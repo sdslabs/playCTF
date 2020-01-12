@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+$screenSize:1;
+
+body {
+    width: 100%;
+}
+
+.home {
+    padding-top: 90px*$screenSize;
+    padding-left: 252px*$screenSize;
+    padding-right: 252px*$screenSize;
+}
+
+.event {
+    width: 400px*$screenSize;
+    text-align: left;
+    font-family: 'Nunito Sans', sans-serif;
+    .event-info {
+        .tagline {
+            font-weight: 800;
+            font-size: 48px*$screenSize;
+            line-height: 72px;
+            color: #393939;
+        }
+        .timing {
+            font-size: 24px*$screenSize;
+            line-height: 40px;
+            color: #575757;
+            font-weight: 600;
+            margin-top: 16px*$screenSize;
+        }
+        .register {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: bold;
+            width: 163px*$screenSize;
+            height: 40px*$screenSize;
+            background: #FF6700;
+            box-shadow: 0px 6px 10px rgba(255, 103, 0, 0.3);
+            border-radius: 3px;
+        }
+    }
+}
+
+.description {
+    font-size: 20px*$screenSize;
+    font-family: 'Open Sans', sans-serif;
+    color: #575757;
+    width: 512px*$screenSize;
+    margin-top: 8px*$screenSize;
+}
+
+.prize-info {
+
+}
+
+.img1 {
+    position: absolute;
+    width: 356px;
+    height: 612px;
+    left: 882px;
+    top: -88px;
+}
+
+.img2 {
+    position: absolute;
+    width: 308px;
+    height: 464.03px;
+    left: 222px;
+    top: 714.44px;
+}

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+$screenSize: 1;
+
+body {
+    width: 1440px*$screenSize;
+    height: 292px*$screenSize;
+    margin-left: -252px*$screenSize;
+    background-color: #F1F1F1;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+}
+
+.poweredBy {
+    font-size: 16px*$screenSize;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.link {
+    text-decoration: none;
+    color: #593C8F;
+}
+
+.contactInfo {
+    margin-top: 30px*$screenSize;
+    width: 140px*$screenSize;
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+}
