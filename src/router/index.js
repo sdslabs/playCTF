@@ -4,7 +4,8 @@ import Home from "../views/Landing.vue";
 import Challenges from "../views/Challenges.vue";
 import About from "../views/About.vue";
 import Leaderboard from "../views/Leaderboard.vue";
-import Notification from "../views/Notifications.vue"
+import Notification from "../views/Notifications.vue";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
@@ -25,11 +26,6 @@ const routes = [
     component: Challenges
   },
   {
-    path: "/challenges",
-    name: "challenges",
-    component: Challenges
-  },
-  {
     path: "/leaderboard",
     name: "leaderboard",
     component: Leaderboard
@@ -38,6 +34,11 @@ const routes = [
     path: "/notifications",
     name: "notifications",
     component: Notification
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: Login
   }
 ];
 

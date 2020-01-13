@@ -40,6 +40,7 @@ body {
             background: #FF6700;
             box-shadow: 0px 6px 10px rgba(255, 103, 0, 0.3);
             border-radius: 3px;
+            margin-top: 16px*$screenSize;
         }
     }
 }
@@ -53,6 +54,16 @@ body {
 }
 
 .prize-info {
+    margin-top: 236px*$screenSize;
+    width: 456px*$screenSize;
+    margin-left: 480px*$screenSize;
+    .heading {
+        font-weight: 800;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 48px*$screenSize;
+        line-height: 72px;
+        color: #393939;
+    }
 
 }
 
@@ -61,13 +72,21 @@ body {
     width: 356px;
     height: 612px;
     left: 882px;
-    top: -88px;
+    top: -75px;
+    z-index: -1;
 }
 
 .img2 {
-    position: absolute;
     width: 308px;
     height: 464.03px;
-    left: 222px;
-    top: 714.44px;
+    margin-left: -700px;
+    margin-top: -260px;
+    z-index: -1;
+}
+.dropdown {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 24px;
+    color: #593C8F;
+    margin-top: 16px;
 }

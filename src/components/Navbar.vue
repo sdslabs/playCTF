@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="beast">
-      <a href="#" class="beast">Beast</a>
+      <a href="/" class="beast">Beast</a>
     </div>
     <nav class="navbar-container" v-if="isUser">
       <router-link to="/challenges" class="navbar-link">Challenges</router-link>
@@ -28,9 +28,9 @@
         <a class="dropdown-link" href="#">Link 3</a>
       </div>
     </div>
-    <div class="loggedOut">
-      LOG IN
-    </div>
+    <nav v-if="isLoggedOut">
+      <router-link to="/login" class="loggedOut">LOG IN</router-link>
+    </nav>
   </div>
 </template>
 
