@@ -3,7 +3,7 @@
     <div class="beast">
       <a href="/" class="beast">Beast</a>
     </div>
-    <nav class="navbar-container" v-if="isUser">
+    <nav class="navbar-container">
       <router-link to="/challenges" class="navbar-link">Challenges</router-link>
       <router-link to="/leaderboard" class="navbar-link"
         >Leaderboard</router-link
@@ -13,11 +13,11 @@
       >
       <router-link to="/about" class="navbar-link">AboutCTF</router-link>
     </nav>
-    <div class="nav-timer" v-if="isUser">
+    <div class="nav-timer">
       <p class="time-remaining">Time remaining</p>
       <p class="timer">02:35:15</p>
     </div>
-    <div class="dropdown" v-if="isUser">
+    <div class="dropdown">
       <button class="dropbtn">
         Team
         <img src="@/assets/images/dropdown.svg" />

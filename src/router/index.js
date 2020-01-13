@@ -2,7 +2,6 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Landing.vue";
 import Challenges from "../views/Challenges.vue";
-import About from "../views/About.vue";
 import Leaderboard from "../views/Leaderboard.vue";
 import Notification from "../views/Notifications.vue";
 import Login from "../views/Login.vue";
@@ -17,8 +16,8 @@ const routes = [
   },
   {
     path: "/about",
-    name: "about",
-    component: About
+    name: "home",
+    component: Home
   },
   {
     path: "/challenges",
