@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+.challenge {
+    margin: auto;
+    width: 936px;
+    margin-top: 32px;
+    .chall {
+        display: flex;
+        flex-direction: row;
+        margin-top: 18px;
+        .tags {
+            display: flex;
+            flex-direction: column;
+            width: 70px;
+            text-align: left;
+            .tag {
+                font-family: 'Nunito Sans', sans-serif;
+                font-weight: normal;
+                font-size: 16px;
+                color: rgba(87, 87, 87, 0.75);
+                margin-top: 32px;
+            }
+            .tag:hover {
+                font-weight: bold;
+                color: #191919;
+                border-right: 2px solid #FF6700;
+            }
+        }
+    }
+}

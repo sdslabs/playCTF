@@ -8,7 +8,7 @@
           school students, created by security experts at SDSLabs.
         </div>
         <div class="timing">4th December 2019, Sunday</div>
-        <button class="register">Register now</button>
+        <Button text="Register now" to="/register" />
       </div>
       <div class="prize-info">
         <div class="heading">Prizes to be won</div>
@@ -29,11 +29,18 @@
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 export default {
-  name: "home"
+  name: "home",
+  components: {
+    Button
+  }
 };
 </script>
 
 <style scoped lang="scss">
 @import "@/assets/scss/landing.scss";
+button {
+  margin-top: 16px;
+}
 </style>
