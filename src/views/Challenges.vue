@@ -1,0 +1,34 @@
+<template>
+  <div class="challenge">
+    <StatsNavbar />
+    <div class="chall">
+      <div class="tags">
+        <a class="tag" tag="Crypto">Crypto</a>
+        <a class="tag" tag="PWN">PWN</a>
+        <a class="tag" tag="Web">Web</a>
+        <a class="tag" tag="Misc">Misc</a>
+      </div>
+      <ChallengesByTag />
+      <ChallCard />
+    </div>
+  </div>
+</template>
+
+<script>
+import StatsNavbar from "@/components/Stats.vue";
+import ChallengesByTag from "@/components/ChallengesByTag.vue";
+import ChallCard from "@/components/ChallCard.vue";
+export default {
+  name: "Challenges",
+  components: {
+    StatsNavbar,
+    ChallengesByTag,
+    ChallCard
+  },
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+@import "@/assets/scss/challenge.scss";
+</style>

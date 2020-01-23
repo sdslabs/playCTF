@@ -2,7 +2,7 @@
   <div class="login">
     <div class="heading">LOG<span class="in"> IN</span></div>
     <div class="form-div">
-      <form class="form" action="/login" method="POST">
+      <form class="form" action="#" method="POST">
         <div class="info">
           <label class="label">E-mail</label>
           <input
@@ -22,6 +22,7 @@
           />
         </div>
         <input class="button" type="submit" value="LOG IN" />
+        <Button text="LOG IN" type="submit" />
       </form>
       <div class="forgot">
         <a href="#" class="forgot">Forgot Password?</a>
@@ -31,8 +32,12 @@
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
 export default {
-  name: "login"
+  name: "login",
+  components: {
+    Button
+  }
 };
 </script>
 
