@@ -12,10 +12,6 @@
   </div>
 </template>
 
-<style scoped lang="scss">
-@import "@/assets/scss/challengesByTag.scss";
-</style>
-
 <script>
 export default {
   name: "ChallengesByTag",

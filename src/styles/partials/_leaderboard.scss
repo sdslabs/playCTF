@@ -1,17 +1,14 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
 %backgroundColor {
     background: #E7E7E7;
 }
 
 .leaderboard {
-    margin-left: 349px;
+    margin-left: 21.8125rem;
     text-align: left;
     .heading {
-        font-family: 'Nunito Sans', sans-serif;
-        font-size: 24px;
-        line-height: 28px;
+        font-family: $primary-font-family;
+        font-size: 1.5rem;
+        line-height: 1.75rem;
         font-weight: 900;
         color: #FF6700;
         .board {
@@ -19,9 +16,10 @@
         }
     }
     .leaderboardTable {
-        width: 648px;
+        width: 40.5rem;
+        border-collapse: collapse;
         tr {
-            height: 32px;
+            height: 2rem;
 
 
         }
@@ -30,11 +28,11 @@
         }
         .number {
             display: inline-block;
-            padding: 4px 10px;
+            padding: 0.25rem 0.625rem;
             color: #FFF;
-            border-radius: 4px;
+            border-radius: 0.25rem;
             background: #44475C;
-            margin: 0px 5px;
+            margin: 0rem 0.3125rem;
             cursor: pointer;
           }
     }

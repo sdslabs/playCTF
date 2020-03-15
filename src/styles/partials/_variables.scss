@@ -1,0 +1,39 @@
+$root-font-size: 0.8982vw;
+// $root-font-size-small: ;
+// $root-font-size-large: ;
+
+$primary-font-family: "Nunito Sans", sans-serif;
+$secondary-font-family: "Open Sans", sans-serif;
+
+$theme-color-white: #ffffff;
+$theme-color-black: #000000;
+$theme-color-blue: #2f53b1;
+$theme-color-orange: #ffc568;
+$theme-color-grey: #555555;
+$theme-color-dark-grey: #444444;
+$theme-color-light-grey: #999999;
+$theme-color-off-white: #dddddd;
+$theme-color-white-grey: #eeeeee;
+$theme-color-dark-blue: #355dc5;
+$theme-color-light-blue: #d6def3;
+$theme-color-red: #b83428;
+
+$primary-font-color: $theme-color-black;
+$primary-theme-color: $theme-color-blue;
+$secondary-theme-color: $theme-color-orange;
+
+$sidebar-bg: $theme-color-black;
+$sidebar-fg: $theme-color-white;
+
+$assets-prefix: "../assets/";
+$assets-sidebar-overview-icon: $assets-prefix + "sidebar-overview-icon.svg";
+$assets-sidebar-logs-icon: $assets-prefix + "sidebar-logs-icon.svg";
+$assets-sidebar-settings-icon: $assets-prefix + "sidebar-settings-icon.svg";
+$assets-sidebar-overview-icon-selected: $assets-prefix + "sidebar-overview-icon-selected.svg";
+$assets-sidebar-logs-icon-selected: $assets-prefix + "sidebar-logs-icon-selected.svg";
+$assets-sidebar-settings-icon-selected: $assets-prefix + "sidebar-settings-icon-selected.svg";
+$assets-dashboard-copy-text-btn: $assets-prefix + "dashboard-card-copy-text-btn.svg";
+$assets-dashboard-copy-text-eye: $assets-prefix + "dashboard-card-copy-text-eye.svg";
+$assets-header-back-button: $assets-prefix + "header-back-button.svg";
+$assets-home-project-database-icon: $assets-prefix + "home-project-database-icon.svg";
+$assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-add.svg";

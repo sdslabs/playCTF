@@ -1,30 +1,27 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
 .challenge {
     margin: auto;
-    width: 936px;
-    margin-top: 32px;
+    width: 58.5rem;
+    margin-top: 2rem;
     .chall {
         display: flex;
         flex-direction: row;
-        margin-top: 18px;
+        margin-top: 1.125rem;
         .tags {
             display: flex;
             flex-direction: column;
-            width: 70px;
+            width: 4.375rem;
             text-align: left;
             .tag {
-                font-family: 'Nunito Sans', sans-serif;
+                font-family: $primary-font-family;
                 font-weight: normal;
-                font-size: 16px;
+                font-size: 1rem;
                 color: rgba(87, 87, 87, 0.75);
-                margin-top: 32px;
+                margin-top: 2rem;
             }
             .tag:hover {
                 font-weight: bold;
                 color: #191919;
-                border-right: 2px solid #FF6700;
+                border-right: 0.125rem solid #FF6700;
             }
         }
     }

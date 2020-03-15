@@ -19,8 +19,8 @@
     </div>
     <div class="dropdown">
       <button class="dropbtn">
-        Team
-        <img src="@/assets/images/dropdown.svg" />
+        Team <span class="teamName">Bandits</span>
+        <img src="@/assets/dropdown.svg" />
       </button>
       <div class="dropdown-content">
         <a class="dropdown-link" href="#">Link 1</a>
@@ -36,11 +36,6 @@
 
 <script>
 export default {
-  name: "Navbar"
+  name: "Navbar",
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-  @import "@/assets/scss/navbar.scss";
-</style>

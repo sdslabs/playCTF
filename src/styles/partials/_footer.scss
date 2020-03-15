@@ -1,0 +1,19 @@
+.footer {
+    background-color: #E7E7E7;
+    margin-left: 252px;
+    margin-right: 252px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .beast {
+        text-align: left;
+        .logo {
+            color: #191919;
+            font-family: Nunito Sans;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 32px;
+            line-height: 24px;
+        }
+    }
+}

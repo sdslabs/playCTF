@@ -17,14 +17,10 @@
         <p class="number">14</p>
         <p class="text">Unattempted</p>
       </div>
-      <img src="@/assets/images/Avatar.svg" class="image" />
+      <img src="@/assets/Avatar.svg" class="image" />
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-@import "@/assets/scss/statsNavbar.scss";
-</style>
 
 <script>
 export default {

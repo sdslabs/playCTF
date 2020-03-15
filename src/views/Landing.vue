@@ -18,13 +18,13 @@
           to appear directly for SDSLabs interview round.
         </div>
         <div class="dropdown">
-            Learn more
-            <img src="@/assets/images/dropdown.svg" />
+          Learn more
+          <img src="@/assets/dropdown.svg" />
         </div>
       </div>
     </div>
-    <img class="img1" src="@/assets/images/landing1.svg" />
-    <img class="img2" src="@/assets/images/landing2.svg" />
+    <img class="img1" src="@/assets/landing1.svg" />
+    <img class="img2" src="@/assets/landing2.svg" />
   </div>
 </template>
 
@@ -39,7 +39,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/scss/landing.scss";
 button {
   margin-top: 16px;
 }

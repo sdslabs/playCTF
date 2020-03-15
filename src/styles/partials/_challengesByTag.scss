@@ -1,0 +1,44 @@
+.challengesByTag {
+    color: #191919;
+    text-align: left;
+    margin-left: 1.5rem;
+    .tag {
+        font-family: $primary-font-family;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: 2rem;
+        margin-left: 0.75rem;
+        margin-bottom: -0.9375rem;
+    }
+    .challenge {
+        width: 16.5rem;
+        height: 4.5rem;
+        background: #FFFFFF;
+        box-shadow: 0rem 0.125rem 0.625rem rgba(57, 57, 57, 0.1);
+        border-radius: 0.1875rem;
+        margin-top: 0.75rem;
+        .challName {
+            font-weight: 500;
+            font-size: 1rem;
+            margin: 0rem;
+            padding: 0.75rem;
+        }
+        .challInfo {
+            font-size: 0.875rem;
+            color: #575757;
+            margin-top: -0.375rem;
+            margin-left: 0.75rem;
+        }
+    }
+    .challenge:active {
+        border: 0.0625rem solid #FF8900;
+        box-sizing: border-box;
+        .challName {
+            color: #191919;
+        }
+        .challInfo {
+            color: #FF6700;
+            font-weight: 600;
+        }
+    }
+}

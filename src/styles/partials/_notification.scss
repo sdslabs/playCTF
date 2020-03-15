@@ -1,0 +1,72 @@
+.notification {
+    margin-left: 21.8125rem;
+    width: 40.5rem;
+    .heading {
+        font-size: 1.5rem;
+        font-weight: 900;
+        font-family: $primary-font-family;
+        line-height: 1.75rem;
+        color: #191919;
+        text-align: left;
+    }
+    .notifications {
+        margin-top: 1.125rem;
+    }
+}
+
+.notificationBox {
+    height: 6rem;
+    background: #FFFFFF;
+    box-shadow: 0rem 0.375rem 0.625rem rgba(25, 25, 25, 0.1);
+    border-radius: 0.1875rem;
+    margin-top: 1rem;
+    padding-left: 1.125rem;
+    padding-right: 1.125rem;
+    text-align: left;
+    .firstLine {
+        display: flex;
+        flex-direction: row;
+        .notificationTitle {
+            font-family: $primary-font-family;
+            font-weight: bold;
+            font-size: 1rem;
+            line-height: 1.75rem;
+            color: #191919;
+            text-align: left;
+            padding-top: 1.25rem;
+        }
+        .notificationStatus {
+            background: #593C8F;
+            border-radius: 0.125rem;
+            margin-top: 1.25rem;
+            margin-left: 0.75rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+            align-self: center;
+            .newNotification {
+                font-family: $secondary-font-family;
+                font-size: 0.75rem;
+                font-weight: bold;
+                line-height: 1rem;
+                color: #FFFFFF;
+            }
+        }
+        .notificationTiming {
+            font-family: $secondary-font-family;
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: #593C8F;
+            padding-top: 1.625rem;
+            margin-left: auto;
+        }
+    }
+    .notificationDesc {
+        font-family: $secondary-font-family;
+        font-size: 0.875rem;
+        line-height: 1.1875rem;
+        color: #575757;
+        margin-top: 0.0625rem;
+
+    }
+    
+}
