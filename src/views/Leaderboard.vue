@@ -4,33 +4,48 @@
       <div class="heading">LEADER <span class="board">BOARD</span></div>
       <searchbar />
     </div>
-    <table class="leaderboardTable">
+    <table class="leaderboardTable" cellspacing="0" cellpadding="0">
       <thead class="tableHead">
-        <th class="coloumnHeading">Rank</th>
-        <th class="coloumnHeading">Teamname</th>
-        <th class="coloumnHeading">Score</th>
+        <th class="coloumnHeading rank">Rank</th>
+        <th class="coloumnHeading teamName">Team Name</th>
+        <th class="coloumnHeading score">Score</th>
       </thead>
       <tbody class="tableBody">
-        <tr v-for="row in get_rows()" :key="row.rank" class="leaderRow">
+        <tr class="leaderboardRow userInfo">
+          <td>{{ user.rank }}</td>
+          <td>{{ user.teamName }}</td>
+          <td>{{ user.score }}</td>
+        </tr>
+        <tr v-for="row in get_rows()" :key="row.rank" class="leaderboardRow">
           <td v-for="col in columns" :key="col.id">{{ row[col] }}</td>
         </tr>
       </tbody>
     </table>
 
     <div class="pagination">
-      <div
-        class="number"
-        v-for="i in num_pages()"
-        v-bind:class="[i == currentPage ? 'active' : '']"
-        v-on:click="change_page(i)"
-        :key="i"
-      >
-        {{ i }}
+      <div class="numeric-pagination">
+        <div class="pagination-previous" v-on:click="prev_page()">Previous</div>
+        <div
+          class="number"
+          v-for="i in num_pages()"
+          v-bind:class="[i == currentPage ? 'active' : '']"
+          v-on:click="change_page(i)"
+          :key="i"
+        >
+          {{ i }}
+        </div>
+        <div class="pagination-next" v-on:click="next_page()">Next</div>
       </div>
-    </div>
-
-    <div class="page">
-      Page
+      <div class="search-pagination">
+        <p class="search-pagination-text">Jump to</p>
+        <input
+          class="pagination-search-page"
+          placeholder="1"
+          @keyup.enter="change_page(pageNumber)"
+          v-model="pageNumber"
+          type="text"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +63,12 @@ export default {
       elementsPerPage: 10,
       ascending: false,
       sortColumn: "",
+      pageNumber: 1,
+      user: {
+        rank: "35",
+        teamName: "Bandit",
+        score: "98"
+      },
       rows: [
         {
           rank: "1",
@@ -157,6 +178,12 @@ export default {
     },
     change_page: function change_page(page) {
       this.currentPage = page;
+    },
+    next_page: function next_page() {
+      this.currentPage = this.currentPage + 1;
+    },
+    prev_page: function prev_page() {
+      this.currentPage = this.currentPage - 1;
     }
   },
   computed: {

@@ -1,39 +1,109 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 %backgroundColor {
     background: #E7E7E7;
 }
 
 .leaderboard {
-    margin-left: 21.8125rem;
+    margin-left: 349px;
+    margin-right: 349px;
     text-align: left;
     .heading {
-        font-family: $primary-font-family;
-        font-size: 1.5rem;
-        line-height: 1.75rem;
+        font-family: 'Nunito Sans', sans-serif;
+        font-size: 24px;
+        line-height: 28px;
         font-weight: 900;
+        margin-bottom: 25px;
         color: #FF6700;
         .board {
             color: black;
         }
     }
     .leaderboardTable {
-        width: 40.5rem;
-        border-collapse: collapse;
-        tr {
-            height: 2rem;
-
-
+        .coloumnHeading {
+            text-align: center;
+            width: 72px;
+            color: #191919;
+            height: 36px;
         }
-        tr:nth-child(2n+1) {
+        .coloumnHeading.teamName {
+            width: auto;
+            text-align: left;
+            padding-left: 24px;
+        }
+        width: 100%;
+        tr {
+            height: 32px;
+            text-align: center;
+            background-color: #F7F7F7;
+            border-radius: 5px;
+        }
+        tr:first-child() {
+            padding-top: 20px;
+        }
+        tr:nth-child(2n) {
             @extend %backgroundColor;
         }
-        .number {
-            display: inline-block;
-            padding: 0.25rem 0.625rem;
-            color: #FFF;
-            border-radius: 0.25rem;
-            background: #44475C;
-            margin: 0rem 0.3125rem;
-            cursor: pointer;
-          }
+        td:nth-child(2n) {
+            padding-left: 24px;
+            text-align: left;
+        }
+        .leaderboardRow.userInfo {
+            background: #593C8F;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 32px;
+            margin-bottom: 100px;
+        }
+    }
+    .pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: Nunito Sans;
+        font-size: 14px;
+        line-height: 16px;
+        .numeric-pagination {
+            font-weight: normal;
+            display: flex;
+            flex-direction: row;
+            color: #593C8F;
+            margin-top: 21px;
+            .pagination-previous {
+                margin-right: 28px;
+            }
+            .number {
+                margin-right: 10px;
+            }
+        }
+        .search-pagination {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 10px;
+            .search-pagination-text {
+                font-weight: 600;
+                color: #393939;
+                padding-right: 10px;
+            }
+            .pagination-search-page {
+                width: 29px;
+                height: 22px;
+                background: #F2F2F2;
+                box-shadow: inset 0px  rgba(0, 0, 0, 0.15);
+                border-radius: 5px;
+                font-family: Nunito Sans;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 14px;
+                line-height: 16px;
+                text-align: center;
+
+                color: #393939;
+            }
+        }
+        
     }
 }

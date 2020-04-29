@@ -40,6 +40,6 @@ export default {
 
 <style scoped lang="scss">
 button {
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 </style>

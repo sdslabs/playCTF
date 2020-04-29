@@ -48,6 +48,36 @@ export default {
           points: "25",
           solves: "320",
           status: "solved"
+        },
+        {
+          name: "Polynomial",
+          points: "25",
+          solves: "320",
+          status: "solved"
+        },
+        {
+          name: "sea_link",
+          points: "255",
+          solves: "3",
+          status: "marked"
+        },
+        {
+          name: "Mindbl0wn",
+          points: "115",
+          solves: "32",
+          status: "marked"
+        },
+        {
+          name: "Polynomial",
+          points: "25",
+          solves: "320",
+          status: "solved"
+        },
+        {
+          name: "Polynomial",
+          points: "25",
+          solves: "320",
+          status: "solved"
         }
       ]
     };

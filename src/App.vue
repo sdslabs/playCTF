@@ -30,6 +30,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   font-size: 1vw;
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 1280) {

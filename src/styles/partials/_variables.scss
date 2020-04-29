@@ -2,9 +2,11 @@ $root-font-size: 0.8982vw;
 // $root-font-size-small: ;
 // $root-font-size-large: ;
 
+// fonts variables
 $primary-font-family: "Nunito Sans", sans-serif;
 $secondary-font-family: "Open Sans", sans-serif;
 
+// colors variables
 $theme-color-white: #ffffff;
 $theme-color-black: #000000;
 $theme-color-blue: #2f53b1;
@@ -22,8 +24,10 @@ $primary-font-color: $theme-color-black;
 $primary-theme-color: $theme-color-blue;
 $secondary-theme-color: $theme-color-orange;
 
+// sidebar themes variables
 $sidebar-bg: $theme-color-black;
 $sidebar-fg: $theme-color-white;
+
 
 $assets-prefix: "../assets/";
 $assets-sidebar-overview-icon: $assets-prefix + "sidebar-overview-icon.svg";

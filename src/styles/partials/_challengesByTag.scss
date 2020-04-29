@@ -1,9 +1,11 @@
 .challengesByTag {
+    height: 525px;
+    width: 267px;
     color: #191919;
     text-align: left;
     margin-left: 1.5rem;
     .tag {
-        font-family: $primary-font-family;
+        font-family: 'Nunito Sans', sans-serif;
         font-size: 1rem;
         font-weight: bold;
         line-height: 2rem;

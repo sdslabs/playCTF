@@ -24,7 +24,6 @@ export default {
     StatsNavbar,
     ChallengesByTag,
     ChallCard
-  },
+  }
 };
 </script>
-

@@ -1,7 +1,7 @@
 .stats {
     margin-left: auto;
     text-align: left;
-    font-family: $primary-font-family;
+    font-family: 'Nunito Sans', sans-serif;
     width: 52.5rem;
     height: 7rem;
     display: flex;
@@ -9,21 +9,22 @@
     box-shadow: 0rem 0.375rem 0.625rem rgba(87, 87, 87, 0.15);
     border-radius: 0.3125rem;
     position: relative;
-    .fixedStat {
+    .rank {
         width: 16.5rem;
         background: #FF8900;
         border-radius: 0.3125rem 0rem 0rem 0.3125rem;
         color: #FFFFFF !important;
         text-align: center;
         margin-right: 3.75rem;
-        .number {
-            font-weight: 600;
-            font-size: 1.5rem;
-        }
         .text {
+            font-weight: normal;
+            font-size: 24px;
+            margin-bottom: auto;
+        }
+        .number {
             font-weight: bold;
-            font-size: 0.875rem;
-            margin-top: -1.25rem;
+            font-size: 32px;
+            margin: auto;
         }
     }
     .dynamicStats {

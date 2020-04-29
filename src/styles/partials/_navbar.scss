@@ -4,13 +4,12 @@
     margin: auto;
     margin-top: 1.25rem;
     width: 65%;
-    .beast {
-        font-family: $primary-font-family;
-        font-size: 1rem;
-        font-weight: 900;
-        line-height: 1.5rem;
-        color: black;
-        text-decoration: none;
+    .logo {
+        width: 4.5rem;
+        height: 1.5rem;
+        top: 1.25rem;
+        display: block;
+        background-color: #000000;
     }
     
     .navbar-container {

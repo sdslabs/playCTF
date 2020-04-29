@@ -1,8 +1,6 @@
 <template>
   <div class="navbar">
-    <div class="beast">
-      <a href="/" class="beast">Beast</a>
-    </div>
+    <router-link to="#" class="logo"></router-link>
     <nav class="navbar-container">
       <router-link to="/challenges" class="navbar-link">Challenges</router-link>
       <router-link to="/leaderboard" class="navbar-link"
@@ -19,7 +17,7 @@
     </div>
     <div class="dropdown">
       <button class="dropbtn">
-        Team <span class="teamName">Bandits</span>
+        Team
         <img src="@/assets/dropdown.svg" />
       </button>
       <div class="dropdown-content">
@@ -36,6 +34,6 @@
 
 <script>
 export default {
-  name: "Navbar",
+  name: "Navbar"
 };
 </script>
