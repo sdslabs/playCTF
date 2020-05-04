@@ -4,15 +4,6 @@
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
       ></router-link>
-      <!-- <router-link to="/challenges" class="navbar-link">Challenges</router-link>
-      <router-link to="/leaderboard" class="navbar-link"
-        >Leaderboard</router-link
-      >
-      <router-link to="/notifications" class="navbar-link"
-        >Notifications</router-link
-      >
-      <router-link to="/about" class="navbar-link">AboutCTF</router-link>
- -->
       <router-link
         v-for="routes in links"
         v-bind:key="routes.index"
