@@ -90,6 +90,9 @@ export default {
         return "NEW";
       }
     }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "Notifications");
   }
 };
 </script>

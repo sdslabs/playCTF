@@ -6,15 +6,15 @@
 }
 
 .leaderboard {
-    margin-left: 349px;
-    margin-right: 349px;
+    margin: auto;
+    width: 46.4375rem;
     text-align: left;
     .heading {
         font-family: 'Nunito Sans', sans-serif;
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 1.5rem;
+        line-height: 1.75rem;
         font-weight: 900;
-        margin-bottom: 25px;
+        margin-bottom: 1.5625rem;
         color: #FF6700;
         .board {
             color: black;
@@ -23,39 +23,39 @@
     .leaderboardTable {
         .coloumnHeading {
             text-align: center;
-            width: 72px;
+            width: 4.5rem;
             color: #191919;
-            height: 36px;
+            height: 2.25rem;
         }
         .coloumnHeading.teamName {
             width: auto;
             text-align: left;
-            padding-left: 24px;
+            padding-left: 1.5rem;
         }
         width: 100%;
         tr {
-            height: 32px;
+            height: 2rem;
             text-align: center;
             background-color: #F7F7F7;
-            border-radius: 5px;
+            border-radius: 0.3125rem;
         }
         tr:first-child() {
-            padding-top: 20px;
+            padding-top: 1.25rem;
         }
         tr:nth-child(2n) {
             @extend %backgroundColor;
         }
         td:nth-child(2n) {
-            padding-left: 24px;
+            padding-left: 1.5rem;
             text-align: left;
         }
         .leaderboardRow.userInfo {
             background: #593C8F;
             color: #ffffff;
             font-weight: bold;
-            font-size: 14px;
-            line-height: 32px;
-            margin-bottom: 100px;
+            font-size: 0.875rem;
+            line-height: 2rem;
+            margin-bottom: 6.25rem;
         }
     }
     .pagination {
@@ -63,42 +63,42 @@
         flex-direction: row;
         justify-content: space-between;
         font-family: Nunito Sans;
-        font-size: 14px;
-        line-height: 16px;
+        font-size: 0.875rem;
+        line-height: 1rem;
         .numeric-pagination {
             font-weight: normal;
             display: flex;
             flex-direction: row;
             color: #593C8F;
-            margin-top: 21px;
+            margin-top: 1.3125rem;
             .pagination-previous {
-                margin-right: 28px;
+                margin-right: 1.75rem;
             }
             .number {
-                margin-right: 10px;
+                margin-right: 0.625rem;
             }
         }
         .search-pagination {
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin-top: 10px;
+            margin-top: 0.625rem;
             .search-pagination-text {
                 font-weight: 600;
                 color: #393939;
-                padding-right: 10px;
+                padding-right: 0.625rem;
             }
             .pagination-search-page {
-                width: 29px;
-                height: 22px;
+                width: 1.8125rem;
+                height: 1.375rem;
                 background: #F2F2F2;
-                box-shadow: inset 0px  rgba(0, 0, 0, 0.15);
-                border-radius: 5px;
+                box-shadow: inset 0rem  rgba(0, 0, 0, 0.15);
+                border-radius: 0.3125rem;
                 font-family: Nunito Sans;
                 font-style: normal;
                 font-weight: 300;
-                font-size: 14px;
-                line-height: 16px;
+                font-size: 0.875rem;
+                line-height: 1rem;
                 text-align: center;
 
                 color: #393939;

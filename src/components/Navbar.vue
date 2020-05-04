@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
-    <router-link to="#" class="logo"></router-link>
-    <nav class="navbar-container">
-      <router-link to="/challenges" class="navbar-link">Challenges</router-link>
+    <nav v-if="$store.getters.login" class="navbar-container">
+      <router-link to="/" class="navbar-link"
+        ><div class="logo"></div
+      ></router-link>
+      <!-- <router-link to="/challenges" class="navbar-link">Challenges</router-link>
       <router-link to="/leaderboard" class="navbar-link"
         >Leaderboard</router-link
       >
@@ -10,30 +12,79 @@
         >Notifications</router-link
       >
       <router-link to="/about" class="navbar-link">AboutCTF</router-link>
-    </nav>
-    <div class="nav-timer">
-      <p class="time-remaining">Time remaining</p>
-      <p class="timer">02:35:15</p>
-    </div>
-    <div class="dropdown">
-      <button class="dropbtn">
-        Team
-        <img src="@/assets/dropdown.svg" />
-      </button>
-      <div class="dropdown-content">
-        <a class="dropdown-link" href="#">Link 1</a>
-        <a class="dropdown-link" href="#">Link 2</a>
-        <a class="dropdown-link" href="#">Link 3</a>
+ -->
+      <router-link
+        v-for="routes in links"
+        v-bind:key="routes.index"
+        :class="{
+          'navbar-link': true,
+          'active': (routes.text === $store.getters.currentPage)
+        }"
+        :to="`${routes.page}`"
+        >{{ routes.text }}
+      </router-link>
+
+      <div class="nav-timer">
+        <p class="time-remaining">Time remaining</p>
+        <p class="timer"><Timer /></p>
       </div>
-    </div>
-    <nav v-if="isLoggedOut">
-      <router-link to="/login" class="loggedOut">LOG IN</router-link>
+      <div class="dropdown">
+        <button class="dropbtn">
+          Team
+          <img src="@/assets/dropdown.svg" />
+        </button>
+        <div class="dropdown-content">
+          <a class="dropdown-link" href="#">Link 1</a>
+          <a class="dropdown-link" href="#">Link 2</a>
+          <a class="dropdown-link" href="#">Link 3</a>
+        </div>
+      </div>
+    </nav>
+
+    <nav v-else class="navbar-container">
+      <router-link to="/" class="navbar-link"
+        ><div class="logo"></div
+      ></router-link>
+      <div class="navbar-registration">
+        <p class="navbar-already-registered">Already Registered?</p>
+        <router-link to="/login" class="login-link">LOG IN</router-link>
+      </div>
     </nav>
   </div>
 </template>
 
 <script>
+import Timer from "@/components/Timer.vue";
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  data() {
+    return {
+      links: [
+        {
+          index: 0,
+          text: "Challenges",
+          page: "/challenges"
+        },
+        {
+          index: 1,
+          text: "Leaderboard",
+          page: "/leaderboard"
+        },
+        {
+          index: 2,
+          text: "Notifications",
+          page: "/notifications"
+        },
+        {
+          index: 3,
+          text: "AboutCTF",
+          page: "/about"
+        }
+      ],
+    };
+  },
+  components: {
+    Timer
+  }
 };
 </script>

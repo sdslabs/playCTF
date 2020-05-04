@@ -24,6 +24,9 @@ export default {
     StatsNavbar,
     ChallengesByTag,
     ChallCard
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "Challenges");
   }
 };
 </script>

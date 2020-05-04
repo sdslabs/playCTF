@@ -1,19 +1,24 @@
 .navbar {
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    margin-top: 1.25rem;
-    width: 65%;
-    .logo {
-        width: 4.5rem;
-        height: 1.5rem;
-        top: 1.25rem;
-        display: block;
-        background-color: #000000;
-    }
+    position: fixed;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    align-items: center;
+    z-index: 100;
     
     .navbar-container {
-        display: block;
+        width: 58.5rem;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .navbar-link {
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
     
     .navbar-link {
@@ -21,35 +26,58 @@
         font-family: $primary-font-family;
         font-weight: normal;
         font-size: 0.875rem;
-        color: #575757;
+        line-height: 24px;
+        color: #191919;
         text-decoration: none;
         margin-left: 1.5rem;
+        &:first-child {
+            margin-left: 0rem;
+        }
+        .logo {
+            width: 72px;
+            height: 24px;
+            background-color: black;
+            vertical-align: super;
+        }
     }
-    
-    .navbar-link:active {
+
+    .active {
         font-weight: bold;
+        margin-bottom: 0.5rem;
+        &:after {
+            content: ""; 
+            display: block;
+            margin: 0 auto;
+            width: 75%;
+            border-bottom: 2px solid #191919;;
+        }
+    }
+
+    .navbar-link-current-page {
+        color: #191919;
+        font-weight: bold;
+
     }
     
     .nav-timer {
+        margin-left: auto;
         font-family: $primary-font-family;
-        margin-right: 405;
-        margin-top: -1.25rem;
+        margin-top: -0.75rem;
         font-size: 0.75rem;
-        line-height: 1.25rem;
         color: #393939;
-        margin-left: 14.5625rem;
+        line-height: 0.5rem;
     }
     
     .timer {
         font-size: 0.875rem;
+        font-weight: bold;
+        margin-bottom: 0rem;
     }
-    
-    .dropdown {
-        float: left;
-        overflow: hidden;
-        text-align: right;
-      }
       
+    .dropdown {
+        margin-left: 2.75rem;
+    }
+
     .dropbtn {
         font-size: 1rem;  
         border: none;
@@ -84,18 +112,26 @@
     .dropdown:hover .dropdown-content {
         display: block;
     }
+
+    .navbar-registration {
+        width: 8.0625rem;
+        height: 3rem;
+        margin-bottom: -0.75rem;
+    }
     
-    .loggedOut {
+    .navbar-already-registered {
+        font-size: 14px;
+        color: #393939;
+        font: $secondary-font-family;
+        margin: 0rem;
+        line-height: 24px;
+        vertical-align: super;
+    }
+    
+    .login-link {
         font-size: 0.875rem;
         font-weight: bold;
-        margin-left: 49.5rem;
         color: #593C8F;
         text-decoration: none;
-    }
-}
-
-@media only screen and (max-width:1280px) {
-    .navbar {
-        width: 100%;
     }
 }

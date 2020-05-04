@@ -17,7 +17,7 @@
           provides. However, Participants from the top three winning teams get
           to appear directly for SDSLabs interview round.
         </div>
-        <div class="dropdown">
+        <div class="learn-more-dropdown">
           Learn more
           <img src="@/assets/dropdown.svg" />
         </div>
@@ -34,6 +34,9 @@ export default {
   name: "home",
   components: {
     Button
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "AboutCTF");
   }
 };
 </script>

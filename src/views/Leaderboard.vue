@@ -149,6 +149,11 @@ export default {
     };
   },
   methods: {
+    methods: {
+      updateGlobal: function() {
+        this.$currentPage = "landing";
+      }
+    },
     sortTable: function sortTable(col) {
       if (this.sortColumn === col) {
         this.ascending = !this.ascending;
@@ -193,6 +198,9 @@ export default {
       }
       return Object.keys(this.rows[0]);
     }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "Leaderboard");
   }
 };
 </script>
