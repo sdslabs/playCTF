@@ -7,8 +7,10 @@
 
 .leaderboard {
     margin: auto;
+    margin-top: 4.75rem;
     width: 46.4375rem;
     text-align: left;
+    min-height: calc(100vh - 12.75rem - 9.25rem);
     .heading {
         font-family: 'Nunito Sans', sans-serif;
         font-size: 1.5rem;
