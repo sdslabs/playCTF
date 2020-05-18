@@ -12,6 +12,8 @@ export default new Vuex.Store({
       Score: ""
     },
     competitonInfo: {
+      competitionName: "",
+      communicationPlatformLink: "",
       startingTime: "May 3, 2020 15:37:25",
       endingTime: "May 5, 2020 15:37:25",
       logo: ""

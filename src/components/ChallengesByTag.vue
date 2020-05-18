@@ -1,10 +1,15 @@
 <template>
   <div class="challengesByTag">
-    <div class="tag">{{ tag }}</div>
-    <div class="challenges">
-      <div class="challenge" v-for="chall in chall" :key="chall">
-        <p class="challName">{{ chall.name }}</p>
-        <p class="challInfo">
+    <div class="challengesByTag-tag">{{ tag }}</div>
+    <div class="challengesByTag-challenges">
+      <div
+        class="challengesByTag-challenge"
+        v-for="chall in chall"
+        :key="chall"
+        @click="emitChallName(chall.name)"
+      >
+        <p class="challengesByTag-challName">{{ chall.name }}</p>
+        <p class="challengesByTag-challInfo">
           {{ chall.points }} Points | {{ chall.solves }} Solves
         </p>
       </div>
@@ -15,9 +20,9 @@
 <script>
 export default {
   name: "ChallengesByTag",
+  props: ["tag"],
   data() {
     return {
-      tag: "PWN",
       chall: [
         {
           name: "Polynomial",
@@ -81,6 +86,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    emitChallName(challName) {
+      this.$emit("clicked", challName);
+    }
   }
 };
 </script>

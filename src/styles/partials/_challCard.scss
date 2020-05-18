@@ -1,7 +1,151 @@
 .challCard {
+    text-align: left;
     width: 34.5rem;
-    margin-left: auto;
     margin-top: 1.75rem;
     background: #FFFFFF;
+    margin-left: 24px;
+    margin-bottom: auto;
+    padding: 24px 20px 28px;
     box-shadow: 0rem 0.375rem 0.625rem rgba(87, 87, 87, 0.15);
+
+    .challCard-firstLine {
+        display: flex;
+        flex-direction: row;
+        height: 24px;
+        .challCard-challName {
+            font-family: $primary-font-family;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            color: #191919;
+        }
+        .challCard-tag {
+            padding: 1px 6px;
+            background: #593C8F;
+            border-radius: 2px;
+            font-family: $secondary-font-family;
+            font-style: normal;
+            font-weight: bold;
+            height: 18px;
+            line-height: 18px;
+            font-size: 12px;
+            color: #FFFFFF;
+            margin-left: 16px;
+            vertical-align: text-bottom;
+        }
+        .challCard-bookmark {
+            margin-left: auto;
+            display: flex;
+            flex-direction: row-reverse;
+            .challCard-review {
+                margin-right: 12px;
+                font-family: $primary-font-family;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 18px;
+                display: flex;
+                align-items: center;
+                text-align: right;
+                color: #393939;
+            }
+        }
+    }
+    .challCard-solves {
+        margin-top: 14px;
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 18px;
+        align-items: center;
+        color: #393939;
+    }
+    .challCard-challDesc {
+        font-family: $secondary-font-family;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        color: #393939;
+        margin-top: 16px;
+    }
+    .challCard-resources {
+        font-family: $secondary-font-family;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        display: inline-block;
+        line-height: 16px;
+        .challCard-challPort {
+            margin-top: 10px;
+            color: #393939;
+        }
+        .challCard-challLink {
+            margin-top: 10px;
+            color: #593C8F;
+            text-decoration: none;
+        }
+        .challCard-challItem {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 8px 12px;
+            height: 32px;
+            border: 1px solid #604195;
+            box-sizing: border-box;
+            border-radius: 3px;
+            text-decoration: none;
+            font-family: Nunito Sans;
+            font-style: normal;
+            font-weight: 600;
+            .challCard-challItem-download {
+                margin-right: 4px;
+                vertical-align: middle;
+            }
+        }
+    }
+    .challCard-bottom-row {
+        display: flex;
+        flex-direction: row;
+        margin-top: 24px;
+        height: 32px;
+        .challCard-form {
+            .challCard-form-input {
+                background: #F2F2F2;
+                box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.05);
+                border-radius: 5px;
+                height: 32px;
+                width: 296px;
+                font-family: $primary-font-family;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 24px;
+                padding: 0px 12px;
+                color: #B3B3B3;
+                border: none;
+            }
+            .challCard-form-submit-button {
+                transform: scale(0.8);
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+        }
+        .challCard-report {
+            margin-left: auto;
+            margin-top: 4px;
+            font-family: $primary-font-family;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 18px;
+            display: flex;
+            align-items: center;
+            color: #575757;
+
+            .challCard-report-bug {
+                margin-left: 8px;
+            }
+        }
+    }
 }

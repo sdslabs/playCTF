@@ -8,7 +8,7 @@
           school students, created by security experts at SDSLabs.
         </div>
         <div class="timing">4th December 2019, Sunday</div>
-        <Button text="Register now" to="/register" />
+        <router-link to="/register"><Button text="Register now"/></router-link>
       </div>
       <div class="prize-info">
         <div class="heading">Prizes to be won</div>
