@@ -38,11 +38,11 @@ export default {
   methods: {
     timerCount: function(start, end) {
       // Get todays date and time
-      var now = new Date().getTime();
+      let now = new Date().getTime();
 
       // Find the distance between now an the count down date
-      var distance = start - now;
-      var passTime = end - now;
+      let distance = start - now;
+      let passTime = end - now;
 
       if (distance < 0 && passTime < 0) {
         this.statusType = "Expired";

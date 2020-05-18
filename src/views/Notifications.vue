@@ -40,9 +40,9 @@ export default {
       if (this.hours < 1) return "NEW";
     },
     duration: function(notification) {
-      var notificationTime = new Date(notification.CreatedAt).getTime();
-      var now = new Date().getTime();
-      var passTime = now - notificationTime;
+      let notificationTime = new Date(notification.CreatedAt).getTime();
+      let now = new Date().getTime();
+      let passTime = now - notificationTime;
       this.calcTime(passTime);
       if (this.days > 0) return this.days + " days";
       else if (this.hours > 0) return this.hours + " hours";
