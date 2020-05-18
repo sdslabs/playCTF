@@ -1,7 +1,7 @@
 <template>
   <div class="notification">
     <div class="heading">NOTIFICATIONS</div>
-    <div class="notifications">
+    <div v-if="this.notification.length != 0" class="notifications">
       <div
         v-for="notify in notification.Notifications.reverse()"
         v-bind:key="notify.ID"
