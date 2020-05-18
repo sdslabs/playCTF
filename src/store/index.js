@@ -11,7 +11,7 @@ export default new Vuex.Store({
       userName: "",
       Score: ""
     },
-    competitonInfo: {
+    competitionInfo: {
       competitionName: "",
       communicationPlatformLink: "",
       startingTime: "May 3, 2020 15:37:25",
@@ -24,8 +24,6 @@ export default new Vuex.Store({
       state.currentPage = page;
     }
   },
-  actions: {},
-  modules: {},
   getters: {
     login: state => state.login,
     currentPage: state => state.currentPage
