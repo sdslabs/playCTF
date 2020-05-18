@@ -1,8 +1,14 @@
 <template>
   <div class="leaderboard">
-    <div class="header">
-      <div class="heading">LEADER <span class="board">BOARD</span></div>
-      <searchbar />
+    <div class="leaderboard-header">
+      <div class="leaderboard-heading">
+        LEADER <span class="board">BOARD</span>
+      </div>
+      <input
+        type="text"
+        placeholder="Search for the teams here..."
+        class="leaderboard-searchbar"
+      />
     </div>
     <table class="leaderboardTable" cellspacing="0" cellpadding="0">
       <thead class="tableHead">
@@ -51,12 +57,8 @@
 </template>
 
 <script>
-import searchbar from "@/components/Searchbar.vue";
 export default {
   name: "leaderboard",
-  components: {
-    searchbar
-  },
   data() {
     return {
       currentPage: 1,

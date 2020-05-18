@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    login: false,
+    login: true,
     currentPage: "",
     userInfo: {
       userName: "",
