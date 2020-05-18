@@ -9,7 +9,7 @@
         v-bind:key="routes.index"
         :class="{
           'navbar-link': true,
-          'active': (routes.text === $store.getters.currentPage)
+          active: routes.text === $store.getters.currentPage
         }"
         :to="`${routes.page}`"
         >{{ routes.text }}
@@ -71,7 +71,7 @@ export default {
           text: "AboutCTF",
           page: "/about"
         }
-      ],
+      ]
     };
   },
   components: {

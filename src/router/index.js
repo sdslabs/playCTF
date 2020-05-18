@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Landing.vue";
-import Challenges from "../views/Challenges.vue";
-import Leaderboard from "../views/Leaderboard.vue";
-import Notification from "../views/Notifications.vue";
-import Login from "../views/Login.vue";
-import Register from "../views/Register.vue";
+import Home from "@/views/Landing.vue";
+import Challenges from "@/views/Challenges.vue";
+import Leaderboard from "@/views/Leaderboard.vue";
+import Notification from "@/views/Notifications.vue";
+import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
 
 Vue.use(VueRouter);
 

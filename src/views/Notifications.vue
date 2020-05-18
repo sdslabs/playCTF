@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import NotificationService from "../api/notificationAPI";
+import NotificationService from "@/api/notificationAPI";
 
 export default {
   name: "notifications",

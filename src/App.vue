@@ -21,7 +21,7 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
-@import "../src/styles/main.scss";
+@import "@/styles/main.scss";
 
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;

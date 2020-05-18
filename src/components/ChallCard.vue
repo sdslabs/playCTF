@@ -4,11 +4,11 @@
       <div class="challCard-challName">{{ challName }}</div>
       <div class="challCard-tag">{{ tag }}</div>
       <div v-if="marked" class="challCard-bookmark" v-on:click="markedStatus()">
-        <img src="../assets/marked.svg" />
+        <img src="@/assets/marked.svg" />
         <p class="challCard-review">Marked for review</p>
       </div>
       <div v-else class="challCard-bookmark" v-on:click="markedStatus()">
-        <img src="../assets/unmarked.svg" />
+        <img src="@/assets/unmarked.svg" />
         <p class="challCard-review">Mark for review</p>
       </div>
     </div>
@@ -28,7 +28,7 @@
         ><div class="challCard-challItem">
           <img
             class="challCard-challItem-download"
-            src="../assets/download.svg"
+            src="@/assets/download.svg"
           />
           {{ challItem.displayName }}
         </div>
@@ -52,20 +52,20 @@
         ></Button>
       </form>
       <div class="challCard-report" @click="showModal()">
-        Report <img class="challCard-report-bug" src="../assets/bug.svg" />
+        Report <img class="challCard-report-bug" src="@/assets/bug.svg" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "../components/Button";
+import Button from "@/components/Button";
 export default {
   name: "ChallCard",
   components: {
-    Button,
+    Button
   },
-  props: ['challName', 'tag'],
+  props: ["challName", "tag"],
   data() {
     return {
       marked: false,

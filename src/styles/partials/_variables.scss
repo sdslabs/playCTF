@@ -29,7 +29,7 @@ $sidebar-bg: $theme-color-black;
 $sidebar-fg: $theme-color-white;
 
 
-$assets-prefix: "../assets/";
+$assets-prefix: "@/assets/";
 $assets-sidebar-overview-icon: $assets-prefix + "sidebar-overview-icon.svg";
 $assets-sidebar-logs-icon: $assets-prefix + "sidebar-logs-icon.svg";
 $assets-sidebar-settings-icon: $assets-prefix + "sidebar-settings-icon.svg";
