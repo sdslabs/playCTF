@@ -26,7 +26,7 @@
         font-family: $primary-font-family;
         font-weight: normal;
         font-size: 0.875rem;
-        line-height: 24px;
+        line-height: 1.5rem;
         color: #191919;
         text-decoration: none;
         margin-left: 1.5rem;
@@ -34,8 +34,8 @@
             margin-left: 0rem;
         }
         .logo {
-            width: 72px;
-            height: 24px;
+            width: 4.5rem;
+            height: 1.5rem;
             background-color: black;
             vertical-align: super;
         }
@@ -49,7 +49,7 @@
             display: block;
             margin: 0 auto;
             width: 75%;
-            border-bottom: 2px solid #191919;;
+            border-bottom: 0.125rem solid #191919;;
         }
     }
 
@@ -91,7 +91,7 @@
     .teamName {
         color: #593C8F;
         font-weight: 600;
-        margin-right: 7px;
+        margin-right: 0.4375rem;
     }
     
     .dropdown-content {
@@ -120,11 +120,11 @@
     }
     
     .navbar-already-registered {
-        font-size: 14px;
+        font-size: 0.875rem;
         color: #393939;
         font: $secondary-font-family;
         margin: 0rem;
-        line-height: 24px;
+        line-height: 1.5rem;
         vertical-align: super;
     }
     

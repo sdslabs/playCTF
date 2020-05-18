@@ -1,5 +1,5 @@
 .challengesByTag {
-    width: 267px;
+    width: 16.6875rem;
     color: #191919;
     text-align: left;
     margin-left: 1.5rem;
@@ -12,13 +12,13 @@
         // margin-bottom: -0.9375rem;
     }
     .challengesByTag-challenges {
-        height: 425px;
+        height: 26.5625rem;
         overflow-y: scroll;
         overflow-x: hidden;
         z-index: -100;
-        padding: 2px;
+        padding: 0.125rem;
         &::-webkit-scrollbar {
-            width: 0px;
+            width: 0rem;
         }
         .challengesByTag-challenge {
             width: 16.5rem;
@@ -28,7 +28,7 @@
             border-radius: 0.1875rem;
             margin-top: 0.75rem;
             &:first-child {
-                margin-top: 0px;
+                margin-top: 0rem;
             }
             .challengesByTag-challName {
                 font-weight: 500;
