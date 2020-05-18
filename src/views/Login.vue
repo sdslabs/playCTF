@@ -1,32 +1,28 @@
 <template>
   <div class="login">
-    <div class="heading">LOG<span class="in"> IN</span></div>
-    <div class="form-div">
-      <form class="form" action="#" method="POST">
-        <div class="info">
-          <label class="label">E-mail</label>
+    <div class="login-heading">Login</div>
+    <div class="login-form-div">
+      <form class="login-form">
+        <div class="login-info">
           <input
             type="text"
-            class="inputField email"
+            class="login-inputField email"
             id="email"
             name="user_email"
+            placeholder="Team Name or E-mail*"
           />
         </div>
-        <div class="info">
-          <label class="label">Password</label>
+        <div class="login-info">
           <input
             type="password"
-            class="inputField password"
+            class="login-inputField password"
             id="password"
             name="user_pass"
+            placeholder="Password*"
           />
         </div>
-        <input class="button" type="submit" value="LOG IN" />
-        <Button text="LOG IN" type="submit" />
+        <Button text="LOG IN" class="login-button" type="submit" />
       </form>
-      <div class="forgot">
-        <a href="#" class="forgot">Forgot Password?</a>
-      </div>
     </div>
   </div>
 </template>

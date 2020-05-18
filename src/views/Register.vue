@@ -1,10 +1,10 @@
 <template>
-  <div class="login">
-    <div class="heading">LOG<span class="in"> IN</span></div>
-    <div class="form-div">
-      <form class="form" action="#" method="POST">
+  <div class="register">
+    <div class="register-heading">Register for n00bCTF</div>
+    <div class="register-form">
+      <form class="form">
         <div class="info">
-          <label class="label">E-mail</label>
+          <label class="label">Team Name *</label>
           <input
             type="text"
             class="inputField email"
@@ -21,7 +21,6 @@
             name="user_pass"
           />
         </div>
-        <input class="button" type="submit" value="LOG IN" />
         <Button text="LOG IN" type="submit" />
       </form>
       <div class="forgot">
