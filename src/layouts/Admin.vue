@@ -1,0 +1,21 @@
+<template>
+  <div id="admin-layout">
+    <AdminHeader />
+    <div id="container">
+      <slot />
+    </div>
+    <AdminFooter />
+  </div>
+</template>
+
+<script>
+import AdminHeader from "../components/AdminHeader.vue";
+import AdminFooter from "../components/AdminFooter.vue";
+export default {
+  name: "AdminLayout",
+  components: {
+    AdminHeader,
+    AdminFooter
+  }
+};
+</script>

@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+$screenRatio: 1;
+.adminHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px * $screenRatio;
+  margin-bottom: 100px * $screenRatio;
+}
+
+.nav-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px * $screenRatio;
+  line-height: 20px * $screenRatio;
+  color: #393939;
+  margin-left: 33px * $screenRatio;
+  margin-right: 33px * $screenRatio;
+}
+
+.timer-message {
+  margin-bottom: 0;
+}
+.timer-value {
+  margin-top: 0;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropbtn {
+  font-size: 14px * $screenRatio;
+  line-height: 24px * $screenRatio;
+  border: none;
+  outline: none;
+  color: #593c8f;
+  background-color: inherit;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 150px;
+}
+
+.dropdown-link {
+  color: black;
+  float: none;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
