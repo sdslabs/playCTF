@@ -1,0 +1,74 @@
+$screenRatio: 1;
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700&display=swap');
+.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heading {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px * $screenRatio;
+  line-height: 28px * $screenRatio;
+}
+
+.subheading {
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px * $screenRatio;
+  line-height: 28px * $screenRatio;
+  margin-bottom: 5px;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Nunito Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  align-self: flex-start;
+}
+
+.bold {
+  font-weight: bold;
+}
+.name {
+  color: #593c8f;
+  font-weight: bold;
+}
+
+.content > * {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.attempts {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.graph {
+  margin-left: 300px * $screenRatio;
+}
+
+.dropdown {
+  width: 200px;
+}
+
+.clear {
+  margin-right: 10px;
+  display: none;
+}

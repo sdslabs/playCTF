@@ -19,3 +19,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#container {
+  padding-left: 25%;
+  padding-right: 25%;
+}
+</style>
