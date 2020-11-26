@@ -213,10 +213,7 @@ export default {
   }
 };
 </script>
-<<<<<<< HEAD
-=======
 
 <style scoped lang="scss">
 @import "@/assets/scss/adminSubmissions.scss";
 </style>
->>>>>>> e7bd13873c2c33c4a5caf04c47e0684929b71864
