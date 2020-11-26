@@ -28,6 +28,6 @@
 
 <script>
 export default {
-  name: "StatsNavbar",
+  name: "StatsNavbar"
 };
 </script>

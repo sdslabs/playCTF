@@ -21,7 +21,6 @@
         <div class="notificationDesc">
           {{ notify.desc }}
         </div>
-        
       </div>
     </div>
   </div>

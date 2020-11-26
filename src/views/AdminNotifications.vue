@@ -1,7 +1,14 @@
 <template>
   <div class="main">
-    <div class="heading">
-      CREATE NEW NOTIFICATION
+    <div class="headingContainer">
+      <div class="heading">
+        CREATE NEW NOTIFICATION
+      </div>
+      <div class="addFeedback">
+        <transition name="fade" v-on:enter="enter">
+          <img v-if="show" src="@/assets/images/notif-added.svg" />
+        </transition>
+      </div>
     </div>
     <div class="form">
       <p class="fields">Notification Title<span class="important">*</span></p>
@@ -22,12 +29,22 @@
           id="checkbox"
           class="checkbox"
           v-model="checked"
+          @change="checkSubmissionValidity"
         />
         <label for="checkbox"
           >I have checked all the information and no further changes shall be
           made.</label
         >
-        <button class="submitButton">
+        <button
+          class="submitButton"
+          :class="{
+            active: canSubmit,
+            inactive: !canSubmit && !subProcessing,
+            processing: subProcessing
+          }"
+          :disabled="!canSubmit"
+          v-on:click="onSubmit"
+        >
           Submit
         </button>
       </div>
@@ -38,10 +55,10 @@
     <div class="notifTabs">
       <NotificationTab
         v-for="notif in notifications"
-        :key="notif.id"
+        :key="notif.ID"
         :title="notif.title"
-        :description="notif.description"
-        :time="notif.time"
+        :description="notif.desc"
+        :time="formatTime(notif.updated_at)"
         :isNew="notif.isNew"
       />
     </div>
@@ -49,6 +66,8 @@
 </template>
 <script>
 import NotificationTab from "../components/NotificationTab";
+import axios from "axios";
+var hostUrl = "http://856011d5d90b.ngrok.io";
 export default {
   name: "AdminNotfications",
   components: {
@@ -56,54 +75,77 @@ export default {
   },
   data() {
     return {
+      show: false,
+      subProcessing: false,
+      canSubmit: false,
       description: "",
       title: "",
       checked: false,
-      notifications: [
-        {
-          id: 1,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: true
-        },
-        {
-          id: 2,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: false
-        },
-        {
-          id: 3,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: false
-        },
-        {
-          id: 4,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: false
-        },
-        {
-          id: 5,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: false
-        },
-        {
-          id: 6,
-          title: "Last hour left!",
-          description: "Only 1 hour is left to start. Gear up",
-          time: "1 hour Ago",
-          isNew: false
-        }
-      ]
+      notifications: []
     };
+  },
+  mounted() {
+    axios.post(`${hostUrl}/api/notification/available`).then(response => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        console.log(response);
+        this.notifications = response.data;
+      }
+    });
+  },
+  methods: {
+    formatTime(time) {
+      return time;
+    },
+    checkSubmissionValidity() {
+      this.canSubmit = this.title.length > 0 && this.checked;
+    },
+    onSubmit() {
+      this.subProcessing = true;
+      var bodyFormData = new FormData();
+      bodyFormData.append("title", this.title);
+      bodyFormData.append("desc", this.description);
+      var self = this;
+      axios({
+        method: "post",
+        url: `${hostUrl}/api/notification/add`,
+        data: bodyFormData,
+        headers: { "Content-Type": "multipart/form-data" }
+      })
+        .then(function(response) {
+          console.log(response);
+          self.notifications = [
+            {
+              title: self.title,
+              desc: self.description,
+              updated_at: "Just Now",
+              isNew: true
+            },
+            ...self.notifications
+          ];
+          self.title = "";
+          self.description = "";
+          self.checked = false;
+          self.canSubmit = false;
+          self.subProcessing = false;
+          self.show = true;
+        })
+        .catch(function(response) {
+          console.log(response);
+        });
+    },
+    enter: function() {
+      var self = this;
+      setTimeout(function() {
+        self.show = false;
+      }, 3000); // hide the message after 3 seconds
+    }
+  },
+  watch: {
+    title: function() {
+      this.canSubmit = this.title.length > 0 && this.checked;
+    }
   }
 };
 </script>

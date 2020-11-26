@@ -6,6 +6,17 @@ $screenRatio: 1;
   flex-direction: column;
   justify-content: flex-start;
 }
+.fade-leave-active {
+  transition: opacity 1s
+}
+.addFeedback{
+  margin-left: $screenRatio * 250px;
+}
+.headingContainer{
+  display: flex;
+  flex-direction: row;
+}
+
 .heading {
   font-family: 'Nunito Sans';
   font-style: normal;
@@ -42,7 +53,6 @@ $screenRatio: 1;
 }
 
 .submitButton {
-  background-color: #ff6700;
   border-radius: 3px;
   color: #ffffff;
   font-family: 'Nunito Sans';
@@ -55,6 +65,15 @@ $screenRatio: 1;
   margin-left: auto;
 }
 
+.active{
+  background-color: #ff6700;
+}
+.inactive{
+  background-color: #D7D7D7;
+}
+.processing{
+  background-color: rgba(255, 103, 0, 0.57);
+}
 .form {
   margin-top: 30px * $screenRatio;
   margin-bottom: 40px * $screenRatio;
@@ -69,10 +88,14 @@ $screenRatio: 1;
   border: 1px solid rgba(87, 87, 87, 0.7);
   padding-left: 16px * $screenRatio;
   margin-bottom: 10px * $screenRatio;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px * $screenRatio;
+  line-height: 18px * $screenRatio;
 }
 .title::placeholder {
   font-family: 'Nunito Sans';
-
   font-style: normal;
   font-weight: 600;
   font-size: 16px * $screenRatio;
@@ -86,6 +109,11 @@ textarea {
   padding-left: 16px * $screenRatio;
   padding-top: 15px * $screenRatio;
   margin-bottom: 10px * $screenRatio;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px * $screenRatio;
+  line-height: 18px * $screenRatio;
 }
 
 textarea::placeholder {

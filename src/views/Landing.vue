@@ -18,8 +18,8 @@
           to appear directly for SDSLabs interview round.
         </div>
         <div class="dropdown">
-            Learn more
-            <img src="@/assets/images/dropdown.svg" />
+          Learn more
+          <img src="@/assets/images/dropdown.svg" />
         </div>
       </div>
     </div>
