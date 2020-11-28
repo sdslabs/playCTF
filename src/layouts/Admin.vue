@@ -24,5 +24,8 @@ export default {
 #container {
   padding-left: 25%;
   padding-right: 25%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

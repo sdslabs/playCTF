@@ -10,8 +10,8 @@ import VuejsPaginate from "vuejs-paginate";
 Vue.config.productionTip = false;
 Vue.component("default-layout", DefaultLayout);
 Vue.component("admin-layout", AdminLayout);
-Vue.component("v-select",vSelect);
-Vue.component('paginate', VuejsPaginate)
+Vue.component("v-select", vSelect);
+Vue.component("paginate", VuejsPaginate);
 new Vue({
   router,
   store,

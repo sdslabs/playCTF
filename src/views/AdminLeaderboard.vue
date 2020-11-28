@@ -29,23 +29,33 @@
         </tbody>
       </table>
     </div>
-    <paginate
-      v-model="currentPage"
-      :page-count="totalPages"
-      :click-handler="pageChangeHandler"
-      :page-range="3"
-      :margin-pages="2"
-      :prev-text="'Previous'"
-      :next-text="'Next'"
-      :container-class="'pagination'"
-      :page-link-class="'pageItem'"
-      :prev-link-class="'prevItem'"
-      :next-link-class="'nextItem'"
-      :break-view-link-class="'breakItemlink-'"
-      :no-li-surround="true"
-    >
-      >
-    </paginate>
+    <div class="paginateContainer">
+      <div class="pagination">
+        <paginate
+          v-model="currentPage"
+          :page-count="totalPages"
+          :click-handler="pageChangeHandler"
+          :page-range="3"
+          :margin-pages="2"
+          :prev-text="'Previous'"
+          :next-text="'Next'"
+          :container-class="'pagination'"
+          :page-link-class="'pageItem'"
+          :prev-link-class="'prevItem'"
+          :next-link-class="'nextItem'"
+          :break-view-link-class="'breakItemlink-'"
+          :no-li-surround="true"
+        >
+          >
+        </paginate>
+      </div>
+      <div class="jumpPage">
+        <span>Jump to</span>
+        <form class="form" @submit="changePage">
+          <input type="number" v-model="jumpPage" :min="1" :max="totalPages" class="pageInput"/>
+        </form>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -53,9 +63,10 @@ export default {
   name: "AdminLeaderboard",
   data() {
     return {
+      jumpPage: 1,
       searchQuery: "",
       currentPage: 1,
-      totalPages: 2,
+      totalPages: 45,
       elementsPerPage: 10,
       ascending: false,
       sortColumn: "",
@@ -63,82 +74,86 @@ export default {
         {
           rank: "1",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "2",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "3",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "4",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "5",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "6",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "7",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "8",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "9",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "10",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "11",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "12",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "13",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "14",
           teamName: "Rockstars",
-          score: "874"
+          score: "874",
         },
         {
           rank: "15",
           teamName: "Rockstars",
-          score: "874"
-        }
-      ]
+          score: "874",
+        },
+      ],
     };
   },
   methods: {
+    changePage() {
+      console.log("submitted");
+      this.currentPage = this.jumpPage;
+    },
     sortTable: function sortTable(col) {
       if (this.sortColumn === col) {
         this.ascending = !this.ascending;
@@ -149,7 +164,7 @@ export default {
 
       var ascending = this.ascending;
 
-      this.rows.sort(function(a, b) {
+      this.rows.sort(function (a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
@@ -171,7 +186,7 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
-    }
+    },
   },
   computed: {
     columns: function columns() {
@@ -179,8 +194,8 @@ export default {
         return [];
       }
       return Object.keys(this.rows[0]);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss">
