@@ -30,7 +30,7 @@
             >
               <router-link
                 class="link"
-                v-if="col === linkCol"
+                v-if="isColLink(col)"
                 :to="redirectLink + row[col]"
               >
                 {{ row[col] }}
@@ -86,18 +86,22 @@ export default {
   data() {
     return {
       jumpPage: 1,
-      currentPage: 1
+      currentPage: 1,
+      redirectLink: ""
     };
   },
-  props: [
-    "tableCols",
-    "rows",
-    "redirectLink",
-    "colStyle",
-    "linkCol",
-    "maxElementPerPage"
-  ],
+  props: ["tableCols", "rows", "colStyle", "links", "maxElementPerPage"],
   methods: {
+    isColLink(val) {
+      var isLink = false;
+      this.links.forEach(item => {
+        if (item.col === val) {
+          isLink = true;
+          this.redirectLink = item.redirect;
+        }
+      });
+      return isLink;
+    },
     changePage() {
       this.currentPage = this.jumpPage;
     },

@@ -16,8 +16,7 @@
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
-      linkCol="username"
-      :redirectLink="'/admin/users/'"
+      :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
     />
   </div>

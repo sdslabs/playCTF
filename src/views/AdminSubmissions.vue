@@ -20,8 +20,10 @@
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
-      linkCol="challenge"
-      :redirectLink="'/admin/challenges/'"
+      :links="[
+        { col: 'challenge', redirect: '/admin/challenges/' },
+        { col: 'username', redirect: '/admin/users/' }
+      ]"
       :maxElementPerPage="20"
     />
   </div>
