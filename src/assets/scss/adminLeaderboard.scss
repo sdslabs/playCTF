@@ -6,12 +6,18 @@ $screenRatio: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width:680px*$screenRatio;
+  width: 744px*$screenRatio;
+  align-self: center;
 }
 
-.heading {
-  width: $screenRatio * 192;
-  height: $screenRatio * 28;
+.headingDiv {
+  align-items: flex-start;
+
+  .heading {
+    align-self: flex-start;
+    width: $screenRatio * 192px;
+    height: $screenRatio * 28px;
+  }
 }
 
 .searchBar {
@@ -50,166 +56,4 @@ $screenRatio: 1;
 
 .searchBtn:focus {
   outline-color: rebeccapurple;
-}
-
-%backgroundColor {
-  background: #e7e7e7;
-}
-
-.leaderboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-
-  .heading {
-    font-family: 'Nunito Sans', sans-serif;
-    font-size: 24px;
-    line-height: 28px;
-    font-weight: 900;
-    color: #ff6700;
-
-    .board {
-      color: black;
-    }
-  }
-
-  .leaderboardTable {
-    border-spacing: 0;
-
-    .columnHeading1 {
-      text-align: center;
-      width: 72px;
-    }
-
-    .columnHeading2 {
-      width: 600px;
-      padding-left: 20px;
-    }
-
-    .columnHeading3 {
-      text-align: center;
-      width: 72px;
-    }
-
-    td {
-      font-family: 'Open Sans';
-      font-style: normal;
-      font-weight: normal;
-      font-size: 14px;
-      line-height: 32px;
-    }
-
-    .rank {
-      text-align: center;
-    }
-
-    .teamName {
-      padding-left: 20px;
-      color: #593c8f;
-    }
-
-    .score {
-      text-align: center;
-    }
-
-    width: 648px;
-    margin-top: 50px;
-
-    th {
-      font-family: 'Nunito Sans';
-      font-style: normal;
-      font-weight: bold;
-      font-size: 16px;
-      line-height: 32px;
-    }
-
-    tr {
-      height: 32px;
-    }
-
-    tr:nth-child(2n + 1) {
-      @extend %backgroundColor;
-    }
-
-    .number {
-      display: inline-block;
-      padding: 4px 10px;
-      color: #fff;
-      border-radius: 4px;
-      background-color: #f7f7f7;
-      margin: 0px 5px;
-      cursor: pointer;
-    }
-  }
-}
-
-.pagination {
-  display: flex;
-  list-style-type: none;
-}
-
-.pageItem {
-  width: 15px*$screenRatio;
-  margin-left: 5px*$screenRatio;
-  margin-right: 5px*$screenRatio;
-  outline: none;
-}
-
-.pageItem.active {
-  color: #191919;
-  font-weight: bold;
-}
-
-.nextItem {
-  color: #593C8F;
-  margin-left: 10px*$screenRatio;
-  outline: none;
-}
-
-.nextItem.disabled {
-  color: rgba(89, 60, 143, 0.57);
-}
-
-.prevItem {
-  color: #593C8F;
-  margin-right: 10px*$screenRatio;
-  outline: none;
-}
-
-.prevItem.disabled {
-  color: rgba(89, 60, 143, 0.57);
-}
-
-.paginateContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: 'Nunito Sans';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px*$screenRatio;
-  line-height: 16px*$screenRatio;
-  color: #575757;
-  justify-content: space-between;
-  margin-top: 20px*$screenRatio;
-}
-
-.jumpPage {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  color:#191919;
-  font-weight: bold;
-}
-
-.pageInput{
-  margin-left: 5px*$screenRatio;
-  color:#191919;
-  background: #F2F2F2;
-  box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  text-align: center;
-  outline: none;
-  width: 40px*$screenRatio;
 }

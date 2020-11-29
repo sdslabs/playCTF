@@ -7,12 +7,13 @@ import Notification from "../views/Notifications.vue";
 import Login from "../views/Login.vue";
 import Admin from "../views/AdminLanding.vue";
 import AdminNotifications from "../views/AdminNotifications.vue";
+import AdminUser from "../views/AdminUser.vue";
 import AdminUsers from "../views/AdminUsers.vue";
 import AdminLeaderboard from "../views/AdminLeaderboard.vue";
 import AdminChallenges from "../views/AdminChallenges.vue";
 import AdminSubmissions from "../views/AdminSubmissions.vue";
 import AdminConfigure from "../views/AdminConfigure.vue";
-
+import AdminChallenge from "../views/AdminChallenge.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -47,8 +48,8 @@ const routes = [
     component: Login
   },
   {
-    path: "/admin",
-    name: "admin",
+    path: "/admin/statistics",
+    name: "adminStatistics",
     component: Admin,
     meta: {
       layout: "admin-layout"
@@ -71,6 +72,14 @@ const routes = [
     }
   },
   {
+    path: "/admin/users/:username",
+    name: "adminUsers",
+    component: AdminUser,
+    meta: {
+      layout: "admin-layout"
+    }
+  },
+  {
     path: "/admin/leaderboard",
     name: "adminLeaderboard",
     component: AdminLeaderboard,
@@ -82,6 +91,14 @@ const routes = [
     path: "/admin/challenges",
     name: "adminChallenges",
     component: AdminChallenges,
+    meta: {
+      layout: "admin-layout"
+    }
+  },
+  {
+    path: "/admin/challenges/:id",
+    name: "adminChallenge",
+    component: AdminChallenge,
     meta: {
       layout: "admin-layout"
     }

@@ -1,7 +1,9 @@
 <template>
   <div class="adminNavbar">
     <nav class="navbar-container">
-      <router-link to="/admin" class="navbar-link">Statistics</router-link>
+      <router-link to="/admin/statistics" class="navbar-link"
+        >Statistics</router-link
+      >
       <router-link to="/admin/notifications" class="navbar-link"
         >Notifications</router-link
       >

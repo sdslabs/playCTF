@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
+$screenRatio: 1;
+
+.challengeContainer {
+    width: 744px*$screenRatio;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.challengeInfo {
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+    box-shadow: 0px 6px 10px rgba(87, 87, 87, 0.15);
+    border-radius: 5px;
+    padding: 30px*$screenRatio;
+
+    .changeButton {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        background: #FFFFFF;
+        border: 1.5px solid #393939;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
+        border-radius: 3px;
+        font-family: 'Nunito Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 24px;
+        color: #393939;
+        padding: 4px 10px;
+        margin: 0px 10px;
+
+        img {
+            size: 16px;
+            margin: 0px 5px;
+        }
+    }
+
+    .details {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .name {
+            font-family: 'Nunito Sans';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            line-height: 28px;
+            color: #191919;
+        }
+
+        .category {
+            text-align: center;
+            vertical-align: middle;
+            background: #593c8f;
+            border-radius: 2px;
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 16px;
+            color: #ffffff;
+            padding: 4px 10px;
+            margin-left: 20px;
+            margin-right: 30px;
+        }
+
+        .status {
+            margin-left: auto;
+            font-family: 'Nunito Sans';
+            font-style: normal;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 28px;
+        }
+
+        .deployed {
+            color: rgba(0, 144, 43, 0.75);
+        }
+
+        .purged {
+            color: rgba(215, 44, 39, 0.75);
+        }
+
+        .undeployed {
+            color: rgba(255, 174, 0, 0.75);
+        }
+    }
+
+    .stats {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .pointSolves {
+            display: flex;
+            flex-direction: row;
+            margin-top: 20px*$screenRatio;
+
+            .point {
+                border-right: 3px*$screenRatio solid rgba(87, 87, 87, 0.7);
+                padding: 0px 10px*$screenRatio;
+                padding-top: 0;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .solves {
+                display: flex;
+                flex-direction: column;
+                padding: 10px*$screenRatio;
+                padding-top: 0;
+            }
+
+            .value {
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 28px;
+                text-align: center;
+                color: #191919;
+            }
+
+            .field {
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 18px;
+                text-align: center;
+                color: #575757;
+            }
+        }
+
+        .changeChallengeStatus {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: auto;
+        }
+    }
+
+    .aboutText {
+        text-align: left;
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 24px;
+        color: #393939;
+    }
+
+    .aboutChallenge {
+        margin: 10px 0px;
+        ;
+    }
+
+    .port {
+        line-height: 16px;
+    }
+
+    .host {
+        line-height: 16px;
+        color: #593C8F;
+        margin: 10px 0px;
+        ;
+    }
+
+    .testRun {
+        width: 100px*$screenRatio;
+        margin: 0;
+    }
+}
