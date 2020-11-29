@@ -2,70 +2,170 @@
 <template>
   <div id="AdminSubmissions">
     <div class="headerComponent">
-      <div>
-        Submissions
-      </div>
+      <div>Submissions</div>
       <v-select
         class="dropdown"
-        :options="['Total', 'Correct', 'Incorrect']"
+        :options="['All', 'Correct', 'Incorrect']"
         :value="this.categoryFilter"
         @input="changeFilter"
         :clearable="false"
-      />
+        :searchable="false"
+      >
+        <template #selected-option="item" class="selection">
+          <span class="filterText">Filter By:</span
+          ><span class="filterSelection">{{ item.label }}</span>
+        </template>
+      </v-select>
     </div>
-    <div class="leaderboard">
-      <table class="leaderboardTable">
-        <thead class="tableHead">
-          <th class="coloumnHeading">User Name</th>
-          <th class="coloumnHeading">Challenge</th>
-          <th class="coloumnHeading">Category</th>
-          <th class="coloumnHeading">Time & Date (+5:30 UTC)</th>
-          <th class="coloumnHeading">Status</th>
-        </thead>
-        <tbody class="tableBody">
-          <tr v-for="row in get_rows()" :key="row.rank" class="leaderRow">
-            <td v-for="col in columns" :key="col.id">{{ row[col] }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="pagination">
-        <div
-          class="number"
-          v-for="i in num_pages()"
-          v-bind:class="[i == currentPage ? 'active' : '']"
-          v-on:click="change_page(i)"
-          :key="i"
-        >
-          {{ i }}
-        </div>
-      </div>
-
-      <div class="page">
-        Page
-      </div>
-    </div>
+    <admin-table
+      :tableCols="tableCols"
+      :rows="rows"
+      linkCol="challenge"
+      :redirectLink="'/admin/challenges/'"
+      :maxElementPerPage="20"
+    />
   </div>
 </template>
 
 <script>
+import adminTable from "../components/adminTable.vue";
 export default {
   name: "AdminSubmissions",
-
+  components: {
+    adminTable
+  },
   data() {
     return {
       categoryFilter: "All",
-      currentPage: 1,
-      elementsPerPage: 10,
       ascending: false,
       sortColumn: "",
+      tableCols: [
+        { id: 1, label: "User Name", style: { paddingLeft: "20px" } },
+        { id: 2, label: "Challenge", style: {} },
+        { id: 3, label: "Category", style: { textAlign: "center" } },
+        {
+          id: 4,
+          label: "Time & Date (+5:30 UTC)",
+          style: { paddingLeft: "20px" }
+        },
+        {
+          id: 5,
+          label: "Status",
+          style: { paddingRight: "20px", textAlign: "center" }
+        }
+      ],
       rows: [
         {
           username: "Rockstar",
           challenge: "Polynomial",
           category: "Crypto",
           timeDate: "07:30:43; January 25th, 2020",
+          status: "Correct"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
           status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Incorrect"
+        },
+        {
+          username: "Rockstar",
+          challenge: "Polynomial",
+          category: "Crypto",
+          timeDate: "07:30:43; January 25th, 2020",
+          status: "Correct"
         },
         {
           username: "Rockstar",

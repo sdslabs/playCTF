@@ -16,7 +16,9 @@
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
+      linkCol="username"
       :redirectLink="'/admin/users/'"
+      :maxElementPerPage="10"
     />
   </div>
 </template>
@@ -43,7 +45,8 @@ export default {
           id: 2,
           label: "User Name",
           style: {
-            width: "600px"
+            width: "600px",
+            paddingLeft: "20px"
           }
         },
         {
@@ -123,7 +126,7 @@ export default {
         },
         {
           rank: "14",
-          teamName: "Rockstars",
+          username: "Rockstars",
           score: "874"
         },
         {

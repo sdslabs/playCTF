@@ -50,7 +50,9 @@
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
+      linkCol="username"
       :redirectLink="'/admin/users/'"
+      :maxElementPerPage="10"
     />
   </div>
 </template>
@@ -79,14 +81,16 @@ export default {
           id: 2,
           label: "User Name",
           style: {
-            width: "120px"
+            width: "120px",
+            paddingLeft: "20px"
           }
         },
         {
           id: 3,
           label: "E-Mail Address",
           style: {
-            textAlign: "left"
+            textAlign: "left",
+            paddingLeft: "20px"
           }
         },
         {
@@ -102,7 +106,8 @@ export default {
           label: "Status",
           style: {
             width: "72px",
-            textAlign: "center"
+            textAlign: "center",
+            paddingRight: "20px"
           }
         }
       ],

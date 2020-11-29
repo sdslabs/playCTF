@@ -18,15 +18,19 @@
               :key="col.id"
               :class="[
                 {
-                  green: col === 'status' && row.status === 'Active',
-                  red: col === 'status' && row.status === 'Banned'
+                  green:
+                    col === 'status' &&
+                    (row.status === 'Active' || row.status === 'Correct'),
+                  red:
+                    col === 'status' &&
+                    (row.status === 'Banned' || row.status === 'Incorrect')
                 },
                 col
               ]"
             >
               <router-link
                 class="link"
-                v-if="col === 'username'"
+                v-if="col === linkCol"
                 :to="redirectLink + row[col]"
               >
                 {{ row[col] }}
@@ -43,7 +47,7 @@
       <div class="pagination">
         <paginate
           v-model="currentPage"
-          :page-count="rows.length / elementsPerPage"
+          :page-count="rows.length / maxElementPerPage"
           :click-handler="pageChangeHandler"
           :page-range="3"
           :margin-pages="2"
@@ -66,7 +70,7 @@
             type="number"
             v-model="jumpPage"
             :min="1"
-            :max="totalPages"
+            :max="rows.length / maxElementPerPage"
             class="pageInput"
           />
         </form>
@@ -82,14 +86,19 @@ export default {
   data() {
     return {
       jumpPage: 1,
-      currentPage: 1,
-      elementsPerPage: 10
+      currentPage: 1
     };
   },
-  props: ["tableCols", "rows", "redirectLink", "colStyle"],
+  props: [
+    "tableCols",
+    "rows",
+    "redirectLink",
+    "colStyle",
+    "linkCol",
+    "maxElementPerPage"
+  ],
   methods: {
     changePage() {
-      console.log("submitted");
       this.currentPage = this.jumpPage;
     },
     sortTable: function sortTable(col) {
@@ -112,11 +121,11 @@ export default {
       });
     },
     num_pages: function num_pages() {
-      return Math.ceil(this.rows.length / this.elementsPerPage);
+      return Math.ceil(this.rows.length / this.maxElementPerPage);
     },
     get_rows: function get_rows() {
-      var start = (this.currentPage - 1) * this.elementsPerPage;
-      var end = start + this.elementsPerPage;
+      var start = (this.currentPage - 1) * this.maxElementPerPage;
+      var end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);
     },
     change_page: function change_page(page) {
@@ -186,11 +195,20 @@ $screenRatio: 1;
     .username,
     .email {
       color: #593c8f;
+      padding-left: 20px;
     }
-
-    .score,
+    .category {
+      text-align: center;
+    }
+    .timeDate {
+      padding-left: 20px;
+    }
+    .score {
+      text-align: center;
+    }
     .status {
       text-align: center;
+      padding-right: 20px;
     }
     .green {
       color: #00902b;
