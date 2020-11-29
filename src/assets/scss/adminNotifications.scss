@@ -132,3 +132,19 @@ textarea::placeholder {
 .notifTabs::-webkit-scrollbar {
   display: none;
 }
+
+textarea:focus, .title:focus{
+  outline: none !important;
+  border: 2px solid #593C8F;
+}
+
+.empty{
+  margin-top: 25px*$screenRatio;
+  text-align: left;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 32px;
+  line-height: 48px;
+  color: rgba(87, 87, 87, 0.7);
+}

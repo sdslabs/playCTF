@@ -1,12 +1,11 @@
 <template>
   <div class="main">
     <div class="headingContainer">
-      <div class="heading">
-        CREATE NEW NOTIFICATION
-      </div>
+      <div class="heading">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
         <transition name="fade" v-on:enter="enter">
-          <img v-if="show" src="@/assets/images/notif-added.svg" />
+          <img v-if="showSuccess" src="@/assets/images/notif-added.svg" />
+          <img v-if="showFail" src="@/assets/images/notif-failed.svg" />
         </transition>
       </div>
     </div>
@@ -49,10 +48,8 @@
         </button>
       </div>
     </div>
-    <div class="heading">
-      PAST NOTIFICATIONS
-    </div>
-    <div class="notifTabs">
+    <div class="heading">PAST NOTIFICATIONS</div>
+    <div class="notifTabs" v-if="notifications.length > 0">
       <NotificationTab
         v-for="notif in notifications"
         :key="notif.ID"
@@ -62,12 +59,15 @@
         :isNew="notif.isNew"
       />
     </div>
+    <div class="empty" v-else>
+      <span> No Notifications posted </span>
+    </div>
   </div>
 </template>
 <script>
 import NotificationTab from "../components/NotificationTab";
 import axios from "axios";
-var hostUrl = "http://856011d5d90b.ngrok.io";
+var hostUrl = "http://bc841ed5e8ba.ngrok.io";
 export default {
   name: "AdminNotfications",
   components: {
@@ -75,7 +75,8 @@ export default {
   },
   data() {
     return {
-      show: false,
+      showSuccess: false,
+      showFail: false,
       subProcessing: false,
       canSubmit: false,
       description: "",
@@ -129,16 +130,23 @@ export default {
           self.checked = false;
           self.canSubmit = false;
           self.subProcessing = false;
-          self.show = true;
+          self.showSuccess = true;
         })
         .catch(function(response) {
           console.log(response);
+          self.title = "";
+          self.description = "";
+          self.checked = false;
+          self.canSubmit = false;
+          self.subProcessing = false;
+          self.showFail = true;
         });
     },
     enter: function() {
       var self = this;
       setTimeout(function() {
-        self.show = false;
+        self.showSuccess = false;
+        self.showFail = false;
       }, 3000); // hide the message after 3 seconds
     }
   },
