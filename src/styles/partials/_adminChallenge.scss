@@ -1,11 +1,11 @@
-.challengeContainer {
+.adminChalInfoContainer {
     width: 744px;
     display: flex;
     flex-direction: column;
     align-self: center;
 }
 
-.challengeInfo {
+.adminChalInfo {
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
@@ -21,10 +21,7 @@
         box-sizing: border-box;
         box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
         border-radius: 3px;
-        font-family: 'Nunito Sans';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 14px;
+        @extend %font-style-basic;
         line-height: 24px;
         color: #393939;
         padding: 4px 10px;
@@ -35,7 +32,7 @@
         }
     }
 
-    .details {
+    .infoDetails {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -87,7 +84,7 @@
         }
     }
 
-    .stats {
+    .infoStats {
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -164,7 +161,7 @@
     }
 
     .testRun {
-        width: 100px;
+        width: 120px;
         margin: 0;
     }
 }

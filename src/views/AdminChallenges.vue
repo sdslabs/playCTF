@@ -1,40 +1,13 @@
 <template>
   <div class="adminChallengesContainer">
     <div class="adminChallengesVerticalNav">
-      <button
+      <button v-for="category in this.categoryFilterOptions"
+        :key="category.id"
         class="navButton"
-        @click="changeCategory('All')"
-        :class="{ active: categoryFilter === 'All' }"
+        @click="changeCategory(category.name)"
+        :class="{ active: categoryFilter === category.name }"
       >
-        All
-      </button>
-      <button
-        class="navButton"
-        @click="changeCategory('Crypto')"
-        :class="{ active: categoryFilter === 'Crypto' }"
-      >
-        Crypto
-      </button>
-      <button
-        class="navButton"
-        @click="changeCategory('PWN')"
-        :class="{ active: categoryFilter === 'PWN' }"
-      >
-        PWN
-      </button>
-      <button
-        class="navButton"
-        @click="changeCategory('Web')"
-        :class="{ active: categoryFilter === 'Web' }"
-      >
-        Web
-      </button>
-      <button
-        class="navButton"
-        @click="changeCategory('Misc')"
-        :class="{ active: categoryFilter === 'Misc' }"
-      >
-        Misc
+      {{category.name}}
       </button>
     </div>
     <div class="mainContainerAdChal">
@@ -48,26 +21,17 @@
       <div class="sort">
         <span class="sortText">Sort by:</span>
         <a
+          v-for="sort in this.sortFilterOptions"
+          :key="sort.id"
           class="sortOption"
-          :class="{ active: sortFilter === 'Name' }"
-          @click="changeSort('Name')"
-          >Name</a
+          :class="[{ active: sortFilter === sort.name }]"
+          @click="changeSort(sort.name)"
         >
-        <a
-          class="sortOption"
-          :class="{ active: sortFilter === 'Score' }"
-          @click="changeSort('Score')"
-          >Score</a
-        >
-        <a
-          class="sortOption"
-          :class="{ active: sortFilter === 'Solves' }"
-          @click="changeSort('Solves')"
-          >Solves</a
-        >
+          {{ sort.name }}
+        </a>
         <v-select
           class="dropdown"
-          :options="['All', 'Deployed', 'Undeployed', 'Purged']"
+          :options="statusFilterOptions"
           :value="this.statusFilter"
           @input="changeFilter"
           :clearable="false"
@@ -81,7 +45,7 @@
       </div>
       <div class="adminChallengesList">
         <admin-chall-card
-          v-for="challenge in challenges"
+          v-for="challenge in displayChallenges"
           :key="challenge.ChallId"
           :challenge="challenge"
         />
@@ -101,29 +65,75 @@ export default {
       sortFilter: "Name",
       categoryFilter: "All",
       challenges: [],
+      displayChallenges: [],
+      categoryFilterOptions: [
+        { name: "All", id: 1 },
+        { name: "Crypto", id: 2 },
+        { name: "PWN", id: 3 },
+        { name: "Web", id: 4 },
+        { name: "Misc", id: 5 },
+      ],
+      sortFilterOptions: [
+        { name: "Name", id: 1 },
+        { name: "Score", id: 2 },
+        { name: "Solves", id: 3 },
+      ],
+      statusFilterOptions: ["All", "Deployed", "Undeployed", "Purged"],
     };
   },
-  mounted(){
-    axios.post(`${$store.getters.hostUrl}/api/info/available`).then(response => {
-      if (response.status !== 200) {
-        console.log(response.data);
-      } else {
-        console.log(response);
-        this.challenges = response.data;
-      }
-    });
+  mounted() {
+    axios
+      .post(`${this.$store.getters.hostUrl}/api/info/available`)
+      .then((response) => {
+        if (response.status !== 200) {
+          console.log(response.data);
+        } else {
+          this.challenges = response.data;
+          this.displayChallenges = this.challenges.sort((a,b)=>{
+            return(a.Name>b.Name?1:-1)
+          });
+        }
+      });
   },
   methods: {
     changeFilter(value) {
       this.statusFilter = value;
+      if (value === "All") {
+        this.displayChallenges = this.challenges;
+      } else {
+        this.displayChallenges = this.challenges.filter((el) => {
+          return el.Status == value;
+        });
+      }
     },
     changeSort(value) {
       this.sortFilter = value;
+      if(value==="Name"){
+        this.displayChallenges = this.displayChallenges.sort((a,b)=>{
+          return (a.Name>b.Name?1:-1);
+        })
+      }else if(value==='Score'){
+      this.displayChallenges = this.displayChallenges.sort((a,b)=>{
+          return (a.Points<=b.Points?a.Points===b.Points?a.Name>b.Name?1:-1:1:-1);
+        })
+      }else if(value==="Solves"){
+        this.displayChallenges = this.displayChallenges.sort((a,b)=>{
+          return (a.SolvesNumber<=b.SolvesNumber?a.SolvesNumber===b.SolvesNumber?a.Name>b.Name?1:-1:1:-1);
+        });
+        console.log(this.displayChallenges);
+      }
     },
     changeCategory(value) {
       this.categoryFilter = value;
-    }
-  }
+      if (value === "All") {
+        this.displayChallenges = this.challenges;
+      } else {
+        this.displayChallenges = this.challenges.filter((el) => {
+          return el.Category == value;
+        });
+      }
+    },
+  },
 };
 </script>
 

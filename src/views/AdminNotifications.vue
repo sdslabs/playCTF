@@ -85,7 +85,7 @@ export default {
     };
   },
   mounted() {
-    axios.post(`${store.getters.hostUrl}/api/notification/available`).then(response => {
+    axios.post(`${this.$store.getters.hostUrl}/api/notification/available`).then(response => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
@@ -109,9 +109,9 @@ export default {
       var self = this;
       axios({
         method: "post",
-        url: `${hostUrl}/api/notification/add`,
+        url: `${this.$store.getters.hostUrl}/api/notification/add`,
         data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { "Content-Type": "multipart/form-data"}
       })
         .then(function(response) {
           console.log(response);

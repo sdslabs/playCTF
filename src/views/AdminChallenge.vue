@@ -1,7 +1,7 @@
 <template>
-  <div class="challengeContainer">
-    <div class="challengeInfo">
-      <div class="details">
+  <div class="adminChalInfoContainer">
+    <div class="adminChalInfo">
+      <div class="infoDetails">
         <span class="name">{{ name }}</span>
         <span class="category">{{ category }}</span>
         <button class="changeButton">
@@ -17,7 +17,7 @@
           >{{ status }}</span
         >
       </div>
-      <div class="stats">
+      <div class="infoStats">
         <div class="pointSolves">
           <div class="point">
             <span class="value">{{ points }}</span>
@@ -54,7 +54,7 @@
         {{ about }}
       </div>
       <div class="port aboutText">Port : {{ port }}</div>
-      <div class="host aboutText">{{ host }}</div>
+      <div class="host aboutText">{{ `${this.$store.getters.challengeHostUrl}:${this.port}` }}</div>
       <button class="changeButton testRun">
         <img src="@/assets/play.svg" /><span>Test Run</span>
       </button>
@@ -62,23 +62,46 @@
   </div>
 </template>
 <script>
+import axios from "axios";
 export default {
   name: "AdminChallenge",
   data() {
     return {
-      name: "Mindbl0wn",
-      category: "PWN",
-      status: "Purged",
-      points: 25,
-      solves: 320,
-      about: `Mindbl0wn has a safe repository of files. The filename is signed using
-          mindbl0wn's private key (using the PKCS-1 standard). Anyone willing to
-          read a file, has to ask for a signature fro mindbl0wn. But mindbl0wn
-          is currently unavailable. Can you still access a file named "flag" on
-          mindbl0wn's repository?`,
-      port: 11003,
-      host: "http://challanges.beast.com:11003"
+      name: "",
+      category: "",
+      status: "",
+      points: "",
+      solves: "",
+      about: "",
+      port: "",
+      loaded: false,
     };
-  }
+  },
+  mounted() {
+    var postData = new FormData();
+    postData.append("name",this.$route.params.id);
+    axios({
+      method: "post",
+      url: `${this.$store.getters.hostUrl}/api/info/challenge/info`,
+      data: postData,
+      headers: { "Content-Type": "multipart/form-data" },
+    }).then((response) => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        this.loaded = true;
+        var data = response.data
+        this.name = data.Name;
+        this.category = data.Category;
+        this.status = data.Status;
+        this.points = data.Points;
+        this.solves = data.SolvesNumber;
+        this.about = data.Desc;
+        if(data.Ports!==null){
+        this.port = data.Ports[0];
+        }
+      }
+    });
+  },
 };
 </script>
