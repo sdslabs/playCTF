@@ -4,8 +4,8 @@
       <div class="heading">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
         <transition name="fade" v-on:enter="enter">
-          <img v-if="showSuccess" src="@/assets/images/notif-added.svg" />
-          <img v-if="showFail" src="@/assets/images/notif-failed.svg" />
+          <img v-if="showSuccess" src="@/assets/notif-added.svg" />
+          <img v-if="showFail" src="@/assets/notif-failed.svg" />
         </transition>
       </div>
     </div>
@@ -67,7 +67,6 @@
 <script>
 import NotificationTab from "../components/NotificationTab";
 import axios from "axios";
-var hostUrl = "http://bc841ed5e8ba.ngrok.io";
 export default {
   name: "AdminNotfications",
   components: {
@@ -86,7 +85,7 @@ export default {
     };
   },
   mounted() {
-    axios.post(`${hostUrl}/api/notification/available`).then(response => {
+    axios.post(`${store.getters.hostUrl}/api/notification/available`).then(response => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {

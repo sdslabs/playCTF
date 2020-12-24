@@ -11,6 +11,7 @@ $theme-color-white: #ffffff;
 $theme-color-black: #000000;
 $theme-color-blue: #2f53b1;
 $theme-color-orange: #ffc568;
+$theme-color-dark-orange: #FF6700;
 $theme-color-grey: #555555;
 $theme-color-dark-grey: #444444;
 $theme-color-light-grey: #999999;
@@ -23,6 +24,7 @@ $theme-color-red: #b83428;
 $primary-font-color: $theme-color-black;
 $primary-theme-color: $theme-color-blue;
 $secondary-theme-color: $theme-color-orange;
+$secondary-admin-theme-color: $theme-color-dark-orange;
 
 // sidebar themes variables
 $sidebar-bg: $theme-color-black;
@@ -41,3 +43,18 @@ $assets-dashboard-copy-text-eye: $assets-prefix + "dashboard-card-copy-text-eye.
 $assets-header-back-button: $assets-prefix + "header-back-button.svg";
 $assets-home-project-database-icon: $assets-prefix + "home-project-database-icon.svg";
 $assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-add.svg";
+
+%font-style-basic{
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 32px;
+    color: $theme-color-black;
+}
+
+%font-style-bold{
+    font-family: 'Nunito Sans';
+    font-style: normal;
+    font-weight: bold;
+}

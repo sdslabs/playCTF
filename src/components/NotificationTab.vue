@@ -2,7 +2,7 @@
   <div class="tab">
     <p class="title">
       {{ this.title }}
-      <span v-if="this.isNew"><img src="@/assets/images/new-tag.svg"/></span>
+      <span v-if="this.isNew"><img src="@/assets/new-tag.svg"/></span>
     </p>
     <p class="timeAgo">{{ this.time }}</p>
     <p class="desc">{{ this.description }}</p>

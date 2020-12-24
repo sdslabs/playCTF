@@ -1,6 +1,6 @@
 <template>
-  <div class="challengesContainer">
-    <div class="verticalNav">
+  <div class="adminChallengesContainer">
+    <div class="adminChallengesVerticalNav">
       <button
         class="navButton"
         @click="changeCategory('All')"
@@ -37,11 +37,11 @@
         Misc
       </button>
     </div>
-    <div class="mainContainer">
+    <div class="mainContainerAdChal">
       <div class="heading">
         <div class="headingName">CHALLENGES</div>
         <button class="addChallenge">
-          <img class="addImg" src="@/assets/images/add.svg" />
+          <img class="addImg" src="@/assets/add.svg" />
           <span class="addText">Create New Challenge</span>
         </button>
       </div>
@@ -79,10 +79,10 @@
           </template>
         </v-select>
       </div>
-      <div class="challenges">
+      <div class="adminChallengesList">
         <admin-chall-card
           v-for="challenge in challenges"
-          :key="challenge.id"
+          :key="challenge.ChallId"
           :challenge="challenge"
         />
       </div>
@@ -91,6 +91,7 @@
 </template>
 <script>
 import adminChallCard from "../components/adminChallCard.vue";
+import axios from "axios";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard },
@@ -99,57 +100,16 @@ export default {
       statusFilter: "All",
       sortFilter: "Name",
       categoryFilter: "All",
-      challenges: [
-        {
-          id: 1,
-          name: "Really Simple Algorithm",
-          category: "PWN",
-          status: "Deployed",
-          points: 25,
-          solves: 325
-        },
-        {
-          id: 2,
-          name: "Really Simple Algorithm",
-          category: "PWN",
-          status: "Deployed",
-          points: 25,
-          solves: 325
-        },
-        {
-          id: 3,
-          name: "Really Simple Algorithm",
-          category: "PWN",
-          status: "Deployed",
-          points: 25,
-          solves: 325
-        },
-        {
-          id: 4,
-          name: "Really Simple Algorithm",
-          category: "PWN",
-          status: "Deployed",
-          points: 25,
-          solves: 325
-        },
-        {
-          id: 5,
-          name: "Really Simple Algorithm",
-          category: "PWN",
-          status: "Deployed",
-          points: 25,
-          solves: 325
-        }
-      ]
+      challenges: [],
     };
   },
   mounted(){
-    axios.post(`${hostUrl}/api/notification/available`).then(response => {
+    axios.post(`${$store.getters.hostUrl}/api/info/available`).then(response => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
         console.log(response);
-        this.notifications = response.data;
+        this.challenges = response.data;
       }
     });
   },
@@ -167,6 +127,4 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import "@/assets/scss/adminChallenges.scss";
-</style>
+

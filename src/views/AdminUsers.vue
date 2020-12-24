@@ -1,10 +1,10 @@
 <template>
   <div class="usersContainer">
     <div class="headingDiv">
-      <img src="@/assets/images/userPanel.svg" class="heading" />
+      <img src="@/assets/userPanel.svg" class="heading" />
       <div class="searchBar">
         <button class="searchBtn">
-          <img src="@/assets/images/search.svg" class="searchImg" />
+          <img src="@/assets/search.svg" class="searchImg" />
         </button>
         <input
           v-model="searchQuery"

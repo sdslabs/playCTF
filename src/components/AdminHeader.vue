@@ -1,7 +1,7 @@
 <template>
   <div class="adminHeader">
     <div class="ctfLogo">
-      <img src="@/assets/images/ctf-logo.svg" />
+      <img src="@/assets/ctf-logo.svg" />
     </div>
     <AdminNav />
     <div class="nav-timer">
@@ -11,7 +11,7 @@
     <div class="dropdown">
       <button class="dropbtn">
         Admin
-        <img src="@/assets/images/dropdown.svg" />
+        <img src="@/assets/dropdown.svg" />
       </button>
       <div class="dropdown-content">
         <a class="dropdown-link" href="#">Link 1</a>

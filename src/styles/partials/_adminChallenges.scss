@@ -1,0 +1,157 @@
+.adminChallengesContainer {
+    display: flex;
+    flex-direction: row;
+    width: 830px;
+    margin-bottom: 300px;
+}
+
+.adminChallengesVerticalNav {
+    width: 66px;
+    height: 290px;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+
+    .navButton {
+        @extend %font-style-basic;
+        background-color: white;
+        border: none;
+        color: $theme-color-light-grey;
+        text-align: right;
+        outline: none;
+    }
+
+    .navButton:hover {
+        @extend %font-style-bold;
+        color: #191919;
+        border-right: 2px solid $secondary-admin-theme-color;
+    }
+
+    .active {
+        @extend %font-style-bold;
+        color: #191919;
+        border-right: 2px solid $secondary-admin-theme-color;
+    }
+}
+
+.mainContainerAdChal {
+    margin-left: 20px;
+    width: 744px;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .heading {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .headingName {
+            @extend %font-style-bold;
+            font-size: 24px;
+            line-height: 28px;
+            text-transform: uppercase;
+            color: #191919;
+        }
+
+        .addChallenge {
+            background: #FF6700;
+            border-radius: 3px;
+            outline: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 4px 12px;
+            border: none;
+        }
+
+        .addImg {
+            width: 15px;
+            height: 15px;
+            margin: 0px 5px;
+        }
+
+        .addText {
+            @extend %font-style-basic;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+    }
+
+    .sort {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        @extend %font-style-basic;
+        margin-top: 30px;
+
+        .sortText {
+            line-height: 18px;
+            color: rgba(57, 57, 57, 0.9);
+            margin-right: 8px;
+        }
+
+        .sortOption {
+            line-height: 24px;
+            color: rgba(87, 87, 87, 0.75);
+            margin: 0px 8px;
+        }
+
+        .sortOption:hover {
+            @extend %font-style-bold;
+            line-height: 24px;
+            text-align: center;
+            color: #191919;
+            border-bottom: 2px solid #FF6700;
+        }
+
+        .active {
+            @extend %font-style-bold;
+            line-height: 24px;
+            text-align: center;
+            color: #191919;
+            border-bottom: 2px solid #FF6700;
+        }
+
+        .dropdown {
+            margin-left: auto;
+            width: 200px;
+
+            .filterText {
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 18px;
+                color: #575757;
+            }
+
+            .filterSelection {
+                margin-left: auto;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 18px;
+                color: rgba(57, 57, 57, 0.9);
+                margin-right: 8px;
+            }
+        }
+        .selection {
+            width: 200px;
+        }
+    }
+}
+
+.adminChallengesList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 744px;
+    justify-content: space-between;
+}

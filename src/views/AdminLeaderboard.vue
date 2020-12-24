@@ -1,11 +1,11 @@
 <template>
   <div class="lbContainer">
     <div class="headingDiv">
-      <img src="@/assets/images/leaderboard.svg" class="heading" />
+      <img src="@/assets/leaderboard.svg" class="heading" />
     </div>
     <div class="searchBar">
       <button class="searchBtn">
-        <img src="@/assets/images/search.svg" class="searchImg" />
+        <img src="@/assets/search.svg" class="searchImg" />
       </button>
       <input
         v-model="searchQuery"

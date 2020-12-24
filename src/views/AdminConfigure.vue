@@ -4,7 +4,7 @@
       CONFIGURE
       <button class="preview-button">
         <div class="preview">
-          <img src="../assets/images/preview.svg" />
+          <img src="../assets/preview.svg" />
           Landing Page
         </div>
       </button>
@@ -78,7 +78,7 @@
       <!-- eslint-disable-next-line -->
       <input type="file" id="actual-button" hidden />
       <label for="actual-button">
-        <img src="../assets/images/upload.svg" />Upload file
+        <img src="../assets/upload.svg" />Upload file
       </label>
       <p class="subfields">Themes</p>
       <div class="themes">

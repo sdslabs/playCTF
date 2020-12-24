@@ -4,7 +4,7 @@
       <div class="userDetails">
         <div class="userName">
           <div class="name">{{ userDetails.name }}</div>
-          <img src="@/assets/images/mail.svg" class="mailImg" />
+          <img src="@/assets/mail.svg" class="mailImg" />
           <div class="contact">Contact</div>
         </div>
         <div class="rankScore">
@@ -21,14 +21,14 @@
       <div class="userStatus" v-if="userDetails.active">
         <div class="status unbanned">Active</div>
         <button class="banButton">
-          <img src="@/assets/images/ban.svg" class="banImg" />
+          <img src="@/assets/ban.svg" class="banImg" />
           <div class="banText">Ban Player</div>
         </button>
       </div>
       <div class="userStatus" v-else>
         <div class="status banned">Banned</div>
         <button class="banButton">
-          <img src="@/assets/images/unban.svg" class="banImg" />
+          <img src="@/assets/unban.svg" class="banImg" />
           <div class="banText">Remove Ban</div>
         </button>
       </div>

@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap');
-$screenRatio: 1;
-
 .challengeContainer {
-    width: 744px*$screenRatio;
+    width: 744px;
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -15,8 +11,7 @@ $screenRatio: 1;
     background: #FFFFFF;
     box-shadow: 0px 6px 10px rgba(87, 87, 87, 0.15);
     border-radius: 5px;
-    padding: 30px*$screenRatio;
-
+    padding: 30px;
     .changeButton {
         display: flex;
         flex-direction: row;
@@ -34,7 +29,6 @@ $screenRatio: 1;
         color: #393939;
         padding: 4px 10px;
         margin: 0px 10px;
-
         img {
             size: 16px;
             margin: 0px 5px;
@@ -101,11 +95,11 @@ $screenRatio: 1;
         .pointSolves {
             display: flex;
             flex-direction: row;
-            margin-top: 20px*$screenRatio;
+            margin-top: 20px;
 
             .point {
-                border-right: 3px*$screenRatio solid rgba(87, 87, 87, 0.7);
-                padding: 0px 10px*$screenRatio;
+                border-right: 3px solid rgba(87, 87, 87, 0.7);
+                padding: 0px 10px;
                 padding-top: 0;
                 display: flex;
                 flex-direction: column;
@@ -114,7 +108,7 @@ $screenRatio: 1;
             .solves {
                 display: flex;
                 flex-direction: column;
-                padding: 10px*$screenRatio;
+                padding: 10px;
                 padding-top: 0;
             }
 
@@ -170,7 +164,7 @@ $screenRatio: 1;
     }
 
     .testRun {
-        width: 100px*$screenRatio;
+        width: 100px;
         margin: 0;
     }
 }

@@ -8,11 +8,11 @@
       </div>
     </div>
     <div class="logos">
-      <img src="@/assets/images/sdslabs-logo.svg" />
+      <img src="@/assets/sdslabs-logo.svg" />
       <div class="contactInfo">
-        <a href="#"><img src="@/assets/images/fb-logo.svg"/></a>
-        <a href="#"><img src="@/assets/images/twitter-logo.svg"/></a>
-        <a href="#"><img src="@/assets/images/github-logo.svg"/></a>
+        <a href="#"><img src="@/assets/fb-logo.svg"/></a>
+        <a href="#"><img src="@/assets/twitter-logo.svg"/></a>
+        <a href="#"><img src="@/assets/github-logo.svg"/></a>
       </div>
     </div>
   </div>

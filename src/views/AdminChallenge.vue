@@ -5,7 +5,7 @@
         <span class="name">{{ name }}</span>
         <span class="category">{{ category }}</span>
         <button class="changeButton">
-          <img src="@/assets/images/edit.svg" /><span>Edit</span>
+          <img src="@/assets/edit.svg" /><span>Edit</span>
         </button>
         <span
           class="status"
@@ -30,23 +30,23 @@
         </div>
         <div v-if="status === 'Deployed'" class="changeChallengeStatus">
           <button class="changeButton">
-            <img src="@/assets/images/undeploy.svg" /><span>Undeploy</span>
+            <img src="@/assets/undeploy.svg" /><span>Undeploy</span>
           </button>
           <button class="changeButton">
-            <img src="@/assets/images/purge.svg" /><span>Purge</span>
+            <img src="@/assets/purge.svg" /><span>Purge</span>
           </button>
         </div>
         <div v-if="status === 'Undeployed'" class="changeChallengeStatus">
           <button class="changeButton">
-            <img src="@/assets/images/play.svg" /><span>Deploy</span>
+            <img src="@/assets/play.svg" /><span>Deploy</span>
           </button>
           <button class="changeButton">
-            <img src="@/assets/images/purge.svg" /><span>Purge</span>
+            <img src="@/assets/purge.svg" /><span>Purge</span>
           </button>
         </div>
         <div v-if="status === 'Purged'" class="changeChallengeStatus">
           <button class="changeButton">
-            <img src="@/assets/images/play.svg" /><span>Deploy</span>
+            <img src="@/assets/play.svg" /><span>Deploy</span>
           </button>
         </div>
       </div>
@@ -56,7 +56,7 @@
       <div class="port aboutText">Port : {{ port }}</div>
       <div class="host aboutText">{{ host }}</div>
       <button class="changeButton testRun">
-        <img src="@/assets/images/play.svg" /><span>Test Run</span>
+        <img src="@/assets/play.svg" /><span>Test Run</span>
       </button>
     </div>
   </div>
@@ -82,6 +82,3 @@ export default {
   }
 };
 </script>
-<style scoped lang="scss">
-@import "@/assets/scss/adminChallenge.scss";
-</style>
