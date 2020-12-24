@@ -1,0 +1,28 @@
+.challenge {
+    margin: auto;
+    width: 58.5rem;
+    margin-top: 5rem;
+    .chall {
+        display: flex;
+        flex-direction: row;
+        margin-top: 1.125rem;
+        .tags {
+            display: flex;
+            flex-direction: column;
+            width: 4.375rem;
+            text-align: left;
+            .tag {
+                font-family: $primary-font-family;
+                font-weight: normal;
+                font-size: 1rem;
+                color: rgba(87, 87, 87, 0.75);
+                margin-top: 2rem;
+            }
+            .tag .selected {
+                font-weight: bold;
+                color: #191919;
+                border-right: 0.125rem solid #FF6700;
+            }
+        }
+    }
+}

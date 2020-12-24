@@ -8,8 +8,12 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+<<<<<<< HEAD
     "axios": "^0.21.0",
     "chart.js": "^2.9.4",
+=======
+    "axios": "^0.19.2",
+>>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
     "core-js": "^3.4.4",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.1",
@@ -30,9 +34,9 @@
     "eslint": "^5.16.0",
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "prettier": "^1.19.1",
-    "sass-loader": "^8.0.0",
+    "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

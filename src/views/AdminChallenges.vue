@@ -143,6 +143,16 @@ export default {
       ]
     };
   },
+  mounted(){
+    axios.post(`${hostUrl}/api/notification/available`).then(response => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        console.log(response);
+        this.notifications = response.data;
+      }
+    });
+  },
   methods: {
     changeFilter(value) {
       this.statusFilter = value;

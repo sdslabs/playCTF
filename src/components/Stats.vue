@@ -1,9 +1,13 @@
 <template>
   <div class="challenge">
     <div class="stats">
-      <div class="fixedStat">
+      <div class="rank">
+        <p class="text">Rank</p>
+        <p class="number">35</p>
+      </div>
+      <div class="dynamicStats">
         <p class="number">24</p>
-        <p class="text">Total Challenges</p>
+        <p class="text">Total</p>
       </div>
       <div class="dynamicStats">
         <p class="number">14</p>
@@ -13,18 +17,10 @@
         <p class="number">10</p>
         <p class="text">Unsolved</p>
       </div>
-      <div class="dynamicStats">
-        <p class="number">14</p>
-        <p class="text">Unattempted</p>
-      </div>
-      <img src="@/assets/images/Avatar.svg" class="image" />
+      <img src="@/assets/Avatar.svg" class="image" />
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-@import "@/assets/scss/statsNavbar.scss";
-</style>
 
 <script>
 export default {

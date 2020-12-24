@@ -1,19 +1,17 @@
 <template>
-  <a :href="url" class="button">
+  <button class="button" :to="url" :disabled="disabled" v-on:click="onclick">
     {{ text }}
-  </a>
+  </button>
 </template>
-
-<style scoped lang="scss">
-@import "@/assets/scss/button.scss";
-</style>
 
 <script>
 export default {
   name: "Button",
   props: {
     url: String,
-    text: String
+    text: String,
+    disabled: Boolean,
+    onclick: String
   }
 };
 </script>

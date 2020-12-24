@@ -1,0 +1,137 @@
+.navbar {
+    position: fixed;
+    background-color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    align-items: center;
+    z-index: 100;
+    
+    .navbar-container {
+        width: 58.5rem;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .navbar-link {
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+    
+    .navbar-link {
+        color: black;
+        font-family: $primary-font-family;
+        font-weight: normal;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: #191919;
+        text-decoration: none;
+        margin-left: 1.5rem;
+        &:first-child {
+            margin-left: 0rem;
+        }
+        .logo {
+            width: 4.5rem;
+            height: 1.5rem;
+            background-color: black;
+            vertical-align: super;
+        }
+    }
+
+    .active {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        &:after {
+            content: ""; 
+            display: block;
+            margin: 0 auto;
+            width: 75%;
+            border-bottom: 0.125rem solid #191919;;
+        }
+    }
+
+    .navbar-link-current-page {
+        color: #191919;
+        font-weight: bold;
+
+    }
+    
+    .nav-timer {
+        margin-left: auto;
+        font-family: $primary-font-family;
+        margin-top: -0.75rem;
+        font-size: 0.75rem;
+        color: #393939;
+        line-height: 0.5rem;
+    }
+    
+    .timer {
+        font-size: 0.875rem;
+        font-weight: bold;
+        margin-bottom: 0rem;
+    }
+      
+    .dropdown {
+        margin-left: 2.75rem;
+    }
+
+    .dropbtn {
+        font-size: 1rem;  
+        border: none;
+        outline: none;
+        color: black;
+        background-color: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
+    .teamName {
+        color: #593C8F;
+        font-weight: 600;
+        margin-right: 0.4375rem;
+    }
+    
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        min-width: 9.375rem;
+    }
+    
+    .dropdown-link {
+        color: black;
+        float: none;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+    
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .navbar-registration {
+        width: 8.0625rem;
+        height: 3rem;
+        margin-bottom: -0.75rem;
+    }
+    
+    .navbar-already-registered {
+        font-size: 0.875rem;
+        color: #393939;
+        font: $secondary-font-family;
+        margin: 0rem;
+        line-height: 1.5rem;
+        vertical-align: super;
+    }
+    
+    .login-link {
+        font-size: 0.875rem;
+        font-weight: bold;
+        color: #593C8F;
+        text-decoration: none;
+    }
+}

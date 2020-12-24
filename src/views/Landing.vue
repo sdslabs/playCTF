@@ -8,7 +8,7 @@
           school students, created by security experts at SDSLabs.
         </div>
         <div class="timing">4th December 2019, Sunday</div>
-        <Button text="Register now" to="/register" />
+        <router-link to="/register"><Button text="Register now"/></router-link>
       </div>
       <div class="prize-info">
         <div class="heading">Prizes to be won</div>
@@ -17,14 +17,20 @@
           provides. However, Participants from the top three winning teams get
           to appear directly for SDSLabs interview round.
         </div>
+<<<<<<< HEAD
         <div class="dropdown">
           Learn more
           <img src="@/assets/images/dropdown.svg" />
+=======
+        <div class="learn-more-dropdown">
+          Learn more
+          <img src="@/assets/dropdown.svg" />
+>>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
         </div>
       </div>
     </div>
-    <img class="img1" src="@/assets/images/landing1.svg" />
-    <img class="img2" src="@/assets/images/landing2.svg" />
+    <img class="img1" src="@/assets/landing1.svg" />
+    <img class="img2" src="@/assets/landing2.svg" />
   </div>
 </template>
 
@@ -34,13 +40,15 @@ export default {
   name: "home",
   components: {
     Button
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "AboutCTF");
   }
 };
 </script>
 
 <style scoped lang="scss">
-@import "@/assets/scss/landing.scss";
 button {
-  margin-top: 16px;
+  margin-top: 1rem;
 }
 </style>

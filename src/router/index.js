@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+<<<<<<< HEAD
 import Home from "../views/Landing.vue";
 import Challenges from "../views/Challenges.vue";
 import Leaderboard from "../views/Leaderboard.vue";
@@ -14,6 +15,15 @@ import AdminChallenges from "../views/AdminChallenges.vue";
 import AdminSubmissions from "../views/AdminSubmissions.vue";
 import AdminConfigure from "../views/AdminConfigure.vue";
 import AdminChallenge from "../views/AdminChallenge.vue";
+=======
+import Home from "@/views/Landing.vue";
+import Challenges from "@/views/Challenges.vue";
+import Leaderboard from "@/views/Leaderboard.vue";
+import Notification from "@/views/Notifications.vue";
+import Login from "@/views/Login.vue";
+import Register from "@/views/Register.vue";
+
+>>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
 Vue.use(VueRouter);
 
 const routes = [
@@ -48,6 +58,7 @@ const routes = [
     component: Login
   },
   {
+<<<<<<< HEAD
     path: "/admin/statistics",
     name: "adminStatistics",
     component: Admin,
@@ -118,6 +129,11 @@ const routes = [
     meta: {
       layout: "admin-layout"
     }
+=======
+    path: "/register",
+    name: "register",
+    component: Register
+>>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
   }
 ];
 

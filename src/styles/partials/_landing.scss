@@ -1,0 +1,74 @@
+.home {
+    margin: auto;
+    margin-top: 5rem;
+    width: 58.5rem;
+}
+
+.event {
+    width: 25rem;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    .event-info {
+        .tagline {
+            font-weight: 800;
+            font-size: 3rem;
+            line-height: 4.5rem;
+            color: #393939;
+        }
+        .timing {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+            color: #575757;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.description {
+    font-size: 1.25rem;
+    font-family: $secondary-font-family;
+    color: #575757;
+    width: 32rem;
+    margin-top: 0.5rem;
+}
+
+.prize-info {
+    margin-top: 14.75rem;
+    width: 28.5rem;
+    margin-left: 27rem;
+    .heading {
+        font-weight: 800;
+        font-family: $primary-font-family;
+        font-size: 3rem;
+        line-height: 4.5rem;
+        color: #393939;
+    }
+
+}
+
+.img1 {
+    position: absolute;
+    width: 22.25rem;
+    height: 38.25rem;
+    left: 52.125rem;
+    top: -4.6875rem;
+    z-index: -1;
+}
+
+.img2 {
+    width: 19.25rem;
+    height: 29.0019rem;
+    margin-left: -43.75rem;
+    margin-top: -16.25rem;
+    z-index: -1;
+}
+
+.learn-more-dropdown {
+    font-weight: bold;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    color: #593C8F;
+    margin-top: 1rem;
+}

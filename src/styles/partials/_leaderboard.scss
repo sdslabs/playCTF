@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+%backgroundColor {
+    background: #E7E7E7;
+}
+
+.leaderboard {
+    margin: auto;
+    margin-top: 4.75rem;
+    width: 46.4375rem;
+    text-align: left;
+    min-height: calc(100vh - 12.75rem - 9.25rem);
+    .leaderboard-header {
+        display: flex;
+        flex-direction: row;
+        .leaderboard-heading {
+            font-family: 'Nunito Sans', sans-serif;
+            font-size: 1.5rem;
+            line-height: 1.75rem;
+            font-weight: 900;
+            margin-bottom: 1.5625rem;
+            color: #FF6700;
+            .board {
+                color: black;
+            }
+        }
+        .leaderboard-searchbar {
+            width: 26rem;
+            margin-top: -0.5rem;
+            height: 2.25rem;
+            padding-left: 2.5rem;
+            margin-left: auto;
+            background: #F2F2F2;
+            border: none;
+            box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+        }
+    }
+    .leaderboardTable {
+        .coloumnHeading {
+            text-align: center;
+            width: 4.5rem;
+            color: #191919;
+            height: 2.25rem;
+        }
+        .coloumnHeading.teamName {
+            width: auto;
+            text-align: left;
+            padding-left: 1.5rem;
+        }
+        width: 100%;
+        tr {
+            height: 2rem;
+            text-align: center;
+            background-color: #F7F7F7;
+            border-radius: 0.3125rem;
+        }
+        tr:first-child() {
+            padding-top: 1.25rem;
+        }
+        tr:nth-child(2n) {
+            @extend %backgroundColor;
+        }
+        td:nth-child(2n) {
+            padding-left: 1.5rem;
+            text-align: left;
+        }
+        .leaderboardRow.userInfo {
+            background: #593C8F;
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 0.875rem;
+            line-height: 2rem;
+        }
+    }
+    .pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        font-family: Nunito Sans;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        .numeric-pagination {
+            font-weight: normal;
+            display: flex;
+            flex-direction: row;
+            color: #593C8F;
+            margin-top: 1.3125rem;
+            .pagination-previous {
+                margin-right: 1.75rem;
+            }
+            .number {
+                margin-right: 0.625rem;
+                color: #575757;
+                font-weight: 300;
+            }
+            .pagination-next {
+                margin-left: 1.125rem;
+            }
+            .active {
+                font-weight: 600;
+                color: #191919;
+            }
+        }
+        .search-pagination {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-top: 0.625rem;
+            .search-pagination-text {
+                font-weight: 600;
+                color: #393939;
+                padding-right: 0.625rem;
+            }
+            .pagination-search-page {
+                width: 1.8125rem;
+                height: 1.375rem;
+                background: #F2F2F2;
+                border: none;
+                box-shadow: inset 0rem  rgba(0, 0, 0, 0.15);
+                border-radius: 0.3125rem;
+                font-family: Nunito Sans;
+                font-style: normal;
+                font-weight: 300;
+                font-size: 0.875rem;
+                line-height: 1rem;
+                text-align: center;
+
+                color: #393939;
+            }
+        }
+        
+    }
+}
