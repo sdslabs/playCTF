@@ -17,15 +17,9 @@
           provides. However, Participants from the top three winning teams get
           to appear directly for SDSLabs interview round.
         </div>
-<<<<<<< HEAD
-        <div class="dropdown">
-          Learn more
-          <img src="@/assets/images/dropdown.svg" />
-=======
         <div class="learn-more-dropdown">
           Learn more
           <img src="@/assets/dropdown.svg" />
->>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
         </div>
       </div>
     </div>

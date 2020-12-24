@@ -1,14 +1,5 @@
 <template>
   <div class="footer">
-<<<<<<< HEAD
-    <p class="poweredBy">Powered by</p>
-    <img src="@/assets/images/sdslabs-logo.svg" />
-    <a class="link" href="www.sdslabs.co">www.sdslabs.co</a>
-    <div class="contactInfo">
-      <a href="#"><img src="@/assets/images/fb-logo.svg"/></a>
-      <a href="#"><img src="@/assets/images/twitter-logo.svg"/></a>
-      <a href="#"><img src="@/assets/images/github-logo.svg"/></a>
-=======
     <div class="footer-about">
       <div class="footer-about-beast">BEAST</div>
       <div class="footer-about-reach">
@@ -27,7 +18,6 @@
         <img class="contact-info-image" src="@/assets/twitter-logo.svg" />
         <img class="contact-info-image" src="@/assets/github-logo.svg" />
       </div>
->>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
     </div>
   </div>
 </template>
@@ -37,11 +27,3 @@ export default {
   name: "Footer"
 };
 </script>
-<<<<<<< HEAD
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/footer.scss";
-</style>
-=======
->>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e

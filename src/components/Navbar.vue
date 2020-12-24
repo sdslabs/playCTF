@@ -79,11 +79,3 @@ export default {
   }
 };
 </script>
-<<<<<<< HEAD
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/navbar.scss";
-</style>
-=======
->>>>>>> e4d9407494ab1014841a323c39cbf4dda697a63e
