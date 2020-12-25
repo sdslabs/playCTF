@@ -18,7 +18,7 @@ export default new Vuex.Store({
       endingTime: "May 5, 2020 15:37:25",
       logo: ""
     },
-    hostUrl: "http://878f93e6ce47.ngrok.io",
+    hostUrl: "https://caa247b0f416.ngrok.io",
     challengeHostUrl:"http://challenges.beast.com",
   },
   mutations: {

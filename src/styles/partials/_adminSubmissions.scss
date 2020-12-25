@@ -1,0 +1,12 @@
+.adSubContainer{
+  width: 80%;
+  margin-left: 10%;
+}
+.adSubHeaderComponent {
+  text-align: left;
+  @extend %font-style-bold;
+  font-size: 24px;
+  line-height: 28px;
+  text-transform: uppercase;
+  color: #191919;
+}

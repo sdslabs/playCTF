@@ -1,0 +1,151 @@
+.adminTableContainer{
+    .adminTable {
+        border-spacing: 0;
+        width:100%;
+        margin-top: 50px;
+        .adminTableData {
+            font-family: "Open Sans";
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 32px;
+        }
+        .adminTableLink {
+            text-decoration: none;
+            color: #593c8f;
+        }
+
+        .adminTableLink:hover {
+            text-decoration: underline;
+        }
+
+        .adminTablerank {
+            text-align: center;
+        }
+
+        .adminTableteamName,
+        .adminTableusername{
+            text-align: left;
+            padding-left: 40px;
+        }
+        .adminTablechallenge{
+            text-align: left;
+        }
+        .adminTableemail {
+            color: #593c8f;
+            padding-left: 20px;
+        }
+
+        .adminTablecategory {
+            text-align: center;
+        }
+
+        .adminTabletimeDate {
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .adminTablescore {
+            text-align: center;
+        }
+
+        .adminTablestatus {
+            text-align: center;
+            padding-right: 20px;
+        }
+
+        .green {
+            color: #00902b;
+        }
+
+        .red {
+            color: #d72c27;
+        }
+
+        .adminTableHeader {
+            font-family: "Nunito Sans";
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 32px;
+        }
+
+        .adminTableRow {
+            height: 32px;
+        }
+
+        .adminTableRow:nth-child(2n + 1) {
+            @extend %backgroundColor;
+        }
+    }
+}
+
+.pagination {
+    display: flex;
+    list-style-type: none;
+}
+
+.pageItem {
+    width: 15px;
+    margin-left: 5px;
+    margin-right: 5px;
+    outline: none;
+}
+
+.pageItem.active {
+    color: #191919;
+    font-weight: bold;
+}
+
+.nextItem {
+    color: #593c8f;
+    margin-left: 10px;
+    outline: none;
+}
+
+.nextItem.disabled {
+    color: rgba(89, 60, 143, 0.57);
+}
+
+.prevItem {
+    color: #593c8f;
+    margin-right: 10px;
+    outline: none;
+}
+
+.prevItem.disabled {
+    color: rgba(89, 60, 143, 0.57);
+}
+
+.paginateContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: "Nunito Sans";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+    color: #575757;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.jumpPage {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #191919;
+    font-weight: bold;
+}
+
+.pageInput {
+    margin-left: 5px;
+    color: #191919;
+    background: #f2f2f2;
+    box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    text-align: center;
+    outline: none;
+    width: 40px;
+}
