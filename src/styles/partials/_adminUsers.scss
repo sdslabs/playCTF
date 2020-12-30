@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+
+$screenRatio: 1;
+
+.adminHeadingColorSearch {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.adminHeadingColor {
+    width: 192rem/$root-base-size;
+    height: 28rem/$root-base-size;
+}
+
+.adminUserSearchDiv{
+    margin-left: auto;
+    width: 60%;
+}
+.adminSearchBar {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: #f2f2f2;
+    box-shadow: inset 0 6rem/$root-base-size 10rem/$root-base-size rgba(0, 0, 0, 0.05);
+    border-radius: 5rem/$root-base-size;
+
+    .searchBtn {
+        background-color: transparent;
+        border: none;
+    }
+
+    .searchImg {
+        margin-top: 2rem/$root-base-size;
+        width: auto;
+        height: auto;
+    }
+
+    .query {
+        width: 90%;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+    }
+
+    .query:focus {
+        outline: none;
+    }
+
+    .searchBtn:focus {
+        outline-color: rebeccapurple;
+    }
+}

@@ -1,0 +1,70 @@
+.adminFooter {
+  padding: 0 25%;
+  display: flex;
+  flex-direction: row;
+  height: 204rem/$root-base-size;
+  background-color: #e7e7e7;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+}
+
+.platformName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.adminFooterTitle {
+  text-align: left;
+  vertical-align: middle;
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 900;
+  font-size: 32rem/$root-base-size;
+  line-height: 24rem/$root-base-size;
+  margin-bottom: 0px;
+}
+
+.adminFooterContact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.adminFooterMessage {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14rem/$root-base-size;
+  line-height: 32rem/$root-base-size;
+}
+
+.adminFooterLink {
+  @extend %font-style-bold;
+  font-size: 16rem/$root-base-size;
+  line-height: 32rem/$root-base-size;
+  margin-left: 10rem/$root-base-size;
+  color: #593c8f;
+  text-decoration: none;
+}
+
+.adminFooterLogos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.adminFooterContactInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 25rem/$root-base-size;
+}
+
+#admin-layout {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
+}

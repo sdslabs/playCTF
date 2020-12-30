@@ -1,0 +1,74 @@
+.adminSubheading {
+  @extend %font-style-bold;
+  font-weight: 700;
+  font-size: 20rem/$root-base-size;
+  margin-bottom: 5rem/$root-base-size;
+  text-align: left;
+}
+
+.adminBold {
+  font-weight: bold;
+}
+
+.adminVioletBold {
+  color: #593c8f;
+  font-weight: bold;
+}
+
+.adminInfo {
+  @extend %font-style-basic;
+  font-weight: normal;
+  font-size: 16rem/$root-base-size;
+  line-height: 18rem/$root-base-size;
+  text-align: left;
+  margin: 0.3rem 0;
+}
+
+.adminStatsContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20rem/$root-base-size;
+  margin-bottom: 20rem/$root-base-size;
+
+  .adminOneColContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .adminTwoColContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    .adminStatsLeftCol{
+      align-self: flex-start;
+    }
+    .adminStatsRightCol{
+     margin-left: 20%; 
+    }
+  }
+}
+
+.adminSolveGraphContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.graph {
+  width: 30%;
+  margin: 1% 10%;
+}
+
+.graphTitle{
+  @extend %font-style-basic;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 18rem/$root-base-size;
+}
+

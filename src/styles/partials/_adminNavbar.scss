@@ -1,0 +1,28 @@
+.adminNavbar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20rem/$root-base-size;
+}
+
+.adminNavbarLink{
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: normal;
+  font-size: 14rem/$root-base-size;
+  color: #575757;
+  text-decoration: none;
+  padding: 10rem/$root-base-size;
+  transition: text-shadow 0.3s;
+}
+
+.adminNavbarLink:hover:not(.router-link-exact-active) {
+  color: #191919;
+  text-shadow: 0 0 0.65rem/$root-base-size #333, 0 0 0.65rem/$root-base-size #333;
+}
+
+.router-link-active.adminNavbarLink{
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14rem/$root-base-size;
+  color: #191919;
+  font-weight: bold;
+  text-decoration: underline;
+}

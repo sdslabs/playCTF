@@ -1,0 +1,30 @@
+.adminNotifCard{
+  height: 6rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: #ffffff;
+  box-shadow: 0rem 0.375rem 0.625rem rgba(25, 25, 25, 0.1);
+  border-radius: 3rem/$root-base-size;
+  margin: 0.5rem 0.5rem 1.5rem;
+  @extend %font-style-basic;
+  font-weight: normal;
+  line-height: 28rem/$root-base-size;
+  padding: 10rem/$root-base-size 1rem;
+}
+.adminNotifTitle {
+  font-weight: bold;
+  text-align: left;
+  width: 60%;
+  margin-bottom: 0;
+}
+
+.adminNotifTime {
+  text-align: right;
+  color: #593c8f;
+  width: 40%;
+  margin-bottom: 0;
+}
+.adminNotifDesc{
+  margin-top: 0;
+}

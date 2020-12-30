@@ -1,7 +1,7 @@
 $root-font-size: 0.8982vw;
 // $root-font-size-small: ;
 // $root-font-size-large: ;
-
+$root-base-size: 16;
 // fonts variables
 $primary-font-family: "Nunito Sans", sans-serif;
 $secondary-font-family: "Open Sans", sans-serif;
@@ -47,9 +47,9 @@ $assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-
 %font-style-basic{
     font-family: 'Nunito Sans';
     font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 32px;
+    font-weight: 600;
+    font-size:1rem;
+    line-height: 18rem / $root-base-size;
     color: $theme-color-black;
 }
 
@@ -57,4 +57,6 @@ $assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-
     font-family: 'Nunito Sans';
     font-style: normal;
     font-weight: bold;
+    font-size:14rem/$root-base-size;
+    line-height: 28rem/$root-base-size;
 }

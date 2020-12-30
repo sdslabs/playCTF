@@ -1,0 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
+
+$screenRatio: 1;
+
+.adminUserInfoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-self: center;
+    background: #FFFFFF;
+    box-shadow: 0 6rem/$root-base-size 10rem/$root-base-size rgba(87, 87, 87, 0.15);
+    border-radius: 5rem/$root-base-size;
+    font-family: 'Nunito Sans';
+    font-style: normal;
+
+    .user {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem 2rem;
+    }
+
+    .userDetails {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .userName {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .name {
+            @extend %font-style-bold;
+            font-size: 24rem/$root-base-size;
+            color: #191919;
+        }
+
+        .mailImg {
+            width: 1rem;
+            width: 12.8rem/$root-base-size;
+            margin-left: 15rem/$root-base-size;
+            margin-right: 15rem/$root-base-size;
+        }
+
+        .contact {
+            font-weight: 600;
+            font-size: 14rem/$root-base-size;
+            line-height: 24rem/$root-base-size;
+            color: #393939;
+        }
+    }
+
+    .rankScore {
+        display: flex;
+        flex-direction: row;
+        margin-top: 20rem/$root-base-size;
+
+        .score {
+            border-left: 2rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+            padding: 10rem/$root-base-size;
+            padding-top: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rank {
+            display: flex;
+            flex-direction: column;
+            padding: 10rem/$root-base-size;
+            padding-top: 0;
+        }
+    }
+
+    .userStatus {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .status {
+            font-weight: bold;
+            font-size: 20rem/$root-base-size;
+            line-height: 28rem/$root-base-size;
+            text-align: right;
+
+        }
+
+        .banned {
+            color: rgba(215, 44, 39, 0.75);
+        }
+
+        .unbanned {
+            color: rgba(0, 144, 43, 0.75);
+        }
+
+
+    }
+
+    .value {
+        font-weight: bold;
+        font-size: 20rem/$root-base-size;
+        line-height: 28rem/$root-base-size;
+        text-align: center;
+        color: #191919;
+    }
+
+    .field {
+        font-weight: normal;
+        font-size: 16rem/$root-base-size;
+        line-height: 18rem/$root-base-size;
+        text-align: center;
+        color: #575757;
+    }
+}
+
+.adminBanButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background: #FFFFFF;
+    border: 1.5rem/$root-base-size solid #393939;
+    box-sizing: border-box;
+    box-shadow: 0rem/$root-base-size 2rem/$root-base-size 10rem/$root-base-size rgba(37, 85, 124, 0.1);
+    border-radius: 3rem/$root-base-size;
+    padding: 5rem/$root-base-size 15rem/$root-base-size;
+    margin: 0 0.2rem;
+
+    .adminBanText {
+        font-weight: 600;
+        font-size: 14rem/$root-base-size;
+        line-height: 24rem/$root-base-size;
+        color: #393939;
+        margin-left: 0.2rem;
+    }
+}
+
+.adminBanButton:hover {
+    background: #393939;
+
+    .banImg {
+        filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg) brightness(99%) contrast(103%);
+    }
+}
+
+.adminBanButton:hover .adminBanText {
+    color: #ffffff;
+}

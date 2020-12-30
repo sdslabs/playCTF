@@ -1,34 +1,29 @@
-.adminChalInfoContainer {
-    width: 744px;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-}
-
 .adminChalInfo {
     display: flex;
     flex-direction: column;
     background: #FFFFFF;
-    box-shadow: 0px 6px 10px rgba(87, 87, 87, 0.15);
-    border-radius: 5px;
-    padding: 30px;
+    box-shadow: 0rem/$root-base-size 6rem/$root-base-size 10rem/$root-base-size rgba(87, 87, 87, 0.15);
+    border-radius: 5rem/$root-base-size;
+    padding: 30rem/$root-base-size;
+
     .changeButton {
         display: flex;
         flex-direction: row;
         align-items: center;
         background: #FFFFFF;
-        border: 1.5px solid #393939;
+        border: 1.5rem/$root-base-size solid #393939;
         box-sizing: border-box;
-        box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-        border-radius: 3px;
+        box-shadow: 0rem/$root-base-size 2rem/$root-base-size 10rem/$root-base-size rgba(37, 85, 124, 0.1);
+        border-radius: 3rem/$root-base-size;
         @extend %font-style-basic;
-        line-height: 24px;
+        line-height: 24rem/$root-base-size;
         color: #393939;
-        padding: 4px 10px;
-        margin: 0px 10px;
+        padding: 4rem/$root-base-size 10rem/$root-base-size;
+        margin: 0rem/$root-base-size 10rem/$root-base-size;
+
         img {
-            size: 16px;
-            margin: 0px 5px;
+            size: 16rem/$root-base-size;
+            margin: 0rem/$root-base-size 5rem/$root-base-size;
         }
     }
 
@@ -41,8 +36,8 @@
             font-family: 'Nunito Sans';
             font-style: normal;
             font-weight: bold;
-            font-size: 24px;
-            line-height: 28px;
+            font-size: 24rem/$root-base-size;
+            line-height: 28rem/$root-base-size;
             color: #191919;
         }
 
@@ -50,16 +45,16 @@
             text-align: center;
             vertical-align: middle;
             background: #593c8f;
-            border-radius: 2px;
+            border-radius: 2rem/$root-base-size;
             font-family: "Open Sans";
             font-style: normal;
             font-weight: bold;
-            font-size: 14px;
-            line-height: 16px;
+            font-size: 14rem/$root-base-size;
+            line-height: 16rem/$root-base-size;
             color: #ffffff;
-            padding: 4px 10px;
-            margin-left: 20px;
-            margin-right: 30px;
+            padding: 4rem/$root-base-size 10rem/$root-base-size;
+            margin-left: 20rem/$root-base-size;
+            margin-right: 30rem/$root-base-size;
         }
 
         .status {
@@ -67,8 +62,8 @@
             font-family: 'Nunito Sans';
             font-style: normal;
             font-weight: bold;
-            font-size: 20px;
-            line-height: 28px;
+            font-size: 20rem/$root-base-size;
+            line-height: 28rem/$root-base-size;
         }
 
         .deployed {
@@ -92,11 +87,11 @@
         .pointSolves {
             display: flex;
             flex-direction: row;
-            margin-top: 20px;
+            margin-top: 20rem/$root-base-size;
 
             .point {
-                border-right: 3px solid rgba(87, 87, 87, 0.7);
-                padding: 0px 10px;
+                border-right: 3rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+                padding: 0rem/$root-base-size 10rem/$root-base-size;
                 padding-top: 0;
                 display: flex;
                 flex-direction: column;
@@ -105,22 +100,22 @@
             .solves {
                 display: flex;
                 flex-direction: column;
-                padding: 10px;
+                padding: 10rem/$root-base-size;
                 padding-top: 0;
             }
 
             .value {
                 font-weight: bold;
-                font-size: 20px;
-                line-height: 28px;
+                font-size: 20rem/$root-base-size;
+                line-height: 28rem/$root-base-size;
                 text-align: center;
                 color: #191919;
             }
 
             .field {
                 font-weight: normal;
-                font-size: 16px;
-                line-height: 18px;
+                font-size: 16rem/$root-base-size;
+                line-height: 18rem/$root-base-size;
                 text-align: center;
                 color: #575757;
             }
@@ -139,29 +134,100 @@
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: normal;
-        font-size: 14px;
-        line-height: 24px;
+        font-size: 14rem/$root-base-size;
+        line-height: 24rem/$root-base-size;
         color: #393939;
     }
 
     .aboutChallenge {
-        margin: 10px 0px;
+        margin: 10rem/$root-base-size 0rem/$root-base-size;
         ;
     }
 
     .port {
-        line-height: 16px;
+        line-height: 16rem/$root-base-size;
     }
 
     .host {
-        line-height: 16px;
+        line-height: 16rem/$root-base-size;
         color: #593C8F;
-        margin: 10px 0px;
+        margin: 10rem/$root-base-size 0rem/$root-base-size;
         ;
     }
 
     .testRun {
-        width: 120px;
+        width: 120rem/$root-base-size;
         margin: 0;
     }
+}
+
+.adminHeadingName {
+    @extend %font-style-bold;
+    text-transform: uppercase;
+    font-size: 24rem/$root-base-size;
+    line-height: 28rem/$root-base-size;
+    text-align: left;
+    padding: 10rem/$root-base-size 0rem/$root-base-size;
+}
+
+.adChalStatistics {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 50rem/$root-base-size;
+    .adChalSubmissions {
+        margin-top: 30rem/$root-base-size;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .adChalSolves {
+        margin-top: 30rem/$root-base-size;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        .leftCol {
+            width: 50%;
+            padding-right: 10%;
+            ;
+        }
+
+        .rightCol {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .graph {
+            width: 70%;
+            height: 80%;
+        }
+    }
+
+    .subheadingName {
+        margin-bottom: 10rem/$root-base-size;
+        @extend %font-style-basic;
+        text-align: left;
+        font-size: 20rem/$root-base-size;
+        line-height: 28rem/$root-base-size;
+    }
+
+    .info {
+        @extend %font-style-basic;
+        font-size: 16rem/$root-base-size;
+        line-height: 18rem/$root-base-size;
+        color: #575757;
+        text-align: left;
+    }
+}
+
+.hrSeparator {
+    width: 100%;
+    margin: 8% 0rem/$root-base-size;
+    height: 1rem/$root-base-size;
+    background-color: rgba(87, 87, 87, 0.4);
 }

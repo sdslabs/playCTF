@@ -1,9 +1,10 @@
 <template>
-  <div class="lbContainer">
-    <div class="headingDiv">
-      <img src="@/assets/leaderboard.svg" class="heading" />
+  <div class="mainAdminContainer">
+    <div class="adminHeadingColor">
+      <img src="@/assets/leaderboard.svg" class="adminHeadingColor" />
     </div>
-    <div class="searchBar">
+    <div class="adminLbSearchDiv">
+    <div class="adminSearchBar">
       <button class="searchBtn">
         <img src="@/assets/search.svg" class="searchImg" />
       </button>
@@ -13,9 +14,10 @@
         class="query"
       />
     </div>
+    </div>
     <admin-table
       :tableCols="tableCols"
-      :rows="rows"
+      :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
     />
@@ -23,6 +25,7 @@
 </template>
 <script>
 import adminTable from "../components/adminTable.vue";
+import UsersService from "@/api/admin/usersAPI";
 export default {
   components: { adminTable },
   name: "AdminLeaderboard",
@@ -37,108 +40,33 @@ export default {
           label: "Rank",
           style: {
             textAlign: "center",
-            width: "72px"
-          }
+            width: "10%",
+          },
         },
         {
           id: 2,
           label: "User Name",
           style: {
-            width: "600px",
-            paddingLeft: "20px"
-          }
+            width: "75%",
+            paddingLeft: "40px",
+            textAlign: "left",
+          },
         },
         {
           id: 3,
           label: "Score",
           style: {
             textAlign: "center",
-            width: "72px"
-          }
-        }
+            width: "15%",
+          },
+        },
       ],
-      rows: [
-        {
-          rank: "1",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "2",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "3",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "4",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "5",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "6",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "7",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "8",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "9",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "10",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "11",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "12",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "13",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "14",
-          username: "Rockstars",
-          score: "874"
-        },
-        {
-          rank: "15",
-          username: "Rockstars",
-          score: "874"
-        }
-      ]
+      users: [],
+      displayUsers: [],
     };
   },
   methods: {
     changePage() {
-      console.log("submitted");
       this.currentPage = this.jumpPage;
     },
     sortTable: function sortTable(col) {
@@ -151,7 +79,7 @@ export default {
 
       var ascending = this.ascending;
 
-      this.rows.sort(function(a, b) {
+      this.rows.sort(function (a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
@@ -173,7 +101,7 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
-    }
+    },
   },
   computed: {
     columns: function columns() {
@@ -181,10 +109,38 @@ export default {
         return [];
       }
       return Object.keys(this.rows[0]);
-    }
-  }
+    },
+    resultQuery() {
+      if (this.searchQuery) {
+        return this.displayUsers.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.username.toLowerCase().includes(v));
+        });
+      } else {
+        return this.displayUsers;
+      }
+    },
+  },
+  mounted() {
+    UsersService.getUsers().then((users) => {
+      console.log(users);
+      if (users === null) {
+        console.log("error fetching users");
+        return;
+      }
+      users.forEach((element) => {
+        this.users.push({
+          rank: element.rank,
+          username: element.username,
+          score: element.score,
+        });
+      });
+      this.displayUsers = this.users.sort((a, b) => {
+        return a.rank > b.rank ? 1 : -1;
+      });
+    });
+  },
 };
 </script>
-<style scoped lang="scss">
-@import "@/assets/scss/adminLeaderboard.scss";
-</style>

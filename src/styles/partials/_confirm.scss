@@ -1,0 +1,71 @@
+.manageChalConfirmBox {
+    .vc-container {
+        width: 30%;
+        border-radius: 5px;
+
+        .vc-text-grid {
+            padding: 1.5rem;
+
+            .vc-title {
+                @extend %font-style-bold;
+                text-align: left;
+                font-size: 24px;
+                line-height: 20px;
+                margin-bottom: 20px;
+                padding: 0
+            }
+
+            .vc-text {
+                text-align: left;
+                font-family: 'Open Sans';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 24px;
+                padding: 0;
+            }
+        }
+
+        .vc-btn-grid {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            padding-top: 0;
+
+            .vc-btn {
+                margin-right: 20px;
+                width: 75px;
+                height: 44px;
+                @extend %font-style-bold;
+                background: #FFFFFF;
+                border: 1px solid #393939;
+                box-sizing: border-box;
+                border-radius: 4px;
+                text-align: center;
+                font-size: 14px;
+                line-height: 24px;
+                color: #393939;
+
+            }
+
+            .vc-btn:hover {
+                color: #FFFFFF;
+                background: #393939;
+            }
+
+            .vc-btn.left {
+                background: #FF6700;
+                border: none;
+                color: #FFFFFF;
+            }
+
+            .vc-btn.left:hover{
+                border: 1px solid #FF6700;
+                color: #FF6700;
+                background: #FFFFFF;
+            }
+        }
+
+    }
+}

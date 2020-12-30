@@ -1,0 +1,132 @@
+.mainAdminContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  margin-left: 10%;
+}
+
+.fade-leave-active {
+  transition: opacity 1s
+}
+
+.addFeedback {
+  margin-left: 20%;
+}
+
+.adHeadingContainerWithFeedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.adNotifForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 5%;
+
+  .important {
+    color: red;
+  }
+
+  .adFormFields {
+    text-align: left;
+    @extend %font-style-basic;
+    font-size: 14rem/$root-base-size;
+    margin: 1rem 0 0 0;
+  }
+
+  .adFormTitle {
+    height: 2.5rem;
+    border-radius: 5rem/$root-base-size;
+    border: 1rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+    padding-left: 1rem;
+    @extend %font-style-basic;
+    margin-bottom: 2%;
+  }
+
+  .adFormTitle::placeholder,
+  textarea::placeholder {
+    @extend %font-style-basic;
+    color: rgba(87, 87, 87, 0.7);
+  }
+
+  textarea {
+    height: 6rem;
+    border-radius: 5rem/$root-base-size;
+    border: 1rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+    @extend %font-style-basic;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 2%;
+  }
+
+  .confirmation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @extend %font-style-basic;
+    color: rgba(87, 87, 87, 0.7);
+    font-size: 16rem/$root-base-size;
+    line-height: 28rem/$root-base-size;
+  }
+
+
+  textarea:focus,
+  .adFormTitle:focus {
+    outline: none !important;
+    border: 2rem/$root-base-size solid #593C8F;
+  }
+}
+
+.adminEmptyData {
+  text-align: left;
+  @extend %font-style-bold;
+  font-size: 2rem;
+  line-height: 3rem;
+  color: rgba(87, 87, 87, 0.7);
+}
+
+.adminNotifTabs {
+  margin-top: 4%;
+  height: 500rem/$root-base-size;
+  overflow-y: scroll;
+
+}
+
+.adminNotifTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.adminDisabledSubmitButton {
+  border-radius: 3rem/$root-base-size;
+  color: #ffffff;
+  @extend %font-style-bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin: auto 0;
+  margin-left: auto;
+}
+
+.adminEnabledSubmitButton {
+  @extend %font-style-bold;
+  background-color: #ff6700;
+}
+
+.adminEnabledSubmitButton:hover {
+  @extend %font-style-bold;
+  background-color: #ffffff;
+  border: 1px solid #FF6700;
+  color: #FF6700;
+  background: #FFFFFF;
+}
+
+.adminInactiveSubmitButton {
+  background-color: #D7D7D7;
+}
+
+.adminProcSubmitButton {
+  background-color: rgba(255, 103, 0, 0.57);
+}

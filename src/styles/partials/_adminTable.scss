@@ -2,13 +2,13 @@
     .adminTable {
         border-spacing: 0;
         width:100%;
-        margin-top: 50px;
+        margin-top: 10rem/$root-base-size;
         .adminTableData {
             font-family: "Open Sans";
             font-style: normal;
             font-weight: normal;
-            font-size: 14px;
-            line-height: 32px;
+            font-size: 14rem/$root-base-size;
+            line-height: 32rem/$root-base-size;
         }
         .adminTableLink {
             text-decoration: none;
@@ -26,14 +26,16 @@
         .adminTableteamName,
         .adminTableusername{
             text-align: left;
-            padding-left: 40px;
+            padding-left: 40rem/$root-base-size;
         }
         .adminTablechallenge{
             text-align: left;
+            padding-left: 40rem/$root-base-size;
         }
         .adminTableemail {
             color: #593c8f;
-            padding-left: 20px;
+            padding-left:40rem/$root-base-size;
+            text-align: left;
         }
 
         .adminTablecategory {
@@ -41,8 +43,12 @@
         }
 
         .adminTabletimeDate {
-            padding-left: 20px;
+            padding-left: 20rem/$root-base-size;
             text-align: left;
+        }
+        .adminTabletimeDateRight {
+            padding-right: 40rem/$root-base-size;
+            text-align: right;
         }
 
         .adminTablescore {
@@ -51,7 +57,7 @@
 
         .adminTablestatus {
             text-align: center;
-            padding-right: 20px;
+            padding-right: 20rem/$root-base-size;
         }
 
         .green {
@@ -66,12 +72,12 @@
             font-family: "Nunito Sans";
             font-style: normal;
             font-weight: bold;
-            font-size: 16px;
-            line-height: 32px;
+            font-size: 16rem/$root-base-size;
+            line-height: 32rem/$root-base-size;
         }
 
         .adminTableRow {
-            height: 32px;
+            height: 32rem/$root-base-size;
         }
 
         .adminTableRow:nth-child(2n + 1) {
@@ -86,9 +92,9 @@
 }
 
 .pageItem {
-    width: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
+    width: 15rem/$root-base-size;
+    margin-left: 5rem/$root-base-size;
+    margin-right: 5rem/$root-base-size;
     outline: none;
 }
 
@@ -99,7 +105,7 @@
 
 .nextItem {
     color: #593c8f;
-    margin-left: 10px;
+    margin-left: 10rem/$root-base-size;
     outline: none;
 }
 
@@ -109,7 +115,7 @@
 
 .prevItem {
     color: #593c8f;
-    margin-right: 10px;
+    margin-right: 10rem/$root-base-size;
     outline: none;
 }
 
@@ -124,11 +130,11 @@
     font-family: "Nunito Sans";
     font-style: normal;
     font-weight: normal;
-    font-size: 14px;
-    line-height: 16px;
+    font-size: 14rem/$root-base-size;
+    line-height: 16rem/$root-base-size;
     color: #575757;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 20rem/$root-base-size;
 }
 
 .jumpPage {
@@ -140,12 +146,12 @@
 }
 
 .pageInput {
-    margin-left: 5px;
+    margin-left: 5rem/$root-base-size;
     color: #191919;
     background: #f2f2f2;
-    box-shadow: inset 0px 6px 10px rgba(0, 0, 0, 0.15);
-    border-radius: 5px;
+    box-shadow: inset 0rem/$root-base-size 6rem/$root-base-size 10rem/$root-base-size rgba(0, 0, 0, 0.15);
+    border-radius: 5rem/$root-base-size;
     text-align: center;
     outline: none;
-    width: 40px;
+    width: 40rem/$root-base-size;
 }

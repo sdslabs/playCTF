@@ -1,9 +1,10 @@
 <template>
-  <div class="usersContainer">
-    <div class="headingDiv">
-      <img src="@/assets/userPanel.svg" class="heading" />
-      <div class="searchBar">
-        <button class="searchBtn">
+  <div class="mainAdminContainer">
+    <div class="adminHeadingColorSearch">
+      <img src="@/assets/userPanel.svg" class="adminHeadingColor" />
+      <div class="adminUserSearchDiv">
+      <div class="adminSearchBar">
+        <button class="searchBtn" :disabled="true">
           <img src="@/assets/search.svg" class="searchImg" />
         </button>
         <input
@@ -12,8 +13,9 @@
           class="query"
         />
       </div>
+      </div>
     </div>
-    <div class="sort">
+    <div class="adminSort">
       <span class="sortText">Sort by:</span>
       <a
         class="sortOption"
@@ -26,12 +28,6 @@
         :class="{ active: sortFilter === 'Score' }"
         @click="changeSort('Score')"
         >Score</a
-      >
-      <a
-        class="sortOption"
-        :class="{ active: sortFilter === 'Rank' }"
-        @click="changeSort('Rank')"
-        >Rank</a
       >
       <v-select
         class="dropdown"
@@ -49,7 +45,7 @@
     </div>
     <admin-table
       :tableCols="tableCols"
-      :rows="rows"
+      :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
     />
@@ -57,6 +53,7 @@
 </template>
 <script>
 import adminTable from "../components/adminTable.vue";
+import UsersService from "@/api/admin/usersAPI";
 export default {
   components: { adminTable },
   name: "AdminLeaderboard",
@@ -64,7 +61,7 @@ export default {
     return {
       sortFilter: "User Name",
       statusFilter: "All",
-      searchQuery: "",
+      searchQuery: null,
       ascending: false,
       sortColumn: "",
       tableCols: [
@@ -73,32 +70,32 @@ export default {
           label: "Rank",
           style: {
             width: "72px",
-            textAlign: "center"
-          }
+            textAlign: "center",
+          },
         },
         {
           id: 2,
           label: "User Name",
           style: {
             width: "120px",
-            paddingLeft: "20px"
-          }
+            paddingLeft: "20px",
+          },
         },
         {
           id: 3,
           label: "E-Mail Address",
           style: {
             textAlign: "left",
-            paddingLeft: "20px"
-          }
+            paddingLeft: "40px",
+          },
         },
         {
           id: 4,
           label: "Score",
           style: {
             width: "72px",
-            textAlign: "center"
-          }
+            textAlign: "center",
+          },
         },
         {
           id: 5,
@@ -106,104 +103,49 @@ export default {
           style: {
             width: "72px",
             textAlign: "center",
-            paddingRight: "20px"
-          }
-        }
+            paddingRight: "20px",
+          },
+        },
       ],
-      rows: [
-        {
-          rank: "1",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "2",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Banned"
-        },
-        {
-          rank: "3",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "4",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "5",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "6",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "7",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "8",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Banned"
-        },
-        {
-          rank: "9",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "10",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "11",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        },
-        {
-          rank: "12 ",
-          username: "Rockstars",
-          email: "coolrockstar@gmail.com",
-          score: "874",
-          status: "Active"
-        }
-      ]
+      displayUsers: [],
+      users: [],
     };
+  },
+  mounted() {
+    UsersService.getUsers().then((users) => {
+      console.log(users);
+      if(users===null){
+        console.log("error fetching users");
+        return;
+      }
+      this.users = users;
+      this.displayUsers = this.users.sort((a, b) => {
+        return a.username > b.username ? 1 : -1;
+      });
+    });
   },
   methods: {
     changeFilter(value) {
       this.statusFilter = value;
+      if (value === "All") {
+        this.displayUsers = this.users;
+      } else {
+        this.displayUsers = this.users.filter((el) => {
+          return el.status == value;
+        });
+      }
     },
     changeSort(value) {
       this.sortFilter = value;
+      if (value === "User Name") {
+        this.displayUsers = this.displayUsers.sort((a, b) => {
+          return a.username > b.username ? 1 : -1;
+        });
+      } else if (value === "Score") {
+        this.displayUsers = this.displayUsers.sort((a, b) => {
+          return a.rank > b.rank ? 1 : -1;
+        });
+      }
     },
     changePage() {
       console.log("submitted");
@@ -219,7 +161,7 @@ export default {
 
       var ascending = this.ascending;
 
-      this.rows.sort(function(a, b) {
+      this.rows.sort(function (a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
@@ -241,7 +183,7 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
-    }
+    },
   },
   computed: {
     columns: function columns() {
@@ -249,10 +191,19 @@ export default {
         return [];
       }
       return Object.keys(this.rows[0]);
-    }
-  }
+    },
+    resultQuery() {
+      if (this.searchQuery) {
+        return this.displayUsers.filter((item) => {
+          return this.searchQuery
+            .toLowerCase()
+            .split(" ")
+            .every((v) => item.username.toLowerCase().includes(v));
+        });
+      } else {
+        return this.displayUsers;
+      }
+    },
+  },
 };
 </script>
-<style scoped lang="scss">
-@import "@/assets/scss/adminUsers.scss";
-</style>

@@ -1,157 +1,175 @@
 .adminChallengesContainer {
     display: flex;
     flex-direction: row;
-    width: 830px;
-    margin-bottom: 300px;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 30%;
 }
 
 .adminChallengesVerticalNav {
-    width: 66px;
-    height: 290px;
-    justify-content: flex-end;
+    width: 10%;
+    justify-content: flex-start;
     display: flex;
     flex-direction: column;
     margin-right: auto;
+    padding-top: 15%;
 
     .navButton {
+        display: flex;
+        flex-direction: row-reverse;
         @extend %font-style-basic;
         background-color: white;
         border: none;
         color: $theme-color-light-grey;
         text-align: right;
         outline: none;
+        margin: 0.5rem 0;
     }
 
     .navButton:hover {
         @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
         color: #191919;
-        border-right: 2px solid $secondary-admin-theme-color;
+        border-right: 2rem/$root-base-size solid $secondary-admin-theme-color;
     }
 
     .active {
         @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
         color: #191919;
-        border-right: 2px solid $secondary-admin-theme-color;
+        border-right: 2rem/$root-base-size solid $secondary-admin-theme-color;
     }
 }
 
 .mainContainerAdChal {
-    margin-left: 20px;
-    width: 744px;
+    margin-left: 20rem/$root-base-size;
+    width: 100%;
     align-self: flex-start;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    .heading {
+    .adminHeadingChal {
         width: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
 
-        .headingName {
-            @extend %font-style-bold;
-            font-size: 24px;
-            line-height: 28px;
-            text-transform: uppercase;
-            color: #191919;
-        }
-
         .addChallenge {
             background: #FF6700;
-            border-radius: 3px;
+            border-radius: 3rem/$root-base-size;
             outline: none;
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 4px 12px;
+            padding: 8rem/$root-base-size 12rem/$root-base-size;
             border: none;
-        }
 
-        .addImg {
-            width: 15px;
-            height: 15px;
-            margin: 0px 5px;
-        }
-
-        .addText {
-            @extend %font-style-basic;
-            font-weight: 600;
-            color: #FFFFFF;
-        }
-
-    }
-
-    .sort {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        @extend %font-style-basic;
-        margin-top: 30px;
-
-        .sortText {
-            line-height: 18px;
-            color: rgba(57, 57, 57, 0.9);
-            margin-right: 8px;
-        }
-
-        .sortOption {
-            line-height: 24px;
-            color: rgba(87, 87, 87, 0.75);
-            margin: 0px 8px;
-        }
-
-        .sortOption:hover {
-            @extend %font-style-bold;
-            line-height: 24px;
-            text-align: center;
-            color: #191919;
-            border-bottom: 2px solid #FF6700;
-        }
-
-        .active {
-            @extend %font-style-bold;
-            line-height: 24px;
-            text-align: center;
-            color: #191919;
-            border-bottom: 2px solid #FF6700;
-        }
-
-        .dropdown {
-            margin-left: auto;
-            width: 200px;
-
-            .filterText {
-                font-weight: normal;
-                font-size: 14px;
-                line-height: 18px;
-                color: #575757;
+            .addImg {
+                width: 15rem/$root-base-size;
+                height: 15rem/$root-base-size;
+                margin: 0rem/$root-base-size 5rem/$root-base-size;
             }
 
-            .filterSelection {
-                margin-left: auto;
+            .addText {
+                @extend %font-style-basic;
                 font-weight: 600;
-                font-size: 14px;
-                line-height: 18px;
-                color: rgba(57, 57, 57, 0.9);
-                margin-right: 8px;
+                color: #FFFFFF;
             }
         }
-        .selection {
-            width: 200px;
+
+        .addChallenge:hover {
+            background: #FFFFFF;
+
+            border: 2rem/$root-base-size solid #FF6700;
+
+            .addImg {
+                filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
+            }
+
+            .addText {
+                color: #FF6700;
+            }
         }
     }
+
+
 }
 
 .adminChallengesList {
-    margin-top: 20px;
+    margin-top: 20rem/$root-base-size;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 744px;
+    width: 744rem/$root-base-size;
     justify-content: space-between;
+}
+
+.adminSort {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @extend %font-style-basic;
+    margin-top: 30rem/$root-base-size;
+
+    .sortText {
+        line-height: 18rem/$root-base-size;
+        color: rgba(57, 57, 57, 0.9);
+        margin-right: 8rem/$root-base-size;
+    }
+
+    .sortOption {
+        line-height: 24rem/$root-base-size;
+        color: rgba(87, 87, 87, 0.75);
+        margin: 0rem/$root-base-size 8rem/$root-base-size;
+    }
+
+    .sortOption:hover {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        text-align: center;
+        color: #191919;
+        border-bottom: 2rem/$root-base-size solid #FF6700;
+    }
+
+    .active {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        text-align: center;
+        color: #191919;
+        border-bottom: 2rem/$root-base-size solid #FF6700;
+    }
+
+    .dropdown {
+        margin-left: auto;
+        width: 200rem/$root-base-size;
+
+        .filterText {
+            font-weight: normal;
+            font-size: 14rem/$root-base-size;
+            line-height: 18rem/$root-base-size;
+            color: #575757;
+        }
+
+        .filterSelection {
+            margin-left: auto;
+            font-weight: 600;
+            font-size: 14rem/$root-base-size;
+            line-height: 18rem/$root-base-size;
+            color: rgba(57, 57, 57, 0.9);
+            margin-right: 8rem/$root-base-size;
+        }
+    }
+
+    .selection {
+        width: 200rem/$root-base-size;
+    }
 }

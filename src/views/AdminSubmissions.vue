@@ -1,9 +1,7 @@
 // TODO: Button CSS, filter redirecting and font colour
 <template>
-  <div class="adSubContainer">
-    <div class="adSubHeaderComponent">
-    Submissions
-    </div>
+  <div class="mainAdminContainer">
+    <div class="adSubHeaderComponent">Submissions</div>
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
@@ -19,6 +17,7 @@
 <script>
 import axios from "axios";
 import adminTable from "../components/adminTable.vue";
+import moment from "moment";
 export default {
   name: "AdminSubmissions",
   components: {
@@ -30,13 +29,25 @@ export default {
       ascending: false,
       sortColumn: "",
       tableCols: [
-        { id: 1, label: "User Name", style: { paddingLeft: "40px",textAlign:'left',width:'30%'} },
-        { id: 2, label: "Challenge", style: {textAlign:'left',width:'20%'} },
-        { id: 3, label: "Category", style: { textAlign: "center",width:'10%'} },
+        {
+          id: 1,
+          label: "User Name",
+          style: { paddingLeft: "40px", textAlign: "left", width: "25%" },
+        },
+        {
+          id: 2,
+          label: "Challenge",
+          style: { textAlign: "left", width: "25%", paddingLeft: "40px" },
+        },
+        {
+          id: 3,
+          label: "Category",
+          style: { textAlign: "center", width: "10%" },
+        },
         {
           id: 4,
           label: "Time & Date (+5:30 UTC)",
-          style: { paddingLeft: "20px" ,textAlign:'left',width:'40% '},
+          style: { paddingLeft: "20px", textAlign: "left", width: "40% " },
         },
       ],
       rows: [],
@@ -93,11 +104,14 @@ export default {
           console.log(response.data);
         } else {
           response.data.forEach((element) => {
+            var timeData = moment(element.solvedAt).format(
+              "h:mm:ss; MMMM Do, YYYY"
+            );
             this.rows.push({
               username: element.username,
               challenge: element.name,
               category: element.category,
-              timeDate: element.solvedAt
+              timeDate: timeData,
             });
           });
         }

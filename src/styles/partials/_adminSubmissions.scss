@@ -5,8 +5,7 @@
 .adSubHeaderComponent {
   text-align: left;
   @extend %font-style-bold;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 24rem/$root-base-size;
   text-transform: uppercase;
   color: #191919;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mainAdminContainer">
     <div class="heading">
       CONFIGURE
       <button class="preview-button">

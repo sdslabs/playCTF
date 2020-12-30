@@ -1,11 +1,11 @@
 <template>
-  <div class="tab">
-    <p class="title">
+  <div class="adminNotifCard">
+    <p class="adminNotifTitle">
       {{ this.title }}
       <span v-if="this.isNew"><img src="@/assets/new-tag.svg"/></span>
     </p>
-    <p class="timeAgo">{{ this.time }}</p>
-    <p class="desc">{{ this.description }}</p>
+    <p class="adminNotifTime">{{ this.time }}</p>
+    <p class="adminNotifDesc">{{ this.description }}</p>
   </div>
 </template>
 
@@ -15,7 +15,4 @@ export default {
   props: ["title", "description", "time", "isNew"]
 };
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/notificationTab.scss";
-</style>
+

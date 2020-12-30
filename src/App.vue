@@ -38,11 +38,14 @@ export default {
   font-size: 1vw;
   overflow: hidden;
   z-index: 1;
+  min-height: 100%;
+  display: flex;
 }
 
 @media only screen and (max-width: 1280) {
   #app {
     width: 100%;
+    min-height: 100%;
   }
 }
 body {

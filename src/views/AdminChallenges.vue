@@ -11,14 +11,14 @@
       </button>
     </div>
     <div class="mainContainerAdChal">
-      <div class="heading">
-        <div class="headingName">CHALLENGES</div>
+      <div class="adminHeadingChal">
+        <div class="adminHeadingName">CHALLENGES</div>
         <button class="addChallenge">
           <img class="addImg" src="@/assets/add.svg" />
           <span class="addText">Create New Challenge</span>
         </button>
       </div>
-      <div class="sort">
+      <div class="adminSort">
         <span class="sortText">Sort by:</span>
         <a
           v-for="sort in this.sortFilterOptions"
@@ -55,7 +55,7 @@
 </template>
 <script>
 import adminChallCard from "../components/adminChallCard.vue";
-import axios from "axios";
+import ChalService from "../api/admin/challengesAPI";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard },
@@ -68,32 +68,26 @@ export default {
       displayChallenges: [],
       categoryFilterOptions: [
         { name: "All", id: 1 },
-        { name: "Crypto", id: 2 },
-        { name: "PWN", id: 3 },
-        { name: "Web", id: 4 },
-        { name: "Misc", id: 5 },
       ],
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
         { name: "Solves", id: 3 },
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed", "Purged"],
+      statusFilterOptions: ["All", "Deployed", "Undeployed"],
     };
   },
   mounted() {
-    axios
-      .post(`${this.$store.getters.hostUrl}/api/info/available`)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          this.challenges = response.data;
-          this.displayChallenges = this.challenges.sort((a,b)=>{
-            return(a.Name>b.Name?1:-1)
-          });
-        }
-      });
+    ChalService.getChallenges().then((response)=>{
+      if(response===null){
+        console.log("Error fetching All challenges");
+      }else{
+        this.challenges = response.challenges;
+        this.displayChallenges = response.displayChallenges;
+        this.categoryFilterOptions = [...this.categoryFilterOptions,...response.categoryFilterOptions];
+        this.displayChallenges = response.displayChallenges;
+      }
+    })
   },
   methods: {
     changeFilter(value) {

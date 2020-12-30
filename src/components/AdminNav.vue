@@ -1,23 +1,23 @@
 <template>
   <div class="adminNavbar">
-    <nav class="navbar-container">
-      <router-link to="/admin/statistics" class="navbar-link"
+    <nav class="adminNavbarContainer">
+      <router-link to="/admin/statistics" class="adminNavbarLink"
         >Statistics</router-link
       >
-      <router-link to="/admin/notifications" class="navbar-link"
+      <router-link to="/admin/notifications" class="adminNavbarLink"
         >Notifications</router-link
       >
-      <router-link to="/admin/users" class="navbar-link">Users</router-link>
-      <router-link to="/admin/leaderboard" class="navbar-link"
+      <router-link to="/admin/users" class="adminNavbarLink">Users</router-link>
+      <router-link to="/admin/leaderboard" class="adminNavbarLink"
         >Leaderboard</router-link
       >
-      <router-link to="/admin/challenges" class="navbar-link"
+      <router-link to="/admin/challenges" class="adminNavbarLink"
         >Challenges</router-link
       >
-      <router-link to="/admin/submissions" class="navbar-link"
+      <router-link to="/admin/submissions" class="adminNavbarLink"
         >Submissions</router-link
       >
-      <router-link to="/admin/configure" class="navbar-link"
+      <router-link to="/admin/configure" class="adminNavbarLink"
         >Configure</router-link
       >
     </nav>
@@ -30,7 +30,3 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/adminNavbar.scss";
-</style>

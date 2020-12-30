@@ -1,41 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap');
-$screenRatio: 1;
 .adminHeader {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20px * $screenRatio;
-  margin-bottom: 20px * $screenRatio;
+  margin-top: 20rem/$root-base-size;
+  margin-bottom: 20rem/$root-base-size;
+  padding: 0 25%;
 }
 
-.nav-timer {
+.adminNavTimer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 12px * $screenRatio;
-  line-height: 20px * $screenRatio;
+  font-size: 12rem/$root-base-size;
+  line-height: 20rem/$root-base-size;
   color: #393939;
-  margin-left: 33px * $screenRatio;
-  margin-right: 33px * $screenRatio;
+  margin: 0 1rem;
 }
 
-.timer-message {
+.adminTimerMessage {
   margin-bottom: 0;
 }
-.timer-value {
+.adminTimerValue {
   margin-top: 0;
 }
 
-.dropdown {
+.adminNavDropdown {
   float: left;
   overflow: hidden;
 }
 
-.dropbtn {
-  font-size: 14px * $screenRatio;
-  line-height: 24px * $screenRatio;
+.adminNavDropbtn {
+  font-size: 14rem/$root-base-size;
+  line-height: 24rem/$root-base-size;
   border: none;
   outline: none;
   color: #593c8f;
@@ -45,13 +43,13 @@ $screenRatio: 1;
   margin: 0;
 }
 
-.dropdown-content {
+.adminNavDropdownContent {
   display: none;
   position: absolute;
   min-width: 150px;
 }
 
-.dropdown-link {
+.adminNavDropdownLink {
   color: black;
   float: none;
   padding: 12px 16px;
@@ -60,6 +58,6 @@ $screenRatio: 1;
   text-align: left;
 }
 
-.dropdown:hover .dropdown-content {
+.adminNavDropdown:hover .adminNavDropdownContent {
   display: block;
 }

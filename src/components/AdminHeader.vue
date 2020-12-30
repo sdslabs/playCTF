@@ -4,19 +4,19 @@
       <img src="@/assets/ctf-logo.svg" />
     </div>
     <AdminNav />
-    <div class="nav-timer">
-      <p class="timer-message">{{ time.message }}</p>
-      <p class="timer-value">{{ time.value }}</p>
+    <div class="adminNavTimer">
+      <p class="adminTimerMessage">{{ time.message }}</p>
+      <p class="adminTimerValue">{{ time.value }}</p>
     </div>
-    <div class="dropdown">
-      <button class="dropbtn">
+    <div class="adminNavDropdown">
+      <button class="adminNavDropbtn">
         Admin
         <img src="@/assets/dropdown.svg" />
       </button>
-      <div class="dropdown-content">
-        <a class="dropdown-link" href="#">Link 1</a>
-        <a class="dropdown-link" href="#">Link 2</a>
-        <a class="dropdown-link" href="#">Link 3</a>
+      <div class="adminNavDropdownContent">
+        <a class="adminNavDropdownLink" href="#">Link 1</a>
+        <a class="adminNavDropdownLink" href="#">Link 2</a>
+        <a class="adminNavDropdownLink" href="#">Link 3</a>
       </div>
     </div>
   </div>
@@ -38,8 +38,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/adminHeader.scss";
-</style>
