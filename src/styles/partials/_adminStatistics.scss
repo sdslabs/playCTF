@@ -2,6 +2,7 @@
   @extend %font-style-bold;
   font-weight: 700;
   font-size: 20rem/$root-base-size;
+  margin-top: 0;
   margin-bottom: 5rem/$root-base-size;
   text-align: left;
 }
@@ -29,8 +30,9 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 20rem/$root-base-size;
-  margin-bottom: 20rem/$root-base-size;
+  justify-content: flex-start;
+  margin-top: 10rem/$root-base-size;
+  margin-bottom: 10rem/$root-base-size;
 
   .adminOneColContainer {
     display: flex;
@@ -42,13 +44,17 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
+    justify-content: space-between;
+    width: 90%;
     .adminStatsLeftCol{
+      display: flex;      
       align-self: flex-start;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .adminStatsRightCol{
-     margin-left: 20%; 
-    }
+
+        }
   }
 }
 
@@ -57,6 +63,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  margin-top: 15rem/$root-base-size;
 }
 
 .graph {

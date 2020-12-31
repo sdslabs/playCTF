@@ -31,9 +31,8 @@ export default {
           status: el.status === 0 ? 'Active' : 'Banned',
         })
       })
-      return allUsers
     }
-    return null
+    return allUsers
   },
 
   async getUserStats() {

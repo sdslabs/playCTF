@@ -3,16 +3,16 @@
     <div class="adminHeadingColorSearch">
       <img src="@/assets/userPanel.svg" class="adminHeadingColor" />
       <div class="adminUserSearchDiv">
-      <div class="adminSearchBar">
-        <button class="searchBtn" :disabled="true">
-          <img src="@/assets/search.svg" class="searchImg" />
-        </button>
-        <input
-          v-model="searchQuery"
-          placeholder="Search for teams here..."
-          class="query"
-        />
-      </div>
+        <div class="adminSearchBar">
+          <button class="searchBtn" :disabled="true">
+            <img src="@/assets/search.svg" class="searchImg" />
+          </button>
+          <input
+            v-model="searchQuery"
+            placeholder="Search for teams here..."
+            class="query"
+          />
+        </div>
       </div>
     </div>
     <div class="adminSort">
@@ -44,11 +44,15 @@
       </v-select>
     </div>
     <admin-table
+      v-if="this.resultQuery.length > 0"
       :tableCols="tableCols"
       :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
     />
+    <div class="adminEmptyDataContainer" v-else>
+      <span class="adminEmptyData">{{this.emptyDataMessage[this.statusFilter]}}</span>
+    </div>
   </div>
 </template>
 <script>
@@ -59,6 +63,11 @@ export default {
   name: "AdminLeaderboard",
   data() {
     return {
+      emptyDataMessage:{
+        All:"No Users",
+        Active:"No Active Users",
+        Banned:"No Banned Users"
+      },
       sortFilter: "User Name",
       statusFilter: "All",
       searchQuery: null,
@@ -114,7 +123,7 @@ export default {
   mounted() {
     UsersService.getUsers().then((users) => {
       console.log(users);
-      if(users===null){
+      if (users === null) {
         console.log("error fetching users");
         return;
       }

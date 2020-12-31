@@ -10,7 +10,11 @@
         { col: 'username', redirect: '/admin/users/' },
       ]"
       :maxElementPerPage="20"
+      v-if="this.rows.length > 0"
     />
+    <div class="adminEmptyDataContainer" :style="{marginTop:'2rem'}" v-else>
+      <span class="adminEmptyData">No Submissions</span>
+    </div>
   </div>
 </template>
 

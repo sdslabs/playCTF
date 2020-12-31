@@ -1,13 +1,14 @@
 <template>
   <div class="adminChallengesContainer">
     <div class="adminChallengesVerticalNav">
-      <button v-for="category in this.categoryFilterOptions"
+      <button
+        v-for="category in this.categoryFilterOptions"
         :key="category.id"
         class="navButton"
         @click="changeCategory(category.name)"
         :class="{ active: categoryFilter === category.name }"
       >
-      {{category.name}}
+        {{ category.name }}
       </button>
     </div>
     <div class="mainContainerAdChal">
@@ -43,12 +44,19 @@
           </template>
         </v-select>
       </div>
-      <div class="adminChallengesList">
+      <div class="adminChallengesList" v-if="displayChallenges.length > 0">
         <admin-chall-card
           v-for="challenge in displayChallenges"
           :key="challenge.ChallId"
           :challenge="challenge"
         />
+      </div>
+      <div
+        class="adminEmptyDataContainer"
+        :style="{marginTop:'2rem'}"
+        v-else
+      >
+        <span class="adminEmptyData">No Challenges available</span>
       </div>
     </div>
   </div>
@@ -66,9 +74,7 @@ export default {
       categoryFilter: "All",
       challenges: [],
       displayChallenges: [],
-      categoryFilterOptions: [
-        { name: "All", id: 1 },
-      ],
+      categoryFilterOptions: [{ name: "All", id: 1 }],
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
@@ -78,16 +84,20 @@ export default {
     };
   },
   mounted() {
-    ChalService.getChallenges().then((response)=>{
-      if(response===null){
+    ChalService.getChallenges().then((response) => {
+      if (response === null) {
         console.log("Error fetching All challenges");
-      }else{
+        return
+      } else {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
-        this.categoryFilterOptions = [...this.categoryFilterOptions,...response.categoryFilterOptions];
+        this.categoryFilterOptions = [
+          ...this.categoryFilterOptions,
+          ...response.categoryFilterOptions,
+        ];
         this.displayChallenges = response.displayChallenges;
       }
-    })
+    });
   },
   methods: {
     changeFilter(value) {
@@ -102,17 +112,29 @@ export default {
     },
     changeSort(value) {
       this.sortFilter = value;
-      if(value==="Name"){
-        this.displayChallenges = this.displayChallenges.sort((a,b)=>{
-          return (a.Name>b.Name?1:-1);
-        })
-      }else if(value==='Score'){
-      this.displayChallenges = this.displayChallenges.sort((a,b)=>{
-          return (a.Points<=b.Points?a.Points===b.Points?a.Name>b.Name?1:-1:1:-1);
-        })
-      }else if(value==="Solves"){
-        this.displayChallenges = this.displayChallenges.sort((a,b)=>{
-          return (a.SolvesNumber<=b.SolvesNumber?a.SolvesNumber===b.SolvesNumber?a.Name>b.Name?1:-1:1:-1);
+      if (value === "Name") {
+        this.displayChallenges = this.displayChallenges.sort((a, b) => {
+          return a.Name > b.Name ? 1 : -1;
+        });
+      } else if (value === "Score") {
+        this.displayChallenges = this.displayChallenges.sort((a, b) => {
+          return a.Points <= b.Points
+            ? a.Points === b.Points
+              ? a.Name > b.Name
+                ? 1
+                : -1
+              : 1
+            : -1;
+        });
+      } else if (value === "Solves") {
+        this.displayChallenges = this.displayChallenges.sort((a, b) => {
+          return a.SolvesNumber <= b.SolvesNumber
+            ? a.SolvesNumber === b.SolvesNumber
+              ? a.Name > b.Name
+                ? 1
+                : -1
+              : 1
+            : -1;
         });
         console.log(this.displayChallenges);
       }

@@ -30,8 +30,11 @@
           is the most solved challenge with
           <span class="adminBold"
             >{{ challenges.maxSolvedChal.solves }} ({{
-              (challenges.maxSolvedChal.solves / users.total_registered_users) *
-              100
+              challenges.maxSolvedChal.solves === "-"
+                ? "-"
+                : (challenges.maxSolvedChal.solves /
+                    users.total_registered_users) *
+                  100
             }}</span
           >%) solves, whereas,
         </p>
@@ -42,9 +45,11 @@
           is the least solved challenge with
           <span class="adminBold"
             >{{ challenges.leastSolvedChal.solves }} ({{
-              (challenges.leastSolvedChal.solves /
-                users.total_registered_users) *
-              100
+              challenges.leastSolvedChal.solves === "-"
+                ? "-"
+                : (challenges.leastSolvedChal.solves /
+                    users.total_registered_users) *
+                  100
             }}</span
           >%).
         </p>
@@ -52,9 +57,9 @@
     </div>
 
     <div class="adminStatsContainer">
-      <div class="adminTwoColContainer">
+      <p class="adminSubheading">Submissions</p>
+      <div class="adminTwoColContainer" v-if="this.submissions.totalChal > 0">
         <div class="adminStatsLeftCol">
-          <p class="adminSubheading">Submissions</p>
           <div class="adminOneColContainer">
             <p class="adminInfo">
               Total
@@ -74,10 +79,17 @@
           <PieChart
             v-bind:chartData="this.categoryChartData()"
             v-bind:options="this.chartOptions"
-            :height="200"
-            :width="200"
+            :height="130"
+            :width="250"
           />
         </div>
+      </div>
+      <div
+        class="adminEmptyDataContainer"
+        :style="{ alignSelf: 'flex-start' }"
+        v-else
+      >
+        <span class="adminEmptyData">No Submissions</span>
       </div>
     </div>
     <div class="adminStatsContainer">
@@ -85,7 +97,7 @@
         <p class="adminSubheading">
           Solve Percentages (Out of {{ users.active }} Active Users)
         </p>
-        <div class="adminSolveGraphContainer">
+        <div class="adminSolveGraphContainer" v-if="this.chalTags.length > 0">
           <div v-for="tag in chalTags" :key="tag.id" class="graph">
             <div class="graphTitle">{{ tag.name }}</div>
             <BarGraph
@@ -93,6 +105,13 @@
               v-bind:options="barChartOptions"
             />
           </div>
+        </div>
+        <div
+          class="adminEmptyDataContainer"
+          :style="{ alignSelf: 'flex-start' }"
+          v-else
+        >
+          <span class="adminEmptyData">No Challenges Category Available</span>
         </div>
       </div>
     </div>
@@ -114,18 +133,18 @@ export default {
   methods: {
     getBarData(tag) {
       var dataSolves = this.chalCategory[tag].solves;
-      if(dataSolves.length>5){
-        dataSolves = dataSolves.slice(0,5);
+      if (dataSolves.length > 5) {
+        dataSolves = dataSolves.slice(0, 5);
       }
       var labels = [];
       var data = [];
-      dataSolves.forEach(el=>{
-        labels.push(el.username)
-        console.log("Aviral")
-        console.log(el)
-        console.log(this.chalCategory[tag])
-        data.push(el.solves/this.chalCategory[tag].total*100);
-      })
+      dataSolves.forEach((el) => {
+        labels.push(el.username);
+        console.log("Aviral");
+        console.log(el);
+        console.log(this.chalCategory[tag]);
+        data.push((el.solves / this.chalCategory[tag].total) * 100);
+      });
       console.log(data);
       return {
         labels,
@@ -191,9 +210,11 @@ export default {
         console.log("error fetching users");
         return;
       }
-      this.leader = users.sort((a, b) => {
-        return a.rank > b.rank ? 1 : -1;
-      })[0];
+      if (users.length > 0) {
+        this.leader = users.sort((a, b) => {
+          return a.rank > b.rank ? 1 : -1;
+        })[0];
+      }
     });
     ChalService.getChalStats().then((response) => {
       if (response === null) {
@@ -220,6 +241,7 @@ export default {
         ChalService.getChalCategory(this.chalTags).then((response) => {
           if (response === null) {
             console.log("Error fetching challenge category data");
+            return;
           } else {
             this.chalCategory = response;
           }
@@ -231,73 +253,12 @@ export default {
     return {
       users: {},
       challenges: {},
-      leader: {},
+      leader: {
+        username:"-",
+        score:"-"
+      },
       submissions: {},
       chalCategory: {},
-      attempts: {
-        labels: [
-          {
-            name: "Misc",
-            id: 1,
-            Total: 300,
-            Correct: 100,
-            Incorrect: 200,
-            topUsers: [
-              { name: "a", percentage: "20%" },
-              { name: "b", percentage: "30%" },
-              { name: "c", percentage: "20%" },
-              { name: "d", percentage: "30%" },
-              { name: "e", percentage: "20%" },
-            ],
-          },
-          {
-            name: "PWN",
-            id: 2,
-            Total: 300,
-            Correct: 60,
-            Incorrect: 140,
-            topUsers: [
-              { name: "a", percentage: "20%" },
-              { name: "b", percentage: "30%" },
-              { name: "c", percentage: "20%" },
-              { name: "d", percentage: "30%" },
-              { name: "e", percentage: "20%" },
-            ],
-          },
-          {
-            name: "Web",
-            id: 3,
-            Total: 300,
-            Correct: 60,
-            Incorrect: 140,
-            topUsers: [
-              { name: "a", percentage: "20%" },
-              { name: "b", percentage: "30%" },
-              { name: "c", percentage: "20%" },
-              { name: "d", percentage: "30%" },
-              { name: "e", percentage: "20%" },
-            ],
-          },
-          {
-            name: "Crypto",
-            id: 4,
-            Total: 300,
-            Correct: 30,
-            Incorrect: 170,
-            topUsers: [
-              { name: "a", percentage: "20%" },
-              { name: "b", percentage: "30%" },
-              { name: "c", percentage: "20%" },
-              { name: "d", percentage: "30%" },
-              { name: "e", percentage: "20%" },
-            ],
-          },
-        ],
-        Total: {
-          total: 1200,
-          data: [300, 300, 300, 300],
-        },
-      },
       categoryFilter: "Correct",
       chartOptions: {
         hoverBorderWidth: 20,
@@ -305,6 +266,9 @@ export default {
         maintainAspectRatio: true,
         legend: {
           position: "right",
+          labels: {
+            boxWidth: 20,
+          },
         },
       },
       barChartOptions: {
@@ -317,12 +281,20 @@ export default {
           xAxes: [
             {
               gridLines: {
-                display: false,
+                color: "#575757",
+                drawOnChartArea: false,
               },
               ticks: {
                 stepSize: 20,
                 min: 0,
                 max: 100,
+                fontColor: "#393939",
+                fontFamily: "Roboto",
+                fontStyle: "normal",
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Solve %",
               },
             },
           ],
@@ -330,33 +302,9 @@ export default {
         yAxes: [
           {
             gridLines: {
-              display: false,
+              color: "#575757",
+              drawOnChartArea: false,
             },
-          },
-        ],
-      },
-      barData: {
-        labels: ["a", "b", "c", "d", "e"],
-        datasets: [
-          {
-            backgroundColor: [
-              "#55C39C",
-              "#6269AB",
-              "#59ABDA",
-              "#81C1D6",
-              "#6E8A8E",
-            ],
-            data: [40, 40, 40, 50, 60],
-          },
-        ],
-      },
-      attemptsChartData: {
-        hoverBorderWidth: 10,
-        labels: ["Correct", "Incorrect"],
-        datasets: [
-          {
-            backgroundColor: ["#41B883", "#E46651"],
-            data: [250, 950],
           },
         ],
       },

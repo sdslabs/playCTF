@@ -1,45 +1,50 @@
 import { axiosInstance } from '../axiosInstance.js'
 
 export default {
-    async getChalCategory(tags) {
-        let response=await axiosInstance.post(`/api/info/available`)
-        if(response.status!==200) {
-            return null
-        } else {
-            var submissionsCategory = {};
-            tags.forEach(tag => {
-                var challenges=response.data.filter(el => {
-                    return el.Category===tag.name;
+  async getChalCategory(tags) {
+    let response = await axiosInstance.post(`/api/info/available`)
+    if (response.status !== 200) {
+      return null
+    } else {
+      var submissionsCategory = {}
+      tags.forEach((tag) => {
+        var challenges = response.data.filter((el) => {
+          return el.Category === tag.name
+        })
+        var totalChallenges = challenges.length
+        var userSolves = []
+        challenges.forEach((el) => {
+          if (el.Solves !== null) {
+            el.Solves.forEach((solve) => {
+              if (
+                userSolves.findIndex((el) => {
+                  el.username === solve.username
+                }) === -1
+              ) {
+                userSolves.push({
+                  username: solve.username,
+                  solves: 1,
                 })
-                console.log(challenges)
-                var totalChallenges=challenges.length;
-                var userSolves=[];
-                challenges.forEach(el => {
-                    el.Solves.forEach(solve => {
-                        if(userSolves.findIndex(el => {
-                            el.username === solve.username
-                        }) === -1) {
-                            userSolves.push({
-                                username: solve.username,
-                                solves:1
-                            })
-                        } else {
-                            userSolves[userSolves.findIndex(el => {
-                            el.username === solve.username
-                        })].solves++;
-                        }
-                    })
-                })
-                userSolves=userSolves.sort((a,b) => {
-                    return a.solves<b.solves? 1:-1;
-                })
-                submissionsCategory[tag.name] = {}
-                submissionsCategory[tag.name].solves=userSolves;
-                submissionsCategory[tag.name].total=totalChallenges;
+              } else {
+                userSolves[
+                  userSolves.findIndex((el) => {
+                    el.username === solve.username
+                  })
+                ].solves++
+              }
             })
-            return submissionsCategory
-        }
-    },
+          }
+        })
+        userSolves = userSolves.sort((a, b) => {
+          return a.solves < b.solves ? 1 : -1
+        })
+        submissionsCategory[tag.name] = {}
+        submissionsCategory[tag.name].solves = userSolves
+        submissionsCategory[tag.name].total = totalChallenges
+      })
+      return submissionsCategory
+    }
+  },
   async getChalStats() {
     let response = await axiosInstance.post(`/api/info/available`)
     if (response.status !== 200) {
@@ -50,8 +55,8 @@ export default {
       var purgedChal = 0
       var maxSolves = 0
       var leastSolves = 1000000000000000
-      var leastSolvedChal = null
-      var maxSolvedChal = null
+      var leastSolvedChal = {name:"-",solves:"-"}
+      var maxSolvedChal = {name:"-",solves:"-"}
       response.data.forEach((el) => {
         switch (el.Status) {
           case 'Deployed':

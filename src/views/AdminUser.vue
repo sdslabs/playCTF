@@ -1,5 +1,6 @@
 <template>
   <div class="mainAdminContainer">
+    <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
     <div class="adminUserInfoContainer">
       <div class="user">
         <div class="userDetails">
@@ -10,25 +11,31 @@
           </div>
           <div class="rankScore">
             <div class="rank">
-              <span class="value">{{ userDetails.rank }}</span>
+              <span class="value" :style="this.userDetails.active?{color:'#191919'}:{color:'rgba(25, 25, 25, 0.57)'}">{{ userDetails.rank }}</span>
               <span class="field">Rank</span>
             </div>
             <div class="score">
-              <span class="value">{{ userDetails.score }}</span>
+              <span class="value" :style="this.userDetails.active?{color:'#191919'}:{color:'rgba(25, 25, 25, 0.57)'}">{{ userDetails.score }}</span>
               <span class="field">Score</span>
             </div>
           </div>
         </div>
         <div class="userStatus" v-if="userDetails.active">
           <div class="status unbanned">Active</div>
-          <button class="adminBanButton">
+          <button
+            class="adminBanButton"
+            @click="manageUser(userDetails.id, 'ban')"
+          >
             <img src="@/assets/ban.svg" class="banImg" />
             <div class="adminBanText">Ban Player</div>
           </button>
         </div>
         <div class="userStatus" v-else>
           <div class="status banned">Banned</div>
-          <button class="adminBanButton">
+          <button
+            class="adminBanButton"
+            @click="manageUser(userDetails.id, 'unban')"
+          >
             <img src="@/assets/unban.svg" class="banImg" />
             <div class="adminBanText">Remove Ban</div>
           </button>
@@ -36,9 +43,9 @@
       </div>
     </div>
     <div class="adminStatsContainer">
-      <div class="adminTwoColContainer">
+      <p class="adminSubheading">Submissions</p>
+      <div class="adminTwoColContainer" v-if="this.submissions.totalChal > 0">
         <div class="adminStatsLeftCol">
-          <p class="adminSubheading">Submissions</p>
           <div class="adminOneColContainer">
             <p class="adminInfo">
               Total
@@ -58,10 +65,13 @@
           <PieChart
             v-bind:chartData="this.categoryChartData()"
             v-bind:options="this.chartOptions"
-            :height="200"
-            :width="200"
+            :height="130"
+            :width="250"
           />
         </div>
+      </div>
+      <div class="adminEmptyDataContainer" v-else>
+        <span class="adminEmptyData">No Correct Submissions</span>
       </div>
     </div>
     <div class="adminStatsContainer">
@@ -72,7 +82,15 @@
           :options="this.lineGraphOptions"
           class="lineGraph"
           :height="150"
+          v-if="this.rows.length > 0"
         />
+        <div
+          class="adminEmptyDataContainer"
+          v-else
+          :style="{ alignSelf: 'flex-start' }"
+        >
+          <span class="adminEmptyData">No Points Scored</span>
+        </div>
       </div>
     </div>
     <div class="adminHeadingName">Submissions</div>
@@ -81,7 +99,15 @@
       :rows="rows"
       :links="[{ col: 'challenge', redirect: '/admin/challenges/' }]"
       :maxElementPerPage="10"
+      v-if="rows.length > 0"
     />
+    <div
+      class="adminEmptyDataContainer"
+      v-else
+      :style="{ alignSelf: 'flex-start' }"
+    >
+      <span class="adminEmptyData">No Correct Submissions</span>
+    </div>
   </div>
 </template>
 <script>
@@ -101,6 +127,24 @@ export default {
   },
   data() {
     return {
+      confirmDialogs: {
+        ban: {
+          title: "Want to ban this player?",
+          message: `Action will pause participation of player.`,
+          button: {
+            yes: "Ban",
+            no: "Cancel",
+          },
+        },
+        unban: {
+          title: "Remove ban from this player?",
+          message: `The action will resume participation of player.`,
+          button: {
+            yes: "Remove ban",
+            no: "Cancel",
+          },
+        },
+      },
       scoreSeries: {},
       lineGraphOptions: {
         layout: {
@@ -163,6 +207,9 @@ export default {
         maintainAspectRatio: true,
         legend: {
           position: "right",
+          labels: {
+            boxWidth: 20,
+          },
         },
       },
       userDetails: {
@@ -170,6 +217,7 @@ export default {
         rank: "",
         score: "",
         active: true,
+        id: null,
       },
       rows: [],
       tableCols: [
@@ -192,6 +240,32 @@ export default {
     };
   },
   methods: {
+    manageUser(userId, action) {
+      this.$confirm({
+        title: this.confirmDialogs[action].title,
+        message: this.confirmDialogs[action].message,
+        button: this.confirmDialogs[action].button,
+        /**
+         * Callback Function
+         * @param {Boolean} confirm
+         */
+        callback: (confirm) => {
+          if (confirm) {
+            axios({
+              method: "post",
+              url: `${this.$store.getters.hostUrl}/api/admin/users/${action}/${userId}`,
+              headers: { "Content-Type": "multipart/form-data" },
+            }).then((response) => {
+              if (response.status !== 200) {
+                console.log(response.data);
+              } else {
+                this.$router.go();
+              }
+            });
+          }
+        },
+      });
+    },
     findScoreSeries(data) {
       data = data.sort((a, b) => {
         return new Date(a.solvedAt) < new Date(b.solvedAt) ? 1 : -1;
@@ -286,6 +360,7 @@ export default {
       } else {
         console.log(response.data);
         var data = response.data;
+        this.userDetails.id = data.id;
         this.userDetails.name = data.username;
         this.userDetails.score = data.score;
         this.userDetails.rank = data.rank;

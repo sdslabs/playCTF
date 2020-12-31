@@ -1,7 +1,7 @@
 .manageChalConfirmBox {
     .vc-container {
         width: 30%;
-        border-radius: 5px;
+        border-radius: 5rem/$root-base-size;
 
         .vc-text-grid {
             padding: 1.5rem;
@@ -9,9 +9,9 @@
             .vc-title {
                 @extend %font-style-bold;
                 text-align: left;
-                font-size: 24px;
-                line-height: 20px;
-                margin-bottom: 20px;
+                font-size: 24rem/$root-base-size;
+                line-height: 20rem/$root-base-size;
+                margin-bottom: 20rem/$root-base-size;
                 padding: 0
             }
 
@@ -20,8 +20,8 @@
                 font-family: 'Open Sans';
                 font-style: normal;
                 font-weight: normal;
-                font-size: 16px;
-                line-height: 24px;
+                font-size: 16rem/$root-base-size;
+                line-height: 24rem/$root-base-size;
                 padding: 0;
             }
         }
@@ -34,18 +34,19 @@
             padding-top: 0;
 
             .vc-btn {
-                margin-right: 20px;
-                width: 75px;
-                height: 44px;
+                margin-right: 20rem/$root-base-size;
+                height: 44rem/$root-base-size;
+                min-width: 75rem/$root-base-size;
                 @extend %font-style-bold;
                 background: #FFFFFF;
-                border: 1px solid #393939;
+                border: 1rem/$root-base-size solid #393939;
                 box-sizing: border-box;
-                border-radius: 4px;
+                border-radius: 4rem/$root-base-size;
                 text-align: center;
-                font-size: 14px;
-                line-height: 24px;
+                font-size: 14rem/$root-base-size;
+                line-height: 24rem/$root-base-size;
                 color: #393939;
+                padding: 0 20rem/$root-base-size;
 
             }
 
@@ -61,7 +62,7 @@
             }
 
             .vc-btn.left:hover{
-                border: 1px solid #FF6700;
+                border: 1rem/$root-base-size solid #FF6700;
                 color: #FF6700;
                 background: #FFFFFF;
             }

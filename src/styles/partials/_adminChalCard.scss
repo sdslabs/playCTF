@@ -67,7 +67,7 @@
 }
 
 .deployedLink{
-    border-left: 5px solid lightgreen;
+    border-left: 5px solid rgba(0, 144, 43, 0.7);
 }
 
 .purgedLink{
@@ -75,5 +75,5 @@
 }
 
 .undeployedLink{
-    border-left: 5px solid yellow;
+    border-left: 5px solid rgba(255, 174, 0, 0.7);
 }

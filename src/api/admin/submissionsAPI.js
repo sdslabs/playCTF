@@ -11,18 +11,20 @@ export default {
       tags.forEach((el) => {
         submissions[el.name] = 0
       })
-      var subs
-      if (user === null) {
-        subs = response.data
-      } else {
-        subs = response.data.filter((el) => {
-          return el.username === user
+      if (response.data !== null) {
+        var subs
+        if (user === null) {
+          subs = response.data
+        } else {
+          subs = response.data.filter((el) => {
+            return el.username === user
+          })
+        }
+        subs.forEach((el) => {
+          submissions[el.category]++
+          totalChal++
         })
       }
-      subs.forEach((el) => {
-        submissions[el.category]++
-        totalChal++
-      })
       return { totalChal: totalChal, category: submissions }
     }
   },
@@ -33,10 +35,13 @@ export default {
       return null
     } else {
       var data = response.data
+      if (data === null) {
+        return
+      }
       data = data.filter((el) => {
         return el.username === username
       })
-      return data;
+      return data
     }
   },
 }

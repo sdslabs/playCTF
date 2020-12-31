@@ -1,7 +1,7 @@
 .mainAdminContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 80%;
   margin-left: 10%;
 }
@@ -80,7 +80,6 @@
     border: 2rem/$root-base-size solid #593C8F;
   }
 }
-
 .adminEmptyData {
   text-align: left;
   @extend %font-style-bold;

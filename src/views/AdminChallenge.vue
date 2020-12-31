@@ -131,7 +131,11 @@
       :rows="rows"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
+      v-if="rows.length > 0"
     />
+    <div class="adminEmptyDataContainer" :style="{alignSelf:'flex-start' }" v-else>
+      <span class="adminEmptyData">No Submissions</span>
+    </div>
   </div>
 </template>
 <script>
@@ -230,6 +234,9 @@ export default {
     };
   },
   methods: {
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    },
     barData() {
       return {
         datasets: [
@@ -262,11 +269,12 @@ export default {
               url: `${this.$store.getters.hostUrl}/api/manage/challenge/`,
               data: postData,
               headers: { "Content-Type": "multipart/form-data" },
-            }).then((response) => {
+            }).then(async (response) => {
               if (response.status !== 200) {
                 console.log(response.data);
               } else {
                 if (action === "purge") {
+                  await this.sleep(5000);
                   this.$router.push("/admin/challenges");
                 } else {
                   this.$router.go();
