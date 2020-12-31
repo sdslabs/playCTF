@@ -51,7 +51,9 @@
       :maxElementPerPage="10"
     />
     <div class="adminEmptyDataContainer" v-else>
-      <span class="adminEmptyData">{{this.emptyDataMessage[this.statusFilter]}}</span>
+      <span class="adminEmptyData">{{
+        this.emptyDataMessage[this.statusFilter]
+      }}</span>
     </div>
   </div>
 </template>
@@ -63,13 +65,13 @@ export default {
   name: "AdminLeaderboard",
   data() {
     return {
-      emptyDataMessage:{
-        All:"No Users",
-        Active:"No Active Users",
-        Banned:"No Banned Users"
+      emptyDataMessage: {
+        All: "No Users",
+        Active: "No Active Users",
+        Banned: "No Banned Users"
       },
       sortFilter: "User Name",
-      statusFilter: "All",  
+      statusFilter: "All",
       searchQuery: null,
       ascending: false,
       sortColumn: "",
@@ -79,32 +81,32 @@ export default {
           label: "Rank",
           style: {
             width: "72px",
-            textAlign: "center",
-          },
+            textAlign: "center"
+          }
         },
         {
           id: 2,
           label: "User Name",
           style: {
             width: "120px",
-            paddingLeft: "20px",
-          },
+            paddingLeft: "20px"
+          }
         },
         {
           id: 3,
           label: "E-Mail Address",
           style: {
             textAlign: "left",
-            paddingLeft: "40px",
-          },
+            paddingLeft: "40px"
+          }
         },
         {
           id: 4,
           label: "Score",
           style: {
             width: "72px",
-            textAlign: "center",
-          },
+            textAlign: "center"
+          }
         },
         {
           id: 5,
@@ -112,16 +114,16 @@ export default {
           style: {
             width: "72px",
             textAlign: "center",
-            paddingRight: "20px",
-          },
-        },
+            paddingRight: "20px"
+          }
+        }
       ],
       displayUsers: [],
-      users: [],
+      users: []
     };
   },
   mounted() {
-    UsersService.getUsers().then((users) => {
+    UsersService.getUsers().then(users => {
       console.log(users);
       if (users === null) {
         console.log("error fetching users");
@@ -139,7 +141,7 @@ export default {
       if (value === "All") {
         this.displayUsers = this.users;
       } else {
-        this.displayUsers = this.users.filter((el) => {
+        this.displayUsers = this.users.filter(el => {
           return el.status == value;
         });
       }
@@ -170,7 +172,7 @@ export default {
 
       var ascending = this.ascending;
 
-      this.rows.sort(function (a, b) {
+      this.rows.sort(function(a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
@@ -192,7 +194,7 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
-    },
+    }
   },
   computed: {
     columns: function columns() {
@@ -203,16 +205,16 @@ export default {
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter((item) => {
+        return this.displayUsers.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.username.toLowerCase().includes(v));
+            .every(v => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    },
-  },
+    }
+  }
 };
 </script>

@@ -18,7 +18,9 @@ var _vuejsPaginate = _interopRequireDefault(require("vuejs-paginate"));
 
 var _index = _interopRequireDefault(require("./store/index"));
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : { default: obj };
+}
 
 _vue.default.config.productionTip = false;
 

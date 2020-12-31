@@ -119,7 +119,7 @@ const routes = [
     component: AdminConfigure,
     meta: {
       layout: "admin-layout"
-    },
+    }
   },
   {
     path: "/register",

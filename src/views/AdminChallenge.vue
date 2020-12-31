@@ -15,7 +15,7 @@
           :class="{
             deployed: status === 'Deployed',
             purged: status === 'Purged',
-            undeployed: status === 'Undeployed',
+            undeployed: status === 'Undeployed'
           }"
           >{{ status }}</span
         >
@@ -158,48 +158,48 @@ export default {
         {
           id: 1,
           label: "User Name",
-          style: { paddingLeft: "40px", textAlign: "left", width: "40%" },
+          style: { paddingLeft: "40px", textAlign: "left", width: "40%" }
         },
         {
           id: 2,
           label: "Time & Date (+5:30 UTC)",
-          style: { paddingRight: "40px", textAlign: "right", width: "60% " },
-        },
+          style: { paddingRight: "40px", textAlign: "right", width: "60% " }
+        }
       ],
       rows: [],
       barChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
         legend: {
-          display: false,
+          display: false
         },
         scales: {
           yAxes: [
             {
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               scaleLabel: {
                 display: true,
-                labelString: "Solve %",
+                labelString: "Solve %"
               },
               ticks: {
                 stepSize: 33,
                 min: 0,
-                max: 100,
-              },
-            },
-          ],
+                max: 100
+              }
+            }
+          ]
         },
         xAxes: [
           {
             gridLines: {
               color: "#575757",
-              drawOnChartArea: false,
-            },
-          },
-        ],
+              drawOnChartArea: false
+            }
+          }
+        ]
       },
       name: "",
       category: "",
@@ -215,31 +215,31 @@ export default {
           message: `Action will pause the participation of players.`,
           button: {
             yes: "Purge",
-            no: "Cancel",
-          },
+            no: "Cancel"
+          }
         },
         deploy: {
           title: "Deploy this Challenge?",
           message: `The challenge would go live after this action. The players would be able to attempt this challenge.`,
           button: {
             yes: "Deploy",
-            no: "Cancel",
-          },
+            no: "Cancel"
+          }
         },
         undeploy: {
           title: "Undeploy this Challenge?",
           message: `The challenge ${this.$route.params.id} will be marked as "Down for maintenance" after this section.`,
           button: {
             yes: "Undeploy",
-            no: "Cancel",
-          },
-        },
-      },
+            no: "Cancel"
+          }
+        }
+      }
     };
   },
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     barData() {
       return {
@@ -247,9 +247,9 @@ export default {
         datasets: [
           {
             backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [this.solvePercentage()],
-          },
-        ],
+            data: [this.solvePercentage()]
+          }
+        ]
       };
     },
     solvePercentage() {
@@ -264,9 +264,9 @@ export default {
          * Callback Function
          * @param {Boolean} confirm
          */
-        callback: (confirm) => {
+        callback: confirm => {
           if (confirm) {
-            ChalService.manageChalAction().then(async (response) => {
+            ChalService.manageChalAction().then(async response => {
               if (response.status !== 200) {
                 console.log(response.data);
               } else {
@@ -279,19 +279,19 @@ export default {
               }
             });
           }
-        },
+        }
       });
-    },
+    }
   },
   mounted() {
-    UsersService.getUserStats().then((response) => {
+    UsersService.getUserStats().then(response => {
       if (response.status !== 200) {
         console.log(response);
       } else {
         this.activeUsers = response.data.unbanned_users;
       }
     });
-    ChalService.fetchChallengeByName(this.$route.params.id).then((response) => {
+    ChalService.fetchChallengeByName(this.$route.params.id).then(response => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
@@ -310,24 +310,24 @@ export default {
       }
     });
 
-    SubmissionService.getSubmissions().then((response) => {
+    SubmissionService.getSubmissions().then(response => {
       if (response.status !== 200) {
         console.log(response.data);
         return;
       } else {
-        response.data.forEach((element) => {
+        response.data.forEach(element => {
           if (element.name == this.$route.params.id) {
             var timeData = moment(element.solvedAt).format(
               "h:mm:ss; MMMM Do, YYYY"
             );
             this.rows.push({
               username: element.username,
-              timeDateRight: timeData,
+              timeDateRight: timeData
             });
           }
         });
       }
     });
-  },
+  }
 };
 </script>

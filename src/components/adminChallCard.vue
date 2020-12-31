@@ -3,11 +3,11 @@
     :to="'/admin/challenges/' + challenge.Name"
     :class="[
       {
-        'deployedLink': challenge.Status === 'Deployed',
-        'undeployedLink': challenge.Status === 'Undeployed',
-        'purgedLink': challenge.Status === 'Purged',
+        deployedLink: challenge.Status === 'Deployed',
+        undeployedLink: challenge.Status === 'Undeployed',
+        purgedLink: challenge.Status === 'Purged'
       },
-      'adminChalLink',
+      'adminChalLink'
     ]"
   >
     <div class="adChalItem" @click="redirect(challenge.Name)">
@@ -31,7 +31,7 @@ export default {
   methods: {
     redirect(id) {
       console.log(id);
-    },
-  },
+    }
+  }
 };
 </script>

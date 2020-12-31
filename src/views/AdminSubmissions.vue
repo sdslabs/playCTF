@@ -7,12 +7,12 @@
       :rows="rows"
       :links="[
         { col: 'challenge', redirect: '/admin/challenges/' },
-        { col: 'username', redirect: '/admin/users/' },
+        { col: 'username', redirect: '/admin/users/' }
       ]"
       :maxElementPerPage="20"
       v-if="this.rows.length > 0"
     />
-    <div class="adminEmptyDataContainer" :style="{marginTop:'2rem'}" v-else>
+    <div class="adminEmptyDataContainer" :style="{ marginTop: '2rem' }" v-else>
       <span class="adminEmptyData">No Submissions</span>
     </div>
   </div>
@@ -25,7 +25,7 @@ import moment from "moment";
 export default {
   name: "AdminSubmissions",
   components: {
-    adminTable,
+    adminTable
   },
   data() {
     return {
@@ -36,25 +36,25 @@ export default {
         {
           id: 1,
           label: "User Name",
-          style: { paddingLeft: "40px", textAlign: "left", width: "25%" },
+          style: { paddingLeft: "40px", textAlign: "left", width: "25%" }
         },
         {
           id: 2,
           label: "Challenge",
-          style: { textAlign: "left", width: "25%", paddingLeft: "40px" },
+          style: { textAlign: "left", width: "25%", paddingLeft: "40px" }
         },
         {
           id: 3,
           label: "Category",
-          style: { textAlign: "center", width: "10%" },
+          style: { textAlign: "center", width: "10%" }
         },
         {
           id: 4,
           label: "Time & Date (+5:30 UTC)",
-          style: { paddingLeft: "20px", textAlign: "left", width: "40% " },
-        },
+          style: { paddingLeft: "20px", textAlign: "left", width: "40% " }
+        }
       ],
-      rows: [],
+      rows: []
     };
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
 
       var ascending = this.ascending;
 
-      this.rows.sort(function (a, b) {
+      this.rows.sort(function(a, b) {
         if (a[col] > b[col]) {
           return ascending ? 1 : -1;
         } else if (a[col] < b[col]) {
@@ -90,7 +90,7 @@ export default {
     },
     change_page: function change_page(page) {
       this.currentPage = page;
-    },
+    }
   },
   computed: {
     columns: function columns() {
@@ -98,27 +98,26 @@ export default {
         return [];
       }
       return Object.keys(this.rows[0]);
-    },
+    }
   },
   mounted() {
-    SubmissionService.getSubmissions()
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          response.data.forEach((element) => {
-            var timeData = moment(element.solvedAt).format(
-              "h:mm:ss; MMMM Do, YYYY"
-            );
-            this.rows.push({
-              username: element.username,
-              challenge: element.name,
-              category: element.category,
-              timeDate: timeData,
-            });
+    SubmissionService.getSubmissions().then(response => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        response.data.forEach(element => {
+          var timeData = moment(element.solvedAt).format(
+            "h:mm:ss; MMMM Do, YYYY"
+          );
+          this.rows.push({
+            username: element.username,
+            challenge: element.name,
+            category: element.category,
+            timeDate: timeData
           });
-        }
-      });
-  },
+        });
+      }
+    });
+  }
 };
 </script>

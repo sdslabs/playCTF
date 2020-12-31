@@ -139,7 +139,7 @@ export default {
   components: {
     LineGraph,
     adminTable,
-    PieChart,
+    PieChart
   },
   data() {
     return {
@@ -149,72 +149,72 @@ export default {
           message: `Action will pause participation of player.`,
           button: {
             yes: "Ban",
-            no: "Cancel",
-          },
+            no: "Cancel"
+          }
         },
         unban: {
           title: "Remove ban from this player?",
           message: `The action will resume participation of player.`,
           button: {
             yes: "Remove ban",
-            no: "Cancel",
-          },
-        },
+            no: "Cancel"
+          }
+        }
       },
       scoreSeries: {},
       lineGraphOptions: {
         layout: {
-          padding: 10,
+          padding: 10
         },
         responsive: true,
         maintainAspectRatio: true,
         legend: {
-          display: false,
+          display: false
         },
         scales: {
           xAxes: [
             {
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               scaleLabel: {
                 display: true,
-                labelString: "Time",
+                labelString: "Time"
               },
               ticks: {
                 source: "auto",
                 fontColor: "#393939",
                 fontFamily: "Roboto",
-                fontStyle: "normal",
+                fontStyle: "normal"
               },
               type: "time",
               distribution: "linear",
               time: {
-                unit: "hour",
-              },
-            },
+                unit: "hour"
+              }
+            }
           ],
           yAxes: [
             {
               scaleLabel: {
                 display: true,
-                labelString: "Score",
+                labelString: "Score"
               },
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               ticks: {
                 source: "auto",
                 fontColor: "#393939",
                 fontFamily: "Roboto",
                 fontStyle: "normal",
-                min: 0,
-              },
-            },
-          ],
-        },
+                min: 0
+              }
+            }
+          ]
+        }
       },
       submissions: {},
       chartOptions: {
@@ -224,35 +224,35 @@ export default {
         legend: {
           position: "right",
           labels: {
-            boxWidth: 20,
-          },
-        },
+            boxWidth: 20
+          }
+        }
       },
       userDetails: {
         name: "",
         rank: "",
         score: "",
         active: true,
-        id: null,
+        id: null
       },
       rows: [],
       tableCols: [
         {
           id: 1,
           label: "Challenge",
-          style: { textAlign: "left", width: "35%", paddingLeft: "40px" },
+          style: { textAlign: "left", width: "35%", paddingLeft: "40px" }
         },
         {
           id: 2,
           label: "Category",
-          style: { textAlign: "center", width: "20%" },
+          style: { textAlign: "center", width: "20%" }
         },
         {
           id: 3,
           label: "Time & Date (+5:30 UTC)",
-          style: { paddingRight: "40px", textAlign: "right", width: "45%" },
-        },
-      ],
+          style: { paddingRight: "40px", textAlign: "right", width: "45%" }
+        }
+      ]
     };
   },
   methods: {
@@ -265,9 +265,9 @@ export default {
          * Callback Function
          * @param {Boolean} confirm
          */
-        callback: (confirm) => {
+        callback: confirm => {
           if (confirm) {
-            UsersService.manageUser(userId, action).then((response) => {
+            UsersService.manageUser(userId, action).then(response => {
               if (response.status !== 200) {
                 console.log(response.data);
               } else {
@@ -275,7 +275,7 @@ export default {
               }
             });
           }
-        },
+        }
       });
     },
     findScoreSeries(data) {
@@ -289,14 +289,14 @@ export default {
           timeScores[0] = this.userDetails.score;
         } else {
           var currentScore = this.userDetails.score;
-          data.slice(0, index).forEach((sub) => {
+          data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[index] = {
           x: new Date(el.solvedAt),
-          y: timeScores[index],
+          y: timeScores[index]
         };
       });
       return scoreSeries;
@@ -311,18 +311,18 @@ export default {
             lineTension: 0,
             pointRadius: 5,
             borderWidth: 1,
-            data: this.scoreSeries,
-          },
-        ],
+            data: this.scoreSeries
+          }
+        ]
       };
     },
     categoryChartData() {
       var labels = [];
       var data = [];
-      this.chalTags.forEach((el) => {
+      this.chalTags.forEach(el => {
         labels.push(el.name);
       });
-      labels.forEach((el) => {
+      labels.forEach(el => {
         data.push(this.submissions.category[el]);
       });
       return {
@@ -331,14 +331,14 @@ export default {
         datasets: [
           {
             backgroundColor: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
-            data,
-          },
-        ],
+            data
+          }
+        ]
       };
-    },
+    }
   },
   mounted() {
-    ChalService.getChallenges().then((response) => {
+    ChalService.getChallenges().then(response => {
       if (response === null) {
         console.log("Error fetching challenges");
         return;
@@ -347,7 +347,7 @@ export default {
         SubmissionService.getSubStats(
           this.chalTags,
           this.$route.params.username
-        ).then((response) => {
+        ).then(response => {
           if (response === null) {
             console.log("error fetching submission stats");
           } else {
@@ -358,7 +358,7 @@ export default {
       }
     });
     UsersService.getUserByUsername(this.$route.params.username).then(
-      (response) => {
+      response => {
         if (response.status !== 200) {
           console.log(response.data);
         } else {
@@ -370,15 +370,15 @@ export default {
           this.userDetails.rank = data.rank;
           this.userDetails.active = data.status === 0;
           SubmissionService.getUserSubs(this.$route.params.username).then(
-            (subData) => {
-              subData.forEach((element) => {
+            subData => {
+              subData.forEach(element => {
                 var timeData = moment(element.solvedAt).format(
                   "h:mm:ss; MMMM Do, YYYY"
                 );
                 this.rows.push({
                   challenge: element.name,
                   category: element.category,
-                  timeDateRight: timeData,
+                  timeDateRight: timeData
                 });
               });
               this.scoreSeries = this.findScoreSeries(subData);
@@ -387,6 +387,6 @@ export default {
         }
       }
     );
-  },
+  }
 };
 </script>

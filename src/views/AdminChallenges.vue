@@ -53,7 +53,7 @@
       </div>
       <div
         class="adminEmptyDataContainer"
-        :style="{marginTop:'2rem'}"
+        :style="{ marginTop: '2rem' }"
         v-else
       >
         <span class="adminEmptyData">No Challenges available</span>
@@ -78,22 +78,22 @@ export default {
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 },
+        { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"],
+      statusFilterOptions: ["All", "Deployed", "Undeployed"]
     };
   },
   mounted() {
-    ChalService.getChallenges().then((response) => {
+    ChalService.getChallenges().then(response => {
       if (response === null) {
         console.log("Error fetching All challenges");
-        return
+        return;
       } else {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.categoryFilterOptions = [
           ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions,
+          ...response.categoryFilterOptions
         ];
         this.displayChallenges = response.displayChallenges;
       }
@@ -105,7 +105,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.Status == value;
         });
       }
@@ -144,13 +144,11 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.Category == value;
         });
       }
-    },
-  },
+    }
+  }
 };
 </script>
-
-

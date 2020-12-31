@@ -19,7 +19,7 @@ export default new Vuex.Store({
       logo: ""
     },
     hostUrl: "http://localhost:5005",
-    challengeHostUrl:"http://challenges.beast.com",
+    challengeHostUrl: "http://challenges.beast.com"
   },
   mutations: {
     updateCurrentPage(state, page) {

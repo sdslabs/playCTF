@@ -41,7 +41,7 @@
           :class="{
             adminEnabledSubmitButton: canSubmit,
             adminInactiveSubmitButton: !canSubmit && !subProcessing,
-            adminProcSubmitButton: subProcessing,
+            adminProcSubmitButton: subProcessing
           }"
           :disabled="!canSubmit"
           v-on:click="onSubmit"
@@ -72,7 +72,7 @@ import NotifService from "../api/admin/notificationsAPI";
 export default {
   name: "AdminNotfications",
   components: {
-    NotificationTab,
+    NotificationTab
   },
   data() {
     return {
@@ -83,11 +83,11 @@ export default {
       description: "",
       title: "",
       checked: false,
-      notifications: [],
+      notifications: []
     };
   },
   mounted() {
-    NotifService.getAllNotifs().then((response) => {
+    NotifService.getAllNotifs().then(response => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
@@ -102,11 +102,11 @@ export default {
     });
   },
   methods: {
-    isNew: function (notification) {
+    isNew: function(notification) {
       this.duration(notification);
       return this.hours < 1;
     },
-    duration: function (notification) {
+    duration: function(notification) {
       if (notification.isNew) {
         return "Just a moment";
       }
@@ -119,7 +119,7 @@ export default {
       else if (this.minutes > 0) return this.minutes + " minutes";
       else if (this.seconds > 0) return this.seconds + " seconds";
     },
-    calcTime: function (passTime) {
+    calcTime: function(passTime) {
       this.seconds = Math.floor((passTime % (1000 * 60)) / 1000);
       this.minutes = Math.floor((passTime % (1000 * 60 * 60)) / (1000 * 60));
       this.hours = Math.floor(
@@ -134,16 +134,16 @@ export default {
       this.subProcessing = true;
       var self = this;
       NotifService.submitNotif(this.title, this.description)
-        .then((response) => {
+        .then(response => {
           console.log(response);
           self.notifications = [
             {
               title: self.title,
               desc: self.description,
               updated_at: "Just Now",
-              isNew: true,
+              isNew: true
             },
-            ...self.notifications,
+            ...self.notifications
           ];
           self.title = "";
           self.description = "";
@@ -152,7 +152,7 @@ export default {
           self.subProcessing = false;
           self.showSuccess = true;
         })
-        .catch(response=> {
+        .catch(response => {
           console.log(response);
           self.title = "";
           self.description = "";
@@ -162,18 +162,18 @@ export default {
           self.showFail = true;
         });
     },
-    enter: function () {
+    enter: function() {
       var self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
-    },
+    }
   },
   watch: {
-    title: function () {
+    title: function() {
       this.canSubmit = this.title.length > 0 && this.checked;
-    },
-  },
+    }
+  }
 };
 </script>

@@ -1,8 +1,8 @@
 <script>
-import {mixins,Bar} from "vue-chartjs";
+import { mixins, Bar } from "vue-chartjs";
 export default {
   name: "BarGraphVertical",
-  extends:Bar,
+  extends: Bar,
   mixins: [mixins.reactiveProp],
   props: ["chartData", "options"],
   watch: {

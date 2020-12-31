@@ -29,7 +29,12 @@
           }}</span>
           is the most solved challenge with
           <span class="adminBold"
-            >{{ challenges.maxSolvedChal.solves === -1 ? "-":challenges.maxSolvedChal.solves}} ({{
+            >{{
+              challenges.maxSolvedChal.solves === -1
+                ? "-"
+                : challenges.maxSolvedChal.solves
+            }}
+            ({{
               challenges.maxSolvedChal.solves === -1
                 ? "-"
                 : (challenges.maxSolvedChal.solves /
@@ -133,7 +138,7 @@ export default {
   name: "Admin",
   components: {
     PieChart,
-    BarGraph,
+    BarGraph
   },
   methods: {
     getBarData(tag) {
@@ -143,7 +148,7 @@ export default {
       }
       var labels = [];
       var data = [];
-      dataSolves.forEach((el) => {
+      dataSolves.forEach(el => {
         labels.push(el.username);
         console.log(this.chalCategory[tag]);
         data.push((el.solves / this.chalCategory[tag].total) * 100);
@@ -158,11 +163,11 @@ export default {
               "#6269AB",
               "#59ABDA",
               "#81C1D6",
-              "#6E8A8E",
+              "#6E8A8E"
             ],
-            data,
-          },
-        ],
+            data
+          }
+        ]
       };
     },
     changeFilter(value) {
@@ -171,10 +176,10 @@ export default {
     categoryChartData() {
       var labels = [];
       var data = [];
-      this.chalTags.forEach((el) => {
+      this.chalTags.forEach(el => {
         labels.push(el.name);
       });
-      labels.forEach((el) => {
+      labels.forEach(el => {
         data.push(this.submissions.category[el]);
       });
       return {
@@ -183,14 +188,14 @@ export default {
         datasets: [
           {
             backgroundColor: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
-            data,
-          },
-        ],
+            data
+          }
+        ]
       };
-    },
+    }
   },
   mounted() {
-    UsersService.getUserStats().then((response) => {
+    UsersService.getUserStats().then(response => {
       if (response.status !== 200) {
         console.log(response);
       } else {
@@ -198,7 +203,7 @@ export default {
       }
     });
 
-    UsersService.getUsers().then((users) => {
+    UsersService.getUsers().then(users => {
       if (users === null) {
         console.log("error fetching users");
         return;
@@ -209,7 +214,7 @@ export default {
         })[0];
       }
     });
-    ChalService.getChalStats().then((response) => {
+    ChalService.getChalStats().then(response => {
       if (response === null) {
         console.log("Error fetching chal stats");
         return;
@@ -217,13 +222,13 @@ export default {
         this.challenges = response;
       }
     });
-    ChalService.getChallenges().then((response) => {
+    ChalService.getChallenges().then(response => {
       if (response === null) {
         console.log("Error fetching challenges");
         return;
       } else {
         this.chalTags = response.categoryFilterOptions;
-        SubmissionService.getSubStats(this.chalTags, null).then((response) => {
+        SubmissionService.getSubStats(this.chalTags, null).then(response => {
           if (response === null) {
             console.log("error fetching submission stats");
           } else {
@@ -231,7 +236,7 @@ export default {
             console.log(this.submissions);
           }
         });
-        ChalService.getChalCategory(this.chalTags).then((response) => {
+        ChalService.getChalCategory(this.chalTags).then(response => {
           if (response === null) {
             console.log("Error fetching challenge category data");
             return;
@@ -248,7 +253,7 @@ export default {
       challenges: {},
       leader: {
         username: "-",
-        score: "-",
+        score: "-"
       },
       submissions: {},
       chalCategory: {},
@@ -260,22 +265,22 @@ export default {
         legend: {
           position: "right",
           labels: {
-            boxWidth: 20,
-          },
-        },
+            boxWidth: 20
+          }
+        }
       },
       barChartOptions: {
         responsive: true,
         maintainAspectRatio: true,
         legend: {
-          display: false,
+          display: false
         },
         scales: {
           xAxes: [
             {
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               ticks: {
                 stepSize: 20,
@@ -283,25 +288,25 @@ export default {
                 max: 100,
                 fontColor: "#393939",
                 fontFamily: "Roboto",
-                fontStyle: "normal",
+                fontStyle: "normal"
               },
               scaleLabel: {
                 display: true,
-                labelString: "Solve %",
-              },
-            },
-          ],
+                labelString: "Solve %"
+              }
+            }
+          ]
         },
         yAxes: [
           {
             gridLines: {
               color: "#575757",
-              drawOnChartArea: false,
-            },
-          },
-        ],
-      },
+              drawOnChartArea: false
+            }
+          }
+        ]
+      }
     };
-  },
+  }
 };
 </script>

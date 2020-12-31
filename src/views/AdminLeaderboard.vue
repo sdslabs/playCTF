@@ -8,7 +8,7 @@
       :options="this.lineGraphOptions"
       class="lineGraph"
       :height="150"
-      v-if="this.users.length>0 && this.scoreSeries.length>0"
+      v-if="this.users.length > 0 && this.scoreSeries.length > 0"
     />
     <div class="adminLbSearchDiv">
       <div class="adminSearchBar">
@@ -30,10 +30,7 @@
       :maxElementPerPage="10"
       v-if="resultQuery.length > 0"
     />
-    <div
-      class="adminEmptyDataContainer"
-      v-else
-    >
+    <div class="adminEmptyDataContainer" v-else>
       <span class="adminEmptyData">No Users</span>
     </div>
   </div>
@@ -52,7 +49,7 @@ export default {
       scoreSeries: [],
       lineGraphOptions: {
         layout: {
-          padding: 10,
+          padding: 10
         },
         legend: {
           display: true,
@@ -62,8 +59,8 @@ export default {
             fontColor: "#191919",
             fontSize: 12,
             lineHeight: 12,
-            boxWidth: 20,
-          },
+            boxWidth: 20
+          }
         },
         responsive: true,
         maintainAspectRatio: true,
@@ -72,45 +69,45 @@ export default {
             {
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               scaleLabel: {
                 display: true,
-                labelString: "Time",
+                labelString: "Time"
               },
               ticks: {
                 source: "auto",
                 fontColor: "#393939",
                 fontFamily: "Roboto",
-                fontStyle: "normal",
+                fontStyle: "normal"
               },
               type: "time",
               distribution: "linear",
               time: {
-                unit: "hour",
-              },
-            },
+                unit: "hour"
+              }
+            }
           ],
           yAxes: [
             {
               scaleLabel: {
                 display: true,
-                labelString: "Score",
+                labelString: "Score"
               },
               gridLines: {
                 color: "#575757",
-                drawOnChartArea: false,
+                drawOnChartArea: false
               },
               ticks: {
                 source: "auto",
                 fontColor: "#393939",
                 fontFamily: "Roboto",
                 fontStyle: "normal",
-                min: 0,
-              },
-            },
-          ],
-        },
+                min: 0
+              }
+            }
+          ]
+        }
       },
       searchQuery: "",
       ascending: false,
@@ -121,8 +118,8 @@ export default {
           label: "Rank",
           style: {
             textAlign: "center",
-            width: "10%",
-          },
+            width: "10%"
+          }
         },
         {
           id: 2,
@@ -130,20 +127,20 @@ export default {
           style: {
             width: "75%",
             paddingLeft: "40px",
-            textAlign: "left",
-          },
+            textAlign: "left"
+          }
         },
         {
           id: 3,
           label: "Score",
           style: {
             textAlign: "center",
-            width: "15%",
-          },
-        },
+            width: "15%"
+          }
+        }
       ],
       users: [],
-      displayUsers: [],
+      displayUsers: []
     };
   },
   methods: {
@@ -170,23 +167,23 @@ export default {
           pointRadius: 5,
           borderWidth: 1,
           fill: false,
-          data: this.scoreSeries[index].series,
+          data: this.scoreSeries[index].series
         });
       });
       return {
         label: "Leaderboard",
-        datasets,
+        datasets
       };
     },
     findScoreSeries(users) {
-      users.forEach((user) => {
-        SubmissionService.getUserSubs(user.username).then((data) => {
-          if(data===null || data===undefined){
-            return
+      users.forEach(user => {
+        SubmissionService.getUserSubs(user.username).then(data => {
+          if (data === null || data === undefined) {
+            return;
           }
           this.scoreSeries.push({
             username: user.username,
-            series: this.findUserScoreSeries(data, user.score),
+            series: this.findUserScoreSeries(data, user.score)
           });
         });
       });
@@ -202,14 +199,14 @@ export default {
           timeScores[0] = score;
         } else {
           var currentScore = score;
-          data.slice(0, index).forEach((sub) => {
+          data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[index] = {
           x: new Date(el.solvedAt),
-          y: timeScores[index],
+          y: timeScores[index]
         };
       });
       return scoreSeries;
@@ -230,7 +227,7 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
-    },
+    }
   },
   computed: {
     columns: function columns() {
@@ -241,31 +238,31 @@ export default {
     },
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter((item) => {
+        return this.displayUsers.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.username.toLowerCase().includes(v));
+            .every(v => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    },
+    }
   },
   mounted() {
-    UsersService.getUsers().then((users) => {
+    UsersService.getUsers().then(users => {
       if (users === null) {
         console.log("error fetching users");
         return;
       }
-      if(users.length === 0){
+      if (users.length === 0) {
         return;
       }
-      users.forEach((element) => {
+      users.forEach(element => {
         this.users.push({
           rank: element.rank,
           username: element.username,
-          score: element.score,
+          score: element.score
         });
       });
       this.displayUsers = this.users.sort((a, b) => {
@@ -279,6 +276,6 @@ export default {
       }
       this.findScoreSeries(leaders);
     });
-  },
+  }
 };
 </script>
