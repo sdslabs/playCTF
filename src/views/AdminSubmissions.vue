@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import SubmissionService from "../api/admin/submissionsAPI";
 import adminTable from "../components/adminTable.vue";
 import moment from "moment";
 export default {
@@ -101,8 +101,7 @@ export default {
     },
   },
   mounted() {
-    axios
-      .post(`${this.$store.getters.hostUrl}/api/info/submissions`)
+    SubmissionService.getSubmissions()
       .then((response) => {
         if (response.status !== 200) {
           console.log(response.data);

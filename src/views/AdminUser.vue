@@ -11,11 +11,27 @@
           </div>
           <div class="rankScore">
             <div class="rank">
-              <span class="value" :style="this.userDetails.active?{color:'#191919'}:{color:'rgba(25, 25, 25, 0.57)'}">{{ userDetails.rank }}</span>
+              <span
+                class="value"
+                :style="
+                  this.userDetails.active
+                    ? { color: '#191919' }
+                    : { color: 'rgba(25, 25, 25, 0.57)' }
+                "
+                >{{ userDetails.rank }}</span
+              >
               <span class="field">Rank</span>
             </div>
             <div class="score">
-              <span class="value" :style="this.userDetails.active?{color:'#191919'}:{color:'rgba(25, 25, 25, 0.57)'}">{{ userDetails.score }}</span>
+              <span
+                class="value"
+                :style="
+                  this.userDetails.active
+                    ? { color: '#191919' }
+                    : { color: 'rgba(25, 25, 25, 0.57)' }
+                "
+                >{{ userDetails.score }}</span
+              >
               <span class="field">Score</span>
             </div>
           </div>
@@ -112,12 +128,12 @@
 </template>
 <script>
 import LineGraph from "../components/LineGraph.vue";
-import axios from "axios";
 import adminTable from "../components/adminTable";
 import moment from "moment";
 import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
+import UsersService from "../api/admin/usersAPI";
 export default {
   name: "AdminUser",
   components: {
@@ -251,11 +267,7 @@ export default {
          */
         callback: (confirm) => {
           if (confirm) {
-            axios({
-              method: "post",
-              url: `${this.$store.getters.hostUrl}/api/admin/users/${action}/${userId}`,
-              headers: { "Content-Type": "multipart/form-data" },
-            }).then((response) => {
+            UsersService.manageUser(userId, action).then((response) => {
               if (response.status !== 200) {
                 console.log(response.data);
               } else {
@@ -345,43 +357,36 @@ export default {
         });
       }
     });
-    var postData = new FormData();
-    postData.append("username", this.$route.params.username);
-    axios({
-      method: "post",
-      url: `${this.$store.getters.hostUrl}/api/info/user`,
-      data: postData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    }).then((response) => {
-      if (response.status !== 200) {
-        console.log(response.data);
-      } else {
-        console.log(response.data);
-        var data = response.data;
-        this.userDetails.id = data.id;
-        this.userDetails.name = data.username;
-        this.userDetails.score = data.score;
-        this.userDetails.rank = data.rank;
-        this.userDetails.active = data.status === 0;
-        SubmissionService.getUserSubs(this.$route.params.username).then(
-          (subData) => {
-            subData.forEach((element) => {
-              var timeData = moment(element.solvedAt).format(
-                "h:mm:ss; MMMM Do, YYYY"
-              );
-              this.rows.push({
-                challenge: element.name,
-                category: element.category,
-                timeDateRight: timeData,
+    UsersService.getUserByUsername(this.$route.params.username).then(
+      (response) => {
+        if (response.status !== 200) {
+          console.log(response.data);
+        } else {
+          console.log(response.data);
+          var data = response.data;
+          this.userDetails.id = data.id;
+          this.userDetails.name = data.username;
+          this.userDetails.score = data.score;
+          this.userDetails.rank = data.rank;
+          this.userDetails.active = data.status === 0;
+          SubmissionService.getUserSubs(this.$route.params.username).then(
+            (subData) => {
+              subData.forEach((element) => {
+                var timeData = moment(element.solvedAt).format(
+                  "h:mm:ss; MMMM Do, YYYY"
+                );
+                this.rows.push({
+                  challenge: element.name,
+                  category: element.category,
+                  timeDateRight: timeData,
+                });
               });
-            });
-            this.scoreSeries = this.findScoreSeries(subData);
-          }
-        );
+              this.scoreSeries = this.findScoreSeries(subData);
+            }
+          );
+        }
       }
-    });
+    );
   },
 };
 </script>

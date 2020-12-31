@@ -35,8 +35,27 @@ export default {
     return allUsers
   },
 
+  async getUserByUsername(username) {
+    var postData = new FormData()
+    postData.append('username', username)
+    return await axiosInstance({
+      method: 'post',
+      url: `/api/info/user`,
+      data: postData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
+  },
   async getUserStats() {
-    let response=await axiosInstance.post(`/api/admin/statistics`)
-    return response;
+    return await axiosInstance.post(`/api/admin/statistics`)
+  },
+
+  async manageUser(userId, action) {
+    return await axiosInstance({
+      method: 'post',
+      url: `/api/admin/users/${action}/${userId}`,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
   },
 }

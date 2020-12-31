@@ -1,8 +1,11 @@
 import { axiosInstance } from '../axiosInstance.js'
 
 export default {
+  async getSubmissions() {
+    return await axiosInstance.post(`/api/info/submissions`)
+  },
   async getSubStats(tags, user) {
-    let response = await axiosInstance.post(`/api/info/submissions`)
+    let response=await this.getSubmissions();
     if (response.status !== 200) {
       return null
     } else {
@@ -30,7 +33,7 @@ export default {
   },
 
   async getUserSubs(username) {
-    let response = await axiosInstance.post(`/api/info/submissions`)
+    let response=await this.getSubmissions();
     if (response.status !== 200) {
       return null
     } else {

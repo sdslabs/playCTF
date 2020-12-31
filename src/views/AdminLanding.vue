@@ -29,8 +29,8 @@
           }}</span>
           is the most solved challenge with
           <span class="adminBold"
-            >{{ challenges.maxSolvedChal.solves }} ({{
-              challenges.maxSolvedChal.solves === "-"
+            >{{ challenges.maxSolvedChal.solves === -1 ? "-":challenges.maxSolvedChal.solves}} ({{
+              challenges.maxSolvedChal.solves === -1
                 ? "-"
                 : (challenges.maxSolvedChal.solves /
                     users.total_registered_users) *
@@ -44,8 +44,13 @@
           }}</span>
           is the least solved challenge with
           <span class="adminBold"
-            >{{ challenges.leastSolvedChal.solves }} ({{
-              challenges.leastSolvedChal.solves === "-"
+            >{{
+              challenges.leastSolvedChal.solves === -1
+                ? "-"
+                : challenges.leastSolvedChal.solves
+            }}
+            ({{
+              challenges.leastSolvedChal.solves === -1
                 ? "-"
                 : (challenges.leastSolvedChal.solves /
                     users.total_registered_users) *
@@ -140,8 +145,6 @@ export default {
       var data = [];
       dataSolves.forEach((el) => {
         labels.push(el.username);
-        console.log("Aviral");
-        console.log(el);
         console.log(this.chalCategory[tag]);
         data.push((el.solves / this.chalCategory[tag].total) * 100);
       });
@@ -164,16 +167,6 @@ export default {
     },
     changeFilter(value) {
       this.categoryFilter = value;
-      this.categoryChartData = {
-        hoverBorderWidth: 10,
-        labels: ["Misc", "PWN", "Web", "Crypto"],
-        datasets: [
-          {
-            backgroundColor: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
-            data: this.attempts[value].data,
-          },
-        ],
-      };
     },
     categoryChartData() {
       var labels = [];
@@ -254,8 +247,8 @@ export default {
       users: {},
       challenges: {},
       leader: {
-        username:"-",
-        score:"-"
+        username: "-",
+        score: "-",
       },
       submissions: {},
       chalCategory: {},

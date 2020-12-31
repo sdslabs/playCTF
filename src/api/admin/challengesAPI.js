@@ -2,7 +2,7 @@ import { axiosInstance } from '../axiosInstance.js'
 
 export default {
   async getChalCategory(tags) {
-    let response = await axiosInstance.post(`/api/info/available`)
+    let response = await this.fetchAllChallenges()
     if (response.status !== 200) {
       return null
     } else {
@@ -46,7 +46,7 @@ export default {
     }
   },
   async getChalStats() {
-    let response = await axiosInstance.post(`/api/info/available`)
+    let response = await this.fetchAllChallenges()
     if (response.status !== 200) {
       return null
     } else {
@@ -55,8 +55,8 @@ export default {
       var purgedChal = 0
       var maxSolves = 0
       var leastSolves = 1000000000000000
-      var leastSolvedChal = {name:"-",solves:"-"}
-      var maxSolvedChal = {name:"-",solves:"-"}
+      var leastSolvedChal = { name: '-', solves: -1 }
+      var maxSolvedChal = { name: '-', solves: -1 }
       response.data.forEach((el) => {
         switch (el.Status) {
           case 'Deployed':
@@ -94,7 +94,7 @@ export default {
   },
 
   async getChallenges() {
-    let response = await axiosInstance.post(`/api/info/available`)
+    let response = await this.fetchAllChallenges()
     if (response.status !== 200) {
       return null
     } else {
@@ -123,5 +123,33 @@ export default {
         displayChallenges,
       }
     }
+  },
+
+  async fetchAllChallenges() {
+    return await axiosInstance.post(`/api/info/available`)
+  },
+  async fetchChallengeByName(name) {
+    var postData = new FormData()
+    postData.append('name', name)
+    let response = await axiosInstance({
+      method: 'post',
+      url: `/api/info/challenge/info`,
+      data: postData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response
+  },
+
+  async manageChalAction(name, action) {
+    var postData = new FormData()
+    postData.append('name', name)
+    postData.append('action', action)
+    let response = await axiosInstance({
+      method: 'post',
+      url: `/api/manage/challenge/`,
+      data: postData,
+      headers: { 'Content-Type': 'multipart/form-data' },
+    })
+    return response
   },
 }

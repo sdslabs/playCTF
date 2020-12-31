@@ -133,17 +133,22 @@
       :maxElementPerPage="10"
       v-if="rows.length > 0"
     />
-    <div class="adminEmptyDataContainer" :style="{alignSelf:'flex-start' }" v-else>
+    <div
+      class="adminEmptyDataContainer"
+      :style="{ alignSelf: 'flex-start' }"
+      v-else
+    >
       <span class="adminEmptyData">No Submissions</span>
     </div>
   </div>
 </template>
 <script>
-import axios from "axios";
 import BarGraphVertical from "../components/BarGraphVertical.vue";
 import AdminTable from "../components/adminTable.vue";
 import moment from "moment";
 import UsersService from "../api/admin/usersAPI";
+import SubmissionService from "../api/admin/submissionsAPI";
+import ChalService from "../api/admin/challengesAPI";
 export default {
   components: { BarGraphVertical, AdminTable },
   name: "AdminChallenge",
@@ -172,7 +177,8 @@ export default {
           yAxes: [
             {
               gridLines: {
-                display: false,
+                color: "#575757",
+                drawOnChartArea: false,
               },
               scaleLabel: {
                 display: true,
@@ -189,10 +195,8 @@ export default {
         xAxes: [
           {
             gridLines: {
-              display: false,
-            },
-            legend: {
-              display: false,
+              color: "#575757",
+              drawOnChartArea: false,
             },
           },
         ],
@@ -239,10 +243,11 @@ export default {
     },
     barData() {
       return {
+        labels: ["Solve Percentage"],
         datasets: [
           {
             backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [(this.solves / this.activeUsers) * 100],
+            data: [this.solvePercentage()],
           },
         ],
       };
@@ -261,15 +266,7 @@ export default {
          */
         callback: (confirm) => {
           if (confirm) {
-            var postData = new FormData();
-            postData.append("name", name);
-            postData.append("action", action);
-            axios({
-              method: "post",
-              url: `${this.$store.getters.hostUrl}/api/manage/challenge/`,
-              data: postData,
-              headers: { "Content-Type": "multipart/form-data" },
-            }).then(async (response) => {
+            ChalService.manageChalAction().then(async (response) => {
               if (response.status !== 200) {
                 console.log(response.data);
               } else {
@@ -294,14 +291,7 @@ export default {
         this.activeUsers = response.data.unbanned_users;
       }
     });
-    var postData = new FormData();
-    postData.append("name", this.$route.params.id);
-    axios({
-      method: "post",
-      url: `${this.$store.getters.hostUrl}/api/info/challenge/info`,
-      data: postData,
-      headers: { "Content-Type": "multipart/form-data" },
-    }).then((response) => {
+    ChalService.fetchChallengeByName(this.$route.params.id).then((response) => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
@@ -320,25 +310,24 @@ export default {
       }
     });
 
-    axios
-      .post(`${this.$store.getters.hostUrl}/api/info/submissions`)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          response.data.forEach((element) => {
-            if (element.name == this.$route.params.id) {
-              var timeData = moment(element.solvedAt).format(
-                "h:mm:ss; MMMM Do, YYYY"
-              );
-              this.rows.push({
-                username: element.username,
-                timeDateRight: timeData,
-              });
-            }
-          });
-        }
-      });
+    SubmissionService.getSubmissions().then((response) => {
+      if (response.status !== 200) {
+        console.log(response.data);
+        return;
+      } else {
+        response.data.forEach((element) => {
+          if (element.name == this.$route.params.id) {
+            var timeData = moment(element.solvedAt).format(
+              "h:mm:ss; MMMM Do, YYYY"
+            );
+            this.rows.push({
+              username: element.username,
+              timeDateRight: timeData,
+            });
+          }
+        });
+      }
+    });
   },
 };
 </script>

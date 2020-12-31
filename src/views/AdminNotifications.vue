@@ -68,7 +68,7 @@
 </template>
 <script>
 import NotificationTab from "../components/NotificationTab";
-import axios from "axios";
+import NotifService from "../api/admin/notificationsAPI";
 export default {
   name: "AdminNotfications",
   components: {
@@ -87,21 +87,19 @@ export default {
     };
   },
   mounted() {
-    axios
-      .post(`${this.$store.getters.hostUrl}/api/notification/available`)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          console.log(response);
-          this.notifications = response.data.sort((a, b) => {
-            return new Date(a.updated_at).getTime() <
-              new Date(b.updated_at).getTime()
-              ? 1
-              : -1;
-          });
-        }
-      });
+    NotifService.getAllNotifs().then((response) => {
+      if (response.status !== 200) {
+        console.log(response.data);
+      } else {
+        console.log(response);
+        this.notifications = response.data.sort((a, b) => {
+          return new Date(a.updated_at).getTime() <
+            new Date(b.updated_at).getTime()
+            ? 1
+            : -1;
+        });
+      }
+    });
   },
   methods: {
     isNew: function (notification) {
@@ -134,17 +132,9 @@ export default {
     },
     onSubmit() {
       this.subProcessing = true;
-      var bodyFormData = new FormData();
-      bodyFormData.append("title", this.title);
-      bodyFormData.append("desc", this.description);
       var self = this;
-      axios({
-        method: "post",
-        url: `${this.$store.getters.hostUrl}/api/notification/add`,
-        data: bodyFormData,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-        .then(function (response) {
+      NotifService.submitNotif(this.title, this.description)
+        .then((response) => {
           console.log(response);
           self.notifications = [
             {
@@ -162,7 +152,7 @@ export default {
           self.subProcessing = false;
           self.showSuccess = true;
         })
-        .catch(function (response) {
+        .catch(response=> {
           console.log(response);
           self.title = "";
           self.description = "";

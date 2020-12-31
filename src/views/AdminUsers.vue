@@ -69,7 +69,7 @@ export default {
         Banned:"No Banned Users"
       },
       sortFilter: "User Name",
-      statusFilter: "All",
+      statusFilter: "All",  
       searchQuery: null,
       ascending: false,
       sortColumn: "",
