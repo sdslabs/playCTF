@@ -116,7 +116,7 @@
         </div>
         <div class="rightCol">
           <BarGraphVertical
-            :chartData="this.barData()  "
+            :chartData="this.barData()"
             :options="this.barChartOptions"
             class="graph"
             :height="150"
@@ -141,7 +141,7 @@ import AdminTable from "../components/adminTable.vue";
 import moment from "moment";
 import UsersService from "../api/admin/usersAPI";
 export default {
-  components: { BarGraphVertical,AdminTable },
+  components: { BarGraphVertical, AdminTable },
   name: "AdminChallenge",
   data() {
     return {
@@ -169,6 +169,10 @@ export default {
             {
               gridLines: {
                 display: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Solve %",
               },
               ticks: {
                 stepSize: 33,
@@ -210,7 +214,7 @@ export default {
           title: "Deploy this Challenge?",
           message: `The challenge would go live after this action. The players would be able to attempt this challenge.`,
           button: {
-            yes: "Purge",
+            yes: "Deploy",
             no: "Cancel",
           },
         },
@@ -226,18 +230,18 @@ export default {
     };
   },
   methods: {
-    barData(){
+    barData() {
       return {
-        labels: ["Solve Percentage(%)"],
         datasets: [
           {
             backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [this.solves/this.activeUsers*100],
+            data: [(this.solves / this.activeUsers) * 100],
           },
-        ],}
+        ],
+      };
     },
-    solvePercentage(){
-      return this.solves/this.activeUsers*100
+    solvePercentage() {
+      return (this.solves / this.activeUsers) * 100;
     },
     manageChallenge(name, action) {
       this.$confirm({
@@ -275,13 +279,13 @@ export default {
     },
   },
   mounted() {
-    UsersService.getUserStats().then((response)=>{
-      if(response.status!==200){
+    UsersService.getUserStats().then((response) => {
+      if (response.status !== 200) {
         console.log(response);
-      }else{
+      } else {
         this.activeUsers = response.data.unbanned_users;
       }
-    })
+    });
     var postData = new FormData();
     postData.append("name", this.$route.params.id);
     axios({
@@ -293,7 +297,7 @@ export default {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
-        console.log(response.data)
+        console.log(response.data);
         this.loaded = true;
         var data = response.data;
         this.name = data.Name;
@@ -316,7 +320,9 @@ export default {
         } else {
           response.data.forEach((element) => {
             if (element.name == this.$route.params.id) {
-              var timeData = moment(element.solvedAt).format('h:mm:ss; MMMM Do, YYYY');
+              var timeData = moment(element.solvedAt).format(
+                "h:mm:ss; MMMM Do, YYYY"
+              );
               this.rows.push({
                 username: element.username,
                 timeDateRight: timeData,

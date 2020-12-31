@@ -16,7 +16,7 @@ export default {
         subs = response.data
       } else {
         subs = response.data.filter((el) => {
-          return (el.username === user)
+          return el.username === user
         })
       }
       subs.forEach((el) => {
@@ -24,6 +24,19 @@ export default {
         totalChal++
       })
       return { totalChal: totalChal, category: submissions }
+    }
+  },
+
+  async getUserSubs(username) {
+    let response = await axiosInstance.post(`/api/info/submissions`)
+    if (response.status !== 200) {
+      return null
+    } else {
+      var data = response.data
+      data = data.filter((el) => {
+        return el.username === username
+      })
+      return data;
     }
   },
 }

@@ -64,6 +64,17 @@
         </div>
       </div>
     </div>
+    <div class="adminStatsContainer">
+      <div class="adminOneColContainer">
+        <p class="adminSubheading">Score over time</p>
+        <LineGraph
+          :chartData="this.lineGraphData()"
+          :options="this.lineGraphOptions"
+          class="lineGraph"
+          :height="150"
+        />
+      </div>
+    </div>
     <div class="adminHeadingName">Submissions</div>
     <admin-table
       :tableCols="tableCols"
@@ -74,6 +85,7 @@
   </div>
 </template>
 <script>
+import LineGraph from "../components/LineGraph.vue";
 import axios from "axios";
 import adminTable from "../components/adminTable";
 import moment from "moment";
@@ -83,11 +95,67 @@ import PieChart from "../components/PieChart.vue";
 export default {
   name: "AdminUser",
   components: {
+    LineGraph,
     adminTable,
-    PieChart
+    PieChart,
   },
   data() {
     return {
+      scoreSeries: {},
+      lineGraphOptions: {
+        layout: {
+          padding: 10,
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        legend: {
+          display: false,
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                color: "#575757",
+                drawOnChartArea: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Time",
+              },
+              ticks: {
+                source: "auto",
+                fontColor: "#393939",
+                fontFamily: "Roboto",
+                fontStyle: "normal",
+              },
+              type: "time",
+              distribution: "linear",
+              time: {
+                unit: "hour",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Score",
+              },
+              gridLines: {
+                color: "#575757",
+                drawOnChartArea: false,
+              },
+              ticks: {
+                source: "auto",
+                fontColor: "#393939",
+                fontFamily: "Roboto",
+                fontStyle: "normal",
+                min: 0,
+              },
+            },
+          ],
+        },
+      },
       submissions: {},
       chartOptions: {
         hoverBorderWidth: 20,
@@ -124,6 +192,44 @@ export default {
     };
   },
   methods: {
+    findScoreSeries(data) {
+      data = data.sort((a, b) => {
+        return new Date(a.solvedAt) < new Date(b.solvedAt) ? 1 : -1;
+      });
+      var scoreSeries = [];
+      var timeScores = [];
+      data.forEach((el, index) => {
+        if (index === 0) {
+          timeScores[0] = this.userDetails.score;
+        } else {
+          var currentScore = this.userDetails.score;
+          data.slice(0, index).forEach((sub) => {
+            currentScore -= sub.points;
+          });
+          timeScores[index] = currentScore;
+        }
+        scoreSeries[index] = {
+          x: new Date(el.solvedAt),
+          y: timeScores[index],
+        };
+      });
+      return scoreSeries;
+    },
+    lineGraphData() {
+      return {
+        label: "Data One",
+        datasets: [
+          {
+            backgroundColor: "white",
+            borderColor: "#0F6CF8",
+            lineTension: 0,
+            pointRadius: 5,
+            borderWidth: 1,
+            data: this.scoreSeries,
+          },
+        ],
+      };
+    },
     categoryChartData() {
       var labels = [];
       var data = [];
@@ -184,31 +290,23 @@ export default {
         this.userDetails.score = data.score;
         this.userDetails.rank = data.rank;
         this.userDetails.active = data.status === 0;
+        SubmissionService.getUserSubs(this.$route.params.username).then(
+          (subData) => {
+            subData.forEach((element) => {
+              var timeData = moment(element.solvedAt).format(
+                "h:mm:ss; MMMM Do, YYYY"
+              );
+              this.rows.push({
+                challenge: element.name,
+                category: element.category,
+                timeDateRight: timeData,
+              });
+            });
+            this.scoreSeries = this.findScoreSeries(subData);
+          }
+        );
       }
     });
-
-    axios
-      .post(`${this.$store.getters.hostUrl}/api/info/submissions`)
-      .then((response) => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          var data = response.data;
-          data = data.filter((el) => {
-            return el.username === this.$route.params.username;
-          });
-          data.forEach((element) => {
-            var timeData = moment(element.solvedAt).format(
-              "h:mm:ss; MMMM Do, YYYY"
-            );
-            this.rows.push({
-              challenge: element.name,
-              category: element.category,
-              timeDateRight: timeData,
-            });
-          });
-        }
-      });
   },
 };
 </script>

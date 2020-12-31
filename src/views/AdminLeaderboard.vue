@@ -4,17 +4,23 @@
       <img src="@/assets/leaderboard.svg" class="adminHeadingColor" />
     </div>
     <div class="adminLbSearchDiv">
-    <div class="adminSearchBar">
-      <button class="searchBtn">
-        <img src="@/assets/search.svg" class="searchImg" />
-      </button>
-      <input
-        v-model="searchQuery"
-        placeholder="Search for teams here..."
-        class="query"
-      />
+      <div class="adminSearchBar">
+        <button class="searchBtn">
+          <img src="@/assets/search.svg" class="searchImg" />
+        </button>
+        <input
+          v-model="searchQuery"
+          placeholder="Search for teams here..."
+          class="query"
+        />
+      </div>
     </div>
-    </div>
+    <LineGraph
+      :chartData="this.lineGraphData()"
+      :options="this.lineGraphOptions"
+      class="lineGraph"
+      :height="150"
+    />
     <admin-table
       :tableCols="tableCols"
       :rows="resultQuery"
@@ -25,12 +31,78 @@
 </template>
 <script>
 import adminTable from "../components/adminTable.vue";
-import UsersService from "@/api/admin/usersAPI";
+import UsersService from "../api/admin/usersAPI";
+import SubmissionService from "../api/admin/submissionsAPI";
+import LineGraph from "../components/LineGraph.vue";
 export default {
-  components: { adminTable },
+  components: { adminTable, LineGraph},
   name: "AdminLeaderboard",
   data() {
     return {
+      lineColors: ["#22F80F", "#F80F55", "#0F6CF8"],
+      scoreSeries: [],
+      lineGraphOptions: {
+        layout: {
+          padding: 10,
+        },
+        legend:{
+          display:true,
+          position:"top",
+          labels:{
+            fontFamily:'Nunito Sans',
+            fontColor:'#191919',
+            fontSize:12,
+            lineHeight:12,
+            boxWidth:20
+          }
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                color: "#575757",
+                drawOnChartArea: false,
+              },
+              scaleLabel: {
+                display: true,
+                labelString: "Time",
+              },
+              ticks: {
+                source: "auto",
+                fontColor: "#393939",
+                fontFamily: "Roboto",
+                fontStyle: "normal",
+              },
+              type: "time",
+              distribution: "linear",
+              time: {
+                unit: "hour",
+              },
+            },
+          ],
+          yAxes: [
+            {
+              scaleLabel: {
+                display: true,
+                labelString: "Score",
+              },
+              gridLines: {
+                color: "#575757",
+                drawOnChartArea: false,
+              },
+              ticks: {
+                source: "auto",
+                fontColor: "#393939",
+                fontFamily: "Roboto",
+                fontStyle: "normal",
+                min: 0,
+              },
+            },
+          ],
+        },
+      },
       searchQuery: "",
       ascending: false,
       sortColumn: "",
@@ -66,27 +138,75 @@ export default {
     };
   },
   methods: {
+    lineGraphData() {
+      var datasets = [];
+      this.scoreSeries.forEach((el, index) => {
+        var labelPostText;
+        switch(index){
+          case 0:
+            labelPostText = "(1st)";
+            break;
+          case 1:
+            labelPostText = "(2nd)";
+            break;
+          case 2:
+            labelPostText = "(3rd)"
+            break;
+        }
+        datasets.push({
+          backgroundColor: this.lineColors[index],
+          borderColor: this.lineColors[index],
+          label: `${this.scoreSeries[index].username} ${labelPostText}`,
+          lineTension: 0,
+          pointRadius: 5,
+          borderWidth: 1,
+          fill:false,
+          data: this.scoreSeries[index].series,
+        });
+      });
+      console.log("datasets");
+      console.log(datasets);
+      return {
+        label: "Leaderboard",
+        datasets,
+      };
+    },
+    findScoreSeries(users) {
+      users.forEach((user) => {
+        SubmissionService.getUserSubs(user.username).then((data) => {
+          this.scoreSeries.push({
+            username: user.username,
+            series: this.findUserScoreSeries(data,user.score),
+          });
+          console.log(this.scoreSeries)
+        });
+      });
+    },
+    findUserScoreSeries(data,score) {
+      data = data.sort((a, b) => {
+        return new Date(a.solvedAt) < new Date(b.solvedAt) ? 1 : -1;
+      });
+      var scoreSeries = [];
+      var timeScores = [];
+      data.forEach((el, index) => {
+        if (index === 0) {
+          timeScores[0] = score;
+        } else {
+          var currentScore = score;
+          data.slice(0, index).forEach((sub) => {
+            currentScore -= sub.points;
+          });
+          timeScores[index] = currentScore;
+        }
+        scoreSeries[index] = {
+          x: new Date(el.solvedAt),
+          y: timeScores[index],
+        };
+      });
+      return scoreSeries;
+    },
     changePage() {
       this.currentPage = this.jumpPage;
-    },
-    sortTable: function sortTable(col) {
-      if (this.sortColumn === col) {
-        this.ascending = !this.ascending;
-      } else {
-        this.ascending = true;
-        this.sortColumn = col;
-      }
-
-      var ascending = this.ascending;
-
-      this.rows.sort(function (a, b) {
-        if (a[col] > b[col]) {
-          return ascending ? 1 : -1;
-        } else if (a[col] < b[col]) {
-          return ascending ? -1 : 1;
-        }
-        return 0;
-      });
     },
     num_pages: function num_pages() {
       return Math.ceil(this.rows.length / this.elementsPerPage);
@@ -140,6 +260,13 @@ export default {
       this.displayUsers = this.users.sort((a, b) => {
         return a.rank > b.rank ? 1 : -1;
       });
+      var leaders;
+      if (this.displayUsers.length > 3) {
+        leaders = this.displayUsers.slice(0, 3);
+      } else {
+        leaders = this.displayUsers;
+      }
+      this.findScoreSeries(leaders);
     });
   },
 };
