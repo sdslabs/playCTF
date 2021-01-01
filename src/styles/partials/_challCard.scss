@@ -12,6 +12,7 @@
         display: flex;
         flex-direction: row;
         height: 1.5rem;
+
         .challCard-challName {
             font-family: $primary-font-family;
             font-style: normal;
@@ -19,6 +20,7 @@
             font-size: 1.5rem;
             color: #191919;
         }
+
         .challCard-tag {
             padding: 0.0625rem 0.375rem;
             background: #593C8F;
@@ -33,10 +35,12 @@
             margin-left: 1rem;
             vertical-align: text-bottom;
         }
+
         .challCard-bookmark {
             margin-left: auto;
             display: flex;
             flex-direction: row-reverse;
+
             .challCard-review {
                 margin-right: 0.75rem;
                 font-family: $primary-font-family;
@@ -51,6 +55,7 @@
             }
         }
     }
+
     .challCard-solves {
         margin-top: 0.875rem;
         font-family: $primary-font-family;
@@ -61,6 +66,7 @@
         align-items: center;
         color: #393939;
     }
+
     .challCard-challDesc {
         font-family: $secondary-font-family;
         font-style: normal;
@@ -70,6 +76,7 @@
         color: #393939;
         margin-top: 1rem;
     }
+
     .challCard-resources {
         font-family: $secondary-font-family;
         font-style: normal;
@@ -77,15 +84,18 @@
         font-size: 0.875rem;
         display: inline-block;
         line-height: 1rem;
+
         .challCard-challPort {
             margin-top: 0.625rem;
             color: #393939;
         }
+
         .challCard-challLink {
             margin-top: 0.625rem;
             color: #593C8F;
             text-decoration: none;
         }
+
         .challCard-challItem {
             display: inline-block;
             margin-top: 0.875rem;
@@ -98,17 +108,20 @@
             font-family: Nunito Sans;
             font-style: normal;
             font-weight: 600;
+
             .challCard-challItem-download {
                 margin-right: 0.25rem;
                 vertical-align: middle;
             }
         }
     }
+
     .challCard-bottom-row {
         display: flex;
         flex-direction: row;
         margin-top: 1.5rem;
         height: 2rem;
+
         .challCard-form {
             .challCard-form-input {
                 background: #F2F2F2;
@@ -125,12 +138,14 @@
                 color: #B3B3B3;
                 border: none;
             }
+
             .challCard-form-submit-button {
                 transform: scale(0.8);
                 padding-left: 0.75rem;
                 padding-right: 0.75rem;
             }
         }
+
         .challCard-report {
             margin-left: auto;
             margin-top: 0.25rem;

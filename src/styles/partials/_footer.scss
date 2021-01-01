@@ -10,21 +10,25 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
     .footer-about {
         text-align: left;
         font-family: Nunito Sans;
+
         .footer-about-beast {
             font-weight: 900;
             font-size: 2rem;
             line-height: 1.5rem;
             color: #191919;
         }
+
         .footer-about-reach {
             font-weight: 600;
             font-size: 0.875rem;
             line-height: 2rem;
             color: #393939;
         }
+
         .footer-about-reach-reachus {
             font-weight: bold;
             font-size: 1rem;
@@ -34,15 +38,18 @@
             margin-left: 0.3125rem;
         }
     }
+
     .footer-contact {
         width: 6.875rem;
         height: 5rem;
         display: flex;
         flex-direction: column;
         align-content: center;
+
         .footer-contact-sds-logo {
             margin-bottom: 0.9375rem;
         }
+
         .footer-contact-info {
             display: flex;
             justify-content: space-between;

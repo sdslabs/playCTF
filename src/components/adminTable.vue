@@ -95,7 +95,7 @@ export default {
   props: ["tableCols", "rows", "colStyle", "links", "maxElementPerPage"],
   methods: {
     isColLink(val) {
-      var isLink = false;
+      let isLink = false;
       this.links.forEach(item => {
         if (item.col === val) {
           isLink = true;
@@ -115,7 +115,7 @@ export default {
         this.sortColumn = col;
       }
 
-      var ascending = this.ascending;
+      let ascending = this.ascending;
 
       this.rows.sort(function(a, b) {
         if (a[col] > b[col]) {
@@ -130,8 +130,8 @@ export default {
       return Math.ceil(this.rows.length / this.maxElementPerPage);
     },
     get_rows: function get_rows() {
-      var start = (this.currentPage - 1) * this.maxElementPerPage;
-      var end = start + this.maxElementPerPage;
+      let start = (this.currentPage - 1) * this.maxElementPerPage;
+      let end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);
     },
     change_page: function change_page(page) {

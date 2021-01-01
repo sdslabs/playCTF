@@ -9,13 +9,13 @@ export default {
     if (response.status !== 200) {
       return null;
     } else {
-      var submissions = {};
-      var totalChal = 0;
+      let submissions = {};
+      let totalChal = 0;
       tags.forEach(el => {
         submissions[el.name] = 0;
       });
       if (response.data !== null) {
-        var subs;
+        let subs;
         if (user === null) {
           subs = response.data;
         } else {
@@ -37,7 +37,7 @@ export default {
     if (response.status !== 200) {
       return null;
     } else {
-      var data = response.data;
+      let data = response.data;
       if (data === null) {
         return;
       }

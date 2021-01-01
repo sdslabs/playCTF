@@ -28,10 +28,5 @@
 export default {
   name: "adminChallCard",
   props: ["challenge"],
-  methods: {
-    redirect(id) {
-      console.log(id);
-    }
-  }
 };
 </script>

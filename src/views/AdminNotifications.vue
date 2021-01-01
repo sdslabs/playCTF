@@ -132,7 +132,7 @@ export default {
     },
     onSubmit() {
       this.subProcessing = true;
-      var self = this;
+      let self = this;
       NotifService.submitNotif(this.title, this.description)
         .then(response => {
           console.log(response);
@@ -163,7 +163,7 @@ export default {
         });
     },
     enter: function() {
-      var self = this;
+      let self = this;
       setTimeout(function() {
         self.showSuccess = false;
         self.showFail = false;

@@ -145,9 +145,9 @@ export default {
   },
   methods: {
     lineGraphData() {
-      var datasets = [];
+      let datasets = [];
       this.scoreSeries.forEach((el, index) => {
-        var labelPostText;
+        let labelPostText;
         switch (index) {
           case 0:
             labelPostText = "(1st)";
@@ -192,13 +192,13 @@ export default {
       data = data.sort((a, b) => {
         return new Date(a.solvedAt) < new Date(b.solvedAt) ? 1 : -1;
       });
-      var scoreSeries = [];
-      var timeScores = [];
+      let scoreSeries = [];
+      let timeScores = [];
       data.forEach((el, index) => {
         if (index === 0) {
           timeScores[0] = score;
         } else {
-          var currentScore = score;
+          let currentScore = score;
           data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
@@ -211,31 +211,8 @@ export default {
       });
       return scoreSeries;
     },
-    changePage() {
-      this.currentPage = this.jumpPage;
-    },
-    num_pages: function num_pages() {
-      return Math.ceil(this.rows.length / this.elementsPerPage);
-    },
-    get_rows: function get_rows() {
-      var start = (this.currentPage - 1) * this.elementsPerPage;
-      var end = start + this.elementsPerPage;
-      return this.rows.slice(start, end);
-    },
-    change_page: function change_page(page) {
-      this.currentPage = page;
-    },
-    pageChangeHandler(selectedPage) {
-      this.currentPage = selectedPage;
-    }
   },
   computed: {
-    columns: function columns() {
-      if (this.rows.length == 0) {
-        return [];
-      }
-      return Object.keys(this.rows[0]);
-    },
     resultQuery() {
       if (this.searchQuery) {
         return this.displayUsers.filter(item => {
@@ -268,7 +245,7 @@ export default {
       this.displayUsers = this.users.sort((a, b) => {
         return a.rank > b.rank ? 1 : -1;
       });
-      var leaders;
+      let leaders;
       if (this.displayUsers.length > 3) {
         leaders = this.displayUsers.slice(0, 3);
       } else {

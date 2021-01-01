@@ -282,13 +282,13 @@ export default {
       data = data.sort((a, b) => {
         return new Date(a.solvedAt) < new Date(b.solvedAt) ? 1 : -1;
       });
-      var scoreSeries = [];
-      var timeScores = [];
+      let scoreSeries = [];
+      let timeScores = [];
       data.forEach((el, index) => {
         if (index === 0) {
           timeScores[0] = this.userDetails.score;
         } else {
-          var currentScore = this.userDetails.score;
+          let currentScore = this.userDetails.score;
           data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
@@ -317,8 +317,8 @@ export default {
       };
     },
     categoryChartData() {
-      var labels = [];
-      var data = [];
+      let labels = [];
+      let data = [];
       this.chalTags.forEach(el => {
         labels.push(el.name);
       });
@@ -363,7 +363,7 @@ export default {
           console.log(response.data);
         } else {
           console.log(response.data);
-          var data = response.data;
+          let data = response.data;
           this.userDetails.id = data.id;
           this.userDetails.name = data.username;
           this.userDetails.score = data.score;
@@ -372,7 +372,7 @@ export default {
           SubmissionService.getUserSubs(this.$route.params.username).then(
             subData => {
               subData.forEach(element => {
-                var timeData = moment(element.solvedAt).format(
+                let timeData = moment(element.solvedAt).format(
                   "h:mm:ss; MMMM Do, YYYY"
                 );
                 this.rows.push({

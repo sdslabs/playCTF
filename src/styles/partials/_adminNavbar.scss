@@ -4,7 +4,7 @@
   margin-left: 20rem/$root-base-size;
 }
 
-.adminNavbarLink{
+.adminNavbarLink {
   font-family: 'Nunito Sans', sans-serif;
   font-weight: normal;
   font-size: 14rem/$root-base-size;
@@ -19,7 +19,7 @@
   text-shadow: 0 0 0.65rem/$root-base-size #333, 0 0 0.65rem/$root-base-size #333;
 }
 
-.router-link-active.adminNavbarLink{
+.router-link-active.adminNavbarLink {
   font-family: 'Nunito Sans', sans-serif;
   font-size: 14rem/$root-base-size;
   color: #191919;

@@ -1,22 +1,22 @@
 "use strict";
 
-var _vue = _interopRequireDefault(require("vue"));
+let _vue = _interopRequireDefault(require("vue"));
 
-var _App = _interopRequireDefault(require("./App.vue"));
+let _App = _interopRequireDefault(require("./App.vue"));
 
-var _router = _interopRequireDefault(require("./router"));
+let _router = _interopRequireDefault(require("./router"));
 
-var _Admin = _interopRequireDefault(require("./layouts/Admin"));
+let _Admin = _interopRequireDefault(require("./layouts/Admin"));
 
-var _Default = _interopRequireDefault(require("./layouts/Default"));
+let _Default = _interopRequireDefault(require("./layouts/Default"));
 
-var _vueSelect = _interopRequireDefault(require("vue-select"));
+let _vueSelect = _interopRequireDefault(require("vue-select"));
 
 require("vue-select/src/scss/vue-select.scss");
 
-var _vuejsPaginate = _interopRequireDefault(require("vuejs-paginate"));
+let _vuejsPaginate = _interopRequireDefault(require("vuejs-paginate"));
 
-var _index = _interopRequireDefault(require("./store/index"));
+let _index = _interopRequireDefault(require("./store/index"));
 
 function _interopRequireDefault(obj) {
   return obj && obj.__esModule ? obj : { default: obj };

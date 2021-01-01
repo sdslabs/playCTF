@@ -2,8 +2,8 @@
   <div class="mainAdminContainer">
     <div class="adminChalInfo">
       <div class="infoDetails">
-        <span class="name">{{ name }}</span>
-        <span class="category">{{ category }}</span>
+        <span class="name">{{ chalDetails.Name }}</span>
+        <span class="category">{{ chalDetails.Category }}</span>
         <button class="adminBanButton">
           <img src="@/assets/edit.svg" class="banImg" /><span
             class="adminBanText"
@@ -13,29 +13,32 @@
         <span
           class="status"
           :class="{
-            deployed: status === 'Deployed',
-            purged: status === 'Purged',
-            undeployed: status === 'Undeployed'
+            deployed: chalDetails.Status === 'Deployed',
+            purged: chalDetails.Status === 'Purged',
+            undeployed: chalDetails.Status === 'Undeployed',
           }"
-          >{{ status }}</span
+          >{{ chalDetails.Status }}</span
         >
       </div>
       <div class="infoStats">
         <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
         <div class="pointSolves">
           <div class="point">
-            <span class="value">{{ points }}</span>
+            <span class="value">{{ chalDetails.Points }}</span>
             <span class="field">Points</span>
           </div>
           <div class="solves">
-            <span class="value">{{ solves }}</span>
+            <span class="value">{{ chalDetails.SolvesNumber }}</span>
             <span class="field">Solves</span>
           </div>
         </div>
-        <div v-if="status === 'Deployed'" class="changeChallengeStatus">
+        <div
+          v-if="chalDetails.Status === 'Deployed'"
+          class="changeChallengeStatus"
+        >
           <button
             class="adminBanButton"
-            @click="manageChallenge(name, 'undeploy')"
+            @click="manageChallenge(chalDetails.Name, 'undeploy')"
           >
             <img src="@/assets/undeploy.svg" class="banImg" /><span
               class="adminBanText"
@@ -44,7 +47,7 @@
           </button>
           <button
             class="adminBanButton"
-            @click="manageChallenge(name, 'purge')"
+            @click="manageChallenge(chalDetails.Name, 'purge')"
           >
             <img src="@/assets/purge.svg" class="banImg" /><span
               class="adminBanText"
@@ -52,10 +55,13 @@
             >
           </button>
         </div>
-        <div v-if="status === 'Undeployed'" class="changeChallengeStatus">
+        <div
+          v-if="chalDetails.Status === 'Undeployed'"
+          class="changeChallengeStatus"
+        >
           <button
             class="adminBanButton"
-            @click="manageChallenge(name, 'deploy')"
+            @click="manageChallenge(chalDetails.Name, 'deploy')"
           >
             <img src="@/assets/play.svg" class="banImg" /><span
               class="adminBanText"
@@ -64,7 +70,7 @@
           </button>
           <button
             class="adminBanButton"
-            @click="manageChallenge(name, 'purge')"
+            @click="manageChallenge(chalDetails.Name, 'purge')"
           >
             <img src="@/assets/purge.svg" class="banImg" /><span
               class="adminBanText"
@@ -72,10 +78,13 @@
             >
           </button>
         </div>
-        <div v-if="status === 'Purged'" class="changeChallengeStatus">
+        <div
+          v-if="chalDetails.Status === 'Purged'"
+          class="changeChallengeStatus"
+        >
           <button
             class="adminBanButton"
-            @click="manageChallenge(name, 'deploy')"
+            @click="manageChallenge(chalDetails.Name, 'deploy')"
           >
             <img src="@/assets/play.svg" class="banImg" /><span
               class="adminBanText"
@@ -85,7 +94,7 @@
         </div>
       </div>
       <div class="aboutChallenge aboutText">
-        {{ about }}
+        {{ chalDetails.Desc }}
       </div>
       <div class="port aboutText">Port : {{ port }}</div>
       <div class="host aboutText">
@@ -102,7 +111,7 @@
       <div class="adChalSubmissions">
         <div class="subheadingName">Submissions</div>
         <div class="info">
-          Total {{ this.solves }} correct submissions are made
+          Total {{ this.chalDetails.SolvesNumber }} correct submissions are made
         </div>
       </div>
       <div class="adChalSolves">
@@ -110,14 +119,19 @@
           <div class="subheadingName">Solve Percentages</div>
           <div class="info">
             There were total <b>{{ this.activeUsers }} Active</b> users, out of
-            which, <b>{{ this.solves }} ({{ this.solvePercentage() }}%)</b> are
-            able to solve this challenge.
+            which,
+            <b
+              >{{ this.chalDetails.SolvesNumber }} ({{
+                this.solvePercentage()
+              }}%)</b
+            >
+            are able to solve this challenge.
           </div>
         </div>
         <div class="rightCol">
           <BarGraphVertical
             :chartData="this.barData()"
-            :options="this.barChartOptions"
+            :options="this.barChartOptions()"
             class="graph"
             :height="150"
           />
@@ -133,11 +147,7 @@
       :maxElementPerPage="10"
       v-if="rows.length > 0"
     />
-    <div
-      class="adminEmptyDataContainer"
-      :style="{ alignSelf: 'flex-start' }"
-      v-else
-    >
+    <div class="adminEmptyDataContainer" v-else>
       <span class="adminEmptyData">No Submissions</span>
     </div>
   </div>
@@ -149,97 +159,26 @@ import moment from "moment";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import ChalService from "../api/admin/challengesAPI";
+import {
+  tableCols,
+  confimDialogMessages,
+  barChartOptions,
+} from "../constants/constants";
 export default {
   components: { BarGraphVertical, AdminTable },
   name: "AdminChallenge",
   data() {
     return {
-      tableCols: [
-        {
-          id: 1,
-          label: "User Name",
-          style: { paddingLeft: "40px", textAlign: "left", width: "40%" }
-        },
-        {
-          id: 2,
-          label: "Time & Date (+5:30 UTC)",
-          style: { paddingRight: "40px", textAlign: "right", width: "60% " }
-        }
-      ],
+      tableCols: tableCols.adminChallenge,
       rows: [],
-      barChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          display: false
-        },
-        scales: {
-          yAxes: [
-            {
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              scaleLabel: {
-                display: true,
-                labelString: "Solve %"
-              },
-              ticks: {
-                stepSize: 33,
-                min: 0,
-                max: 100
-              }
-            }
-          ]
-        },
-        xAxes: [
-          {
-            gridLines: {
-              color: "#575757",
-              drawOnChartArea: false
-            }
-          }
-        ]
-      },
-      name: "",
-      category: "",
-      status: "",
-      points: "",
-      solves: "",
-      about: "",
-      port: "",
-      loaded: false,
-      confirmDialogs: {
-        purge: {
-          title: "Purge this Challenge?",
-          message: `Action will pause the participation of players.`,
-          button: {
-            yes: "Purge",
-            no: "Cancel"
-          }
-        },
-        deploy: {
-          title: "Deploy this Challenge?",
-          message: `The challenge would go live after this action. The players would be able to attempt this challenge.`,
-          button: {
-            yes: "Deploy",
-            no: "Cancel"
-          }
-        },
-        undeploy: {
-          title: "Undeploy this Challenge?",
-          message: `The challenge ${this.$route.params.id} will be marked as "Down for maintenance" after this section.`,
-          button: {
-            yes: "Undeploy",
-            no: "Cancel"
-          }
-        }
-      }
+      chalDetails: {},
+      confirmDialogs: confimDialogMessages(this.$route.params.id)
+        .adminChallenge,
     };
   },
   methods: {
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     barData() {
       return {
@@ -247,87 +186,82 @@ export default {
         datasets: [
           {
             backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [this.solvePercentage()]
-          }
-        ]
+            data: [this.solvePercentage()],
+          },
+        ],
       };
     },
+    barChartOptions() {
+      return barChartOptions();
+    },
     solvePercentage() {
-      return (this.solves / this.activeUsers) * 100;
+      return (this.chalDetails.SolvesNumber / this.activeUsers) * 100;
     },
     manageChallenge(name, action) {
       this.$confirm({
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        /**
-         * Callback Function
-         * @param {Boolean} confirm
-         */
-        callback: confirm => {
+        callback: (confirm) => {
           if (confirm) {
-            ChalService.manageChalAction().then(async response => {
-              if (response.status !== 200) {
-                console.log(response.data);
-              } else {
-                if (action === "purge") {
-                  await this.sleep(5000);
-                  this.$router.push("/admin/challenges");
+            ChalService.manageChalAction(name, action).then(
+              async (response) => {
+                if (response.status !== 200) {
+                  console.log(response.data);
                 } else {
-                  this.$router.go();
+                  if (action === "purge") {
+                    await this.sleep(5000);
+                    this.$router.push("/admin/challenges");
+                  } else {
+                    this.$router.go();
+                  }
                 }
               }
-            });
+            );
           }
-        }
+        },
       });
-    }
+    },
   },
   mounted() {
-    UsersService.getUserStats().then(response => {
+    UsersService.getUserStats().then((response) => {
       if (response.status !== 200) {
         console.log(response);
       } else {
         this.activeUsers = response.data.unbanned_users;
       }
     });
-    ChalService.fetchChallengeByName(this.$route.params.id).then(response => {
+    ChalService.fetchChallengeByName(this.$route.params.id).then((response) => {
       if (response.status !== 200) {
         console.log(response.data);
       } else {
         console.log(response.data);
-        this.loaded = true;
-        var data = response.data;
-        this.name = data.Name;
-        this.category = data.Category;
-        this.status = data.Status;
-        this.points = data.Points;
-        this.solves = data.SolvesNumber;
-        this.about = data.Desc;
+        let data = response.data;
+        this.chalDetails = data;
         if (data.Ports !== null) {
-          this.port = data.Ports[0];
+          this.chalDetails.port = data.Ports[0];
         }
       }
     });
 
-    SubmissionService.getSubmissions().then(response => {
+    SubmissionService.getSubmissions().then((response) => {
       if (response.status !== 200) {
         console.log(response.data);
         return;
       } else {
-        response.data.forEach(element => {
+        response.data.forEach((element) => {
           if (element.name == this.$route.params.id) {
-            var timeData = moment(element.solvedAt).format(
+            let timeData = moment(element.solvedAt).format(
               "h:mm:ss; MMMM Do, YYYY"
             );
             this.rows.push({
               username: element.username,
-              timeDateRight: timeData
+              timeDateRight: timeData,
             });
           }
         });
       }
     });
-  }
+  },
 };
 </script>

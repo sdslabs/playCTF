@@ -3,6 +3,7 @@
     margin-top: 4.75rem;
     min-height: calc(100vh - 12.75rem - 9.25rem);
     width: 46.4375rem;
+
     .heading {
         font-size: 1.5rem;
         font-weight: 900;
@@ -11,6 +12,7 @@
         color: #191919;
         text-align: left;
     }
+
     .notifications {
         margin-top: 1.125rem;
         margin-bottom: 3.5rem;
@@ -26,9 +28,11 @@
     padding-left: 1.125rem;
     padding-right: 1.125rem;
     text-align: left;
+
     .firstLine {
         display: flex;
         flex-direction: row;
+
         .notificationTitle {
             font-family: $primary-font-family;
             font-weight: bold;
@@ -38,6 +42,7 @@
             text-align: left;
             padding-top: 1.25rem;
         }
+
         .notificationStatus {
             background: #593C8F;
             border-radius: 0.125rem;
@@ -46,6 +51,7 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
             align-self: center;
+
             .newNotification {
                 font-family: $secondary-font-family;
                 font-size: 0.75rem;
@@ -54,6 +60,7 @@
                 color: #FFFFFF;
             }
         }
+
         .notificationTiming {
             font-family: $secondary-font-family;
             font-size: 0.75rem;
@@ -63,6 +70,7 @@
             margin-left: auto;
         }
     }
+
     .notificationDesc {
         font-family: $secondary-font-family;
         font-size: 0.875rem;
@@ -71,5 +79,5 @@
         margin-top: 0.0625rem;
 
     }
-    
+
 }

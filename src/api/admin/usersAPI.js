@@ -3,11 +3,11 @@ import { axiosInstance } from "../axiosInstance.js";
 export default {
   async getUsers() {
     let response = await axiosInstance.get(`/api/info/user/available`);
-    var allUsers = [];
+    let allUsers = [];
     if (response.status !== 200) {
       console.log(response.data);
     } else {
-      var users = response.data;
+      let users = response.data;
       users = users.filter(el => {
         return el.role === "contestant";
       });
@@ -20,7 +20,7 @@ export default {
             : 1
           : -1;
       });
-      var rank = 0;
+      let rank = 0;
       users.forEach(el => {
         rank++;
         allUsers.push({
@@ -36,15 +36,12 @@ export default {
   },
 
   async getUserByUsername(username) {
-    var postData = new FormData();
+    let postData = new FormData();
     postData.append("username", username);
     return await axiosInstance({
       method: "post",
       url: `/api/info/user`,
       data: postData,
-      headers: {
-        "Content-Type": "multipart/form-data"
-      }
     });
   },
   async getUserStats() {
@@ -55,7 +52,6 @@ export default {
     return await axiosInstance({
       method: "post",
       url: `/api/admin/users/${action}/${userId}`,
-      headers: { "Content-Type": "multipart/form-data" }
     });
   }
 };

@@ -142,12 +142,12 @@ export default {
   },
   methods: {
     getBarData(tag) {
-      var dataSolves = this.chalCategory[tag].solves;
+      let dataSolves = this.chalCategory[tag].solves;
       if (dataSolves.length > 5) {
         dataSolves = dataSolves.slice(0, 5);
       }
-      var labels = [];
-      var data = [];
+      let labels = [];
+      let data = [];
       dataSolves.forEach(el => {
         labels.push(el.username);
         console.log(this.chalCategory[tag]);
@@ -174,8 +174,8 @@ export default {
       this.categoryFilter = value;
     },
     categoryChartData() {
-      var labels = [];
-      var data = [];
+      let labels = [];
+      let data = [];
       this.chalTags.forEach(el => {
         labels.push(el.name);
       });

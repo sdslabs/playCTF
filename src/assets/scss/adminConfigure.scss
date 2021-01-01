@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 
 $screenRatio: 1;
+
 .main {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
+
 .heading {
   font-family: "Nunito Sans";
   font-style: normal;
@@ -31,6 +33,7 @@ $screenRatio: 1;
   box-sizing: border-box;
   box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
   border-radius: 3px;
+
   .preview {
     display: flex;
     flex-direction: row;
@@ -62,6 +65,7 @@ $screenRatio: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   .timeSub {
     display: flex;
     flex-direction: row;
@@ -72,17 +76,20 @@ $screenRatio: 1;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   .sub-themes {
     border: 0cm;
     background: none;
     display: flex;
     flex-direction: column;
+
     .block {
       width: 120px;
       height: 85.33px;
       background: #c4c4c4;
       border: none;
     }
+
     .block:focus {
       border: 2px solid #ff6700;
       box-sizing: border-box;
@@ -192,6 +199,7 @@ textarea:focus {
   height: 600px * $screenRatio;
   overflow-y: scroll;
 }
+
 .notifTabs::-webkit-scrollbar {
   display: none;
 }

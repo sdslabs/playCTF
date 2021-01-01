@@ -3,6 +3,7 @@
     margin-top: 6.75rem;
     min-height: calc(100vh - 24rem);
     width: 58.5rem;
+
     .login-heading {
         font-family: $primary-font-family;
         font-style: normal;
@@ -12,11 +13,13 @@
         color: #393939;
         text-align: left;
     }
+
     .login-form-div {
         width: 22.5rem;
         margin-left: 0rem;
         margin-top: 0.75rem;
         text-align: left;
+
         .login-form {
             .login-inputField {
                 width: 100%;
@@ -34,6 +37,7 @@
                 line-height: 1.125rem;
                 color: rgba(87, 87, 87, 0.7);
             }
+
             .login-button {
                 margin-top: 2rem;
             }

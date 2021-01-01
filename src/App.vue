@@ -27,6 +27,9 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import "@/styles/main.scss";
 
 #app {

@@ -51,11 +51,7 @@
           :challenge="challenge"
         />
       </div>
-      <div
-        class="adminEmptyDataContainer"
-        :style="{ marginTop: '2rem' }"
-        v-else
-      >
+      <div class="adminEmptyDataContainer" v-else>
         <span class="adminEmptyData">No Challenges available</span>
       </div>
     </div>
@@ -78,13 +74,13 @@ export default {
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 }
+        { name: "Solves", id: 3 },
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"]
+      statusFilterOptions: ["All", "Deployed", "Undeployed"],
     };
   },
   mounted() {
-    ChalService.getChallenges().then(response => {
+    ChalService.getChallenges().then((response) => {
       if (response === null) {
         console.log("Error fetching All challenges");
         return;
@@ -93,7 +89,7 @@ export default {
         this.displayChallenges = response.displayChallenges;
         this.categoryFilterOptions = [
           ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions
+          ...response.categoryFilterOptions,
         ];
         this.displayChallenges = response.displayChallenges;
       }
@@ -105,7 +101,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter(el => {
+        this.displayChallenges = this.challenges.filter((el) => {
           return el.Status == value;
         });
       }
@@ -118,25 +114,12 @@ export default {
         });
       } else if (value === "Score") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return a.Points <= b.Points
-            ? a.Points === b.Points
-              ? a.Name > b.Name
-                ? 1
-                : -1
-              : 1
-            : -1;
+          return this.findGreater(a,b,'Points','Name')
         });
       } else if (value === "Solves") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return a.SolvesNumber <= b.SolvesNumber
-            ? a.SolvesNumber === b.SolvesNumber
-              ? a.Name > b.Name
-                ? 1
-                : -1
-              : 1
-            : -1;
+          return this.findGreater(a,b,'SolvesNumber','Name')
         });
-        console.log(this.displayChallenges);
       }
     },
     changeCategory(value) {
@@ -144,11 +127,20 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter(el => {
+        this.displayChallenges = this.displayChallenges.filter((el) => {
           return el.Category == value;
         });
       }
-    }
-  }
+    },
+    findGreater(a, b, field1, field2) {
+      return a[field1] <= b[field2]
+        ? a[field1] === b[field1]
+          ? a[field2] > b[field2]
+            ? 1
+            : -1
+          : 1
+        : -1;
+    },
+  },
 };
 </script>

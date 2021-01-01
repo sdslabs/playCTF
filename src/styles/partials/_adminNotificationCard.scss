@@ -1,4 +1,4 @@
-.adminNotifCard{
+.adminNotifCard {
   height: 6rem;
   display: flex;
   flex-direction: row;
@@ -12,6 +12,7 @@
   line-height: 28rem/$root-base-size;
   padding: 10rem/$root-base-size 1rem;
 }
+
 .adminNotifTitle {
   font-weight: bold;
   text-align: left;
@@ -25,6 +26,7 @@
   width: 40%;
   margin-bottom: 0;
 }
-.adminNotifDesc{
+
+.adminNotifDesc {
   margin-top: 0;
 }

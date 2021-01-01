@@ -46,19 +46,18 @@
     align-items: center;
     justify-content: space-between;
     width: 90%;
-    .adminStatsLeftCol{
-      display: flex;      
+
+    .adminStatsLeftCol {
+      display: flex;
       align-self: flex-start;
       flex-direction: column;
       justify-content: flex-start;
     }
-    .adminStatsRightCol{
 
-        }
   }
 }
 
-.adminSolveGraphContainer{
+.adminSolveGraphContainer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -71,11 +70,10 @@
   margin: 1% 10%;
 }
 
-.graphTitle{
+.graphTitle {
   @extend %font-style-basic;
   text-align: left;
   font-weight: 600;
   font-size: 1rem;
   line-height: 18rem/$root-base-size;
 }
-
