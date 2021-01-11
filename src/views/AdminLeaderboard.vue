@@ -3,35 +3,38 @@
     <div class="adminHeadingColor">
       <img src="@/assets/leaderboard.svg" class="adminHeadingColor" />
     </div>
-    <LineGraph
-      :chartData="this.lineGraphData()"
-      :options="this.lineGraphOptions"
-      class="lineGraph"
-      :height="150"
-      v-if="this.users.length > 0 && this.scoreSeries.length > 0"
-    />
-    <div class="adminLbSearchDiv">
-      <div class="adminSearchBar">
-        <button class="searchBtn">
-          <img src="@/assets/search.svg" class="searchImg" />
-        </button>
-        <input
-          v-model="searchQuery"
-          placeholder="Search for teams here..."
-          class="query"
-        />
+    <spin-loader v-if="loading" />
+    <div v-else>
+      <LineGraph
+        :chartData="this.lineGraphData()"
+        :options="this.lineGraphOptions"
+        class="lineGraph"
+        :height="150"
+        v-if="this.users.length > 0 && this.scoreSeries.length > 0"
+      />
+      <div class="adminLbSearchDiv">
+        <div class="adminSearchBar">
+          <button class="searchBtn">
+            <img src="@/assets/search.svg" class="searchImg" />
+          </button>
+          <input
+            v-model="searchQuery"
+            placeholder="Search for teams here..."
+            class="query"
+          />
+        </div>
       </div>
-    </div>
 
-    <admin-table
-      :tableCols="tableCols"
-      :rows="resultQuery"
-      :links="[{ col: 'username', redirect: '/admin/users/' }]"
-      :maxElementPerPage="10"
-      v-if="resultQuery.length > 0"
-    />
-    <div class="adminEmptyDataContainer" v-else>
-      <span class="adminEmptyData">No Users</span>
+      <admin-table
+        v-if="resultQuery.length > 0"
+        :tableCols="tableCols"
+        :rows="resultQuery"
+        :links="[{ col: 'username', redirect: '/admin/users/' }]"
+        :maxElementPerPage="10"
+      />
+      <div class="adminEmptyDataContainer" v-else>
+        <span class="adminEmptyData">No Users</span>
+      </div>
     </div>
   </div>
 </template>
@@ -40,11 +43,13 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
-  components: { adminTable, LineGraph },
+  components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
+      loading: true,
       lineColors: ["#22F80F", "#F80F55", "#0F6CF8"],
       scoreSeries: [],
       lineGraphOptions: {
@@ -210,7 +215,7 @@ export default {
         };
       });
       return scoreSeries;
-    },
+    }
   },
   computed: {
     resultQuery() {
@@ -227,32 +232,36 @@ export default {
     }
   },
   mounted() {
-    UsersService.getUsers().then(users => {
-      if (users === null) {
-        console.log("error fetching users");
-        return;
-      }
-      if (users.length === 0) {
-        return;
-      }
-      users.forEach(element => {
-        this.users.push({
-          rank: element.rank,
-          username: element.username,
-          score: element.score
+    UsersService.getUsers()
+      .then(users => {
+        if (users === null) {
+          console.log("error fetching users");
+          return;
+        }
+        if (users.length === 0) {
+          return;
+        }
+        users.forEach(element => {
+          this.users.push({
+            rank: element.rank,
+            username: element.username,
+            score: element.score
+          });
         });
+        this.displayUsers = this.users.sort((a, b) => {
+          return a.rank > b.rank ? 1 : -1;
+        });
+        let leaders;
+        if (this.displayUsers.length > 3) {
+          leaders = this.displayUsers.slice(0, 3);
+        } else {
+          leaders = this.displayUsers;
+        }
+        this.findScoreSeries(leaders);
+      })
+      .finally(() => {
+        this.loading = false;
       });
-      this.displayUsers = this.users.sort((a, b) => {
-        return a.rank > b.rank ? 1 : -1;
-      });
-      let leaders;
-      if (this.displayUsers.length > 3) {
-        leaders = this.displayUsers.slice(0, 3);
-      } else {
-        leaders = this.displayUsers;
-      }
-      this.findScoreSeries(leaders);
-    });
   }
 };
 </script>

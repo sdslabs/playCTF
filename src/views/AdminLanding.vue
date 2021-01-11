@@ -1,5 +1,6 @@
 <template>
-  <div class="mainAdminContainer">
+  <spin-loader v-if="isLoading" />
+  <div class="mainAdminContainer" v-else>
     <div class="adminHeadingName">Statistics</div>
     <div class="adminStatsContainer">
       <div class="adminOneColContainer">
@@ -134,11 +135,23 @@ import BarGraph from "../components/BarGraph.vue";
 import UsersService from "../api/admin/usersAPI";
 import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
   name: "Admin",
   components: {
     PieChart,
-    BarGraph
+    BarGraph,
+    SpinLoader
+  },
+  computed: {
+    isLoading: function() {
+      for (let apiState in this.loading) {
+        if (this.loading[apiState]) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
   methods: {
     getBarData(tag) {
@@ -195,38 +208,34 @@ export default {
     }
   },
   mounted() {
-    UsersService.getUserStats().then(response => {
-      if (response.status !== 200) {
-        console.log(response);
-      } else {
+    UsersService.getUserStats()
+      .then(response => {
         this.users = response.data;
-      }
-    });
+      })
+      .finally(() => {
+        this.loading.api1 = false;
+      });
 
-    UsersService.getUsers().then(users => {
-      if (users === null) {
-        console.log("error fetching users");
-        return;
-      }
-      if (users.length > 0) {
-        this.leader = users.sort((a, b) => {
-          return a.rank > b.rank ? 1 : -1;
-        })[0];
-      }
-    });
-    ChalService.getChalStats().then(response => {
-      if (response === null) {
-        console.log("Error fetching chal stats");
-        return;
-      } else {
+    UsersService.getUsers()
+      .then(users => {
+        if (users.length > 0) {
+          this.leader = users.sort((a, b) => {
+            return a.rank > b.rank ? 1 : -1;
+          })[0];
+        }
+      })
+      .finally(() => {
+        this.loading.api2 = false;
+      });
+    ChalService.getChalStats()
+      .then(response => {
         this.challenges = response;
-      }
-    });
-    ChalService.getChallenges().then(response => {
-      if (response === null) {
-        console.log("Error fetching challenges");
-        return;
-      } else {
+      })
+      .finally(() => {
+        this.loading.api3 = false;
+      });
+    ChalService.getChallenges()
+      .then(response => {
         this.chalTags = response.categoryFilterOptions;
         SubmissionService.getSubStats(this.chalTags, null).then(response => {
           if (response === null) {
@@ -244,11 +253,19 @@ export default {
             this.chalCategory = response;
           }
         });
-      }
-    });
+      })
+      .finally(() => {
+        this.loading.api4 = false;
+      });
   },
   data() {
     return {
+      loading: {
+        api1: true,
+        api2: true,
+        api3: true,
+        api4: true
+      },
       users: {},
       challenges: {},
       leader: {

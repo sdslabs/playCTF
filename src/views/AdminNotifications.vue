@@ -1,5 +1,6 @@
 <template>
-  <div class="mainAdminContainer">
+  <spin-loader v-if="loading" />
+  <div class="mainAdminContainer" v-else>
     <div class="adHeadingContainerWithFeedback">
       <div class="adminHeadingName">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
@@ -69,10 +70,12 @@
 <script>
 import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
   name: "AdminNotfications",
   components: {
-    NotificationTab
+    NotificationTab,
+    SpinLoader
   },
   data() {
     return {
@@ -83,14 +86,13 @@ export default {
       description: "",
       title: "",
       checked: false,
-      notifications: []
+      notifications: [],
+      loading: true
     };
   },
   mounted() {
-    NotifService.getAllNotifs().then(response => {
-      if (response.status !== 200) {
-        console.log(response.data);
-      } else {
+    NotifService.getAllNotifs()
+      .then(response => {
         console.log(response);
         this.notifications = response.data.sort((a, b) => {
           return new Date(a.updated_at).getTime() <
@@ -98,8 +100,10 @@ export default {
             ? 1
             : -1;
         });
-      }
-    });
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
   methods: {
     isNew: function(notification) {

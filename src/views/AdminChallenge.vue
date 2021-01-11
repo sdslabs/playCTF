@@ -1,5 +1,6 @@
 <template>
-  <div class="mainAdminContainer">
+  <spin-loader v-if="isLoading" />
+  <div class="mainAdminContainer" v-else>
     <div class="adminChalInfo">
       <div class="infoDetails">
         <span class="name">{{ chalDetails.Name }}</span>
@@ -15,7 +16,7 @@
           :class="{
             deployed: chalDetails.Status === 'Deployed',
             purged: chalDetails.Status === 'Purged',
-            undeployed: chalDetails.Status === 'Undeployed',
+            undeployed: chalDetails.Status === 'Undeployed'
           }"
           >{{ chalDetails.Status }}</span
         >
@@ -162,23 +163,38 @@ import ChalService from "../api/admin/challengesAPI";
 import {
   tableCols,
   confimDialogMessages,
-  barChartOptions,
+  barChartOptions
 } from "../constants/constants";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
-  components: { BarGraphVertical, AdminTable },
+  components: { BarGraphVertical, AdminTable, SpinLoader },
   name: "AdminChallenge",
   data() {
     return {
+      loading: {
+        api1: true,
+        api2: true,
+        api3: true
+      },
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
-      confirmDialogs: confimDialogMessages(this.$route.params.id)
-        .adminChallenge,
+      confirmDialogs: confimDialogMessages(this.$route.params.id).adminChallenge
     };
+  },
+  computed: {
+    isLoading: function() {
+      for (let apiState in this.loading) {
+        if (this.loading[apiState]) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     barData() {
       return {
@@ -186,9 +202,9 @@ export default {
         datasets: [
           {
             backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [this.solvePercentage()],
-          },
-        ],
+            data: [this.solvePercentage()]
+          }
+        ]
       };
     },
     barChartOptions() {
@@ -202,66 +218,67 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: (confirm) => {
+        callback: confirm => {
           if (confirm) {
-            ChalService.manageChalAction(name, action).then(
-              async (response) => {
-                if (response.status !== 200) {
-                  console.log(response.data);
+            ChalService.manageChalAction(name, action).then(async response => {
+              if (response.status !== 200) {
+                console.log(response.data);
+              } else {
+                if (action === "purge") {
+                  await this.sleep(5000);
+                  this.$router.push("/admin/challenges");
                 } else {
-                  if (action === "purge") {
-                    await this.sleep(5000);
-                    this.$router.push("/admin/challenges");
-                  } else {
-                    this.$router.go();
-                  }
+                  this.$router.go();
                 }
               }
-            );
+            });
           }
-        },
+        }
       });
-    },
+    }
   },
   mounted() {
-    UsersService.getUserStats().then((response) => {
-      if (response.status !== 200) {
-        console.log(response);
-      } else {
+    UsersService.getUserStats()
+      .then(response => {
         this.activeUsers = response.data.unbanned_users;
-      }
-    });
-    ChalService.fetchChallengeByName(this.$route.params.id).then((response) => {
-      if (response.status !== 200) {
-        console.log(response.data);
-      } else {
-        console.log(response.data);
-        let data = response.data;
-        this.chalDetails = data;
-        if (data.Ports !== null) {
-          this.chalDetails.port = data.Ports[0];
+      })
+      .finally(() => {
+        this.loading.api1 = false;
+      });
+    ChalService.fetchChallengeByName(this.$route.params.id)
+      .then(response => {
+        if (response.status !== 200) {
+          console.log(response.data);
+        } else {
+          console.log(response.data);
+          let data = response.data;
+          this.chalDetails = data;
+          if (data.Ports !== null) {
+            this.chalDetails.port = data.Ports[0];
+          }
         }
-      }
-    });
+      })
+      .finally(() => {
+        this.loading.api2 = false;
+      });
 
-    SubmissionService.getSubmissions().then((response) => {
-      if (response.status !== 200) {
-        console.log(response.data);
-        return;
-      } else {
-        response.data.forEach((element) => {
+    SubmissionService.getSubmissions()
+      .then(response => {
+        response.data.forEach(element => {
           if (element.name == this.$route.params.id) {
             let timeData = moment(element.solvedAt).format(
               "h:mm:ss; MMMM Do, YYYY"
             );
             this.rows.push({
               username: element.username,
-              timeDateRight: timeData,
+              timeDateRight: timeData
             });
           }
         });
-      }
-    });
-  },
+      })
+      .finally(() => {
+        this.loading.api3 = false;
+      });
+  }
 };
 </script>

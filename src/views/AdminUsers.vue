@@ -43,14 +43,18 @@
         </template>
       </v-select>
     </div>
+    <spin-loader v-if="loading" />
     <admin-table
-      v-if="this.resultQuery.length > 0"
+      v-if="this.resultQuery.length > 0 && !loading"
       :tableCols="tableCols"
       :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
     />
-    <div class="adminEmptyDataContainer" v-else>
+    <div
+      class="adminEmptyDataContainer"
+      v-if="!loading && this.resultQuery.length === 0"
+    >
       <span class="adminEmptyData">{{
         this.emptyDataMessage[this.statusFilter]
       }}</span>
@@ -60,11 +64,13 @@
 <script>
 import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
-  components: { adminTable },
+  components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
+      loading: true,
       emptyDataMessage: {
         All: "No Users",
         Active: "No Active Users",
@@ -123,17 +129,21 @@ export default {
     };
   },
   mounted() {
-    UsersService.getUsers().then(users => {
-      console.log(users);
-      if (users === null) {
-        console.log("error fetching users");
-        return;
-      }
-      this.users = users;
-      this.displayUsers = this.users.sort((a, b) => {
-        return a.username > b.username ? 1 : -1;
+    UsersService.getUsers()
+      .then(users => {
+        console.log(users);
+        if (users === null) {
+          console.log("error fetching users");
+          return;
+        }
+        this.users = users;
+        this.displayUsers = this.users.sort((a, b) => {
+          return a.username > b.username ? 1 : -1;
+        });
+      })
+      .finally(() => {
+        this.loading = false;
       });
-    });
   },
   methods: {
     changeFilter(value) {
@@ -157,7 +167,7 @@ export default {
           return a.rank > b.rank ? 1 : -1;
         });
       }
-    },
+    }
   },
   computed: {
     resultQuery() {

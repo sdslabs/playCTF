@@ -2,48 +2,44 @@ import { axiosInstance } from "../axiosInstance.js";
 
 export default {
   async getChalCategory(tags) {
+    let submissionsCategory = {};
     let response = await this.fetchAllChallenges();
-    if (response.status !== 200) {
-      return null;
-    } else {
-      let submissionsCategory = {};
-      tags.forEach(tag => {
-        let challenges = response.data.filter(el => {
-          return el.Category === tag.name;
-        });
-        let totalChallenges = challenges.length;
-        let userSolves = [];
-        challenges.forEach(el => {
-          if (el.Solves !== null) {
-            el.Solves.forEach(solve => {
-              if (
+    tags.forEach(tag => {
+      let challenges = response.data.filter(el => {
+        return el.Category === tag.name;
+      });
+      let totalChallenges = challenges.length;
+      let userSolves = [];
+      challenges.forEach(el => {
+        if (el.Solves !== null) {
+          el.Solves.forEach(solve => {
+            if (
+              userSolves.findIndex(el => {
+                el.username === solve.username;
+              }) === -1
+            ) {
+              userSolves.push({
+                username: solve.username,
+                solves: 1
+              });
+            } else {
+              userSolves[
                 userSolves.findIndex(el => {
                   el.username === solve.username;
-                }) === -1
-              ) {
-                userSolves.push({
-                  username: solve.username,
-                  solves: 1
-                });
-              } else {
-                userSolves[
-                  userSolves.findIndex(el => {
-                    el.username === solve.username;
-                  })
-                ].solves++;
-              }
-            });
-          }
-        });
-        userSolves = userSolves.sort((a, b) => {
-          return a.solves < b.solves ? 1 : -1;
-        });
-        submissionsCategory[tag.name] = {};
-        submissionsCategory[tag.name].solves = userSolves;
-        submissionsCategory[tag.name].total = totalChallenges;
+                })
+              ].solves++;
+            }
+          });
+        }
       });
-      return submissionsCategory;
-    }
+      userSolves = userSolves.sort((a, b) => {
+        return a.solves < b.solves ? 1 : -1;
+      });
+      submissionsCategory[tag.name] = {};
+      submissionsCategory[tag.name].solves = userSolves;
+      submissionsCategory[tag.name].total = totalChallenges;
+    });
+    return submissionsCategory;
   },
   async getChalStats() {
     let response = await this.fetchAllChallenges();
@@ -95,34 +91,30 @@ export default {
 
   async getChallenges() {
     let response = await this.fetchAllChallenges();
-    if (response.status !== 200) {
-      return null;
-    } else {
-      let challenges = response.data;
-      let allTags = [];
-      let categoryFilterOptions = [];
-      let displayChallenges = [];
-      challenges.forEach(el => {
-        allTags.push(el.Category);
-      });
-      allTags = allTags.filter((item, pos) => {
-        return allTags.indexOf(item) == pos;
-      });
-      let id = 2;
-      allTags.forEach(el => {
-        categoryFilterOptions.push({ id: id, name: el });
-        id++;
-      });
-      displayChallenges = challenges.sort((a, b) => {
-        return a.Name > b.Name ? 1 : -1;
-      });
-      return {
-        challenges,
-        allTags,
-        categoryFilterOptions,
-        displayChallenges
-      };
-    }
+    let challenges = response.data;
+    let allTags = [];
+    let categoryFilterOptions = [];
+    let displayChallenges = [];
+    challenges.forEach(el => {
+      allTags.push(el.Category);
+    });
+    allTags = allTags.filter((item, pos) => {
+      return allTags.indexOf(item) == pos;
+    });
+    let id = 2;
+    allTags.forEach(el => {
+      categoryFilterOptions.push({ id: id, name: el });
+      id++;
+    });
+    displayChallenges = challenges.sort((a, b) => {
+      return a.Name > b.Name ? 1 : -1;
+    });
+    return {
+      challenges,
+      allTags,
+      categoryFilterOptions,
+      displayChallenges
+    };
   },
 
   async fetchAllChallenges() {
@@ -134,7 +126,7 @@ export default {
     let response = await axiosInstance({
       method: "post",
       url: `/api/info/challenge/info`,
-      data: postData,
+      data: postData
     });
     return response;
   },
@@ -146,7 +138,7 @@ export default {
     let response = await axiosInstance({
       method: "post",
       url: `/api/manage/challenge/`,
-      data: postData,
+      data: postData
     });
     return response;
   }

@@ -8,7 +8,7 @@ export default {
     return await axiosInstance({
       method: "post",
       url: `/api/notification/add`,
-      data: bodyFormData,
+      data: bodyFormData
     });
   },
 

@@ -173,3 +173,16 @@
         width: 200rem/$root-base-size;
     }
 }
+
+.loader{
+    align-self: center;
+    text-align: center;
+    justify-self: center;
+    padding:5%
+}
+
+.vue-simple-spinner-text{
+    @extend %font-style-bold;
+    line-height: 24rem/$root-base-size;
+    color: rgba(87, 87, 87, 0.7);
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="adminChallengesContainer">
-    <div class="adminChallengesVerticalNav">
+    <div class="adminChallengesVerticalNav" v-if="!loading">
       <button
         v-for="category in this.categoryFilterOptions"
         :key="category.id"
@@ -44,14 +44,21 @@
           </template>
         </v-select>
       </div>
-      <div class="adminChallengesList" v-if="displayChallenges.length > 0">
+      <spin-loader v-if="loading" />
+      <div
+        class="adminChallengesList"
+        v-if="displayChallenges.length > 0 && !loading"
+      >
         <admin-chall-card
           v-for="challenge in displayChallenges"
           :key="challenge.ChallId"
           :challenge="challenge"
         />
       </div>
-      <div class="adminEmptyDataContainer" v-else>
+      <div
+        class="adminEmptyDataContainer"
+        v-if="displayChallenges.length === 0 && !loading"
+      >
         <span class="adminEmptyData">No Challenges available</span>
       </div>
     </div>
@@ -60,11 +67,13 @@
 <script>
 import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
+import SpinLoader from "../components/spinLoader";
 export default {
   name: "AdminChallenges",
-  components: { adminChallCard },
+  components: { adminChallCard, SpinLoader },
   data() {
     return {
+      loading: true,
       statusFilter: "All",
       sortFilter: "Name",
       categoryFilter: "All",
@@ -74,26 +83,25 @@ export default {
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 },
+        { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"],
+      statusFilterOptions: ["All", "Deployed", "Undeployed"]
     };
   },
   mounted() {
-    ChalService.getChallenges().then((response) => {
-      if (response === null) {
-        console.log("Error fetching All challenges");
-        return;
-      } else {
+    ChalService.getChallenges()
+      .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.categoryFilterOptions = [
           ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions,
+          ...response.categoryFilterOptions
         ];
         this.displayChallenges = response.displayChallenges;
-      }
-    });
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
   methods: {
     changeFilter(value) {
@@ -101,7 +109,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.Status == value;
         });
       }
@@ -114,11 +122,11 @@ export default {
         });
       } else if (value === "Score") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return this.findGreater(a,b,'Points','Name')
+          return this.findGreater(a, b, "Points", "Name");
         });
       } else if (value === "Solves") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return this.findGreater(a,b,'SolvesNumber','Name')
+          return this.findGreater(a, b, "SolvesNumber", "Name");
         });
       }
     },
@@ -127,7 +135,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.displayChallenges.filter((el) => {
+        this.displayChallenges = this.displayChallenges.filter(el => {
           return el.Category == value;
         });
       }
@@ -140,7 +148,7 @@ export default {
             : -1
           : 1
         : -1;
-    },
-  },
+    }
+  }
 };
 </script>

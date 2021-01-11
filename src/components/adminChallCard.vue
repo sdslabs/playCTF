@@ -27,6 +27,6 @@
 <script>
 export default {
   name: "adminChallCard",
-  props: ["challenge"],
+  props: ["challenge"]
 };
 </script>

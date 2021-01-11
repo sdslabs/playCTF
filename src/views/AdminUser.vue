@@ -1,5 +1,6 @@
 <template>
-  <div class="mainAdminContainer">
+  <spin-loader v-if="isLoading" />
+  <div class="mainAdminContainer" v-else>
     <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
     <div class="adminUserInfoContainer">
       <div class="user">
@@ -134,15 +135,21 @@ import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
+import SpinLoader from "../components/spinLoader";
 export default {
   name: "AdminUser",
   components: {
     LineGraph,
     adminTable,
-    PieChart
+    PieChart,
+    SpinLoader
   },
   data() {
     return {
+      loading: {
+        api1: true,
+        api2: true
+      },
       confirmDialogs: {
         ban: {
           title: "Want to ban this player?",
@@ -255,16 +262,22 @@ export default {
       ]
     };
   },
+  computed: {
+    isLoading: function() {
+      for (let apiState in this.loading) {
+        if (this.loading[apiState]) {
+          return true;
+        }
+      }
+      return false;
+    }
+  },
   methods: {
     manageUser(userId, action) {
       this.$confirm({
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        /**
-         * Callback Function
-         * @param {Boolean} confirm
-         */
         callback: confirm => {
           if (confirm) {
             UsersService.manageUser(userId, action).then(response => {
@@ -338,27 +351,31 @@ export default {
     }
   },
   mounted() {
-    ChalService.getChallenges().then(response => {
-      if (response === null) {
-        console.log("Error fetching challenges");
-        return;
-      } else {
-        this.chalTags = response.categoryFilterOptions;
-        SubmissionService.getSubStats(
-          this.chalTags,
-          this.$route.params.username
-        ).then(response => {
-          if (response === null) {
-            console.log("error fetching submission stats");
-          } else {
-            this.submissions = response;
-            console.log(this.submissions);
-          }
-        });
-      }
-    });
-    UsersService.getUserByUsername(this.$route.params.username).then(
-      response => {
+    ChalService.getChallenges()
+      .then(response => {
+        if (response === null) {
+          console.log("Error fetching challenges");
+          return;
+        } else {
+          this.chalTags = response.categoryFilterOptions;
+          SubmissionService.getSubStats(
+            this.chalTags,
+            this.$route.params.username
+          ).then(response => {
+            if (response === null) {
+              console.log("error fetching submission stats");
+            } else {
+              this.submissions = response;
+              console.log(this.submissions);
+            }
+          });
+        }
+      })
+      .finally(() => {
+        this.loading.api1 = false;
+      });
+    UsersService.getUserByUsername(this.$route.params.username)
+      .then(response => {
         if (response.status !== 200) {
           console.log(response.data);
         } else {
@@ -385,8 +402,10 @@ export default {
             }
           );
         }
-      }
-    );
+      })
+      .finally(() => {
+        this.loading.api2 = false;
+      });
   }
 };
 </script>

@@ -8,6 +8,7 @@ import "vue-select/src/scss/vue-select.scss";
 import VuejsPaginate from "vuejs-paginate";
 import store from "./store/index";
 import VueConfirmDialog from "vue-confirm-dialog";
+import Spinner from "vue-simple-spinner";
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
@@ -15,6 +16,14 @@ Vue.component("admin-layout", AdminLayout);
 Vue.component("v-select", vSelect);
 Vue.component("paginate", VuejsPaginate);
 Vue.component("vue-confirm-dialog", VueConfirmDialog.default);
+Vue.component("loader", Spinner);
+Vue.mixin({
+  methods: {
+    apiErrHandler: function(error) {
+      console.log(error);
+    }
+  }
+});
 new Vue({
   router,
   store,
