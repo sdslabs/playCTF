@@ -1,4 +1,41 @@
+export const colors = {
+  statistics: {
+    barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
+    pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"]
+  },
+  leaderboard: {
+    lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"]
+  }
+};
+
 export const tableCols = {
+  leaderboard: [
+    {
+      id: 1,
+      label: "Rank",
+      style: {
+        textAlign: "center",
+        width: "10%"
+      }
+    },
+    {
+      id: 2,
+      label: "User Name",
+      style: {
+        width: "75%",
+        paddingLeft: "40px",
+        textAlign: "left"
+      }
+    },
+    {
+      id: 3,
+      label: "Score",
+      style: {
+        textAlign: "center",
+        width: "15%"
+      }
+    }
+  ],
   adminSumbissions: [
     {
       id: 1,
@@ -66,15 +103,105 @@ export const confimDialogMessages = chalName => {
   };
 };
 
-export const barChartOptions = () => {
+export const pieChartOptions = () => {
   return {
+    hoverBorderWidth: 20,
+    responsive: true,
+    maintainAspectRatio: true,
+    legend: {
+      position: "right",
+      labels: {
+        boxWidth: 20
+      }
+    }
+  };
+};
+
+export const barChartOptions = () => {
+  let containerProps = {
     responsive: true,
     maintainAspectRatio: true,
     legend: {
       display: false
+    }
+  };
+  let gridProps = {
+    color: "#575757",
+    drawOnChartArea: false
+  };
+
+  let supportAxisProps = [
+    {
+      gridLines: gridProps
+    }
+  ];
+  return {
+    challenges: {
+      ...containerProps,
+      scales: {
+        yAxes: [
+          {
+            gridLines: gridProps,
+            scaleLabel: {
+              display: true,
+              labelString: "Solve %"
+            },
+            ticks: {
+              stepSize: 33,
+              min: 0,
+              max: 100
+            }
+          }
+        ]
+      },
+      xAxes: supportAxisProps
     },
+    statistics: {
+      ...containerProps,
+      scales: {
+        xAxes: [
+          {
+            gridLines: gridProps,
+            ticks: {
+              stepSize: 20,
+              min: 0,
+              max: 100,
+              fontColor: "#393939",
+              fontFamily: "Roboto",
+              fontStyle: "normal"
+            },
+            scaleLabel: {
+              display: true,
+              labelString: "Solve %"
+            }
+          }
+        ]
+      },
+      yAxes: supportAxisProps
+    }
+  };
+};
+
+export const lineGraphOptions = () => {
+  return {
+    layout: {
+      padding: 10
+    },
+    legend: {
+      display: true,
+      position: "top",
+      labels: {
+        fontFamily: "Nunito Sans",
+        fontColor: "#191919",
+        fontSize: 12,
+        lineHeight: 12,
+        boxWidth: 20
+      }
+    },
+    responsive: true,
+    maintainAspectRatio: true,
     scales: {
-      yAxes: [
+      xAxes: [
         {
           gridLines: {
             color: "#575757",
@@ -82,23 +209,47 @@ export const barChartOptions = () => {
           },
           scaleLabel: {
             display: true,
-            labelString: "Solve %"
+            labelString: "Time"
           },
           ticks: {
-            stepSize: 33,
-            min: 0,
-            max: 100
+            source: "auto",
+            fontColor: "#393939",
+            fontFamily: "Roboto",
+            fontStyle: "normal"
+          },
+          type: "time",
+          distribution: "linear",
+          time: {
+            unit: "hour"
+          }
+        }
+      ],
+      yAxes: [
+        {
+          scaleLabel: {
+            display: true,
+            labelString: "Score"
+          },
+          gridLines: {
+            color: "#575757",
+            drawOnChartArea: false
+          },
+          ticks: {
+            source: "auto",
+            fontColor: "#393939",
+            fontFamily: "Roboto",
+            fontStyle: "normal",
+            min: 0
           }
         }
       ]
-    },
-    xAxes: [
-      {
-        gridLines: {
-          color: "#575757",
-          drawOnChartArea: false
-        }
-      }
-    ]
+    }
   };
+};
+
+export const lineGraphConfig = {
+  lineTension: 0,
+  pointRadius: 5,
+  borderWidth: 1,
+  fill: false
 };

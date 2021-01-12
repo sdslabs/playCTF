@@ -156,7 +156,6 @@
 <script>
 import BarGraphVertical from "../components/BarGraphVertical.vue";
 import AdminTable from "../components/adminTable.vue";
-import moment from "moment";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import ChalService from "../api/admin/challengesAPI";
@@ -208,7 +207,7 @@ export default {
       };
     },
     barChartOptions() {
-      return barChartOptions();
+      return barChartOptions().challenges;
     },
     solvePercentage() {
       return (this.chalDetails.SolvesNumber / this.activeUsers) * 100;
@@ -247,15 +246,11 @@ export default {
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
       .then(response => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          console.log(response.data);
-          let data = response.data;
-          this.chalDetails = data;
-          if (data.Ports !== null) {
-            this.chalDetails.port = data.Ports[0];
-          }
+        console.log(response.data);
+        let data = response.data;
+        this.chalDetails = data;
+        if (data.Ports !== null) {
+          this.chalDetails.port = data.Ports[0];
         }
       })
       .finally(() => {
@@ -264,14 +259,11 @@ export default {
 
     SubmissionService.getSubmissions()
       .then(response => {
-        response.data.forEach(element => {
+        response.forEach(element => {
           if (element.name == this.$route.params.id) {
-            let timeData = moment(element.solvedAt).format(
-              "h:mm:ss; MMMM Do, YYYY"
-            );
             this.rows.push({
               username: element.username,
-              timeDateRight: timeData
+              timeDateRight: element.solvedAt
             });
           }
         });

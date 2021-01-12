@@ -141,13 +141,11 @@ export default {
       }
     },
     findGreater(a, b, field1, field2) {
-      return a[field1] <= b[field2]
-        ? a[field1] === b[field1]
-          ? a[field2] > b[field2]
-            ? 1
-            : -1
-          : 1
-        : -1;
+      return a[field1] === b[field1]
+        ? a[field2] > b[field2]
+          ? 1
+          : -1
+        : a[field1] - b[field1];
     }
   }
 };

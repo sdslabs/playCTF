@@ -117,11 +117,7 @@
             />
           </div>
         </div>
-        <div
-          class="adminEmptyDataContainer"
-          :style="{ alignSelf: 'flex-start' }"
-          v-else
-        >
+        <div class="adminEmptyDataContainer" v-else>
           <span class="adminEmptyData">No Challenges Category Available</span>
         </div>
       </div>
@@ -136,6 +132,11 @@ import UsersService from "../api/admin/usersAPI";
 import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import {
+  colors,
+  barChartOptions,
+  pieChartOptions
+} from "../constants/constants";
 export default {
   name: "Admin",
   components: {
@@ -163,28 +164,17 @@ export default {
       let data = [];
       dataSolves.forEach(el => {
         labels.push(el.username);
-        console.log(this.chalCategory[tag]);
         data.push((el.solves / this.chalCategory[tag].total) * 100);
       });
-      console.log(data);
       return {
         labels,
         datasets: [
           {
-            backgroundColor: [
-              "#55C39C",
-              "#6269AB",
-              "#59ABDA",
-              "#81C1D6",
-              "#6E8A8E"
-            ],
+            backgroundColor: colors.statistics.barGraph,
             data
           }
         ]
       };
-    },
-    changeFilter(value) {
-      this.categoryFilter = value;
     },
     categoryChartData() {
       let labels = [];
@@ -200,7 +190,7 @@ export default {
         labels,
         datasets: [
           {
-            backgroundColor: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
+            backgroundColor: colors.statistics.pieChart,
             data
           }
         ]
@@ -238,20 +228,10 @@ export default {
       .then(response => {
         this.chalTags = response.categoryFilterOptions;
         SubmissionService.getSubStats(this.chalTags, null).then(response => {
-          if (response === null) {
-            console.log("error fetching submission stats");
-          } else {
-            this.submissions = response;
-            console.log(this.submissions);
-          }
+          this.submissions = response;
         });
         ChalService.getChalCategory(this.chalTags).then(response => {
-          if (response === null) {
-            console.log("Error fetching challenge category data");
-            return;
-          } else {
-            this.chalCategory = response;
-          }
+          this.chalCategory = response;
         });
       })
       .finally(() => {
@@ -274,55 +254,8 @@ export default {
       },
       submissions: {},
       chalCategory: {},
-      categoryFilter: "Correct",
-      chartOptions: {
-        hoverBorderWidth: 20,
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          position: "right",
-          labels: {
-            boxWidth: 20
-          }
-        }
-      },
-      barChartOptions: {
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              ticks: {
-                stepSize: 20,
-                min: 0,
-                max: 100,
-                fontColor: "#393939",
-                fontFamily: "Roboto",
-                fontStyle: "normal"
-              },
-              scaleLabel: {
-                display: true,
-                labelString: "Solve %"
-              }
-            }
-          ]
-        },
-        yAxes: [
-          {
-            gridLines: {
-              color: "#575757",
-              drawOnChartArea: false
-            }
-          }
-        ]
-      }
+      chartOptions: pieChartOptions(),
+      barChartOptions: barChartOptions().statistics
     };
   }
 };

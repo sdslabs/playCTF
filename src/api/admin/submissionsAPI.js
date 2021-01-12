@@ -1,50 +1,44 @@
 import { axiosInstance } from "../axiosInstance.js";
-
+import moment from "moment";
 export default {
   async getSubmissions() {
-    return await axiosInstance.post(`/api/info/submissions`);
+    let response = await axiosInstance.post(`/api/info/submissions`);
+    let submissions = [];
+    response.data.forEach(element => {
+      element.solvedAt = moment(element.solvedAt).format(
+        "h:mm:ss; MMMM Do, YYYY"
+      );
+      submissions.push(element);
+    });
+    return submissions;
   },
   async getSubStats(tags, user) {
     let response = await this.getSubmissions();
-    if (response.status !== 200) {
-      return null;
+    let submissions = {};
+    let totalChal = 0;
+    tags.forEach(el => {
+      submissions[el.name] = 0;
+    });
+    let subs;
+    if (user === null) {
+      subs = response;
     } else {
-      let submissions = {};
-      let totalChal = 0;
-      tags.forEach(el => {
-        submissions[el.name] = 0;
+      subs = response.filter(el => {
+        return el.username === user;
       });
-      if (response.data !== null) {
-        let subs;
-        if (user === null) {
-          subs = response.data;
-        } else {
-          subs = response.data.filter(el => {
-            return el.username === user;
-          });
-        }
-        subs.forEach(el => {
-          submissions[el.category]++;
-          totalChal++;
-        });
-      }
-      return { totalChal: totalChal, category: submissions };
     }
+    subs.forEach(el => {
+      submissions[el.category]++;
+      totalChal++;
+    });
+    return { totalChal: totalChal, category: submissions };
   },
 
   async getUserSubs(username) {
     let response = await this.getSubmissions();
-    if (response.status !== 200) {
-      return null;
-    } else {
-      let data = response.data;
-      if (data === null) {
-        return;
-      }
-      data = data.filter(el => {
-        return el.username === username;
-      });
-      return data;
-    }
+    let data = response.filter(el => {
+      return el.username === username;
+    });
+    return data;
   }
 };

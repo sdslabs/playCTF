@@ -44,106 +44,23 @@ import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
 import SpinLoader from "../components/spinLoader.vue";
+import {
+  tableCols,
+  colors,
+  lineGraphOptions,
+  lineGraphConfig
+} from "../constants/constants";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
       loading: true,
-      lineColors: ["#22F80F", "#F80F55", "#0F6CF8"],
+      lineColors: colors.leaderboard.lineGraph,
       scoreSeries: [],
-      lineGraphOptions: {
-        layout: {
-          padding: 10
-        },
-        legend: {
-          display: true,
-          position: "top",
-          labels: {
-            fontFamily: "Nunito Sans",
-            fontColor: "#191919",
-            fontSize: 12,
-            lineHeight: 12,
-            boxWidth: 20
-          }
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              scaleLabel: {
-                display: true,
-                labelString: "Time"
-              },
-              ticks: {
-                source: "auto",
-                fontColor: "#393939",
-                fontFamily: "Roboto",
-                fontStyle: "normal"
-              },
-              type: "time",
-              distribution: "linear",
-              time: {
-                unit: "hour"
-              }
-            }
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: "Score"
-              },
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              ticks: {
-                source: "auto",
-                fontColor: "#393939",
-                fontFamily: "Roboto",
-                fontStyle: "normal",
-                min: 0
-              }
-            }
-          ]
-        }
-      },
+      lineGraphOptions: lineGraphOptions(),
       searchQuery: "",
-      ascending: false,
-      sortColumn: "",
-      tableCols: [
-        {
-          id: 1,
-          label: "Rank",
-          style: {
-            textAlign: "center",
-            width: "10%"
-          }
-        },
-        {
-          id: 2,
-          label: "User Name",
-          style: {
-            width: "75%",
-            paddingLeft: "40px",
-            textAlign: "left"
-          }
-        },
-        {
-          id: 3,
-          label: "Score",
-          style: {
-            textAlign: "center",
-            width: "15%"
-          }
-        }
-      ],
+      tableCols: tableCols.leaderboard,
       users: [],
       displayUsers: []
     };
@@ -168,10 +85,7 @@ export default {
           backgroundColor: this.lineColors[index],
           borderColor: this.lineColors[index],
           label: `${this.scoreSeries[index].username} ${labelPostText}`,
-          lineTension: 0,
-          pointRadius: 5,
-          borderWidth: 1,
-          fill: false,
+          ...lineGraphConfig,
           data: this.scoreSeries[index].series
         });
       });
@@ -234,10 +148,6 @@ export default {
   mounted() {
     UsersService.getUsers()
       .then(users => {
-        if (users === null) {
-          console.log("error fetching users");
-          return;
-        }
         if (users.length === 0) {
           return;
         }

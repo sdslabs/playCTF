@@ -24,7 +24,6 @@
 <script>
 import SubmissionService from "../api/admin/submissionsAPI";
 import adminTable from "../components/adminTable.vue";
-import moment from "moment";
 import spinLoader from "../components/spinLoader.vue";
 import { tableCols } from "../constants/constants";
 export default {
@@ -44,21 +43,14 @@ export default {
   mounted() {
     SubmissionService.getSubmissions()
       .then(response => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          response.data.forEach(element => {
-            let timeData = moment(element.solvedAt).format(
-              "h:mm:ss; MMMM Do, YYYY"
-            );
-            this.rows.push({
-              username: element.username,
-              challenge: element.name,
-              category: element.category,
-              timeDate: timeData
-            });
+        response.forEach(element => {
+          this.rows.push({
+            username: element.username,
+            challenge: element.name,
+            category: element.category,
+            timeDate: element.solvedAt
           });
-        }
+        });
       })
       .finally(() => {
         this.loading = false;

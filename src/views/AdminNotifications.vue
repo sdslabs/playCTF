@@ -93,7 +93,6 @@ export default {
   mounted() {
     NotifService.getAllNotifs()
       .then(response => {
-        console.log(response);
         this.notifications = response.data.sort((a, b) => {
           return new Date(a.updated_at).getTime() <
             new Date(b.updated_at).getTime()
