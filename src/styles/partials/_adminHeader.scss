@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: $primary-font-family, sans-serif;
   font-size: 0.75rem;
   line-height: 1.25rem;
   color: $theme-color-grey39;
@@ -39,7 +39,7 @@
   outline: none;
   color: $theme-color-violet;
   background-color: inherit;
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: $primary-font-family, sans-serif;
   font-weight: 600;
   margin: 0;
 }

@@ -9,7 +9,7 @@
 // }
 
 // .heading {
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: bold;
 //   font-size: 1.5rem * $screenRatio;
@@ -43,7 +43,7 @@
 
 // .fields {
 //   text-align: left;
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   font-size: 0.875rem * $screenRatio;
@@ -54,7 +54,7 @@
 // .subfields {
 //   font-size: 0.75rem * $screenRatio;
 //   text-align: left;
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   line-height: 1.125rem * $screenRatio;
@@ -98,7 +98,7 @@
 // }
 
 // label {
-//   font-family: Nunito Sans;
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   font-size: 0.875rem * $screenRatio;
@@ -121,7 +121,7 @@
 //   flex-direction: row;
 //   justify-content: flex-start;
 //   align-items: center;
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   font-size: 1rem * $screenRatio;
@@ -132,7 +132,7 @@
 //   background-color: $theme-color-dark-orange;
 //   border-radius: 0.125rem;
 //   color: $theme-color-white;
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: bold;
 //   font-size: 0.875rem * $screenRatio;
@@ -159,7 +159,7 @@
 // }
 
 // .title::placeholder {
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   font-size: 1rem * $screenRatio;
@@ -182,7 +182,7 @@
 // }
 
 // textarea::placeholder {
-//   font-family: "Nunito Sans";
+//   font-family: $primary-font-family;
 //   font-style: normal;
 //   font-weight: 600;
 //   font-size: 1rem * $screenRatio;

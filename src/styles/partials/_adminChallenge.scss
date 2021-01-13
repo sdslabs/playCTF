@@ -33,7 +33,7 @@
         align-items: center;
 
         .name {
-            font-family: 'Nunito Sans';
+            font-family: $primary-font-family;
             font-style: normal;
             font-weight: bold;
             font-size: 1.5rem;
@@ -46,7 +46,7 @@
             vertical-align: middle;
             background: $theme-color-violet;
             border-radius: 0.125rem;
-            font-family: "Open Sans";
+            font-family: $secondary-font-family;
             font-style: normal;
             font-weight: bold;
             font-size: 0.875rem;
@@ -59,7 +59,7 @@
 
         .status {
             margin-left: auto;
-            font-family: 'Nunito Sans';
+            font-family: $primary-font-family;
             font-style: normal;
             font-weight: bold;
             font-size: 1.25rem;
@@ -131,7 +131,7 @@
 
     .aboutText {
         text-align: left;
-        font-family: 'Open Sans';
+        font-family: $secondary-font-family;
         font-style: normal;
         font-weight: normal;
         font-size: 0.875rem;

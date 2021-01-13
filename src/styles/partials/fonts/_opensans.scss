@@ -1,6 +1,6 @@
 /* ITALIC
 @font-face {
-  font-family: 'Open Sans';
+  font-family: $secondary-font-family;
   font-style: italic;
   font-weight: 300;
   font-display: swap;
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: $secondary-font-family;
   font-style: italic;
   font-weight: 400;
   font-display: swap;
@@ -18,7 +18,7 @@
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: $secondary-font-family;
   font-style: italic;
   font-weight: 600;
   font-display: swap;
@@ -27,7 +27,7 @@
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: $secondary-font-family;
   font-style: italic;
   font-weight: 700;
   font-display: swap;
@@ -36,7 +36,7 @@
 }
 
 @font-face {
-  font-family: 'Open Sans';
+  font-family: $secondary-font-family;
   font-style: italic;
   font-weight: 800;
   font-display: swap;
@@ -46,7 +46,7 @@
 
 NORMAL */
 @font-face {
-    font-family: "Open Sans";
+    font-family: $secondary-font-family;
     
     font-weight: 300;
     font-display: swap;
@@ -58,7 +58,7 @@ NORMAL */
   }
   
   @font-face {
-    font-family: "Open Sans";
+    font-family: $secondary-font-family;
     
     font-weight: 400;
     font-display: swap;
@@ -70,7 +70,7 @@ NORMAL */
   }
   /*
   @font-face {
-    font-family: 'Open Sans';
+    font-family: $secondary-font-family;
     
     font-weight: 600;
     font-display: swap;
@@ -79,7 +79,7 @@ NORMAL */
   }
   */
   @font-face {
-    font-family: "Open Sans";
+    font-family: $secondary-font-family;
     
     font-weight: 700;
     font-display: swap;
@@ -91,7 +91,7 @@ NORMAL */
   }
   /*
   @font-face {
-    font-family: 'Open Sans';
+    font-family: $secondary-font-family;
     
     font-weight: 800;
     font-display: swap;

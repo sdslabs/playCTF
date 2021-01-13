@@ -19,7 +19,7 @@
 .adminFooterTitle {
   text-align: left;
   vertical-align: middle;
-  font-family: 'Nunito Sans';
+  font-family: $primary-font-family;
   font-style: normal;
   font-weight: 900;
   font-size: 2rem;
@@ -34,7 +34,7 @@
 }
 
 .adminFooterMessage {
-  font-family: 'Nunito Sans';
+  font-family: $primary-font-family;
   font-style: normal;
   font-weight: 600;
   font-size: 0.875rem;

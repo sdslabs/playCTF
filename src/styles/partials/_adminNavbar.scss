@@ -5,7 +5,7 @@
 }
 
 .adminNavbarLink {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: $primary-font-family, sans-serif;
   font-weight: normal;
   font-size: 0.875rem;
   color: $theme-color-grey57;
@@ -21,7 +21,7 @@
 }
 
 .router-link-active.adminNavbarLink {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: $primary-font-family, sans-serif;
   font-size: 0.875rem;
   color: $theme-color-black19;
   font-weight: bold;

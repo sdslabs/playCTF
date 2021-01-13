@@ -71,7 +71,7 @@ $assets-home-project-database-icon: $assets-prefix + "home-project-database-icon
 $assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-add.svg";
 
 %font-style-basic{
-    font-family: 'Nunito Sans';
+    font-family: $primary-font-family;
     font-style: normal;
     font-weight: 600;
     font-size:1rem;
@@ -80,7 +80,7 @@ $assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-
 }
 
 %font-style-bold{
-    font-family: 'Nunito Sans';
+    font-family: $primary-font-family;
     font-style: normal;
     font-weight: bold;
     font-size:0.875rem;
