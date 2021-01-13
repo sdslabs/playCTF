@@ -1,6 +1,6 @@
 import variables from "../styles/main.scss";
 
-export const colors={
+export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
   lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"],
@@ -8,6 +8,49 @@ export const colors={
 };
 
 export const tableCols = {
+  users: [
+    {
+      id: 1,
+      label: "Rank",
+      style: {
+        width: "4.5rem",
+        textAlign: "center"
+      }
+    },
+    {
+      id: 2,
+      label: "User Name",
+      style: {
+        width: "7.5rem",
+        paddingLeft: "1.25rem"
+      }
+    },
+    {
+      id: 3,
+      label: "E-Mail Address",
+      style: {
+        textAlign: "left",
+        paddingLeft: "2.5rem"
+      }
+    },
+    {
+      id: 4,
+      label: "Score",
+      style: {
+        width: "4.5rem",
+        textAlign: "center"
+      }
+    },
+    {
+      id: 5,
+      label: "Status",
+      style: {
+        width: "4.5rem",
+        textAlign: "center",
+        paddingRight: "1.25rem"
+      }
+    }
+  ],
   leaderboard: [
     {
       id: 1,

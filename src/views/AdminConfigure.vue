@@ -77,9 +77,7 @@
       <p class="subfields">Competition logo</p>
       <!-- eslint-disable-next-line -->
       <input type="file" id="actual-button" hidden />
-      <label for="actual-button">
-        <img :src="upload" />Upload file
-      </label>
+      <label for="actual-button"> <img :src="upload" />Upload file </label>
       <p class="subfields">Themes</p>
       <div class="themes">
         <div class="sub-themes">
@@ -108,13 +106,14 @@
   </div>
 </template>
 <script>
-import {preview,upload} from "../constants/images"
+import { preview, upload } from "../constants/images";
 export default {
   name: "AdminConfigure",
-  data(){
-    return{
-      preview,upload
-    }
+  data() {
+    return {
+      preview,
+      upload
+    };
   }
 };
 </script>

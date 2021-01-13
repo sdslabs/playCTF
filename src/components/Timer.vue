@@ -22,8 +22,8 @@ export default {
       hours: "",
       seconds: "",
       statusType: "",
-      startTime: this.$store.state.competitonInfo.startingTime,
-      endTime: this.$store.state.competitonInfo.endingTime
+      startTime: this.$store.state.competitionInfo.startingTime,
+      endTime: this.$store.state.competitionInfo.endingTime
     };
   },
   mounted() {

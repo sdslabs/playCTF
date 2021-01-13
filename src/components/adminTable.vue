@@ -107,36 +107,6 @@ export default {
     changePage() {
       this.currentPage = this.jumpPage;
     },
-    sortTable: function sortTable(col) {
-      if (this.sortColumn === col) {
-        this.ascending = !this.ascending;
-      } else {
-        this.ascending = true;
-        this.sortColumn = col;
-      }
-
-      let ascending = this.ascending;
-
-      this.rows.sort(function(a, b) {
-        if (a[col] > b[col]) {
-          return ascending ? 1 : -1;
-        } else if (a[col] < b[col]) {
-          return ascending ? -1 : 1;
-        }
-        return 0;
-      });
-    },
-    num_pages: function num_pages() {
-      return Math.ceil(this.rows.length / this.maxElementPerPage);
-    },
-    get_rows: function get_rows() {
-      let start = (this.currentPage - 1) * this.maxElementPerPage;
-      let end = start + this.maxElementPerPage;
-      return this.rows.slice(start, end);
-    },
-    change_page: function change_page(page) {
-      this.currentPage = page;
-    },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
     }

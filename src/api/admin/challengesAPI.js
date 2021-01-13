@@ -3,7 +3,7 @@ import { axiosInstance } from "../axiosInstance.js";
 export default {
   async getChalCategory(tags) {
     let submissionsCategory = {};
-    let response = await this.fetchAllChallenges();
+    const response = await this.fetchAllChallenges();
     tags.forEach(tag => {
       let challenges = response.data.filter(el => {
         return el.Category === tag.name;
@@ -42,7 +42,7 @@ export default {
     return submissionsCategory;
   },
   async getChalStats() {
-    let response = await this.fetchAllChallenges();
+    const response = await this.fetchAllChallenges();
     if (response.status !== 200) {
       return null;
     } else {
@@ -50,7 +50,7 @@ export default {
       let undeployedChal = 0;
       let purgedChal = 0;
       let maxSolves = 0;
-      let leastSolves = 1000000000000000;
+      let leastSolves = Number.MAX_SAFE_INTEGER;
       let leastSolvedChal = { name: "-", solves: -1 };
       let maxSolvedChal = { name: "-", solves: -1 };
       response.data.forEach(el => {
@@ -90,7 +90,7 @@ export default {
   },
 
   async getChallenges() {
-    let response = await this.fetchAllChallenges();
+    const response = await this.fetchAllChallenges();
     let challenges = response.data;
     let allTags = [];
     let categoryFilterOptions = [];
@@ -123,23 +123,21 @@ export default {
   async fetchChallengeByName(name) {
     let postData = new FormData();
     postData.append("name", name);
-    let response = await axiosInstance({
+    return await axiosInstance({
       method: "post",
       url: `/api/info/challenge/info`,
       data: postData
     });
-    return response;
   },
 
   async manageChalAction(name, action) {
     let postData = new FormData();
     postData.append("name", name);
     postData.append("action", action);
-    let response = await axiosInstance({
+    return await axiosInstance({
       method: "post",
       url: `/api/manage/challenge/`,
       data: postData
     });
-    return response;
   }
 };

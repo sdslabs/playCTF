@@ -68,7 +68,7 @@
 import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
-import {add} from "../constants/images"
+import { add } from "../constants/images";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader },
@@ -143,11 +143,10 @@ export default {
       }
     },
     findGreater(a, b, field1, field2) {
-      return a[field1] === b[field1]
-        ? a[field2] > b[field2]
-          ? 1
-          : -1
-        : a[field1] - b[field1];
+      if (a[field1] === b[field1]) {
+        return a[field2] > b[field2] ? 1 : -1;
+      }
+      return b[field1] - a[field1];
     }
   }
 };

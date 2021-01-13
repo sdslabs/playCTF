@@ -66,6 +66,7 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { search, userPanel } from "../constants/images";
+import { tableCols } from "../constants/constants";
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
@@ -77,63 +78,21 @@ export default {
       emptyDataMessage: {
         All: "No Users",
         Active: "No Active Users",
-        Banned: "No Banned Users",
+        Banned: "No Banned Users"
       },
       sortFilter: "User Name",
       statusFilter: "All",
       searchQuery: null,
       ascending: false,
       sortColumn: "",
-      tableCols: [
-        {
-          id: 1,
-          label: "Rank",
-          style: {
-            width: "4.5rem",
-            textAlign: "center",
-          },
-        },
-        {
-          id: 2,
-          label: "User Name",
-          style: {
-            width: "7.5rem",
-            paddingLeft: "1.25rem",
-          },
-        },
-        {
-          id: 3,
-          label: "E-Mail Address",
-          style: {
-            textAlign: "left",
-            paddingLeft: "2.5rem",
-          },
-        },
-        {
-          id: 4,
-          label: "Score",
-          style: {
-            width: "4.5rem",
-            textAlign: "center",
-          },
-        },
-        {
-          id: 5,
-          label: "Status",
-          style: {
-            width: "4.5rem",
-            textAlign: "center",
-            paddingRight: "1.25rem",
-          },
-        },
-      ],
+      tableCols: tableCols.users,
       displayUsers: [],
-      users: [],
+      users: []
     };
   },
   mounted() {
     UsersService.getUsers()
-      .then((users) => {
+      .then(users => {
         console.log(users);
         if (users === null) {
           console.log("error fetching users");
@@ -154,7 +113,7 @@ export default {
       if (value === "All") {
         this.displayUsers = this.users;
       } else {
-        this.displayUsers = this.users.filter((el) => {
+        this.displayUsers = this.users.filter(el => {
           return el.status == value;
         });
       }
@@ -167,24 +126,24 @@ export default {
         });
       } else if (value === "Score") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.rank > b.rank ? 1 : -1;
+          return a.rank - b.rank;
         });
       }
-    },
+    }
   },
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter((item) => {
+        return this.displayUsers.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.username.toLowerCase().includes(v));
+            .every(v => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    },
-  },
+    }
+  }
 };
 </script>

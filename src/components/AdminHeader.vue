@@ -1,12 +1,12 @@
 <template>
   <div class="adminHeader">
     <div class="ctfLogo">
-      <img :src="ctflogo" />
+      <img :src="ctfLogo" />
     </div>
     <AdminNav />
     <div class="adminNavTimer">
-      <p class="adminTimerMessage">{{ time.message }}</p>
-      <p class="adminTimerValue">{{ time.value }}</p>
+      <p class="adminTimerMessage">Time Remaining</p>
+      <Timer class="adminTimerValue"/>
     </div>
     <div class="adminNavDropdown">
       <button class="adminNavDropbtn">
@@ -23,19 +23,18 @@
 </template>
 <script>
 import AdminNav from "./AdminNav";
-import {ctflogo,dropdown} from "../constants/images"
+import Timer from "@/components/Timer.vue";
+import { ctfLogo, dropdown } from "../constants/images";
 export default {
   name: "AdminHeader",
   components: {
-    AdminNav
+    AdminNav,
+    Timer
   },
   data() {
     return {
-      ctflogo,dropdown,
-      time: {
-        message: "Time Remaining",
-        value: "02:35:15"
-      }
+      ctfLogo,
+      dropdown,
     };
   }
 };

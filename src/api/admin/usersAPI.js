@@ -3,24 +3,17 @@ import { axiosInstance } from "../axiosInstance.js";
 export default {
   async getUsers() {
     let allUsers = [];
-    let response = await axiosInstance
-      .get(`/api/info/user/available`)
-      .catch(error => {
-        this.apiErrHandler(error);
-        return allUsers;
-      });
+    const response = await axiosInstance.get(`/api/info/user/available`);
     let users = response.data;
     users = users.filter(el => {
       return el.role === "contestant";
     });
     users = users.sort((a, b) => {
-      return a.score <= b.score
-        ? a.score === b.score
-          ? a.username > b.username
-            ? 1
-            : -1
-          : 1
-        : -1;
+      if (a.score === b.score) {
+        return a.username > b.username ? 1 : -1;
+      } else {
+        return b.score - a.score;
+      }
     });
     let rank = 0;
     users.forEach(el => {

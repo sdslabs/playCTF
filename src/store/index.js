@@ -14,8 +14,8 @@ export default new Vuex.Store({
     competitionInfo: {
       competitionName: "",
       communicationPlatformLink: "",
-      startingTime: "May 3, 2020 15:37:25",
-      endingTime: "May 5, 2020 15:37:25",
+      startingTime: "Jan 12, 2021 15:37:25",
+      endingTime: "Jan 14, 2021 15:37:25",
       logo: ""
     },
     hostUrl: "http://localhost:5005",
@@ -30,6 +30,6 @@ export default new Vuex.Store({
     login: state => state.login,
     currentPage: state => state.currentPage,
     hostUrl: state => state.hostUrl,
-    challengeHostUrl: state => state.challengeHostUrl
+    challengeHostUrl: state => state.challengeHostUrl,
   }
 });

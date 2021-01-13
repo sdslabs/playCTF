@@ -71,7 +71,7 @@
 import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
 import SpinLoader from "../components/spinLoader.vue";
-import {notifAdded,notifFailed} from "../constants/images"
+import { notifAdded, notifFailed } from "../constants/images";
 export default {
   name: "AdminNotfications",
   components: {

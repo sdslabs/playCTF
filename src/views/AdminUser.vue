@@ -133,7 +133,7 @@ import {
   pieChartOptions,
   lineGraphOptions,
   lineGraphConfig,
-  colors,
+  colors
 } from "../constants/constants";
 import { mail, ban, unban } from "../constants/images";
 export default {
@@ -142,7 +142,7 @@ export default {
     LineGraph,
     adminTable,
     PieChart,
-    SpinLoader,
+    SpinLoader
   },
   data() {
     return {
@@ -152,7 +152,7 @@ export default {
       loading: {
         api1: true,
         api2: true,
-        api3: false,
+        api3: false
       },
       confirmDialogs: confimDialogMessages().user,
       scoreSeries: {},
@@ -164,25 +164,25 @@ export default {
         rank: "",
         score: "",
         active: true,
-        id: null,
+        id: null
       },
       rows: [],
-      tableCols: tableCols.user,
+      tableCols: tableCols.user
     };
   },
   computed: {
-    isLoading: function () {
+    isLoading: function() {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   methods: {
     manageUser(userId, action) {
-      let confirmHandler = (confirm) => {
+      let confirmHandler = confirm => {
         if (confirm) {
           this.loading.api3 = true;
           UsersService.manageUser(userId, action).then(() => {
@@ -195,7 +195,7 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirmHandler,
+        callback: confirmHandler
       };
 
       this.$confirm(inputParams);
@@ -211,14 +211,14 @@ export default {
           timeScores[0] = this.userDetails.score;
         } else {
           let currentScore = this.userDetails.score;
-          data.slice(0, index).forEach((sub) => {
+          data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[index] = {
           x: new Date(el.solvedAt),
-          y: timeScores[index],
+          y: timeScores[index]
         };
       });
       return scoreSeries;
@@ -229,18 +229,18 @@ export default {
           {
             ...lineGraphConfig.singleLineConfig,
             ...lineGraphConfig,
-            data: this.scoreSeries,
-          },
-        ],
+            data: this.scoreSeries
+          }
+        ]
       };
     },
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach((el) => {
+      this.chalTags.forEach(el => {
         labels.push(el.name);
       });
-      labels.forEach((el) => {
+      labels.forEach(el => {
         data.push(this.submissions.category[el]);
       });
       return {
@@ -248,20 +248,20 @@ export default {
         datasets: [
           {
             backgroundColor: colors.pieChart,
-            data,
-          },
-        ],
+            data
+          }
+        ]
       };
-    },
+    }
   },
   mounted() {
     ChalService.getChallenges()
-      .then((response) => {
+      .then(response => {
         this.chalTags = response.categoryFilterOptions;
         SubmissionService.getSubStats(
           this.chalTags,
           this.$route.params.username
-        ).then((response) => {
+        ).then(response => {
           this.submissions = response;
         });
       })
@@ -269,7 +269,7 @@ export default {
         this.loading.api1 = false;
       });
     UsersService.getUserByUsername(this.$route.params.username)
-      .then((response) => {
+      .then(response => {
         let data = response.data;
         this.userDetails.id = data.id;
         this.userDetails.name = data.username;
@@ -277,12 +277,12 @@ export default {
         this.userDetails.rank = data.rank;
         this.userDetails.active = data.status === 0;
         SubmissionService.getUserSubs(this.$route.params.username).then(
-          (subData) => {
-            subData.forEach((element) => {
+          subData => {
+            subData.forEach(element => {
               this.rows.push({
                 challenge: element.name,
                 category: element.category,
-                timeDateRight: element.solvedTime,
+                timeDateRight: element.solvedTime
               });
             });
             this.scoreSeries = this.findScoreSeries(subData);
@@ -292,6 +292,6 @@ export default {
       .finally(() => {
         this.loading.api2 = false;
       });
-  },
+  }
 };
 </script>

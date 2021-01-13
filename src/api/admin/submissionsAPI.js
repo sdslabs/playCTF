@@ -2,7 +2,7 @@ import { axiosInstance } from "../axiosInstance.js";
 import moment from "moment";
 export default {
   async getSubmissions() {
-    let response = await axiosInstance.post(`/api/info/submissions`);
+    const response = await axiosInstance.post(`/api/info/submissions`);
     let submissions = [];
     response.data.forEach(element => {
       // solvedTime is solved time is given format
@@ -11,11 +11,10 @@ export default {
       );
       submissions.push(element);
     });
-    console.log(submissions);
     return submissions;
   },
   async getSubStats(tags, user) {
-    let response = await this.getSubmissions();
+    const response = await this.getSubmissions();
     let submissions = {};
     let totalChal = 0;
     tags.forEach(el => {
@@ -37,7 +36,7 @@ export default {
   },
 
   async getUserSubs(username) {
-    let response = await this.getSubmissions();
+    const response = await this.getSubmissions();
     let data = response.filter(el => {
       return el.username === username;
     });
