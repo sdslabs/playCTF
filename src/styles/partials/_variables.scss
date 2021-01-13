@@ -1,0 +1,98 @@
+$root-font-size: 0.8982vw;
+// $root-font-size-small: ;
+// $root-font-size-large: ;
+$root-base-size: 16;
+// fonts variables
+$primary-font-family: "Nunito Sans", sans-serif;
+$secondary-font-family: "Open Sans", sans-serif;
+
+// colors variables
+$theme-color-white: #ffffff;
+$theme-color-offwhite: #f2f2f2;
+$theme-color-dark-white: #e7e7e7;
+$theme-color-black: #000000;
+$theme-color-black19: #191919;
+$theme-color-blue: #2f53b1;
+$theme-color-orange: #ffc568;
+$theme-color-dark-orange: #ff6700;
+$theme-color-light-orange: #ff8900;
+$theme-color-grey57: #575757;
+$theme-color-grey39: #393939;
+$theme-color-grey: #555555;
+$theme-color-dark-grey: #444444;
+$theme-color-light-grey: #999999;
+$theme-color-off-white: #dddddd;
+$theme-color-light-grey-d7: #d7d7d7;
+$theme-color-white-grey: #eeeeee;
+$theme-color-dark-blue: #355dc5;
+$theme-color-light-blue: #d6def3;
+$theme-color-red: #b83428;
+$theme-color-violet: #593C8F;
+$theme-color-black-low-transp: rgba(57, 57, 57, 0.1);
+$theme-color-black-med-transp: rgba(57, 57, 57, 0.57);
+$theme-color-black-high-transp: rgba(57, 57, 57, 0.9);
+$theme-color-green-high-transp: rgba(0, 144, 43, 0.7);
+$theme-color-yellow-high-transp:rgba(255, 174, 0, 0.7);
+$theme-color-red-high-transp:rgba(215, 44, 39, 0.7);
+$theme-color-dark-red-med-transp: rgba(255, 103, 0, 0.57);
+$theme-color-grey-low-transp: rgba(87, 87, 87, 0.15);
+$theme-color-grey-med-transp: rgba(87, 87, 87, 0.4);
+$theme-color-grey-high-transp: rgba(87, 87, 87, 0.7);
+$theme-color-blue-low-transp: rgba(37, 85, 124, 0.1);
+$theme-color-light-black-low-transp:rgba(25, 25, 25, 0.1);
+$theme-color-light-black-med-transp:rgba(25, 25, 25, 0.57);
+$theme-color-violet-med-transp: rgba(89, 60, 143, 0.57);
+$theme-color-dark-black-low-transp:rgba(0, 0, 0, 0.15);
+$theme-color-dark-blue-high-transp:rgba(76, 128, 165, 0.75);
+
+
+
+$primary-font-color: $theme-color-black;
+$primary-theme-color: $theme-color-blue;
+$secondary-theme-color: $theme-color-orange;
+$secondary-admin-theme-color: $theme-color-dark-orange;
+
+// sidebar themes variables
+$sidebar-bg: $theme-color-black;
+$sidebar-fg: $theme-color-white;
+
+
+$assets-prefix: "@/assets/";
+$assets-sidebar-overview-icon: $assets-prefix + "sidebar-overview-icon.svg";
+$assets-sidebar-logs-icon: $assets-prefix + "sidebar-logs-icon.svg";
+$assets-sidebar-settings-icon: $assets-prefix + "sidebar-settings-icon.svg";
+$assets-sidebar-overview-icon-selected: $assets-prefix + "sidebar-overview-icon-selected.svg";
+$assets-sidebar-logs-icon-selected: $assets-prefix + "sidebar-logs-icon-selected.svg";
+$assets-sidebar-settings-icon-selected: $assets-prefix + "sidebar-settings-icon-selected.svg";
+$assets-dashboard-copy-text-btn: $assets-prefix + "dashboard-card-copy-text-btn.svg";
+$assets-dashboard-copy-text-eye: $assets-prefix + "dashboard-card-copy-text-eye.svg";
+$assets-header-back-button: $assets-prefix + "header-back-button.svg";
+$assets-home-project-database-icon: $assets-prefix + "home-project-database-icon.svg";
+$assets-new-instance-multiple-add-icon: $assets-prefix + "new-instance-multiple-add.svg";
+
+%font-style-basic{
+    font-family: $primary-font-family;
+    font-style: normal;
+    font-weight: 600;
+    font-size:1rem;
+    line-height: 18rem / $root-base-size;
+    color: $theme-color-black;
+}
+
+%font-style-bold{
+    font-family: $primary-font-family;
+    font-style: normal;
+    font-weight: bold;
+    font-size:0.875rem;
+    line-height: 1.75rem;
+}
+:export {
+    themeColorGrey57: $theme-color-grey57;
+    themeColorGrey39: $theme-color-grey39;
+    themeColorBlack19: $theme-color-black19;
+    themeColorDarkBlueHighTransp: $theme-color-dark-blue-high-transp;
+    themeColorWhite:$theme-color-white;
+    themeColorViolet:$theme-color-violet;
+    themeColorGreyLowTransp:$theme-color-grey-low-transp;
+    themeColorGreyHighTransp:$theme-color-grey-high-transp;
+}

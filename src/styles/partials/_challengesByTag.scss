@@ -1,0 +1,68 @@
+.challengesByTag {
+    width: 16.6875rem;
+    color: $theme-color-black19;
+    text-align: left;
+    margin-left: 1.5rem;
+
+    .challengesByTag-tag {
+        font-family: $primary-font-family, sans-serif;
+        font-size: 1rem;
+        font-weight: bold;
+        line-height: 2rem;
+        margin-left: 0.75rem;
+        // margin-bottom: -0.9375rem;
+    }
+
+    .challengesByTag-challenges {
+        height: 26.5625rem;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        z-index: -100;
+        padding: 0.125rem;
+
+        &::-webkit-scrollbar {
+            width: 0rem;
+        }
+
+        .challengesByTag-challenge {
+            width: 16.5rem;
+            height: 4.5rem;
+            background: $theme-color-white;
+            box-shadow: 0rem 0.125rem 0.625rem $theme-color-black-low-transp;
+            border-radius: 0.1875rem;
+            margin-top: 0.75rem;
+
+            &:first-child {
+                margin-top: 0rem;
+            }
+
+            .challengesByTag-challName {
+                font-weight: 500;
+                font-size: 1rem;
+                margin: 0rem;
+                padding: 0.75rem;
+            }
+
+            .challengesByTag-challInfo {
+                font-size: 0.875rem;
+                color: $theme-color-grey57;
+                margin-top: -0.375rem;
+                margin-left: 0.75rem;
+            }
+        }
+
+        .challengesByTag-challenge:active {
+            border: 0.0625rem solid $theme-color-light-orange;
+            box-sizing: border-box;
+
+            .challengesByTag-challName {
+                color: $theme-color-black19;
+            }
+
+            .challengesByTag-challInfo {
+                color: $theme-color-dark-orange;
+                font-weight: 600;
+            }
+        }
+    }
+}

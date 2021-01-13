@@ -1,0 +1,32 @@
+.adminNotifCard {
+  height: 6rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  background: $theme-color-white;
+  box-shadow: 0rem 0.375rem 0.625rem $theme-color-light-black-low-transp;
+  border-radius: 0.1875rem;
+  margin: 0.5rem 0.5rem 1.5rem;
+  @extend %font-style-basic;
+  font-weight: normal;
+  line-height: 1.75rem;
+  padding: 0.625rem 1rem;
+}
+
+.adminNotifTitle {
+  font-weight: bold;
+  text-align: left;
+  width: 60%;
+  margin-bottom: 0;
+}
+
+.adminNotifTime {
+  text-align: right;
+  color: $theme-color-violet;
+  width: 40%;
+  margin-bottom: 0;
+}
+
+.adminNotifDesc {
+  margin-top: 0;
+}

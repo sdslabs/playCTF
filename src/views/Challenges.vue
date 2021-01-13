@@ -3,13 +3,17 @@
     <StatsNavbar />
     <div class="chall">
       <div class="tags">
-        <a class="tag" tag="Crypto">Crypto</a>
-        <a class="tag" tag="PWN">PWN</a>
-        <a class="tag" tag="Web">Web</a>
-        <a class="tag" tag="Misc">Misc</a>
+        <a
+          v-for="tag in tags"
+          v-bind:key="tag"
+          :class="{ tag: true }"
+          :tag="tag"
+          @click="hello(tag)"
+          >{{ tag }}
+        </a>
       </div>
-      <ChallengesByTag />
-      <ChallCard />
+      <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
+      <ChallCard :challName="this.challName" :tag="this.selectedTag" />
     </div>
   </div>
 </template>
@@ -20,15 +24,28 @@ import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
 export default {
   name: "Challenges",
+  data() {
+    return {
+      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"]
+    };
+  },
+  props: ["selectedTag", "challName"],
   components: {
     StatsNavbar,
     ChallengesByTag,
     ChallCard
   },
+  methods: {
+    hello: function(tag) {
+      this.selectedTag = tag;
+    },
+    getChallName: function(challName) {
+      this.challName = challName;
+    }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "Challenges");
+    this.selectedTag = this.tags[0];
+  }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-@import "@/assets/scss/challenge.scss";
-</style>

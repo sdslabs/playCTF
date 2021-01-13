@@ -1,0 +1,29 @@
+.adminNavbar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 1.25rem;
+}
+
+.adminNavbarLink {
+  font-family: $primary-font-family, sans-serif;
+  font-weight: normal;
+  font-size: 0.875rem;
+  color: $theme-color-grey57;
+  text-decoration: none;
+  padding: 0.625rem;
+  transition: text-shadow 0.3s;
+}
+
+.adminNavbarLink:hover:not(.router-link-exact-active) {
+  color: $theme-color-black19;
+  text-shadow: 0 0 0.040625rem $theme-color-grey39,
+    0 0 0.040625rem $theme-color-grey39;
+}
+
+.router-link-active.adminNavbarLink {
+  font-family: $primary-font-family, sans-serif;
+  font-size: 0.875rem;
+  color: $theme-color-black19;
+  font-weight: bold;
+  text-decoration: underline;
+}

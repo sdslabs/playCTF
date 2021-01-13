@@ -1,0 +1,131 @@
+.mainAdminContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.fade-leave-active {
+  transition: opacity 1s
+}
+
+.addFeedback {
+  margin-left: 20%;
+}
+
+.adHeadingContainerWithFeedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.adNotifForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 5%;
+
+  .important {
+    color: red;
+  }
+
+  .adFormFields {
+    text-align: left;
+    @extend %font-style-basic;
+    font-size: 0.875rem;
+    margin: 1rem 0 0 0;
+  }
+
+  .adFormTitle {
+    height: 2.5rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid $theme-color-grey-high-transp;
+    padding-left: 1rem;
+    @extend %font-style-basic;
+    margin-bottom: 2%;
+  }
+
+  .adFormTitle::placeholder,
+  textarea::placeholder {
+    @extend %font-style-basic;
+    color: $theme-color-grey-high-transp;
+  }
+
+  textarea {
+    height: 6rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid $theme-color-grey-high-transp;
+    @extend %font-style-basic;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    margin-bottom: 2%;
+  }
+
+  .confirmation {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @extend %font-style-basic;
+    color: $theme-color-grey-high-transp;
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+
+
+  textarea:focus,
+  .adFormTitle:focus {
+    outline: none !important;
+    border: 0.125rem solid $theme-color-violet;
+  }
+}
+
+.adminEmptyData {
+  text-align: left;
+  @extend %font-style-bold;
+  font-size: 2rem;
+  line-height: 3rem;
+  color: $theme-color-grey-high-transp;
+}
+
+.adminNotifTabs {
+  margin-top: 4%;
+  height: 31.25rem;
+  overflow-y: scroll;
+
+}
+
+.adminNotifTabs::-webkit-scrollbar {
+  display: none;
+}
+
+.adminDisabledSubmitButton {
+  border-radius: 0.1875rem;
+  color: $theme-color-white;
+  @extend %font-style-bold;
+  padding: 0.5rem 1rem;
+  border: none;
+  margin: auto 0;
+  margin-left: auto;
+}
+
+.adminEnabledSubmitButton {
+  @extend %font-style-bold;
+  background-color: $theme-color-dark-orange;
+}
+
+.adminEnabledSubmitButton:hover {
+  @extend %font-style-bold;
+  background-color: $theme-color-white;
+  border: 0.0625rem solid $theme-color-dark-orange;
+  color: $theme-color-dark-orange;
+  background: $theme-color-white;
+}
+
+.adminInactiveSubmitButton {
+  background-color: $theme-color-light-grey-d7;
+}
+y
+.adminProcSubmitButton {
+  background-color: $theme-color-dark-red-med-transp;
+}

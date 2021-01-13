@@ -1,0 +1,64 @@
+.adminHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding: 0 25%;
+}
+
+.adminNavTimer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: $primary-font-family, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: $theme-color-grey39;
+  margin: 0 1rem;
+}
+
+.adminTimerMessage {
+  margin-bottom: 0;
+}
+
+.adminTimerValue {
+  margin-top: 0;
+}
+
+.adminNavDropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.adminNavDropbtn {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  border: none;
+  outline: none;
+  color: $theme-color-violet;
+  background-color: inherit;
+  font-family: $primary-font-family, sans-serif;
+  font-weight: 600;
+  margin: 0;
+}
+
+.adminNavDropdownContent {
+  display: none;
+  position: absolute;
+  min-width: 9.375rem;
+}
+
+.adminNavDropdownLink {
+  color: black;
+  float: none;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.adminNavDropdown:hover .adminNavDropdownContent {
+  display: block;
+}

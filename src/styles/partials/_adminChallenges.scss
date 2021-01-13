@@ -1,0 +1,188 @@
+.adminChallengesContainer {
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 30%;
+}
+
+.adminChallengesVerticalNav {
+    width: 10%;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    padding-top: 15%;
+
+    .navButton {
+        display: flex;
+        flex-direction: row-reverse;
+        @extend %font-style-basic;
+        background-color: white;
+        border: none;
+        color: $theme-color-light-grey;
+        text-align: right;
+        outline: none;
+        margin: 0.5rem 0;
+    }
+
+    .navButton:hover {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        color: $theme-color-black19;
+        border-right: 0.125rem solid $secondary-admin-theme-color;
+    }
+
+    .active {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        color: $theme-color-black19;
+        border-right: 0.125rem solid $secondary-admin-theme-color;
+    }
+}
+
+.mainContaineradminChall {
+    margin-left: 1.25rem;
+    width: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .adminHeadingChal {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .addChallenge {
+            background: $theme-color-dark-orange;
+            border-radius: 0.1875rem;
+            outline: none;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0.5rem 0.75rem;
+            border: none;
+
+            .addImg {
+                width: 0.9375rem;
+                height: 0.9375rem;
+                margin: 0 0.3125rem;
+            }
+
+            .addText {
+                @extend %font-style-basic;
+                font-weight: 600;
+                color: $theme-color-white;
+            }
+        }
+
+        .addChallenge:hover {
+            background: $theme-color-white;
+
+            border: 0.125rem solid $theme-color-dark-orange;
+
+            .addImg {
+                filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
+            }
+
+            .addText {
+                color: $theme-color-dark-orange;
+            }
+        }
+    }
+
+
+}
+
+.adminChallengesList {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 46.5rem;
+    justify-content: space-between;
+}
+
+.adminSort {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    @extend %font-style-basic;
+    margin-top: 1.875rem;
+
+    .sortText {
+        line-height: 1.125rem;
+        color: $theme-color-black-high-transp;
+        margin-right: 0.5rem;
+    }
+
+    .sortOption {
+        line-height: 1.5rem;
+        color: $theme-color-grey-high-transp;
+        margin: 0 0.5rem;
+    }
+
+    .sortOption:hover {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        text-align: center;
+        color: $theme-color-black19;
+        border-bottom: 0.125rem solid $theme-color-dark-orange;
+    }
+
+    .active {
+        @extend %font-style-bold;
+        font-size: 1rem;
+        line-height: 18rem / $root-base-size;
+        text-align: center;
+        color: $theme-color-black19;
+        border-bottom: 0.125rem solid $theme-color-dark-orange;
+    }
+
+    .dropdown {
+        margin-left: auto;
+        width: 12.5rem;
+
+        .filterText {
+            font-weight: normal;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            color: $theme-color-grey57;
+        }
+
+        .filterSelection {
+            margin-left: auto;
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            color: $theme-color-black-high-transp;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .selection {
+        width: 12.5rem;
+    }
+}
+
+.loader{
+    align-self: center;
+    text-align: center;
+    justify-self: center;
+    padding:5%
+}
+
+.vue-simple-spinner-text{
+    @extend %font-style-bold;
+    line-height: 1.5rem;
+    color: $theme-color-grey-high-transp;
+}
