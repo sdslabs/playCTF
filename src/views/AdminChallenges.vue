@@ -11,11 +11,11 @@
         {{ category.name }}
       </button>
     </div>
-    <div class="mainContainerAdChal">
+    <div class="mainContaineradminChall">
       <div class="adminHeadingChal">
         <div class="adminHeadingName">CHALLENGES</div>
         <button class="addChallenge">
-          <img class="addImg" src="@/assets/add.svg" />
+          <img class="addImg" :src="add" />
           <span class="addText">Create New Challenge</span>
         </button>
       </div>
@@ -68,11 +68,13 @@
 import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
+import {add} from "../constants/images"
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader },
   data() {
     return {
+      add,
       loading: true,
       statusFilter: "All",
       sortFilter: "Name",

@@ -95,11 +95,7 @@
           />
         </div>
       </div>
-      <div
-        class="adminEmptyDataContainer"
-        :style="{ alignSelf: 'flex-start' }"
-        v-else
-      >
+      <div class="adminEmptyDataContainer" v-else>
         <span class="adminEmptyData">No Submissions</span>
       </div>
     </div>
@@ -170,7 +166,7 @@ export default {
         labels,
         datasets: [
           {
-            backgroundColor: colors.statistics.barGraph,
+            backgroundColor: colors.barGraph,
             data
           }
         ]
@@ -186,11 +182,10 @@ export default {
         data.push(this.submissions.category[el]);
       });
       return {
-        hoverBorderWidth: 10,
         labels,
         datasets: [
           {
-            backgroundColor: colors.statistics.pieChart,
+            backgroundColor: colors.pieChart,
             data
           }
         ]
@@ -210,13 +205,14 @@ export default {
       .then(users => {
         if (users.length > 0) {
           this.leader = users.sort((a, b) => {
-            return a.rank > b.rank ? 1 : -1;
+            return a.rank - b.rank;
           })[0];
         }
       })
       .finally(() => {
         this.loading.api2 = false;
       });
+
     ChalService.getChalStats()
       .then(response => {
         this.challenges = response;
@@ -224,6 +220,7 @@ export default {
       .finally(() => {
         this.loading.api3 = false;
       });
+
     ChalService.getChallenges()
       .then(response => {
         this.chalTags = response.categoryFilterOptions;

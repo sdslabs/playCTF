@@ -5,11 +5,13 @@ export default {
     let response = await axiosInstance.post(`/api/info/submissions`);
     let submissions = [];
     response.data.forEach(element => {
-      element.solvedAt = moment(element.solvedAt).format(
+      // solvedTime is solved time is given format
+      element.solvedTime = moment(element.solvedAt).format(
         "h:mm:ss; MMMM Do, YYYY"
       );
       submissions.push(element);
     });
+    console.log(submissions);
     return submissions;
   },
   async getSubStats(tags, user) {

@@ -10,15 +10,17 @@
       'adminChalLink'
     ]"
   >
-    <div class="adChalItem" @click="redirect(challenge.Name)">
-      <div class="adChalDetails">
-        <span class="adChalName">{{ challenge.Name }}</span>
-        <span class="adChalCategory">{{ challenge.Category }}</span>
-        <span class="adChalStatus">{{ challenge.Status }}</span>
+    <div class="adminChallItem" @click="redirect(challenge.Name)">
+      <div class="adminChallDetails">
+        <span class="adminChallName">{{ challenge.Name }}</span>
+        <span class="adminChallCategory">{{ challenge.Category }}</span>
+        <span class="adminChallStatus">{{ challenge.Status }}</span>
       </div>
-      <div class="adChalStats">
-        <span class="adChalPoints">{{ challenge.Points }} Points</span>
-        <span class="adChalSolves">{{ challenge.SolvesNumber }} Solves</span>
+      <div class="adminChallStats">
+        <span class="adminChallPoints">{{ challenge.Points }} Points</span>
+        <span class="adminChallSolves"
+          >{{ challenge.SolvesNumber }} Solves</span
+        >
       </div>
     </div>
   </router-link>

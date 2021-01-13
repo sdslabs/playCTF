@@ -6,7 +6,7 @@
         <span class="name">{{ chalDetails.Name }}</span>
         <span class="category">{{ chalDetails.Category }}</span>
         <button class="adminBanButton">
-          <img src="@/assets/edit.svg" class="banImg" /><span
+          <img :src="edit" class="banImg" /><span
             class="adminBanText"
             >Edit</span
           >
@@ -16,7 +16,7 @@
           :class="{
             deployed: chalDetails.Status === 'Deployed',
             purged: chalDetails.Status === 'Purged',
-            undeployed: chalDetails.Status === 'Undeployed'
+            undeployed: chalDetails.Status === 'Undeployed',
           }"
           >{{ chalDetails.Status }}</span
         >
@@ -41,7 +41,7 @@
             class="adminBanButton"
             @click="manageChallenge(chalDetails.Name, 'undeploy')"
           >
-            <img src="@/assets/undeploy.svg" class="banImg" /><span
+            <img :src="undeploy" class="banImg" /><span
               class="adminBanText"
               >Undeploy</span
             >
@@ -50,7 +50,7 @@
             class="adminBanButton"
             @click="manageChallenge(chalDetails.Name, 'purge')"
           >
-            <img src="@/assets/purge.svg" class="banImg" /><span
+            <img :src="purge" class="banImg" /><span
               class="adminBanText"
               >Purge</span
             >
@@ -64,7 +64,7 @@
             class="adminBanButton"
             @click="manageChallenge(chalDetails.Name, 'deploy')"
           >
-            <img src="@/assets/play.svg" class="banImg" /><span
+            <img :src="play" class="banImg" /><span
               class="adminBanText"
               >Deploy</span
             >
@@ -73,7 +73,7 @@
             class="adminBanButton"
             @click="manageChallenge(chalDetails.Name, 'purge')"
           >
-            <img src="@/assets/purge.svg" class="banImg" /><span
+            <img :src="purge" class="banImg" /><span
               class="adminBanText"
               >Purge</span
             >
@@ -87,7 +87,7 @@
             class="adminBanButton"
             @click="manageChallenge(chalDetails.Name, 'deploy')"
           >
-            <img src="@/assets/play.svg" class="banImg" /><span
+            <img :src="play" class="banImg" /><span
               class="adminBanText"
               >Deploy</span
             >
@@ -102,20 +102,20 @@
         {{ `${this.$store.getters.challengeHostUrl}:${this.port}` }}
       </div>
       <button class="adminBanButton testRun">
-        <img src="@/assets/play.svg" class="banImg" /><span class="adminBanText"
+        <img :src="play" class="banImg" /><span class="adminBanText"
           >Test Run</span
         >
       </button>
     </div>
-    <div class="adChalStatistics">
+    <div class="adminChallStatistics">
       <div class="adminHeadingName">Statistics</div>
-      <div class="adChalSubmissions">
+      <div class="adminChallSubmissions">
         <div class="subheadingName">Submissions</div>
         <div class="info">
           Total {{ this.chalDetails.SolvesNumber }} correct submissions are made
         </div>
       </div>
-      <div class="adChalSolves">
+      <div class="adminChallSolves">
         <div class="leftCol">
           <div class="subheadingName">Solve Percentages</div>
           <div class="info">
@@ -162,48 +162,55 @@ import ChalService from "../api/admin/challengesAPI";
 import {
   tableCols,
   confimDialogMessages,
-  barChartOptions
+  barChartOptions,
+  colors,
 } from "../constants/constants";
+import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
 export default {
   components: { BarGraphVertical, AdminTable, SpinLoader },
   name: "AdminChallenge",
   data() {
     return {
+      play,
+      purge,
+      undeploy,
+      edit,
       loading: {
         api1: true,
         api2: true,
-        api3: true
+        api3: true,
       },
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
-      confirmDialogs: confimDialogMessages(this.$route.params.id).adminChallenge
+      confirmDialogs: confimDialogMessages(this.$route.params.id)
+        .adminChallenge,
     };
   },
   computed: {
-    isLoading: function() {
+    isLoading: function () {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    }
+    },
   },
   methods: {
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     barData() {
       return {
         labels: ["Solve Percentage"],
         datasets: [
           {
-            backgroundColor: ["rgba(76, 128, 165, 0.75)"],
-            data: [this.solvePercentage()]
-          }
-        ]
+            backgroundColor: colors.singleBarGraph,
+            data: [this.solvePercentage()],
+          },
+        ],
       };
     },
     barChartOptions() {
@@ -213,39 +220,41 @@ export default {
       return (this.chalDetails.SolvesNumber / this.activeUsers) * 100;
     },
     manageChallenge(name, action) {
-      this.$confirm({
+      let confirmHandler = (confirm) => {
+        if (confirm) {
+          ChalService.manageChalAction(name, action).then(async (response) => {
+            if (response.status !== 200) {
+              console.log(response.data);
+            } else {
+              if (action === "purge") {
+                await this.sleep(5000);
+                this.$router.push("/admin/challenges");
+              } else {
+                this.$router.go();
+              }
+            }
+          });
+        }
+      };
+      let inputParams = {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirm => {
-          if (confirm) {
-            ChalService.manageChalAction(name, action).then(async response => {
-              if (response.status !== 200) {
-                console.log(response.data);
-              } else {
-                if (action === "purge") {
-                  await this.sleep(5000);
-                  this.$router.push("/admin/challenges");
-                } else {
-                  this.$router.go();
-                }
-              }
-            });
-          }
-        }
-      });
-    }
+        callback: confirmHandler,
+      };
+      this.$confirm(inputParams);
+    },
   },
   mounted() {
     UsersService.getUserStats()
-      .then(response => {
+      .then((response) => {
         this.activeUsers = response.data.unbanned_users;
       })
       .finally(() => {
         this.loading.api1 = false;
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
-      .then(response => {
+      .then((response) => {
         console.log(response.data);
         let data = response.data;
         this.chalDetails = data;
@@ -258,12 +267,12 @@ export default {
       });
 
     SubmissionService.getSubmissions()
-      .then(response => {
-        response.forEach(element => {
+      .then((response) => {
+        response.forEach((element) => {
           if (element.name == this.$route.params.id) {
             this.rows.push({
               username: element.username,
-              timeDateRight: element.solvedAt
+              timeDateRight: element.solvedAt,
             });
           }
         });
@@ -271,6 +280,6 @@ export default {
       .finally(() => {
         this.loading.api3 = false;
       });
-  }
+  },
 };
 </script>

@@ -7,7 +7,7 @@
         <div class="userDetails">
           <div class="userName">
             <div class="name">{{ userDetails.name }}</div>
-            <img src="@/assets/mail.svg" class="mailImg" />
+            <img :src="mail" class="mailImg" />
             <div class="contact">Contact</div>
           </div>
           <div class="rankScore">
@@ -43,7 +43,7 @@
             class="adminBanButton"
             @click="manageUser(userDetails.id, 'ban')"
           >
-            <img src="@/assets/ban.svg" class="banImg" />
+            <img :src="ban" class="banImg" />
             <div class="adminBanText">Ban Player</div>
           </button>
         </div>
@@ -53,7 +53,7 @@
             class="adminBanButton"
             @click="manageUser(userDetails.id, 'unban')"
           >
-            <img src="@/assets/unban.svg" class="banImg" />
+            <img :src="unban" class="banImg" />
             <div class="adminBanText">Remove Ban</div>
           </button>
         </div>
@@ -101,11 +101,7 @@
           :height="150"
           v-if="this.rows.length > 0"
         />
-        <div
-          class="adminEmptyDataContainer"
-          v-else
-          :style="{ alignSelf: 'flex-start' }"
-        >
+        <div class="adminEmptyDataContainer" v-else>
           <span class="adminEmptyData">No Points Scored</span>
         </div>
       </div>
@@ -118,11 +114,7 @@
       :maxElementPerPage="10"
       v-if="rows.length > 0"
     />
-    <div
-      class="adminEmptyDataContainer"
-      v-else
-      :style="{ alignSelf: 'flex-start' }"
-    >
+    <div class="adminEmptyDataContainer" v-else>
       <span class="adminEmptyData">No Correct Submissions</span>
     </div>
   </div>
@@ -130,166 +122,83 @@
 <script>
 import LineGraph from "../components/LineGraph.vue";
 import adminTable from "../components/adminTable";
-import moment from "moment";
 import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
+import {
+  confimDialogMessages,
+  tableCols,
+  pieChartOptions,
+  lineGraphOptions,
+  lineGraphConfig,
+  colors,
+} from "../constants/constants";
+import { mail, ban, unban } from "../constants/images";
 export default {
   name: "AdminUser",
   components: {
     LineGraph,
     adminTable,
     PieChart,
-    SpinLoader
+    SpinLoader,
   },
   data() {
     return {
+      mail,
+      ban,
+      unban,
       loading: {
         api1: true,
-        api2: true
+        api2: true,
+        api3: false,
       },
-      confirmDialogs: {
-        ban: {
-          title: "Want to ban this player?",
-          message: `Action will pause participation of player.`,
-          button: {
-            yes: "Ban",
-            no: "Cancel"
-          }
-        },
-        unban: {
-          title: "Remove ban from this player?",
-          message: `The action will resume participation of player.`,
-          button: {
-            yes: "Remove ban",
-            no: "Cancel"
-          }
-        }
-      },
+      confirmDialogs: confimDialogMessages().user,
       scoreSeries: {},
-      lineGraphOptions: {
-        layout: {
-          padding: 10
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              scaleLabel: {
-                display: true,
-                labelString: "Time"
-              },
-              ticks: {
-                source: "auto",
-                fontColor: "#393939",
-                fontFamily: "Roboto",
-                fontStyle: "normal"
-              },
-              type: "time",
-              distribution: "linear",
-              time: {
-                unit: "hour"
-              }
-            }
-          ],
-          yAxes: [
-            {
-              scaleLabel: {
-                display: true,
-                labelString: "Score"
-              },
-              gridLines: {
-                color: "#575757",
-                drawOnChartArea: false
-              },
-              ticks: {
-                source: "auto",
-                fontColor: "#393939",
-                fontFamily: "Roboto",
-                fontStyle: "normal",
-                min: 0
-              }
-            }
-          ]
-        }
-      },
+      lineGraphOptions: lineGraphOptions(false),
       submissions: {},
-      chartOptions: {
-        hoverBorderWidth: 20,
-        responsive: true,
-        maintainAspectRatio: true,
-        legend: {
-          position: "right",
-          labels: {
-            boxWidth: 20
-          }
-        }
-      },
+      chartOptions: pieChartOptions(),
       userDetails: {
         name: "",
         rank: "",
         score: "",
         active: true,
-        id: null
+        id: null,
       },
       rows: [],
-      tableCols: [
-        {
-          id: 1,
-          label: "Challenge",
-          style: { textAlign: "left", width: "35%", paddingLeft: "40px" }
-        },
-        {
-          id: 2,
-          label: "Category",
-          style: { textAlign: "center", width: "20%" }
-        },
-        {
-          id: 3,
-          label: "Time & Date (+5:30 UTC)",
-          style: { paddingRight: "40px", textAlign: "right", width: "45%" }
-        }
-      ]
+      tableCols: tableCols.user,
     };
   },
   computed: {
-    isLoading: function() {
+    isLoading: function () {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    }
+    },
   },
   methods: {
     manageUser(userId, action) {
-      this.$confirm({
+      let confirmHandler = (confirm) => {
+        if (confirm) {
+          this.loading.api3 = true;
+          UsersService.manageUser(userId, action).then(() => {
+            this.$router.go();
+            this.loading.api3 = false;
+          });
+        }
+      };
+      let inputParams = {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirm => {
-          if (confirm) {
-            UsersService.manageUser(userId, action).then(response => {
-              if (response.status !== 200) {
-                console.log(response.data);
-              } else {
-                this.$router.go();
-              }
-            });
-          }
-        }
-      });
+        callback: confirmHandler,
+      };
+
+      this.$confirm(inputParams);
     },
     findScoreSeries(data) {
       data = data.sort((a, b) => {
@@ -302,110 +211,87 @@ export default {
           timeScores[0] = this.userDetails.score;
         } else {
           let currentScore = this.userDetails.score;
-          data.slice(0, index).forEach(sub => {
+          data.slice(0, index).forEach((sub) => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[index] = {
           x: new Date(el.solvedAt),
-          y: timeScores[index]
+          y: timeScores[index],
         };
       });
       return scoreSeries;
     },
     lineGraphData() {
       return {
-        label: "Data One",
         datasets: [
           {
-            backgroundColor: "white",
-            borderColor: "#0F6CF8",
-            lineTension: 0,
-            pointRadius: 5,
-            borderWidth: 1,
-            data: this.scoreSeries
-          }
-        ]
+            ...lineGraphConfig.singleLineConfig,
+            ...lineGraphConfig,
+            data: this.scoreSeries,
+          },
+        ],
       };
     },
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach(el => {
+      this.chalTags.forEach((el) => {
         labels.push(el.name);
       });
-      labels.forEach(el => {
+      labels.forEach((el) => {
         data.push(this.submissions.category[el]);
       });
       return {
-        hoverBorderWidth: 10,
         labels,
         datasets: [
           {
-            backgroundColor: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
-            data
-          }
-        ]
+            backgroundColor: colors.pieChart,
+            data,
+          },
+        ],
       };
-    }
+    },
   },
   mounted() {
     ChalService.getChallenges()
-      .then(response => {
-        if (response === null) {
-          console.log("Error fetching challenges");
-          return;
-        } else {
-          this.chalTags = response.categoryFilterOptions;
-          SubmissionService.getSubStats(
-            this.chalTags,
-            this.$route.params.username
-          ).then(response => {
-            if (response === null) {
-              console.log("error fetching submission stats");
-            } else {
-              this.submissions = response;
-              console.log(this.submissions);
-            }
-          });
-        }
+      .then((response) => {
+        this.chalTags = response.categoryFilterOptions;
+        SubmissionService.getSubStats(
+          this.chalTags,
+          this.$route.params.username
+        ).then((response) => {
+          this.submissions = response;
+        });
       })
       .finally(() => {
         this.loading.api1 = false;
       });
     UsersService.getUserByUsername(this.$route.params.username)
-      .then(response => {
-        if (response.status !== 200) {
-          console.log(response.data);
-        } else {
-          console.log(response.data);
-          let data = response.data;
-          this.userDetails.id = data.id;
-          this.userDetails.name = data.username;
-          this.userDetails.score = data.score;
-          this.userDetails.rank = data.rank;
-          this.userDetails.active = data.status === 0;
-          SubmissionService.getUserSubs(this.$route.params.username).then(
-            subData => {
-              subData.forEach(element => {
-                let timeData = moment(element.solvedAt).format(
-                  "h:mm:ss; MMMM Do, YYYY"
-                );
-                this.rows.push({
-                  challenge: element.name,
-                  category: element.category,
-                  timeDateRight: timeData
-                });
+      .then((response) => {
+        let data = response.data;
+        this.userDetails.id = data.id;
+        this.userDetails.name = data.username;
+        this.userDetails.score = data.score;
+        this.userDetails.rank = data.rank;
+        this.userDetails.active = data.status === 0;
+        SubmissionService.getUserSubs(this.$route.params.username).then(
+          (subData) => {
+            subData.forEach((element) => {
+              this.rows.push({
+                challenge: element.name,
+                category: element.category,
+                timeDateRight: element.solvedTime,
               });
-              this.scoreSeries = this.findScoreSeries(subData);
-            }
-          );
-        }
+            });
+            this.scoreSeries = this.findScoreSeries(subData);
+          }
+        );
       })
       .finally(() => {
         this.loading.api2 = false;
       });
-  }
+  },
 };
 </script>

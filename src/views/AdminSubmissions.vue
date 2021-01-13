@@ -48,7 +48,7 @@ export default {
             username: element.username,
             challenge: element.name,
             category: element.category,
-            timeDate: element.solvedAt
+            timeDate: element.solvedTime
           });
         });
       })

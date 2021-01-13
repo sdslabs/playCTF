@@ -1,11 +1,11 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adminHeadingColorSearch">
-      <img src="@/assets/userPanel.svg" class="adminHeadingColor" />
+      <img :src="userPanel" class="adminHeadingColor" />
       <div class="adminUserSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn" :disabled="true">
-            <img src="@/assets/search.svg" class="searchImg" />
+            <img :src="search" class="searchImg" />
           </button>
           <input
             v-model="searchQuery"
@@ -65,16 +65,19 @@
 import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import { search, userPanel } from "../constants/images";
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
+      search,
+      userPanel,
       loading: true,
       emptyDataMessage: {
         All: "No Users",
         Active: "No Active Users",
-        Banned: "No Banned Users"
+        Banned: "No Banned Users",
       },
       sortFilter: "User Name",
       statusFilter: "All",
@@ -87,32 +90,32 @@ export default {
           label: "Rank",
           style: {
             width: "72px",
-            textAlign: "center"
-          }
+            textAlign: "center",
+          },
         },
         {
           id: 2,
           label: "User Name",
           style: {
             width: "120px",
-            paddingLeft: "20px"
-          }
+            paddingLeft: "20px",
+          },
         },
         {
           id: 3,
           label: "E-Mail Address",
           style: {
             textAlign: "left",
-            paddingLeft: "40px"
-          }
+            paddingLeft: "40px",
+          },
         },
         {
           id: 4,
           label: "Score",
           style: {
             width: "72px",
-            textAlign: "center"
-          }
+            textAlign: "center",
+          },
         },
         {
           id: 5,
@@ -120,17 +123,17 @@ export default {
           style: {
             width: "72px",
             textAlign: "center",
-            paddingRight: "20px"
-          }
-        }
+            paddingRight: "20px",
+          },
+        },
       ],
       displayUsers: [],
-      users: []
+      users: [],
     };
   },
   mounted() {
     UsersService.getUsers()
-      .then(users => {
+      .then((users) => {
         console.log(users);
         if (users === null) {
           console.log("error fetching users");
@@ -151,7 +154,7 @@ export default {
       if (value === "All") {
         this.displayUsers = this.users;
       } else {
-        this.displayUsers = this.users.filter(el => {
+        this.displayUsers = this.users.filter((el) => {
           return el.status == value;
         });
       }
@@ -167,21 +170,21 @@ export default {
           return a.rank > b.rank ? 1 : -1;
         });
       }
-    }
+    },
   },
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter(item => {
+        return this.displayUsers.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.username.toLowerCase().includes(v));
+            .every((v) => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    }
-  }
+    },
+  },
 };
 </script>

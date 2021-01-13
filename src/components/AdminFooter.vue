@@ -10,18 +10,24 @@
       </div>
     </div>
     <div class="adminFooterLogos">
-      <img src="@/assets/sdslabs-logo.svg" />
+      <img :src="sdslabslogo" />
       <div class="adminFooterContactInfo">
-        <a href="#"><img src="@/assets/fb-logo.svg"/></a>
-        <a href="#"><img src="@/assets/twitter-logo.svg"/></a>
-        <a href="#"><img src="@/assets/github-logo.svg"/></a>
+        <a><img :src="fblogo"/></a>
+        <a><img :src="twitterlogo"/></a>
+        <a><img :src="githublogo"/></a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { sdslabslogo,twitterlogo,githublogo,fblogo } from "../constants/images";
 export default {
-  name: "AdminFooter"
+  name: "AdminFooter",
+  data() {
+    return {
+      sdslabslogo,twitterlogo,githublogo,fblogo
+    };
+  }
 };
 </script>

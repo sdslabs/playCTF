@@ -7,24 +7,24 @@
     box-shadow: 0px 2px 10px rgba(57, 57, 57, 0.1);
     margin-bottom: 12px;
 
-    .adChalItem {
+    .adminChallItem {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        .adChalDetails {
+        .adminChallDetails {
             display: flex;
             flex-direction: row;
             align-items: center;
             margin-bottom: 10px;
 
-            .adChalName {
+            .adminChallName {
                 @extend %font-style-basic;
                 font-size: 16px;
                 line-height: 18px;
             }
 
-            .adChalCategory {
+            .adminChallCategory {
                 text-align: center;
                 vertical-align: middle;
                 background: #593c8f;
@@ -39,7 +39,7 @@
                 margin-left: 10px;
             }
 
-            .adChalStatus {
+            .adminChallStatus {
                 @extend %font-style-basic;
                 font-weight: 300;
                 line-height: 14px;
@@ -49,7 +49,7 @@
             }
         }
 
-        .adChalStats {
+        .adminChallStats {
             display: flex;
             flex-direction: row;
             @extend %font-style-basic;
@@ -57,12 +57,12 @@
             line-height: 18px;
             color: rgba(57, 57, 57, 0.57);
 
-            .adChalPoints {
+            .adminChallPoints {
                 border-right: 2px solid rgba(57, 57, 57, 0.57);
                 padding-right: 5px;
             }
 
-            .adChalSolves {
+            .adminChallSolves {
                 padding-left: 5px;
             }
         }

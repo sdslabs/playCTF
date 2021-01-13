@@ -1,11 +1,8 @@
 export const colors = {
-  statistics: {
-    barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
-    pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"]
-  },
-  leaderboard: {
-    lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"]
-  }
+  barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
+  pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
+  lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"],
+  singleBarGraph: ["rgba(76, 128, 165, 0.75)"]
 };
 
 export const tableCols = {
@@ -69,6 +66,23 @@ export const tableCols = {
       label: "Time & Date (+5:30 UTC)",
       style: { paddingRight: "40px", textAlign: "right", width: "60% " }
     }
+  ],
+  user: [
+    {
+      id: 1,
+      label: "Challenge",
+      style: { textAlign: "left", width: "35%", paddingLeft: "40px" }
+    },
+    {
+      id: 2,
+      label: "Category",
+      style: { textAlign: "center", width: "20%" }
+    },
+    {
+      id: 3,
+      label: "Time & Date (+5:30 UTC)",
+      style: { paddingRight: "40px", textAlign: "right", width: "45%" }
+    }
   ]
 };
 
@@ -96,6 +110,24 @@ export const confimDialogMessages = chalName => {
         message: `The challenge ${chalName} will be marked as "Down for maintenance" after this section.`,
         button: {
           yes: "Undeploy",
+          no: "Cancel"
+        }
+      }
+    },
+    user: {
+      ban: {
+        title: "Want to ban this player?",
+        message: `Action will pause participation of player.`,
+        button: {
+          yes: "Ban",
+          no: "Cancel"
+        }
+      },
+      unban: {
+        title: "Remove ban from this player?",
+        message: `The action will resume participation of player.`,
+        button: {
+          yes: "Remove ban",
           no: "Cancel"
         }
       }
@@ -182,12 +214,10 @@ export const barChartOptions = () => {
   };
 };
 
-export const lineGraphOptions = () => {
-  return {
-    layout: {
-      padding: 10
-    },
-    legend: {
+export const lineGraphOptions = showLegend => {
+  let legend;
+  if (showLegend) {
+    legend = {
       display: true,
       position: "top",
       labels: {
@@ -197,7 +227,17 @@ export const lineGraphOptions = () => {
         lineHeight: 12,
         boxWidth: 20
       }
+    };
+  } else {
+    legend = {
+      display: false
+    };
+  }
+  return {
+    layout: {
+      padding: 10
     },
+    legend,
     responsive: true,
     maintainAspectRatio: true,
     scales: {
@@ -251,5 +291,9 @@ export const lineGraphConfig = {
   lineTension: 0,
   pointRadius: 5,
   borderWidth: 1,
-  fill: false
+  fill: false,
+  singleLineConfig: {
+    backgroundColor: "white",
+    borderColor: "#0F6CF8"
+  }
 };

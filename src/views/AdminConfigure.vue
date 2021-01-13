@@ -4,7 +4,7 @@
       CONFIGURE
       <button class="preview-button">
         <div class="preview">
-          <img src="../assets/preview.svg" />
+          <img :src="preview" />
           Landing Page
         </div>
       </button>
@@ -78,7 +78,7 @@
       <!-- eslint-disable-next-line -->
       <input type="file" id="actual-button" hidden />
       <label for="actual-button">
-        <img src="../assets/upload.svg" />Upload file
+        <img :src="upload" />Upload file
       </label>
       <p class="subfields">Themes</p>
       <div class="themes">
@@ -108,8 +108,14 @@
   </div>
 </template>
 <script>
+import {preview,upload} from "../constants/images"
 export default {
-  name: "AdminConfigure"
+  name: "AdminConfigure",
+  data(){
+    return{
+      preview,upload
+    }
+  }
 };
 </script>
 

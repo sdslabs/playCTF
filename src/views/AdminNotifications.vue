@@ -5,8 +5,8 @@
       <div class="adminHeadingName">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
         <transition name="fade" v-on:enter="enter">
-          <img v-if="showSuccess" src="@/assets/notif-added.svg" />
-          <img v-if="showFail" src="@/assets/notif-failed.svg" />
+          <img v-if="showSuccess" :src="notifAdded" />
+          <img v-if="showFail" :src="notifFailed" />
         </transition>
       </div>
     </div>
@@ -71,6 +71,7 @@
 import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import {notifAdded,notifFailed} from "../constants/images"
 export default {
   name: "AdminNotfications",
   components: {
@@ -79,6 +80,8 @@ export default {
   },
   data() {
     return {
+      notifAdded,
+      notifFailed,
       showSuccess: false,
       showFail: false,
       subProcessing: false,

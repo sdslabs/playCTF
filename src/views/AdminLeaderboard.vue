@@ -1,7 +1,7 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adminHeadingColor">
-      <img src="@/assets/leaderboard.svg" class="adminHeadingColor" />
+      <img :src="leaderboard" class="adminHeadingColor" />
     </div>
     <spin-loader v-if="loading" />
     <div v-else>
@@ -15,7 +15,7 @@
       <div class="adminLbSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn">
-            <img src="@/assets/search.svg" class="searchImg" />
+            <img :src="search" class="searchImg" />
           </button>
           <input
             v-model="searchQuery"
@@ -48,21 +48,24 @@ import {
   tableCols,
   colors,
   lineGraphOptions,
-  lineGraphConfig
+  lineGraphConfig,
 } from "../constants/constants";
+import { leaderboard, search } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
+      leaderboard,
+      search,
       loading: true,
-      lineColors: colors.leaderboard.lineGraph,
+      lineColors: colors.lineGraph,
       scoreSeries: [],
-      lineGraphOptions: lineGraphOptions(),
+      lineGraphOptions: lineGraphOptions(true),
       searchQuery: "",
       tableCols: tableCols.leaderboard,
       users: [],
-      displayUsers: []
+      displayUsers: [],
     };
   },
   methods: {
@@ -86,23 +89,23 @@ export default {
           borderColor: this.lineColors[index],
           label: `${this.scoreSeries[index].username} ${labelPostText}`,
           ...lineGraphConfig,
-          data: this.scoreSeries[index].series
+          data: this.scoreSeries[index].series,
         });
       });
       return {
         label: "Leaderboard",
-        datasets
+        datasets,
       };
     },
     findScoreSeries(users) {
-      users.forEach(user => {
-        SubmissionService.getUserSubs(user.username).then(data => {
+      users.forEach((user) => {
+        SubmissionService.getUserSubs(user.username).then((data) => {
           if (data === null || data === undefined) {
             return;
           }
           this.scoreSeries.push({
             username: user.username,
-            series: this.findUserScoreSeries(data, user.score)
+            series: this.findUserScoreSeries(data, user.score),
           });
         });
       });
@@ -118,44 +121,44 @@ export default {
           timeScores[0] = score;
         } else {
           let currentScore = score;
-          data.slice(0, index).forEach(sub => {
+          data.slice(0, index).forEach((sub) => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[index] = {
           x: new Date(el.solvedAt),
-          y: timeScores[index]
+          y: timeScores[index],
         };
       });
       return scoreSeries;
-    }
+    },
   },
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter(item => {
+        return this.displayUsers.filter((item) => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.username.toLowerCase().includes(v));
+            .every((v) => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    }
+    },
   },
   mounted() {
     UsersService.getUsers()
-      .then(users => {
+      .then((users) => {
         if (users.length === 0) {
           return;
         }
-        users.forEach(element => {
+        users.forEach((element) => {
           this.users.push({
             rank: element.rank,
             username: element.username,
-            score: element.score
+            score: element.score,
           });
         });
         this.displayUsers = this.users.sort((a, b) => {
@@ -172,6 +175,6 @@ export default {
       .finally(() => {
         this.loading = false;
       });
-  }
+  },
 };
 </script>

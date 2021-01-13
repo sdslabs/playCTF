@@ -21,6 +21,9 @@ Vue.mixin({
   methods: {
     apiErrHandler: function(error) {
       console.log(error);
+    },
+    getImage(imagename) {
+      return require(`../src/assets/${imagename}.svg`);
     }
   }
 });
