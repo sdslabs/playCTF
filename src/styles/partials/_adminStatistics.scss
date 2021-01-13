@@ -1,9 +1,9 @@
 .adminSubheading {
   @extend %font-style-bold;
   font-weight: 700;
-  font-size: 20rem/$root-base-size;
+  font-size: 1.25rem;
   margin-top: 0;
-  margin-bottom: 5rem/$root-base-size;
+  margin-bottom: 0.3125rem;
   text-align: left;
 }
 
@@ -12,15 +12,15 @@
 }
 
 .adminVioletBold {
-  color: #593c8f;
+  color: $theme-color-violet;
   font-weight: bold;
 }
 
 .adminInfo {
   @extend %font-style-basic;
   font-weight: normal;
-  font-size: 16rem/$root-base-size;
-  line-height: 18rem/$root-base-size;
+  font-size: 1rem;
+  line-height: 1.125rem;
   text-align: left;
   margin: 0.3rem 0;
 }
@@ -31,8 +31,8 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-top: 10rem/$root-base-size;
-  margin-bottom: 10rem/$root-base-size;
+  margin-top: 0.625rem;
+  margin-bottom: 0.625rem;
 
   .adminOneColContainer {
     display: flex;
@@ -62,7 +62,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  margin-top: 15rem/$root-base-size;
+  margin-top: 0.9375rem;
 }
 
 .graph {
@@ -75,5 +75,5 @@
   text-align: left;
   font-weight: 600;
   font-size: 1rem;
-  line-height: 18rem/$root-base-size;
+  line-height: 1.125rem;
 }

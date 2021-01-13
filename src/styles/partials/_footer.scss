@@ -2,7 +2,7 @@
 
 .footer {
     height: 12.75rem;
-    background-color: #E7E7E7;
+    background-color: $theme-color-dark-white;
     padding: 0rem 15.75rem;
     margin-top: 4.5rem;
     bottom: 0rem;
@@ -19,21 +19,21 @@
             font-weight: 900;
             font-size: 2rem;
             line-height: 1.5rem;
-            color: #191919;
+            color: $theme-color-black19;
         }
 
         .footer-about-reach {
             font-weight: 600;
             font-size: 0.875rem;
             line-height: 2rem;
-            color: #393939;
+            color: $theme-color-grey39;
         }
 
         .footer-about-reach-reachus {
             font-weight: bold;
             font-size: 1rem;
             line-height: 2rem;
-            color: #593C8F;
+            color: $theme-color-violet;
             text-decoration: none;
             margin-left: 0.3125rem;
         }

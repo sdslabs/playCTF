@@ -3,14 +3,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  background: #ffffff;
-  box-shadow: 0rem 0.375rem 0.625rem rgba(25, 25, 25, 0.1);
-  border-radius: 3rem/$root-base-size;
+  background: $theme-color-white;
+  box-shadow: 0rem 0.375rem 0.625rem $theme-color-light-black-low-transp;
+  border-radius: 0.1875rem;
   margin: 0.5rem 0.5rem 1.5rem;
   @extend %font-style-basic;
   font-weight: normal;
-  line-height: 28rem/$root-base-size;
-  padding: 10rem/$root-base-size 1rem;
+  line-height: 1.75rem;
+  padding: 0.625rem 1rem;
 }
 
 .adminNotifTitle {
@@ -22,7 +22,7 @@
 
 .adminNotifTime {
   text-align: right;
-  color: #593c8f;
+  color: $theme-color-violet;
   width: 40%;
   margin-bottom: 0;
 }

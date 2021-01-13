@@ -2,19 +2,19 @@
     .adminTable {
         border-spacing: 0;
         width: 100%;
-        margin-top: 10rem/$root-base-size;
+        margin-top: 0.625rem;
 
         .adminTableData {
             font-family: "Open Sans";
             font-style: normal;
             font-weight: normal;
-            font-size: 14rem/$root-base-size;
-            line-height: 32rem/$root-base-size;
+            font-size: 0.875rem;
+            line-height: 2rem;
         }
 
         .adminTableLink {
             text-decoration: none;
-            color: #593c8f;
+            color: $theme-color-violet;
         }
 
         .adminTableLink:hover {
@@ -28,17 +28,17 @@
         .adminTableteamName,
         .adminTableusername {
             text-align: left;
-            padding-left: 40rem/$root-base-size;
+            padding-left: 2.5rem;
         }
 
         .adminTablechallenge {
             text-align: left;
-            padding-left: 40rem/$root-base-size;
+            padding-left: 2.5rem;
         }
 
         .adminTableemail {
-            color: #593c8f;
-            padding-left: 40rem/$root-base-size;
+            color: $theme-color-violet;
+            padding-left: 2.5rem;
             text-align: left;
         }
 
@@ -47,12 +47,12 @@
         }
 
         .adminTabletimeDate {
-            padding-left: 20rem/$root-base-size;
+            padding-left: 1.25rem;
             text-align: left;
         }
 
         .adminTabletimeDateRight {
-            padding-right: 40rem/$root-base-size;
+            padding-right: 2.5rem;
             text-align: right;
         }
 
@@ -62,27 +62,27 @@
 
         .adminTablestatus {
             text-align: center;
-            padding-right: 20rem/$root-base-size;
+            padding-right: 1.25rem;
         }
 
         .green {
-            color: #00902b;
+            color: $theme-color-green-high-transp;
         }
 
         .red {
-            color: #d72c27;
+            color: $theme-color-red-high-transp;
         }
 
         .adminTableHeader {
             font-family: "Nunito Sans";
             font-style: normal;
             font-weight: bold;
-            font-size: 16rem/$root-base-size;
-            line-height: 32rem/$root-base-size;
+            font-size: 1rem;
+            line-height: 2rem;
         }
 
         .adminTableRow {
-            height: 32rem/$root-base-size;
+            height: 2rem;
         }
 
         .adminTableRow:nth-child(2n + 1) {
@@ -97,35 +97,35 @@
 }
 
 .pageItem {
-    width: 15rem/$root-base-size;
-    margin-left: 5rem/$root-base-size;
-    margin-right: 5rem/$root-base-size;
+    width: 0.9375rem;
+    margin-left: 0.3125rem;
+    margin-right: 0.3125rem;
     outline: none;
 }
 
 .pageItem.active {
-    color: #191919;
+    color: $theme-color-black19;
     font-weight: bold;
 }
 
 .nextItem {
-    color: #593c8f;
-    margin-left: 10rem/$root-base-size;
+    color: $theme-color-violet;
+    margin-left: 0.625rem;
     outline: none;
 }
 
 .nextItem.disabled {
-    color: rgba(89, 60, 143, 0.57);
+    color: $theme-color-violet-med-transp;
 }
 
 .prevItem {
-    color: #593c8f;
-    margin-right: 10rem/$root-base-size;
+    color: $theme-color-violet;
+    margin-right: 0.625rem;
     outline: none;
 }
 
 .prevItem.disabled {
-    color: rgba(89, 60, 143, 0.57);
+    color: $theme-color-violet-med-transp;
 }
 
 .paginateContainer {
@@ -135,28 +135,28 @@
     font-family: "Nunito Sans";
     font-style: normal;
     font-weight: normal;
-    font-size: 14rem/$root-base-size;
-    line-height: 16rem/$root-base-size;
-    color: #575757;
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: $theme-color-grey57;
     justify-content: space-between;
-    margin-top: 20rem/$root-base-size;
+    margin-top: 1.25rem;
 }
 
 .jumpPage {
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: #191919;
+    color: $theme-color-black19;
     font-weight: bold;
 }
 
 .pageInput {
-    margin-left: 5rem/$root-base-size;
-    color: #191919;
-    background: #f2f2f2;
-    box-shadow: inset 0rem/$root-base-size 6rem/$root-base-size 10rem/$root-base-size rgba(0, 0, 0, 0.15);
-    border-radius: 5rem/$root-base-size;
+    margin-left: 0.3125rem;
+    color: $theme-color-black19;
+    background: $theme-color-offwhite;
+    box-shadow: inset 0 0.375rem 0.625rem $theme-color-dark-black-low-transp;
+    border-radius: 0.3125rem;
     text-align: center;
     outline: none;
-    width: 40rem/$root-base-size;
+    width: 2.5rem;
 }

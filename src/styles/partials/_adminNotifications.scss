@@ -32,14 +32,14 @@
   .adFormFields {
     text-align: left;
     @extend %font-style-basic;
-    font-size: 14rem/$root-base-size;
+    font-size: 0.875rem;
     margin: 1rem 0 0 0;
   }
 
   .adFormTitle {
     height: 2.5rem;
-    border-radius: 5rem/$root-base-size;
-    border: 1rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid $theme-color-grey-high-transp;
     padding-left: 1rem;
     @extend %font-style-basic;
     margin-bottom: 2%;
@@ -48,13 +48,13 @@
   .adFormTitle::placeholder,
   textarea::placeholder {
     @extend %font-style-basic;
-    color: rgba(87, 87, 87, 0.7);
+    color: $theme-color-grey-high-transp;
   }
 
   textarea {
     height: 6rem;
-    border-radius: 5rem/$root-base-size;
-    border: 1rem/$root-base-size solid rgba(87, 87, 87, 0.7);
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid $theme-color-grey-high-transp;
     @extend %font-style-basic;
     padding-left: 1rem;
     padding-top: 1rem;
@@ -67,16 +67,16 @@
     justify-content: flex-start;
     align-items: center;
     @extend %font-style-basic;
-    color: rgba(87, 87, 87, 0.7);
-    font-size: 16rem/$root-base-size;
-    line-height: 28rem/$root-base-size;
+    color: $theme-color-grey-high-transp;
+    font-size: 1rem;
+    line-height: 1.75rem;
   }
 
 
   textarea:focus,
   .adFormTitle:focus {
     outline: none !important;
-    border: 2rem/$root-base-size solid #593C8F;
+    border: 0.125rem solid $theme-color-violet;
   }
 }
 
@@ -85,12 +85,12 @@
   @extend %font-style-bold;
   font-size: 2rem;
   line-height: 3rem;
-  color: rgba(87, 87, 87, 0.7);
+  color: $theme-color-grey-high-transp;
 }
 
 .adminNotifTabs {
   margin-top: 4%;
-  height: 500rem/$root-base-size;
+  height: 31.25rem;
   overflow-y: scroll;
 
 }
@@ -100,8 +100,8 @@
 }
 
 .adminDisabledSubmitButton {
-  border-radius: 3rem/$root-base-size;
-  color: #ffffff;
+  border-radius: 0.1875rem;
+  color: $theme-color-white;
   @extend %font-style-bold;
   padding: 0.5rem 1rem;
   border: none;
@@ -111,21 +111,21 @@
 
 .adminEnabledSubmitButton {
   @extend %font-style-bold;
-  background-color: #ff6700;
+  background-color: $theme-color-dark-orange;
 }
 
 .adminEnabledSubmitButton:hover {
   @extend %font-style-bold;
-  background-color: #ffffff;
-  border: 1px solid #FF6700;
-  color: #FF6700;
-  background: #FFFFFF;
+  background-color: $theme-color-white;
+  border: 0.0625rem solid $theme-color-dark-orange;
+  color: $theme-color-dark-orange;
+  background: $theme-color-white;
 }
 
 .adminInactiveSubmitButton {
-  background-color: #D7D7D7;
+  background-color: $theme-color-light-grey-d7;
 }
-
+y
 .adminProcSubmitButton {
-  background-color: rgba(255, 103, 0, 0.57);
+  background-color: $theme-color-dark-red-med-transp;
 }

@@ -24,8 +24,8 @@
 
             .tag .selected {
                 font-weight: bold;
-                color: #191919;
-                border-right: 0.125rem solid #FF6700;
+                color: $theme-color-black19;
+                border-right: 0.125rem solid $theme-color-dark-orange;
             }
         }
     }

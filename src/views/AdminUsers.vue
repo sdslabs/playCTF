@@ -89,7 +89,7 @@ export default {
           id: 1,
           label: "Rank",
           style: {
-            width: "72px",
+            width: "4.5rem",
             textAlign: "center",
           },
         },
@@ -97,8 +97,8 @@ export default {
           id: 2,
           label: "User Name",
           style: {
-            width: "120px",
-            paddingLeft: "20px",
+            width: "7.5rem",
+            paddingLeft: "1.25rem",
           },
         },
         {
@@ -106,14 +106,14 @@ export default {
           label: "E-Mail Address",
           style: {
             textAlign: "left",
-            paddingLeft: "40px",
+            paddingLeft: "2.5rem",
           },
         },
         {
           id: 4,
           label: "Score",
           style: {
-            width: "72px",
+            width: "4.5rem",
             textAlign: "center",
           },
         },
@@ -121,9 +121,9 @@ export default {
           id: 5,
           label: "Status",
           style: {
-            width: "72px",
+            width: "4.5rem",
             textAlign: "center",
-            paddingRight: "20px",
+            paddingRight: "1.25rem",
           },
         },
       ],

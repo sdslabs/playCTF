@@ -2,8 +2,8 @@
   padding: 0 20%;
   display: flex;
   flex-direction: row;
-  height: 204rem/$root-base-size;
-  background-color: #e7e7e7;
+  height: 12.75rem;
+  background-color: $theme-color-dark-white;
   justify-content: space-between;
   position: absolute;
   bottom: 0;
@@ -22,9 +22,9 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 900;
-  font-size: 32rem/$root-base-size;
-  line-height: 24rem/$root-base-size;
-  margin-bottom: 0px;
+  font-size: 2rem;
+  line-height: 1.5rem;
+  margin-bottom: 0;
 }
 
 .adminFooterContact {
@@ -37,16 +37,16 @@
   font-family: 'Nunito Sans';
   font-style: normal;
   font-weight: 600;
-  font-size: 14rem/$root-base-size;
-  line-height: 32rem/$root-base-size;
+  font-size: 0.875rem;
+  line-height: 2rem;
 }
 
 .adminFooterLink {
   @extend %font-style-bold;
-  font-size: 16rem/$root-base-size;
-  line-height: 32rem/$root-base-size;
-  margin-left: 10rem/$root-base-size;
-  color: #593c8f;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-left: 0.625rem;
+  color: $theme-color-violet;
   text-decoration: none;
 }
 
@@ -60,7 +60,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 25rem/$root-base-size;
+  margin-top: 1.5625rem;
 }
 
 #admin-layout {

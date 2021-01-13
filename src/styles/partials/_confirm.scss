@@ -1,7 +1,7 @@
 .manageChalConfirmBox {
     .vc-container {
         width: 30%;
-        border-radius: 5rem/$root-base-size;
+        border-radius: 0.3125rem;
 
         .vc-text-grid {
             padding: 1.5rem;
@@ -9,19 +9,19 @@
             .vc-title {
                 @extend %font-style-bold;
                 text-align: left;
-                font-size: 24rem/$root-base-size;
-                line-height: 20rem/$root-base-size;
-                margin-bottom: 20rem/$root-base-size;
+                font-size: 1.5rem;
+                line-height: 1.25rem;
+                margin-bottom: 1.25rem;
                 padding: 0
             }
 
             .vc-text {
                 text-align: left;
                 font-family: 'Open Sans';
-                font-style: normal;
+                
                 font-weight: normal;
-                font-size: 16rem/$root-base-size;
-                line-height: 24rem/$root-base-size;
+                font-size: 1rem;
+                line-height: 1.5rem;
                 padding: 0;
             }
         }
@@ -34,37 +34,37 @@
             padding-top: 0;
 
             .vc-btn {
-                margin-right: 20rem/$root-base-size;
+                margin-right: 1.25rem;
                 height: 44rem/$root-base-size;
                 min-width: 75rem/$root-base-size;
                 @extend %font-style-bold;
-                background: #FFFFFF;
-                border: 1rem/$root-base-size solid #393939;
+                background: $theme-color-white;
+                border: 0.0625rem solid $theme-color-grey39;
                 box-sizing: border-box;
-                border-radius: 4rem/$root-base-size;
+                border-radius: 0.25rem;
                 text-align: center;
-                font-size: 14rem/$root-base-size;
-                line-height: 24rem/$root-base-size;
-                color: #393939;
-                padding: 0 20rem/$root-base-size;
+                font-size: 0.875rem;
+                line-height: 1.5rem;
+                color: $theme-color-grey39;
+                padding: 0 1.25rem;
 
             }
 
             .vc-btn:hover {
-                color: #FFFFFF;
-                background: #393939;
+                color: $theme-color-white;
+                background: $theme-color-grey39;
             }
 
             .vc-btn.left {
-                background: #FF6700;
+                background: $theme-color-dark-orange;
                 border: none;
-                color: #FFFFFF;
+                color: $theme-color-white;
             }
 
             .vc-btn.left:hover {
-                border: 1rem/$root-base-size solid #FF6700;
-                color: #FF6700;
-                background: #FFFFFF;
+                border: 0.0625rem solid $theme-color-dark-orange;
+                color: $theme-color-dark-orange;
+                background: $theme-color-white;
             }
         }
 

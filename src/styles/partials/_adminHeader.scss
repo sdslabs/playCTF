@@ -3,8 +3,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-top: 20rem/$root-base-size;
-  margin-bottom: 20rem/$root-base-size;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
   padding: 0 25%;
 }
 
@@ -13,9 +13,9 @@
   flex-direction: column;
   justify-content: center;
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 12rem/$root-base-size;
-  line-height: 20rem/$root-base-size;
-  color: #393939;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  color: $theme-color-grey39;
   margin: 0 1rem;
 }
 
@@ -33,11 +33,11 @@
 }
 
 .adminNavDropbtn {
-  font-size: 14rem/$root-base-size;
-  line-height: 24rem/$root-base-size;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
   border: none;
   outline: none;
-  color: #593c8f;
+  color: $theme-color-violet;
   background-color: inherit;
   font-family: 'Nunito Sans', sans-serif;
   font-weight: 600;
@@ -47,13 +47,13 @@
 .adminNavDropdownContent {
   display: none;
   position: absolute;
-  min-width: 150px;
+  min-width: 9.375rem;
 }
 
 .adminNavDropdownLink {
   color: black;
   float: none;
-  padding: 12px 16px;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   display: block;
   text-align: left;

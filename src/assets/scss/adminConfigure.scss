@@ -1,205 +1,205 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
 
-$screenRatio: 1;
+// $screenRatio: 1;
 
-.main {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+// .main {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+// }
 
-.heading {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px * $screenRatio;
-  line-height: 28px * $screenRatio;
-  text-align: left;
-}
+// .heading {
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: bold;
+//   font-size: 1.5rem * $screenRatio;
+//   line-height: 1.75rem * $screenRatio;
+//   text-align: left;
+// }
 
-.important {
-  color: red;
-}
+// .important {
+//   color: red;
+// }
 
-.preview-button {
-  margin-left: 14px;
-  font-size: 14px * $screenRatio;
-  line-height: 28px * $screenRatio;
-  padding: 2px 12px;
-  height: 32px;
-  width: 140px;
-  background: #ffffff;
-  border: 1.5px solid #393939;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-  border-radius: 3px;
+// .preview-button {
+//   margin-left: 0.875rem;
+//   font-size: 0.875rem * $screenRatio;
+//   line-height: 1.75rem * $screenRatio;
+//   padding: 0.125rem 0.75rem;
+//   height: 2rem;
+//   width: 140px;
+//   background: $theme-color-white;
+//   border: 1.0.3125rem solid $theme-color-grey39;
+//   box-sizing: border-box;
+//   box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+//   border-radius: 0.1875rem;
 
-  .preview {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-  }
-}
+//   .preview {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-evenly;
+//   }
+// }
 
-.fields {
-  text-align: left;
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px * $screenRatio;
-  line-height: 18px * $screenRatio;
-  margin: 5px;
-}
+// .fields {
+//   text-align: left;
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 0.875rem * $screenRatio;
+//   line-height: 1.125rem * $screenRatio;
+//   margin: 0.3125rem;
+// }
 
-.subfields {
-  font-size: 12px * $screenRatio;
-  text-align: left;
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  line-height: 18px * $screenRatio;
-  margin: 5px;
-}
+// .subfields {
+//   font-size: 0.75rem * $screenRatio;
+//   text-align: left;
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   line-height: 1.125rem * $screenRatio;
+//   margin: 0.3125rem;
+// }
 
-.time {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+// .time {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
 
-  .timeSub {
-    display: flex;
-    flex-direction: row;
-  }
-}
+//   .timeSub {
+//     display: flex;
+//     flex-direction: row;
+//   }
+// }
 
-.themes {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+// .themes {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
 
-  .sub-themes {
-    border: 0cm;
-    background: none;
-    display: flex;
-    flex-direction: column;
+//   .sub-themes {
+//     border: 0cm;
+//     background: none;
+//     display: flex;
+//     flex-direction: column;
 
-    .block {
-      width: 120px;
-      height: 85.33px;
-      background: #c4c4c4;
-      border: none;
-    }
+//     .block {
+//       width: 7.5rem;
+//       height: 85.33px;
+//       background: #c4c4c4;
+//       border: none;
+//     }
 
-    .block:focus {
-      border: 2px solid #ff6700;
-      box-sizing: border-box;
-    }
-  }
-}
+//     .block:focus {
+//       border: 0.125rem solid $theme-color-dark-orange;
+//       box-sizing: border-box;
+//     }
+//   }
+// }
 
-label {
-  font-family: Nunito Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 14px * $screenRatio;
-  line-height: 18px * $screenRatio;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 115px;
-  padding: 7px;
-  height: 32px;
-  background: #ffffff;
-  border: 1.5px solid #393939;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-  border-radius: 2px;
-}
+// label {
+//   font-family: Nunito Sans;
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 0.875rem * $screenRatio;
+//   line-height: 1.125rem * $screenRatio;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-evenly;
+//   width: 115px;
+//   padding: 0.4375rem;
+//   height: 2rem;
+//   background: $theme-color-white;
+//   border: 1.0.3125rem solid $theme-color-grey39;
+//   box-sizing: border-box;
+//   box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+//   border-radius: 0.125rem;
+// }
 
-.confirmation {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px * $screenRatio;
-  line-height: 28px * $screenRatio;
-}
+// .confirmation {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: flex-start;
+//   align-items: center;
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 1rem * $screenRatio;
+//   line-height: 1.75rem * $screenRatio;
+// }
 
-.submitButton {
-  background-color: #ff6700;
-  border-radius: 2px;
-  color: #ffffff;
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: bold;
-  font-size: 14px * $screenRatio;
-  line-height: 28px * $screenRatio;
-  padding: 8px 16px 8px 16px;
-  border: none;
-  margin-left: auto;
-}
+// .submitButton {
+//   background-color: $theme-color-dark-orange;
+//   border-radius: 0.125rem;
+//   color: $theme-color-white;
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: bold;
+//   font-size: 0.875rem * $screenRatio;
+//   line-height: 1.75rem * $screenRatio;
+//   padding: 0.5rem 1rem 0.5rem 1rem;
+//   border: none;
+//   margin-left: auto;
+// }
 
-.form {
-  margin-top: 30px * $screenRatio;
-  margin-bottom: 40px * $screenRatio;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
+// .form {
+//   margin-top: 1.875rem * $screenRatio;
+//   margin-bottom: 2.5rem * $screenRatio;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+// }
 
-.title {
-  height: 48px * $screenRatio;
-  border-radius: 2px;
-  border: 1px solid rgba(87, 87, 87, 0.7);
-  padding-left: 16px * $screenRatio;
-  margin-bottom: 10px * $screenRatio;
-}
+// .title {
+//   height: 48px * $screenRatio;
+//   border-radius: 0.125rem;
+//   border: 0.0625rem solid $theme-color-grey-high-transp;
+//   padding-left: 1rem * $screenRatio;
+//   margin-bottom: 0.625rem * $screenRatio;
+// }
 
-.title::placeholder {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px * $screenRatio;
-  line-height: 48px * $screenRatio;
-}
+// .title::placeholder {
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 1rem * $screenRatio;
+//   line-height: 48px * $screenRatio;
+// }
 
-.title:focus {
-  border: 1.5px solid #593c8f;
-  box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-}
+// .title:focus {
+//   border: 1.0.3125rem solid $theme-color-violet;
+//   box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+// }
 
-textarea {
-  height: 96px * $screenRatio;
-  box-sizing: border-box;
-  border-radius: 2px;
-  border: 1px solid rgba(87, 87, 87, 0.7);
-  padding-left: 16px * $screenRatio;
-  padding-top: 15px * $screenRatio;
-  margin-bottom: 10px * $screenRatio;
-}
+// textarea {
+//   height: 96px * $screenRatio;
+//   box-sizing: border-box;
+//   border-radius: 0.125rem;
+//   border: 0.0625rem solid $theme-color-grey-high-transp;
+//   padding-left: 1rem * $screenRatio;
+//   padding-top: 0.9375rem * $screenRatio;
+//   margin-bottom: 0.625rem * $screenRatio;
+// }
 
-textarea::placeholder {
-  font-family: "Nunito Sans";
-  font-style: normal;
-  font-weight: 600;
-  font-size: 16px * $screenRatio;
-  line-height: 18px * $screenRatio;
-}
+// textarea::placeholder {
+//   font-family: "Nunito Sans";
+//   font-style: normal;
+//   font-weight: 600;
+//   font-size: 1rem * $screenRatio;
+//   line-height: 1.125rem * $screenRatio;
+// }
 
-textarea:focus {
-  border: 1.5px solid #593c8f;
-  box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-}
+// textarea:focus {
+//   border: 1.0.3125rem solid $theme-color-violet;
+//   box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+// }
 
-.notifTabs {
-  margin-top: 40px * $screenRatio;
-  height: 600px * $screenRatio;
-  overflow-y: scroll;
-}
+// .notifTabs {
+//   margin-top: 2.5rem * $screenRatio;
+//   height: 600px * $screenRatio;
+//   overflow-y: scroll;
+// }
 
-.notifTabs::-webkit-scrollbar {
-  display: none;
-}
+// .notifTabs::-webkit-scrollbar {
+//   display: none;
+// }

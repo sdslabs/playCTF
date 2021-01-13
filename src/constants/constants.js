@@ -1,8 +1,10 @@
-export const colors = {
+import variables from "../styles/main.scss";
+
+export const colors={
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
   lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"],
-  singleBarGraph: ["rgba(76, 128, 165, 0.75)"]
+  singleBarGraph: [variables.themeColorDarkBlueHighTransp]
 };
 
 export const tableCols = {
@@ -20,7 +22,7 @@ export const tableCols = {
       label: "User Name",
       style: {
         width: "75%",
-        paddingLeft: "40px",
+        paddingLeft: "2.5rem",
         textAlign: "left"
       }
     },
@@ -37,12 +39,12 @@ export const tableCols = {
     {
       id: 1,
       label: "User Name",
-      style: { paddingLeft: "40px", textAlign: "left", width: "25%" }
+      style: { paddingLeft: "2.5rem", textAlign: "left", width: "25%" }
     },
     {
       id: 2,
       label: "Challenge",
-      style: { textAlign: "left", width: "25%", paddingLeft: "40px" }
+      style: { textAlign: "left", width: "25%", paddingLeft: "2.5rem" }
     },
     {
       id: 3,
@@ -52,26 +54,26 @@ export const tableCols = {
     {
       id: 4,
       label: "Time & Date (+5:30 UTC)",
-      style: { paddingLeft: "20px", textAlign: "left", width: "40% " }
+      style: { paddingLeft: "1.25rem", textAlign: "left", width: "40% " }
     }
   ],
   adminChallenge: [
     {
       id: 1,
       label: "User Name",
-      style: { paddingLeft: "40px", textAlign: "left", width: "40%" }
+      style: { paddingLeft: "2.5rem", textAlign: "left", width: "40%" }
     },
     {
       id: 2,
       label: "Time & Date (+5:30 UTC)",
-      style: { paddingRight: "40px", textAlign: "right", width: "60% " }
+      style: { paddingRight: "2.5rem", textAlign: "right", width: "60% " }
     }
   ],
   user: [
     {
       id: 1,
       label: "Challenge",
-      style: { textAlign: "left", width: "35%", paddingLeft: "40px" }
+      style: { textAlign: "left", width: "35%", paddingLeft: "2.5rem" }
     },
     {
       id: 2,
@@ -81,7 +83,7 @@ export const tableCols = {
     {
       id: 3,
       label: "Time & Date (+5:30 UTC)",
-      style: { paddingRight: "40px", textAlign: "right", width: "45%" }
+      style: { paddingRight: "2.5rem", textAlign: "right", width: "45%" }
     }
   ]
 };
@@ -158,7 +160,7 @@ export const barChartOptions = () => {
     }
   };
   let gridProps = {
-    color: "#575757",
+    color: variables.themeColorGrey57,
     drawOnChartArea: false
   };
 
@@ -198,7 +200,7 @@ export const barChartOptions = () => {
               stepSize: 20,
               min: 0,
               max: 100,
-              fontColor: "#393939",
+              fontColor: variables.themeColorGrey39,
               fontFamily: "Roboto",
               fontStyle: "normal"
             },
@@ -222,7 +224,7 @@ export const lineGraphOptions = showLegend => {
       position: "top",
       labels: {
         fontFamily: "Nunito Sans",
-        fontColor: "#191919",
+        fontColor: variables.themeColorBlack19,
         fontSize: 12,
         lineHeight: 12,
         boxWidth: 20
@@ -244,7 +246,7 @@ export const lineGraphOptions = showLegend => {
       xAxes: [
         {
           gridLines: {
-            color: "#575757",
+            color: variables.themeColorGrey57,
             drawOnChartArea: false
           },
           scaleLabel: {
@@ -253,7 +255,7 @@ export const lineGraphOptions = showLegend => {
           },
           ticks: {
             source: "auto",
-            fontColor: "#393939",
+            fontColor: variables.themeColorGrey39,
             fontFamily: "Roboto",
             fontStyle: "normal"
           },
@@ -271,12 +273,12 @@ export const lineGraphOptions = showLegend => {
             labelString: "Score"
           },
           gridLines: {
-            color: "#575757",
+            color: variables.themeColorGrey57,
             drawOnChartArea: false
           },
           ticks: {
             source: "auto",
-            fontColor: "#393939",
+            fontColor: variables.themeColorGrey39,
             fontFamily: "Roboto",
             fontStyle: "normal",
             min: 0
@@ -293,7 +295,7 @@ export const lineGraphConfig = {
   borderWidth: 1,
   fill: false,
   singleLineConfig: {
-    backgroundColor: "white",
+    backgroundColor: variables.themeColorWhite,
     borderColor: "#0F6CF8"
   }
 };

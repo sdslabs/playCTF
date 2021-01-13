@@ -28,7 +28,7 @@
         font-weight: normal;
         font-size: 0.875rem;
         line-height: 1.5rem;
-        color: #191919;
+        color: $theme-color-black19;
         text-decoration: none;
         margin-left: 1.5rem;
 
@@ -53,13 +53,13 @@
             display: block;
             margin: 0 auto;
             width: 75%;
-            border-bottom: 0.125rem solid #191919;
+            border-bottom: 0.125rem solid $theme-color-black19;
             ;
         }
     }
 
     .navbar-link-current-page {
-        color: #191919;
+        color: $theme-color-black19;
         font-weight: bold;
 
     }
@@ -69,7 +69,7 @@
         font-family: $primary-font-family;
         margin-top: -0.75rem;
         font-size: 0.75rem;
-        color: #393939;
+        color: $theme-color-grey39;
         line-height: 0.5rem;
     }
 
@@ -94,7 +94,7 @@
     }
 
     .teamName {
-        color: #593C8F;
+        color: $theme-color-violet;
         font-weight: 600;
         margin-right: 0.4375rem;
     }
@@ -126,7 +126,7 @@
 
     .navbar-already-registered {
         font-size: 0.875rem;
-        color: #393939;
+        color: $theme-color-grey39;
         font: $secondary-font-family;
         margin: 0rem;
         line-height: 1.5rem;
@@ -136,7 +136,7 @@
     .login-link {
         font-size: 0.875rem;
         font-weight: bold;
-        color: #593C8F;
+        color: $theme-color-violet;
         text-decoration: none;
     }
 }

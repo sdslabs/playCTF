@@ -30,21 +30,21 @@
         @extend %font-style-bold;
         font-size: 1rem;
         line-height: 18rem / $root-base-size;
-        color: #191919;
-        border-right: 2rem/$root-base-size solid $secondary-admin-theme-color;
+        color: $theme-color-black19;
+        border-right: 0.125rem solid $secondary-admin-theme-color;
     }
 
     .active {
         @extend %font-style-bold;
         font-size: 1rem;
         line-height: 18rem / $root-base-size;
-        color: #191919;
-        border-right: 2rem/$root-base-size solid $secondary-admin-theme-color;
+        color: $theme-color-black19;
+        border-right: 0.125rem solid $secondary-admin-theme-color;
     }
 }
 
 .mainContaineradminChall {
-    margin-left: 20rem/$root-base-size;
+    margin-left: 1.25rem;
     width: 100%;
     align-self: flex-start;
     display: flex;
@@ -60,39 +60,39 @@
         justify-content: space-between;
 
         .addChallenge {
-            background: #FF6700;
-            border-radius: 3rem/$root-base-size;
+            background: $theme-color-dark-orange;
+            border-radius: 0.1875rem;
             outline: none;
             display: flex;
             flex-direction: row;
             align-items: center;
-            padding: 8rem/$root-base-size 12rem/$root-base-size;
+            padding: 0.5rem 0.75rem;
             border: none;
 
             .addImg {
-                width: 15rem/$root-base-size;
-                height: 15rem/$root-base-size;
-                margin: 0rem/$root-base-size 5rem/$root-base-size;
+                width: 0.9375rem;
+                height: 0.9375rem;
+                margin: 0 0.3125rem;
             }
 
             .addText {
                 @extend %font-style-basic;
                 font-weight: 600;
-                color: #FFFFFF;
+                color: $theme-color-white;
             }
         }
 
         .addChallenge:hover {
-            background: #FFFFFF;
+            background: $theme-color-white;
 
-            border: 2rem/$root-base-size solid #FF6700;
+            border: 0.125rem solid $theme-color-dark-orange;
 
             .addImg {
                 filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
             }
 
             .addText {
-                color: #FF6700;
+                color: $theme-color-dark-orange;
             }
         }
     }
@@ -101,11 +101,11 @@
 }
 
 .adminChallengesList {
-    margin-top: 20rem/$root-base-size;
+    margin-top: 1.25rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 744rem/$root-base-size;
+    width: 46.5rem;
     justify-content: space-between;
 }
 
@@ -116,18 +116,18 @@
     justify-content: flex-start;
     align-items: center;
     @extend %font-style-basic;
-    margin-top: 30rem/$root-base-size;
+    margin-top: 1.875rem;
 
     .sortText {
-        line-height: 18rem/$root-base-size;
-        color: rgba(57, 57, 57, 0.9);
-        margin-right: 8rem/$root-base-size;
+        line-height: 1.125rem;
+        color: $theme-color-black-high-transp;
+        margin-right: 0.5rem;
     }
 
     .sortOption {
-        line-height: 24rem/$root-base-size;
-        color: rgba(87, 87, 87, 0.75);
-        margin: 0rem/$root-base-size 8rem/$root-base-size;
+        line-height: 1.5rem;
+        color: $theme-color-grey-high-transp;
+        margin: 0 0.5rem;
     }
 
     .sortOption:hover {
@@ -135,8 +135,8 @@
         font-size: 1rem;
         line-height: 18rem / $root-base-size;
         text-align: center;
-        color: #191919;
-        border-bottom: 2rem/$root-base-size solid #FF6700;
+        color: $theme-color-black19;
+        border-bottom: 0.125rem solid $theme-color-dark-orange;
     }
 
     .active {
@@ -144,33 +144,33 @@
         font-size: 1rem;
         line-height: 18rem / $root-base-size;
         text-align: center;
-        color: #191919;
-        border-bottom: 2rem/$root-base-size solid #FF6700;
+        color: $theme-color-black19;
+        border-bottom: 0.125rem solid $theme-color-dark-orange;
     }
 
     .dropdown {
         margin-left: auto;
-        width: 200rem/$root-base-size;
+        width: 12.5rem;
 
         .filterText {
             font-weight: normal;
-            font-size: 14rem/$root-base-size;
-            line-height: 18rem/$root-base-size;
-            color: #575757;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            color: $theme-color-grey57;
         }
 
         .filterSelection {
             margin-left: auto;
             font-weight: 600;
-            font-size: 14rem/$root-base-size;
-            line-height: 18rem/$root-base-size;
-            color: rgba(57, 57, 57, 0.9);
-            margin-right: 8rem/$root-base-size;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            color: $theme-color-black-high-transp;
+            margin-right: 0.5rem;
         }
     }
 
     .selection {
-        width: 200rem/$root-base-size;
+        width: 12.5rem;
     }
 }
 
@@ -183,6 +183,6 @@
 
 .vue-simple-spinner-text{
     @extend %font-style-bold;
-    line-height: 24rem/$root-base-size;
-    color: rgba(87, 87, 87, 0.7);
+    line-height: 1.5rem;
+    color: $theme-color-grey-high-transp;
 }

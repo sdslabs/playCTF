@@ -6,7 +6,7 @@
 .adSubHeaderComponent {
   text-align: left;
   @extend %font-style-bold;
-  font-size: 24rem/$root-base-size;
+  font-size: 1.5rem;
   text-transform: uppercase;
-  color: #191919;
+  color: $theme-color-black19;
 }

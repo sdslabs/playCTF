@@ -14,13 +14,13 @@
             font-weight: 800;
             font-size: 3rem;
             line-height: 4.5rem;
-            color: #393939;
+            color: $theme-color-grey39;
         }
 
         .timing {
             font-size: 1.5rem;
             line-height: 2.5rem;
-            color: #575757;
+            color: $theme-color-grey57;
             font-weight: 600;
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -31,7 +31,7 @@
 .description {
     font-size: 1.25rem;
     font-family: $secondary-font-family;
-    color: #575757;
+    color: $theme-color-grey57;
     width: 32rem;
     margin-top: 0.5rem;
 }
@@ -46,7 +46,7 @@
         font-family: $primary-font-family;
         font-size: 3rem;
         line-height: 4.5rem;
-        color: #393939;
+        color: $theme-color-grey39;
     }
 
 }
@@ -72,6 +72,6 @@
     font-weight: bold;
     font-size: 1rem;
     line-height: 1.5rem;
-    color: #593C8F;
+    color: $theme-color-violet;
     margin-top: 1rem;
 }

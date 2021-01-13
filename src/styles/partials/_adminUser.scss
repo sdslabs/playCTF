@@ -4,12 +4,12 @@
     justify-content: center;
     width: 100%;
     align-self: center;
-    background: #FFFFFF;
-    box-shadow: 0 6rem/$root-base-size 10rem/$root-base-size rgba(87, 87, 87, 0.15);
-    border-radius: 5rem/$root-base-size;
+    background: $theme-color-white;
+    box-shadow: 0 0.375rem 0.625rem $theme-color-grey-low-transp;
+    border-radius: 0.3125rem;
     font-family: 'Nunito Sans';
-    font-style: normal;
-    margin-bottom: 40rem/$root-base-size;
+    
+    margin-bottom: 2.5rem;
 
     .user {
         display: flex;
@@ -30,33 +30,33 @@
 
         .name {
             @extend %font-style-bold;
-            font-size: 24rem/$root-base-size;
-            color: #191919;
+            font-size: 1.5rem;
+            color: $theme-color-black19;
         }
 
         .mailImg {
             width: 1rem;
-            width: 12.8rem/$root-base-size;
-            margin-left: 15rem/$root-base-size;
-            margin-right: 15rem/$root-base-size;
+            width: 12.0.5rem;
+            margin-left: 0.9375rem;
+            margin-right: 0.9375rem;
         }
 
         .contact {
             font-weight: 600;
-            font-size: 14rem/$root-base-size;
-            line-height: 24rem/$root-base-size;
-            color: #393939;
+            font-size: 0.875rem;
+            line-height: 1.5rem;
+            color: $theme-color-grey39;
         }
     }
 
     .rankScore {
         display: flex;
         flex-direction: row;
-        margin-top: 20rem/$root-base-size;
+        margin-top: 1.25rem;
 
         .score {
-            border-left: 2rem/$root-base-size solid rgba(87, 87, 87, 0.7);
-            padding: 10rem/$root-base-size;
+            border-left: 0.125rem solid $theme-color-grey-high-transp;
+            padding: 0.625rem;
             padding-top: 0;
             display: flex;
             flex-direction: column;
@@ -65,7 +65,7 @@
         .rank {
             display: flex;
             flex-direction: column;
-            padding: 10rem/$root-base-size;
+            padding: 0.625rem;
             padding-top: 0;
         }
     }
@@ -77,18 +77,18 @@
 
         .status {
             font-weight: bold;
-            font-size: 20rem/$root-base-size;
-            line-height: 28rem/$root-base-size;
+            font-size: 1.25rem;
+            line-height: 1.75rem;
             text-align: right;
 
         }
 
         .banned {
-            color: rgba(215, 44, 39, 0.75);
+            color: $theme-color-red-high-transp;
         }
 
         .unbanned {
-            color: rgba(0, 144, 43, 0.75);
+            color: $theme-color-green-high-transp;
         }
 
 
@@ -96,18 +96,18 @@
 
     .value {
         font-weight: bold;
-        font-size: 20rem/$root-base-size;
-        line-height: 28rem/$root-base-size;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
         text-align: center;
-        color: #191919;
+        color: $theme-color-black19;
     }
 
     .field {
         font-weight: normal;
-        font-size: 16rem/$root-base-size;
-        line-height: 18rem/$root-base-size;
+        font-size: 1rem;
+        line-height: 1.125rem;
         text-align: center;
-        color: #575757;
+        color: $theme-color-grey57;
     }
 }
 
@@ -116,25 +116,25 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    background: #FFFFFF;
-    border: 1.5rem/$root-base-size solid #393939;
+    background: $theme-color-white;
+    border: 1.0.3125rem solid $theme-color-grey39;
     box-sizing: border-box;
-    box-shadow: 0rem/$root-base-size 2rem/$root-base-size 10rem/$root-base-size rgba(37, 85, 124, 0.1);
-    border-radius: 3rem/$root-base-size;
-    padding: 5rem/$root-base-size 15rem/$root-base-size;
+    box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    border-radius: 0.1875rem;
+    padding: 0.3125rem 0.9375rem;
     margin: 0 0.2rem;
 
     .adminBanText {
         font-weight: 600;
-        font-size: 14rem/$root-base-size;
-        line-height: 24rem/$root-base-size;
-        color: #393939;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: $theme-color-grey39;
         margin-left: 0.2rem;
     }
 }
 
 .adminBanButton:hover {
-    background: #393939;
+    background: $theme-color-grey39;
 
     .banImg {
         filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg) brightness(99%) contrast(103%);
@@ -142,5 +142,5 @@
 }
 
 .adminBanButton:hover .adminBanText {
-    color: #ffffff;
+    color: $theme-color-white;
 }

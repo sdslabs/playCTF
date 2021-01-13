@@ -6,11 +6,11 @@
 
     .login-heading {
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: bold;
         font-size: 1.75rem;
         line-height: 2.75rem;
-        color: #393939;
+        color: $theme-color-grey39;
         text-align: left;
     }
 
@@ -26,16 +26,16 @@
                 height: 3rem;
                 margin-top: 1.75rem;
                 padding: 1rem;
-                background: #FFFFFF;
-                border: 0.0313rem solid rgba(87, 87, 87, 0.7);
+                background: $theme-color-white;
+                border: 0.0313rem solid $theme-color-grey-high-transp;
                 box-sizing: border-box;
                 border-radius: 0.125rem;
                 font-family: $primary-font-family;
-                font-style: normal;
+                
                 font-weight: 600;
                 font-size: 1rem;
                 line-height: 1.125rem;
-                color: rgba(87, 87, 87, 0.7);
+                color: $theme-color-grey-high-transp;
             }
 
             .login-button {
