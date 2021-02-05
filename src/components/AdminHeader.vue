@@ -6,7 +6,7 @@
     <AdminNav />
     <div class="adminNavTimer">
       <p class="adminTimerMessage">Time Remaining</p>
-      <Timer class="adminTimerValue"/>
+      <Timer class="adminTimerValue" />
     </div>
     <div class="adminNavDropdown">
       <button class="adminNavDropbtn">
@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       ctfLogo,
-      dropdown,
+      dropdown
     };
   }
 };

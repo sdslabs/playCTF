@@ -141,7 +141,6 @@ export default {
       let self = this;
       NotifService.submitNotif(this.title, this.description)
         .then(response => {
-          console.log(response);
           self.notifications = [
             {
               title: self.title,
@@ -159,7 +158,6 @@ export default {
           self.showSuccess = true;
         })
         .catch(response => {
-          console.log(response);
           self.title = "";
           self.description = "";
           self.checked = false;

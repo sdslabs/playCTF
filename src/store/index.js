@@ -30,6 +30,6 @@ export default new Vuex.Store({
     login: state => state.login,
     currentPage: state => state.currentPage,
     hostUrl: state => state.hostUrl,
-    challengeHostUrl: state => state.challengeHostUrl,
+    challengeHostUrl: state => state.challengeHostUrl
   }
 });

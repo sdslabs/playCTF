@@ -109,6 +109,11 @@ export default {
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
+    },
+    get_rows: function get_rows() {
+      let start = (this.currentPage - 1) * this.maxElementPerPage;
+      let end = start + this.maxElementPerPage;
+      return this.rows.slice(start, end);
     }
   },
   computed: {

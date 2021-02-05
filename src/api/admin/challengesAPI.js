@@ -6,13 +6,13 @@ export default {
     const response = await this.fetchAllChallenges();
     tags.forEach(tag => {
       let challenges = response.data.filter(el => {
-        return el.Category === tag.name;
+        return el.category === tag.name;
       });
       let totalChallenges = challenges.length;
       let userSolves = [];
       challenges.forEach(el => {
-        if (el.Solves !== null) {
-          el.Solves.forEach(solve => {
+        if (el.solves !== null) {
+          el.solves.forEach(solve => {
             if (
               userSolves.findIndex(el => {
                 el.username === solve.username;
@@ -54,7 +54,7 @@ export default {
       let leastSolvedChal = { name: "-", solves: -1 };
       let maxSolvedChal = { name: "-", solves: -1 };
       response.data.forEach(el => {
-        switch (el.Status) {
+        switch (el.status) {
           case "Deployed":
             deployedChal++;
             break;
@@ -64,17 +64,17 @@ export default {
           case "Purged":
             purgedChal++;
         }
-        if (el.SolvesNumber <= leastSolves) {
-          leastSolves = el.SolvesNumber;
+        if (el.solvesNumber <= leastSolves) {
+          leastSolves = el.solvesNumber;
           leastSolvedChal = {
-            name: el.Name,
+            name: el.name,
             solves: leastSolves
           };
         }
-        if (el.SolvesNumber >= maxSolves) {
-          maxSolves = el.SolvesNumber;
+        if (el.solvesNumber >= maxSolves) {
+          maxSolves = el.solvesNumber;
           maxSolvedChal = {
-            name: el.Name,
+            name: el.name,
             solves: maxSolves
           };
         }
@@ -96,7 +96,7 @@ export default {
     let categoryFilterOptions = [];
     let displayChallenges = [];
     challenges.forEach(el => {
-      allTags.push(el.Category);
+      allTags.push(el.category);
     });
     allTags = allTags.filter((item, pos) => {
       return allTags.indexOf(item) == pos;
@@ -107,7 +107,7 @@ export default {
       id++;
     });
     displayChallenges = challenges.sort((a, b) => {
-      return a.Name > b.Name ? 1 : -1;
+      return a.name > b.name ? 1 : -1;
     });
     return {
       challenges,
