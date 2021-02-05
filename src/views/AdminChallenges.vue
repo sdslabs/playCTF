@@ -51,7 +51,7 @@
       >
         <admin-chall-card
           v-for="challenge in displayChallenges"
-          :key="challenge.ChallId"
+          :key="challenge.id"
           :challenge="challenge"
         />
       </div>
@@ -112,7 +112,7 @@ export default {
         this.displayChallenges = this.challenges;
       } else {
         this.displayChallenges = this.challenges.filter(el => {
-          return el.Status == value;
+          return el.status == value;
         });
       }
     },
@@ -120,7 +120,7 @@ export default {
       this.sortFilter = value;
       if (value === "Name") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return a.Name > b.Name ? 1 : -1;
+          return a.name > b.name ? 1 : -1;
         });
       } else if (value === "Score") {
         this.displayChallenges = this.displayChallenges.sort((a, b) => {
@@ -137,8 +137,8 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.displayChallenges.filter(el => {
-          return el.Category == value;
+        this.displayChallenges = this.challenges.filter(el => {
+          return el.category == value;
         });
       }
     },

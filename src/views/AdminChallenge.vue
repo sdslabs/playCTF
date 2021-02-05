@@ -3,8 +3,8 @@
   <div class="mainAdminContainer" v-else>
     <div class="adminChalInfo">
       <div class="infoDetails">
-        <span class="name">{{ chalDetails.Name }}</span>
-        <span class="category">{{ chalDetails.Category }}</span>
+        <span class="name">{{ chalDetails.name }}</span>
+        <span class="category">{{ chalDetails.category }}</span>
         <button class="adminBanButton">
           <img :src="edit" class="banImg" /><span class="adminBanText"
             >Edit</span
@@ -13,32 +13,32 @@
         <span
           class="status"
           :class="{
-            deployed: chalDetails.Status === 'Deployed',
-            purged: chalDetails.Status === 'Purged',
-            undeployed: chalDetails.Status === 'Undeployed'
+            deployed: chalDetails.status === 'Deployed',
+            purged: chalDetails.status === 'Purged',
+            undeployed: chalDetails.status === 'Undeployed'
           }"
-          >{{ chalDetails.Status }}</span
+          >{{ chalDetails.status }}</span
         >
       </div>
       <div class="infoStats">
         <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
         <div class="pointSolves">
           <div class="point">
-            <span class="value">{{ chalDetails.Points }}</span>
+            <span class="value">{{ chalDetails.points }}</span>
             <span class="field">Points</span>
           </div>
           <div class="solves">
-            <span class="value">{{ chalDetails.SolvesNumber }}</span>
+            <span class="value">{{ chalDetails.solvesNumber }}</span>
             <span class="field">Solves</span>
           </div>
         </div>
         <div
-          v-if="chalDetails.Status === 'Deployed'"
+          v-if="chalDetails.status === 'Deployed'"
           class="changeChallengeStatus"
         >
           <button
             class="adminBanButton"
-            @click="manageChallenge(chalDetails.Name, 'undeploy')"
+            @click="manageChallenge(chalDetails.name, 'undeploy')"
           >
             <img :src="undeploy" class="banImg" /><span class="adminBanText"
               >Undeploy</span
@@ -46,7 +46,7 @@
           </button>
           <button
             class="adminBanButton"
-            @click="manageChallenge(chalDetails.Name, 'purge')"
+            @click="manageChallenge(chalDetails.name, 'purge')"
           >
             <img :src="purge" class="banImg" /><span class="adminBanText"
               >Purge</span
@@ -54,12 +54,12 @@
           </button>
         </div>
         <div
-          v-if="chalDetails.Status === 'Undeployed'"
+          v-if="chalDetails.status === 'Undeployed'"
           class="changeChallengeStatus"
         >
           <button
             class="adminBanButton"
-            @click="manageChallenge(chalDetails.Name, 'deploy')"
+            @click="manageChallenge(chalDetails.name, 'deploy')"
           >
             <img :src="play" class="banImg" /><span class="adminBanText"
               >Deploy</span
@@ -67,7 +67,7 @@
           </button>
           <button
             class="adminBanButton"
-            @click="manageChallenge(chalDetails.Name, 'purge')"
+            @click="manageChallenge(chalDetails.name, 'purge')"
           >
             <img :src="purge" class="banImg" /><span class="adminBanText"
               >Purge</span
@@ -75,12 +75,12 @@
           </button>
         </div>
         <div
-          v-if="chalDetails.Status === 'Purged'"
+          v-if="chalDetails.status === 'Purged'"
           class="changeChallengeStatus"
         >
           <button
             class="adminBanButton"
-            @click="manageChallenge(chalDetails.Name, 'deploy')"
+            @click="manageChallenge(chalDetails.name, 'deploy')"
           >
             <img :src="play" class="banImg" /><span class="adminBanText"
               >Deploy</span
@@ -89,7 +89,7 @@
         </div>
       </div>
       <div class="aboutChallenge aboutText">
-        {{ chalDetails.Desc }}
+        {{ chalDetails.description }}
       </div>
       <div class="port aboutText">Port : {{ port }}</div>
       <div class="host aboutText">
@@ -106,7 +106,7 @@
       <div class="adminChallSubmissions">
         <div class="subheadingName">Submissions</div>
         <div class="info">
-          Total {{ this.chalDetails.SolvesNumber }} correct submissions are made
+          Total {{ this.chalDetails.solvesNumber }} correct submissions are made
         </div>
       </div>
       <div class="adminChallSolves">
@@ -116,7 +116,7 @@
             There were total <b>{{ this.activeUsers }} Active</b> users, out of
             which,
             <b
-              >{{ this.chalDetails.SolvesNumber }} ({{
+              >{{ this.chalDetails.solvesNumber }} ({{
                 this.solvePercentage()
               }}%)</b
             >
@@ -210,7 +210,7 @@ export default {
       return barChartOptions().challenges;
     },
     solvePercentage() {
-      return (this.chalDetails.SolvesNumber / this.activeUsers) * 100;
+      return (this.chalDetails.solvesNumber / this.activeUsers) * 100;
     },
     manageChallenge(name, action) {
       let confirmHandler = confirm => {
@@ -248,11 +248,10 @@ export default {
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
       .then(response => {
-        console.log(response.data);
         let data = response.data;
         this.chalDetails = data;
-        if (data.Ports !== null) {
-          this.chalDetails.port = data.Ports[0];
+        if (data.ports !== null) {
+          this.chalDetails.port = data.ports[0];
         }
       })
       .finally(() => {

@@ -93,11 +93,6 @@ export default {
   mounted() {
     UsersService.getUsers()
       .then(users => {
-        console.log(users);
-        if (users === null) {
-          console.log("error fetching users");
-          return;
-        }
         this.users = users;
         this.displayUsers = this.users.sort((a, b) => {
           return a.username > b.username ? 1 : -1;
