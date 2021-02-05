@@ -1,5 +1,4 @@
 import variables from "../styles/main.scss";
-
 export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
@@ -182,6 +181,48 @@ export const confimDialogMessages = chalName => {
 
 export const pieChartOptions = () => {
   return {
+    plugins: {
+      datalabels: {
+        formatter: (value, ctx) => {
+          let sum = 0;
+          let dataArr = ctx.chart.data.datasets[0].data;
+          dataArr.map(data => {
+            sum += data;
+          });
+          let percentage = ((value * 100) / sum).toFixed(0) + "%";
+          return percentage;
+        },
+        color: "#fff",
+        font: {
+          size: 12,
+          weight: "bold"
+        }
+      }
+    },
+    cutoutPercentage: 35,
+    tooltips: {
+      callbacks: {
+        title: function(tooltipItem, data) {
+          return data["labels"][tooltipItem[0]["index"]];
+        },
+        label: function(tooltipItem, data) {
+          let sum = 0;
+          let dataArr = data.datasets[0].data;
+          dataArr.forEach(el => {
+            sum += el;
+          });
+          let correct = data["datasets"][0]["data"][tooltipItem["index"]];
+          let message = `${correct} Correct, ${((correct / sum) * 100).toFixed(
+            2
+          )}%`;
+          return message;
+        }
+      },
+      displayColors: false,
+      backgroundColor: `#000000`,
+      color: "#FFFFFF",
+      bodyFontFamily: "Nunito Sans"
+    },
     hoverBorderWidth: 20,
     responsive: true,
     maintainAspectRatio: true,
@@ -196,6 +237,7 @@ export const pieChartOptions = () => {
 
 export const barChartOptions = () => {
   let containerProps = {
+    plugins: null,
     responsive: true,
     maintainAspectRatio: true,
     legend: {

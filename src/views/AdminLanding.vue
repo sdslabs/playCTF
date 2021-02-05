@@ -68,9 +68,9 @@
     </div>
 
     <div class="adminStatsContainer">
-      <p class="adminSubheading">Submissions</p>
       <div class="adminTwoColContainer" v-if="this.submissions.totalChal > 0">
         <div class="adminStatsLeftCol">
+          <p class="adminSubheading">Submissions</p>
           <div class="adminOneColContainer">
             <p class="adminInfo">
               Total
@@ -179,7 +179,8 @@ export default {
         labels.push(el.name);
       });
       labels.forEach(el => {
-        data.push(this.submissions.category[el]);
+        let sub = this.submissions.category[el];
+        data.push(sub);
       });
       return {
         labels,

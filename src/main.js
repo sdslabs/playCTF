@@ -9,6 +9,7 @@ import VuejsPaginate from "vuejs-paginate";
 import store from "./store/index";
 import VueConfirmDialog from "vue-confirm-dialog";
 import Spinner from "vue-simple-spinner";
+import ChartJsPluginDataLabels from "chartjs-plugin-datalabels";
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
@@ -30,5 +31,8 @@ Vue.mixin({
 new Vue({
   router,
   store,
+  components: {
+    ChartJsPluginDataLabels
+  },
   render: h => h(App)
 }).$mount("#app");
