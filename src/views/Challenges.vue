@@ -1,7 +1,6 @@
 <template>
   <div class="challenge">
-    <StatsNavbar />
-    <div class="chall">
+    <div class="chall-tags">
       <div class="tags">
         <a
           v-for="tag in tags"
@@ -12,8 +11,13 @@
           >{{ tag }}
         </a>
       </div>
-      <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
-      <ChallCard :challName="this.challName" :tag="this.selectedTag" />
+    </div>
+    <div class="chall-details">
+      <StatsNavbar />
+      <div class="chall">
+        <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
+        <ChallCard :challName="this.challName" :tag="this.selectedTag" />
+      </div>
     </div>
   </div>
 </template>
@@ -26,26 +30,26 @@ export default {
   name: "Challenges",
   data() {
     return {
-      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"]
+      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"],
     };
   },
   props: ["selectedTag", "challName"],
   components: {
     StatsNavbar,
     ChallengesByTag,
-    ChallCard
+    ChallCard,
   },
   methods: {
-    hello: function(tag) {
+    hello: function (tag) {
       this.selectedTag = tag;
     },
-    getChallName: function(challName) {
+    getChallName: function (challName) {
       this.challName = challName;
-    }
+    },
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Challenges");
     this.selectedTag = this.tags[0];
-  }
+  },
 };
 </script>

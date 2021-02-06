@@ -46,7 +46,7 @@
           v-model="disable"
         />
         <Button
-          class="challCard-form-submit-button"
+          class="challCard-form-submit-button primary-btn"
           :disabled="disable"
           text="Submit Flag"
         ></Button>

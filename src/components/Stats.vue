@@ -1,5 +1,4 @@
 <template>
-  <div class="challenge">
     <div class="stats">
       <div class="rank">
         <p class="text">Rank</p>
@@ -19,7 +18,6 @@
       </div>
       <img src="@/assets/Avatar.svg" class="image" />
     </div>
-  </div>
 </template>
 
 <script>
