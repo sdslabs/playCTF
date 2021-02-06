@@ -1,46 +1,63 @@
 <template>
   <div class="notification">
     <div class="heading">NOTIFICATIONS</div>
-    <div v-if="this.notification.length != 0" class="notifications">
-      <div
-        v-for="notify in notification.Notifications.reverse()"
-        v-bind:key="notify.ID"
-        class="notificationBox"
-      >
-        <div class="firstLine">
-          <div class="notificationTitle">
-            {{ notify.Title }}
-          </div>
-          <div class="notificationStatus">
-            <div class="newNotification">{{ isNew(notify) }}</div>
-          </div>
-          <div class="notificationTiming">{{ duration(notify) }} ago</div>
-        </div>
-        <div class="notificationDesc">
-          {{ notify.Description }}
-        </div>
-      </div>
+    <spin-loader v-if="loading" />
+    <div
+      class="user-notif-tabs"
+      v-if="notifications.length > 0 && !this.loading"
+    >
+      <NotificationTab
+        v-for="notif in notifications"
+        :key="notif.ID"
+        :title="notif.title"
+        :description="notif.desc"
+        :time="`${duration(notif)} ago`"
+        :isNew="isNew(notif)"
+      />
+    </div>
+    <div class="adminEmptyData" v-else>
+      <span> No Notifications posted </span>
     </div>
   </div>
 </template>
 
 <script>
-import NotificationService from "@/api/notificationAPI";
-
+import NotificationService from "@/api/admin/notificationsAPI";
+import NotificationTab from "../components/NotificationTab";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
   name: "notifications",
   data() {
     return {
-      notification: []
+      notifications: [],
+      loading: true,
     };
   },
+  mounted() {
+    NotificationService.getAllNotifs()
+      .then((response) => {
+        this.notifications = response.data.sort((a, b) => {
+          return new Date(a.updated_at).getTime() <
+            new Date(b.updated_at).getTime()
+            ? 1
+            : -1;
+        });
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+  },
+  components: {
+    NotificationTab,
+    SpinLoader,
+  },
   methods: {
-    isNew: function(notification) {
+    isNew: function (notification) {
       this.duration(notification);
       if (this.hours < 1) return "NEW";
     },
-    duration: function(notification) {
-      let notificationTime = new Date(notification.CreatedAt).getTime();
+    duration: function (notification) {
+      let notificationTime = new Date(notification.updated_at).getTime();
       let now = new Date().getTime();
       let passTime = now - notificationTime;
       this.calcTime(passTime);
@@ -49,7 +66,7 @@ export default {
       else if (this.minutes > 0) return this.minutes + " minutes";
       else if (this.seconds > 0) return this.seconds + " seconds";
     },
-    calcTime: function(passTime) {
+    calcTime: function (passTime) {
       this.seconds = Math.floor((passTime % (1000 * 60)) / 1000);
       this.minutes = Math.floor((passTime % (1000 * 60 * 60)) / (1000 * 60));
       this.hours = Math.floor(
@@ -57,19 +74,9 @@ export default {
       );
       this.days = Math.floor(passTime / (1000 * 60 * 60 * 24));
     },
-    async getNotification() {
-      NotificationService.getNotifications().then(
-        (event => {
-          this.$set(this, "notification", event);
-        }).bind(this)
-      );
-    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Notifications");
   },
-  created() {
-    this.getNotification();
-  }
 };
 </script>

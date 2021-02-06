@@ -1,8 +1,5 @@
 .notification {
-    margin: auto;
     margin-top: 4.75rem;
-    min-height: calc(100vh - 12.75rem - 9.25rem);
-    width: 46.4375rem;
 
     .heading {
         font-size: 1.5rem;
@@ -13,71 +10,13 @@
         text-align: left;
     }
 
-    .notifications {
-        margin-top: 1.125rem;
-        margin-bottom: 3.5rem;
-    }
-}
-
-.notificationBox {
-    height: 6rem;
-    background: $theme-color-white;
-    box-shadow: 0rem 0.375rem 0.625rem $theme-color-light-black-low-transp;
-    border-radius: 0.1875rem;
-    margin-top: 1rem;
-    padding-left: 1.125rem;
-    padding-right: 1.125rem;
-    text-align: left;
-
-    .firstLine {
-        display: flex;
-        flex-direction: row;
-
-        .notificationTitle {
-            font-family: $primary-font-family;
-            font-weight: bold;
-            font-size: 1rem;
-            line-height: 1.75rem;
-            color: $theme-color-black19;
-            text-align: left;
-            padding-top: 1.25rem;
-        }
-
-        .notificationStatus {
-            background: $theme-color-violet;
-            border-radius: 0.125rem;
-            margin-top: 1.25rem;
-            margin-left: 0.75rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-            align-self: center;
-
-            .newNotification {
-                font-family: $secondary-font-family;
-                font-size: 0.75rem;
-                font-weight: bold;
-                line-height: 1rem;
-                color: $theme-color-white;
-            }
-        }
-
-        .notificationTiming {
-            font-family: $secondary-font-family;
-            font-size: 0.75rem;
-            line-height: 1rem;
-            color: $theme-color-violet;
-            padding-top: 1.625rem;
-            margin-left: auto;
-        }
+    .user-notif-tabs {
+        margin-top: 4%;
+        height: 35rem;
+        overflow-y: scroll;
     }
 
-    .notificationDesc {
-        font-family: $secondary-font-family;
-        font-size: 0.875rem;
-        line-height: 1.1875rem;
-        color: $theme-color-grey57;
-        margin-top: 0.0625rem;
-
+    .user-notif-tabs::-webkit-scrollbar {
+        display: none;
     }
-
 }
