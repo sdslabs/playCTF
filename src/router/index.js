@@ -62,7 +62,10 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: Login
+    component: Login,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/admin/statistics",
@@ -139,7 +142,10 @@ const routes = [
   {
     path: "/register",
     name: "register",
-    component: Register
+    component: Register,
+    meta: {
+      layout: "user-layout"
+    }
   }
 ];
 
