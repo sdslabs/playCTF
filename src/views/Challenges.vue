@@ -1,7 +1,6 @@
 <template>
   <div class="challenge">
-    <StatsNavbar />
-    <div class="chall">
+    <div class="chall-tags">
       <div class="tags">
         <a
           v-for="tag in tags"
@@ -12,8 +11,13 @@
           >{{ tag }}
         </a>
       </div>
-      <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
-      <ChallCard :challName="this.challName" :tag="this.selectedTag" />
+    </div>
+    <div class="chall-details">
+      <StatsNavbar />
+      <div class="chall">
+        <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
+        <ChallCard :challName="this.challName" :tag="this.selectedTag" />
+      </div>
     </div>
   </div>
 </template>

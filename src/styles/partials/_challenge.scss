@@ -1,25 +1,27 @@
 .challenge {
-    margin: auto;
-    width: 58.5rem;
-    margin-top: 5rem;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+    display: flex;
+    flex-direction: row;
 
-    .chall {
+    .chall-tags {
         display: flex;
-        flex-direction: row;
-        margin-top: 1.125rem;
-
+        flex-direction: column;
+        padding-top: 12rem;
         .tags {
             display: flex;
             flex-direction: column;
             width: 4.375rem;
             text-align: left;
-
+            align-items: flex-end;
+            justify-content: flex-start;
             .tag {
                 font-family: $primary-font-family;
                 font-weight: normal;
                 font-size: 1rem;
                 color: rgba(87, 87, 87, 0.75);
-                margin-top: 2rem;
+                margin-bottom: 2rem;
+                padding-right: 1rem;
             }
 
             .tag .selected {
@@ -27,6 +29,16 @@
                 color: $theme-color-black19;
                 border-right: 0.125rem solid $theme-color-dark-orange;
             }
+        }
+    }
+
+    .chall-details {
+        display: flex;
+        flex-direction: column;
+        .chall {
+            display: flex;
+            flex-direction: row;
+            margin-top: 1.125rem;
         }
     }
 }

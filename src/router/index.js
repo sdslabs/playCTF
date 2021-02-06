@@ -22,27 +22,42 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: Home
+    component: Home,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/about",
     name: "home",
-    component: Home
+    component: Home,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/challenges",
     name: "challenges",
-    component: Challenges
+    component: Challenges,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/leaderboard",
     name: "leaderboard",
-    component: Leaderboard
+    component: Leaderboard,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/notifications",
     name: "notifications",
-    component: Notification
+    component: Notification,
+    meta: {
+      layout: "user-layout"
+    }
   },
   {
     path: "/login",
