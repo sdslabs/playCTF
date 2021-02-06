@@ -1,3 +1,64 @@
 .register {
-    margin-top: 10rem;
+    margin-top: 100px;
+    min-height: calc(100vh - 24rem);
+    width: 58.5rem;
+
+    .register-heading {
+        font-family: $primary-font-family;
+        font-weight: bold;
+        font-size: 1.75rem;
+        line-height: 2.75rem;
+        color: $theme-color-grey39;
+        text-align: left;
+
+        .switch {
+            color: $theme-color-dark-orange;
+        }
+    }
+
+    .register-form-div {
+        width: 22.5rem;
+        margin-left: 0rem;
+        margin-top: 0.75rem;
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .register-form {
+            padding-right: 5rem;
+            .register-inputField {
+                width: 25rem;
+                height: 3rem;
+                margin-top: 1.75rem;
+                padding: 1rem;
+                background: $theme-color-white;
+                border: 0.0313rem solid $theme-color-grey-high-transp;
+                box-sizing: border-box;
+                border-radius: 0.125rem;
+                font-family: $primary-font-family;
+                
+                font-weight: 600;
+                font-size: 1rem;
+                line-height: 1.125rem;
+                color: $theme-color-grey-high-transp;
+            }
+
+            .register-button {
+                margin-top: 2rem;
+                width: 165px;
+                height: 40px;
+                left: 252px;
+                top: 496px;
+
+                background: #D9D9D9;
+                border: none;
+                border-radius: 3px;
+            }
+        }
+
+        .register-image {
+            height: 20rem;
+        }
+    }
 }

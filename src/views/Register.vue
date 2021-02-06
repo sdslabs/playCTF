@@ -1,31 +1,52 @@
 <template>
   <div class="register">
-    <div class="register-heading">Register for n00bCTF</div>
-    <div class="register-form">
-      <form class="form">
-        <div class="info">
-          <label class="label">Team Name *</label>
+    <div class="register-heading">Register for n00b<label class="switch">CTF</label></div>
+    <div class="register-form-div">
+      <form class="register-form">
+        <div class="register-info">
+          <label class="label">Name*</label>
           <input
             type="text"
-            class="inputField email"
+            class="register-inputField email"
+            id="name"
+            name="user_name"
+            placeholder="Name*"
+            required=true
+          />
+        </div>
+        <div class="register-info">
+          <input
+            type="text"
+            class="register-inputField email"
             id="email"
             name="user_email"
+            placeholder="Email*"
+            required=true
           />
         </div>
         <div class="info">
-          <label class="label">Password</label>
           <input
             type="password"
-            class="inputField password"
+            class="register-inputField password"
             id="password"
             name="user_pass"
+            placeholder="Password*"
+            required=true
           />
         </div>
-        <Button text="LOG IN" type="submit" />
+        <div class="info">
+          <input
+            type="password"
+            class="register-inputField password"
+            id="confirmpassword"
+            name="user_pass"
+            placeholder="Confirm Password*"
+            required=true
+          />
+        </div>
+        <Button text="Register Now" class="register-button" type="submit" />
       </form>
-      <div class="forgot">
-        <a href="#" class="forgot">Forgot Password?</a>
-      </div>
+      <img src="@/assets/registration.svg" class="register-image"/>
     </div>
   </div>
 </template>

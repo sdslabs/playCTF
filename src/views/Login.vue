@@ -21,8 +21,9 @@
             placeholder="Password*"
           />
         </div>
-        <Button text="LOG IN" class="login-button" type="submit" />
+        <Button text="Login" class="login-button" type="submit" />
       </form>
+      <img src="@/assets/login.svg" class="login-image"/>
     </div>
   </div>
 </template>
