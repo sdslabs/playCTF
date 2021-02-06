@@ -30,12 +30,12 @@ export default {
   data() {
     return {
       notifications: [],
-      loading: true,
+      loading: true
     };
   },
   mounted() {
     NotificationService.getAllNotifs()
-      .then((response) => {
+      .then(response => {
         this.notifications = response.data.sort((a, b) => {
           return new Date(a.updated_at).getTime() <
             new Date(b.updated_at).getTime()
@@ -49,14 +49,14 @@ export default {
   },
   components: {
     NotificationTab,
-    SpinLoader,
+    SpinLoader
   },
   methods: {
-    isNew: function (notification) {
+    isNew: function(notification) {
       this.duration(notification);
       if (this.hours < 1) return "NEW";
     },
-    duration: function (notification) {
+    duration: function(notification) {
       let notificationTime = new Date(notification.updated_at).getTime();
       let now = new Date().getTime();
       let passTime = now - notificationTime;
@@ -66,17 +66,17 @@ export default {
       else if (this.minutes > 0) return this.minutes + " minutes";
       else if (this.seconds > 0) return this.seconds + " seconds";
     },
-    calcTime: function (passTime) {
+    calcTime: function(passTime) {
       this.seconds = Math.floor((passTime % (1000 * 60)) / 1000);
       this.minutes = Math.floor((passTime % (1000 * 60 * 60)) / (1000 * 60));
       this.hours = Math.floor(
         (passTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       this.days = Math.floor(passTime / (1000 * 60 * 60 * 24));
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Notifications");
-  },
+  }
 };
 </script>

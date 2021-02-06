@@ -92,7 +92,7 @@ export default {
   },
   mounted() {
     UsersService.getUsers()
-    //TODO: need to handle api errors
+      //TODO: need to handle api errors
       .then(users => {
         this.users = users;
         this.displayUsers = this.users.sort((a, b) => {

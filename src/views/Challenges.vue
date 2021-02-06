@@ -30,26 +30,26 @@ export default {
   name: "Challenges",
   data() {
     return {
-      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"],
+      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"]
     };
   },
   props: ["selectedTag", "challName"],
   components: {
     StatsNavbar,
     ChallengesByTag,
-    ChallCard,
+    ChallCard
   },
   methods: {
-    hello: function (tag) {
+    hello: function(tag) {
       this.selectedTag = tag;
     },
-    getChallName: function (challName) {
+    getChallName: function(challName) {
       this.challName = challName;
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Challenges");
     this.selectedTag = this.tags[0];
-  },
+  }
 };
 </script>

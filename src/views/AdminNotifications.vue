@@ -140,7 +140,7 @@ export default {
       this.subProcessing = true;
       let self = this;
       NotifService.submitNotif(this.title, this.description)
-        .then(response => {
+        .then(() => {
           self.notifications = [
             {
               title: self.title,
@@ -157,7 +157,7 @@ export default {
           self.subProcessing = false;
           self.showSuccess = true;
         })
-        .catch(response => {
+        .catch(() => {
           self.title = "";
           self.description = "";
           self.checked = false;

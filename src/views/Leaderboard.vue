@@ -1,20 +1,20 @@
 <template>
   <div class="user-lb-container">
-  <div class="user-lb-heading">
-    <div class="adminHeadingColor">
-      <img :src="leaderboard" class="adminHeadingColor" />
-    </div>
-    <div class="user-searchbar-div">
-      <div class="adminSearchBar">
-        <button class="searchBtn">
-          <img :src="search" class="searchImg" />
-        </button>
-        <input
-          v-model="searchQuery"
-          placeholder="Search for teams here..."
-          class="query"
-        />
+    <div class="user-lb-heading">
+      <div class="adminHeadingColor">
+        <img :src="leaderboard" class="adminHeadingColor" />
       </div>
+      <div class="user-searchbar-div">
+        <div class="adminSearchBar">
+          <button class="searchBtn">
+            <img :src="search" class="searchImg" />
+          </button>
+          <input
+            v-model="searchQuery"
+            placeholder="Search for teams here..."
+            class="query"
+          />
+        </div>
       </div>
     </div>
     <spin-loader v-if="loading" />
@@ -52,34 +52,34 @@ export default {
       searchQuery: "",
       tableCols: tableCols.leaderboard,
       users: [],
-      displayUsers: [],
+      displayUsers: []
     };
   },
   computed: {
     resultQuery() {
       if (this.searchQuery) {
-        return this.displayUsers.filter((item) => {
+        return this.displayUsers.filter(item => {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every((v) => item.username.toLowerCase().includes(v));
+            .every(v => item.username.toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
       }
-    },
+    }
   },
   mounted() {
     UsersService.getUsers()
-      .then((users) => {
+      .then(users => {
         if (users.length === 0) {
           return;
         }
-        users.forEach((element) => {
+        users.forEach(element => {
           this.users.push({
             rank: element.rank,
             username: element.username,
-            score: element.score,
+            score: element.score
           });
         });
         this.displayUsers = this.users.sort((a, b) => {
@@ -99,6 +99,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Leaderboard");
-  },
+  }
 };
 </script>

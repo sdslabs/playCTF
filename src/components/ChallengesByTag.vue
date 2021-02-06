@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     emitChallName(challName) {
-      console.log(challName)
       this.$emit("clicked", challName);
     }
   }

@@ -15,8 +15,8 @@ export default {
   name: "UserLayout",
   components: {
     Navbar,
-    AdminFooter,
-  },
+    AdminFooter
+  }
 };
 </script>
 

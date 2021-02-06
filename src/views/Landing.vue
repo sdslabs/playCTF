@@ -39,11 +39,11 @@ import Button from "@/components/Button.vue";
 export default {
   name: "home",
   components: {
-    Button,
+    Button
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");
-  },
+  }
 };
 </script>
 
