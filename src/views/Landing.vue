@@ -3,12 +3,11 @@
     <div class="event">
       <div class="event-info">
         <div class="event-info-text">
-          <div class="tagline">Be a part of noobCTF 2019</div>
+          <div class="tagline">Be a part of {{ configs.name }}</div>
           <div class="description">
-            noobCTF is a free computer security game targeted at middle and high
-            school students, created by security experts at SDSLabs.
+            {{ configs.about }}
           </div>
-          <div class="timing">4th December 2019, Sunday</div>
+          <div class="timing">{{ configs.starting_time }}</div>
           <router-link to="/challenges"
             ><Button text="See Challenges" class="primary-btn"
           /></router-link>
@@ -21,9 +20,7 @@
         <div class="prize-info-text">
           <div class="heading">Prizes to be won</div>
           <div class="description">
-            The real gem to acquire is the experience time bound competition
-            provides. However, Participants from the top three winning teams get
-            to appear directly for SDSLabs interview round.
+            {{ configs.prizes }}
           </div>
         </div>
         <div class="prize-info-img">
@@ -36,13 +33,33 @@
 
 <script>
 import Button from "@/components/Button.vue";
+import ConfigApiService from "../api/configureAPI";
 export default {
   name: "home",
   components: {
     Button
   },
+  data() {
+    return {
+      configs: {
+        title: "",
+        about: "",
+        prizes: "",
+        starting_time: "",
+        ending_time: "",
+        timezone: "",
+        logo_url: ""
+      }
+    };
+  },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");
+  },
+  mounted() {
+    ConfigApiService.getConfigs().then(response => {
+      console.log(response);
+      this.configs = response;
+    });
   }
 };
 </script>

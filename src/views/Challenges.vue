@@ -4,19 +4,26 @@
       <div class="tags">
         <a
           v-for="tag in tags"
-          v-bind:key="tag"
+          v-bind:key="tag.id"
           :class="{ tag: true }"
-          :tag="tag"
-          @click="hello(tag)"
-          >{{ tag }}
+          :tag="tag.name"
+          @click="changeFilter(tag)"
+          >{{ tag.name }}
         </a>
       </div>
     </div>
     <div class="chall-details">
-      <StatsNavbar />
+      <StatsNavbar :details="userDetails" :total="totalChals" />
       <div class="chall">
-        <ChallengesByTag :tag="this.selectedTag" @clicked="getChallName" />
-        <ChallCard :challName="this.challName" :tag="this.selectedTag" />
+        <ChallengesByTag
+          :tag="this.selectedTag.name"
+          :challenges="displayChallenges"
+          @clicked="selectChallenge"
+        />
+        <ChallCard
+          :challDetails="this.displayChallenge"
+          :tag="this.selectedTag.name"
+        />
       </div>
     </div>
   </div>
@@ -26,30 +33,75 @@
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
+import ChalService from "../api/admin/challengesAPI";
+import UsersService from "../api/admin/usersAPI";
 export default {
   name: "Challenges",
   data() {
     return {
-      tags: ["Crypto", "PWN", "Web", "Misc", "Rev"]
+      tag: "All",
+      challenges: [],
+      displayChallenges: [],
+      tags: [{ name: "All", id: 1 }],
+      selectedTag: { name: "All", id: 1 },
+      api1: true,
+      api2: true,
+      userDetails: {},
+      totalChals: 0,
+      selectedChall: {}
     };
   },
-  props: ["selectedTag", "challName"],
   components: {
     StatsNavbar,
     ChallengesByTag,
     ChallCard
   },
+  mounted() {
+    ChalService.getChallenges()
+      .then(response => {
+        this.challenges = response.challenges;
+        this.displayChallenges = response.displayChallenges;
+        this.tags = [...this.tags, ...response.categoryFilterOptions];
+        this.displayChallenges = response.displayChallenges;
+        this.totalChals = response.challenges.length;
+        this.selectedChall = this.displayChallenges[0];
+      })
+      .finally(() => {
+        this.api1 = false;
+      });
+    // hardcoding user for now, need to fix after login integration
+    UsersService.getUserByUsername("testplayer1")
+      .then(response => {
+        this.userDetails = response.data;
+      })
+      .finally(() => {
+        this.api2 = false;
+      });
+  },
   methods: {
-    hello: function(tag) {
-      this.selectedTag = tag;
+    changeFilter(value) {
+      this.selectedTag = value;
+      if (value.name === "All") {
+        this.displayChallenges = this.challenges;
+      } else {
+        this.displayChallenges = this.challenges.filter(el => {
+          return el.category == value.name;
+        });
+      }
     },
-    getChallName: function(challName) {
-      this.challName = challName;
+    selectChallenge(name) {
+      this.selectedChall = this.challenges.filter(el => {
+        return el.name == name;
+      })[0];
+    }
+  },
+  computed: {
+    displayChallenge: function() {
+      return this.selectedChall;
     }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "Challenges");
-    this.selectedTag = this.tags[0];
   }
 };
 </script>
