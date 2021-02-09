@@ -19,7 +19,13 @@ export default {
         const response = await this.loginUser(username, password);
         if (response.status === 200) {
             store.commit('update', response.data.token);
-            router.push("/");
+            if (response.data.role === "author")  {
+                store.commit('giveAccess');
+                router.push("/admin/statistics");
+            }
+            else {
+                router.push("/"); 
+            }
         }
         else {
             alert("Login attempt failed: " + response.data.message);
@@ -45,7 +51,7 @@ export default {
     async registeredUser(name, username, email, password, ssh) {
         const response = await this.registerUser(name, username, email, password, ssh);
         if (response.status === 200) {
-            store.commit('update', response.data.token);
+            store.commit('update', response.data.token, "contestant");
             router.push("/");
         }
         else {

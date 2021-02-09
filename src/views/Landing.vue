@@ -34,6 +34,7 @@
 <script>
 import Button from "@/components/Button.vue";
 import ConfigApiService from "../api/configureAPI";
+import store from '../api/loginToken';
 export default {
   name: "home",
   components: {
@@ -55,11 +56,18 @@ export default {
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");
   },
+<<<<<<< HEAD
   mounted() {
     ConfigApiService.getConfigs().then(response => {
       console.log(response);
       this.configs = response;
     });
+=======
+  created() {
+    if (store.getters.getState && store.getters.getRights) {
+      this.$router.push("/admin/statistics/");
+    }
+>>>>>>> Add user role and corresponding checks
   }
 };
 </script>

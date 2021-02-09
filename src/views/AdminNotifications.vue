@@ -72,6 +72,7 @@ import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { notifAdded, notifFailed } from "../constants/images";
+import store from '../api/loginToken';
 export default {
   name: "AdminNotfications",
   components: {
@@ -94,8 +95,8 @@ export default {
     };
   },
   created() {
-    if (!this.$store.getters.getState) {
-      this.$router.push("/login/");
+    if (!store.getters.getState || !store.getters.getRights) {
+      this.$router.push("/admin/statistics/");
     }
   },
   mounted() {

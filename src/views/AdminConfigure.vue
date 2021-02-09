@@ -123,6 +123,7 @@ import configureService from "../api/admin/configureAPI";
 import moment from "moment-timezone";
 import { configFail, configSuccess } from "../constants/images";
 import store from '../api/loginToken.js';
+import store from '../api/loginToken';
 export default {
   name: "AdminConfigure",
   data() {
@@ -146,8 +147,8 @@ export default {
     };
   },
   created() {
-    if (!this.$store.getters.getState) {
-      this.$router.push("/login/");
+    if (!store.getters.getState || !store.getters.getRights) {
+      this.$router.push("/admin/statistics/");
     }
   },
   methods: {

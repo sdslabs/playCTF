@@ -128,6 +128,7 @@ import UsersService from "../api/admin/usersAPI";
 import ChalService from "../api/admin/challengesAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import store from '../api/loginToken';
 import {
   colors,
   barChartOptions,
@@ -151,8 +152,11 @@ export default {
     }
   },
   created() {
-    if (!this.$store.getters.getState) {
+    if (!store.getters.getState) {
       this.$router.push("/login/");
+    }
+    if (!store.getters.getRights) {
+      this.$router.push("/");
     }
   },
   methods: {

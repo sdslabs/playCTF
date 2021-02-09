@@ -7,7 +7,7 @@ const store = new Vuex.Store({
   state: {
     token: null,
     login: false,
-    admin: false
+    access: false
   },
   mutations: {
     update (state, key) {
@@ -17,9 +17,10 @@ const store = new Vuex.Store({
     logout (state) {
         state.token = null
         state.login = false
+        state.access = false
     },
-    rights (state) {
-        state.admin = true;
+    giveAccess (state) {
+        state.access = true
     }
   },
   getters: {
@@ -30,7 +31,7 @@ const store = new Vuex.Store({
         return state.login
     },
     getRights: state => {
-        return state.admin
+        return state.access
     }
   }
 })

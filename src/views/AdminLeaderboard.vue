@@ -44,6 +44,7 @@ import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
 import SpinLoader from "../components/spinLoader.vue";
+import store from '../api/loginToken';
 import {
   tableCols,
   colors,
@@ -69,7 +70,7 @@ export default {
     };
   },
   created() {
-    if (!this.$store.getters.getState) {
+    if (!store.getters.getState || !store.getters.getRights) {
       this.$router.push("/login/");
     }
   },

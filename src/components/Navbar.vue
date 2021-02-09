@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <nav v-if="this.$store.getters.getState" class="navbar-container">
+    <nav v-if="loggedIn()" class="navbar-container">
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
       ></router-link>
@@ -36,7 +36,7 @@
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
       ></router-link>
-      <div v-if="pathLogin()" class="navbar-registration">
+      <div class="navbar-registration">
         <p class="navbar-already-registered">New here?</p>
         <router-link to="/register" class="login-link">REGISTER</router-link>
       </div>
@@ -56,6 +56,7 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
+import store from '../api/loginToken';
 export default {
   name: "Navbar",
   data() {
@@ -88,12 +89,22 @@ export default {
     Timer
   },
   methods: {
+    loggedIn() {
+      if (store.getters.getState) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
     pathLogin() {
       var route = this.$route.name;
       if (route.includes("login")) {
         return true;
       }
-      return false;
+      else {
+        return false;
+      }
     }
   }
 };
