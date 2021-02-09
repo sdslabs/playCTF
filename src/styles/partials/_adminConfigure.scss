@@ -92,6 +92,11 @@ $screenRatio: 1;
         padding: 0.5rem 1rem 0.5rem 1rem;
         border: none;
         margin-left: auto;
+        &:disabled {
+            background: $theme-color-light-grey-d7;
+            box-shadow: none;
+            color: $theme-color-grey39;
+        }
     }
 
 
