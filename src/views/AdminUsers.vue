@@ -66,7 +66,6 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { search, userPanel } from "../constants/images";
-import store from '../api/loginToken';
 import { tableCols } from "../constants/constants";
 export default {
   components: { adminTable, SpinLoader },
@@ -92,7 +91,7 @@ export default {
     };
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },

@@ -146,7 +146,7 @@ export default {
     };
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },

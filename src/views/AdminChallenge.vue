@@ -153,7 +153,6 @@ import AdminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import ChalService from "../api/admin/challengesAPI";
-import store from '../api/loginToken';
 import {
   tableCols,
   confimDialogMessages,
@@ -183,7 +182,7 @@ export default {
     };
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },

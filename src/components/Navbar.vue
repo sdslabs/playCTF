@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <nav v-if="$store.getters.login" class="navbar-container">
+    <nav v-if="this.$store.getters.getState" class="navbar-container">
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
       ></router-link>
@@ -29,6 +29,16 @@
           <a class="dropdown-link" href="#">Change Password</a>
           <a class="dropdown-link" href="#">Logout</a>
         </div>
+      </div>
+    </nav>
+
+    <nav v-else-if="pathLogin()" class="navbar-container">
+      <router-link to="/" class="navbar-link"
+        ><div class="logo"></div
+      ></router-link>
+      <div v-if="pathLogin()" class="navbar-registration">
+        <p class="navbar-already-registered">New here?</p>
+        <router-link to="/register" class="login-link">REGISTER</router-link>
       </div>
     </nav>
 
@@ -76,6 +86,15 @@ export default {
   },
   components: {
     Timer
+  },
+  methods: {
+    pathLogin() {
+      var route = this.$route.name;
+      if (route.includes("login")) {
+        return true;
+      }
+      return false;
+    }
   }
 };
 </script>

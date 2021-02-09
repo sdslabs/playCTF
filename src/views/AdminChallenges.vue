@@ -69,7 +69,6 @@ import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
 import { add } from "../constants/images";
-import store from '../api/loginToken';
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader },
@@ -92,7 +91,7 @@ export default {
     };
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },

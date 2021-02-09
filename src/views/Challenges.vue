@@ -32,7 +32,6 @@
 <script>
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
-import store from '../api/loginToken';
 import ChallCard from "@/components/ChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import UsersService from "../api/admin/usersAPI";
@@ -58,7 +57,7 @@ export default {
     ChallCard
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },

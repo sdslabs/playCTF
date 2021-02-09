@@ -43,7 +43,6 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
-import store from '../api/loginToken';
 import SpinLoader from "../components/spinLoader.vue";
 import {
   tableCols,
@@ -70,7 +69,7 @@ export default {
     };
   },
   created() {
-    if (store.getters.getToken === null) {
+    if (!this.$store.getters.getState) {
       this.$router.push("/login/");
     }
   },
