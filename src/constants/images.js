@@ -23,3 +23,5 @@ export const mail = getImage("mail");
 export const ban = getImage("ban");
 export const unban = getImage("unban");
 export const userPanel = getImage("userPanel");
+export const configFail = getImage("config-fail");
+export const configSuccess = getImage("config-success");

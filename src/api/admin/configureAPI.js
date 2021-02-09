@@ -9,10 +9,12 @@ export default {
     bodyFormData.append("starting_time", configs.startingTime);
     bodyFormData.append("ending_time", configs.endingTime);
     bodyFormData.append("timezone", configs.timezone);
+    bodyFormData.append("logo", configs.logo);
     return await axiosInstance({
       method: "post",
       url: `/api/config/competition-info`,
-      data: bodyFormData
+      data: bodyFormData,
+      headers: { "Content-Type": "multipart/form-data" }
     });
   },
   async getConfigs() {

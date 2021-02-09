@@ -2,12 +2,19 @@
   <div class="adminConfigureContainer">
     <div class="heading">
       <span> CONFIGURE</span>
+
       <button class="preview-button">
         <div class="preview">
           <img :src="preview" />
           Landing Page
         </div>
       </button>
+      <div class="addConfigFeedback">
+        <transition name="fade" v-on:enter="enter">
+          <img v-if="showSuccess" :src="configSuccess" />
+          <img v-if="showFail" :src="configFail" />
+        </transition>
+      </div>
     </div>
     <div class="form">
       <p class="fields">
@@ -62,10 +69,16 @@
           </div>
         </div>
       </div>
-      <p class="subfields">Competition logo</p>
+      <p class="subfields">Competition logo (in .jpg format)</p>
       <!-- eslint-disable-next-line -->
       <div class="logoUpload">
-        <input type="file" id="actual-button" hidden />
+        <input
+          type="file"
+          id="actual-button"
+          ref="file"
+          v-on:change="onFileChange()"
+          hidden
+        />
         <label for="actual-button">
           <img :src="upload" />
           <div class="uploadText">Upload file</div></label
@@ -99,7 +112,7 @@
         :disabled="cannotUpdate()"
         @click="updateConfigs"
       >
-        Submit
+        Save Changes
       </button>
     </div>
   </div>
@@ -108,10 +121,13 @@
 import { preview, upload } from "../constants/images";
 import configureService from "../api/admin/configureAPI";
 import moment from "moment-timezone";
+import { configFail, configSuccess } from "../constants/images";
 export default {
   name: "AdminConfigure",
   data() {
     return {
+      configFail,
+      configSuccess,
       preview,
       configs: {},
       upload,
@@ -122,7 +138,10 @@ export default {
       compStartTime: "",
       compStartDate: "",
       compEndTime: "",
-      compEndDate: ""
+      compEndDate: "",
+      image: "",
+      showSuccess: false,
+      showFail: false
     };
   },
   methods: {
@@ -137,6 +156,9 @@ export default {
         this.compEndDate
       );
       return value;
+    },
+    onFileChange() {
+      this.image = this.$refs.file.files[0];
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
@@ -160,11 +182,17 @@ export default {
         prizes: this.compPrizes,
         startingTime,
         endingTime,
-        timezone: this.compTimezone
+        timezone: this.compTimezone,
+        logo: this.image
       };
-      configureService.updateConfigs(configs).then(resp => {
-        console.log(resp);
-      });
+      configureService
+        .updateConfigs(configs)
+        .then(() => {
+          this.showSuccess = true;
+        })
+        .catch(() => {
+          this.showFail = true;
+        });
     },
     getAllTimezones() {
       let timezones = moment.tz.names();
@@ -176,10 +204,16 @@ export default {
     },
     setTimezone(value) {
       this.compTimezone = value;
+    },
+    enter: function() {
+      let self = this;
+      setTimeout(function() {
+        self.showSuccess = false;
+        self.showFail = false;
+      }, 3000); // hide the message after 3 seconds
     }
   },
   mounted() {
-    console.log(moment.now());
     configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;

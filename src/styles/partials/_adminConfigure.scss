@@ -40,6 +40,12 @@ $screenRatio: 1;
                 width: 100%;
             }
         }
+        .addConfigFeedback{
+            margin-left:auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
     }
 
     .form {
