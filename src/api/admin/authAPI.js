@@ -1,6 +1,5 @@
 import { axiosInstance } from "../axiosInstance.js";
 import Vuex from "vuex";
-import { resolve } from "core-js/fn/promise";
 
 export default {
     async loginUser(username, password) {
@@ -35,20 +34,19 @@ export default {
         let bodyFormData = new FormData();
         bodyFormData.append("name", name);
         bodyFormData.append("username", username);
-        bodyFormData.append("email", email);
         bodyFormData.append("password", password);
-        bodyFormData.append("sshKey", ssh);
+        bodyFormData.append("email", email);
+        bodyFormData.append("ssh-key", ssh);
         let response = await axiosInstance({
             method: "post",
-            url: `/auth/login`,
+            url: `/auth/register`,
             data: bodyFormData
         });
         return Promise.resolve(response);
     },
 
     async registeredUser(name, username, email, password, ssh) {
-        const response = await this.loginUser(name, username, email, password, ssh);
-        console.log(response.status);
+        const response = await this.registerUser(name, username, email, password, ssh);
         if (response.status === 200) {
             alert(response.data.message);
         }
