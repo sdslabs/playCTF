@@ -153,6 +153,7 @@ import AdminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import ChalService from "../api/admin/challengesAPI";
+import store from '../api/loginToken';
 import {
   tableCols,
   confimDialogMessages,
@@ -180,6 +181,11 @@ export default {
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id).adminChallenge
     };
+  },
+  created() {
+    if (store.getters.getToken === null) {
+      this.$router.push("/login/");
+    }
   },
   computed: {
     isLoading: function() {

@@ -32,6 +32,7 @@
 <script>
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
+import store from '../api/loginToken';
 import ChallCard from "@/components/ChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import UsersService from "../api/admin/usersAPI";
@@ -56,6 +57,11 @@ export default {
     ChallengesByTag,
     ChallCard
   },
+  created() {
+    if (store.getters.getToken === null) {
+      this.$router.push("/login/");
+    }
+  },
   mounted() {
     ChalService.getChallenges()
       .then(response => {
@@ -77,7 +83,7 @@ export default {
       .finally(() => {
         this.api2 = false;
       });
-  },
+  }, 
   methods: {
     changeFilter(value) {
       this.selectedTag = value;

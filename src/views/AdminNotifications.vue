@@ -71,6 +71,7 @@
 import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import store from '../api/loginToken';
 import { notifAdded, notifFailed } from "../constants/images";
 export default {
   name: "AdminNotfications",
@@ -92,6 +93,11 @@ export default {
       notifications: [],
       loading: true
     };
+  },
+  created() {
+    if (store.getters.getToken === null) {
+      this.$router.push("/login/");
+    }
   },
   mounted() {
     NotifService.getAllNotifs()

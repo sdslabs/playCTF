@@ -25,6 +25,7 @@
 import SubmissionService from "../api/admin/submissionsAPI";
 import adminTable from "../components/adminTable.vue";
 import spinLoader from "../components/spinLoader.vue";
+import store from '../api/loginToken';
 import { tableCols } from "../constants/constants";
 export default {
   name: "AdminSubmissions",
@@ -38,6 +39,11 @@ export default {
       tableCols: tableCols.adminSumbissions,
       loading: true
     };
+  },
+  created() {
+    if (store.getters.getToken === null) {
+      this.$router.push("/login/");
+    }
   },
   methods: {},
   mounted() {

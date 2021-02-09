@@ -25,6 +25,7 @@
 import NotificationService from "@/api/admin/notificationsAPI";
 import NotificationTab from "../components/NotificationTab";
 import SpinLoader from "../components/spinLoader.vue";
+import store from '../api/loginToken';
 export default {
   name: "notifications",
   data() {
@@ -32,6 +33,11 @@ export default {
       notifications: [],
       loading: true
     };
+  },
+  created() {
+    if (store.getters.getToken === null) {
+      this.$router.push("/login/");
+    }
   },
   mounted() {
     NotificationService.getAllNotifs()
