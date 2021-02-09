@@ -1,5 +1,6 @@
 import { axiosInstance } from "../axiosInstance.js";
-import Vuex from "vuex";
+import store from "../loginToken.js";
+import router from "../../router/index.js";
 
 export default {
     async loginUser(username, password) {
@@ -16,13 +17,9 @@ export default {
 
     async loggedInUser(username, password) {
         const response = await this.loginUser(username, password);
-        console.log(response.status);
         if (response.status === 200) {
-            const store = new Vuex.Store({
-                state: response.data.token,
-                strict: true,
-            });
-            console.log(store.state);
+            store.commit('update', response.data.token);
+            router.push("/");
         }
         else {
             alert("Login attempt failed: " + response.data.message);
@@ -48,7 +45,8 @@ export default {
     async registeredUser(name, username, email, password, ssh) {
         const response = await this.registerUser(name, username, email, password, ssh);
         if (response.status === 200) {
-            alert(response.data.message);
+            store.commit('update', response.data.token);
+            router.push("/");
         }
         else {
             alert("Registration attempt failed: " + response.data.message);
