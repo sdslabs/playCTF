@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&display=swap");
+
+$screenRatio: 1;
+
+.adminConfigureContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    .heading {
+        @extend %font-style-bold;
+        font-size: 1.5rem;
+        line-height: 1.75rem;
+        text-align: left;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .preview-button {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 0.875rem;
+            font-size: 0.875rem;
+            line-height: 1.75rem;
+            padding: 0.125rem 0.5rem;
+            height: 2rem;
+            width: 9rem;
+            background: $theme-color-white;
+            border: 1.0.3125rem solid $theme-color-grey39;
+            box-sizing: border-box;
+            box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+            border-radius: 0.1875rem;
+            outline: none;
+
+            .preview {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                width: 100%;
+            }
+        }
+        .addConfigFeedback{
+            margin-left:auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+    }
+
+    .form {
+        margin-top: 1.875rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+
+        .fields {
+            text-align: left;
+            font-family: $primary-font-family;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            margin: 0.3125rem;
+        }
+
+        .subfields {
+            font-size: 0.75rem;
+            text-align: left;
+            font-family: $primary-font-family;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1.125rem;
+            margin: 0.3125rem;
+        }
+    }
+
+    .confirmation {
+        @extend %font-style-basic;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
+
+    .submitButton {
+        background-color: $theme-color-dark-orange;
+        border-radius: 0.125rem;
+        color: $theme-color-white;
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+        border: none;
+        margin-left: auto;
+        &:disabled {
+            background: $theme-color-light-grey-d7;
+            box-shadow: none;
+            color: $theme-color-grey39;
+        }
+    }
+
+
+
+    .title {
+        height: 48px;
+        border-radius: 0.125rem;
+        border: 0.0625rem solid $theme-color-grey-high-transp;
+        padding-left: 1rem;
+        margin-bottom: 0.625rem;
+    }
+
+    .title::placeholder {
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 48px;
+    }
+
+    .title:focus {
+        border: 1.0.3125rem solid $theme-color-violet;
+        box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    }
+
+    textarea {
+        height: 96px;
+        box-sizing: border-box;
+        border-radius: 0.125rem;
+        border: 0.0625rem solid $theme-color-grey-high-transp;
+        padding-left: 1rem;
+        padding-top: 0.9375rem;
+        margin-bottom: 0.625rem;
+    }
+
+    textarea::placeholder {
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 1.125rem;
+    }
+
+    textarea:focus {
+        border: 1.0.3125rem solid $theme-color-violet;
+        box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    }
+
+    .notifTabs {
+        margin-top: 2.5rem;
+        height: 600px;
+        overflow-y: scroll;
+    }
+
+    .notifTabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .logoUpload {
+        border: 1.5px solid #393939;
+        box-sizing: border-box;
+        box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
+        border-radius: 3px;
+        width: 7rem;
+        height: 2rem;
+
+        label {
+            height: 100%;
+            @extend %font-style-basic;
+            font-size: 0.875rem;
+            line-height: 1.125rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            background: $theme-color-white;
+            align-items: center
+        }
+    }
+
+    .importantField {
+        color: red;
+    }
+
+    .time {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .timeSub {
+            display: flex;
+            flex-direction: row;
+        }
+    }
+
+    .timezoneSelect {
+        outline: none;
+    }
+}
+
+// .themes {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+
+//     .sub-themes {
+//         border: 0cm;
+//         background: none;
+//         display: flex;
+//         flex-direction: column;
+
+//         .block {
+//             width: 7.5rem;
+//             height: 85.33px;
+//             background: #c4c4c4;
+//             border: none;
+//         }
+
+//         .block:focus {
+//             border: 0.125rem solid $theme-color-dark-orange;
+//             box-sizing: border-box;
+//         }
+//     }
+// }
