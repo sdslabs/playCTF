@@ -33,10 +33,12 @@
         Date and Time Settings <span class="importantField">*</span>
       </p>
       <p class="subfields">Time Zone</p>
-      <input
-        v-model="title"
-        placeholder="UTC + 5:30; Indian Standard Time (IST)"
-        class="title"
+      <v-select
+        :options="this.getAllTimezones()"
+        :value="this.currentTimezone"
+        @input="setTimezone"
+        :clearable="false"
+        class="timezoneSelect"
       />
       <div class="time">
         <div class="timeSub">
@@ -98,13 +100,31 @@
 </template>
 <script>
 import { preview, upload } from "../constants/images";
+import moment from "moment-timezone";
 export default {
   name: "AdminConfigure",
   data() {
     return {
       preview,
-      upload
+      upload,
+      currentTimezone: `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format('Z')}`,
     };
-  }
+  },
+  methods: {
+    getAllTimezones() {
+      let timezones =  moment.tz.names();
+      let formattedTimezones = []
+      timezones.forEach(el=>{
+        formattedTimezones.push(`${el}: UTC ${moment.tz(el).format('Z')}`)
+      })
+      return formattedTimezones
+    },
+    setTimezone(value) {
+      this.currentTimezone = value;
+    },
+  },
+  mounted() {
+    console.log(moment.tz.names());
+  },
 };
 </script>
