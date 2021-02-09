@@ -1,7 +1,7 @@
 <template>
-  <div class="mainAdminContainer">
+  <div class="adminConfigureContainer">
     <div class="heading">
-      CONFIGURE
+      <span> CONFIGURE</span>
       <button class="preview-button">
         <div class="preview">
           <img :src="preview" />
@@ -10,21 +10,27 @@
       </button>
     </div>
     <div class="form">
-      <p class="fields">Competition Name<span class="important">*</span></p>
-      <input v-model="title" placeholder="noobCTF" class="title" />
+      <p class="fields">
+        Competition Name<span class="importantField">*</span>
+      </p>
+      <input
+        v-model="title"
+        placeholder="Enter the name of competition to be displayed"
+        class="title"
+      />
       <p class="fields">Content</p>
-      <p class="subfields">About<span class="important">*</span></p>
+      <p class="subfields">About<span class="importantField">*</span></p>
       <textarea
         v-model="description"
-        placeholder="Get ready for action."
+        placeholder="Enter the information to be displayed regarding competition"
       ></textarea>
-      <p class="subfields">Prizes<span class="important">*</span></p>
+      <p class="subfields">Prizes<span class="importantField">*</span></p>
       <textarea
         v-model="description"
-        placeholder="Prizes worth Rs. 10000"
+        placeholder="Enter the information to be displayed regarding prizes"
       ></textarea>
       <p class="fields">
-        Date and Time Settings <span class="important">*</span>
+        Date and Time Settings <span class="importantField">*</span>
       </p>
       <p class="subfields">Time Zone</p>
       <input
@@ -36,49 +42,34 @@
         <div class="timeSub">
           <div>
             <p class="subfields">Start date</p>
-            <input
-              v-model="title"
-              placeholder="UTC + 5:30; Indian Standard Time (IST)"
-              class="title"
-              type="date"
-            />
+            <input v-model="title" class="title" type="date" />
           </div>
           <div>
             <p class="subfields">Start time (24 hr format)</p>
-            <input
-              v-model="title"
-              placeholder="UTC + 5:30; Indian Standard Time (IST)"
-              class="title"
-              type="time"
-            />
+            <input v-model="title" class="title" type="time" />
           </div>
         </div>
         <div class="timeSub">
           <div>
             <p class="subfields">End date</p>
-            <input
-              v-model="title"
-              placeholder="UTC + 5:30; Indian Standard Time (IST)"
-              class="title"
-              type="date"
-            />
+            <input v-model="title" class="title" type="date" />
           </div>
           <div>
             <p class="subfields">End time (24 hr format)</p>
-            <input
-              v-model="title"
-              placeholder="UTC + 5:30; Indian Standard Time (IST)"
-              class="title"
-              type="time"
-            />
+            <input v-model="title" class="title" type="time" />
           </div>
         </div>
       </div>
       <p class="subfields">Competition logo</p>
       <!-- eslint-disable-next-line -->
-      <input type="file" id="actual-button" hidden />
-      <label for="actual-button"> <img :src="upload" />Upload file </label>
-      <p class="subfields">Themes</p>
+      <div class="logoUpload">
+        <input type="file" id="actual-button" hidden />
+        <label for="actual-button">
+          <img :src="upload" />
+          <div class="uploadText">Upload file</div></label
+        >
+      </div>
+      <!-- <p class="subfields">Themes</p>
       <div class="themes">
         <div class="sub-themes">
           <button class="block"></button>
@@ -100,7 +91,7 @@
           <button class="block"></button>
           <p class="theme-name">Green</p>
         </div>
-      </div>
+      </div> -->
       <button class="submitButton">Submit</button>
     </div>
   </div>
@@ -117,7 +108,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-@import "@/assets/scss/adminConfigure.scss";
-</style>
