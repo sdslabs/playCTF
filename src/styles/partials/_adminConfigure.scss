@@ -134,6 +134,7 @@
         padding-left: 1rem;
         padding-top: 1rem;
         margin-bottom: 2%;
+        width: 100%;
     }
 
     textarea::placeholder {
@@ -144,7 +145,8 @@
         line-height: 1.125rem;
     }
 
-    textarea:focus, .title:focus {
+    textarea:focus,
+    .title:focus {
         outline: none !important;
         border: 0.125rem solid $theme-color-violet;
     }
@@ -224,3 +226,12 @@
 //         }
 //     }
 // }
+
+.v-select-disabled {
+    pointer-events: none;
+    color: #bfcbd9;
+    cursor: not-allowed;
+    background-image: none;
+    background-color: #eef1f6;
+    border-color: #d1dbe5;
+}

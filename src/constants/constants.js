@@ -1,4 +1,5 @@
 import variables from "../styles/main.scss";
+import moment from "moment-timezone";
 export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
@@ -36,6 +37,16 @@ export const AdminLandingDetails = [
       "Preview the landing page you have made and proceed. You can update these things later in the configure page"
   }
 ];
+
+export const getAllTimezones = () => {
+  let timezones = moment.tz.names();
+  let formattedTimezones = [];
+  timezones.forEach(el => {
+    formattedTimezones.push(`${el}: UTC ${moment.tz(el).format("Z")}`);
+  });
+  return formattedTimezones;
+};
+
 export const tableCols = {
   users: [
     {
