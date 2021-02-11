@@ -8,6 +8,15 @@
         line-height: 1.7rem;
         text-transform: uppercase;
     }
+    .action{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        .action-btn{
+            margin-left: 1rem;
+        }
+    }
 }
 
 .orange{

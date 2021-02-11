@@ -1,0 +1,23 @@
+.adminLandingProgress{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    .progress{
+        width: 10%;
+        height: 0.25rem;
+        border-radius: 0.1875rem;
+        background-color: $theme-color-grey-high-transp;
+    }
+
+    .completed{
+        background-color: $theme-color-black;
+    }
+
+    .current{
+        background-color: $theme-color-dark-orange;
+        width: 40%;
+    }
+}
