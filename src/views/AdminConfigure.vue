@@ -1,12 +1,12 @@
 <template>
   <div class="adminConfigureContainer">
     <div class="heading">
-      <span> CONFIGURE</span>
+      <span class="headingText"> CONFIGURE</span>
 
       <button class="preview-button">
         <div class="preview">
           <img :src="preview" />
-          Landing Page
+          Preview
         </div>
       </button>
       <div class="addConfigFeedback">

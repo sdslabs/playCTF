@@ -1,7 +1,31 @@
-.adminConfigureContainer {
+.adminConfigureContainer,
+.landingInput {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+
+    .preview-button {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        height: 2rem;
+        width: 7rem;
+        background: $theme-color-white;
+        border: 1.0.3125rem solid $theme-color-grey39;
+        box-sizing: border-box;
+        box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+        border-radius: 0.1875rem;
+        outline: none;
+
+        .preview {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+    }
 
     .heading {
         @extend %font-style-bold;
@@ -11,31 +35,10 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-
-        .preview-button {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            margin-left: 0.875rem;
-            font-size: 0.875rem;
-            line-height: 1.75rem;
-            padding: 0.125rem 0.5rem;
-            height: 2rem;
-            width: 9rem;
-            background: $theme-color-white;
-            border: 1.0.3125rem solid $theme-color-grey39;
-            box-sizing: border-box;
-            box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
-            border-radius: 0.1875rem;
-            outline: none;
-
-            .preview {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                width: 100%;
-            }
+        .headingText{
+            margin-right: 2rem;
         }
+
 
         .addConfigFeedback {
             margin-left: auto;
@@ -51,28 +54,28 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
+    }
 
-        .fields {
-            text-align: left;
-            font-family: $primary-font-family;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 0.875rem;
-            line-height: 1.125rem;
-            margin: 0.3125rem;
-            margin-left: 0;
-        }
+    .fields {
+        text-align: left;
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+        margin: 0.2rem;
+        margin-left: 0;
+    }
 
-        .subfields {
-            font-size: 0.75rem;
-            text-align: left;
-            font-family: $primary-font-family;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 1.125rem;
-            margin: 0.3125rem;
-            margin-left: 0;
-        }
+    .subfields {
+        font-size: 0.75rem;
+        text-align: left;
+        font-family: $primary-font-family;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1.125rem;
+        margin: 0.2rem;
+        margin-left: 0;
     }
 
     .confirmation {
@@ -134,7 +137,7 @@
         padding-left: 1rem;
         padding-top: 1rem;
         margin-bottom: 2%;
-        width: 100%;
+        width: 95%;
     }
 
     textarea::placeholder {
@@ -234,4 +237,10 @@
     background-image: none;
     background-color: #eef1f6;
     border-color: #d1dbe5;
+}
+
+.configureContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="configureContent">
     <p class="subfields">About<span class="importantField">*</span></p>
     <textarea
       v-model="content.about"

@@ -12,7 +12,7 @@ export default {
   props: ["compName"],
   data() {
     return {
-      name: ""
+      name: this.compName
     };
   },
   methods: {
