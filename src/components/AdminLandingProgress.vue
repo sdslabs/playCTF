@@ -5,7 +5,7 @@
       :key="index"
       :class="[
         'progress',
-        { current: currentStep === index, completed: currentStep > index },
+        { current: currentStep === index, completed: currentStep > index }
       ]"
     />
   </div>
@@ -13,6 +13,6 @@
 <script>
 export default {
   name: "AdminLandingProgress",
-  props: ["totalSteps", "currentStep"],
+  props: ["totalSteps", "currentStep"]
 };
 </script>

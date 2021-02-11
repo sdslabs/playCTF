@@ -7,7 +7,28 @@
     <AdminLandingProgress
       :totalSteps="totalSteps"
       :currentStep="getCurrentStep()"
-    />
+    /><transition-group
+      tag="div"
+      class="div-slider"
+      :name="back ? 'slideback' : 'slide'"
+    >
+      <div :key="getCurrentStep()">
+        <div class="configValueComp">
+          <div class="configHeading">
+            <span class="orange">{{ getCurrentStep() }}. </span
+            ><span>{{ AdminLandingDetails[getCurrentStep() - 1].title }}</span>
+            <span
+              v-if="AdminLandingDetails[getCurrentStep() - 1].required"
+              class="importantField"
+              >*</span
+            >
+          </div>
+          <div class="configSubheading">
+            {{ AdminLandingDetails[getCurrentStep() - 1].subtitle }}
+          </div>
+        </div>
+      </div>
+    </transition-group>
     <div v-if="totalSteps === getCurrentStep()" class="action">
       <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
         Back
@@ -27,29 +48,35 @@
 
 <script>
 import AdminLandingProgress from "../components/AdminLandingProgress";
+import { AdminLandingDetails } from "../constants/constants";
 export default {
   data() {
     return {
       currentStep: 1,
       totalSteps: 5,
+      currentIndex: 0,
+      AdminLandingDetails,
+      back: false
     };
   },
   components: {
-    AdminLandingProgress,
+    AdminLandingProgress
   },
   methods: {
     getCurrentStep() {
       return this.currentStep;
     },
     goNext() {
+      this.back = false;
       this.currentStep++;
     },
     goBack() {
       if (this.currentStep > 1) {
+        this.back = true;
         this.currentStep--;
       }
     },
-    submitConfig() {},
-  },
+    submitConfig() {}
+  }
 };
 </script>
