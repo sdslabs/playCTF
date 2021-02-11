@@ -55,7 +55,7 @@
           </div>
           <div>
             <p class="subfields">Start time (24 hr format)</p>
-            <input v-model="compStartTime" class="title" type="time" />
+            <input v-model="compStartTime" class="title" type="time" step="1" />
           </div>
         </div>
         <div class="timeSub">
@@ -65,7 +65,7 @@
           </div>
           <div>
             <p class="subfields">End time (24 hr format)</p>
-            <input v-model="compEndTime" class="title" type="time" />
+            <input v-model="compEndTime" class="title" type="time" step="1" />
           </div>
         </div>
       </div>
@@ -170,10 +170,12 @@ export default {
         `${this.compStartDate}  ${this.compStartTime}`
       );
       let endingTimeObj = moment(`${this.compEndDate}  ${this.compEndTime}`);
-      let startingTime = `${startingTimeObj.format("HH:mm")} UTC: ${moment
-        .tz(timezone)
-        .format("Z")}, ${startingTimeObj.format("Do MMMM YYYY, dddd")}`;
-      let endingTime = `${endingTimeObj.format("HH:mm")} UTC: ${moment
+      let startingTime = `${startingTimeObj.format(
+        "HH:mm:ss"
+      )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
+        "Do MMMM YYYY, dddd"
+      )}`;
+      let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
         .tz(timezone)
         .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
       let configs = {
@@ -225,14 +227,15 @@ export default {
       let endingDetails = endingTime.split(",");
       this.compStartTime = moment(
         startDetails[0].split(" ")[0],
-        "HH:mm"
-      ).format("HH:mm");
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
       this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
         "yyyy-MM-DD"
       );
-      this.compEndTime = moment(endingDetails[0].split(" ")[0], "HH:mm").format(
-        "HH:mm"
-      );
+      this.compEndTime = moment(
+        endingDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
       this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
         "yyyy-MM-DD"
       );
