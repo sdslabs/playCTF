@@ -6,6 +6,7 @@
          <div class="register-info">
           <label class="label">Name*</label>
           <input
+            v-model="uname"
             type="text"
             class="register-inputField email"
             id="name"
@@ -16,6 +17,7 @@
         </div>
         <div class="register-info">
           <input
+            v-model="username"
             type="text"
             class="register-inputField email"
             id="username"
@@ -26,6 +28,7 @@
         </div>
         <div class="register-info">
           <input
+            v-model="email"
             type="text"
             class="register-inputField email"
             id="email"
@@ -36,6 +39,7 @@
         </div>
         <div class="info">
           <input
+            v-model="password"
             type="password"
             class="register-inputField password"
             id="password"
@@ -46,6 +50,7 @@
         </div>
         <div class="info">
           <input
+            v-model="password2"
             type="password"
             class="register-inputField password"
             id="confirmpassword"
@@ -54,16 +59,7 @@
             required=true
           />
         </div>
-        <div class="info">
-          <input
-            type="password"
-            class="register-inputField password"
-            id="ssh"
-            name="ssh"
-            placeholder="ssh key"
-          />
-        </div>
-        <div v-on:click="register()" class="register-button">Register Now</div>
+        <button @click="register()" class="register-button">Register Now</button>
       </form>
       <img src="@/assets/registration.svg" class="register-image"/>
     </div>
@@ -76,16 +72,19 @@ export default {
   name: "register",
   components: {
   },
+  data() {
+    return {
+      uname: "",
+      username: "",
+      email: "",
+      password: "",
+      password2: ""
+    };
+  },
   methods: {
     async register() {
-      const name = document.getElementById("name").value;
-      const username = document.getElementById("username").value;
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const password2 = document.getElementById("confirmpassword").value;
-      const ssh = document.getElementById("ssh").value;
-      if(password === password2) {
-        RegisterUser.registeredUser(name, username, email, password, ssh);
+      if(this.password === this.password2) {
+        RegisterUser.registeredUser(this.uname, this.username, this.email, this.password);
       }
       else {
         alert("Passwords don't match");

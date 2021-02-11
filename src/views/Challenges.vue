@@ -58,7 +58,7 @@ export default {
     ChallCard
   },
   created() {
-    if (!store.getters.getState || store.getters.getRights) {
+    if (!store.getters.getState || store.getters.getAccess) {
       this.$router.push("/");
     }
   },

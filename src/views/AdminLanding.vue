@@ -155,7 +155,7 @@ export default {
     if (!store.getters.getState) {
       this.$router.push("/login/");
     }
-    if (!store.getters.getRights) {
+    if (!store.getters.getAccess) {
       this.$router.push("/");
     }
   },

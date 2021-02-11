@@ -11,6 +11,7 @@
             name="user_name"
             placeholder="Team Name*"
             required="true"
+            v-model="username"
           />
         </div>
         <div class="login-info">
@@ -21,9 +22,10 @@
             name="user_pass"
             placeholder="Password*"
             required="true"
+            v-model="password"
           />
         </div>
-        <div v-on:click="login()" class="login-button">Login</div>
+        <button @click="login()" class="login-button">Login</button>
       </form>
       <img src="@/assets/login.svg" class="login-image" />
     </div>
@@ -34,13 +36,17 @@
 import LoginUser from "../api/admin/authAPI.js";
 export default {
   name: "login",
+  data() {
+    return {
+      username: "",
+      password: ""
+    }
+  },
   components: {
   },
   methods: {
     async login() {
-      const name = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-      LoginUser.loggedInUser(name, password);
+      LoginUser.loggedInUser(this.username, this.password);
     },
   }
 };

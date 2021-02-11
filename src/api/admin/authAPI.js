@@ -33,13 +33,12 @@ export default {
         return
     },
 
-    async registerUser(name, username, email, password, ssh) {
+    async registerUser(name, username, email, password) {
         let bodyFormData = new FormData();
         bodyFormData.append("name", name);
         bodyFormData.append("username", username);
         bodyFormData.append("password", password);
         bodyFormData.append("email", email);
-        bodyFormData.append("ssh-key", ssh);
         let response = await axiosInstance({
             method: "post",
             url: `/auth/register`,
@@ -48,11 +47,11 @@ export default {
         return Promise.resolve(response);
     },
 
-    async registeredUser(name, username, email, password, ssh) {
-        const response = await this.registerUser(name, username, email, password, ssh);
+    async registeredUser(name, username, email, password) {
+        const response = await this.registerUser(name, username, email, password);
         if (response.status === 200) {
             store.commit('update', response.data.token, "contestant");
-            router.push("/");
+            router.push("/login");
         }
         else {
             alert("Registration attempt failed: " + response.data.message);

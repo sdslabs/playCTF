@@ -53,21 +53,19 @@ export default {
       }
     };
   },
+  created() {
+    if (store.getters.getState && store.getters.getAccess) {
+      this.$router.push("/admin/statistics/");
+    }
+  },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");
   },
-<<<<<<< HEAD
   mounted() {
     ConfigApiService.getConfigs().then(response => {
       console.log(response);
       this.configs = response;
     });
-=======
-  created() {
-    if (store.getters.getState && store.getters.getRights) {
-      this.$router.push("/admin/statistics/");
-    }
->>>>>>> Add user role and corresponding checks
   }
 };
 </script>

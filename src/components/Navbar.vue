@@ -99,12 +99,7 @@ export default {
     },
     pathLogin() {
       var route = this.$route.name;
-      if (route.includes("login")) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      return route.includes("login")
     }
   }
 };
