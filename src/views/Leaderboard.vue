@@ -23,7 +23,7 @@
         v-if="resultQuery.length > 0"
         :tableCols="tableCols"
         :rows="resultQuery"
-        :links="[{ col: 'username', redirect: '/admin/users/' }]"
+        :links="[]"
         :maxElementPerPage="10"
       />
       <div class="adminEmptyDataContainer" v-else>
@@ -85,13 +85,6 @@ export default {
         this.displayUsers = this.users.sort((a, b) => {
           return a.rank > b.rank ? 1 : -1;
         });
-        let leaders;
-        if (this.displayUsers.length > 3) {
-          leaders = this.displayUsers.slice(0, 3);
-        } else {
-          leaders = this.displayUsers;
-        }
-        this.findScoreSeries(leaders);
       })
       .finally(() => {
         this.loading = false;
