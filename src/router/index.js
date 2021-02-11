@@ -4,7 +4,8 @@ import Challenges from "@/views/Challenges.vue";
 import Leaderboard from "@/views/Leaderboard.vue";
 import Notification from "@/views/Notifications.vue";
 import Login from "@/views/Login.vue";
-import Admin from "@/views/AdminLanding.vue";
+import AdminLanding from "../views/AdminLanding.vue";
+import AdminStatistics from "../views/AdminStatistics.vue";
 import AdminNotifications from "@/views/AdminNotifications.vue";
 import AdminUser from "@/views/AdminUser.vue";
 import AdminUsers from "@/views/AdminUsers.vue";
@@ -69,9 +70,18 @@ const routes = [
     }
   },
   {
+    path: "/admin",
+    name: "admin",
+    component: AdminLanding,
+
+    meta: {
+      layout: "admin-landing-layout"
+    }
+  },
+  {
     path: "/admin/statistics",
     name: "adminStatistics",
-    component: Admin,
+    component: AdminStatistics,
     meta: {
       layout: "admin-layout"
     }

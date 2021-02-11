@@ -1,0 +1,15 @@
+.adminLandingMainContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    .heading{
+        @extend %font-style-bold;
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+        text-transform: uppercase;
+    }
+}
+
+.orange{
+    color:$theme-color-dark-orange;
+}
