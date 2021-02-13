@@ -26,21 +26,21 @@ export default {
     };
   },
   methods: {
-    emitLogo(val) {
-      this.$emit("changed", val);
+    emitLogo(value) {
+      this.$emit("changed", value);
     },
     onFileChange() {
       this.logo = this.$refs.file.files[0];
     }
   },
   watch: {
-    logo: function(newVal, oldVal) {
-      if (newVal != oldVal) {
-        this.emitLogo(newVal);
+    logo: function(changedValue, prevValue) {
+      if (changedValue != prevValue) {
+        this.emitLogo(changedValue);
       }
     }
-    // compLogo: function (newval) {
-    //   this.logo = newval;
+    // compLogo: function (changedValue) {
+    //   this.logo = changedValue;
     // },
   }
 };
