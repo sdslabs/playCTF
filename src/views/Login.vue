@@ -2,14 +2,16 @@
   <div class="login">
     <div class="login-heading">Login</div>
     <div class="login-form-div">
-      <form class="login-form">
+      <div class="login-form">
         <div class="login-info">
           <input
             type="text"
-            class="login-inputField email"
-            id="email"
-            name="user_email"
-            placeholder="Team Name or E-mail*"
+            class="login-inputField name"
+            id="username"
+            name="user_name"
+            placeholder="Team Name*"
+            required="true"
+            v-model="username"
           />
         </div>
         <div class="login-info">
@@ -19,20 +21,33 @@
             id="password"
             name="user_pass"
             placeholder="Password*"
+            required="true"
+            v-model="password"
           />
         </div>
-        <Button text="LOG IN" class="login-button" type="submit" />
-      </form>
+        <button @click="login()" class="login-button">Login</button>
+      </div>
+      <img src="@/assets/login.svg" class="login-image" />
     </div>
   </div>
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
+import LoginUser from "../api/admin/authAPI.js";
 export default {
   name: "login",
+  data() {
+    return {
+      username: "",
+      password: ""
+    }
+  },
   components: {
-    Button
+  },
+  methods: {
+    async login() {
+      LoginUser.loggedInUser(this.username, this.password);
+    },
   }
 };
 </script>

@@ -15,6 +15,7 @@ import AdminConfigure from "@/views/AdminConfigure.vue";
 import AdminChallenge from "@/views/AdminChallenge.vue";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
+import store from "../api/loginToken";
 
 Vue.use(VueRouter);
 
@@ -151,6 +152,36 @@ const routes = [
 
 const router = new VueRouter({
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  let loginPages = ['/login','/register','/'];
+  let pagePath = to.path;
+  if (loginPages.includes(pagePath)) {
+    next();
+  }
+  else if (!store.getters.getState) {
+    next({
+      path: '/login',
+      query: { redirect: to.path }
+    })
+  } 
+  else {
+    let adminPages ='/admin/';
+    let userPages = ['/challenges','/leaderboard','/notifications','/about'];
+    if(userPages.includes(pagePath) && !(store.getters.getAccess)) {
+      next();
+    }
+    else if(pagePath.includes(adminPages) && store.getters.getAccess) {
+      next();
+    }
+    else {
+      next({
+        path: '/login',
+        query: { redirect: to.path }
+      })
+    }
+  }
 });
 
 export default router;

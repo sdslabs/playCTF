@@ -77,7 +77,7 @@ export default {
       .finally(() => {
         this.api2 = false;
       });
-  },
+  }, 
   methods: {
     changeFilter(value) {
       this.selectedTag = value;

@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <nav v-if="$store.getters.login" class="navbar-container">
+    <nav v-if="loggedIn()" class="navbar-container">
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
       ></router-link>
@@ -27,8 +27,18 @@
         <div class="dropdown-content">
           <a class="dropdown-link" href="#">Dark Theme</a>
           <a class="dropdown-link" href="#">Change Password</a>
-          <a class="dropdown-link" href="#">Logout</a>
+          <a class="dropdown-link" @click="logout()">Logout</a>
         </div>
+      </div>
+    </nav>
+
+    <nav v-else-if="pathLogin()" class="navbar-container">
+      <router-link to="/" class="navbar-link"
+        ><div class="logo"></div
+      ></router-link>
+      <div class="navbar-registration">
+        <p class="navbar-already-registered">New here?</p>
+        <router-link to="/register" class="login-link">REGISTER</router-link>
       </div>
     </nav>
 
@@ -46,6 +56,7 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
+import store from '../api/loginToken';
 export default {
   name: "Navbar",
   data() {
@@ -76,6 +87,19 @@ export default {
   },
   components: {
     Timer
+  },
+  methods: {
+    loggedIn() {
+      return store.getters.getState
+    },
+    logout() {
+      store.commit('logout');
+      this.$router.push('/login');
+    },
+    pathLogin() {
+      var route = this.$route.name;
+      return route.includes("login")
+    }
   }
 };
 </script>

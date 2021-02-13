@@ -22,7 +22,8 @@
     "vue-simple-spinner": "^1.2.10",
     "vue-sliding-pagination": "^1.1.0",
     "vuejs-paginate": "^2.1.0",
-    "vuex": "^3.1.2"
+    "vuex": "^3.1.2",
+    "vuex-persistedstate": "^4.0.0-beta.3"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
