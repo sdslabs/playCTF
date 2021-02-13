@@ -35,7 +35,6 @@ import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import UsersService from "../api/admin/usersAPI";
-import store from '../api/loginToken';
 export default {
   name: "Challenges",
   data() {
@@ -56,11 +55,6 @@ export default {
     StatsNavbar,
     ChallengesByTag,
     ChallCard
-  },
-  created() {
-    if (!store.getters.getState || store.getters.getAccess) {
-      this.$router.push("/");
-    }
   },
   mounted() {
     ChalService.getChallenges()

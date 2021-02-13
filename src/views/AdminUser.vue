@@ -127,7 +127,6 @@ import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
-import store from '../api/loginToken';
 import {
   confimDialogMessages,
   tableCols,
@@ -170,11 +169,6 @@ export default {
       rows: [],
       tableCols: tableCols.user
     };
-  },
-  created() {
-    if (!store.getters.getState || !store.getters.getAccess) {
-      this.$router.push("/login/");
-    }
   },
   computed: {
     isLoading: function() {

@@ -50,7 +50,6 @@ export default {
     async registeredUser(name, username, email, password) {
         const response = await this.registerUser(name, username, email, password);
         if (response.status === 200) {
-            store.commit('update', response.data.token, "contestant");
             router.push("/login");
         }
         else {

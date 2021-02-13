@@ -161,7 +161,6 @@ import {
 } from "../constants/constants";
 import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
-import store from '../api/loginToken';
 export default {
   components: { BarGraphVertical, AdminTable, SpinLoader },
   name: "AdminChallenge",
@@ -181,11 +180,6 @@ export default {
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id).adminChallenge
     };
-  },
-  created() {
-    if (!store.getters.getState || !store.getters.getAccess) {
-      this.$router.push("/admin/statistics/");
-    }
   },
   computed: {
     isLoading: function() {

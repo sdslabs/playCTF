@@ -34,7 +34,6 @@
 <script>
 import Button from "@/components/Button.vue";
 import ConfigApiService from "../api/configureAPI";
-import store from '../api/loginToken';
 export default {
   name: "home",
   components: {
@@ -52,11 +51,6 @@ export default {
         logo_url: ""
       }
     };
-  },
-  created() {
-    if (store.getters.getState && store.getters.getAccess) {
-      this.$router.push("/admin/statistics/");
-    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");

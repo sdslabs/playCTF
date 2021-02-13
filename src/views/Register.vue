@@ -2,7 +2,7 @@
   <div class="register">
     <div class="register-heading">Register for n00b<label class="switch">CTF</label></div>
     <div class="register-form-div">
-      <form class="register-form">
+      <div class="register-form">
          <div class="register-info">
           <label class="label">Name*</label>
           <input
@@ -60,7 +60,7 @@
           />
         </div>
         <button @click="register()" class="register-button">Register Now</button>
-      </form>
+      </div>
       <img src="@/assets/registration.svg" class="register-image"/>
     </div>
   </div>

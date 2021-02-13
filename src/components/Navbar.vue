@@ -27,7 +27,7 @@
         <div class="dropdown-content">
           <a class="dropdown-link" href="#">Dark Theme</a>
           <a class="dropdown-link" href="#">Change Password</a>
-          <a class="dropdown-link" href="#">Logout</a>
+          <a class="dropdown-link" @click="logout()">Logout</a>
         </div>
       </div>
     </nav>
@@ -90,12 +90,11 @@ export default {
   },
   methods: {
     loggedIn() {
-      if (store.getters.getState) {
-        return true;
-      }
-      else {
-        return false;
-      }
+      return store.getters.getState
+    },
+    logout() {
+      store.commit('logout');
+      this.$router.push('/login');
     },
     pathLogin() {
       var route = this.$route.name;

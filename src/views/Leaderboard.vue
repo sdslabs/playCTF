@@ -38,7 +38,6 @@ import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { tableCols, colors, lineGraphOptions } from "../constants/constants";
 import { leaderboard, search } from "../constants/images";
-import store from '../api/loginToken';
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
@@ -68,11 +67,6 @@ export default {
       } else {
         return this.displayUsers;
       }
-    }
-  },
-  created() {
-    if (!store.getters.getState || store.getters.getAccess) {
-      this.$router.push("/");
     }
   },
   mounted() {

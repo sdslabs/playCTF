@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-heading">Login</div>
     <div class="login-form-div">
-      <form class="login-form">
+      <div class="login-form">
         <div class="login-info">
           <input
             type="text"
@@ -26,7 +26,7 @@
           />
         </div>
         <button @click="login()" class="login-button">Login</button>
-      </form>
+      </div>
       <img src="@/assets/login.svg" class="login-image" />
     </div>
   </div>
