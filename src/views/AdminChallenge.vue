@@ -171,9 +171,9 @@ export default {
       undeploy,
       edit,
       loading: {
-        api1NotFetched: true,
-        api2NotFetched: true,
-        api3NotFetched: true
+        usersNotFetched: true,
+        challengeNotFetched: true,
+        submissionsNotFetched: true
       },
       tableCols: tableCols.adminChallenge,
       rows: [],
@@ -244,7 +244,7 @@ export default {
         this.activeUsers = response.data.unbanned_users;
       })
       .finally(() => {
-        this.loading.api1NotFetched = false;
+        this.loading.usersNotFetched = false;
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
       .then(response => {
@@ -255,7 +255,7 @@ export default {
         }
       })
       .finally(() => {
-        this.loading.api2NotFetched = false;
+        this.loading.challengeNotFetched = false;
       });
 
     SubmissionService.getSubmissions()
@@ -270,7 +270,7 @@ export default {
         });
       })
       .finally(() => {
-        this.loading.api3NotFetched = false;
+        this.loading.submissionsNotFetched = false;
       });
   }
 };

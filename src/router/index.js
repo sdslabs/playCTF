@@ -165,31 +165,27 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  let loginPages = ['/login','/register','/'];
+  let loginPages = ["/login", "/register", "/"];
   let pagePath = to.path;
   if (loginPages.includes(pagePath)) {
     next();
-  }
-  else if (!store.getters.getState) {
+  } else if (!store.getters.getState) {
     next({
-      path: '/login',
+      path: "/login",
       query: { redirect: to.path }
-    })
-  } 
-  else {
-    let adminPages ='/admin/';
-    let userPages = ['/challenges','/leaderboard','/notifications','/about'];
-    if(userPages.includes(pagePath) && !(store.getters.getAccess)) {
+    });
+  } else {
+    let adminPages = "/admin/";
+    let userPages = ["/challenges", "/leaderboard", "/notifications", "/about"];
+    if (userPages.includes(pagePath) && !store.getters.getAccess) {
       next();
-    }
-    else if(pagePath.includes(adminPages) && store.getters.getAccess) {
+    } else if (pagePath.includes(adminPages) && store.getters.getAccess) {
       next();
-    }
-    else {
+    } else {
       next({
-        path: '/login',
+        path: "/login",
         query: { redirect: to.path }
-      })
+      });
     }
   }
 });

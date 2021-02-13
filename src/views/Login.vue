@@ -40,14 +40,13 @@ export default {
     return {
       username: "",
       password: ""
-    }
+    };
   },
-  components: {
-  },
+  components: {},
   methods: {
     async login() {
       LoginUser.loggedInUser(this.username, this.password);
-    },
+    }
   }
 };
 </script>

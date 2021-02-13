@@ -56,7 +56,7 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
-import store from '../api/loginToken';
+import store from "../api/loginToken";
 export default {
   name: "Navbar",
   data() {
@@ -90,15 +90,15 @@ export default {
   },
   methods: {
     loggedIn() {
-      return store.getters.getState
+      return store.getters.getState;
     },
     logout() {
-      store.commit('logout');
-      this.$router.push('/login');
+      store.commit("logout");
+      this.$router.push("/login");
     },
     pathLogin() {
       var route = this.$route.name;
-      return route.includes("login")
+      return route.includes("login");
     }
   }
 };

@@ -199,7 +199,7 @@ export default {
         this.users = response.data;
       })
       .finally(() => {
-        this.loading.api1NotFetched = false;
+        this.loading.userStatsNotFetched = false;
       });
 
     UsersService.getUsers()
@@ -211,7 +211,7 @@ export default {
         }
       })
       .finally(() => {
-        this.loading.api2NotFetched = false;
+        this.loading.usersNotFetched = false;
       });
 
     ChalService.getChalStats()
@@ -219,7 +219,7 @@ export default {
         this.challenges = response;
       })
       .finally(() => {
-        this.loading.api3NotFetched = false;
+        this.loading.chalStatsNotFetched = false;
       });
 
     ChalService.getChallenges()
@@ -233,16 +233,16 @@ export default {
         });
       })
       .finally(() => {
-        this.loading.api4NotFetched = false;
+        this.loading.challengesNotFetched = false;
       });
   },
   data() {
     return {
       loading: {
-        api1NotFetched: true,
-        api2NotFetched: true,
-        api3NotFetched: true,
-        api4NotFetched: true
+        userStatsNotFetched: true,
+        usersNotFetched: true,
+        chalStatsNotFetched: true,
+        challengesNotFetched: true
       },
       users: {},
       challenges: {},
