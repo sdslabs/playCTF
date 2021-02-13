@@ -33,7 +33,7 @@
 
 <script>
 import Button from "@/components/Button.vue";
-import ConfigApiService from "../api/configureAPI";
+import ConfigApiService from "../api/admin/configureAPI";
 export default {
   name: "home",
   components: {
@@ -58,7 +58,7 @@ export default {
   mounted() {
     ConfigApiService.getConfigs().then(response => {
       console.log(response);
-      this.configs = response;
+      this.configs = response.data;
     });
   }
 };
