@@ -44,8 +44,8 @@ export default {
       displayChallenges: [],
       tags: [{ name: "All", id: 1 }],
       selectedTag: { name: "All", id: 1 },
-      api1: true,
-      api2: true,
+      api1NotFetched: true,
+      api2NotFetched: true,
       userDetails: {},
       totalChals: 0,
       selectedChall: {}
@@ -67,7 +67,7 @@ export default {
         this.selectedChall = this.displayChallenges[0];
       })
       .finally(() => {
-        this.api1 = false;
+        this.api1NotFetched = false;
       });
     // hardcoding user for now, need to fix after login integration
     UsersService.getUserByUsername("testplayer1")
@@ -75,7 +75,7 @@ export default {
         this.userDetails = response.data;
       })
       .finally(() => {
-        this.api2 = false;
+        this.api2NotFetched = false;
       });
   }, 
   methods: {

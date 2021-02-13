@@ -150,9 +150,9 @@ export default {
       ban,
       unban,
       loading: {
-        api1: true,
-        api2: true,
-        api3: false
+        api1NotFetched: true,
+        api2NotFetched: true,
+        api3NotFetched: false
       },
       confirmDialogs: confimDialogMessages().user,
       scoreSeries: {},
@@ -184,10 +184,10 @@ export default {
     manageUser(userId, action) {
       let confirmHandler = confirm => {
         if (confirm) {
-          this.loading.api3 = true;
+          this.loading.api3NotFetched = true;
           UsersService.manageUser(userId, action).then(() => {
             this.$router.go();
-            this.loading.api3 = false;
+            this.loading.api3NotFetched = false;
           });
         }
       };
@@ -266,7 +266,7 @@ export default {
         });
       })
       .finally(() => {
-        this.loading.api1 = false;
+        this.loading.api1NotFetched = false;
       });
     UsersService.getUserByUsername(this.$route.params.username)
       .then(response => {
@@ -290,7 +290,7 @@ export default {
         );
       })
       .finally(() => {
-        this.loading.api2 = false;
+        this.loading.api2NotFetched = false;
       });
   }
 };
