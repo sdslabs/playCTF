@@ -16,18 +16,18 @@ export default {
     };
   },
   methods: {
-    emitName(value) {
-      this.$emit("changed", value);
+    emitName(compInfoName) {
+      this.$emit("changed", compInfoName);
     }
   },
   watch: {
-    name: function(changedValue, prevValue) {
-      if (changedValue != prevValue) {
-        this.emitName(changedValue);
+    name: function(newCompInfoName, prevCompInfoName) {
+      if (newCompInfoName != prevCompInfoName) {
+        this.emitName(newCompInfoName);
       }
     },
-    compName: function(changedValue) {
-      this.name = changedValue;
+    compName: function(newCompInfoName) {
+      this.name = newCompInfoName;
     }
   }
 };

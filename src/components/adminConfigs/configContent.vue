@@ -23,20 +23,20 @@ export default {
     };
   },
   methods: {
-    emitContent(value) {
-      this.$emit("changed", value);
+    emitContent(compInfoContent) {
+      this.$emit("changed", compInfoContent);
     }
   },
   watch: {
     content: {
-      handler: function(changedValue) {
-        this.emitContent(changedValue);
+      handler: function(newCompInfoContent) {
+        this.emitContent(newCompInfoContent);
       },
       deep: true
     },
     compContent: {
-      handler(changedValue) {
-        this.content = changedValue;
+      handler(newCompInfoContent) {
+        this.content = newCompInfoContent;
       }
     }
   }

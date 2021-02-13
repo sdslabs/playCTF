@@ -67,8 +67,8 @@ export default {
     };
   },
   methods: {
-    emitTimeDate(value) {
-      this.$emit("changed", value);
+    emitTimeDate(compInfoDateTime) {
+      this.$emit("changed", compInfoDateTime);
     },
     setTimezone(value) {
       this.timedate.timezone = value;
@@ -76,15 +76,15 @@ export default {
   },
   watch: {
     timedate: {
-      handler: function(changedValue) {
-        console.log(changedValue);
-        this.emitTimeDate(changedValue);
+      handler: function(newCompInfoDateTime) {
+        console.log(newCompInfoDateTime);
+        this.emitTimeDate(newCompInfoDateTime);
       },
       deep: true
     },
     compTimeDate: {
-      handler(changedValue) {
-        this.timedate = changedValue;
+      handler(newCompInfoDateTime) {
+        this.timedate = newCompInfoDateTime;
       }
     }
   }
