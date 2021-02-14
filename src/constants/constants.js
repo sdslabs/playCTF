@@ -1,9 +1,50 @@
 import variables from "../styles/main.scss";
+import moment from "moment-timezone";
 export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
   lineGraph: ["#22F80F", "#F80F55", "#0F6CF8"],
   singleBarGraph: [variables.themeColorDarkBlueHighTransp]
+};
+export const AdminLandingDetails = [
+  {
+    title: "What’s gonna be your competition’s name?",
+    required: true,
+    subtitle:
+      "It’s recommended to be sweet, short and simple. It’ll be easier to announce."
+  },
+  {
+    title: "When does the competition will happen?",
+    required: true,
+    subtitle: "Once decided, this information cannot be changed"
+  },
+  {
+    title: "Tell players about competition!",
+    required: true,
+    subtitle:
+      "Provide us information about the CTF (It will be conveyed to the players)"
+  },
+  {
+    title: "Want to have a logo?",
+    required: false,
+    subtitle:
+      "Upload the logo of competition to be conveyed (in .jpg/.png/.svg format)"
+  },
+  {
+    title: "Preview & Proceed",
+    required: false,
+    subtitle:
+      "Preview the landing page you have made and proceed. You can update these things later in the configure page"
+  }
+];
+
+export const getAllTimezones = () => {
+  let timezones = moment.tz.names();
+  let formattedTimezones = [];
+  timezones.forEach(el => {
+    formattedTimezones.push(`${el}: UTC ${moment.tz(el).format("Z")}`);
+  });
+  return formattedTimezones;
 };
 
 export const tableCols = {

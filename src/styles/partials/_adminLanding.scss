@@ -1,0 +1,94 @@
+.adminLandingMainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: hidden;
+
+    .heading {
+        @extend %font-style-bold;
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+        text-transform: uppercase;
+    }
+
+    .configValueComp {
+        width: 100%;
+        text-align: left;
+        margin-bottom: 3rem;
+
+        .configHeading {
+            @extend %font-style-basic;
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+
+            .importantField {
+                color: $theme-color-red
+            }
+        }
+
+        .configSubheading {
+            @extend %font-style-basic;
+            line-height: 1.5rem;
+            color: $theme-color-grey;
+        }
+    }
+
+    .action {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        .action-btn {
+            margin-left: 1rem;
+        }
+    }
+}
+
+.orange {
+    color: $theme-color-dark-orange;
+}
+
+.slide-leave-active,
+.slide-enter-active {
+    transition: 1s;
+}
+
+.slide-enter {
+    transform: translate(100%, 0);
+}
+
+.slide-leave-to {
+    transform: translate(-100%, 0);
+}
+
+.slideback-leave-active,
+.slideback-enter-active {
+    transition: 1s;
+}
+
+.slideback-enter {
+    transform: translate(-100%, 0);
+}
+
+.slideback-leave-to {
+    transform: translate(100%, 0);
+}
+
+.div-slider {
+    overflow: hidden;
+    position: relative;
+    height: 25rem;
+    width: 100%;
+}
+
+.div-slider .configValueComp {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.landingInput {
+    margin-top: 2rem;
+    width: 100%;
+}

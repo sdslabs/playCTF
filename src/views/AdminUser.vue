@@ -150,9 +150,8 @@ export default {
       ban,
       unban,
       loading: {
-        api1: true,
-        api2: true,
-        api3: false
+        challengesNotFetched: true,
+        userNotFetched: true
       },
       confirmDialogs: confimDialogMessages().user,
       scoreSeries: {},
@@ -184,10 +183,8 @@ export default {
     manageUser(userId, action) {
       let confirmHandler = confirm => {
         if (confirm) {
-          this.loading.api3 = true;
           UsersService.manageUser(userId, action).then(() => {
             this.$router.go();
-            this.loading.api3 = false;
           });
         }
       };
@@ -266,7 +263,7 @@ export default {
         });
       })
       .finally(() => {
-        this.loading.api1 = false;
+        this.loading.challengesNotFetched = false;
       });
     UsersService.getUserByUsername(this.$route.params.username)
       .then(response => {
@@ -290,7 +287,7 @@ export default {
         );
       })
       .finally(() => {
-        this.loading.api2 = false;
+        this.loading.userNotFetched = false;
       });
   }
 };

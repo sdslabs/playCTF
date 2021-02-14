@@ -1,260 +1,274 @@
 <template>
-  <spin-loader v-if="isLoading" />
-  <div class="mainAdminContainer" v-else>
-    <div class="adminHeadingName">Statistics</div>
-    <div class="adminStatsContainer">
-      <div class="adminOneColContainer">
-        <p class="adminSubheading">General</p>
-        <p class="adminInfo">
-          Total
-          <span class="adminBold">{{ users.total_registered_users }}</span> are
-          registered out of which
-          <span class="adminBold">{{ users.banned_users }}</span> are banned
-          and,
-        </p>
-        <p class="adminInfo">
-          <span class="adminBold">{{ challenges.deployedChal }}</span> are
-          deployed,
-          <span class="adminBold">{{ challenges.undeployedChal }}</span> are
-          undeployed and
-          <span class="adminBold">{{ challenges.purgedChal }}</span> are purged
-        </p>
-        <p class="adminInfo">
-          <span class="adminVioletBold">{{ leader.username }}</span> leads the
-          leaderboard with
-          <span class="adminBold">{{ leader.score }}</span> points.
-        </p>
-        <p class="adminInfo">
-          <span class="adminVioletBold">{{
-            challenges.maxSolvedChal.name
-          }}</span>
-          is the most solved challenge with
-          <span class="adminBold"
-            >{{
-              challenges.maxSolvedChal.solves === -1
-                ? "-"
-                : challenges.maxSolvedChal.solves
-            }}
-            ({{
-              challenges.maxSolvedChal.solves === -1
-                ? "-"
-                : (challenges.maxSolvedChal.solves /
-                    users.total_registered_users) *
-                  100
-            }}</span
-          >%) solves, whereas,
-        </p>
-        <p class="adminInfo">
-          <span class="adminVioletBold">{{
-            challenges.leastSolvedChal.name
-          }}</span>
-          is the least solved challenge with
-          <span class="adminBold"
-            >{{
-              challenges.leastSolvedChal.solves === -1
-                ? "-"
-                : challenges.leastSolvedChal.solves
-            }}
-            ({{
-              challenges.leastSolvedChal.solves === -1
-                ? "-"
-                : (challenges.leastSolvedChal.solves /
-                    users.total_registered_users) *
-                  100
-            }}</span
-          >%).
-        </p>
-      </div>
+  <div class="adminLandingMainContainer">
+    <div class="heading">
+      <span class="orange"> WELCOME! </span>
+      <span>LET'S START BUILDING YOUR COMPETITION</span>
     </div>
-
-    <div class="adminStatsContainer">
-      <div class="adminTwoColContainer" v-if="this.submissions.totalChal > 0">
-        <div class="adminStatsLeftCol">
-          <p class="adminSubheading">Submissions</p>
-          <div class="adminOneColContainer">
-            <p class="adminInfo">
-              Total
-              <span class="adminBold">{{ this.submissions.totalChal }}</span>
-              correct submisions are made
-            </p>
-            <p class="adminInfo" v-for="cat in chalTags" :key="cat.id">
-              <span class="adminBold">{{ cat.name }}</span> has
-              <span class="adminBold">{{
-                submissions.category[cat.name]
-              }}</span>
-              correct submissions.
-            </p>
+    <AdminLandingProgress
+      :totalSteps="totalSteps"
+      :currentStep="getCurrentStep()"
+    /><transition-group
+      tag="div"
+      class="div-slider"
+      :name="back ? 'slideback' : 'slide'"
+    >
+      <div :key="getCurrentStep()">
+        <div class="configValueComp">
+          <div class="configHeading">
+            <span class="orange">{{ getCurrentStep() }}. </span
+            ><span>{{ AdminLandingDetails[getCurrentStep() - 1].title }}</span>
+            <span
+              v-if="AdminLandingDetails[getCurrentStep() - 1].required"
+              class="importantField"
+              >*</span
+            >
           </div>
-        </div>
-        <div class="adminStatsRightCol">
-          <PieChart
-            v-bind:chartData="this.categoryChartData()"
-            v-bind:options="this.chartOptions"
-            :height="130"
-            :width="250"
-          />
-        </div>
-      </div>
-      <div class="adminEmptyDataContainer" v-else>
-        <span class="adminEmptyData">No Submissions</span>
-      </div>
-    </div>
-    <div class="adminStatsContainer">
-      <div class="adminOneColContainer">
-        <p class="adminSubheading">
-          Solve Percentages (Out of {{ users.active }} Active Users)
-        </p>
-        <div class="adminSolveGraphContainer" v-if="this.chalTags.length > 0">
-          <div v-for="tag in chalTags" :key="tag.id" class="graph">
-            <div class="graphTitle">{{ tag.name }}</div>
-            <BarGraph
-              v-bind:chartData="getBarData(tag.name)"
-              v-bind:options="barChartOptions"
+          <div class="configSubheading">
+            {{ AdminLandingDetails[getCurrentStep() - 1].subtitle }}
+          </div>
+          <div class="landingInput">
+            <ConfigTitle
+              v-if="getCurrentStep() === 1"
+              @changed="setCompName"
+              :compName="this.compName"
             />
+            <ConfigContent
+              v-if="getCurrentStep() === 3"
+              :compContent="{ about: compAbout, prizes: compPrizes }"
+              @changed="setCompContent"
+            />
+            <ConfigTimeDate
+              v-if="getCurrentStep() === 2"
+              @changed="setTimeDate"
+              :compTimeDate="{
+                timezone: compTimezone,
+                startTime: compStartTime,
+                startDate: compStartDate,
+                endDate: compEndDate,
+                endTime: compEndTime
+              }"
+              :disabled="false"
+            />
+            <ConfigLogo
+              v-if="getCurrentStep() === 4"
+              @changed="setCompLogo"
+              :compLogo="compLogo"
+            />
+            <button class="preview-button" v-if="getCurrentStep() === 5">
+              <div class="preview">
+                <img :src="preview" />
+                Preview
+              </div>
+            </button>
           </div>
         </div>
-        <div class="adminEmptyDataContainer" v-else>
-          <span class="adminEmptyData">No Challenges Category Available</span>
-        </div>
       </div>
+    </transition-group>
+    <div v-if="totalSteps === getCurrentStep()" class="action">
+      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
+        Back
+      </button>
+      <button class="primary-btn action-btn" @click="submitConfigs">
+        Proceed
+      </button>
+    </div>
+    <div v-else class="action">
+      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
+        Back
+      </button>
+      <button
+        class="primary-btn action-btn"
+        @click="goNext"
+        :disabled="isNextDisabled()"
+      >
+        Next
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import PieChart from "../components/PieChart.vue";
-import BarGraph from "../components/BarGraph.vue";
-import UsersService from "../api/admin/usersAPI";
-import ChalService from "../api/admin/challengesAPI";
-import SubmissionService from "../api/admin/submissionsAPI";
-import SpinLoader from "../components/spinLoader.vue";
-import {
-  colors,
-  barChartOptions,
-  pieChartOptions
-} from "../constants/constants";
+import AdminLandingProgress from "../components/AdminLandingProgress";
+import { AdminLandingDetails } from "../constants/constants";
+import ConfigTitle from "../components/adminConfigs/configTitle.vue";
+import ConfigContent from "../components/adminConfigs/configContent.vue";
+import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
+import ConfigLogo from "../components/adminConfigs/configLogo.vue";
+import moment from "moment-timezone";
+import { getAllTimezones } from "../constants/constants";
+import configureService from "../api/admin/configureAPI";
+import { preview } from "../constants/images";
 export default {
-  name: "Admin",
-  components: {
-    PieChart,
-    BarGraph,
-    SpinLoader
+  data() {
+    return {
+      currentStep: 1,
+      totalSteps: 5,
+      currentIndex: 0,
+      AdminLandingDetails,
+      back: false,
+      compTimezone: "",
+      compName: "",
+      compAbout: "",
+      compPrizes: "",
+      compStartTime: "",
+      compStartDate: "",
+      compEndTime: "",
+      compEndDate: "",
+      compLogo: "",
+      preview
+    };
   },
-  computed: {
-    isLoading: function() {
-      for (let apiState in this.loading) {
-        if (this.loading[apiState]) {
+  components: {
+    AdminLandingProgress,
+    ConfigTitle,
+    ConfigContent,
+    ConfigTimeDate,
+    ConfigLogo
+  },
+  methods: {
+    isNextDisabled() {
+      let currentStep = this.getCurrentStep();
+      if (currentStep === 1) {
+        if (!this.compName) {
+          return true;
+        }
+      }
+      if (currentStep === 2) {
+        if (
+          !(
+            this.compStartTime &&
+            this.compStartDate &&
+            this.compEndTime &&
+            this.compEndDate &&
+            this.compTimezone
+          )
+        ) {
+          return true;
+        }
+      }
+      if (currentStep === 3) {
+        if (!this.compAbout) {
           return true;
         }
       }
       return false;
-    }
-  },
-  methods: {
-    getBarData(tag) {
-      let dataSolves = this.chalCategory[tag].solves;
-      if (dataSolves.length > 5) {
-        dataSolves = dataSolves.slice(0, 5);
-      }
-      let labels = [];
-      let data = [];
-      dataSolves.forEach(el => {
-        labels.push(el.username);
-        data.push((el.solves / this.chalCategory[tag].total) * 100);
-      });
-      return {
-        labels,
-        datasets: [
-          {
-            backgroundColor: colors.barGraph,
-            data
-          }
-        ]
-      };
     },
-    categoryChartData() {
-      let labels = [];
-      let data = [];
-      this.chalTags.forEach(el => {
-        labels.push(el.name);
-      });
-      labels.forEach(el => {
-        let sub = this.submissions.category[el];
-        data.push(sub);
-      });
-      return {
-        labels,
-        datasets: [
-          {
-            backgroundColor: colors.pieChart,
-            data
+    getStartingStep() {
+      let page = 1;
+      if (this.compName) {
+        page = 2;
+        if (
+          this.compStartTime &&
+          this.compStartDate &&
+          this.compEndTime &&
+          this.compEndDate
+        ) {
+          page = 3;
+          if (this.compAbout && this.compPrizes) {
+            page = 4;
+            if (this.compLogo) {
+              page = 5;
+            }
           }
-        ]
+        }
+      }
+      return page;
+    },
+    setCompName(val) {
+      this.compName = val;
+    },
+    setCompContent(val) {
+      this.compAbout = val.about;
+      this.compPrizes = val.prizes;
+    },
+    setTimeDate(val) {
+      this.compStartDate = val.startDate;
+      this.compStartTime = val.startTime;
+      this.compEndDate = val.endDate;
+      this.compEndTime = val.endTime;
+      this.compTimezone = val.timezone;
+    },
+    setCompLogo(val) {
+      this.compLogo = val;
+    },
+    getCurrentStep() {
+      return this.currentStep;
+    },
+    goNext() {
+      this.back = false;
+      this.currentStep++;
+    },
+    goBack() {
+      if (this.currentStep > 1) {
+        this.back = true;
+        this.currentStep--;
+      }
+    },
+    submitConfigs() {
+      let timezone = moment.tz.names()[
+        getAllTimezones().findIndex(el => {
+          return el === this.compTimezone;
+        })
+      ];
+      let startingTimeObj = moment(
+        `${this.compStartDate}  ${this.compStartTime}`
+      );
+      let endingTimeObj = moment(`${this.compEndDate}  ${this.compEndTime}`);
+      let startingTime = `${startingTimeObj.format(
+        "HH:mm:ss"
+      )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
+        "Do MMMM YYYY, dddd"
+      )}`;
+      let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
+        .tz(timezone)
+        .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
+      let configs = {
+        name: this.compName,
+        about: this.compAbout,
+        prizes: this.compPrizes,
+        startingTime,
+        endingTime,
+        timezone: this.compTimezone,
+        logo: this.compLogo
       };
+      configureService
+        .updateConfigs(configs)
+        .then(() => {
+          this.showSuccess = true;
+        })
+        .catch(() => {
+          this.showFail = true;
+        });
     }
   },
   mounted() {
-    UsersService.getUserStats()
-      .then(response => {
-        this.users = response.data;
-      })
-      .finally(() => {
-        this.loading.api1 = false;
-      });
-
-    UsersService.getUsers()
-      .then(users => {
-        if (users.length > 0) {
-          this.leader = users.sort((a, b) => {
-            return a.rank - b.rank;
-          })[0];
-        }
-      })
-      .finally(() => {
-        this.loading.api2 = false;
-      });
-
-    ChalService.getChalStats()
-      .then(response => {
-        this.challenges = response;
-      })
-      .finally(() => {
-        this.loading.api3 = false;
-      });
-
-    ChalService.getChallenges()
-      .then(response => {
-        this.chalTags = response.categoryFilterOptions;
-        SubmissionService.getSubStats(this.chalTags, null).then(response => {
-          this.submissions = response;
-        });
-        ChalService.getChalCategory(this.chalTags).then(response => {
-          this.chalCategory = response;
-        });
-      })
-      .finally(() => {
-        this.loading.api4 = false;
-      });
-  },
-  data() {
-    return {
-      loading: {
-        api1: true,
-        api2: true,
-        api3: true,
-        api4: true
-      },
-      users: {},
-      challenges: {},
-      leader: {
-        username: "-",
-        score: "-"
-      },
-      submissions: {},
-      chalCategory: {},
-      chartOptions: pieChartOptions(),
-      barChartOptions: barChartOptions().statistics
-    };
+    configureService.getConfigs().then(response => {
+      let configs = response.data;
+      this.compName = configs.name;
+      this.compAbout = configs.about;
+      this.compPrizes = configs.prizes;
+      let startingTime = configs.starting_time;
+      let endingTime = configs.ending_time;
+      let startDetails = startingTime.split(",");
+      let endingDetails = endingTime.split(",");
+      this.compStartTime = moment(
+        startDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
+      this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
+        "yyyy-MM-DD"
+      );
+      this.compEndTime = moment(
+        endingDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
+      this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
+        "yyyy-MM-DD"
+      );
+      this.compTimezone =
+        configs.timezone ||
+        `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
+    });
   }
 };
 </script>

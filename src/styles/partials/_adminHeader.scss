@@ -8,6 +8,16 @@
   padding: 0 25%;
 }
 
+.adminLandingHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  padding: 0 25%;
+}
+
 .adminNavTimer {
   display: flex;
   flex-direction: column;

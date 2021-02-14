@@ -1,12 +1,12 @@
 <template>
   <div class="adminConfigureContainer">
     <div class="heading">
-      <span> CONFIGURE</span>
+      <span class="headingText"> CONFIGURE</span>
 
       <button class="preview-button">
         <div class="preview">
           <img :src="preview" />
-          Landing Page
+          Preview
         </div>
       </button>
       <div class="addConfigFeedback">
@@ -20,70 +20,29 @@
       <p class="fields">
         Competition Name<span class="importantField">*</span>
       </p>
-      <input
-        v-model="compName"
-        placeholder="Enter the name of competition to be displayed"
-        class="title"
-      />
+      <ConfigTitle @changed="setCompName" :compName="this.compName" />
       <p class="fields">Content</p>
-      <p class="subfields">About<span class="importantField">*</span></p>
-      <textarea
-        v-model="compAbout"
-        placeholder="Enter the information to be displayed regarding competition"
-      ></textarea>
-      <p class="subfields">Prizes<span class="importantField">*</span></p>
-      <textarea
-        v-model="compPrizes"
-        placeholder="Enter the information to be displayed regarding prizes"
-      ></textarea>
+      <ConfigContent
+        :compContent="{ about: compAbout, prizes: compPrizes }"
+        @changed="setCompContent"
+      ></ConfigContent>
       <p class="fields">
         Date and Time Settings <span class="importantField">*</span>
       </p>
-      <p class="subfields">Time Zone</p>
-      <v-select
-        :options="this.getAllTimezones()"
-        :value="this.compTimezone"
-        @input="setTimezone"
-        :clearable="false"
-        class="timezoneSelect"
-      />
-      <div class="time">
-        <div class="timeSub">
-          <div>
-            <p class="subfields">Start date</p>
-            <input v-model="compStartDate" class="title" type="date" />
-          </div>
-          <div>
-            <p class="subfields">Start time (24 hr format)</p>
-            <input v-model="compStartTime" class="title" type="time" />
-          </div>
-        </div>
-        <div class="timeSub">
-          <div>
-            <p class="subfields">End date</p>
-            <input v-model="compEndDate" class="title" type="date" />
-          </div>
-          <div>
-            <p class="subfields">End time (24 hr format)</p>
-            <input v-model="compEndTime" class="title" type="time" />
-          </div>
-        </div>
-      </div>
+      <ConfigTimeDate
+        @changed="setTimeDate"
+        :compTimeDate="{
+          timezone: compTimezone,
+          startTime: compStartTime,
+          startDate: compStartDate,
+          endDate: compEndDate,
+          endTime: compEndTime
+        }"
+        :disabled="true"
+      ></ConfigTimeDate>
       <p class="subfields">Competition logo (in .jpg format)</p>
       <!-- eslint-disable-next-line -->
-      <div class="logoUpload">
-        <input
-          type="file"
-          id="actual-button"
-          ref="file"
-          v-on:change="onFileChange()"
-          hidden
-        />
-        <label for="actual-button">
-          <img :src="upload" />
-          <div class="uploadText">Upload file</div></label
-        >
-      </div>
+      <ConfigLogo @changed="setCompLogo" :compLogo="compLogo"></ConfigLogo>
       <!-- <p class="subfields">Themes</p>
       <div class="themes">
         <div class="sub-themes">
@@ -122,8 +81,19 @@ import { preview, upload } from "../constants/images";
 import configureService from "../api/admin/configureAPI";
 import moment from "moment-timezone";
 import { configFail, configSuccess } from "../constants/images";
+import ConfigTitle from "../components/adminConfigs/configTitle.vue";
+import ConfigContent from "../components/adminConfigs/configContent.vue";
+import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
+import ConfigLogo from "../components/adminConfigs/configLogo.vue";
+import { getAllTimezones } from "../constants/constants";
 export default {
   name: "AdminConfigure",
+  components: {
+    ConfigTitle,
+    ConfigContent,
+    ConfigTimeDate,
+    ConfigLogo
+  },
   data() {
     return {
       configFail,
@@ -139,17 +109,33 @@ export default {
       compStartDate: "",
       compEndTime: "",
       compEndDate: "",
-      image: "",
+      compLogo: "",
       showSuccess: false,
       showFail: false
     };
   },
   methods: {
+    setCompName(val) {
+      this.compName = val;
+    },
+    setCompContent(val) {
+      this.compAbout = val.about;
+      this.compPrizes = val.prizes;
+    },
+    setTimeDate(val) {
+      this.compStartDate = val.startDate;
+      this.compStartTime = val.startTime;
+      this.compEndDate = val.endDate;
+      this.compEndTime = val.endTime;
+      this.compTimezone = val.timezone;
+    },
+    setCompLogo(val) {
+      this.compLogo = val;
+    },
     cannotUpdate() {
       let value = !(
         this.compName &&
         this.compAbout &&
-        this.compPrizes &&
         this.compStartTime &&
         this.compStartDate &&
         this.compEndTime &&
@@ -157,12 +143,9 @@ export default {
       );
       return value;
     },
-    onFileChange() {
-      this.image = this.$refs.file.files[0];
-    },
     updateConfigs() {
       let timezone = moment.tz.names()[
-        this.getAllTimezones().findIndex(el => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -170,10 +153,12 @@ export default {
         `${this.compStartDate}  ${this.compStartTime}`
       );
       let endingTimeObj = moment(`${this.compEndDate}  ${this.compEndTime}`);
-      let startingTime = `${startingTimeObj.format("HH:mm")} UTC: ${moment
-        .tz(timezone)
-        .format("Z")}, ${startingTimeObj.format("Do MMMM YYYY, dddd")}`;
-      let endingTime = `${endingTimeObj.format("HH:mm")} UTC: ${moment
+      let startingTime = `${startingTimeObj.format(
+        "HH:mm:ss"
+      )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
+        "Do MMMM YYYY, dddd"
+      )}`;
+      let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
         .tz(timezone)
         .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
       let configs = {
@@ -183,7 +168,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.image
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -193,17 +178,6 @@ export default {
         .catch(() => {
           this.showFail = true;
         });
-    },
-    getAllTimezones() {
-      let timezones = moment.tz.names();
-      let formattedTimezones = [];
-      timezones.forEach(el => {
-        formattedTimezones.push(`${el}: UTC ${moment.tz(el).format("Z")}`);
-      });
-      return formattedTimezones;
-    },
-    setTimezone(value) {
-      this.compTimezone = value;
     },
     enter: function() {
       let self = this;
@@ -225,14 +199,15 @@ export default {
       let endingDetails = endingTime.split(",");
       this.compStartTime = moment(
         startDetails[0].split(" ")[0],
-        "HH:mm"
-      ).format("HH:mm");
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
       this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
         "yyyy-MM-DD"
       );
-      this.compEndTime = moment(endingDetails[0].split(" ")[0], "HH:mm").format(
-        "HH:mm"
-      );
+      this.compEndTime = moment(
+        endingDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
       this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
         "yyyy-MM-DD"
       );
