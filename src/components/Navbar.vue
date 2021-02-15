@@ -56,7 +56,7 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
-import store from "../api/loginToken";
+import store from "../store/index";
 export default {
   name: "Navbar",
   data() {

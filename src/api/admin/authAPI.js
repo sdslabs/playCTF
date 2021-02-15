@@ -1,5 +1,5 @@
 import { axiosInstance } from "../axiosInstance.js";
-import store from "../loginToken.js";
+import store from "../../store/index";
 import router from "../../router/index.js";
 
 export default {
@@ -18,10 +18,9 @@ export default {
   async loggedInUser(username, password) {
     const response = await this.loginUser(username, password);
     if (response.status === 200) {
-      store.commit("update", response.data.token);
+      store.commit("updateUserAuth", response.data.token, response.data.role);
       if (response.data.role === "author") {
-        store.commit("giveAccess");
-        router.push("/admin/statistics");
+        router.push("/admin/");
       } else {
         router.push("/");
       }
