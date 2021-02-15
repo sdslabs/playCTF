@@ -19,7 +19,7 @@ export default {
     const response = await this.loginUser(username, password);
     if (response.status === 200) {
       store.commit("updateUserAuth", response.data.token, response.data.role);
-      if (response.data.role === "author") {
+      if (response.data.role === "admin") {
         router.push("/admin/");
       } else {
         router.push("/");

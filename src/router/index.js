@@ -168,7 +168,7 @@ router.beforeEach((to, from, next) => {
   let loginPages = ["/login", "/register"];
   let pagePath = to.path;
   if (loginPages.includes(pagePath) && store.getters.getAccess) {
-    if (store.getters.getRole === "author") {
+    if (store.getters.getRole === "admin") {
       router.push("/admin/");
     } else {
       router.push("/");
