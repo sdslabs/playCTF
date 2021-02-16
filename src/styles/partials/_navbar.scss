@@ -73,12 +73,6 @@
         line-height: 0.5rem;
     }
 
-    .timer {
-        font-size: 0.875rem;
-        font-weight: bold;
-        margin-bottom: 0rem;
-    }
-
     .dropdown {
         margin-left: 2.75rem;
     }
@@ -139,4 +133,8 @@
         color: $theme-color-violet;
         text-decoration: none;
     }
+}
+
+.bold{
+    @extend %font-style-bold;
 }

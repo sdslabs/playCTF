@@ -167,7 +167,11 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   let loginPages = ["/login", "/register"];
   let pagePath = to.path;
-  if (loginPages.includes(pagePath) && store.getters.getAccess) {
+  if (
+    loginPages.includes(pagePath) &&
+    store.getters.getAccess &&
+    store.getters.getRole
+  ) {
     if (store.getters.getRole === "admin") {
       router.push("/admin/");
     } else {

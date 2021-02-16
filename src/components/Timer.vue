@@ -1,15 +1,18 @@
 <template>
   <div>
-    <div class="timer" v-show="statusType === 'running'">
-      {{ days }}:{{ hours }}:{{ minutes }}:{{ seconds }}
+    <div class="timer bold" v-show="statusType === 'running'">
+      {{ days }}Day(s) {{ this.formatValue(hours) }}:{{
+        this.formatValue(minutes)
+      }}:{{ this.formatValue(seconds) }}
     </div>
-    <div class="timer" v-show="statusType !== 'running'">
+    <div class="timer bold" v-show="statusType !== 'running'">
       {{ statusType }}
     </div>
   </div>
 </template>
 
 <script>
+import moment from "moment-timezone";
 export default {
   name: "timer",
   data: function() {
@@ -27,8 +30,8 @@ export default {
     };
   },
   mounted() {
-    this.start = new Date(this.startTime).getTime();
-    this.end = new Date(this.endTime).getTime();
+    this.start = this.getDateTimeString(this.startTime);
+    this.end = this.getDateTimeString(this.endTime);
     // Update the count down every 1 second
     this.timerCount(this.start, this.end);
     this.interval = setInterval(() => {
@@ -36,6 +39,15 @@ export default {
     }, 1000);
   },
   methods: {
+    getDateTimeString(time) {
+      return moment(time, "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd");
+    },
+    formatValue(timeElement) {
+      if (timeElement < 10) {
+        return "0" + timeElement.toString();
+      }
+      return timeElement;
+    },
     timerCount: function(start, end) {
       // Get todays date and time
       let now = new Date().getTime();
