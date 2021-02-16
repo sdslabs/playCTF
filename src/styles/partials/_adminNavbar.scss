@@ -1,7 +1,18 @@
 .adminNavbar {
   display: flex;
   flex-direction: row;
-  margin-left: 1.25rem;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  position: absolute;
+  margin-left: 25%;
+  .adminNavbarContainer{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .adminNavbarLink {
@@ -10,7 +21,7 @@
   font-size: 0.875rem;
   color: $theme-color-grey57;
   text-decoration: none;
-  padding: 0.625rem;
+  padding: 0.625rem 0;
   transition: text-shadow 0.3s;
 }
 

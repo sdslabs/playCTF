@@ -45,7 +45,7 @@ export default {
   components: {},
   methods: {
     async login() {
-      LoginUser.loggedInUser(this.username, this.password);
+      await LoginUser.loggedInUser(this.username, this.password);
     }
   }
 };

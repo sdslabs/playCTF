@@ -22,8 +22,8 @@ export default new Vuex.Store({
     competitionInfo: {
       competitionName: "",
       communicationPlatformLink: "",
-      startingTime: "23:07 UTC: +06:00, 9th February 2021, Tuesday",
-      endingTime: "07:07 UTC: +06:00, 11th February 2021, Thursday",
+      startingTime: "23:07:05 UTC: +06:00, 9th February 2021, Tuesday",
+      endingTime: "07:07:00 UTC: +06:00, 18th February 2021, Thursday",
       logo: ""
     },
     hostUrl: "http://localhost:5005",
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     updateCurrentPage(state, page) {
       state.currentPage = page;
     },
-    updateUserAuth(state, key, role) {
+    async updateUserAuth(state, key, role) {
       state.userInfo.token = key;
       state.userInfo.login = true;
       state.userInfo.role = role;

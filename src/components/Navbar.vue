@@ -25,7 +25,6 @@
           <img src="@/assets/dropdown.svg" />
         </button>
         <div class="dropdown-content">
-          <a class="dropdown-link" href="#">Dark Theme</a>
           <a class="dropdown-link" href="#">Change Password</a>
           <a class="dropdown-link" @click="logout()">Logout</a>
         </div>

@@ -1,13 +1,15 @@
 .adminHeader {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
-  margin-top: 1.25rem;
-  margin-bottom: 1.25rem;
-  padding: 0 25%;
+  margin: 2.25rem 0;
+  height: 2rem;
+  width: 100%;
 }
-
+.ctfLogo{
+  position: absolute;
+  right: 77%;
+}
 .adminLandingHeader {
   display: flex;
   flex-direction: row;
@@ -26,7 +28,6 @@
   font-size: 0.75rem;
   line-height: 1.25rem;
   color: $theme-color-grey39;
-  margin: 0 1rem;
 }
 
 .adminTimerMessage {
@@ -38,6 +39,8 @@
 }
 
 .adminNavDropdown {
+  position: absolute;
+  left: 77%;
   float: left;
   overflow: hidden;
 }
