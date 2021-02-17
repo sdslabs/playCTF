@@ -101,7 +101,7 @@ export default {
         this.loading.usersNotFetched = false;
       });
     // hardcoding user for now, need to fix after login integration
-    UsersService.getUserByUsername("testplayer1")
+    UsersService.getUserByUsername("burnerlee")
       .then(response => {
         this.userInfo = response.data;
       })

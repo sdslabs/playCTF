@@ -28,7 +28,7 @@
         @mouseleave="showDropdownContent(false)"
       >
         <button class="adminNavDropbtn">
-          Team {{ teamname }}
+          {{ teamname }}
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
@@ -107,7 +107,7 @@ export default {
     },
     pathLogin() {
       var route = this.$route.name;
-      return route.includes("login");
+      return route.includes("login") || route.includes("resetpassword");
     },
     showDropdownContent(showContent) {
       this.displayDropdownContent = showContent;

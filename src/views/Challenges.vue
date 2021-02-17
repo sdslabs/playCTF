@@ -59,7 +59,7 @@ export default {
     ChallCard
   },
   mounted() {
-    ChalService.getChallenges()
+    ChalService.getChallenges(true, "burnerlee")
       .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
@@ -72,7 +72,7 @@ export default {
         this.challengesNotFetched = false;
       });
     // hardcoding user for now, need to fix after login integration
-    UsersService.getUserByUsername("testplayer1")
+    UsersService.getUserByUsername("burnerlee")
       .then(response => {
         this.userDetails = response.data;
         console.log(response.data);

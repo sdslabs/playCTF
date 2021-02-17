@@ -1,8 +1,5 @@
 .register {
-    margin-top: 100px;
-    min-height: calc(100vh - 24rem);
-    width: 58.5rem;
-
+    width: 100%;
     .register-heading {
         font-family: $primary-font-family;
         font-weight: bold;
@@ -17,7 +14,7 @@
     }
 
     .register-form-div {
-        width: 22.5rem;
+        width: 100%;
         margin-left: 0rem;
         margin-top: 0.75rem;
         text-align: left;
@@ -26,9 +23,9 @@
         justify-content: space-between;
 
         .register-form {
-            padding-right: 5rem;
+            width: 35%;
             .register-inputField {
-                width: 25rem;
+                width: 100%;
                 height: 3rem;
                 margin-top: 1.75rem;
                 padding: 1rem;
@@ -59,7 +56,7 @@
         }
 
         .register-image {
-            height: 20rem;
+            width:60%;
         }
     }
 }

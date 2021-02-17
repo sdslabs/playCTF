@@ -13,7 +13,10 @@
         ]"
         @click="emitChallName(chall.name)"
       >
-        <p class="challengesByTag-challName">{{ chall.name }}</p>
+        <div class="challName">
+          <p class="challengesByTag-challName">{{ chall.name }}</p>
+          <img v-if="chall.isSolved" src="@/assets/tick.svg" />
+        </div>
         <p class="challengesByTag-challInfo">
           {{ chall.points }} Points | {{ chall.solves.length }} Solves
         </p>

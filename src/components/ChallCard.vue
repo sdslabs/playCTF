@@ -3,6 +3,10 @@
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
       <div class="challCard-tag">{{ challDetails.category }}</div>
+      <div v-if="challDetails.isSolved" class="chall-submitted">
+        <span>Submitted</span>
+        <img src="@/assets/tick.svg" />
+      </div>
       <!--
       <div v-if="marked" class="challCard-bookmark" v-on:click="markedStatus()">
         <img src="@/assets/marked.svg" />
@@ -38,8 +42,8 @@
         </div>
       </a>-->
     </div>
-    <div class="challCard-bottom-row">
-      <form class="challCard-form" @submit="submitFlag">
+    <div v-if="!challDetails.isSolved" class="challCard-bottom-row">
+      <div class="challCard-form">
         <input
           type="text"
           name="flag"
@@ -49,13 +53,14 @@
           v-validate="'required'"
           v-model="flag"
         />
-        <Button
+        <button
           class="challCard-form-submit-button primary-btn"
           :disabled="flag.length === 0"
-          text="Submit Flag"
-          type="submit"
-        ></Button>
-      </form>
+          @click="submitFlag"
+        >
+          Submit Flag
+        </button>
+      </div>
       <!--<div class="challCard-report" @click="showModal()">
         Report <img class="challCard-report-bug" src="@/assets/bug.svg" />
       </div>
@@ -65,13 +70,9 @@
 </template>
 
 <script>
-import Button from "@/components/Button";
 import FlagService from "../api/userFlag";
 export default {
   name: "ChallCard",
-  components: {
-    Button
-  },
   props: ["challDetails", "tag"],
   data() {
     return {
