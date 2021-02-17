@@ -75,7 +75,6 @@ export default {
     UsersService.getUserByUsername("burnerlee")
       .then(response => {
         this.userDetails = response.data;
-        console.log(response.data);
       })
       .finally(() => {
         this.usersNotFetched = false;

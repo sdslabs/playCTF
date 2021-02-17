@@ -77,7 +77,6 @@ export default {
   watch: {
     timedate: {
       handler: function(newCompInfoDateTime) {
-        console.log(newCompInfoDateTime);
         this.emitTimeDate(newCompInfoDateTime);
       },
       deep: true

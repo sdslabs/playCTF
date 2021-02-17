@@ -8,7 +8,6 @@ export default {
     users = users.filter(el => {
       return el.role === "contestant";
     });
-    console.log(users);
     users = users.sort((a, b) => {
       if (a.score === b.score) {
         return a.username > b.username ? 1 : -1;

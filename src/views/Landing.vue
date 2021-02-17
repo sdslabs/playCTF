@@ -61,7 +61,6 @@ export default {
   },
   mounted() {
     ConfigApiService.getConfigs().then(response => {
-      console.log(response);
       this.configs = response.data;
     });
   }

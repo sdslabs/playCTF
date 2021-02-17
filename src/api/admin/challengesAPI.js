@@ -94,7 +94,6 @@ export default {
     let challenges = response.data;
     if (getUserSolves) {
       let userData = await await UserService.getUserByUsername(username);
-      console.log(userData);
       challenges.forEach(challenge => {
         if (
           userData.data.challenges.find(el => {
