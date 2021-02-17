@@ -6,10 +6,12 @@
   height: 2rem;
   width: 100%;
 }
-.ctfLogo{
+
+.ctfLogo {
   position: absolute;
   right: 77%;
 }
+
 .adminLandingHeader {
   display: flex;
   flex-direction: row;
@@ -42,7 +44,6 @@
   position: absolute;
   left: 77%;
   float: left;
-  overflow: hidden;
 }
 
 .adminNavDropbtn {
@@ -58,20 +59,22 @@
 }
 
 .adminNavDropdownContent {
-  display: none;
   position: absolute;
-  min-width: 9.375rem;
+  width: 9.375rem;
+  border: 0.75px solid #484848;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 8px rgba(89, 60, 143, 0.15);
+  border-radius: 3px 0px 3px 3px;
 }
 
 .adminNavDropdownLink {
-  color: black;
+  font-family: 'Open Sans';
+  color: #484848;
+  font-size: 14px;
+  line-height: 24px;
   float: none;
   padding: 0.75rem 1rem;
   text-decoration: none;
   display: block;
   text-align: left;
-}
-
-.adminNavDropdown:hover .adminNavDropdownContent {
-  display: block;
 }

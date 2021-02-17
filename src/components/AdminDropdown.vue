@@ -1,10 +1,14 @@
 <template>
-  <div class="adminNavDropdown">
+  <div
+    class="adminNavDropdown"
+    @mouseover="showDropdownContent(true)"
+    @mouseleave="showDropdownContent(false)"
+  >
     <button class="adminNavDropbtn">
       Admin
       <img :src="dropdown" />
     </button>
-    <div class="adminNavDropdownContent">
+    <div v-if="displayDropdownContent" class="adminNavDropdownContent">
       <a class="adminNavDropdownLink" @click="logout()">Logout</a>
     </div>
   </div>
@@ -17,13 +21,17 @@ export default {
   name: "AdminDropdown",
   data() {
     return {
-      dropdown
+      dropdown,
+      displayDropdownContent: true
     };
   },
   methods: {
     logout() {
       store.commit("logout");
       this.$router.push("/login");
+    },
+    showDropdownContent(showContent) {
+      this.displayDropdownContent = showContent;
     }
   }
 };
