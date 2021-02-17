@@ -1,6 +1,7 @@
 .challCard {
+    box-sizing: border-box;
     text-align: left;
-    width: 34.5rem;
+    width: 70%;
     margin-top: 1.75rem;
     background: $theme-color-white;
     margin-left: 1.5rem;
@@ -124,12 +125,13 @@
         height: 2rem;
 
         .challCard-form {
+            width: 100%;
             .challCard-form-input {
                 background: $theme-color-offwhite;
                 box-shadow: inset 0rem 0.375rem 0.625rem rgba(0, 0, 0, 0.05);
                 border-radius: 0.3125rem;
                 height: 2rem;
-                width: 18.5rem;
+                width: 60%;
                 font-family: $primary-font-family;
                 
                 font-weight: 600;

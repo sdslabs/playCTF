@@ -1,29 +1,31 @@
 <template>
-  <div class="challenge">
+  <div class="challenge-main-container">
     <div class="chall-tags">
       <div class="tags">
         <a
           v-for="tag in tags"
           v-bind:key="tag.id"
-          :class="{ tag: true }"
+          :class="{ tag: true, active: selectedTag.name === tag.name }"
           :tag="tag.name"
           @click="changeFilter(tag)"
           >{{ tag.name }}
         </a>
       </div>
     </div>
-    <div class="chall-details">
-      <StatsNavbar :details="userDetails" :total="totalChals" />
-      <div class="chall">
-        <ChallengesByTag
-          :tag="this.selectedTag.name"
-          :challenges="displayChallenges"
-          @clicked="selectChallenge"
-        />
-        <ChallCard
-          :challDetails="this.displayChallenge"
-          :tag="this.selectedTag.name"
-        />
+    <div class="challenge">
+      <div class="chall-details">
+        <StatsNavbar :details="userDetails" :total="totalChals" />
+        <div class="chall">
+          <ChallengesByTag
+            :tag="this.selectedTag.name"
+            :challenges="displayChallenges"
+            @clicked="selectChallenge"
+          />
+          <ChallCard
+            :challDetails="this.displayChallenge"
+            :tag="this.selectedTag.name"
+          />
+        </div>
       </div>
     </div>
   </div>
@@ -73,6 +75,7 @@ export default {
     UsersService.getUserByUsername("testplayer1")
       .then(response => {
         this.userDetails = response.data;
+        console.log(response.data);
       })
       .finally(() => {
         this.usersNotFetched = false;
