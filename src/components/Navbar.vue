@@ -27,7 +27,7 @@
         @mouseleave="showDropdownContent(false)"
       >
         <button class="adminNavDropbtn">
-          Team
+          Team {{ teamname }}
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
@@ -67,6 +67,7 @@ export default {
   data() {
     return {
       dropdown,
+      teamname: "Bandits",
       displayDropdownContent: false,
       links: [
         {

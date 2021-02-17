@@ -61,26 +61,28 @@
 .adminNavDropdownContent {
   position: absolute;
   width: 10rem;
-  border: 0.75px solid #484848;
+  border: 0.0625rem solid #484848;
+  border-radius: 1rem;
   box-sizing: border-box;
-  box-shadow: 0px 4px 8px rgba(89, 60, 143, 0.15);
-  border-radius: 3px 0px 3px 3px;
+  box-shadow: 0 0.25rem 0.5rem rgba(89, 60, 143, 0.15);
+  border-radius: 0.1875rem 0 0.1875rem 0.1875rem;
   padding: 0.5rem 1rem;
 }
 
 .adminNavDropdownLink {
   font-family: 'Open Sans';
   color: #484848;
-  font-size: 14px;
-  line-height: 24px;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
   float: none;
   width: 8rem;
   text-decoration: none;
   display: block;
   text-align: left;
   padding: 1rem 0;
-  border-bottom: 2px solid #484848;
-  &:last-child{
+  border-bottom: 0.125rem solid #484848;
+
+  &:last-child {
     border-bottom: none
   }
 }

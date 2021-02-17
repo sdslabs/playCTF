@@ -1,7 +1,5 @@
 .home {
-    margin: auto;
-    margin-top: 5rem;
-    min-width: 100%;
+    width: 100%;
 }
 
 .event {
@@ -15,31 +13,35 @@
         justify-content: space-between;
 
         .event-info-text {
-            width: 25rem;
+            width: 60%;
 
             .tagline {
+                @extend %font-style-basic;
                 font-weight: 800;
                 font-size: 3rem;
-                line-height: 4.5rem;
+                line-height: 3rem;
                 color: $theme-color-grey39;
+                margin-bottom: 1rem;
             }
 
             .timing {
-                font-size: 1.5rem;
-                line-height: 2.5rem;
-                color: $theme-color-grey57;
-                font-weight: 600;
-                margin-top: 1rem;
-                margin-bottom: 1rem;
+                @extend %font-style-basic;
+                font-size: 1rem;
+                line-height: 2rem;
+                margin: 0.5rem 0;
             }
         }
 
+        .event-info-img {
+            width: 40%;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
 
     }
 
     .landing-img {
-        height: 23rem;
-        width: 25rem;
+        width: 100%;
     }
 
     .prize-info {
@@ -49,6 +51,15 @@
         flex-direction: row-reverse;
         justify-content: space-between;
 
+        .prize-info-text {
+            width: 60%;
+        }
+
+        .prize-info-img {
+            width: 40%;
+            padding-right: 12.5%;
+        }
+
         .heading {
             font-weight: 800;
             font-family: $primary-font-family;
@@ -57,6 +68,7 @@
             color: $theme-color-grey39;
         }
 
+
     }
 }
 
@@ -64,7 +76,6 @@
     font-size: 1.25rem;
     font-family: $secondary-font-family;
     color: $theme-color-grey57;
-    width: 32rem;
     margin-top: 0.5rem;
 }
 
