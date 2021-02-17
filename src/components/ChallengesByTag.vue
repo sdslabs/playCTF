@@ -8,7 +8,7 @@
         :class="[
           {
             'challengesByTag-challenge': true,
-            selected: isSelected(chall.name)
+            selected: selectedChallenge === chall.name
           }
         ]"
         @click="emitChallName(chall.name)"
@@ -28,16 +28,13 @@ export default {
   props: ["tag", "challenges"],
   data() {
     return {
-      selectedChallenge: this.challenges[0].name
+      selectedChallenge: {}
     };
   },
   methods: {
     emitChallName(challName) {
       this.selectedChallenge = challName;
       this.$emit("clicked", challName);
-    },
-    isSelected(challName) {
-      return challName === this.selectedChallenge;
     }
   },
   watch: {

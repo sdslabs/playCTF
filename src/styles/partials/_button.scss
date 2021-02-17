@@ -19,7 +19,7 @@
         color: $theme-color-grey39;
     }
 
-    &:hover {
+    &:hover:enabled{
         background: $theme-color-white;
         color: $theme-color-dark-orange;
         border: 0.0625rem solid $theme-color-dark-orange;

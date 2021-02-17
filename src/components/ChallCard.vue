@@ -39,7 +39,7 @@
       </a>-->
     </div>
     <div class="challCard-bottom-row">
-      <form class="challCard-form">
+      <form class="challCard-form" @submit="submitFlag">
         <input
           type="text"
           name="flag"
@@ -47,12 +47,13 @@
           id="flag-input"
           placeholder="Start typing flag here..."
           v-validate="'required'"
-          v-model="disable"
+          v-model="flag"
         />
         <Button
           class="challCard-form-submit-button primary-btn"
-          :disabled="disable"
+          :disabled="flag.length === 0"
           text="Submit Flag"
+          type="submit"
         ></Button>
       </form>
       <!--<div class="challCard-report" @click="showModal()">
@@ -65,6 +66,7 @@
 
 <script>
 import Button from "@/components/Button";
+import FlagService from "../api/userFlag";
 export default {
   name: "ChallCard",
   components: {
@@ -73,7 +75,8 @@ export default {
   props: ["challDetails", "tag"],
   data() {
     return {
-      port: undefined
+      port: undefined,
+      flag: ""
       // marked: false,
     };
   },
@@ -88,6 +91,11 @@ export default {
     }
   },
   methods: {
+    submitFlag() {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        alert(Response.data.message);
+      });
+    },
     isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {

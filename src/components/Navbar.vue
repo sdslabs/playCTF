@@ -5,17 +5,18 @@
         ><div class="logo"></div
       ></router-link>
       <nav class="navbar-container">
-        <router-link
-          v-for="routes in links"
-          v-bind:key="routes.index"
-          :class="{
-            'navbar-link': true,
-            active: routes.text === $store.getters.currentPage
-          }"
-          :to="`${routes.page}`"
-          >{{ routes.text }}
-        </router-link>
-
+        <div class="link-container">
+          <router-link
+            v-for="routes in links"
+            v-bind:key="routes.index"
+            :class="{
+              'navbar-link': true,
+              active: routes.text === $store.getters.currentPage
+            }"
+            :to="`${routes.page}`"
+            >{{ routes.text }}
+          </router-link>
+        </div>
         <div class="adminNavTimer">
           <p class="adminTimerMessage">Time Remaining</p>
           <Timer class="adminTimerValue" />

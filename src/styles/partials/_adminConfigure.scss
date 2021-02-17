@@ -202,6 +202,26 @@
         .timeSub {
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
+            width: 48%;
+
+            .dateInput {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeInput {
+                width: 45%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title {
+                width: 75%;
+            }
         }
     }
 

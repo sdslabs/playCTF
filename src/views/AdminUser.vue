@@ -7,8 +7,10 @@
         <div class="userDetails">
           <div class="userName">
             <div class="name">{{ userDetails.name }}</div>
-            <img :src="mail" class="mailImg" />
-            <div class="contact">Contact</div>
+            <a :href="`mailto:${userDetails.email}`" class="mailLink">
+              <img :src="mail" class="mailImg" />
+              <div class="contact">Contact</div></a
+            >
           </div>
           <div class="rankScore">
             <div class="rank">
@@ -273,6 +275,7 @@ export default {
         this.userDetails.score = data.score;
         this.userDetails.rank = data.rank;
         this.userDetails.active = data.status === 0;
+        this.userDetails.email = data.email;
         SubmissionService.getUserSubs(this.$route.params.username).then(
           subData => {
             subData.forEach(element => {
