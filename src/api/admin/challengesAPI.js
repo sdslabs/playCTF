@@ -1,5 +1,5 @@
 import { axiosInstance } from "../axiosInstance.js";
-
+import UserService from "./usersAPI";
 export default {
   async getChalCategory(tags) {
     let submissionsCategory = {};
@@ -89,9 +89,21 @@ export default {
     }
   },
 
-  async getChallenges() {
+  async getChallenges(getUserSolves, username) {
     const response = await this.fetchAllChallenges();
     let challenges = response.data;
+    if (getUserSolves) {
+      let userData = await await UserService.getUserByUsername(username);
+      challenges.forEach(challenge => {
+        if (
+          userData.data.challenges.find(el => {
+            return el.id === challenge.id;
+          })
+        ) {
+          challenge.isSolved = true;
+        }
+      });
+    }
     let allTags = [];
     let categoryFilterOptions = [];
     let displayChallenges = [];

@@ -3,12 +3,16 @@
     <div class="heading">
       <span class="headingText"> CONFIGURE</span>
 
-      <button class="preview-button">
+      <button
+        class="preview-button"
+        @click="showPreviewModal = true"
+      >
         <div class="preview">
           <img :src="preview" />
           Preview
         </div>
       </button>
+
       <div class="addConfigFeedback">
         <transition name="fade" v-on:enter="enter">
           <img v-if="showSuccess" :src="configSuccess" />
@@ -36,7 +40,7 @@
           startTime: compStartTime,
           startDate: compStartDate,
           endDate: compEndDate,
-          endTime: compEndTime
+          endTime: compEndTime,
         }"
         :disabled="true"
       ></ConfigTimeDate>
@@ -74,6 +78,11 @@
         Save Changes
       </button>
     </div>
+    <transition name="fade" appear>
+      <div class="modal-overlay" v-if="showPreviewModal">
+        <preview-modal @close="showPreviewModal = false" />
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -86,13 +95,15 @@ import ConfigContent from "../components/adminConfigs/configContent.vue";
 import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
 import ConfigLogo from "../components/adminConfigs/configLogo.vue";
 import { getAllTimezones } from "../constants/constants";
+import PreviewModal from "../components/PreviewModal.vue";
 export default {
   name: "AdminConfigure",
   components: {
     ConfigTitle,
     ConfigContent,
     ConfigTimeDate,
-    ConfigLogo
+    ConfigLogo,
+    PreviewModal,
   },
   data() {
     return {
@@ -111,7 +122,8 @@ export default {
       compEndDate: "",
       compLogo: "",
       showSuccess: false,
-      showFail: false
+      showFail: false,
+      showPreviewModal: false,
     };
   },
   methods: {
@@ -145,7 +157,7 @@ export default {
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex(el => {
+        getAllTimezones().findIndex((el) => {
           return el === this.compTimezone;
         })
       ];
@@ -168,7 +180,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo
+        logo: this.compLogo,
       };
       configureService
         .updateConfigs(configs)
@@ -179,16 +191,22 @@ export default {
           this.showFail = true;
         });
     },
-    enter: function() {
+    enter: function () {
       let self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
-    }
+    },
+    openModal() {
+      this.modalOpen = !this.modalOpen;
+    },
+    closeModal() {
+      this.showPreviewModal = false;
+    },
   },
   mounted() {
-    configureService.getConfigs().then(response => {
+    configureService.getConfigs().then((response) => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -215,6 +233,6 @@ export default {
         configs.timezone ||
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
-  }
+  },
 };
 </script>

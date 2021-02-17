@@ -1,37 +1,44 @@
 <template>
   <div class="navbar">
-    <nav v-if="loggedIn()" class="navbar-container">
-      <router-link to="/" class="navbar-link"
+    <div class="user-navbar-container" v-if="loggedIn()">
+      <router-link to="/" class="navbar-link ctfLogo"
         ><div class="logo"></div
       ></router-link>
-      <router-link
-        v-for="routes in links"
-        v-bind:key="routes.index"
-        :class="{
-          'navbar-link': true,
-          active: routes.text === $store.getters.currentPage
-        }"
-        :to="`${routes.page}`"
-        >{{ routes.text }}
-      </router-link>
-
-      <div class="nav-timer">
-        <p class="time-remaining">Time remaining</p>
-        <p class="timer"><Timer /></p>
-      </div>
-      <div class="dropdown">
-        <button class="dropbtn">
-          Team
-          <img src="@/assets/dropdown.svg" />
+      <nav class="navbar-container">
+        <div class="link-container">
+          <router-link
+            v-for="routes in links"
+            v-bind:key="routes.index"
+            :class="{
+              'navbar-link': true,
+              active: routes.text === $store.getters.currentPage
+            }"
+            :to="`${routes.page}`"
+            >{{ routes.text }}
+          </router-link>
+        </div>
+        <div class="adminNavTimer">
+          <p class="adminTimerMessage">Time Remaining</p>
+          <Timer class="adminTimerValue" />
+        </div>
+      </nav>
+      <div
+        class="adminNavDropdown"
+        @mouseover="showDropdownContent(true)"
+        @mouseleave="showDropdownContent(false)"
+      >
+        <button class="adminNavDropbtn">
+          {{ teamname }}
+          <img :src="dropdown" />
         </button>
-        <div class="dropdown-content">
-          <a class="dropdown-link" href="#">Dark Theme</a>
-          <a class="dropdown-link" href="#">Change Password</a>
-          <a class="dropdown-link" @click="logout()">Logout</a>
+        <div v-if="displayDropdownContent" class="adminNavDropdownContent">
+          <router-link to="/resetpassword" class="adminNavDropdownLink"
+            >Change Password</router-link
+          >
+          <a class="adminNavDropdownLink" @click="logout()">Logout</a>
         </div>
       </div>
-    </nav>
-
+    </div>
     <nav v-else-if="pathLogin()" class="navbar-container">
       <router-link to="/" class="navbar-link"
         ><div class="logo"></div
@@ -56,11 +63,15 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
+import { dropdown } from "../constants/images";
 import store from "../store/index";
 export default {
   name: "Navbar",
   data() {
     return {
+      dropdown,
+      teamname: "Bandits",
+      displayDropdownContent: false,
       links: [
         {
           index: 0,
@@ -99,6 +110,9 @@ export default {
     pathLogin() {
       var route = this.$route.name;
       return route.includes("login");
+    },
+    showDropdownContent(showContent) {
+      this.displayDropdownContent = showContent;
     }
   }
 };

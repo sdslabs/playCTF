@@ -12,6 +12,18 @@
             {{ tableCol.label }}
           </th>
         </thead>
+        <tr class="adminTableUserRow" v-if="this.userData">
+          <td class="adminTableData adminTableUserData adminTablerank">
+            {{ this.userData.rank }}
+          </td>
+          <td class="adminTableData adminTableUserData adminTableusername">
+            {{ this.userData.username }}
+          </td>
+          <td class="adminTableData adminTableUserData adminTablescore">
+            {{ this.userData.score }}
+          </td>
+        </tr>
+        <tr class="adminNullRow"></tr>
         <tbody class="adminTableBody">
           <tr v-for="row in get_rows()" :key="row.rank" class="adminTableRow">
             <td
@@ -92,7 +104,14 @@ export default {
       redirectLink: ""
     };
   },
-  props: ["tableCols", "rows", "colStyle", "links", "maxElementPerPage"],
+  props: [
+    "tableCols",
+    "rows",
+    "colStyle",
+    "links",
+    "maxElementPerPage",
+    "userData"
+  ],
   methods: {
     isColLink(val) {
       let isLink = false;

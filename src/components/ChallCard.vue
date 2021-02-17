@@ -1,8 +1,12 @@
 <template>
-  <div class="challCard">
+  <div v-if="this.challDetails" class="challCard">
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
       <div class="challCard-tag">{{ challDetails.category }}</div>
+      <div v-if="challDetails.isSolved" class="chall-submitted">
+        <span>Submitted</span>
+        <img src="@/assets/tick.svg" />
+      </div>
       <!--
       <div v-if="marked" class="challCard-bookmark" v-on:click="markedStatus()">
         <img src="@/assets/marked.svg" />
@@ -38,8 +42,8 @@
         </div>
       </a>-->
     </div>
-    <div class="challCard-bottom-row">
-      <form class="challCard-form">
+    <div v-if="!challDetails.isSolved" class="challCard-bottom-row">
+      <div class="challCard-form">
         <input
           type="text"
           name="flag"
@@ -47,33 +51,41 @@
           id="flag-input"
           placeholder="Start typing flag here..."
           v-validate="'required'"
-          v-model="disable"
+          v-model="flag"
         />
-        <Button
+        <button
           class="challCard-form-submit-button primary-btn"
-          :disabled="disable"
-          text="Submit Flag"
-        ></Button>
-      </form>
+          :disabled="flag.length === 0 || this.showSuccess || this.showFail"
+          @click="submitFlag"
+        >
+          Submit Flag
+        </button>
+      </div>
       <!--<div class="challCard-report" @click="showModal()">
         Report <img class="challCard-report-bug" src="@/assets/bug.svg" />
       </div>
       -->
     </div>
+    <div class="submit-feedback">
+      <transition name="fade" v-on:enter="enter">
+        <img v-if="showSuccess" src="@/assets/submit-success.svg" />
+        <img v-if="showFail" src="@/assets/submit-fail.svg" />
+      </transition>
+    </div>
   </div>
 </template>
 
 <script>
-import Button from "@/components/Button";
+import FlagService from "../api/userFlag";
 export default {
   name: "ChallCard",
-  components: {
-    Button
-  },
   props: ["challDetails", "tag"],
   data() {
     return {
-      port: undefined
+      port: undefined,
+      flag: "",
+      showSuccess: false,
+      showFail: false
       // marked: false,
     };
   },
@@ -88,6 +100,25 @@ export default {
     }
   },
   methods: {
+    enter: function() {
+      let self = this;
+      setTimeout(function() {
+        if (self.showSuccess) {
+          self.$router.go();
+        }
+        self.showSuccess = false;
+        self.showFail = false;
+      }, 3000); // hide the message after 3 seconds
+    },
+    submitFlag() {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        if (Response.data.success) {
+          this.showSuccess = true;
+        } else {
+          this.showFail = true;
+        }
+      });
+    },
     isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {

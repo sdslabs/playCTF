@@ -1,21 +1,32 @@
 .navbar {
-    position: fixed;
     background-color: white;
-    left: 50%;
-    transform: translateX(-50%);
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     width: 100%;
+    height: 2rem;
+    display: flex;
+    padding: 2.25rem 0;
+    flex-direction: row;
     align-items: center;
     z-index: 100;
+    .link-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 50%;
+    }
+    .user-navbar-container{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
 
     .navbar-container {
-        width: 58.5rem;
+        width: 50%;
         margin: auto;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
+        align-items: center;
         .navbar-link {
             display: inline-block;
             vertical-align: middle;
@@ -46,7 +57,6 @@
 
     .active {
         font-weight: bold;
-        margin-bottom: 0.5rem;
 
         &:after {
             content: "";
@@ -65,18 +75,12 @@
     }
 
     .nav-timer {
-        margin-left: auto;
+        margin-left: 20%;
         font-family: $primary-font-family;
         margin-top: -0.75rem;
         font-size: 0.75rem;
         color: $theme-color-grey39;
         line-height: 0.5rem;
-    }
-
-    .timer {
-        font-size: 0.875rem;
-        font-weight: bold;
-        margin-bottom: 0rem;
     }
 
     .dropdown {
@@ -139,4 +143,8 @@
         color: $theme-color-violet;
         text-decoration: none;
     }
+}
+
+.bold{
+    @extend %font-style-bold;
 }

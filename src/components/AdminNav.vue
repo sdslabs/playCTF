@@ -21,11 +21,19 @@
         >Configure</router-link
       >
     </nav>
+    <div class="adminNavTimer">
+      <p class="adminTimerMessage">Time Remaining</p>
+      <Timer class="adminTimerValue" />
+    </div>
   </div>
 </template>
 
 <script>
+import Timer from "@/components/Timer.vue";
 export default {
-  name: "AdminNavbar"
+  name: "AdminNavbar",
+  components: {
+    Timer
+  }
 };
 </script>

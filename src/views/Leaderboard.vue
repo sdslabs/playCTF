@@ -17,18 +17,15 @@
         </div>
       </div>
     </div>
-    <spin-loader v-if="loading" />
+    <spin-loader v-if="isLoading()" />
     <div v-else>
       <admin-table
-        v-if="resultQuery.length > 0"
         :tableCols="tableCols"
         :rows="resultQuery"
         :links="[]"
         :maxElementPerPage="10"
+        :userData="userInfo"
       />
-      <div class="adminEmptyDataContainer" v-else>
-        <span class="adminEmptyData">No Users</span>
-      </div>
     </div>
   </div>
 </template>
@@ -45,15 +42,29 @@ export default {
     return {
       leaderboard,
       search,
-      loading: true,
       lineColors: colors.lineGraph,
       scoreSeries: [],
       lineGraphOptions: lineGraphOptions(true),
       searchQuery: "",
       tableCols: tableCols.leaderboard,
       users: [],
-      displayUsers: []
+      displayUsers: [],
+      userInfo: {},
+      loading: {
+        userNotFetched: true,
+        usersNotFetched: true
+      }
     };
+  },
+  methods: {
+    isLoading() {
+      for (let apiState in this.loading) {
+        if (this.loading[apiState]) {
+          return true;
+        }
+      }
+      return false;
+    }
   },
   computed: {
     resultQuery() {
@@ -87,7 +98,15 @@ export default {
         });
       })
       .finally(() => {
-        this.loading = false;
+        this.loading.usersNotFetched = false;
+      });
+    // hardcoding user for now, need to fix after login integration
+    UsersService.getUserByUsername("burnerlee")
+      .then(response => {
+        this.userInfo = response.data;
+      })
+      .finally(() => {
+        this.loading.userNotFetched = false;
       });
   },
   beforeCreate() {

@@ -3,13 +3,27 @@
         border-spacing: 0;
         width: 100%;
         margin-top: 0.625rem;
-
         .adminTableData {
             font-family: $secondary-font-family;
             font-style: normal;
             font-weight: normal;
             font-size: 0.875rem;
             line-height: 2rem;
+        }
+        .adminNullRow{
+            height: 1rem;
+        }
+
+        .adminTableUserRow{
+            background: $theme-color-violet;
+            border-radius: 0.1875rem;
+            margin-bottom: 1rem;
+        }
+
+        .adminTableUserData{
+            @extend %font-style-bold;
+            font-weight: 700;
+            color: $theme-color-white;
         }
 
         .adminTableLink {
@@ -83,6 +97,7 @@
 
         .adminTableRow {
             height: 2rem;
+            border-radius: 0.1875rem;
         }
 
         .adminTableRow:nth-child(2n + 1) {

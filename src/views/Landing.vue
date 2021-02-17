@@ -3,11 +3,15 @@
     <div class="event">
       <div class="event-info">
         <div class="event-info-text">
-          <div class="tagline">Be a part of {{ configs.name }}</div>
+          <div class="tagline">Be a part of</div>
+          <div class="tagline">{{ configs.name }}</div>
           <div class="description">
             {{ configs.about }}
           </div>
+          <div class="description">Starting Time</div>
           <div class="timing">{{ configs.starting_time }}</div>
+          <div class="description">Ending Time</div>
+          <div class="timing">{{ configs.ending_time }}</div>
           <router-link to="/challenges"
             ><Button text="See Challenges" class="primary-btn"
           /></router-link>
@@ -57,7 +61,6 @@ export default {
   },
   mounted() {
     ConfigApiService.getConfigs().then(response => {
-      console.log(response);
       this.configs = response.data;
     });
   }

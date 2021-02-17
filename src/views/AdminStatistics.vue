@@ -38,9 +38,11 @@
             ({{
               challenges.maxSolvedChal.solves === -1
                 ? "-"
-                : (challenges.maxSolvedChal.solves /
-                    users.total_registered_users) *
-                  100
+                : (
+                    (challenges.maxSolvedChal.solves /
+                      users.total_registered_users) *
+                    100
+                  ).toFixed(2)
             }}</span
           >%) solves, whereas,
         </p>
@@ -58,9 +60,11 @@
             ({{
               challenges.leastSolvedChal.solves === -1
                 ? "-"
-                : (challenges.leastSolvedChal.solves /
-                    users.total_registered_users) *
-                  100
+                : (
+                    (challenges.leastSolvedChal.solves /
+                      users.total_registered_users) *
+                    100
+                  ).toFixed(2)
             }}</span
           >%).
         </p>

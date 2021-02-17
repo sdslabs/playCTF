@@ -10,7 +10,7 @@
     />
     <div class="time">
       <div class="timeSub">
-        <div>
+        <div class="dateInput">
           <p class="subfields">Start date</p>
           <input
             v-model="timedate.startDate"
@@ -19,7 +19,7 @@
             :disabled="this.disabled"
           />
         </div>
-        <div>
+        <div class="timeInput">
           <p class="subfields">Start time (24 hr format)</p>
           <input
             v-model="timedate.startTime"
@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="timeSub">
-        <div>
+        <div class="dateInput">
           <p class="subfields">End date</p>
           <input
             v-model="timedate.endDate"
@@ -40,7 +40,7 @@
             :disabled="this.disabled"
           />
         </div>
-        <div>
+        <div class="timeInput">
           <p class="subfields">End time (24 hr format)</p>
           <input
             v-model="timedate.endTime"
@@ -77,7 +77,6 @@ export default {
   watch: {
     timedate: {
       handler: function(newCompInfoDateTime) {
-        console.log(newCompInfoDateTime);
         this.emitTimeDate(newCompInfoDateTime);
       },
       deep: true

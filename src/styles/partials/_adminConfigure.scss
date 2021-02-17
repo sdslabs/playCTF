@@ -35,7 +35,8 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        .headingText{
+
+        .headingText {
             margin-right: 2rem;
         }
 
@@ -130,15 +131,17 @@
     }
 
     textarea {
+        box-sizing: border-box;
         height: 6rem;
         border-radius: 0.3125rem;
         border: 0.0625rem solid $theme-color-grey-high-transp;
         @extend %font-style-basic;
+        margin-bottom: 2%;
+        width: 100%;
         padding-left: 1rem;
         padding-top: 1rem;
-        margin-bottom: 2%;
-        width: 95%;
     }
+
 
     textarea::placeholder {
         font-family: $primary-font-family;
@@ -146,6 +149,8 @@
         font-weight: 600;
         font-size: 1rem;
         line-height: 1.125rem;
+        padding-left: 1rem;
+        padding-top: 1rem;
     }
 
     textarea:focus,
@@ -197,6 +202,26 @@
         .timeSub {
             display: flex;
             flex-direction: row;
+            justify-content: space-between;
+            width: 48%;
+
+            .dateInput {
+                width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeInput {
+                width: 45%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .title {
+                width: 75%;
+            }
         }
     }
 
@@ -243,4 +268,5 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    padding: 0 0.1rem;
 }

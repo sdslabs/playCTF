@@ -1,13 +1,34 @@
-.challenge {
-    margin-top: 8rem;
-    margin-bottom: 8rem;
+.challenge-main-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
 
+    .challenge {
+        margin-bottom: 8rem;
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .chall-details {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            .chall {
+                display: flex;
+                flex-direction: row;
+                margin-top: 1.125rem;
+            }
+        }
+    }
+
     .chall-tags {
+        position: absolute;
         display: flex;
         flex-direction: column;
         padding-top: 12rem;
+        margin-right: auto;
+        margin-left: -6rem;
+
         .tags {
             display: flex;
             flex-direction: column;
@@ -15,6 +36,7 @@
             text-align: left;
             align-items: flex-end;
             justify-content: flex-start;
+
             .tag {
                 font-family: $primary-font-family;
                 font-weight: normal;
@@ -24,21 +46,11 @@
                 padding-right: 1rem;
             }
 
-            .tag .selected {
+            .tag.active, .tag:hover{
                 font-weight: bold;
                 color: $theme-color-black19;
                 border-right: 0.125rem solid $theme-color-dark-orange;
             }
-        }
-    }
-
-    .chall-details {
-        display: flex;
-        flex-direction: column;
-        .chall {
-            display: flex;
-            flex-direction: row;
-            margin-top: 1.125rem;
         }
     }
 }
