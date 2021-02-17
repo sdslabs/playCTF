@@ -57,11 +57,11 @@
 
             .maintenance-msg {
                 position: absolute;
-                opacity: 1;
-                margin-left: 15%;
+
+                display: none;
             }
 
-            &.disabled div{
+            &.disabled div {
                 opacity: 0.6;
             }
 
@@ -80,5 +80,13 @@
             }
 
         }
+
+        .challengesByTag-challenge:hover.disabled .maintenance-msg {
+            display: block;
+            position: absolute;
+            opacity: 1;
+            margin-left: 15%;
+        }
+
     }
 }

@@ -13,14 +13,8 @@
           }
         ]"
         @click="emitChallName(chall.name, chall.status)"
-        @mouseover="showMsg(chall.status, true)"
-        @mouseleave="showMsg(chall.status, false)"
       >
-        <img
-          v-if="chall.status !== 'Deployed' && showMaintenanceMsg"
-          class="maintenance-msg"
-          src="@/assets/maintenance-msg.svg"
-        />
+        <img class="maintenance-msg" src="@/assets/maintenance-msg.svg" />
         <div class="challName">
           <p class="challengesByTag-challName">{{ chall.name }}</p>
           <img
@@ -46,8 +40,7 @@ export default {
   props: ["tag", "challenges"],
   data() {
     return {
-      selectedChallenge: {},
-      showMaintenanceMsg: false
+      selectedChallenge: {}
     };
   },
   methods: {
@@ -57,11 +50,6 @@ export default {
       }
       this.selectedChallenge = challName;
       this.$emit("clicked", challName);
-    },
-    showMsg(status, show) {
-      if (status !== "Deployed") {
-        this.showMaintenanceMsg = show;
-      }
     }
   },
   watch: {

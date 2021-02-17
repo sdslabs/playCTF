@@ -55,7 +55,7 @@
         />
         <button
           class="challCard-form-submit-button primary-btn"
-          :disabled="flag.length === 0"
+          :disabled="flag.length === 0 || this.showSuccess || this.showFail"
           @click="submitFlag"
         >
           Submit Flag
@@ -65,6 +65,12 @@
         Report <img class="challCard-report-bug" src="@/assets/bug.svg" />
       </div>
       -->
+    </div>
+    <div class="submit-feedback">
+      <transition name="fade" v-on:enter="enter">
+        <img v-if="showSuccess" src="@/assets/submit-success.svg" />
+        <img v-if="showFail" src="@/assets/submit-fail.svg" />
+      </transition>
     </div>
   </div>
 </template>
@@ -77,7 +83,9 @@ export default {
   data() {
     return {
       port: undefined,
-      flag: ""
+      flag: "",
+      showSuccess: false,
+      showFail: false
       // marked: false,
     };
   },
@@ -92,9 +100,23 @@ export default {
     }
   },
   methods: {
+    enter: function() {
+      let self = this;
+      setTimeout(function() {
+        if (self.showSuccess) {
+          self.$router.go();
+        }
+        self.showSuccess = false;
+        self.showFail = false;
+      }, 3000); // hide the message after 3 seconds
+    },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        alert(Response.data.message);
+        if (Response.data.success) {
+          this.showSuccess = true;
+        } else {
+          this.showFail = true;
+        }
       });
     },
     isDisabled: function() {
