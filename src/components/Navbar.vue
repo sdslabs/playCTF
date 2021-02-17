@@ -32,7 +32,9 @@
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
-          <a class="adminNavDropdownLink">Change Password</a>
+          <router-link to="/resetpassword" class="adminNavDropdownLink"
+            >Change Password</router-link
+          >
           <a class="adminNavDropdownLink" @click="logout()">Logout</a>
         </div>
       </div>
@@ -107,7 +109,7 @@ export default {
     },
     pathLogin() {
       var route = this.$route.name;
-      return route.includes("login") || route.includes("resetpassword");
+      return route.includes("login");
     },
     showDropdownContent(showContent) {
       this.displayDropdownContent = showContent;

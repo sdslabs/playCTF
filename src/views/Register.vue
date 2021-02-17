@@ -6,7 +6,6 @@
     <div class="register-form-div">
       <div class="register-form">
         <div class="register-info">
-          <label class="label">Name*</label>
           <input
             v-model="uname"
             type="text"
@@ -61,7 +60,7 @@
             required="true"
           />
         </div>
-        <button @click="register()" class="register-button">
+        <button @click="register()" class="login-button primary-btn">
           Register Now
         </button>
       </div>

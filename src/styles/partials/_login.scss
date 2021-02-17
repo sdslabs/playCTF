@@ -3,11 +3,17 @@
 
     .login-heading {
         font-family: $primary-font-family;
-        
+
         font-weight: bold;
         font-size: 1.75rem;
         line-height: 2.75rem;
         color: $theme-color-grey39;
+        text-align: left;
+    }
+
+    .login-subheading {
+        @extend %font-style-basic;
+        color: $theme-color-grey57;
         text-align: left;
     }
 
@@ -22,6 +28,7 @@
 
         .login-form {
             padding-right: 5rem;
+
             .login-inputField {
                 width: 25rem;
                 height: 3rem;
@@ -30,29 +37,27 @@
                 background: $theme-color-white;
                 border: 0.0313rem solid $theme-color-grey-high-transp;
                 box-sizing: border-box;
-                border-radius: 0.125rem;
+                border-radius: 0.1875rem;
                 font-family: $primary-font-family;
-                
+
                 font-weight: 600;
                 font-size: 1rem;
                 line-height: 1.125rem;
                 color: $theme-color-grey-high-transp;
+
+                &:focus {
+                    outline: none !important;
+                    border: 0.125rem solid $theme-color-violet;
+                }
             }
 
-            .login-button {
-                text-align: center;
-                line-height: 2.5rem;
-                margin-top: 2rem;
-                width: 30%;
-                height: 16%;
-                left: 252px;
-                top: 324px;
-                background: #FF6700;
-                box-shadow: 0px 6px 10px rgba(255, 103, 0, 0.3);
-                border-radius: 3px;
-                border: none;
-                color: $theme-color-white;
-            }
+
+
+
         }
     }
+}
+
+.login-button {
+    margin-top: 1.75rem;
 }

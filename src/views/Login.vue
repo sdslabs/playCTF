@@ -25,7 +25,7 @@
             v-model="password"
           />
         </div>
-        <button @click="login()" class="login-button">Login</button>
+        <button @click="login()" class="login-button primary-btn">Login</button>
       </div>
       <img src="@/assets/login.svg" class="login-image" />
     </div>

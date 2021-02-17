@@ -16,6 +16,7 @@ import AdminConfigure from "@/views/AdminConfigure.vue";
 import AdminChallenge from "@/views/AdminChallenge.vue";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
+import Reset from "../views/Reset.vue";
 // import store from "../store/index";
 
 Vue.use(VueRouter);
@@ -65,6 +66,14 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    meta: {
+      layout: "user-layout"
+    }
+  },
+  {
+    path: "/resetpassword",
+    name: "resetpassword",
+    component: Reset,
     meta: {
       layout: "user-layout"
     }
