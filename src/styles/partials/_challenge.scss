@@ -46,7 +46,7 @@
                 padding-right: 1rem;
             }
 
-            .tag.active {
+            .tag.active, .tag:hover{
                 font-weight: bold;
                 color: $theme-color-black19;
                 border-right: 0.125rem solid $theme-color-dark-orange;

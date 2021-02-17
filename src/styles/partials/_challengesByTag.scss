@@ -26,13 +26,14 @@
             width: 0;
         }
 
-        .challName{
+        .challName {
             width: 90%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             align-items: center;
         }
+
         .challengesByTag-challenge {
             width: 95%;
             height: 4.5rem;
@@ -45,12 +46,23 @@
                 margin-top: 0rem;
             }
 
+            &:hover:not(.disabled),
             &.selected {
                 border: 0.125rem solid $theme-color-light-orange;
 
                 .challengesByTag-challInfo {
                     color: $theme-color-light-orange;
                 }
+            }
+
+            .maintenance-msg {
+                position: absolute;
+                opacity: 1;
+                margin-left: 15%;
+            }
+
+            &.disabled div{
+                opacity: 0.6;
             }
 
             .challengesByTag-challName {

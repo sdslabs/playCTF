@@ -93,6 +93,9 @@ export default {
       }
     },
     selectChallenge(name) {
+      if (name === null) {
+        this.selectedChall = null;
+      }
       this.selectedChall = this.challenges.filter(el => {
         return el.name == name;
       })[0];

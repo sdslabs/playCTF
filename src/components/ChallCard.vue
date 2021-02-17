@@ -1,5 +1,5 @@
 <template>
-  <div class="challCard">
+  <div v-if="this.challDetails" class="challCard">
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
       <div class="challCard-tag">{{ challDetails.category }}</div>
