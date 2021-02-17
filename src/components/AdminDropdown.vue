@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       dropdown,
-      displayDropdownContent: true
+      displayDropdownContent: false
     };
   },
   methods: {
