@@ -1,6 +1,4 @@
 .notification {
-    margin-top: 4.75rem;
-
     .heading {
         font-size: 1.5rem;
         font-weight: 900;
@@ -12,11 +10,5 @@
 
     .user-notif-tabs {
         margin-top: 4%;
-        height: 30rem;
-        overflow-y: scroll;
-    }
-
-    .user-notif-tabs::-webkit-scrollbar {
-        display: none;
     }
 }
