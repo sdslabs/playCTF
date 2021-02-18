@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import LoginUser from "../api/admin/authAPI.js";
+import UserService from "../api/userAPI.js";
 export default {
   name: "login",
   data() {
@@ -51,7 +51,11 @@ export default {
       if (this.password !== this.password2) {
         alert("Passwords don't match");
       } else {
-        await LoginUser.loggedInUser(this.password);
+        await UserService.resetPassword(this.password).then(resp => {
+          if (resp.status === 200) {
+            alert(resp.message);
+          }
+        });
       }
     }
   }

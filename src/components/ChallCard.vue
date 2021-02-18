@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import FlagService from "../api/userFlag";
+import FlagService from "../api/userAPI";
 export default {
   name: "ChallCard",
   props: ["challDetails", "tag"],

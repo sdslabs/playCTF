@@ -15,7 +15,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function(error) {
-    if (error.message) {
+    if (!error.response) {
       router.push("/error/networkerror");
     } else {
       switch (error.response.status) {
