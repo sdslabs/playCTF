@@ -1,12 +1,27 @@
 <template>
   <div class="configureContent">
-    <p class="subfields">About<span class="importantField">*</span></p>
+    <div class="subfields-row">
+      <p class="subfields">
+        About
+        <span class="importantField">*</span>
+      </p>
+      <p class="counter" id="about-counter">
+        {{ maxAbout - content.about.length }} Characters Remaining
+      </p>
+    </div>
     <textarea
+      id="about"
       v-model="content.about"
       placeholder="Enter the information to be displayed regarding competition"
     ></textarea>
-    <p class="subfields">Prizes</p>
+    <div class="subfields-row">
+      <p class="subfields">Prizes</p>
+      <p class="counter" id="prizes-counter">
+        {{ maxPrizes - content.prizes.length }} Characters Remaining
+      </p>
+    </div>
     <textarea
+      id="prizes"
       v-model="content.prizes"
       placeholder="Enter the information to be displayed regarding prizes"
     ></textarea>
@@ -19,7 +34,9 @@ export default {
   props: ["compContent"],
   data() {
     return {
-      content: this.compContent
+      content: this.compContent,
+      maxAbout: 200,
+      maxPrizes: 200
     };
   },
   methods: {
@@ -30,6 +47,20 @@ export default {
   watch: {
     content: {
       handler: function(newCompInfoContent) {
+        if (this.content.about.length > this.maxAbout) {
+          this.content.about = this.content.about.substring(
+            0,
+            this.content.about.length - 1
+          );
+          newCompInfoContent.about = this.content.about;
+        }
+        if (this.content.prizes.length > this.maxPrizes) {
+          this.content.prizes = this.content.prizes.substring(
+            0,
+            this.content.prizes.length - 1
+          );
+          newCompInfoContent.prizes = this.content.prizes;
+        }
         this.emitContent(newCompInfoContent);
       },
       deep: true

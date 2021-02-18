@@ -17,8 +17,11 @@
         text-align: left;
     }
 
+    .login-image{
+        width: 50%;
+    }
     .login-form-div {
-        width: 22.5rem;
+        width: 100%;
         margin-left: 0rem;
         margin-top: 0.75rem;
         text-align: left;
@@ -28,9 +31,9 @@
 
         .login-form {
             padding-right: 5rem;
-
+            width: 60%;
             .login-inputField {
-                width: 25rem;
+                width: 100%;
                 height: 3rem;
                 margin-top: 1.75rem;
                 padding: 1rem;

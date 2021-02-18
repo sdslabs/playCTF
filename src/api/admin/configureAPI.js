@@ -19,5 +19,9 @@ export default {
   },
   async getConfigs() {
     return await axiosInstance.get(`/api/info/competition-info`);
+  },
+
+  async getLogo(imgUrl) {
+    return await axiosInstance.get(imgUrl);
   }
 };
