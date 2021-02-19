@@ -80,22 +80,31 @@ export default {
       username: "",
       email: "",
       password: "",
-      password2: ""
+      password2: "",
     };
   },
   methods: {
+    validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
     async register() {
       if (this.password === this.password2) {
-        RegisterUser.registeredUser(
-          this.uname,
-          this.username,
-          this.email,
-          this.password
-        );
+        if (this.validateEmail(this.email)) {
+          RegisterUser.registeredUser(
+            this.uname,
+            this.username,
+            this.email,
+            this.password
+          );
+        }
+        else {
+          alert("Email correct email");
+        }
       } else {
         alert("Passwords don't match");
       }
-    }
-  }
+    },
+  },
 };
 </script>
