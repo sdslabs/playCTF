@@ -45,7 +45,7 @@
                 startTime: compStartTime,
                 startDate: compStartDate,
                 endDate: compEndDate,
-                endTime: compEndTime
+                endTime: compEndTime,
               }"
               :disabled="false"
             />
@@ -69,7 +69,7 @@
         Back
       </button>
       <button class="primary-btn action-btn" @click="submitConfigs">
-        Proceed
+        <router-link to="/admin/statistics"> Proceed </router-link>
       </button>
     </div>
     <div v-else class="action">
@@ -115,7 +115,7 @@ export default {
       compEndTime: "",
       compEndDate: "",
       compLogo: "",
-      preview
+      preview,
     };
   },
   components: {
@@ -123,7 +123,37 @@ export default {
     ConfigTitle,
     ConfigContent,
     ConfigTimeDate,
-    ConfigLogo
+    ConfigLogo,
+  },
+  async created() {
+    await configureService.getConfigs().then((response) => {
+      let configs = response.data;
+      this.compName = configs.name;
+      this.compAbout = configs.about;
+      this.compPrizes = configs.prizes;
+      let startingTime = configs.starting_time;
+      let endingTime = configs.ending_time;
+      let startDetails = startingTime.split(",");
+      let endingDetails = endingTime.split(",");
+      this.compStartTime = moment(
+        startDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
+      this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
+        "yyyy-MM-DD"
+      );
+      this.compEndTime = moment(
+        endingDetails[0].split(" ")[0],
+        "HH:mm:ss"
+      ).format("HH:mm:ss");
+      this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
+        "yyyy-MM-DD"
+      );
+      this.compTimezone =
+        configs.timezone ||
+        `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
+    });
+    this.currentStep = this.getStartingStep();
   },
   methods: {
     isNextDisabled() {
@@ -206,7 +236,7 @@ export default {
     },
     submitConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex(el => {
+        getAllTimezones().findIndex((el) => {
           return el === this.compTimezone;
         })
       ];
@@ -229,42 +259,18 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo
+        logo: this.compLogo,
       };
-      configureService.updateConfigs(configs).then(() => {
-        this.showSuccess = true;
-        this.$router.push("/admin/statistics");
-      });
-    }
+      configureService
+        .updateConfigs(configs)
+        .then(() => {
+          this.showSuccess = true;
+          this.$router.push("/admin/statistics");
+        })
+        .catch(() => {
+          this.showFail = true;
+        });
+    },
   },
-  mounted() {
-    configureService.getConfigs().then(response => {
-      let configs = response.data;
-      this.compName = configs.name;
-      this.compAbout = configs.about;
-      this.compPrizes = configs.prizes;
-      let startingTime = configs.starting_time;
-      let endingTime = configs.ending_time;
-      let startDetails = startingTime.split(",");
-      let endingDetails = endingTime.split(",");
-      this.compStartTime = moment(
-        startDetails[0].split(" ")[0],
-        "HH:mm:ss"
-      ).format("HH:mm:ss");
-      this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
-        "yyyy-MM-DD"
-      );
-      this.compEndTime = moment(
-        endingDetails[0].split(" ")[0],
-        "HH:mm:ss"
-      ).format("HH:mm:ss");
-      this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
-        "yyyy-MM-DD"
-      );
-      this.compTimezone =
-        configs.timezone ||
-        `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
-    });
-  }
 };
 </script>
