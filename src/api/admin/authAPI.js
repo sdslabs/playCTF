@@ -26,6 +26,7 @@ export default {
         if (response.status === 200) {
             await store.commit(
                 "updateUserAuth",
+                username,
                 response.data.token,
                 response.data.role
             );

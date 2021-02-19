@@ -99,6 +99,9 @@ export default {
   components: {
     Timer
   },
+  created() {
+    this.teamname = store.getters.getUsername;
+  },
   methods: {
     loggedIn() {
       return store.getters.getState;

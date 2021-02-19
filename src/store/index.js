@@ -33,13 +33,15 @@ export default new Vuex.Store({
     updateCurrentPage(state, page) {
       state.currentPage = page;
     },
-    async updateUserAuth(state, key, role) {
+    async updateUserAuth(state, username, key, role) {
+      state.userInfo.userName = username;
       state.userInfo.token = key;
       state.userInfo.login = true;
       state.userInfo.role = role;
       state.userInfo.access = true;
     },
     logout(state) {
+      state.userInfo.userName = null;
       state.userInfo.token = null;
       state.userInfo.login = false;
       state.userInfo.access = false;
@@ -52,6 +54,9 @@ export default new Vuex.Store({
     currentPage: state => state.currentPage,
     hostUrl: state => state.hostUrl,
     challengeHostUrl: state => state.challengeHostUrl,
+    getUsername: state => {
+      return state.userInfo.userName;
+    },
     getToken: state => {
       return state.userInfo.token;
     },
