@@ -9,7 +9,7 @@
           <input
             v-model="uname"
             type="text"
-            class="register-inputField email"
+            class="register-inputField"
             id="name"
             name="name"
             placeholder="Name*"
@@ -20,7 +20,7 @@
           <input
             v-model="username"
             type="text"
-            class="register-inputField email"
+            class="register-inputField"
             id="username"
             name="user_name"
             placeholder="Username*"
@@ -31,12 +31,15 @@
           <input
             v-model="email"
             type="text"
-            class="register-inputField email"
+            class="register-inputField"
             id="email"
             name="user_email"
             placeholder="Email*"
             required="true"
           />
+          <div class="error" v-if="emailErr">
+            <img src="@/assets/error.svg" class="errImg" /> Enter a valid email
+          </div>
         </div>
         <div class="info">
           <input
@@ -59,6 +62,10 @@
             placeholder="Confirm Password*"
             required="true"
           />
+          <div class="error" v-if="passErr">
+            <img src="@/assets/error.svg" class="errImg" /> Passwords don't
+            match
+          </div>
         </div>
         <button @click="register()" class="login-button primary-btn">
           Register Now
@@ -81,6 +88,8 @@ export default {
       email: "",
       password: "",
       password2: "",
+      emailErr: false,
+      passErr: false,
     };
   },
   methods: {
@@ -89,20 +98,25 @@ export default {
       return re.test(email);
     },
     async register() {
-      if (this.password === this.password2) {
-        if (this.validateEmail(this.email)) {
-          RegisterUser.registeredUser(
-            this.uname,
-            this.username,
-            this.email,
-            this.password
-          );
-        }
-        else {
-          alert("Email correct email");
-        }
-      } else {
-        alert("Passwords don't match");
+      if (!this.validateEmail(this.email)) {
+        this.emailErr = true;
+      }
+      else {
+        this.emailErr = false;
+      }
+      if (this.password !== this.password2) {
+        this.passErr = true;
+      }
+      else {
+        this.passErr = false;
+      }
+      if (!this.passErr && !this.emailErr) {
+        RegisterUser.registeredUser(
+          this.uname,
+          this.username,
+          this.email,
+          this.password
+        );
       }
     },
   },

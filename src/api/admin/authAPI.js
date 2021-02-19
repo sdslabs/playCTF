@@ -36,9 +36,16 @@ export default {
                 router.push("/");
             }
         } else {
-            alert("Login attempt failed: " + response.message);
+            if (response.message.includes("400")) {
+                return 400;
+            }
+            else if (response.message.includes("401")) {
+                return 401;
+            }
+            else if (response.message.includes("403")) {
+                return 403;
+            }
         }
-        return true;
     },
 
     async registerUser(name, username, email, password) {
