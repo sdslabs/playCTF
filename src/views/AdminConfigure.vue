@@ -232,6 +232,11 @@ export default {
       this.compTimezone =
         configs.timezone ||
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
+      configureService.getLogo(configs.logo_url).then(response => {
+        if (response.status === 200) {
+          this.compLogo = response.data;
+        }
+      });
     });
   },
 };

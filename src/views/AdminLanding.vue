@@ -231,14 +231,10 @@ export default {
         timezone: this.compTimezone,
         logo: this.compLogo
       };
-      configureService
-        .updateConfigs(configs)
-        .then(() => {
-          this.showSuccess = true;
-        })
-        .catch(() => {
-          this.showFail = true;
-        });
+      configureService.updateConfigs(configs).then(() => {
+        this.showSuccess = true;
+        this.$router.push("/admin/statistics");
+      });
     }
   },
   mounted() {

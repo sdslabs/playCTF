@@ -68,6 +68,21 @@
         margin-left: 0;
     }
 
+    .subfields-row {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        height: 1.5rem;
+    }
+
+    .counter {
+        @extend %font-style-basic;
+        font-size: 0.75rem;
+        color: $theme-color-violet;
+        margin-left: auto;
+        display: none;
+    }
+
     .subfields {
         font-size: 0.75rem;
         text-align: left;
@@ -149,8 +164,6 @@
         font-weight: 600;
         font-size: 1rem;
         line-height: 1.125rem;
-        padding-left: 1rem;
-        padding-top: 1rem;
     }
 
     textarea:focus,
@@ -167,6 +180,38 @@
 
     .notifTabs::-webkit-scrollbar {
         display: none;
+    }
+
+    .uploadRow {
+        display: flex;
+        align-items: center;
+        margin-bottom: 3rem;
+
+        .filename {
+            @extend %font-style-basic;
+            border: 0.1rem solid rgba(87, 87, 87, 0.57);
+            box-sizing: border-box;
+            box-shadow: 0px 0.125rem 0.625rem rgba(37, 85, 124, 0.1);
+            border-radius: 1.25rem;
+            display: flex;
+            align-items: center;
+            color: rgba(25, 25, 25, 0.57);
+            height: 2rem;
+            padding: 0 1rem;
+            position: absolute;
+            margin-left: 9rem;
+
+            img {
+                padding-left: 0.5rem;
+                height: 0.8rem;
+            }
+        }
+
+        .upload-feedback {
+            height: 1.5rem;
+            position: absolute;
+            margin-left: 20%;
+        }
     }
 
     .logoUpload {
@@ -227,6 +272,22 @@
 
     .timezoneSelect {
         outline: none;
+    }
+}
+
+.adminConfigureContainer {
+    .upload-preview {
+        height: 5rem;
+        position: absolute;
+        right: 25%;
+    }
+}
+
+.landingInput {
+    .upload-preview {
+        height: 5rem;
+        position: absolute;
+        right: 0;
     }
 }
 

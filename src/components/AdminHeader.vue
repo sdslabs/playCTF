@@ -1,7 +1,7 @@
 <template>
   <div class="adminHeader">
     <div class="ctfLogo">
-      <img :src="ctfLogo" />
+      <img :src="`${baseUrl}/api/info/logo`" />
     </div>
     <AdminNav />
     <AdminDropdown />
@@ -9,6 +9,7 @@
 </template>
 <script>
 import AdminNav from "./AdminNav";
+import { CONFIG } from "@/config/config";
 import AdminDropdown from "@/components/AdminDropdown.vue";
 import { ctfLogo } from "../constants/images";
 export default {
@@ -19,7 +20,8 @@ export default {
   },
   data() {
     return {
-      ctfLogo
+      ctfLogo,
+      baseUrl: CONFIG.beastRoot
     };
   }
 };
