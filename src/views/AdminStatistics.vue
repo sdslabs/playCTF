@@ -197,8 +197,8 @@ export default {
       };
     }
   },
-  mounted() {
-    UsersService.getUserStats()
+  async created() {
+    await UsersService.getUserStats()
       .then(response => {
         this.users = response.data;
       })
@@ -206,7 +206,7 @@ export default {
         this.loading.userStatsNotFetched = false;
       });
 
-    UsersService.getUsers()
+    await UsersService.getUsers()
       .then(users => {
         if (users.length > 0) {
           this.leader = users.sort((a, b) => {
@@ -218,7 +218,7 @@ export default {
         this.loading.usersNotFetched = false;
       });
 
-    ChalService.getChalStats()
+    await ChalService.getChalStats()
       .then(response => {
         this.challenges = response;
       })
@@ -226,7 +226,7 @@ export default {
         this.loading.chalStatsNotFetched = false;
       });
 
-    ChalService.getChallenges()
+    await ChalService.getChallenges()
       .then(response => {
         this.chalTags = response.categoryFilterOptions;
         SubmissionService.getSubStats(this.chalTags, null).then(response => {

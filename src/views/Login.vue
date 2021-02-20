@@ -3,6 +3,9 @@
     <div class="login-heading">Login</div>
     <div class="login-form-div">
       <div class="login-form">
+        <div class="error" v-if="err">
+          <img src="@/assets/error.svg" class="errImg"/> {{ this.err }}
+        </div>
         <div class="login-info">
           <input
             type="text"
@@ -38,15 +41,25 @@ export default {
   name: "login",
   data() {
     return {
+      err: null,
       username: "",
-      password: ""
+      password: "",
     };
   },
   components: {},
   methods: {
     async login() {
-      await LoginUser.loggedInUser(this.username, this.password);
-    }
-  }
+      const check = await LoginUser.loggedInUser(this.username, this.password);
+      if (check === 400) {
+        this.err = "User not registered";
+      }
+      else if (check === 401) {
+        this.err = "Wrong credentials";
+      }
+      else if (check === 403) {
+        this.err = "User banned";
+      }
+    },
+  },
 };
 </script>
