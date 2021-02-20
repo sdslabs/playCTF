@@ -5,7 +5,7 @@
     @mouseleave="showDropdownContent(false)"
   >
     <button class="adminNavDropbtn">
-      Admin
+      {{ username }}
       <img :src="dropdown" />
     </button>
     <div v-if="displayDropdownContent" class="adminNavDropdownContent">
@@ -22,8 +22,12 @@ export default {
   data() {
     return {
       dropdown,
-      displayDropdownContent: false
+      username: "",
+      displayDropdownContent: false,
     };
+  },
+  created() {
+    this.username = store.getters.getUsername;
   },
   methods: {
     logout() {
@@ -32,7 +36,7 @@ export default {
     },
     showDropdownContent(showContent) {
       this.displayDropdownContent = showContent;
-    }
-  }
+    },
+  },
 };
 </script>
