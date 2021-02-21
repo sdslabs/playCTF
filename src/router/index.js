@@ -31,7 +31,7 @@ const routes = [
     name: "home",
     component: Home,
     meta: {
-      layout: "user-layout"
+      layout: "auth-layout"
     }
   },
   {
@@ -71,7 +71,7 @@ const routes = [
     name: "login",
     component: Login,
     meta: {
-      layout: "user-layout"
+      layout: "auth-layout"
     }
   },
   {
@@ -168,7 +168,7 @@ const routes = [
     name: "register",
     component: Register,
     meta: {
-      layout: "user-layout"
+      layout: "auth-layout"
     }
   },
   {
@@ -220,7 +220,7 @@ const router = new VueRouter({
 //     if (store.getters.getRole === "admin") {
 //       router.push("/admin/");
 //     } else {
-//       router.push("/");
+//       router.push("/about");
 //     }
 //   } else if (loginPages.includes(pagePath)) {
 //     next();

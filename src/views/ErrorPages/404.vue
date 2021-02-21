@@ -25,7 +25,7 @@ export default {
       if (this.$store.state.userInfo.role === "admin") {
         this.$router.push("/admin/statistics");
       } else {
-        this.$router.push("/");
+        this.$router.push("/about");
       }
     }
   }
