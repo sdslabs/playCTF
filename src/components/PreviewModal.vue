@@ -22,8 +22,8 @@ export default {
     return { cross };
   },
   components: {
-    Landing,
+    Landing
   },
-  methods: {},
+  methods: {}
 };
 </script>

@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="timer bold" v-if="days" v-show="statusType === 'running' ">
+    <div class="timer bold" v-if="days" v-show="statusType === 'running'">
       {{ days }}Day(s) {{ this.formatValue(hours) }}:{{
         this.formatValue(minutes)
       }}:{{ this.formatValue(seconds) }}
     </div>
     <div class="timer bold" v-else v-show="statusType === 'running'">
-      {{ this.formatValue(hours) }}:{{
-        this.formatValue(minutes)
-      }}:{{ this.formatValue(seconds) }}
+      {{ this.formatValue(hours) }}:{{ this.formatValue(minutes) }}:{{
+        this.formatValue(seconds)
+      }}
     </div>
     <div class="timer bold" v-show="statusType !== 'running'">
       {{ statusType }}

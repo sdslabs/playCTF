@@ -3,10 +3,7 @@
     <div class="heading">
       <span class="headingText"> CONFIGURE</span>
 
-      <button
-        class="preview-button"
-        @click="showPreviewModal = true"
-      >
+      <button class="preview-button" @click="showPreviewModal = true">
         <div class="preview">
           <img :src="preview" />
           Preview
@@ -40,7 +37,7 @@
           startTime: compStartTime,
           startDate: compStartDate,
           endDate: compEndDate,
-          endTime: compEndTime,
+          endTime: compEndTime
         }"
         :disabled="true"
       ></ConfigTimeDate>
@@ -103,7 +100,7 @@ export default {
     ConfigContent,
     ConfigTimeDate,
     ConfigLogo,
-    PreviewModal,
+    PreviewModal
   },
   data() {
     return {
@@ -123,7 +120,7 @@ export default {
       compLogo: "",
       showSuccess: false,
       showFail: false,
-      showPreviewModal: false,
+      showPreviewModal: false
     };
   },
   methods: {
@@ -157,7 +154,7 @@ export default {
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex((el) => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -180,7 +177,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo,
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -191,9 +188,9 @@ export default {
           this.showFail = true;
         });
     },
-    enter: function () {
+    enter: function() {
       let self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
@@ -203,10 +200,10 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
-    },
+    }
   },
   mounted() {
-    configureService.getConfigs().then((response) => {
+    configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -238,6 +235,6 @@ export default {
         }
       });
     });
-  },
+  }
 };
 </script>

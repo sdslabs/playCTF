@@ -4,7 +4,7 @@
     <div class="login-form-div">
       <div class="login-form">
         <div class="error" v-if="err">
-          <img src="@/assets/error.svg" class="errImg"/> {{ this.err }}
+          <img src="@/assets/error.svg" class="errImg" /> {{ this.err }}
         </div>
         <div class="login-info">
           <input
@@ -43,7 +43,7 @@ export default {
     return {
       err: null,
       username: "",
-      password: "",
+      password: ""
     };
   },
   components: {},
@@ -52,14 +52,12 @@ export default {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
         this.err = "User not registered";
-      }
-      else if (check === 401) {
+      } else if (check === 401) {
         this.err = "Wrong credentials";
-      }
-      else if (check === 403) {
+      } else if (check === 403) {
         this.err = "User banned";
       }
-    },
-  },
+    }
+  }
 };
 </script>

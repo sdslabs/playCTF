@@ -89,7 +89,7 @@ export default {
       password: "",
       password2: "",
       emailErr: false,
-      passErr: false,
+      passErr: false
     };
   },
   methods: {
@@ -100,14 +100,12 @@ export default {
     async register() {
       if (!this.validateEmail(this.email)) {
         this.emailErr = true;
-      }
-      else {
+      } else {
         this.emailErr = false;
       }
       if (this.password !== this.password2) {
         this.passErr = true;
-      }
-      else {
+      } else {
         this.passErr = false;
       }
       if (!this.passErr && !this.emailErr) {
@@ -118,7 +116,7 @@ export default {
           this.password
         );
       }
-    },
-  },
+    }
+  }
 };
 </script>

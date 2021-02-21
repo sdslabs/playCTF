@@ -23,7 +23,7 @@ export default {
     return {
       dropdown,
       username: "",
-      displayDropdownContent: false,
+      displayDropdownContent: false
     };
   },
   created() {
@@ -36,7 +36,7 @@ export default {
     },
     showDropdownContent(showContent) {
       this.displayDropdownContent = showContent;
-    },
-  },
+    }
+  }
 };
 </script>

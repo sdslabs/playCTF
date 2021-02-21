@@ -30,6 +30,7 @@
   </div>
 </template>
 <script>
+import store from "@/store/index";
 import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
@@ -55,6 +56,9 @@ export default {
         usersNotFetched: true
       }
     };
+  },
+  created() {
+    this.username = store.getters.getUsername;
   },
   methods: {
     isLoading() {
@@ -101,7 +105,7 @@ export default {
         this.loading.usersNotFetched = false;
       });
     // hardcoding user for now, need to fix after login integration
-    UsersService.getUserByUsername("burnerlee")
+    UsersService.getUserByUsername(this.username)
       .then(response => {
         this.userInfo = response.data;
       })

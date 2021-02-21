@@ -11,7 +11,7 @@ export default {
       let response = await axiosInstance({
         method: "post",
         url: `/auth/login`,
-        data: bodyFormData,
+        data: bodyFormData
       });
       return Promise.resolve(response);
     } catch (err) {
@@ -53,7 +53,7 @@ export default {
       let response = await axiosInstance({
         method: "post",
         url: `/auth/register`,
-        data: bodyFormData,
+        data: bodyFormData
       });
       return Promise.resolve(response);
     } catch (err) {
@@ -70,5 +70,5 @@ export default {
       alert("Registration attempt failed: " + response.message);
     }
     return;
-  },
+  }
 };
