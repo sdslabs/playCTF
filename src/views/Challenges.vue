@@ -62,8 +62,8 @@ export default {
   created() {
     this.username = store.getters.getUsername;
   },
-  mounted() {
-    ChalService.getChallenges(true, this.username)
+  async mounted() {
+    await ChalService.getChallenges(true, this.username)
       .then((response) => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
@@ -74,8 +74,7 @@ export default {
       .finally(() => {
         this.challengesNotFetched = false;
       });
-    // hardcoding user for now, need to fix after login integration
-    UsersService.getUserByUsername(this.username)
+    await UsersService.getUserByUsername(this.username)
       .then((response) => {
         this.userDetails = response.data;
       })
@@ -95,7 +94,6 @@ export default {
       }
     },
     selectChallenge(name) {
-      console.log(this.displayChallenges)
       if (name === null) {
         this.selectedChall = null;
       }

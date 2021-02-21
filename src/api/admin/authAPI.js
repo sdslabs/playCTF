@@ -70,5 +70,29 @@ export default {
       alert("Registration attempt failed: " + response.message);
     }
     return;
+  },
+
+  async resetPass(newPassword) {
+    let bodyFormData = new FormData();
+    bodyFormData.append("new_pass", newPassword);
+    try {
+      let response = await axiosInstance({
+        method: "post",
+        url: `/auth/reset-password`,
+        data: bodyFormData
+      });
+      return Promise.resolve(response);
+    } catch (err) {
+      let response = err;
+      return response
+    }
+  },
+
+  async resetPassword(newPassword) {
+    const response = await this.resetPass(newPassword);
+    if (response.status === 200) {
+      return true;
+    }
+    return false;
   }
 };

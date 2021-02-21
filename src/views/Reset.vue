@@ -4,6 +4,15 @@
     <div class="login-subheading">Choose your new password</div>
     <div class="login-form-div">
       <div class="login-form">
+        <div class="error" v-if="pass">
+          <img src="@/assets/error.svg" class="errImg" /> Passwords don't match
+        </div>
+        <div class="error" v-else-if="err">
+          <img src="@/assets/error.svg" class="errImg" /> Unauthorized Access
+        </div>
+        <div class="error" v-else-if="changed">
+          <div class="no-error">Password changed succesfully</div>
+        </div>
         <div class="login-info">
           <input
             v-model="password"
@@ -39,19 +48,28 @@ export default {
   name: "login",
   data() {
     return {
+      pass: false,
+      changed: false,
+      err: false,
       password: "",
-      password2: ""
+      password2: "",
     };
   },
   components: {},
   methods: {
     async reset() {
       if (this.password !== this.password2) {
-        alert("Passwords don't match");
+        this.pass = true;
       } else {
-        await LoginUser.loggedInUser(this.password);
+        this.pass = false;
+        const state = await LoginUser.resetPassword(this.password);
+        if (state) {
+          this.changed = true;
+        } else {
+          this.err = true;
+        }
       }
-    }
-  }
+    },
+  },
 };
 </script>
