@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="user-navbar-container" v-if="loggedIn()">
-      <router-link to="/" class="navbar-link ctfLogo"
+      <router-link to="/about" class="navbar-link ctfLogo"
         ><div class="logo"></div
       ></router-link>
       <nav class="navbar-container">
@@ -39,25 +39,6 @@
         </div>
       </div>
     </div>
-    <nav v-else-if="pathLogin()" class="navbar-container">
-      <router-link to="/" class="navbar-link"
-        ><div class="logo"></div
-      ></router-link>
-      <div class="navbar-registration">
-        <p class="navbar-already-registered">New here?</p>
-        <router-link to="/register" class="login-link">REGISTER</router-link>
-      </div>
-    </nav>
-
-    <nav v-else class="navbar-container">
-      <router-link to="/" class="navbar-link"
-        ><div class="logo"></div
-      ></router-link>
-      <div class="navbar-registration">
-        <p class="navbar-already-registered">Already Registered?</p>
-        <router-link to="/login" class="login-link">LOG IN</router-link>
-      </div>
-    </nav>
   </div>
 </template>
 
@@ -109,10 +90,6 @@ export default {
     logout() {
       store.commit("logout");
       this.$router.push("/login");
-    },
-    pathLogin() {
-      var route = this.$route.name;
-      return route.includes("login");
     },
     showDropdownContent(showContent) {
       this.displayDropdownContent = showContent;
