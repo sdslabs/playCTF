@@ -4,17 +4,30 @@ import store from "../store/index";
 import router from "../router/index";
 const axiosInstance = axios.create({
   headers: {
-    "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${store.state.userInfo.token}`
+    "Content-Type": "multipart/form-data"
   },
   baseURL: CONFIG.beastRoot
 });
+
+axiosInstance.interceptors.request.use(
+  function(config) {
+    const token = store.state.userInfo.token;
+    if (token) {
+      config.headers["Authorization"] = "Bearer " + token;
+    }
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
 
 axiosInstance.interceptors.response.use(
   function(response) {
     return response;
   },
   function(error) {
+    console.log(store.state.userInfo.token);
     if (!error.response) {
       router.push("/error/networkerror");
     } else {
