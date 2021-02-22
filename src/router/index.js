@@ -21,7 +21,7 @@ import ErrorPageNetworkError from "@/views/ErrorPages/NetworkError";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
 import Reset from "../views/Reset.vue";
-// import store from "../store/index";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -72,6 +72,19 @@ const routes = [
     component: Login,
     meta: {
       layout: "auth-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if(store.getters.getState) {
+        if(store.getters.getRole === "admin") {
+          router.push("/admin/");
+        }
+        else {
+          router.push("/about/");
+        }
+      }
+      else {
+        next();
+      }
     }
   },
   {
