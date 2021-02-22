@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import LoginUser from "../api/admin/authAPI"
+import LoginUser from "../api/admin/authAPI";
 export default {
   name: "login",
   data() {
@@ -58,7 +58,13 @@ export default {
     };
   },
   components: {},
+    beforeCreate() {
+    this.$store.commit("updateCurrentPage", "ResetPassword");
+  },
   methods: {
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
+    },
     async reset() {
       if (this.password !== this.password2) {
         this.pass = true;
@@ -67,6 +73,8 @@ export default {
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
           this.changed = true;
+          await this.sleep(2000);
+          this.$router.push("/about");
         } else {
           this.err = true;
         }
