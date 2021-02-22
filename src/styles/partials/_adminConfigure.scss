@@ -67,22 +67,18 @@
         margin: 0.2rem;
         margin-left: 0;
     }
-
-    .subfields-row {
+    .subfields-row{
         width: 100%;
         display: flex;
         align-items: center;
         height: 1.5rem;
     }
-
-    .counter {
+    .counter{
         @extend %font-style-basic;
         font-size: 0.75rem;
-        color: $theme-color-violet;
+        color:$theme-color-violet;
         margin-left: auto;
-        display: none;
     }
-
     .subfields {
         font-size: 0.75rem;
         text-align: left;

@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="login-heading">Reset Password</div>
+    <div class="login-heading">Change Password</div>
     <div class="login-subheading">Choose your new password</div>
     <div class="login-form-div">
       <div class="login-form">
@@ -11,7 +11,7 @@
             class="login-inputField password"
             id="password"
             name="user_pass"
-            placeholder="Password*"
+            placeholder="New Password*"
             required="true"
           />
         </div>
@@ -26,7 +26,9 @@
             required="true"
           />
         </div>
-        <button @click="reset()" class="login-button primary-btn">Reset</button>
+        <button @click="reset()" class="login-button primary-btn">
+          Change Password
+        </button>
       </div>
       <img src="@/assets/login.svg" class="login-image" />
     </div>
@@ -34,7 +36,7 @@
 </template>
 
 <script>
-import LoginUser from "../api/admin/authAPI.js";
+import UserService from "../api/userAPI.js";
 export default {
   name: "login",
   data() {
@@ -49,7 +51,12 @@ export default {
       if (this.password !== this.password2) {
         alert("Passwords don't match");
       } else {
-        await LoginUser.loggedInUser(this.password);
+        await UserService.resetPassword(this.password).then(resp => {
+          if (resp.status === 200) {
+            alert("Password Changed Successfully");
+            this.$router.push("/");
+          }
+        });
       }
     }
   }

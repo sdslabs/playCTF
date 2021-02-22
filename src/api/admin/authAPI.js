@@ -1,4 +1,4 @@
-import { axiosInstance } from "../axiosInstance.js";
+import axiosInstance from "../axiosInstance.js";
 import store from "../../store/index";
 import router from "../../router/index.js";
 
