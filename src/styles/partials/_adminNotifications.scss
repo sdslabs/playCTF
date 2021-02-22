@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
 }
 
 .adNotifForm {
@@ -80,6 +81,9 @@
   }
 }
 
+.adminEmptyDataContainer{
+  text-align: left;
+}
 .adminEmptyData {
   text-align: left;
   @extend %font-style-bold;

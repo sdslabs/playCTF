@@ -27,7 +27,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function(error) {
-    console.log(store.state.userInfo.token);
+    if (error.response.config.url === "/api/info/logo") {
+      Promise.reject(error);
+      return;
+    }
     if (!error.response) {
       router.push("/error/networkerror");
     } else {

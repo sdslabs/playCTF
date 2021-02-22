@@ -220,8 +220,48 @@ export default {
               console.log(response.data);
             } else {
               if (action === "purge") {
-                await this.sleep(5000);
+                this.loading.challengeNotFetched = true;
+                await this.sleep(1000);
+                this.loading.challengeNotFetched = false;
                 this.$router.push("/admin/challenges");
+              }
+              if (action === "deploy") {
+                let challengeDeployed = false;
+                while (!challengeDeployed) {
+                  if (this.$route.name !== "adminChallenge") {
+                    break;
+                  }
+                  ChalService.fetchChallengeByName(this.$route.params.id).then(
+                    response => {
+                      let data = response.data;
+                      this.chalDetails = data;
+                      if (data.ports !== null) {
+                        this.chalDetails.port = data.ports[0];
+                      }
+                      challengeDeployed = data.status === "Deployed";
+                    }
+                  );
+                  await this.sleep(5000);
+                }
+              }
+              if (action === "undeploy") {
+                let challengeDeployed = false;
+                while (!challengeDeployed) {
+                  if (this.$route.name !== "adminChallenge") {
+                    break;
+                  }
+                  ChalService.fetchChallengeByName(this.$route.params.id).then(
+                    response => {
+                      let data = response.data;
+                      this.chalDetails = data;
+                      if (data.ports !== null) {
+                        this.chalDetails.port = data.ports[0];
+                      }
+                      challengeDeployed = data.status === "Undeployed";
+                    }
+                  );
+                  await this.sleep(5000);
+                }
               } else {
                 this.$router.go();
               }

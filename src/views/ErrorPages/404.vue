@@ -22,7 +22,11 @@ export default {
   },
   methods: {
     redirectToHome() {
-      this.$router.push("/");
+      if (this.$store.state.userInfo.role === "admin") {
+        this.$router.push("/admin/statistics");
+      } else {
+        this.$router.push("/");
+      }
     }
   }
 };

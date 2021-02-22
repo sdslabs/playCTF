@@ -53,7 +53,8 @@ export default {
       } else {
         await UserService.resetPassword(this.password).then(resp => {
           if (resp.status === 200) {
-            alert(resp.message);
+            alert("Password Changed Successfully");
+            this.$router.push("/");
           }
         });
       }
