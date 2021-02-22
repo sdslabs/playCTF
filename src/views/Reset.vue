@@ -58,9 +58,6 @@ export default {
     };
   },
   components: {},
-    beforeCreate() {
-    this.$store.commit("updateCurrentPage", "ResetPassword");
-  },
   methods: {
     sleep(ms) {
       return new Promise((resolve) => setTimeout(resolve, ms));
@@ -80,6 +77,9 @@ export default {
         }
       }
     },
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "ResetPassword");
   },
 };
 </script>

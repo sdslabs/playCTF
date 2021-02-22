@@ -24,10 +24,12 @@
     font-family: $primary-font-family;
     font-size: 1.5rem;
     border-bottom: 0.0625rem solid rgba(87, 87, 87, 0.7);
-    .modal-close-button {
-        border: none;
-        background-color: white;
-    }
+
+}
+
+.modal-close-button {
+    border: none;
+    background-color: white;
 }
 
 .modal-body {

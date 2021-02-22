@@ -13,6 +13,7 @@
     margin-right: auto;
     padding-top: 15%;
     margin-left: -13%;
+
     .navButton {
         display: flex;
         flex-direction: row-reverse;
@@ -173,15 +174,34 @@
     }
 }
 
-.loader{
+.loader {
     align-self: center;
     text-align: center;
     justify-self: center;
-    padding:5%
+    padding: 5%
 }
 
-.vue-simple-spinner-text{
+.vue-simple-spinner-text {
     @extend %font-style-bold;
     line-height: 1.5rem;
     color: $theme-color-grey-high-transp;
+}
+
+.chall-modal {
+    margin: 15rem 35%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    .chall-modal-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .heading{
+            @extend %font-style-bold;
+            color: $theme-color-black19;
+            font-size: 1.5rem;
+            line-height: 1.75rem;
+        }
+    }
 }

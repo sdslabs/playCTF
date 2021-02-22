@@ -235,6 +235,18 @@ router.beforeEach((to, from, next) => {
     next({
       path: '/error/401',
     })
+  } else if (pagePath === '/') {
+    if (store.getters.getRole === 'contestant') {
+      next({
+        path: '/about',
+      })
+    } else if (store.getters.getRole === 'admin') {
+      next({
+        path: '/admin/statistics',
+      })
+    } else {
+      next()
+    }
   } else {
     next()
   }
