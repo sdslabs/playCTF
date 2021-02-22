@@ -45,7 +45,7 @@
                 startTime: compStartTime,
                 startDate: compStartDate,
                 endDate: compEndDate,
-                endTime: compEndTime,
+                endTime: compEndTime
               }"
               :disabled="false"
             />
@@ -115,7 +115,7 @@ export default {
       compEndTime: "",
       compEndDate: "",
       compLogo: "",
-      preview,
+      preview
     };
   },
   components: {
@@ -123,10 +123,10 @@ export default {
     ConfigTitle,
     ConfigContent,
     ConfigTimeDate,
-    ConfigLogo,
+    ConfigLogo
   },
   async created() {
-    await configureService.getConfigs().then((response) => {
+    await configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -236,7 +236,7 @@ export default {
     },
     submitConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex((el) => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -259,7 +259,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo,
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -270,7 +270,7 @@ export default {
         .catch(() => {
           this.showFail = true;
         });
-    },
-  },
+    }
+  }
 };
 </script>

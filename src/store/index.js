@@ -33,9 +33,9 @@ export default new Vuex.Store({
     updateCurrentPage(state, page) {
       state.currentPage = page;
     },
-    async updateUserAuth(state, username, key, role) {
+    updateUserAuth(state, { username, token, role }) {
       state.userInfo.userName = username;
-      state.userInfo.token = key;
+      state.userInfo.token = token;
       state.userInfo.login = true;
       state.userInfo.role = role;
       state.userInfo.access = true;
