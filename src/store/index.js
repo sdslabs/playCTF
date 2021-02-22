@@ -38,7 +38,8 @@ export default new Vuex.Store({
       state.userInfo.token = token;
       state.userInfo.login = true;
       state.userInfo.role = role;
-      state.userInfo.access = true;
+      if(role === "admin")
+        state.userInfo.access = true;
     },
     logout(state) {
       state.userInfo.userName = null;

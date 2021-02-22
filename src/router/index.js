@@ -21,7 +21,7 @@ import ErrorPageNetworkError from "@/views/ErrorPages/NetworkError";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
 import Reset from "../views/Reset.vue";
-// import store from "../store/index";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -40,6 +40,14 @@ const routes = [
     component: Home,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && !store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -48,6 +56,14 @@ const routes = [
     component: Challenges,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && !store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -56,6 +72,14 @@ const routes = [
     component: Leaderboard,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && !store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -64,6 +88,14 @@ const routes = [
     component: Notification,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && !store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -72,6 +104,19 @@ const routes = [
     component: Login,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState) {
+        if (store.getters.getAccess) {
+          router.push("/admin/");
+        }
+        else {
+          router.push("/about/");
+        }
+      }
+      else {
+        next();
+      }
     }
   },
   {
@@ -80,6 +125,14 @@ const routes = [
     component: Reset,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && !store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -89,6 +142,14 @@ const routes = [
 
     meta: {
       layout: "admin-landing-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -97,6 +158,14 @@ const routes = [
     component: AdminStatistics,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -105,6 +174,14 @@ const routes = [
     component: AdminNotifications,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -113,6 +190,14 @@ const routes = [
     component: AdminUsers,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -121,6 +206,14 @@ const routes = [
     component: AdminUser,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -129,6 +222,14 @@ const routes = [
     component: AdminLeaderboard,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -137,6 +238,14 @@ const routes = [
     component: AdminChallenges,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -145,6 +254,14 @@ const routes = [
     component: AdminChallenge,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -153,6 +270,14 @@ const routes = [
     component: AdminSubmissions,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -161,6 +286,14 @@ const routes = [
     component: AdminConfigure,
     meta: {
       layout: "admin-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState && store.getters.getAccess) {
+        next();
+      }
+      else {
+        router.push("/login");
+      }
     }
   },
   {
@@ -169,6 +302,19 @@ const routes = [
     component: Register,
     meta: {
       layout: "user-layout"
+    },
+    beforeEnter: function (to, from, next) {
+      if (store.getters.getState) {
+        if (store.getters.getAccess) {
+          router.push("/admin");
+        }
+        else {
+          router.push("/about");
+        }
+      }
+      else {
+        next();
+      }
     }
   },
   {
@@ -208,47 +354,5 @@ const routes = [
 const router = new VueRouter({
   routes
 });
-
-// router.beforeEach((to, from, next) => {
-//   let loginPages = ["/login", "/register"];
-//   let pagePath = to.path;
-//   if (
-//     loginPages.includes(pagePath) &&
-//     store.getters.getAccess &&
-//     store.getters.getRole
-//   ) {
-//     if (store.getters.getRole === "admin") {
-//       router.push("/admin/");
-//     } else {
-//       router.push("/");
-//     }
-//   } else if (loginPages.includes(pagePath)) {
-//     next();
-//   } else if (!store.getters.getState) {
-//     next({
-//       path: "/login",
-//       query: { redirect: to.path }
-//     });
-//   } else {
-//     let adminPages = "/admin/";
-//     let userPages = [
-//       "/challenges",
-//       "/leaderboard",
-//       "/notifications",
-//       "/about",
-//       "/"
-//     ];
-//     if (userPages.includes(pagePath) && store.getters.getAccess) {
-//       next();
-//     } else if (pagePath.includes(adminPages) && store.getters.getAccess) {
-//       next();
-//     } else {
-//       next({
-//         path: "/login",
-//         query: { redirect: to.path }
-//       });
-//     }
-//   }
-// });
 
 export default router;
