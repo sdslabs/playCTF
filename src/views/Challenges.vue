@@ -64,7 +64,7 @@ export default {
   },
   mounted() {
     ChalService.getChallenges(true, this.username)
-      .then((response) => {
+      .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.tags = [...this.tags, ...response.categoryFilterOptions];

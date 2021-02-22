@@ -32,14 +32,14 @@ import AdminFooter from "../components/AdminFooter.vue";
 export default {
   name: "AuthLayout",
   components: {
-    AdminFooter,
+    AdminFooter
   },
   methods: {
     pathLogin() {
       var route = this.$route.name;
       return route.includes("login");
-    },
-  },
+    }
+  }
 };
 </script>
 

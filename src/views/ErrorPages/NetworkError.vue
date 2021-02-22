@@ -11,20 +11,20 @@ import Error from "../../components/Error";
 export default {
   Name: "ErrorPageNetworkError",
   components: {
-    Error,
+    Error
   },
   data() {
     return {
       error: {
         code: "Network Problem",
-        msg: "Check your Internet Connection",
-      },
+        msg: "Check your Internet Connection"
+      }
     };
   },
   methods: {
     refresh() {
       this.$router.go(-1);
-    },
-  },
+    }
+  }
 };
 </script>

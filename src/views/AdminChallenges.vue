@@ -94,19 +94,19 @@ export default {
       sortFilterOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 },
+        { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"],
+      statusFilterOptions: ["All", "Deployed", "Undeployed"]
     };
   },
   mounted() {
     ChalService.getChallenges()
-      .then((response) => {
+      .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.categoryFilterOptions = [
           ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions,
+          ...response.categoryFilterOptions
         ];
         this.displayChallenges = response.displayChallenges;
       })
@@ -120,7 +120,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.status == value;
         });
       }
@@ -146,7 +146,7 @@ export default {
       if (value === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.category == value;
         });
       }
@@ -156,7 +156,7 @@ export default {
         return a[field2] > b[field2] ? 1 : -1;
       }
       return b[field1] - a[field1];
-    },
-  },
+    }
+  }
 };
 </script>

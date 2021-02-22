@@ -22,8 +22,8 @@ export default {
     return { cross };
   },
   components: {
-    ConfigLogo,
+    ConfigLogo
   },
-  methods: {},
+  methods: {}
 };
 </script>

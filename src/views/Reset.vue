@@ -54,13 +54,13 @@ export default {
       changed: false,
       err: false,
       password: "",
-      password2: "",
+      password2: ""
     };
   },
   components: {},
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async reset() {
       if (this.password !== this.password2) {
@@ -76,10 +76,10 @@ export default {
           this.err = true;
         }
       }
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "ResetPassword");
-  },
+  }
 };
 </script>
