@@ -3,7 +3,8 @@
     <div class="navbar">
       <nav v-if="pathLogin()" class="navbar-container">
         <router-link to="/" class="navbar-link"
-          ><div class="logo"></div
+          ><div class="logo">
+            <img :src="`${baseUrl}/api/info/logo`" /></div
         ></router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">New here?</p>
@@ -11,8 +12,9 @@
         </div>
       </nav>
       <nav v-else class="navbar-container">
-        <router-link to="/" class="navbar-link"
-          ><div class="logo"></div
+        <router-link to="/" class="navbar-link">
+          <div class="logo">
+            <img :src="`${baseUrl}/api/info/logo`" /></div
         ></router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">Already Registered?</p>
@@ -29,8 +31,14 @@
 
 <script>
 import AdminFooter from "../components/AdminFooter.vue";
+import { CONFIG } from "@/config/config";
 export default {
   name: "AuthLayout",
+  data() {
+    return {
+      baseUrl: CONFIG.beastRoot
+    };
+  },
   components: {
     AdminFooter
   },

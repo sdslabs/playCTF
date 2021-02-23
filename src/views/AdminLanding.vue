@@ -45,7 +45,7 @@
                 startTime: compStartTime,
                 startDate: compStartDate,
                 endDate: compEndDate,
-                endTime: compEndTime,
+                endTime: compEndTime
               }"
               :disabled="false"
             />
@@ -73,7 +73,7 @@
         Back
       </button>
       <button class="primary-btn action-btn" @click="submitConfigs">
-        <router-link to="/admin/statistics"> Proceed </router-link>
+        Proceed
       </button>
     </div>
     <div v-else class="action">
@@ -126,7 +126,7 @@ export default {
       compEndDate: "",
       compLogo: "",
       preview,
-      showPreviewModal: false,
+      showPreviewModal: false
     };
   },
   components: {
@@ -138,7 +138,7 @@ export default {
     PreviewModal
   },
   async created() {
-    await configureService.getConfigs().then((response) => {
+    await configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -166,6 +166,9 @@ export default {
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
     this.currentStep = this.getStartingStep();
+    if (this.currentStep > 3) {
+      this.$router.push("/admin/statistics");
+    }
   },
   methods: {
     isNextDisabled() {
@@ -251,7 +254,7 @@ export default {
     },
     submitConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex((el) => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -274,7 +277,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo,
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -285,7 +288,7 @@ export default {
         .catch(() => {
           this.showFail = true;
         });
-    },
-  },
+    }
+  }
 };
 </script>

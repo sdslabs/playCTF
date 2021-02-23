@@ -48,10 +48,9 @@
         }
 
         .logo {
-            width: 4.5rem;
-            height: 1.5rem;
-            background-color: black;
-            vertical-align: super;
+            img{
+                height: 3rem;
+            }
         }
     }
 
@@ -124,8 +123,6 @@
 
     .navbar-registration {
         width: 8.0625rem;
-        height: 3rem;
-        margin-bottom: -0.75rem;
     }
 
     .navbar-already-registered {
