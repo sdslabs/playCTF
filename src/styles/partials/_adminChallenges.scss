@@ -186,3 +186,19 @@
     line-height: 1.5rem;
     color: $theme-color-grey-high-transp;
 }
+
+.uploadChallengeButton {
+    width: 50%;
+    padding: 0.2rem 1rem;
+    margin-right: auto;
+}
+
+
+.createChallBtnRow{
+    display: flex;
+    flex-direction: row;
+    .createChallButton{
+        padding: 0.2rem 1rem;
+        margin-right: 2rem;
+    }
+}

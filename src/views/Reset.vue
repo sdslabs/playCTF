@@ -35,7 +35,11 @@
             required="true"
           />
         </div>
-        <button @click="reset()" class="login-button primary-btn">
+        <button
+          @click="reset()"
+          class="login-button primary-btn"
+          :disabled="!(password && password2)"
+        >
           Change Password
         </button>
       </div>

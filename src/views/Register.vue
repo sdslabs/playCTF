@@ -67,7 +67,11 @@
             match
           </div>
         </div>
-        <button @click="register()" class="login-button primary-btn">
+        <button
+          @click="register()"
+          class="login-button primary-btn"
+          :disabled="!(uname && username && password && password2 && email)"
+        >
           Register Now
         </button>
       </div>

@@ -1,19 +1,17 @@
 <template>
-  <div class="uploadRow">
+  <div class="uploadRow margin-vert-1">
     <div class="logoUpload">
       <input
         type="file"
-        id="actual-button"
+        id="challFileInput"
         ref="file"
         v-on:change="onFileChange()"
         hidden
       />
-      <label for="actual-button">
+      <label for="challFileInput">
         <img :src="upload" />
         <div class="uploadText">
-          {{
-            this.logo || this.showInitialImg ? "Replace file" : "Upload file"
-          }}
+          {{ this.logo ? "Replace file" : "Upload file" }}
         </div></label
       >
     </div>
@@ -35,46 +33,32 @@ export default {
       baseUrl: CONFIG.beastRoot,
       logo: null,
       upload,
-      showImg: false,
-      showInitialImg: true,
+      showImg: false
     };
   },
   methods: {
     removeLogo() {
-      document.getElementById("actual-button").value = "";
       this.showImg = false;
-      document.getElementById("preview").src = null;
       this.logo = null;
-    },
-    previewImg() {
-      if (!this.logo) {
-        return;
-      }
-      this.showImg = true;
-      let reader = new FileReader();
-      reader.readAsDataURL(this.logo);
-      reader.onload = function (readerEvent) {
-        document.getElementById("preview").src = readerEvent.target.result;
-      };
+      document.getElementById("challFileInput").value = "";
     },
     emitLogo(compInfoLogo) {
       this.$emit("changed", compInfoLogo);
     },
     onFileChange() {
-      this.showInitialImg = false;
       this.logo = this.$refs.file.files[0];
-      this.previewImg();
-    },
+      console.log(this.logo);
+    }
   },
   watch: {
-    logo: function (newCompInfoLogo, prevCompInfoLogo) {
+    logo: function(newCompInfoLogo, prevCompInfoLogo) {
       if (newCompInfoLogo != prevCompInfoLogo) {
         this.emitLogo(newCompInfoLogo);
       }
-    },
+    }
     // uploadFile: function (changedValue) {
     //   this.logo = changedValue;
     // },
-  },
+  }
 };
 </script>

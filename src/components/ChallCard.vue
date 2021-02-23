@@ -1,8 +1,14 @@
 <template>
-  <div v-if="this.challDetails" class="challCard">
+  <div
+    v-if="this.challDetails"
+    class="challCard"
+    :class="{ 'preview-challcard': isPreview }"
+  >
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
-      <div v-if="challDetails.category" class="challCard-tag">{{ challDetails.category }}</div>
+      <div v-if="challDetails.category" class="challCard-tag">
+        {{ challDetails.category }}
+      </div>
       <div v-if="challDetails.isSolved" class="chall-submitted">
         <span>Submitted</span>
         <img src="@/assets/tick.svg" />
@@ -19,7 +25,10 @@
       -->
     </div>
     <div class="challCard-solves">
-      {{ challDetails.points }} Points <span v-if="challeDetails">| {{ challDetails.solves.length }} Solves</span>
+      {{ challDetails.points }} Points
+      <span v-if="challeDetails"
+        >| {{ challDetails.solves.length }} Solves</span
+      >
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
@@ -42,7 +51,10 @@
         </div>
       </a>-->
     </div>
-    <div v-if="!challDetails.isSolved && !isPreview" class="challCard-bottom-row">
+    <div
+      v-if="!challDetails.isSolved && !isPreview"
+      class="challCard-bottom-row"
+    >
       <div class="challCard-form">
         <input
           type="text"
@@ -95,7 +107,7 @@ export default {
     isModalVisible: false
   },
   mounted() {
-    console.log(this.challDetails)
+    console.log(this.challDetails);
     if (this.challDetails.ports && this.challDetails.ports.length > 0) {
       this.port = this.challDetails.ports[0];
     }

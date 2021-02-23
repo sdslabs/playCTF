@@ -26,7 +26,7 @@ export default new Vuex.Store({
       endingTime: "07:07:00 UTC: +06:00, 18th February 2021, Thursday",
       logo: ""
     },
-    hostUrl: "http://localhost:5005",
+    hostUrl: "http://localhost:5005"
   },
   mutations: {
     updateCurrentPage(state, page) {
