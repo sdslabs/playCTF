@@ -151,5 +151,18 @@ export default {
       url: `/api/manage/challenge/`,
       data: postData
     });
+  },
+
+  async createChallenge(file) {
+    let bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    const response = await axiosInstance({
+      method: "post",
+      url: `/api/manage/challenge/upload`,
+      data: bodyFormData,
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+    console.log(response);
+    return response.data;
   }
 };

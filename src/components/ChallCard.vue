@@ -1,8 +1,14 @@
 <template>
-  <div v-if="this.challDetails" class="challCard">
+  <div
+    v-if="this.challDetails"
+    class="challCard"
+    :class="{ 'preview-challcard': isPreview }"
+  >
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
-      <div class="challCard-tag">{{ challDetails.category }}</div>
+      <div v-if="challDetails.category" class="challCard-tag">
+        {{ challDetails.category }}
+      </div>
       <div v-if="challDetails.isSolved" class="chall-submitted">
         <span>Submitted</span>
         <img src="@/assets/tick.svg" />
@@ -19,16 +25,19 @@
       -->
     </div>
     <div class="challCard-solves">
-      {{ challDetails.points }} Points | {{ challDetails.solves.length }} Solves
+      {{ challDetails.points }} Points
+      <span v-if="challeDetails"
+        >| {{ challDetails.solves.length }} Solves</span
+      >
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
       <div v-if="this.port" class="challCard-challPort">
         Port: {{ this.port }}
       </div>
-      <a :href="`${this.$store.getters.challengeHostUrl}:${this.port || ''}`"
+      <a :href="`${this.$store.getters.hostUrl}:${this.port || ''}`"
         ><div class="challCard-challLink">
-          {{ `${this.$store.getters.challengeHostUrl}:${this.port || ""}` }}
+          {{ `${this.$store.getters.hostUrl}:${this.port || ""}` }}
         </div>
       </a>
 
@@ -42,7 +51,10 @@
         </div>
       </a>-->
     </div>
-    <div v-if="!challDetails.isSolved" class="challCard-bottom-row">
+    <div
+      v-if="!challDetails.isSolved && !isPreview"
+      class="challCard-bottom-row"
+    >
       <div class="challCard-form">
         <input
           type="text"
@@ -79,7 +91,7 @@
 import FlagService from "../api/userAPI";
 export default {
   name: "ChallCard",
-  props: ["challDetails", "tag"],
+  props: ["challDetails", "tag", "isPreview"],
   data() {
     return {
       port: undefined,
@@ -95,6 +107,7 @@ export default {
     isModalVisible: false
   },
   mounted() {
+    console.log(this.challDetails);
     if (this.challDetails.ports && this.challDetails.ports.length > 0) {
       this.port = this.challDetails.ports[0];
     }

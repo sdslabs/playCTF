@@ -16,7 +16,9 @@
         <div class="adminHeadingName">CHALLENGES</div>
         <button class="addChallenge">
           <img class="addImg" :src="add" />
-          <span class="addText">Create New Challenge</span>
+          <span class="addText" @click="showCreateChallModal = true"
+            >Create New Challenge</span
+          >
         </button>
       </div>
       <div class="adminSort">
@@ -62,6 +64,11 @@
         <span class="adminEmptyData">No Challenges available</span>
       </div>
     </div>
+    <transition name="fade" appear>
+      <div class="modal-overlay" v-if="showCreateChallModal">
+        <create-chall-modal @close="showCreateChallModal = false" />
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -69,11 +76,13 @@ import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
 import { add } from "../constants/images";
+import CreateChallModal from "../components/CreateChallModal.vue";
 export default {
   name: "AdminChallenges",
-  components: { adminChallCard, SpinLoader },
+  components: { adminChallCard, SpinLoader, CreateChallModal },
   data() {
     return {
+      showCreateChallModal: false,
       add,
       loading: true,
       statusFilter: "All",

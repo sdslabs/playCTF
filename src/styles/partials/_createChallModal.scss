@@ -1,0 +1,19 @@
+.create-chall-modal {
+    margin: 15rem 35%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    .create-chall-modal-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .heading{
+            @extend %font-style-bold;
+            color: $theme-color-black19;
+            font-size: 1.5rem;
+            line-height: 1.75rem;
+        }
+    }
+}
+

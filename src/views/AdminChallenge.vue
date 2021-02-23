@@ -93,7 +93,7 @@
       </div>
       <div class="port aboutText">Port : {{ port }}</div>
       <div class="host aboutText">
-        {{ `${this.$store.getters.challengeHostUrl}:${this.port}` }}
+        {{ `${this.$store.getters.hostUrl}:${chalDetails.ports}` }}
       </div>
       <button class="adminBanButton testRun">
         <img :src="play" class="banImg" /><span class="adminBanText"

@@ -26,8 +26,7 @@ export default new Vuex.Store({
       endingTime: "07:07:00 UTC: +06:00, 18th February 2021, Thursday",
       logo: ""
     },
-    hostUrl: "http://localhost:5005",
-    challengeHostUrl: "http://challenges.beast.com"
+    hostUrl: "http://localhost:5005"
   },
   mutations: {
     updateCurrentPage(state, page) {
@@ -53,7 +52,6 @@ export default new Vuex.Store({
     login: state => state.userInfo.login,
     currentPage: state => state.currentPage,
     hostUrl: state => state.hostUrl,
-    challengeHostUrl: state => state.challengeHostUrl,
     getUsername: state => {
       return state.userInfo.userName;
     },

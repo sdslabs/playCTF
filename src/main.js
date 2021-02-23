@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
 Vue.component("admin-layout", AdminLayout);
-Vue.component("user-layout",UserLayout);
+Vue.component("user-layout", UserLayout);
 Vue.component("auth-layout", AuthLayout);
 Vue.component("error-layout", ErrorLayout);
 Vue.component("admin-landing-layout", AdminLandingLayout);

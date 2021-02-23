@@ -35,7 +35,11 @@
             required="true"
           />
         </div>
-        <button @click="reset()" class="login-button primary-btn">
+        <button
+          @click="reset()"
+          class="login-button primary-btn"
+          :disabled="!(password && password2)"
+        >
           Change Password
         </button>
       </div>
@@ -54,16 +58,13 @@ export default {
       changed: false,
       err: false,
       password: "",
-      password2: "",
+      password2: ""
     };
   },
   components: {},
-    beforeCreate() {
-    this.$store.commit("updateCurrentPage", "ResetPassword");
-  },
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async reset() {
       if (this.password !== this.password2) {
@@ -79,7 +80,10 @@ export default {
           this.err = true;
         }
       }
-    },
+    }
   },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "ResetPassword");
+  }
 };
 </script>

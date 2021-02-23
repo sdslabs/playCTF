@@ -13,6 +13,7 @@
     margin-right: auto;
     padding-top: 15%;
     margin-left: -13%;
+
     .navButton {
         display: flex;
         flex-direction: row-reverse;
@@ -173,15 +174,31 @@
     }
 }
 
-.loader{
+.loader {
     align-self: center;
     text-align: center;
     justify-self: center;
-    padding:5%
+    padding: 5%
 }
 
-.vue-simple-spinner-text{
+.vue-simple-spinner-text {
     @extend %font-style-bold;
     line-height: 1.5rem;
     color: $theme-color-grey-high-transp;
+}
+
+.uploadChallengeButton {
+    width: 50%;
+    padding: 0.2rem 1rem;
+    margin-right: auto;
+}
+
+
+.createChallBtnRow{
+    display: flex;
+    flex-direction: row;
+    .createChallButton{
+        padding: 0.2rem 1rem;
+        margin-right: 2rem;
+    }
 }

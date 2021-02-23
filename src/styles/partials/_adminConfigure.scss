@@ -67,18 +67,21 @@
         margin: 0.2rem;
         margin-left: 0;
     }
-    .subfields-row{
+
+    .subfields-row {
         width: 100%;
         display: flex;
         align-items: center;
         height: 1.5rem;
     }
-    .counter{
+
+    .counter {
         @extend %font-style-basic;
         font-size: 0.75rem;
-        color:$theme-color-violet;
+        color: $theme-color-violet;
         margin-left: auto;
     }
+
     .subfields {
         font-size: 0.75rem;
         text-align: left;
@@ -99,28 +102,6 @@
         font-size: 1rem;
         line-height: 1.75rem;
     }
-
-    .submitButton {
-        background-color: $theme-color-dark-orange;
-        border-radius: 0.125rem;
-        color: $theme-color-white;
-        font-family: $primary-font-family;
-        font-style: normal;
-        font-weight: bold;
-        font-size: 0.875rem;
-        line-height: 1.75rem;
-        padding: 0.5rem 1rem 0.5rem 1rem;
-        border: none;
-        margin-left: auto;
-
-        &:disabled {
-            background: $theme-color-light-grey-d7;
-            box-shadow: none;
-            color: $theme-color-grey39;
-        }
-    }
-
-
 
     .title {
         height: 2.5rem;
@@ -176,59 +157,6 @@
 
     .notifTabs::-webkit-scrollbar {
         display: none;
-    }
-
-    .uploadRow {
-        display: flex;
-        align-items: center;
-        margin-bottom: 3rem;
-
-        .filename {
-            @extend %font-style-basic;
-            border: 0.1rem solid rgba(87, 87, 87, 0.57);
-            box-sizing: border-box;
-            box-shadow: 0px 0.125rem 0.625rem rgba(37, 85, 124, 0.1);
-            border-radius: 1.25rem;
-            display: flex;
-            align-items: center;
-            color: rgba(25, 25, 25, 0.57);
-            height: 2rem;
-            padding: 0 1rem;
-            position: absolute;
-            margin-left: 9rem;
-
-            img {
-                padding-left: 0.5rem;
-                height: 0.8rem;
-            }
-        }
-
-        .upload-feedback {
-            height: 1.5rem;
-            position: absolute;
-            margin-left: 20%;
-        }
-    }
-
-    .logoUpload {
-        border: 1.5px solid #393939;
-        box-sizing: border-box;
-        box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-        border-radius: 3px;
-        width: 7rem;
-        height: 2rem;
-
-        label {
-            height: 100%;
-            @extend %font-style-basic;
-            font-size: 0.875rem;
-            line-height: 1.125rem;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            background: $theme-color-white;
-            align-items: center
-        }
     }
 
     .importantField {
@@ -327,3 +255,89 @@
     align-items: flex-start;
     padding: 0 0.1rem;
 }
+
+.uploadRow {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+
+    .filename {
+        @extend %font-style-basic;
+        border: 0.1rem solid rgba(87, 87, 87, 0.57);
+        box-sizing: border-box;
+        box-shadow: 0px 0.125rem 0.625rem rgba(37, 85, 124, 0.1);
+        border-radius: 1.25rem;
+        display: flex;
+        align-items: center;
+        color: rgba(25, 25, 25, 0.57);
+        height: 2rem;
+        padding: 0 1rem;
+        position: absolute;
+        margin-left: 9rem;
+
+        img {
+            padding-left: 0.5rem;
+            height: 0.8rem;
+        }
+    }
+
+    .upload-feedback {
+        height: 1.5rem;
+        position: absolute;
+        margin-left: 20%;
+    }
+}
+
+.logoUpload {
+    border: 1.5px solid #393939;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
+    border-radius: 3px;
+    width: 7rem;
+    height: 2rem;
+
+    label {
+        height: 100%;
+        @extend %font-style-basic;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        background: $theme-color-white;
+        align-items: center
+    }
+}
+
+.margin-vert-1 {
+    margin: 1rem 0;
+}
+
+.margin-bottom-2 {
+    margin-bottom: 2rem;
+}
+
+.margin-0 {
+    margin: 0;
+}
+
+.submitButton {
+    background-color: $theme-color-dark-orange;
+    border-radius: 0.125rem;
+    color: $theme-color-white;
+    font-family: $primary-font-family;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.875rem;
+    line-height: 1.75rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border: none;
+    margin-left: auto;
+
+    &:disabled {
+        background: $theme-color-light-grey-d7;
+        box-shadow: none;
+        color: $theme-color-grey39;
+    }
+}
+

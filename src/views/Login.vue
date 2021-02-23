@@ -13,7 +13,6 @@
             id="username"
             name="user_name"
             placeholder="Team Name*"
-            required="true"
             v-model="username"
           />
         </div>
@@ -24,11 +23,16 @@
             id="password"
             name="user_pass"
             placeholder="Password*"
-            required="true"
             v-model="password"
           />
         </div>
-        <button @click="login()" class="login-button primary-btn">Login</button>
+        <button
+          :disabled="!(username && password)"
+          @click="login()"
+          class="login-button primary-btn"
+        >
+          Login
+        </button>
       </div>
       <img src="@/assets/login.svg" class="login-image" />
     </div>
