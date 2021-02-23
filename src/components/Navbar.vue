@@ -2,7 +2,8 @@
   <div class="navbar">
     <div class="user-navbar-container" v-if="loggedIn()">
       <router-link to="/about" class="navbar-link ctfLogo"
-        ><div class="logo"></div
+        ><div class="logo">
+          <img :src="`${baseUrl}/api/info/logo`" /></div
       ></router-link>
       <nav class="navbar-container">
         <div class="link-container">
@@ -46,6 +47,7 @@
 import Timer from "@/components/Timer.vue";
 import { dropdown } from "../constants/images";
 import store from "../store/index";
+import { CONFIG } from "@/config/config";
 export default {
   name: "Navbar",
   data() {
@@ -53,6 +55,7 @@ export default {
       dropdown,
       username: "",
       displayDropdownContent: false,
+      baseUrl: CONFIG.beastRoot,
       links: [
         {
           index: 0,

@@ -11,7 +11,6 @@
 import AdminNav from "./AdminNav";
 import { CONFIG } from "@/config/config";
 import AdminDropdown from "@/components/AdminDropdown.vue";
-import { ctfLogo } from "../constants/images";
 export default {
   name: "AdminHeader",
   components: {
@@ -20,7 +19,6 @@ export default {
   },
   data() {
     return {
-      ctfLogo,
       baseUrl: CONFIG.beastRoot
     };
   }

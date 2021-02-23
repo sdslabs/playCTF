@@ -5,11 +5,11 @@
       <div class="infoDetails">
         <span class="name">{{ chalDetails.name }}</span>
         <span class="category">{{ chalDetails.category }}</span>
-        <button class="adminBanButton">
+        <!-- <button class="adminBanButton">
           <img :src="edit" class="banImg" /><span class="adminBanText"
             >Edit</span
           >
-        </button>
+        </button> -->
         <span
           class="status"
           :class="{
@@ -95,11 +95,11 @@
       <div class="host aboutText">
         {{ `${this.$store.getters.hostUrl}:${chalDetails.ports}` }}
       </div>
-      <button class="adminBanButton testRun">
+      <!-- <button class="adminBanButton testRun">
         <img :src="play" class="banImg" /><span class="adminBanText"
           >Test Run</span
         >
-      </button>
+      </button> -->
     </div>
     <div class="adminChallStatistics">
       <div class="adminHeadingName">Statistics</div>
