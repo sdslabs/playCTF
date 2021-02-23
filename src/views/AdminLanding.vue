@@ -45,7 +45,7 @@
                 startTime: compStartTime,
                 startDate: compStartDate,
                 endDate: compEndDate,
-                endTime: compEndTime
+                endTime: compEndTime,
               }"
               :disabled="false"
             />
@@ -54,7 +54,11 @@
               @changed="setCompLogo"
               :compLogo="compLogo"
             />
-            <button class="preview-button" v-if="getCurrentStep() === 5">
+            <button
+              class="preview-button"
+              @click="showPreviewModal = true"
+              v-if="getCurrentStep() === 5"
+            >
               <div class="preview">
                 <img :src="preview" />
                 Preview
@@ -84,6 +88,11 @@
         Next
       </button>
     </div>
+    <transition name="fade" appear>
+      <div class="modal-overlay" v-if="showPreviewModal">
+        <preview-modal @close="showPreviewModal = false" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -98,6 +107,7 @@ import moment from "moment-timezone";
 import { getAllTimezones } from "../constants/constants";
 import configureService from "../api/admin/configureAPI";
 import { preview } from "../constants/images";
+import PreviewModal from "../components/PreviewModal.vue";
 export default {
   data() {
     return {
@@ -115,7 +125,8 @@ export default {
       compEndTime: "",
       compEndDate: "",
       compLogo: "",
-      preview
+      preview,
+      showPreviewModal: false,
     };
   },
   components: {
@@ -123,10 +134,11 @@ export default {
     ConfigTitle,
     ConfigContent,
     ConfigTimeDate,
-    ConfigLogo
+    ConfigLogo,
+    PreviewModal
   },
   async created() {
-    await configureService.getConfigs().then(response => {
+    await configureService.getConfigs().then((response) => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -234,9 +246,12 @@ export default {
         this.currentStep--;
       }
     },
+    closeModal() {
+      this.showPreviewModal = false;
+    },
     submitConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex(el => {
+        getAllTimezones().findIndex((el) => {
           return el === this.compTimezone;
         })
       ];
@@ -259,7 +274,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo
+        logo: this.compLogo,
       };
       configureService
         .updateConfigs(configs)
@@ -270,7 +285,7 @@ export default {
         .catch(() => {
           this.showFail = true;
         });
-    }
-  }
+    },
+  },
 };
 </script>
