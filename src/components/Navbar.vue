@@ -33,7 +33,7 @@
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
-          <router-link :to="path" class="adminNavDropdownLink"
+          <router-link :to="userProfilePath" class="adminNavDropdownLink"
             >Profile</router-link
           >
           <router-link to="/resetpassword" class="adminNavDropdownLink"
@@ -81,7 +81,7 @@ export default {
           page: "/about"
         }
       ],
-      path:"/users/"
+      userProfilePath:"/user/"
     };
   },
   components: {
@@ -89,7 +89,7 @@ export default {
   },
   created() {
     this.username = store.getters.getUsername;
-    this.path += this.username;
+    this.userProfilePath += this.username;
   },
   methods: {
     loggedIn() {

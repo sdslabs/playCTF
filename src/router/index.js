@@ -67,7 +67,7 @@ const routes = [
     }
   },
   {
-    path: "/users/:username",
+    path: "/user/:username",
     name: "users",
     component: AdminUser,
     meta: {
