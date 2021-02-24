@@ -8,13 +8,13 @@
 
 <script>
 import Navbar from "@/components/Navbar.vue";
-import Footer from "@/components/Footer.vue";
+import AdminFooter from "@/components/AdminFooter.vue";
 const default_layout = "default-layout";
 export default {
   name: "app",
   components: {
     Navbar,
-    Footer
+    AdminFooter
   },
   computed: {
     layout() {
