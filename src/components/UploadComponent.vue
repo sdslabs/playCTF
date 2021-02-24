@@ -49,7 +49,6 @@ export default {
     onFileChange() {
       this.logo = this.$refs.file.files[0];
       this.name = this.logo.name.trim().substr(0, 10) + "...";
-      console.log(this.logo);
     },
   },
   watch: {

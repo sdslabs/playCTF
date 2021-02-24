@@ -162,7 +162,6 @@ export default {
       data: bodyFormData,
       headers: { "Content-Type": "multipart/form-data" }
     });
-    console.log(response);
     return response.data;
   }
 };

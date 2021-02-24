@@ -53,7 +53,6 @@ export default {
   },
   methods: {
     setChallengeTar(val) {
-      console.log(val);
       this.challengeTar = val;
     },
     async updateConfigs() {
