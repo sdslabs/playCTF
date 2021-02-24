@@ -107,7 +107,6 @@ export default {
     isModalVisible: false
   },
   mounted() {
-    console.log(this.challDetails);
     if (this.challDetails.ports && this.challDetails.ports.length > 0) {
       this.port = this.challDetails.ports[0];
     }
