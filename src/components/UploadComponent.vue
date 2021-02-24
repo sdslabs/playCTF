@@ -16,7 +16,7 @@
       >
     </div>
     <div v-if="logo" class="filename">
-      {{ logo.name }}
+      {{ name }}
       <div @click="removeLogo()"><img src="@/assets/cross.svg" /></div>
     </div>
   </div>
@@ -33,7 +33,8 @@ export default {
       baseUrl: CONFIG.beastRoot,
       logo: null,
       upload,
-      showImg: false
+      showImg: false,
+      name: null,
     };
   },
   methods: {
@@ -47,6 +48,8 @@ export default {
     },
     onFileChange() {
       this.logo = this.$refs.file.files[0];
+      this.name = this.logo.name.substr(0,10);
+      this.name.trim();
       console.log(this.logo);
     }
   },
