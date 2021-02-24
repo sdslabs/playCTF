@@ -34,7 +34,7 @@ export default {
       logo: null,
       upload,
       showImg: false,
-      name: null,
+      name: "",
     };
   },
   methods: {
@@ -48,20 +48,16 @@ export default {
     },
     onFileChange() {
       this.logo = this.$refs.file.files[0];
-      this.name = this.logo.name.substr(0,10);
-      this.name.trim();
+      this.name = this.logo.name.trim().substr(0, 10) + "...";
       console.log(this.logo);
-    }
+    },
   },
   watch: {
-    logo: function(newCompInfoLogo, prevCompInfoLogo) {
+    logo: function (newCompInfoLogo, prevCompInfoLogo) {
       if (newCompInfoLogo != prevCompInfoLogo) {
         this.emitLogo(newCompInfoLogo);
       }
-    }
-    // uploadFile: function (changedValue) {
-    //   this.logo = changedValue;
-    // },
-  }
+    },
+  },
 };
 </script>
