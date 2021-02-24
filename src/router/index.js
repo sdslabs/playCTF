@@ -67,6 +67,14 @@ const routes = [
     }
   },
   {
+    path: "/user/:username",
+    name: "users",
+    component: AdminUser,
+    meta: {
+      layout: "user-layout"
+    }
+  },
+  {
     path: "/login",
     name: "login",
     component: Login,

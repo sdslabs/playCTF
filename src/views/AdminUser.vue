@@ -39,25 +39,27 @@
             </div>
           </div>
         </div>
-        <div class="userStatus" v-if="userDetails.active">
-          <div class="status unbanned">Active</div>
-          <button
-            class="adminBanButton"
-            @click="manageUser(userDetails.id, 'ban')"
-          >
-            <img :src="ban" class="banImg" />
-            <div class="adminBanText">Ban Player</div>
-          </button>
-        </div>
-        <div class="userStatus" v-else>
-          <div class="status banned">Banned</div>
-          <button
-            class="adminBanButton"
-            @click="manageUser(userDetails.id, 'unban')"
-          >
-            <img :src="unban" class="banImg" />
-            <div class="adminBanText">Remove Ban</div>
-          </button>
+        <div v-if="getAccess()">
+          <div class="userStatus" v-if="userDetails.active">
+            <div class="status unbanned">Active</div>
+            <button
+              class="adminBanButton"
+              @click="manageUser(userDetails.id, 'ban')"
+            >
+              <img :src="ban" class="banImg" />
+              <div class="adminBanText">Ban Player</div>
+            </button>
+          </div>
+          <div class="userStatus" v-else>
+            <div class="status banned">Banned</div>
+            <button
+              class="adminBanButton"
+              @click="manageUser(userDetails.id, 'unban')"
+            >
+              <img :src="unban" class="banImg" />
+              <div class="adminBanText">Remove Ban</div>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -129,6 +131,7 @@ import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
+import store from '../store/index';
 import {
   confimDialogMessages,
   tableCols,
@@ -182,6 +185,11 @@ export default {
     }
   },
   methods: {
+    getAccess() {
+      if(store.getters.getRole === "admin")
+        return true;
+      return false;
+    },
     manageUser(userId, action) {
       let confirmHandler = confirm => {
         if (confirm) {
