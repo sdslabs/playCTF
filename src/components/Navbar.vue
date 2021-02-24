@@ -33,6 +33,9 @@
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
+          <router-link :to="path" class="adminNavDropdownLink"
+            >Profile</router-link
+          >
           <router-link to="/resetpassword" class="adminNavDropdownLink"
             >Change Password</router-link
           >
@@ -77,7 +80,8 @@ export default {
           text: "AboutCTF",
           page: "/about"
         }
-      ]
+      ],
+      path:"/users/"
     };
   },
   components: {
@@ -85,6 +89,7 @@ export default {
   },
   created() {
     this.username = store.getters.getUsername;
+    this.path += this.username;
   },
   methods: {
     loggedIn() {
