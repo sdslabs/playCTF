@@ -28,7 +28,7 @@ import {
   fbLogo
 } from "../constants/images";
 export default {
-  name: "AdminFooter",
+  name: "Footer",
   data() {
     return {
       sdslabsLogo,

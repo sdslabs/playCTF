@@ -25,12 +25,12 @@
     <div id="container">
       <slot />
     </div>
-    <AdminFooter />
+    <Footer />
   </div>
 </template>
 
 <script>
-import AdminFooter from "../components/AdminFooter.vue";
+import Footer from "../components/Footer.vue";
 import { CONFIG } from "@/config/config";
 export default {
   name: "AuthLayout",
@@ -40,7 +40,7 @@ export default {
     };
   },
   components: {
-    AdminFooter
+    Footer
   },
   methods: {
     pathLogin() {

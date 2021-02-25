@@ -3,16 +3,16 @@
     <div id="container">
       <slot />
     </div>
-    <AdminFooter />
+    <Footer />
   </div>
 </template>
 
 <script>
-import AdminFooter from "../components/AdminFooter.vue";
+import Footer from "../components/Footer.vue";
 export default {
   name: "UserLayout",
   components: {
-    AdminFooter
+    Footer
   }
 };
 </script>

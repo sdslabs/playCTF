@@ -4,18 +4,18 @@
     <div id="container">
       <slot />
     </div>
-    <AdminFooter />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
-import AdminFooter from "../components/AdminFooter.vue";
+import Footer from "../components/Footer.vue";
 export default {
   name: "DefaultLayout",
   components: {
     Navbar,
-    AdminFooter
+    Footer
   }
 };
 </script>
