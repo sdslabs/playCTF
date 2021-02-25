@@ -99,17 +99,21 @@
       <div class="adminOneColContainer">
         <p class="adminSubheading">Score over time</p>
         <LineGraph
+          v-if="userDetails.active && this.rows.length > 0"
           :chartData="this.lineGraphData()"
           :options="this.lineGraphOptions"
           class="lineGraph"
           :height="150"
-          v-if="this.rows.length > 0"
         />
+        <div class="adminEmptyDataContainer" v-else-if="!userDetails.active">
+          <span class="adminEmptyData">Banned</span>
+        </div>
         <div class="adminEmptyDataContainer" v-else>
           <span class="adminEmptyData">No Points Scored</span>
         </div>
       </div>
     </div>
+    <hr class="hrSeparator" />
     <div class="adminHeadingName">Submissions</div>
     <admin-table
       :tableCols="tableCols"
@@ -132,6 +136,7 @@ import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
 import store from "../store/index";
+import moment from "moment";
 import {
   confimDialogMessages,
   tableCols,
@@ -222,11 +227,18 @@ export default {
           });
           timeScores[index] = currentScore;
         }
-        scoreSeries[index] = {
-          x: new Date(el.solvedAt),
+        scoreSeries[index + 1] = {
+          x: moment(new Date(el.solvedAt)),
           y: timeScores[index]
         };
       });
+      scoreSeries[0] = {
+        x: moment(
+          this.$store.state.competitionInfo.startingTime,
+          "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+        ),
+        y: 0
+      };
       return scoreSeries;
     },
     lineGraphData() {

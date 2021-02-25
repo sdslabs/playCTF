@@ -93,24 +93,27 @@
     </div>
     <div class="adminChallStatistics">
       <div class="adminHeadingName">Statistics</div>
-      <div class="adminChallSubmissions">
-        <div class="subheadingName">Submissions</div>
-        <div class="info">
-          Total {{ this.chalDetails.solvesNumber }} correct submissions are made
-        </div>
-      </div>
-      <div class="adminChallSolves">
+      <div class="adminChallStatisticsContent">
         <div class="leftCol">
-          <div class="subheadingName">Solve Percentages</div>
-          <div class="info">
-            There were total <b>{{ this.activeUsers }} Active</b> users, out of
-            which,
-            <b
-              >{{ this.chalDetails.solvesNumber }} ({{
-                this.solvePercentage()
-              }}%)</b
-            >
-            are able to solve this challenge.
+          <div class="adminChallSubmissions">
+            <div class="subheadingName">Submissions</div>
+            <div class="info">
+              Total {{ this.chalDetails.solvesNumber }} correct submissions are
+              made
+            </div>
+          </div>
+          <div class="adminChallSolves">
+            <div class="subheadingName">Solve Percentages</div>
+            <div class="info">
+              There were total <b>{{ this.activeUsers }} Active</b> users, out
+              of which,
+              <b
+                >{{ this.chalDetails.solvesNumber }} ({{
+                  this.solvePercentage()
+                }}%)</b
+              >
+              are able to solve this challenge.
+            </div>
           </div>
         </div>
         <div class="rightCol">
@@ -118,7 +121,7 @@
             :chartData="this.barData()"
             :options="this.barChartOptions()"
             class="graph"
-            :height="150"
+            :height="200"
           />
         </div>
       </div>
@@ -187,7 +190,6 @@ export default {
     },
     barData() {
       return {
-        labels: ["Solve Percentage"],
         datasets: [
           {
             backgroundColor: colors.singleBarGraph,

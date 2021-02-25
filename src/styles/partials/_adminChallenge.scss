@@ -34,7 +34,7 @@
 
         .name {
             font-family: $primary-font-family;
-            
+
             font-weight: bold;
             font-size: 1.5rem;
             line-height: 1.75rem;
@@ -47,7 +47,7 @@
             background: $theme-color-violet;
             border-radius: 0.125rem;
             font-family: $secondary-font-family;
-            
+
             font-weight: bold;
             font-size: 0.875rem;
             line-height: 1rem;
@@ -60,7 +60,7 @@
         .status {
             margin-left: auto;
             font-family: $primary-font-family;
-            
+
             font-weight: bold;
             font-size: 1.25rem;
             line-height: 1.75rem;
@@ -113,7 +113,7 @@
             }
 
             .field {
-                
+
                 font-size: 1rem;
                 line-height: 1.125rem;
                 text-align: center;
@@ -132,8 +132,8 @@
     .aboutText {
         text-align: left;
         font-family: $secondary-font-family;
-        
-        
+
+
         font-size: 0.875rem;
         line-height: 1.5rem;
         color: $theme-color-grey39;
@@ -183,32 +183,6 @@
         align-items: flex-start;
     }
 
-    .adminChallSolves {
-        margin-top: 1.875rem;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
-
-        .leftCol {
-            width: 50%;
-            padding-right: 10%;
-            ;
-        }
-
-        .rightCol {
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .graph {
-            width: 70%;
-            height: 80%;
-        }
-    }
-
     .subheadingName {
         margin-bottom: 0.625rem;
         @extend %font-style-basic;
@@ -228,11 +202,48 @@
 
 .hrSeparator {
     width: 100%;
-    margin: 8% 0;
+    margin: 1rem 0;
     height: 0.0625rem;
     background-color: $theme-color-grey-med-transp;
 }
 
-.challenge-action-btn{
+.challenge-action-btn {
     margin-left: 1rem;
+}
+
+.adminChallStatisticsContent {
+    display: flex;
+
+    .leftCol {
+        width: 50%;
+        padding-right: 10%;
+        display: flex;
+        flex-direction: column;
+
+        .adminChallSolves {
+            margin-top: 1.875rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+
+        }
+    }
+
+    .rightCol {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .graph {
+            width: 100%;
+        }
+    }
+}
+
+.chartjs-size-monitor {
+    position: relative;
+    display: none;
 }
