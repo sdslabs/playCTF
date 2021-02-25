@@ -100,6 +100,7 @@
         </div>
       </div>
       <div class="adminEmptyDataContainer" v-else>
+        <p class="adminSubheading">Submissions</p>
         <span class="adminEmptyData">No Submissions</span>
       </div>
     </div>
