@@ -14,11 +14,9 @@
     <div class="mainContaineradminChall">
       <div class="adminHeadingChal">
         <div class="adminHeadingName">CHALLENGES</div>
-        <button class="addChallenge">
+        <button class="addChallenge" @click="showCreateChallModal = true">
           <img class="addImg" :src="add" />
-          <span class="addText" @click="showCreateChallModal = true"
-            >Create New Challenge</span
-          >
+          <span class="addText">Create New Challenge</span>
         </button>
       </div>
       <div class="adminSort">
