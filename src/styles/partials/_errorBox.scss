@@ -1,0 +1,16 @@
+.error {
+    margin-left: 2.5rem;
+    padding: 0.3rem 3rem;
+    font-size: 1.2rem;
+    margin-top: 0.8rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0.2rem;
+    width: auto;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .errorImg {
+        padding-right: 1rem;
+    }
+}

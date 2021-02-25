@@ -1,16 +1,21 @@
 .register {
     width: 100%;
 
-    .register-heading {
-        font-family: $primary-font-family;
-        font-weight: bold;
-        font-size: 1.75rem;
-        line-height: 2.75rem;
-        color: $theme-color-grey39;
-        text-align: left;
+    .container {
+        display: flex;
+        flex-direction: row;
 
-        .switch {
-            color: $theme-color-dark-orange;
+        .register-heading {
+            font-family: $primary-font-family;
+            font-weight: bold;
+            font-size: 1.75rem;
+            line-height: 2.75rem;
+            color: $theme-color-grey39;
+            text-align: left;
+
+            .switch {
+                color: $theme-color-dark-orange;
+            }
         }
     }
 
@@ -25,17 +30,6 @@
 
         .register-form {
             width: 35%;
-
-            .error {
-                font-size: 0.85rem;
-                margin-top: 0.8rem;
-                color: #d72c27;
-                display: flex;
-                flex-direction: row;
-                .errImg {
-                    padding-right: 0.6rem;
-                }
-            }
 
             .register-inputField {
                 width: 100%;

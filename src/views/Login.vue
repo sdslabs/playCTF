@@ -1,11 +1,13 @@
 <template>
   <div class="login">
-    <div class="login-heading">Login</div>
+    <div class="container">
+      <div class="login-heading">Login</div>
+      <div v-if="err.msg">
+        <ErrorBox :error="err" />
+      </div>
+    </div>
     <div class="login-form-div">
       <div class="login-form">
-        <div class="error" v-if="err">
-          <img src="@/assets/error.svg" class="errImg" /> {{ this.err }}
-        </div>
         <div class="login-info">
           <input
             type="text"
@@ -41,27 +43,33 @@
 
 <script>
 import LoginUser from "../api/admin/authAPI.js";
+import ErrorBox from "../components/ErrorBox";
 export default {
   name: "login",
   data() {
     return {
-      err: null,
+      err:{
+        msg: null,
+        icon: "error-white",
+      },
       username: "",
-      password: ""
+      password: "",
     };
   },
-  components: {},
+  components: {
+    ErrorBox,
+  },
   methods: {
     async login() {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
-        this.err = "User not registered";
+        this.err.msg = "User not registered";
       } else if (check === 401) {
-        this.err = "Wrong credentials";
+        this.err.msg = "Wrong credentials";
       } else if (check === 403) {
-        this.err = "User banned";
+        this.err.msg = "User banned";
       }
-    }
-  }
+    },
+  },
 };
 </script>

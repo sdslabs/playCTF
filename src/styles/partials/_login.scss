@@ -1,14 +1,18 @@
 .login {
     width: 100%;
 
-    .login-heading {
-        font-family: $primary-font-family;
+    .container {
+        display: flex;
+        flex-direction: row;
 
-        font-weight: bold;
-        font-size: 1.75rem;
-        line-height: 2.75rem;
-        color: $theme-color-grey39;
-        text-align: left;
+        .login-heading {
+            font-family: $primary-font-family;
+            font-weight: bold;
+            font-size: 1.75rem;
+            line-height: 2.75rem;
+            color: $theme-color-grey39;
+            text-align: left;
+        }
     }
 
     .login-subheading {
@@ -32,20 +36,6 @@
         .login-form {
             padding-right: 5rem;
             width: 60%;
-
-            .error {
-                font-size: 0.85rem;
-                margin-top: 0.8rem;
-                color: #D72C27;
-                display: flex;
-                flex-direction: row;
-                .errImg {
-                    padding-right: 0.6rem;
-                }
-                .no-error {
-                    color: green;
-                }
-            }
 
             .login-inputField {
                 width: 100%;
