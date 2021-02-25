@@ -1,56 +1,74 @@
-.footer {
-    height: 12.75rem;
-    background-color: $theme-color-dark-white;
-    padding: 0rem 15.75rem;
-    margin-top: 4.5rem;
-    bottom: 0rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.adminFooter {
+  padding: 0 20%;
+  display: flex;
+  flex-direction: row;
+  height: 12.75rem;
+  background-color: $theme-color-dark-white;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 0;
+  width: 60%;
+}
 
-    .footer-about {
-        text-align: left;
-        font-family: $primary-font-family;
+.platformName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-        .footer-about-beast {
-            font-weight: 900;
-            font-size: 2rem;
-            line-height: 1.5rem;
-            color: $theme-color-black19;
-        }
+.adminFooterTitle {
+  text-align: left;
+  vertical-align: middle;
+  font-family: $primary-font-family;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 2rem;
+  line-height: 1.5rem;
+  margin-bottom: 0;
+}
 
-        .footer-about-reach {
-            font-weight: 600;
-            font-size: 0.875rem;
-            line-height: 2rem;
-            color: $theme-color-grey39;
-        }
+.adminFooterContact {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
-        .footer-about-reach-reachus {
-            font-weight: bold;
-            font-size: 1rem;
-            line-height: 2rem;
-            color: $theme-color-violet;
-            text-decoration: none;
-            margin-left: 0.3125rem;
-        }
-    }
+.adminFooterMessage {
+  font-family: $primary-font-family;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.875rem;
+  line-height: 2rem;
+}
 
-    .footer-contact {
-        width: 6.875rem;
-        height: 5rem;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
+.adminFooterLink {
+  @extend %font-style-bold;
+  font-size: 1rem;
+  line-height: 2rem;
+  margin-left: 0.625rem;
+  color: $theme-color-violet;
+  text-decoration: none;
+}
 
-        .footer-contact-sds-logo {
-            margin-bottom: 0.9375rem;
-        }
+.adminFooterLogos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-        .footer-contact-info {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
+.adminFooterContactInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 1.5625rem;
+}
+
+#admin-layout,
+#admin-landing-layout,
+#user-layout,
+#error-layout,
+#auth-layout {
+  min-height: 100vh;
+  position: relative;
+  width: 100%;
 }
