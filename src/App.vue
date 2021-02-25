@@ -14,13 +14,13 @@ export default {
   name: "app",
   components: {
     Navbar,
-    Footer
+    Footer,
   },
   computed: {
     layout() {
       return this.$route.meta.layout || default_layout;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -54,5 +54,6 @@ export default {
 body {
   margin: 0;
   overflow-x: hidden;
+  overflow-y: overlay;
 }
 </style>
