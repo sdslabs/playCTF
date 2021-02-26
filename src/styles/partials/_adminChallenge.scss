@@ -34,7 +34,7 @@
 
         .name {
             font-family: $primary-font-family;
-            font-style: normal;
+            
             font-weight: bold;
             font-size: 1.5rem;
             line-height: 1.75rem;
@@ -47,7 +47,7 @@
             background: $theme-color-violet;
             border-radius: 0.125rem;
             font-family: $secondary-font-family;
-            font-style: normal;
+            
             font-weight: bold;
             font-size: 0.875rem;
             line-height: 1rem;
@@ -60,7 +60,7 @@
         .status {
             margin-left: auto;
             font-family: $primary-font-family;
-            font-style: normal;
+            
             font-weight: bold;
             font-size: 1.25rem;
             line-height: 1.75rem;
@@ -113,7 +113,7 @@
             }
 
             .field {
-                font-weight: normal;
+                
                 font-size: 1rem;
                 line-height: 1.125rem;
                 text-align: center;
@@ -132,8 +132,8 @@
     .aboutText {
         text-align: left;
         font-family: $secondary-font-family;
-        font-style: normal;
-        font-weight: normal;
+        
+        
         font-size: 0.875rem;
         line-height: 1.5rem;
         color: $theme-color-grey39;
