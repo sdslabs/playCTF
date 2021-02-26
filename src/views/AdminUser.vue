@@ -131,7 +131,7 @@ import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
-import store from '../store/index';
+import store from "../store/index";
 import {
   confimDialogMessages,
   tableCols,
@@ -186,8 +186,7 @@ export default {
   },
   methods: {
     getAccess() {
-      if(store.getters.getRole === "admin")
-        return true;
+      if (store.getters.getRole === "admin") return true;
       return false;
     },
     manageUser(userId, action) {

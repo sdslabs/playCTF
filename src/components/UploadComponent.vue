@@ -34,7 +34,7 @@ export default {
       logo: null,
       upload,
       showImg: false,
-      name: "",
+      name: ""
     };
   },
   methods: {
@@ -49,14 +49,14 @@ export default {
     onFileChange() {
       this.logo = this.$refs.file.files[0];
       this.name = this.logo.name.trim().substr(0, 10) + "...";
-    },
+    }
   },
   watch: {
-    logo: function (newCompInfoLogo, prevCompInfoLogo) {
+    logo: function(newCompInfoLogo, prevCompInfoLogo) {
       if (newCompInfoLogo != prevCompInfoLogo) {
         this.emitLogo(newCompInfoLogo);
       }
-    },
-  },
+    }
+  }
 };
 </script>

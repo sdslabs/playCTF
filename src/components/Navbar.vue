@@ -81,7 +81,7 @@ export default {
           page: "/about"
         }
       ],
-      userProfilePath:"/user/"
+      userProfilePath: "/user/"
     };
   },
   components: {

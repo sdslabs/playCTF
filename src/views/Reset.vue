@@ -58,15 +58,15 @@ export default {
       password: "",
       password2: "",
       errorIcon: "error-white",
-      tickIcon: "tick-white",
+      tickIcon: "tick-white"
     };
   },
   components: {
-    ErrorBox,
+    ErrorBox
   },
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async reset() {
       if (this.password !== this.password2) {
@@ -84,10 +84,10 @@ export default {
           this.icon = this.errorIcon;
         }
       }
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "ResetPassword");
-  },
+  }
 };
 </script>

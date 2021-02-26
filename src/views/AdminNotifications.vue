@@ -94,8 +94,8 @@ export default {
       loading: true,
       err: {
         msg: null,
-        icon: null,
-      },
+        icon: null
+      }
     };
   },
   mounted() {

@@ -14,13 +14,13 @@ export default {
   name: "app",
   components: {
     Navbar,
-    Footer,
+    Footer
   },
   computed: {
     layout() {
       return this.$route.meta.layout || default_layout;
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -88,7 +88,7 @@ import ErrorBox from "../components/ErrorBox";
 export default {
   name: "register",
   components: {
-    ErrorBox,
+    ErrorBox
   },
   data() {
     return {
@@ -104,7 +104,7 @@ export default {
       PassErr: false,
       registered: true,
       errorIcon: "error-white",
-      tickIcon: "tick-white",
+      tickIcon: "tick-white"
     };
   },
   methods: {
@@ -113,7 +113,7 @@ export default {
       return re.test(email);
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async register() {
       if (!this.validateEmail(this.email)) {
@@ -144,7 +144,7 @@ export default {
           this.$router.push("/login");
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
