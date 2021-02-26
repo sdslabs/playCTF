@@ -60,7 +60,7 @@
     .fields {
         text-align: left;
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         font-size: 0.875rem;
         line-height: 1.125rem;
@@ -86,7 +86,7 @@
         font-size: 0.75rem;
         text-align: left;
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: 1.125rem;
         margin: 0.2rem;
@@ -137,7 +137,7 @@
 
     textarea::placeholder {
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         font-size: 1rem;
         line-height: 1.125rem;
@@ -326,7 +326,7 @@
     border-radius: 0.125rem;
     color: $theme-color-white;
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: bold;
     font-size: 0.875rem;
     line-height: 1.75rem;
