@@ -4,7 +4,8 @@
     .container {
         display: flex;
         flex-direction: row;
-
+        align-items: center;
+        text-align: center;
         .login-heading {
             font-family: $primary-font-family;
             font-weight: bold;
@@ -36,6 +37,17 @@
         .login-form {
             padding-right: 5rem;
             width: 60%;
+
+            .error-box {
+                font-size: 0.85rem;
+                margin-top: 0.8rem;
+                color: #D72C27;
+                display: flex;
+                flex-direction: row;
+                .errImg {
+                    padding-right: 0.6rem;
+                }
+            }
 
             .login-inputField {
                 width: 100%;

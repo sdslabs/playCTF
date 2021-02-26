@@ -42,8 +42,8 @@
             placeholder="Email*"
             required="true"
           />
-          <div class="error" v-if="emailErr">
-            <img src="@/assets/error.svg" class="errImg" /> Enter a valid email
+          <div class="error-box" v-if="EmailErr">
+            <img src="@/assets/error.svg" class="errImg" /> {{ this.EmailErr }}
           </div>
         </div>
         <div class="info">
@@ -67,9 +67,8 @@
             placeholder="Confirm Password*"
             required="true"
           />
-          <div class="error" v-if="passErr">
-            <img src="@/assets/error.svg" class="errImg" /> Passwords don't
-            match
+          <div class="error-box" v-if="PassErr">
+            <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
           </div>
         </div>
         <button
@@ -104,10 +103,9 @@ export default {
       email: "",
       password: "",
       password2: "",
-      emailErr: false,
-      passErr: false,
       status: false,
-      err: false,
+      EmailErr: false,
+      PassErr: false,
       registered: true,
       errorIcon: "error-white",
       tickIcon: "tick-white",
@@ -123,19 +121,16 @@ export default {
     },
     async register() {
       if (!this.validateEmail(this.email)) {
-        this.emailErr = true;
-        (this.error.msg = "Invalid Email"), (this.error.icon = this.errorIcon);
+        this.EmailErr = "Invalid Email";
       } else {
-        this.emailErr = false;
+        this.EmailErr = false;
       }
       if (this.password !== this.password2) {
-        this.passErr = true;
-        (this.error.msg = "Passwords don't match"),
-          (this.error.icon = this.errorIcon);
+        this.PassErr = "Passwords don't match";
       } else {
-        this.passErr = false;
+        this.PassErr = false;
       }
-      if (!this.passErr && !this.emailErr) {
+      if (!this.PassErr && !this.EmailErr) {
         this.status = RegisterUser.registeredUser(
           this.uname,
           this.username,
@@ -145,7 +140,6 @@ export default {
         if (!this.status) {
           this.error.msg = "Registration Failed";
           this.error.icon = this.errorIcon;
-          this.err = true;
         } else {
           this.error.msg = "Registered Successfully";
           this.error.icon = this.tickIcon;

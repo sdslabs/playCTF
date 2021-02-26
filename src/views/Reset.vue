@@ -30,6 +30,9 @@
             placeholder="Confirm Password*"
             required="true"
           />
+          <div class="error-box" v-if="PassErr">
+            <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
+          </div>
         </div>
         <button
           @click="reset()"
@@ -55,6 +58,7 @@ export default {
         msg: null,
         icon: null,
       },
+      PassErr: false,
       password: "",
       password2: "",
       errorIcon: "error-white",
@@ -70,9 +74,9 @@ export default {
     },
     async reset() {
       if (this.password !== this.password2) {
-        this.error.msg = "Passwords don't match";
-        this.error.icon = this.errorIcon;
+        this.PassErr = "Passwords don't match";
       } else {
+        this.PassErr = false;
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
           this.error.msg = "Succesfully changed";
