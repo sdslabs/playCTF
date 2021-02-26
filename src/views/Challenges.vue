@@ -1,16 +1,14 @@
 <template>
   <div class="challenge-main-container">
-    <div class="chall-tags">
-      <div class="tags">
-        <a
-          v-for="tag in tags"
-          v-bind:key="tag.id"
-          :class="{ tag: true, active: selectedTag.name === tag.name }"
-          :tag="tag.name"
-          @click="changeFilter(tag)"
-          >{{ tag.name }}
-        </a>
-      </div>
+    <div class="adminChallengesVerticalNav tags">
+      <a
+        v-for="tag in tags"
+        v-bind:key="tag.id"
+        :class="{ navButton: true, active: selectedTag.name === tag.name }"
+        :tag="tag.name"
+        @click="changeFilter(tag)"
+        >{{ tag.name }}
+      </a>
     </div>
     <div class="challenge">
       <div class="chall-details">

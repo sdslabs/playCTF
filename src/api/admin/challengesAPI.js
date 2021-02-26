@@ -135,7 +135,7 @@ export default {
   async fetchChallengeByName(name) {
     return await axiosInstance({
       method: "get",
-      url: `/api/info/challenge/${name}`,
+      url: `/api/info/challenge/${name}`
       // data: postData
     });
   },

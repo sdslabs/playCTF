@@ -14,16 +14,16 @@
           <p class="subfields">Start date</p>
           <input
             v-model="timedate.startDate"
-            class="title"
+            class="timeComponent"
             type="date"
             :disabled="this.disabled"
           />
         </div>
         <div class="timeInput">
-          <p class="subfields">Start time (24 hr format)</p>
+          <p class="subfields">Start time (24HR)</p>
           <input
             v-model="timedate.startTime"
-            class="title"
+            class="dateComponent"
             type="time"
             step="1"
             :disabled="this.disabled"
@@ -35,16 +35,16 @@
           <p class="subfields">End date</p>
           <input
             v-model="timedate.endDate"
-            class="title"
+            class="timeComponent"
             type="date"
             :disabled="this.disabled"
           />
         </div>
         <div class="timeInput">
-          <p class="subfields">End time (24 hr format)</p>
+          <p class="subfields">End time (24HR)</p>
           <input
             v-model="timedate.endTime"
-            class="title"
+            class="dateComponent"
             type="time"
             step="1"
             :disabled="this.disabled"

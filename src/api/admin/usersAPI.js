@@ -5,7 +5,7 @@ export default {
     let allUsers = [];
     const response = await axiosInstance.get(`/api/info/users`);
     let users = response.data;
-    users = users.filter((el) => {
+    users = users.filter(el => {
       return el.role === "contestant";
     });
     users = users.sort((a, b) => {
@@ -16,14 +16,14 @@ export default {
       }
     });
     let rank = 0;
-    users.forEach((el) => {
+    users.forEach(el => {
       rank++;
       allUsers.push({
         rank: rank,
         username: el.username,
         email: el.email,
         score: el.score,
-        status: el.status === 0 ? "Active" : "Banned",
+        status: el.status === 0 ? "Active" : "Banned"
       });
     });
     return allUsers;
@@ -32,7 +32,7 @@ export default {
   async getUserByUsername(username) {
     return await axiosInstance({
       method: "get",
-      url: `/api/info/user/${username}`,
+      url: `/api/info/user/${username}`
     });
   },
   async getUserStats() {
@@ -42,7 +42,7 @@ export default {
   async manageUser(userId, action) {
     return await axiosInstance({
       method: "post",
-      url: `/api/admin/users/${action}/${userId}`,
+      url: `/api/admin/users/${action}/${userId}`
     });
-  },
+  }
 };

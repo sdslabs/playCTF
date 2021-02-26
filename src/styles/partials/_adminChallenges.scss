@@ -6,40 +6,43 @@
 }
 
 .adminChallengesVerticalNav {
-    width: 10%;
+    width: 15rem;
     justify-content: flex-start;
+    align-items: flex-end;
     display: flex;
     flex-direction: column;
     margin-right: auto;
-    padding-top: 15%;
-    margin-left: -13%;
+    padding-top: 8rem;
+    padding-right: 1.5rem;
+    margin-left: -15rem;
+    box-sizing: border-box;
 
     .navButton {
         display: flex;
         flex-direction: row-reverse;
         @extend %font-style-basic;
+        font-size: 1rem;
+        line-height: 1rem;
         background-color: white;
         border: none;
         color: $theme-color-light-grey;
         text-align: right;
         outline: none;
-        margin: 0.5rem 0;
+        margin: 1rem 0;
+        width: 100%;
+        height: 1.5rem;
+        padding-right: 0.5rem;
+        padding-top: 0.25rem;
     }
 
-    .navButton:hover {
-        @extend %font-style-bold;
-        font-size: 1rem;
-        line-height: 18rem / $root-base-size;
-        color: $theme-color-black19;
-        border-right: 0.125rem solid $secondary-admin-theme-color;
-    }
-
+    .navButton:hover,
     .active {
         @extend %font-style-bold;
         font-size: 1rem;
-        line-height: 18rem / $root-base-size;
+        line-height: 1rem;
         color: $theme-color-black19;
-        border-right: 0.125rem solid $secondary-admin-theme-color;
+        border-right: 0.125rem solid $theme-color-dark-orange;
+        padding-right: calc(0.5rem - 0.125rem);
     }
 }
 
@@ -86,55 +89,63 @@
     align-items: center;
     @extend %font-style-basic;
     margin-top: 1.875rem;
+    height: 2.5rem;
 
     .sortText {
         line-height: 1.125rem;
         color: $theme-color-black-high-transp;
-        margin-right: 0.5rem;
+        margin-right: 1rem;
     }
 
     .sortOption {
+        box-sizing: border-box;
+        font-size: 1rem;
         line-height: 1.5rem;
         color: $theme-color-grey-high-transp;
-        margin: 0 0.5rem;
+        margin: 0rem;
+        width: 5.5rem;
+        height: 3rem;
+        padding-top: 0.75rem;
     }
 
-    .sortOption:hover {
-        @extend %font-style-bold;
-        font-size: 1rem;
-        line-height: 18rem / $root-base-size;
-        text-align: center;
-        color: $theme-color-black19;
-        border-bottom: 0.125rem solid $theme-color-dark-orange;
-    }
-
+    .sortOption:hover,
     .active {
         @extend %font-style-bold;
         font-size: 1rem;
-        line-height: 18rem / $root-base-size;
-        text-align: center;
+        line-height: 1.5rem;
         color: $theme-color-black19;
-        border-bottom: 0.125rem solid $theme-color-dark-orange;
+        margin: 0rem;
+        height: 3rem;
+
+        &:after {
+            content: "";
+            display: block;
+            margin: 0 auto;
+            width: 3.5rem;
+            border-bottom: 0.125rem solid $theme-color-dark-orange;
+            ;
+        }
     }
 
     .dropdown {
         margin-left: auto;
         width: 12.5rem;
-
         .filterText {
-
+            @extend %font-style-basic;
             font-size: 0.875rem;
             line-height: 1.125rem;
             color: $theme-color-grey57;
         }
 
         .filterSelection {
-            margin-left: auto;
-            font-weight: 600;
+            @extend %font-style-basic;
             font-size: 0.875rem;
             line-height: 1.125rem;
             color: $theme-color-black-high-transp;
-            margin-right: 0.5rem;
+        }
+        .vs__selected{
+            position: absolute;
+            top:0.1rem;
         }
     }
 

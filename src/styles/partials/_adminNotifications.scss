@@ -20,7 +20,9 @@
   justify-content: space-between;
 }
 
-.adNotifForm {
+.adNotifForm,
+.form,
+.landingInput {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -38,12 +40,13 @@
   }
 
   .adFormTitle {
+    box-sizing: border-box;
     height: 2.5rem;
     border-radius: 0.3125rem;
-    border: 0.0625rem solid $theme-color-grey-high-transp;
+    border: 1px solid $theme-color-grey-high-transp;
     padding-left: 1rem;
     @extend %font-style-basic;
-    margin-bottom: 2%;
+    margin-bottom: 1rem;
   }
 
   .adFormTitle::placeholder,
@@ -53,9 +56,10 @@
   }
 
   textarea {
+    box-sizing: border-box;
     height: 6rem;
     border-radius: 0.3125rem;
-    border: 0.0625rem solid $theme-color-grey-high-transp;
+    border: 1px solid $theme-color-grey-high-transp;
     @extend %font-style-basic;
     padding-left: 1rem;
     padding-top: 1rem;
@@ -76,8 +80,13 @@
 
   textarea:focus,
   .adFormTitle:focus {
-    outline: none !important;
-    border: 0.125rem solid $theme-color-violet;
+    outline: 0;
+    border: 2px solid $theme-color-violet;
+    padding-left: calc(1rem - 1px);
+  }
+
+  textarea:focus {
+    padding-top: calc(1rem - 1px);
   }
 }
 
