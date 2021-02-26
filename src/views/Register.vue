@@ -1,48 +1,46 @@
 <template>
-  <div class="register">
-    <div class="container">
-      <div class="register-heading">
+  <div class="auth">
+    <div class="auth-container">
+      <div class="heading">
         Register for n00b<label class="switch">CTF</label>
       </div>
-      <div v-if="error.msg">
-        <ErrorBox :error="error" />
-      </div>
+      <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
-    <div class="register-form-div">
-      <div class="register-form">
-        <div class="register-info">
+    <div class="form-div">
+      <div class="form">
+        <div class="info">
           <input
             v-model="uname"
             type="text"
-            class="register-inputField"
+            class="inputField"
             id="name"
             name="name"
             placeholder="Name*"
             required="true"
           />
         </div>
-        <div class="register-info">
+        <div class="info">
           <input
             v-model="username"
             type="text"
-            class="register-inputField"
+            class="inputField"
             id="username"
             name="user_name"
             placeholder="Username*"
             required="true"
           />
         </div>
-        <div class="register-info">
+        <div class="info">
           <input
             v-model="email"
             type="text"
-            class="register-inputField"
+            class="inputField"
             id="email"
             name="user_email"
             placeholder="Email*"
             required="true"
           />
-          <div class="error-box" v-if="EmailErr">
+          <div class="text-field-error" v-if="EmailErr">
             <img src="@/assets/error.svg" class="errImg" /> {{ this.EmailErr }}
           </div>
         </div>
@@ -50,7 +48,7 @@
           <input
             v-model="password"
             type="password"
-            class="register-inputField password"
+            class="inputField password"
             id="password"
             name="user_pass"
             placeholder="Password*"
@@ -61,25 +59,25 @@
           <input
             v-model="password2"
             type="password"
-            class="register-inputField password"
+            class="inputField password"
             id="confirmpassword"
             name="user_pass"
             placeholder="Confirm Password*"
             required="true"
           />
-          <div class="error-box" v-if="PassErr">
+          <div class="text-field-error" v-if="PassErr">
             <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
           </div>
         </div>
         <button
           @click="register()"
-          class="login-button primary-btn"
+          class="auth-button primary-btn"
           :disabled="!(uname && username && password && password2 && email)"
         >
           Register Now
         </button>
       </div>
-      <img src="@/assets/registration.svg" class="register-image" />
+      <img src="@/assets/registration.svg" class="auth-image" />
     </div>
   </div>
 </template>
@@ -94,10 +92,8 @@ export default {
   },
   data() {
     return {
-      error: {
-        msg: null,
-        icon: null,
-      },
+      msg: null,
+      icon: null,
       uname: "",
       username: "",
       email: "",
@@ -138,11 +134,11 @@ export default {
           this.password
         );
         if (!this.status) {
-          this.error.msg = "Registration Failed";
-          this.error.icon = this.errorIcon;
+          this.msg = "Registration Failed";
+          this.icon = this.errorIcon;
         } else {
-          this.error.msg = "Registered Successfully";
-          this.error.icon = this.tickIcon;
+          this.msg = "Registered Successfully";
+          this.icon = this.tickIcon;
           this.registered;
           await this.sleep(3000);
           this.$router.push("/login");

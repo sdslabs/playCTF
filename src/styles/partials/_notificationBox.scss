@@ -1,0 +1,19 @@
+.error-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: "Open Sans";
+    margin-left: 2.5rem;
+    padding: 0.2rem 2rem;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.9);
+    border-radius: 0.2rem;
+    height: 1.6rem;
+    width: auto;
+    color: #ffffff;
+    .errorImg {
+        height: 14px;
+        width: auto;
+        padding-right: 0.5rem;
+    }
+}

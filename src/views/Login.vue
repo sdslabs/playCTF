@@ -1,27 +1,25 @@
 <template>
-  <div class="login">
-    <div class="container">
-      <div class="login-heading">Login</div>
-      <div v-if="err.msg">
-        <ErrorBox :error="err" />
-      </div>
+  <div class="auth">
+    <div class="auth-container">
+      <div class="heading">Login</div>
+      <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
-    <div class="login-form-div">
-      <div class="login-form">
-        <div class="login-info">
+    <div class="form-div">
+      <div class="form">
+        <div class="info">
           <input
             type="text"
-            class="login-inputField name"
+            class="inputField name"
             id="username"
             name="user_name"
             placeholder="Team Name*"
             v-model="username"
           />
         </div>
-        <div class="login-info">
+        <div class="info">
           <input
             type="password"
-            class="login-inputField password"
+            class="inputField password"
             id="password"
             name="user_pass"
             placeholder="Password*"
@@ -31,12 +29,12 @@
         <button
           :disabled="!(username && password)"
           @click="login()"
-          class="login-button primary-btn"
+          class="auth-button primary-btn"
         >
           Login
         </button>
       </div>
-      <img src="@/assets/login.svg" class="login-image" />
+      <img src="@/assets/login.svg" class="auth-image" />
     </div>
   </div>
 </template>
@@ -48,10 +46,8 @@ export default {
   name: "login",
   data() {
     return {
-      err:{
-        msg: null,
-        icon: "error-white",
-      },
+      msg: null,
+      icon: "error-white",
       username: "",
       password: "",
     };
@@ -63,11 +59,11 @@ export default {
     async login() {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
-        this.err.msg = "User not registered";
+        this.msg = "User not registered";
       } else if (check === 401) {
-        this.err.msg = "Wrong credentials";
+        this.msg = "Wrong credentials";
       } else if (check === 403) {
-        this.err.msg = "User banned";
+        this.msg = "User banned";
       }
     },
   },
