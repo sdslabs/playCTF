@@ -1,25 +1,25 @@
 <template>
-  <div class="login">
-    <div class="login-heading">Login</div>
-    <div class="login-form-div">
-      <div class="login-form">
-        <div class="error" v-if="err">
-          <img src="@/assets/error.svg" class="errImg" /> {{ this.err }}
-        </div>
-        <div class="login-info">
+  <div class="auth">
+    <div class="auth-container">
+      <div class="heading">Login</div>
+      <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
+    </div>
+    <div class="form-div">
+      <div class="form">
+        <div class="info">
           <input
             type="text"
-            class="login-inputField name"
+            class="inputField name"
             id="username"
             name="user_name"
             placeholder="Team Name*"
             v-model="username"
           />
         </div>
-        <div class="login-info">
+        <div class="info">
           <input
             type="password"
-            class="login-inputField password"
+            class="inputField password"
             id="password"
             name="user_pass"
             placeholder="Password*"
@@ -29,39 +29,43 @@
         <button
           :disabled="!(username && password)"
           @click="login()"
-          class="login-button primary-btn"
+          class="auth-button primary-btn"
         >
           Login
         </button>
       </div>
-      <img src="@/assets/login.svg" class="login-image" />
+      <img src="@/assets/login.svg" class="auth-image" />
     </div>
   </div>
 </template>
 
 <script>
 import LoginUser from "../api/admin/authAPI.js";
+import ErrorBox from "../components/ErrorBox";
 export default {
   name: "login",
   data() {
     return {
-      err: null,
+      msg: null,
+      icon: "error-white",
       username: "",
-      password: ""
+      password: "",
     };
   },
-  components: {},
+  components: {
+    ErrorBox,
+  },
   methods: {
     async login() {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
-        this.err = "User not registered";
+        this.msg = "User not registered";
       } else if (check === 401) {
-        this.err = "Wrong credentials";
+        this.msg = "Wrong credentials";
       } else if (check === 403) {
-        this.err = "User banned";
+        this.msg = "User banned";
       }
-    }
-  }
+    },
+  },
 };
 </script>

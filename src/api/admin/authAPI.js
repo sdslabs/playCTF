@@ -64,19 +64,17 @@ export default {
       });
       return Promise.resolve(response);
     } catch (err) {
-      let response = err;
-      return response;
+      return err;
     }
   },
 
   async registeredUser(name, username, email, password) {
     const response = await this.registerUser(name, username, email, password);
     if (response.status === 200) {
-      router.push("/login");
+      return true;
     } else {
-      alert("Registration attempt failed: " + response.message);
+      return false;
     }
-    return;
   },
 
   async resetPass(newPassword) {
@@ -90,8 +88,7 @@ export default {
       });
       return Promise.resolve(response);
     } catch (err) {
-      let response = err;
-      return response;
+      return err;
     }
   },
 

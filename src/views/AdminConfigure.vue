@@ -11,10 +11,9 @@
       </button>
 
       <div class="addConfigFeedback">
-        <transition name="fade" v-on:enter="enter">
-          <img v-if="showSuccess" :src="configSuccess" />
-          <img v-if="showFail" :src="configFail" />
-        </transition>
+       <div class="fade" v-if="err.msg">
+          <ErrorBox :error="err" />
+        </div>
       </div>
     </div>
     <div class="form">
@@ -93,6 +92,7 @@ import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
 import ConfigLogo from "../components/adminConfigs/configLogo.vue";
 import { getAllTimezones } from "../constants/constants";
 import PreviewModal from "../components/PreviewModal.vue";
+import ErrorBox from "../components/ErrorBox";
 export default {
   name: "AdminConfigure",
   components: {
@@ -100,7 +100,8 @@ export default {
     ConfigContent,
     ConfigTimeDate,
     ConfigLogo,
-    PreviewModal
+    PreviewModal,
+    ErrorBox
   },
   data() {
     return {
@@ -120,7 +121,11 @@ export default {
       compLogo: "",
       showSuccess: false,
       showFail: false,
-      showPreviewModal: false
+      showPreviewModal: false,
+      err: {
+        msg: null,
+        icon: null
+      },
     };
   },
   methods: {
@@ -151,6 +156,16 @@ export default {
         this.compEndDate
       );
       return value;
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async fadeFunc() {
+      await this.sleep(3000);
+      this.err.msg = null;
+      this.err.icon = null;
+      this.showSuccess = false;
+      this.showFail = false;
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
@@ -183,9 +198,15 @@ export default {
         .updateConfigs(configs)
         .then(() => {
           this.showSuccess = true;
+          this.err.msg = "Changes made successfully";
+          this.err.icon = "tick-white";
+          this.fadeFunc();
         })
         .catch(() => {
           this.showFail = true;
+          this.err.msg = "Failed to make changes";
+          this.err.icon = "error-white";
+          this.fadeFunc();
         });
     },
     enter: function() {
