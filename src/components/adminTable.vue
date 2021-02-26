@@ -37,7 +37,10 @@
                     (row.status === 'Active' || row.status === 'Correct'),
                   red:
                     col === 'status' &&
-                    (row.status === 'Banned' || row.status === 'Incorrect')
+                    (row.status === 'Banned' || row.status === 'Incorrect'),
+                  bannedTableData:
+                    row.status === 'Banned' &&
+                    (col === 'rank' || col === 'score')
                 },
                 `adminTable${col}`
               ]"
