@@ -1,30 +1,28 @@
 <template>
-  <div class="login">
-    <div class="container">
-      <div class="login-heading">Change Password</div>
-      <div v-if="error.msg">
-        <ErrorBox :error="error" />
-      </div>
+  <div class="auth">
+    <div class="auth-container">
+      <div class="heading">Change Password</div>
+      <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
-    <div class="login-subheading">Choose your new password</div>
-    <div class="login-form-div">
-      <div class="login-form">
-        <div class="login-info">
+    <div class="auth-subheading">Choose your new password</div>
+    <div class="form-div">
+      <div class="form">
+        <div class="info">
           <input
             v-model="password"
             type="password"
-            class="login-inputField password"
+            class="inputField password"
             id="password"
             name="user_pass"
             placeholder="New Password*"
             required="true"
           />
         </div>
-        <div class="login-info">
+        <div class="info">
           <input
             v-model="password2"
             type="password"
-            class="login-inputField password"
+            class="inputField password"
             id="confirmpassword"
             name="user_pass"
             placeholder="Confirm Password*"
@@ -36,13 +34,13 @@
         </div>
         <button
           @click="reset()"
-          class="login-button primary-btn"
+          class="auth-button primary-btn"
           :disabled="!(password && password2)"
         >
           Change Password
         </button>
       </div>
-      <img src="@/assets/login.svg" class="login-image" />
+      <img src="@/assets/login.svg" class="auth-image" />
     </div>
   </div>
 </template>
@@ -54,10 +52,8 @@ export default {
   name: "login",
   data() {
     return {
-      error: {
-        msg: null,
-        icon: null,
-      },
+      msg: null,
+      icon: null,
       PassErr: false,
       password: "",
       password2: "",
@@ -79,13 +75,13 @@ export default {
         this.PassErr = false;
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
-          this.error.msg = "Succesfully changed";
-          this.error.icon = this.tickIcon;
+          this.msg = "Succesfully changed";
+          this.icon = this.tickIcon;
           await this.sleep(3000);
           this.$router.push("/about");
         } else {
-          this.error.msg = "Unatuthorized Access";
-          this.error.icon = this.errorIcon;
+          this.msg = "Unatuthorized Access";
+          this.icon = this.errorIcon;
         }
       }
     },
