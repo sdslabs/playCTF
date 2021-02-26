@@ -7,13 +7,15 @@
     flex-direction: row;
     align-items: center;
     z-index: 100;
-    .link-container{
+
+    .link-container {
         display: flex;
         flex-direction: row;
         align-items: center;
         width: 50%;
     }
-    .user-navbar-container{
+
+    .user-navbar-container {
         width: 100%;
         display: flex;
         flex-direction: row;
@@ -27,6 +29,7 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
+
         .navbar-link {
             display: inline-block;
             vertical-align: middle;
@@ -48,13 +51,14 @@
         }
 
         .logo {
-            img{
+            img {
                 height: 3rem;
             }
         }
     }
 
-    .active {
+    .active,
+    .router-link-exact-active {
         font-weight: bold;
 
         &:after {
@@ -142,6 +146,6 @@
     }
 }
 
-.bold{
+.bold {
     @extend %font-style-bold;
 }

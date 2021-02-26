@@ -1,10 +1,12 @@
 <template>
-  <div class="adminHeader">
-    <div class="ctfLogo">
-      <img :src="`${baseUrl}/api/info/logo`" />
+  <div class="navbar">
+    <div class="user-navbar-container">
+      <div class="ctfLogo">
+        <img :src="`${baseUrl}/api/info/logo`" />
+      </div>
+      <AdminNav />
+      <AdminDropdown />
     </div>
-    <AdminNav />
-    <AdminDropdown />
   </div>
 </template>
 <script>
