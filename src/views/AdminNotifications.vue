@@ -4,10 +4,9 @@
     <div class="adHeadingContainerWithFeedback">
       <div class="adminHeadingName">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
-        <transition name="fade" v-on:enter="enter">
-          <img v-if="showSuccess" :src="notifAdded" />
-          <img v-if="showFail" :src="notifFailed" />
-        </transition>
+        <div class="fade" v-if="err.msg">
+          <ErrorBox :error="err" />
+        </div>
       </div>
     </div>
     <div class="adNotifForm">
@@ -72,11 +71,13 @@ import NotificationTab from "../components/NotificationTab";
 import NotifService from "../api/admin/notificationsAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { notifAdded, notifFailed } from "../constants/images";
+import ErrorBox from "../components/ErrorBox";
 export default {
   name: "AdminNotfications",
   components: {
     NotificationTab,
-    SpinLoader
+    SpinLoader,
+    ErrorBox
   },
   data() {
     return {
@@ -90,7 +91,11 @@ export default {
       title: "",
       checked: false,
       notifications: [],
-      loading: true
+      loading: true,
+      err: {
+        msg: null,
+        icon: null,
+      },
     };
   },
   mounted() {
@@ -111,6 +116,16 @@ export default {
     isNew: function(notification) {
       this.duration(notification);
       return this.hours < 1;
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async fadeFunc() {
+      await this.sleep(3000);
+      this.err.msg = null;
+      this.err.icon = null;
+      this.showSuccess = false;
+      this.showFail = false;
     },
     duration: function(notification) {
       if (notification.isNew) {
@@ -156,6 +171,9 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showSuccess = true;
+          self.err.msg = "Notification sent successfully";
+          self.err.icon = "tick-white";
+          this.fadeFunc();
         })
         .catch(() => {
           self.title = "";
@@ -164,6 +182,9 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showFail = true;
+          self.err.msg = "Failed to send notification";
+          self.err.icon = "error-white";
+          this.fadeFunc();
         });
     },
     enter: function() {
