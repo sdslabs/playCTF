@@ -137,7 +137,7 @@ export const tableCols = {
     {
       id: 4,
       label: "Time & Date (+5:30 UTC)",
-      style: { paddingLeft: "1.25rem", textAlign: "left", width: "40% " }
+      style: { paddingRight: "2.5rem", textAlign: "right", width: "40% " }
     }
   ],
   adminChallenge: [
