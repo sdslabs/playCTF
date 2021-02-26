@@ -9,7 +9,7 @@
       </button>
 
       <div class="addConfigFeedback">
-       <div class="fade" v-if="err.msg">
+        <div class="fade" v-if="err.msg">
           <ErrorBox :error="err" />
         </div>
       </div>
@@ -123,7 +123,7 @@ export default {
       err: {
         msg: null,
         icon: null
-      },
+      }
     };
   },
   methods: {

@@ -14,7 +14,6 @@
 <script>
 export default {
   name: "ErrorBox",
-  props: ["msg", "icon"],
+  props: ["msg", "icon"]
 };
 </script>
-
