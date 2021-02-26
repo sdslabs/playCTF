@@ -5,8 +5,8 @@
       <div class="infoDetails">
         <span class="name">{{ chalDetails.name }}</span>
         <span class="category">{{ chalDetails.category }}</span>
-        <!-- <button class="adminBanButton">
-          <img :src="edit" class="banImg" /><span class="adminBanText"
+        <!-- <button class="action-cta">
+          <img :src="edit"  /><span class="adminBanText"
             >Edit</span
           >
         </button> -->
@@ -37,20 +37,16 @@
           class="changeChallengeStatus"
         >
           <button
-            class="adminBanButton"
+            class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'undeploy')"
           >
-            <img :src="undeploy" class="banImg" /><span class="adminBanText"
-              >Undeploy</span
-            >
+            <img :src="undeploy" /><span class="adminBanText">Undeploy</span>
           </button>
           <button
-            class="adminBanButton"
+            class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'purge')"
           >
-            <img :src="purge" class="banImg" /><span class="adminBanText"
-              >Purge</span
-            >
+            <img :src="purge" /><span class="adminBanText">Purge</span>
           </button>
         </div>
         <div
@@ -58,20 +54,16 @@
           class="changeChallengeStatus"
         >
           <button
-            class="adminBanButton"
+            class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'deploy')"
           >
-            <img :src="play" class="banImg" /><span class="adminBanText"
-              >Deploy</span
-            >
+            <img :src="play" /><span class="adminBanText">Deploy</span>
           </button>
           <button
-            class="adminBanButton"
+            class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'purge')"
           >
-            <img :src="purge" class="banImg" /><span class="adminBanText"
-              >Purge</span
-            >
+            <img :src="purge" /><span class="adminBanText">Purge</span>
           </button>
         </div>
         <div
@@ -79,12 +71,10 @@
           class="changeChallengeStatus"
         >
           <button
-            class="adminBanButton"
+            class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'deploy')"
           >
-            <img :src="play" class="banImg" /><span class="adminBanText"
-              >Deploy</span
-            >
+            <img :src="play" /><span class="adminBanText">Deploy</span>
           </button>
         </div>
       </div>
@@ -95,8 +85,8 @@
       <div class="host aboutText">
         {{ `${this.$store.getters.hostUrl}:${chalDetails.ports}` }}
       </div>
-      <!-- <button class="adminBanButton testRun">
-        <img :src="play" class="banImg" /><span class="adminBanText"
+      <!-- <button class="action-cta testRun">
+        <img :src="play"  /><span class="adminBanText"
           >Test Run</span
         >
       </button> -->

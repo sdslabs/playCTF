@@ -59,42 +59,11 @@
         align-items: center;
         justify-content: space-between;
 
-        .addChallenge {
-            background: $theme-color-dark-orange;
-            border-radius: 0.1875rem;
-            outline: none;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            padding: 0.5rem 0.75rem;
-            border: none;
-
-            .addImg {
-                width: 0.9375rem;
-                height: 0.9375rem;
-                margin: 0 0.3125rem;
-            }
-
-            .addText {
-                @extend %font-style-basic;
-                font-weight: 600;
-                color: $theme-color-white;
-            }
-        }
-
-        .addChallenge:hover {
-            background: $theme-color-white;
-
-            border: 0.125rem solid $theme-color-dark-orange;
-
-            .addImg {
-                filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
-            }
-
-            .addText {
-                color: $theme-color-dark-orange;
-            }
-        }
+        // .addChallenge:hover {
+        //     .addImg {
+        //         filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
+        //     }
+        // }
     }
 
 
@@ -194,10 +163,11 @@
 }
 
 
-.createChallBtnRow{
+.createChallBtnRow {
     display: flex;
     flex-direction: row;
-    .createChallButton{
+
+    .createChallButton {
         padding: 0.2rem 1rem;
         margin-right: 2rem;
     }

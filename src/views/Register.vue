@@ -71,7 +71,7 @@
         </div>
         <button
           @click="register()"
-          class="auth-button primary-btn"
+          class="login-button primary-cta"
           :disabled="!(uname && username && password && password2 && email)"
         >
           Register Now

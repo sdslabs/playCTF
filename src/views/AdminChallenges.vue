@@ -14,7 +14,10 @@
     <div class="mainContaineradminChall">
       <div class="adminHeadingChal">
         <div class="adminHeadingName">CHALLENGES</div>
-        <button class="addChallenge" @click="showCreateChallModal = true">
+        <button
+          class="addChallenge primary-cta"
+          @click="showCreateChallModal = true"
+        >
           <img class="addImg" :src="add" />
           <span class="addText">Create New Challenge</span>
         </button>

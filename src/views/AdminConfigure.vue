@@ -3,11 +3,9 @@
     <div class="heading">
       <span class="headingText"> CONFIGURE</span>
 
-      <button class="preview-button" @click="showPreviewModal = true">
-        <div class="preview">
-          <img :src="preview" />
-          Preview
-        </div>
+      <button class="action-cta" @click="showPreviewModal = true">
+        <img :src="preview" />
+        <span>Preview</span>
       </button>
 
       <div class="addConfigFeedback">
@@ -67,7 +65,7 @@
         </div>
       </div> -->
       <button
-        class="submitButton"
+        class="adminSubmitButton primary-cta"
         :disabled="cannotUpdate()"
         @click="updateConfigs"
       >

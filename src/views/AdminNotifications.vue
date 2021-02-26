@@ -37,10 +37,8 @@
           made.</label
         >
         <button
-          class="adminDisabledSubmitButton"
+          class="adminSubmitButton primary-cta"
           :class="{
-            adminEnabledSubmitButton: canSubmit,
-            adminInactiveSubmitButton: !canSubmit && !subProcessing,
             adminProcSubmitButton: subProcessing
           }"
           :disabled="!canSubmit"

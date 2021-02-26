@@ -29,7 +29,7 @@
         <button
           :disabled="!(username && password)"
           @click="login()"
-          class="auth-button primary-btn"
+          class="primary-cta login-button"
         >
           Login
         </button>
