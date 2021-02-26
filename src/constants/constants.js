@@ -14,7 +14,7 @@ export const AdminLandingDetails = [
       "It’s recommended to be sweet, short and simple. It’ll be easier to announce."
   },
   {
-    title: "When does the competition will happen?",
+    title: "When will the competition take place?",
     required: true,
     subtitle: "Once decided, this information cannot be changed"
   },
