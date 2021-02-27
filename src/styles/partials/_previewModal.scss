@@ -16,7 +16,7 @@
 
     &::-webkit-scrollbar {
         width: 0.5rem;
-        height: 2rem
+        height: 2rem;
     }
 
     &::-webkit-scrollbar-button {
@@ -29,7 +29,8 @@
     }
 
     ​ &::-webkit-scrollbar-track-piece {
-        background: #888
+        background: rgba(57, 57, 57, 0.35);
+        
     }
 
 

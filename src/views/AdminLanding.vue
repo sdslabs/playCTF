@@ -96,7 +96,11 @@
     </div>
     <transition name="fade" appear>
       <div class="modal-overlay" v-if="showPreviewModal">
-        <preview-modal @close="showPreviewModal = false" />
+        <preview-modal
+          :configs="getConfigs()"
+          :fetchedData="true"
+          @close="showPreviewModal = false"
+        />
       </div>
     </transition>
   </div>
@@ -172,11 +176,22 @@ export default {
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
     this.currentStep = this.getStartingStep();
-    if (this.currentStep > 3) {
-      this.$router.push("/admin/statistics");
-    }
+    // if (this.currentStep > 3) {
+    //   this.$router.push("/admin/statistics");
+    // }
   },
   methods: {
+    getConfigs() {
+      return {
+        name: this.compName,
+        about: this.compAbout,
+        prizes: this.compPrizes,
+        starting_time: this.getDateTimeString().startingTime,
+        ending_time: this.getDateTimeString().endingTime,
+        timezone: this.compTimezone,
+        logo: this.compLogo
+      };
+    },
     isNextDisabled() {
       let currentStep = this.getCurrentStep();
       if (currentStep === 1) {
@@ -259,23 +274,9 @@ export default {
       this.showPreviewModal = false;
     },
     submitConfigs() {
-      let timezone = moment.tz.names()[
-        getAllTimezones().findIndex(el => {
-          return el === this.compTimezone;
-        })
-      ];
-      let startingTimeObj = moment(
-        `${this.compStartDate}  ${this.compStartTime}`
-      );
-      let endingTimeObj = moment(`${this.compEndDate}  ${this.compEndTime}`);
-      let startingTime = `${startingTimeObj.format(
-        "HH:mm:ss"
-      )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
-        "Do MMMM YYYY, dddd"
-      )}`;
-      let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
-        .tz(timezone)
-        .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
+      let startEndTime = this.getDateTimeString();
+      let startingTime = startEndTime.startingTime;
+      let endingTime = startEndTime.endingTime;
       let configs = {
         name: this.compName,
         about: this.compAbout,
@@ -294,6 +295,29 @@ export default {
         .catch(() => {
           this.showFail = true;
         });
+    },
+    getDateTimeString() {
+      let timezone = moment.tz.names()[
+        getAllTimezones().findIndex(el => {
+          return el === this.compTimezone;
+        })
+      ];
+      let startingTimeObj = moment(
+        `${this.compStartDate}  ${this.compStartTime}`
+      );
+      let endingTimeObj = moment(`${this.compEndDate}  ${this.compEndTime}`);
+      let startingTime = `${startingTimeObj.format(
+        "HH:mm:ss"
+      )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
+        "Do MMMM YYYY, dddd"
+      )}`;
+      let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
+        .tz(timezone)
+        .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
+      return {
+        startingTime,
+        endingTime
+      };
     }
   }
 };
