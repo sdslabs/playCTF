@@ -13,16 +13,6 @@
         <span>Submitted</span>
         <img src="@/assets/tick.svg" />
       </div>
-      <!--
-      <div v-if="marked" class="challCard-bookmark" v-on:click="markedStatus()">
-        <img src="@/assets/marked.svg" />
-        <p class="challCard-review">Marked for review</p>
-      </div>
-      <div v-else class="challCard-bookmark" v-on:click="markedStatus()">
-        <img src="@/assets/unmarked.svg" />
-        <p class="challCard-review">Mark for review</p>
-      </div>
-      -->
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points
@@ -40,16 +30,6 @@
           {{ `${this.$store.getters.hostUrl}:${this.port || ""}` }}
         </div>
       </a>
-
-      <!-- <a v-if="challItem" :href="challItem.link"
-        ><div class="challCard-challItem">
-          <img
-            class="challCard-challItem-download"
-            src="@/assets/download.svg"
-          />
-          {{ challItem.displayName }}
-        </div>
-      </a>-->
     </div>
     <div
       v-if="!challDetails.isSolved && !isPreview"
@@ -65,18 +45,13 @@
           v-validate="'required'"
           v-model="flag"
         />
-        <button
-          class="challCard-form-submit-button primary-btn"
+        <Button
+          text="Submit Flag"
+          variant="primary-cta"
           :disabled="flag.length === 0 || this.showSuccess || this.showFail"
-          @click="submitFlag"
-        >
-          Submit Flag
-        </button>
+          :onclick="submitFlag"
+        />
       </div>
-      <!--<div class="challCard-report" @click="showModal()">
-        Report <img class="challCard-report-bug" src="@/assets/bug.svg" />
-      </div>
-      -->
     </div>
     <div class="submit-feedback">
       <transition name="fade" v-on:enter="enter">
@@ -89,21 +64,21 @@
 
 <script>
 import FlagService from "../api/userAPI";
+import Button from "@/components/Button.vue";
 export default {
   name: "ChallCard",
   props: ["challDetails", "tag", "isPreview"],
+  components: { Button },
   data() {
     return {
       port: undefined,
       flag: "",
       showSuccess: false,
       showFail: false
-      // marked: false,
     };
   },
   state: {
     disable: false,
-    // marked: false,
     isModalVisible: false
   },
   mounted() {
@@ -113,13 +88,12 @@ export default {
   },
   methods: {
     enter: function() {
-      let self = this;
       setTimeout(function() {
-        if (self.showSuccess) {
-          self.$router.go();
+        if (this.showSuccess) {
+          this.$router.go();
         }
-        self.showSuccess = false;
-        self.showFail = false;
+        this.showSuccess = false;
+        this.showFail = false;
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
@@ -139,9 +113,6 @@ export default {
         this.disable = false;
       }
     },
-    // markedStatus: function() {
-    //   this.marked = !this.marked;
-    // },
     showModal() {
       this.isModalVisible = true;
     },
