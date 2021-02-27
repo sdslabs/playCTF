@@ -22,6 +22,7 @@
       text="Upload Challenge"
       v-if="!challCreated"
       :disabled="!challengeTar"
+      class="uploadChallButton"
       variant="primary-cta"
       :onclick="updateConfigs"
     />

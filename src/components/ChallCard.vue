@@ -16,9 +16,7 @@
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points
-      <span v-if="challeDetails"
-        >| {{ challDetails.solves.length }} Solves</span
-      >
+      <span v-if="challDetails">| {{ challDetails.solves.length }} Solves</span>
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">

@@ -122,7 +122,7 @@
         width: 12.5rem;
 
         .filterText {
-            
+
             font-size: 0.875rem;
             line-height: 1.125rem;
             color: $theme-color-grey57;
@@ -171,4 +171,8 @@
         padding: 0.2rem 1rem;
         margin-right: 2rem;
     }
+}
+
+.uploadChallButton {
+    margin-right: auto;
 }
