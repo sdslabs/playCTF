@@ -16,10 +16,11 @@
         background: $theme-color-light-grey-d7;
         box-shadow: none;
         color: $theme-color-grey39;
+        border: none;
     }
 
     &:hover:enabled {
-        background: #E6650D;
+        background: #e6650d;
         color: $theme-color-white;
         border: 0.0625rem solid $theme-color-dark-orange;
     }
@@ -41,10 +42,11 @@
     &:disabled {
         background: $theme-color-light-grey-d7;
         color: $theme-color-grey39;
+        border: none;
     }
 
     &:hover:enabled {
-        background: #E6650D;
+        background: #e6650d;
         color: $theme-color-white;
         border: 0.0625rem solid $theme-color-dark-orange;
     }

@@ -167,6 +167,7 @@
                 height: 2rem;
                 width: 65%;
                 font-family: $primary-font-family;
+                margin-right: 0.75rem;
 
                 font-weight: 600;
                 font-size: 0.875rem;
@@ -174,14 +175,6 @@
                 padding: 0rem 0.75rem;
                 color: #B3B3B3;
                 border: none;
-            }
-
-            .challCard-form-submit-button {
-                width: 30%;
-                transform: scale(0.8);
-                padding-left: 0.75rem;
-                padding-right: 0.75rem;
-                margin-left: auto;
             }
         }
 
