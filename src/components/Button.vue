@@ -1,17 +1,12 @@
 <template>
-  <button class="button" :to="url" :disabled="disabled" v-on:click="onclick">
-    {{ text }}
+  <button :class="variant" :to="url" :disabled="disabled" v-on:click="onclick">
+    <img v-if="icon" class="img" :src="icon" />{{ text }}
   </button>
 </template>
 
 <script>
 export default {
   name: "Button",
-  props: {
-    url: String,
-    text: String,
-    disabled: Boolean,
-    onclick: String
-  }
+  props: ["url", "text", "disabled", "onclick", "icon", "variant"],
 };
 </script>
