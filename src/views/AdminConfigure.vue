@@ -196,6 +196,7 @@ export default {
         .updateConfigs(configs)
         .then(() => {
           this.showSuccess = true;
+          this.$store.commit("updateCompInfo", configs);
           this.err.msg = "Changes made successfully";
           this.err.icon = "tick-white";
           this.fadeFunc();

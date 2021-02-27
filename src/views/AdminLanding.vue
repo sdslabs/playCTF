@@ -176,9 +176,9 @@ export default {
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
     this.currentStep = this.getStartingStep();
-    // if (this.currentStep > 3) {
-    //   this.$router.push("/admin/statistics");
-    // }
+    if (this.currentStep > 3) {
+      this.$router.push("/admin/statistics");
+    }
   },
   methods: {
     getConfigs() {
@@ -290,6 +290,7 @@ export default {
         .updateConfigs(configs)
         .then(() => {
           this.showSuccess = true;
+          this.$store.commit("updateCompInfo", configs);
           this.$router.push("/admin/statistics");
         })
         .catch(() => {

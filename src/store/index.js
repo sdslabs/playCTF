@@ -20,10 +20,12 @@ export default new Vuex.Store({
       role: null
     },
     competitionInfo: {
-      competitionName: "",
-      communicationPlatformLink: "",
-      startingTime: "23:07:05 UTC: +06:00, 9th February 2021, Tuesday",
-      endingTime: "07:07:00 UTC: +06:00, 18th February 2021, Thursday",
+      name: "",
+      about: "",
+      prizes: "",
+      startingTime: "",
+      endingTime: "",
+      timezone: "",
       logo: ""
     },
     hostUrl: "http://localhost:5005"
@@ -46,6 +48,9 @@ export default new Vuex.Store({
       state.userInfo.access = false;
       state.userInfo.role = null;
       sessionStorage.clear();
+    },
+    updateCompInfo(state, configs) {
+      state.competitionInfo = configs;
     }
   },
   getters: {
