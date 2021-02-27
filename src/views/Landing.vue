@@ -13,7 +13,7 @@
           <div class="description">Ending Time</div>
           <div class="timing">{{ configs.ending_time }}</div>
           <router-link to="/challenges"
-            ><Button text="See Challenges" class="primary-btn"
+            ><Button text="See Challenges" variant="primary-cta"
           /></router-link>
         </div>
         <div class="event-info-img">
