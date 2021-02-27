@@ -4,17 +4,19 @@
       <img class="error-img" src="@/assets/error-page.svg" />
       <div class="error-msg">{{ code }} - {{ msg }}</div>
     </div>
-
-    <button class="primary-btn" @click="handleClick">
-      {{ buttonText }}
-    </button>
+    <Button variant="primary-cta" :onclick="handleClick" :text="buttonText" />
   </div>
 </template>
 
 <script>
+import Button from "@/components/Button.vue";
+
 export default {
   Name: "ErrorPage",
   props: ["errorCode"],
+  components: {
+    Button
+  },
   data() {
     return {
       code: this.errorCode

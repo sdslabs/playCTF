@@ -90,9 +90,8 @@
         class="primary-cta action-btn"
         @click="goNext"
         :disabled="isNextDisabled()"
-      >
-        Next
-      </button>
+        text="Next"
+      />
     </div>
     <transition name="fade" appear>
       <div class="modal-overlay" v-if="showPreviewModal">
@@ -114,6 +113,7 @@ import { getAllTimezones } from "../constants/constants";
 import configureService from "../api/admin/configureAPI";
 import { preview } from "../constants/images";
 import PreviewModal from "../components/PreviewModal.vue";
+import Button from "@/components/Button.vue";
 export default {
   data() {
     return {
@@ -141,6 +141,7 @@ export default {
     ConfigContent,
     ConfigTimeDate,
     ConfigLogo,
+    Button,
     PreviewModal
   },
   async created() {
