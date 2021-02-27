@@ -26,13 +26,13 @@
             v-model="password"
           />
         </div>
-        <button
+        <Button
           :disabled="!(username && password)"
-          @click="login()"
-          class="auth-button primary-btn"
-        >
-          Login
-        </button>
+          :onclick="login"
+          class="auth-button"
+          variant="primary-cta"
+          text="Login"
+        />
       </div>
       <img src="@/assets/login.svg" class="auth-image" />
     </div>
@@ -42,6 +42,7 @@
 <script>
 import LoginUser from "../api/admin/authAPI.js";
 import ErrorBox from "../components/ErrorBox";
+import Button from "@/components/Button.vue";
 export default {
   name: "login",
   data() {
@@ -53,7 +54,8 @@ export default {
     };
   },
   components: {
-    ErrorBox
+    ErrorBox,
+    Button
   },
   methods: {
     async login() {

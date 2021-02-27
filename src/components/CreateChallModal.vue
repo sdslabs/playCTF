@@ -18,21 +18,19 @@
         :isPreview="true"
       />
     </div>
-    <button
+    <Button
+      text="Upload Challenge"
       v-if="!challCreated"
       :disabled="!challengeTar"
-      class="uploadChallengeButton primary-btn"
-      @click="updateConfigs"
-    >
-      Upload Challenge
-    </button>
+      variant="primary-cta"
+      :onclick="updateConfigs"
+    />
     <div v-if="challCreated" class="createChallBtnRow">
-      <button class="createChallButton primary-btn" @click="deployChall">
-        Create and Deploy
-      </button>
-      <!--      <button class="createChallButton primary-btn" @click="deployChall">
-        Create
-      </button> -->
+      <Button
+        text="Create and Deploy"
+        class="primary-cta"
+        :onclick="deployChall"
+      />
     </div>
   </div>
 </template>
@@ -42,6 +40,7 @@ import { cross } from "../constants/images";
 import challengesService from "../api/admin/challengesAPI";
 import UploadComponent from "@/components/UploadComponent.vue";
 import ChallCard from "@/components/ChallCard.vue";
+import Button from "@/components/Button.vue";
 export default {
   name: "PreviewModal",
   data() {
@@ -49,7 +48,8 @@ export default {
   },
   components: {
     UploadComponent,
-    ChallCard
+    ChallCard,
+    Button
   },
   methods: {
     setChallengeTar(val) {

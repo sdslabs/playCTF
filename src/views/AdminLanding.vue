@@ -68,25 +68,27 @@
         </div>
       </div>
     </transition-group>
-    <div v-if="totalSteps === getCurrentStep()" class="action">
-      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
-        Back
-      </button>
-      <button class="primary-btn action-btn" @click="submitConfigs">
-        Proceed
-      </button>
-    </div>
-    <div v-else class="action">
-      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
-        Back
-      </button>
-      <button
-        class="primary-btn action-btn"
-        @click="goNext"
+    <div class="action">
+      <Button
+        v-if="getCurrentStep() !== 1"
+        variant="primary-cta"
+        class="mr-1"
+        :onclick="goBack"
+        text="Back"
+      />
+      <Button
+        v-if="totalSteps === getCurrentStep()"
+        variant="primary-cta"
+        :onclick="submitConfigs"
+        text="Proceed"
+      />
+      <Button
+        v-else
+        variant="primary-cta"
+        :onclick="goNext"
         :disabled="isNextDisabled()"
-      >
-        Next
-      </button>
+        text="Next"
+      />
     </div>
     <transition name="fade" appear>
       <div class="modal-overlay" v-if="showPreviewModal">
@@ -108,6 +110,7 @@ import { getAllTimezones } from "../constants/constants";
 import configureService from "../api/admin/configureAPI";
 import { preview } from "../constants/images";
 import PreviewModal from "../components/PreviewModal.vue";
+import Button from "@/components/Button.vue";
 export default {
   data() {
     return {
@@ -135,6 +138,7 @@ export default {
     ConfigContent,
     ConfigTimeDate,
     ConfigLogo,
+    Button,
     PreviewModal
   },
   async created() {

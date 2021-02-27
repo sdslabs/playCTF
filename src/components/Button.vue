@@ -7,6 +7,6 @@
 <script>
 export default {
   name: "Button",
-  props: ["url", "text", "disabled", "onclick", "icon", "variant"],
+  props: ["url", "text", "disabled", "onclick", "icon", "variant"]
 };
 </script>
