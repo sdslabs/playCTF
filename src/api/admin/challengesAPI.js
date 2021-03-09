@@ -130,15 +130,13 @@ export default {
   },
 
   async fetchAllChallenges() {
-    return await axiosInstance.post(`/api/info/available`);
+    return await axiosInstance.get(`/api/info/challenges`);
   },
   async fetchChallengeByName(name) {
-    let postData = new FormData();
-    postData.append("name", name);
     return await axiosInstance({
-      method: "post",
-      url: `/api/info/challenge/info`,
-      data: postData
+      method: "get",
+      url: `/api/info/challenge/${name}`,
+      // data: postData
     });
   },
 

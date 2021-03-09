@@ -10,7 +10,8 @@
     flex-direction: row;
     align-items: center;
     .rank {
-        width: 16.5rem;
+        width: calc(30% - 1.5rem);
+        min-width: 12.5rem;
         min-height: 100%;
         background: $theme-color-light-orange;
         border-radius: 0.3125rem 0rem 0rem 0.3125rem;
