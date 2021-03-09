@@ -2,7 +2,7 @@ import axiosInstance from "../axiosInstance.js";
 import moment from "moment";
 export default {
   async getSubmissions() {
-    const response = await axiosInstance.post(`/api/info/submissions`);
+    const response = await axiosInstance.get(`/api/info/submissions`);
     let submissions = [];
     response.data.forEach(element => {
       // solvedTime is solved time is given format
