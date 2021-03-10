@@ -1,5 +1,6 @@
 import variables from "../styles/main.scss";
 import moment from "moment-timezone";
+import store from "../store/index";
 export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],
@@ -278,8 +279,23 @@ export const pieChartOptions = () => {
 
 export const barChartOptions = () => {
   let containerProps = {
-    plugins: null,
     responsive: true,
+    tooltips: {
+      callbacks: {
+        title(tooltipItem, data) {
+          return data["labels"][tooltipItem[0]["index"]];
+        },
+        label(tooltipItem, data) {
+          let correctPercentage =
+            data["datasets"][0]["data"][tooltipItem["index"]];
+          return `${correctPercentage}%`;
+        }
+      },
+      displayColors: false,
+      backgroundColor: `#000000`,
+      color: "#FFFFFF",
+      bodyFontFamily: "Nunito Sans"
+    },
     maintainAspectRatio: true,
     legend: {
       display: false
@@ -298,26 +314,67 @@ export const barChartOptions = () => {
   return {
     challenges: {
       ...containerProps,
+      layout: {
+        padding: {
+          top: 50
+        }
+      },
+      plugins: {
+        datalabels: {
+          formatter: (value, ctx) => {
+            let percentage = value + "%";
+            return percentage;
+          },
+          font: {
+            size: 12,
+            weight: "normal"
+          },
+          color: "#191919",
+          anchor: "end",
+          align: "top"
+        }
+      },
       scales: {
         yAxes: [
           {
             gridLines: gridProps,
             scaleLabel: {
               display: true,
-              labelString: "Solve %"
+              labelString: "Solve Percentages(%)"
             },
+            fontColor: "#191919",
             ticks: {
               stepSize: 33,
               min: 0,
               max: 100
             }
           }
-        ]
-      },
-      xAxes: supportAxisProps
+        ],
+        xAxes: supportAxisProps
+      }
     },
     statistics: {
       ...containerProps,
+      plugins: {
+        datalabels: {
+          formatter: (value, ctx) => {
+            let percentage = value + "%";
+            return percentage;
+          },
+          font: {
+            size: 12,
+            weight: "normal"
+          },
+          color: "#191919",
+          anchor: "end",
+          align: "right"
+        }
+      },
+      layout: {
+        padding: {
+          right: 50
+        }
+      },
       scales: {
         xAxes: [
           {
@@ -332,7 +389,7 @@ export const barChartOptions = () => {
             },
             scaleLabel: {
               display: true,
-              labelString: "Solve %"
+              labelString: "Solve Percentage"
             }
           }
         ]
@@ -343,7 +400,7 @@ export const barChartOptions = () => {
 };
 
 export const lineGraphOptions = showLegend => {
-  let legend;
+  let legend, tooltips;
   if (showLegend) {
     legend = {
       display: true,
@@ -356,23 +413,127 @@ export const lineGraphOptions = showLegend => {
         boxWidth: 20
       }
     };
+    tooltips = {
+      callbacks: {
+        title(data, tooltipItem) {
+          let title = "";
+          data.forEach((el, index) => {
+            let playerInfo = tooltipItem.datasets[el.datasetIndex].label;
+            let playerData = playerInfo.split(" ");
+            title += `${playerData[0]}; ${playerData[1].substring(1, 4)} Rank`;
+            if (index !== data.length - 1) {
+              title += " & ";
+            }
+          });
+          return title;
+        },
+        label: function(data, tooltipItem) {
+          let time = moment(data["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
+          let value = time.format("MMMM DD, YYYY; HH:mm:ss, ") + data["value"];
+          console.log(value);
+          return value;
+        }
+      },
+      displayColors: false,
+      backgroundColor: `#000000`,
+      color: "#FFFFFF",
+      bodyFontFamily: "Nunito Sans"
+    };
   } else {
     legend = {
       display: false
     };
+    tooltips = {
+      mode: "index",
+      intersect: false,
+      callbacks: {
+        title: function(data, tooltipItem) {
+          let time = moment(data[0]["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
+          return time.format("MMMM DD, YYYY; HH:mm:ss");
+        }
+      },
+      displayColors: false,
+      backgroundColor: `#000000`,
+      color: "#FFFFFF",
+      bodyFontFamily: "Nunito Sans"
+    };
   }
   return {
+    tooltips,
     layout: {
-      padding: 10
+      padding: 20
     },
     legend,
     responsive: true,
     maintainAspectRatio: true,
+    plugins: {
+      datalabels: {
+        formatter: () => {
+          return "";
+        }
+      }
+    },
     scales: {
       xAxes: [
         {
+          type: "time",
+          distribution: "linear",
+          time: {
+            unit: "hour",
+            displayFormats: {
+              hour: "HH:mm"
+            },
+            stepSize: Math.floor(
+              moment
+                .duration(
+                  moment(
+                    store.state.competitionInfo.endingTime,
+                    "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                  ).diff(
+                    moment(
+                      store.state.competitionInfo.startingTime,
+                      "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                    )
+                  )
+                )
+                .asHours() / 10
+            )
+          },
           gridLines: {
             color: variables.themeColorGrey57,
+            drawOnChartArea: false
+          },
+          scaleLabel: {
+            display: false
+          },
+          ticks: {
+            fontColor: variables.themeColorGrey39,
+            fontFamily: "Roboto",
+            fontStyle: "normal",
+            min:
+              moment(
+                store.state.competitionInfo.startingTime,
+                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+              ).unix() * 1000,
+            max:
+              moment(
+                store.state.competitionInfo.endingTime,
+                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+              ).unix() * 1000
+          }
+        },
+        {
+          type: "time",
+          distribution: "linear",
+          time: {
+            unit: "day",
+            displayFormats: {
+              day: "Do MMMM YYYY"
+            },
+            stepSize: 1
+          },
+          gridLines: {
+            color: variables.themeColorGreyHighTransp,
             drawOnChartArea: false
           },
           scaleLabel: {
@@ -380,15 +541,19 @@ export const lineGraphOptions = showLegend => {
             labelString: "Time"
           },
           ticks: {
-            source: "auto",
-            fontColor: variables.themeColorGrey39,
+            fontColor: variables.themeColorGreyHighTransp,
             fontFamily: "Roboto",
-            fontStyle: "normal"
-          },
-          type: "time",
-          distribution: "linear",
-          time: {
-            unit: "hour"
+            fontStyle: "normal",
+            min:
+              moment(
+                store.state.competitionInfo.startingTime,
+                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+              ).unix() * 1000,
+            max:
+              moment(
+                store.state.competitionInfo.endingTime,
+                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+              ).unix() * 1000
           }
         }
       ],

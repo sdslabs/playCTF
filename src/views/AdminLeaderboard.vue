@@ -44,6 +44,7 @@ import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
 import SpinLoader from "../components/spinLoader.vue";
+import moment from "moment-timezone";
 import {
   tableCols,
   colors,
@@ -85,10 +86,11 @@ export default {
             break;
         }
         datasets.push({
-          backgroundColor: this.lineColors[index],
+          ...lineGraphConfig,
+          backgroundColor: "#ffffff",
           borderColor: this.lineColors[index],
           label: `${this.scoreSeries[index].username} ${labelPostText}`,
-          ...lineGraphConfig,
+
           data: this.scoreSeries[index].series
         });
       });
@@ -126,11 +128,18 @@ export default {
           });
           timeScores[index] = currentScore;
         }
-        scoreSeries[index] = {
-          x: new Date(el.solvedAt),
+        scoreSeries[index + 1] = {
+          x: moment(new Date(el.solvedAt)),
           y: timeScores[index]
         };
       });
+      scoreSeries[0] = {
+        x: moment(
+          this.$store.state.competitionInfo.startingTime,
+          "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+        ),
+        y: 0
+      };
       return scoreSeries;
     }
   },
