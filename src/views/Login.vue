@@ -50,12 +50,12 @@ export default {
       msg: null,
       icon: "error-white",
       username: "",
-      password: "",
+      password: ""
     };
   },
   components: {
     ErrorBox,
-    Button,
+    Button
   },
   methods: {
     async login() {
@@ -67,7 +67,7 @@ export default {
       } else if (check === 403) {
         this.msg = "User banned";
       }
-    },
-  },
+    }
+  }
 };
 </script>
