@@ -172,9 +172,9 @@ export default {
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
     this.currentStep = this.getStartingStep();
-    // if (this.currentStep > 3) {
-    //   this.$router.push("/admin/statistics");
-    // }
+    if (this.currentStep > 3) {
+      this.$router.push("/admin/statistics");
+    }
   },
   methods: {
     isNextDisabled() {

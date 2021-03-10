@@ -86,23 +86,10 @@
         line-height: 1.75rem;
     }
 
-    .title {
-        height: 2.5rem;
-        border-radius: 0.3125rem;
-        border: 0.0625rem solid $theme-color-grey-high-transp;
-        padding-left: 1rem;
-        @extend %font-style-basic;
-        margin-bottom: 0.625rem;
-    }
-
-    .title::placeholder {
-        @extend %font-style-basic;
-        color: $theme-color-grey-high-transp;
-    }
-
-    .title:focus {
-        border: 1.0.3125rem solid $theme-color-violet;
-        box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    .configTitle:focus,
+    textarea:focus {
+        outline: 0;
+        border: 2px solid $theme-color-violet;
     }
 
     textarea {
@@ -126,12 +113,6 @@
         line-height: 1.125rem;
     }
 
-    textarea:focus,
-    .title:focus {
-        outline: none !important;
-        border: 0.125rem solid $theme-color-violet;
-    }
-
     .notifTabs {
         margin-top: 2.5rem;
         height: 43rem;
@@ -150,12 +131,22 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        padding: 0.2rem 0;
 
         .timeSub {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
             width: 48%;
+
+            input {
+                border: 1px solid rgba(87, 87, 87, 0.7);
+                border-radius: 2px;
+                background-color: $theme-color-white;
+                padding-left: 1rem;
+                height: 2rem;
+                outline: none;
+            }
 
             .dateInput {
                 width: 50%;
@@ -170,15 +161,26 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-
-            .title {
-                width: 75%;
-            }
         }
     }
 
     .timezoneSelect {
         outline: none;
+        background-color: $theme-color-white;
+
+        .vs__selected {
+            @extend %font-style-basic;
+        }
+    }
+
+    .v-select-disabled {
+        outline: none;
+        background-color: $theme-color-white;
+
+        .vs__selected {
+            color: $theme-color-grey-high-transp;
+            @extend %font-style-basic;
+        }
     }
 }
 
