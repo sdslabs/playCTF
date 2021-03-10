@@ -13,6 +13,6 @@ export default {
   },
 
   async getAllNotifs() {
-    return await axiosInstance.post(`/api/notification/available`);
+    return await axiosInstance.get(`/api/notification/available`);
   }
 };

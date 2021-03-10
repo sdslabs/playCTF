@@ -3,9 +3,9 @@ import axiosInstance from "../axiosInstance.js";
 export default {
   async getUsers() {
     let allUsers = [];
-    const response = await axiosInstance.get(`/api/info/user/available`);
+    const response = await axiosInstance.get(`/api/info/users`);
     let users = response.data;
-    users = users.filter(el => {
+    users = users.filter((el) => {
       return el.role === "contestant";
     });
     users = users.sort((a, b) => {
@@ -16,36 +16,33 @@ export default {
       }
     });
     let rank = 0;
-    users.forEach(el => {
+    users.forEach((el) => {
       rank++;
       allUsers.push({
         rank: rank,
         username: el.username,
         email: el.email,
         score: el.score,
-        status: el.status === 0 ? "Active" : "Banned"
+        status: el.status === 0 ? "Active" : "Banned",
       });
     });
     return allUsers;
   },
 
   async getUserByUsername(username) {
-    let postData = new FormData();
-    postData.append("username", username);
     return await axiosInstance({
-      method: "post",
-      url: `/api/info/user`,
-      data: postData
+      method: "get",
+      url: `/api/info/user/${username}`,
     });
   },
   async getUserStats() {
-    return await axiosInstance.post(`/api/admin/statistics`);
+    return await axiosInstance.get(`/api/admin/statistics`);
   },
 
   async manageUser(userId, action) {
     return await axiosInstance({
       method: "post",
-      url: `/api/admin/users/${action}/${userId}`
+      url: `/api/admin/users/${action}/${userId}`,
     });
-  }
+  },
 };
