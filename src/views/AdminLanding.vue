@@ -55,33 +55,39 @@
               :compLogo="compLogo"
             />
             <button
-              class="preview-button"
+              class="action-cta preview-button"
               @click="showPreviewModal = true"
               v-if="getCurrentStep() === 5"
             >
-              <div class="preview">
-                <img :src="preview" />
-                Preview
-              </div>
+              <img :src="preview" />
+              <span> Preview</span>
             </button>
           </div>
         </div>
       </div>
     </transition-group>
     <div v-if="totalSteps === getCurrentStep()" class="action">
-      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
+      <button
+        v-if="getCurrentStep() !== 1"
+        class="action-cta back-btn"
+        @click="goBack"
+      >
         Back
       </button>
-      <button class="primary-btn action-btn" @click="submitConfigs">
+      <button class="primary-cta action-btn" @click="submitConfigs">
         Proceed
       </button>
     </div>
     <div v-else class="action">
-      <button v-if="getCurrentStep() !== 1" class="primary-btn" @click="goBack">
+      <button
+        v-if="getCurrentStep() !== 1"
+        class="action-cta back-btn"
+        @click="goBack"
+      >
         Back
       </button>
       <button
-        class="primary-btn action-btn"
+        class="primary-cta action-btn"
         @click="goNext"
         :disabled="isNextDisabled()"
       >
@@ -166,9 +172,9 @@ export default {
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
     });
     this.currentStep = this.getStartingStep();
-    if (this.currentStep > 3) {
-      this.$router.push("/admin/statistics");
-    }
+    // if (this.currentStep > 3) {
+    //   this.$router.push("/admin/statistics");
+    // }
   },
   methods: {
     isNextDisabled() {

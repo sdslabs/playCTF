@@ -43,20 +43,20 @@
           <div class="userStatus" v-if="userDetails.active">
             <div class="status unbanned">Active</div>
             <button
-              class="adminBanButton"
+              class="action-cta"
               @click="manageUser(userDetails.id, 'ban')"
             >
-              <img :src="ban" class="banImg" />
+              <img :src="ban" />
               <div class="adminBanText">Ban Player</div>
             </button>
           </div>
           <div class="userStatus" v-else>
             <div class="status banned">Banned</div>
             <button
-              class="adminBanButton"
+              class="action-cta"
               @click="manageUser(userDetails.id, 'unban')"
             >
-              <img :src="unban" class="banImg" />
+              <img :src="unban" />
               <div class="adminBanText">Remove Ban</div>
             </button>
           </div>
@@ -131,7 +131,7 @@ import SubmissionService from "../api/admin/submissionsAPI";
 import PieChart from "../components/PieChart.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader";
-import store from '../store/index';
+import store from "../store/index";
 import {
   confimDialogMessages,
   tableCols,
@@ -186,8 +186,7 @@ export default {
   },
   methods: {
     getAccess() {
-      if(store.getters.getRole === "admin")
-        return true;
+      if (store.getters.getRole === "admin") return true;
       return false;
     },
     manageUser(userId, action) {

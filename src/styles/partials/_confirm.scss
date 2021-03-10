@@ -18,8 +18,8 @@
             .vc-text {
                 text-align: left;
                 font-family: $secondary-font-family;
-                
-                font-weight: normal;
+
+
                 font-size: 1rem;
                 line-height: 1.5rem;
                 padding: 0;
@@ -33,39 +33,25 @@
             padding: 1.5rem;
             padding-top: 0;
 
-            .vc-btn {
-                margin-right: 1.25rem;
-                height: 44rem/$root-base-size;
-                min-width: 75rem/$root-base-size;
-                @extend %font-style-bold;
-                background: $theme-color-white;
-                border: 0.0625rem solid $theme-color-grey39;
-                box-sizing: border-box;
-                border-radius: 0.25rem;
-                text-align: center;
-                font-size: 0.875rem;
-                line-height: 1.5rem;
-                color: $theme-color-grey39;
-                padding: 0 1.25rem;
-
+            .vc-btn:not(.left) {
+                @extend .action-cta;
+                @extend .back-btn;
+                padding: 0 0.5rem !important;
+                margin-right: 1rem;
+                min-width: 5rem;
             }
 
-            .vc-btn:hover {
-                color: $theme-color-white;
-                background: $theme-color-grey39;
-            }
 
             .vc-btn.left {
-                background: $theme-color-dark-orange;
-                border: none;
-                color: $theme-color-white;
+                @extend .primary-cta;
+                padding: 0 1rem !important;
             }
 
-            .vc-btn.left:hover {
-                border: 0.0625rem solid $theme-color-dark-orange;
-                color: $theme-color-dark-orange;
-                background: $theme-color-white;
+            .vc-btn{
+                display: flex;
+                justify-content: center;
             }
+
         }
 
     }

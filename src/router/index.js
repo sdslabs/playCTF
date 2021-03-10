@@ -14,10 +14,7 @@ import AdminChallenges from "@/views/AdminChallenges.vue";
 import AdminSubmissions from "@/views/AdminSubmissions.vue";
 import AdminConfigure from "@/views/AdminConfigure.vue";
 import AdminChallenge from "@/views/AdminChallenge.vue";
-import ErrorPage401 from "@/views/ErrorPages/401";
-import ErrorPage500 from "@/views/ErrorPages/500";
-import ErrorPage404 from "@/views/ErrorPages/404";
-import ErrorPageNetworkError from "@/views/ErrorPages/NetworkError";
+import ErrorPage from "@/views/ErrorPage.vue";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
 import Reset from "../views/Reset.vue";
@@ -193,7 +190,10 @@ const routes = [
   {
     path: "/error/500",
     name: "500",
-    component: ErrorPage500,
+    component: ErrorPage,
+    props: {
+      errorCode: "500"
+    },
     meta: {
       layout: "error-layout"
     }
@@ -201,7 +201,10 @@ const routes = [
   {
     path: "/error/networkerror",
     name: "NetworkError",
-    component: ErrorPageNetworkError,
+    component: ErrorPage,
+    props: {
+      errorCode: "408"
+    },
     meta: {
       layout: "error-layout"
     }
@@ -209,7 +212,10 @@ const routes = [
   {
     path: "/error/401",
     name: "401",
-    component: ErrorPage401,
+    component: ErrorPage,
+    props: {
+      errorCode: "401"
+    },
     meta: {
       layout: "error-layout"
     }
@@ -217,7 +223,10 @@ const routes = [
   {
     path: "*",
     name: "404",
-    component: ErrorPage404,
+    component: ErrorPage,
+    props: {
+      errorCode: "404"
+    },
     meta: {
       layout: "error-layout"
     }

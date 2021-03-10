@@ -32,13 +32,13 @@
             <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
           </div>
         </div>
-        <button
-          @click="reset()"
-          class="auth-button primary-btn"
+        <Button
+          :onclick="reset"
+          class="auth-button"
+          variant=" primary-cta"
           :disabled="!(password && password2)"
-        >
-          Change Password
-        </button>
+          text="Change Password"
+        />
       </div>
       <img src="@/assets/login.svg" class="auth-image" />
     </div>
@@ -48,6 +48,8 @@
 <script>
 import LoginUser from "../api/admin/authAPI";
 import ErrorBox from "../components/ErrorBox";
+import Button from "@/components/Button.vue";
+
 export default {
   name: "login",
   data() {
@@ -58,15 +60,16 @@ export default {
       password: "",
       password2: "",
       errorIcon: "error-white",
-      tickIcon: "tick-white",
+      tickIcon: "tick-white"
     };
   },
   components: {
     ErrorBox,
+    Button
   },
   methods: {
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async reset() {
       if (this.password !== this.password2) {
@@ -84,10 +87,10 @@ export default {
           this.icon = this.errorIcon;
         }
       }
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "ResetPassword");
-  },
+  }
 };
 </script>

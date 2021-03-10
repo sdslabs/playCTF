@@ -110,44 +110,10 @@
     }
 
     .field {
-        font-weight: normal;
+        
         font-size: 1rem;
         line-height: 1.125rem;
         text-align: center;
         color: $theme-color-grey57;
     }
-}
-
-.adminBanButton {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    background: $theme-color-white;
-    border: 1.0.3125rem solid $theme-color-grey39;
-    box-sizing: border-box;
-    box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
-    border-radius: 0.1875rem;
-    padding: 0.3125rem 0.9375rem;
-    margin: 0 0.2rem;
-
-    .adminBanText {
-        font-weight: 600;
-        font-size: 0.875rem;
-        line-height: 1.5rem;
-        color: $theme-color-grey39;
-        margin-left: 0.2rem;
-    }
-}
-
-.adminBanButton:hover {
-    background: $theme-color-grey39;
-
-    .banImg {
-        filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg) brightness(99%) contrast(103%);
-    }
-}
-
-.adminBanButton:hover .adminBanText {
-    color: $theme-color-white;
 }

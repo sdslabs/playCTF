@@ -7,7 +7,7 @@ $screenRatio: 1;
 
     .heading {
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: bold;
         font-size: 1.5rem;
         line-height: 1.75rem;
@@ -25,7 +25,7 @@ $screenRatio: 1;
 .fields {
     text-align: left;
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     font-size: 0.875rem;
     line-height: 1.125rem;
@@ -36,7 +36,7 @@ $screenRatio: 1;
     font-size: 0.75rem;
     text-align: left;
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     line-height: 1.125rem;
     margin: 0.3125rem;
@@ -80,7 +80,7 @@ $screenRatio: 1;
 
 label {
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     font-size: 0.875rem;
     line-height: 1.125rem;
@@ -103,7 +103,7 @@ label {
     justify-content: flex-start;
     align-items: center;
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     font-size: 1rem;
     line-height: 1.75rem;
@@ -114,7 +114,7 @@ label {
     border-radius: 0.125rem;
     color: $theme-color-white;
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: bold;
     font-size: 0.875rem;
     line-height: 1.75rem;
@@ -141,7 +141,7 @@ label {
 
 .title::placeholder {
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     font-size: 1rem;
     line-height: 48px;
@@ -164,7 +164,7 @@ textarea {
 
 textarea::placeholder {
     font-family: $primary-font-family;
-    font-style: normal;
+    
     font-weight: 600;
     font-size: 1rem;
     line-height: 1.125rem;

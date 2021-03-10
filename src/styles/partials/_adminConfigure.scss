@@ -5,26 +5,9 @@
     justify-content: flex-start;
 
     .preview-button {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 0.875rem;
-        line-height: 1.75rem;
-        height: 2rem;
-        width: 7rem;
-        background: $theme-color-white;
-        border: 1.0.3125rem solid $theme-color-grey39;
-        box-sizing: border-box;
-        box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
-        border-radius: 0.1875rem;
-        outline: none;
-
-        .preview {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-evenly;
-            width: 100%;
-        }
+        padding: 0 1rem;
+        justify-content: space-between;
+        width:7rem;
     }
 
     .heading {
@@ -60,7 +43,7 @@
     .fields {
         text-align: left;
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         font-size: 0.875rem;
         line-height: 1.125rem;
@@ -86,7 +69,7 @@
         font-size: 0.75rem;
         text-align: left;
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         line-height: 1.125rem;
         margin: 0.2rem;
@@ -137,7 +120,7 @@
 
     textarea::placeholder {
         font-family: $primary-font-family;
-        font-style: normal;
+        
         font-weight: 600;
         font-size: 1rem;
         line-height: 1.125rem;
@@ -289,12 +272,12 @@
 }
 
 .logoUpload {
+    width: 7rem;
+    height: 2rem;
     border: 1.5px solid #393939;
     box-sizing: border-box;
     box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
     border-radius: 3px;
-    width: 7rem;
-    height: 2rem;
 
     label {
         height: 100%;
@@ -320,24 +303,3 @@
 .margin-0 {
     margin: 0;
 }
-
-.submitButton {
-    background-color: $theme-color-dark-orange;
-    border-radius: 0.125rem;
-    color: $theme-color-white;
-    font-family: $primary-font-family;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 0.875rem;
-    line-height: 1.75rem;
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    border: none;
-    margin-left: auto;
-
-    &:disabled {
-        background: $theme-color-light-grey-d7;
-        box-shadow: none;
-        color: $theme-color-grey39;
-    }
-}
-

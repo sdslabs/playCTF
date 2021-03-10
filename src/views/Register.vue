@@ -69,13 +69,13 @@
             <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
           </div>
         </div>
-        <button
-          @click="register()"
-          class="auth-button primary-btn"
+        <Button
+          :onclick="register"
+          variant="primary-cta"
+          class="auth-button"
           :disabled="!(uname && username && password && password2 && email)"
-        >
-          Register Now
-        </button>
+          text="Register Now"
+        />
       </div>
       <img src="@/assets/registration.svg" class="auth-image" />
     </div>
@@ -85,10 +85,12 @@
 <script>
 import RegisterUser from "../api/admin/authAPI.js";
 import ErrorBox from "../components/ErrorBox";
+import Button from "@/components/Button.vue";
 export default {
   name: "register",
   components: {
     ErrorBox,
+    Button
   },
   data() {
     return {
@@ -104,7 +106,7 @@ export default {
       PassErr: false,
       registered: true,
       errorIcon: "error-white",
-      tickIcon: "tick-white",
+      tickIcon: "tick-white"
     };
   },
   methods: {
@@ -113,7 +115,7 @@ export default {
       return re.test(email);
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async register() {
       if (!this.validateEmail(this.email)) {
@@ -144,7 +146,7 @@ export default {
           this.$router.push("/login");
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>

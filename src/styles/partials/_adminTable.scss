@@ -6,8 +6,8 @@
 
         .adminTableData {
             font-family: $secondary-font-family;
-            font-style: normal;
-            font-weight: normal;
+            
+            
             font-size: 0.875rem;
             line-height: 2rem;
         }
@@ -95,7 +95,7 @@
 
         .adminTableHeader {
             font-family: $primary-font-family;
-            font-style: normal;
+            
             font-weight: bold;
             font-size: 1rem;
             line-height: 2rem;
@@ -154,8 +154,8 @@
     flex-direction: row;
     align-items: center;
     font-family: $primary-font-family;
-    font-style: normal;
-    font-weight: normal;
+    
+    
     font-size: 0.875rem;
     line-height: 1rem;
     color: $theme-color-grey57;

@@ -39,10 +39,19 @@
         flex-direction: row;
         justify-content: flex-end;
         margin-top: 1rem;
+
         .action-btn {
             margin-left: 1rem;
         }
     }
+}
+
+.back-btn {
+    height: 2.5rem;
+    padding: 0rem 2rem;
+    @extend %font-style-bold;
+    font-size: 1rem;
+    line-height: 1.75rem;
 }
 
 .orange {

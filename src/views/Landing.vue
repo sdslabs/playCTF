@@ -12,9 +12,9 @@
           <div class="timing">{{ configs.starting_time }}</div>
           <div class="description">Ending Time</div>
           <div class="timing">{{ configs.ending_time }}</div>
-          <router-link to="/challenges"
-            ><Button text="See Challenges" class="primary-btn"
-          /></router-link>
+          <button class="primary-cta" @click="gotoChallenges">
+            See Challenges
+          </button>
         </div>
         <div class="event-info-img">
           <img class="landing-img" src="@/assets/landing1.svg" />
@@ -36,13 +36,9 @@
 </template>
 
 <script>
-import Button from "@/components/Button.vue";
 import ConfigApiService from "../api/admin/configureAPI";
 export default {
   name: "home",
-  components: {
-    Button
-  },
   data() {
     return {
       configs: {
@@ -63,6 +59,11 @@ export default {
     ConfigApiService.getConfigs().then(response => {
       this.configs = response.data;
     });
+  },
+  methods: {
+    gotoChallenges() {
+      this.$router.push("/challenges");
+    }
   }
 };
 </script>

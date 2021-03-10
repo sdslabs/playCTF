@@ -37,10 +37,8 @@
           made.</label
         >
         <button
-          class="adminDisabledSubmitButton"
+          class="adminSubmitButton primary-cta"
           :class="{
-            adminEnabledSubmitButton: canSubmit,
-            adminInactiveSubmitButton: !canSubmit && !subProcessing,
             adminProcSubmitButton: subProcessing
           }"
           :disabled="!canSubmit"
@@ -94,8 +92,8 @@ export default {
       loading: true,
       err: {
         msg: null,
-        icon: null,
-      },
+        icon: null
+      }
     };
   },
   mounted() {
