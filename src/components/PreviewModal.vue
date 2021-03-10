@@ -7,7 +7,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <landing />
+      <landing :fetchedData="this.fetched" :configs="this.configs" />
     </div>
   </div>
 </template>
@@ -18,8 +18,9 @@ import { cross } from "../constants/images";
 
 export default {
   name: "PreviewModal",
+  props: ["fetchedData", "configs"],
   data() {
-    return { cross };
+    return { cross, fetched: this.fetchedData, config: this.configs };
   },
   components: {
     Landing

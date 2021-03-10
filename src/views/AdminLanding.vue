@@ -96,7 +96,11 @@
     </div>
     <transition name="fade" appear>
       <div class="modal-overlay" v-if="showPreviewModal">
-        <preview-modal @close="showPreviewModal = false" />
+        <preview-modal
+          :configs="getConfigs()"
+          :fetchedData="true"
+          @close="showPreviewModal = false"
+        />
       </div>
     </transition>
   </div>
@@ -177,6 +181,17 @@ export default {
     }
   },
   methods: {
+    getConfigs() {
+      return {
+        name: this.compName,
+        about: this.compAbout,
+        prizes: this.compPrizes,
+        starting_time: this.getDateTimeString().startingTime,
+        ending_time: this.getDateTimeString().endingTime,
+        timezone: this.compTimezone,
+        logo: this.compLogo
+      };
+    },
     isNextDisabled() {
       let currentStep = this.getCurrentStep();
       if (currentStep === 1) {
@@ -259,6 +274,30 @@ export default {
       this.showPreviewModal = false;
     },
     submitConfigs() {
+      let startEndTime = this.getDateTimeString();
+      let startingTime = startEndTime.startingTime;
+      let endingTime = startEndTime.endingTime;
+      let configs = {
+        name: this.compName,
+        about: this.compAbout,
+        prizes: this.compPrizes,
+        startingTime,
+        endingTime,
+        timezone: this.compTimezone,
+        logo: this.compLogo
+      };
+      configureService
+        .updateConfigs(configs)
+        .then(() => {
+          this.showSuccess = true;
+          this.$store.commit("updateCompInfo", configs);
+          this.$router.push("/admin/statistics");
+        })
+        .catch(() => {
+          this.showFail = true;
+        });
+    },
+    getDateTimeString() {
       let timezone = moment.tz.names()[
         getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
@@ -276,24 +315,10 @@ export default {
       let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
         .tz(timezone)
         .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
-      let configs = {
-        name: this.compName,
-        about: this.compAbout,
-        prizes: this.compPrizes,
+      return {
         startingTime,
-        endingTime,
-        timezone: this.compTimezone,
-        logo: this.compLogo
+        endingTime
       };
-      configureService
-        .updateConfigs(configs)
-        .then(() => {
-          this.showSuccess = true;
-          this.$router.push("/admin/statistics");
-        })
-        .catch(() => {
-          this.showFail = true;
-        });
     }
   }
 };

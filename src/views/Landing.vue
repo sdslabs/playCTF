@@ -4,27 +4,36 @@
       <div class="event-info">
         <div class="event-info-text">
           <div class="tagline">Be a part of</div>
-          <div class="tagline">{{ configs.name }}</div>
+          <div class="tagline">{{ configData.name }}</div>
           <div class="description">
-            {{ configs.about }}
+            {{ configData.about }}
           </div>
           <div class="description">Starting Time</div>
-          <div class="timing">{{ configs.starting_time }}</div>
+          <div class="timing">{{ configData.starting_time }}</div>
           <div class="description">Ending Time</div>
-          <div class="timing">{{ configs.ending_time }}</div>
-          <button class="primary-cta" @click="gotoChallenges">
-            See Challenges
-          </button>
+          <div class="timing">{{ configData.ending_time }}</div>
+          <Button
+            v-if="isLoggedIn()"
+            text="See Challenges"
+            class="primary-cta"
+            url="/challenges"
+          />
+          <Button
+            v-else
+            text="Register Now"
+            class="primary-cta"
+            url="/register"
+          />
         </div>
         <div class="event-info-img">
           <img class="landing-img" src="@/assets/landing1.svg" />
         </div>
       </div>
-      <div class="prize-info">
+      <div v-if="configData.prizes" class="prize-info">
         <div class="prize-info-text">
           <div class="heading">Prizes to be won</div>
           <div class="description">
-            {{ configs.prizes }}
+            {{ configData.prizes }}
           </div>
         </div>
         <div class="prize-info-img">
@@ -37,32 +46,35 @@
 
 <script>
 import ConfigApiService from "../api/admin/configureAPI";
+import Button from "../components/Button.vue";
 export default {
   name: "home",
+  components: {
+    Button
+  },
+  props: ["fetchedData", "configs"],
   data() {
     return {
-      configs: {
-        title: "",
-        about: "",
-        prizes: "",
-        starting_time: "",
-        ending_time: "",
-        timezone: "",
-        logo_url: ""
-      }
+      configData: {}
     };
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "AboutCTF");
   },
   mounted() {
-    ConfigApiService.getConfigs().then(response => {
-      this.configs = response.data;
-    });
+    if (!this.fetchedData) {
+      ConfigApiService.getConfigs().then(response => {
+        this.configData = response.data;
+      });
+    } else {
+      console.log(this.configs);
+      this.configData = this.configs;
+    }
   },
   methods: {
-    gotoChallenges() {
-      this.$router.push("/challenges");
+    isLoggedIn() {
+      let userInfo = this.$store.state.userInfo;
+      return userInfo.access && userInfo.role === "contestant";
     }
   }
 };

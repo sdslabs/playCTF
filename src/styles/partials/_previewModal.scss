@@ -13,6 +13,27 @@
     background-color: white;
     max-height: 75vh;
     overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        width: 0.5rem;
+        height: 2rem;
+    }
+
+    &::-webkit-scrollbar-button {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(57, 57, 57, 0.35);
+        border-radius: 3px;
+    }
+
+    ​ &::-webkit-scrollbar-track-piece {
+        background: rgba(57, 57, 57, 0.35);
+        
+    }
+
+
 }
 
 .modal-header {

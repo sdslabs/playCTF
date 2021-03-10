@@ -1,5 +1,6 @@
 .primary-cta {
     padding: 0.375rem 2rem;
+    width: max-content;
     height: 2.5rem;
     background: $theme-color-dark-orange;
     box-shadow: 0px 6px 10px rgba(255, 103, 0, 0.3);
@@ -37,6 +38,7 @@
 .secondary-cta {
     padding: 0.25rem 1rem;
     border: none;
+    width: max-content;
     height: 2rem;
     background: $theme-color-dark-orange;
     border-radius: 3px;
@@ -73,6 +75,7 @@
     padding: 0.25rem 0.75rem;
     border: 1.5px solid $theme-color-grey39;
     height: 2rem;
+    width: max-content;
     background-color: $theme-color-white;
     box-sizing: border-box;
     box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
