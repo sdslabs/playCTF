@@ -5,24 +5,42 @@
         About
         <span class="importantField">*</span>
       </p>
-      <p class="counter" id="about-counter">
+      <p v-if="showAboutCounter" class="counter">
         {{ maxAbout - content.about.length }} Characters Remaining
       </p>
     </div>
     <textarea
-      id="about"
       v-model="content.about"
+      @focus="
+        () => {
+          this.showAboutCounter = true;
+        }
+      "
+      @blur="
+        () => {
+          this.showAboutCounter = false;
+        }
+      "
       placeholder="Enter the information to be displayed regarding competition"
     ></textarea>
     <div class="subfields-row">
       <p class="subfields">Prizes</p>
-      <p class="counter" id="prizes-counter">
+      <p v-if="showPrizeCounter" class="counter">
         {{ maxPrizes - content.prizes.length }} Characters Remaining
       </p>
     </div>
     <textarea
-      id="prizes"
       v-model="content.prizes"
+      @focus="
+        () => {
+          this.showPrizeCounter = true;
+        }
+      "
+      @blur="
+        () => {
+          this.showPrizeCounter = false;
+        }
+      "
       placeholder="Enter the information to be displayed regarding prizes"
     ></textarea>
   </div>
@@ -36,7 +54,9 @@ export default {
     return {
       content: this.compContent,
       maxAbout: 200,
-      maxPrizes: 200
+      maxPrizes: 200,
+      showPrizeCounter: false,
+      showAboutCounter: false
     };
   },
   methods: {
