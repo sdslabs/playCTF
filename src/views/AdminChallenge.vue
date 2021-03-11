@@ -81,7 +81,13 @@
         :key="port"
         class="host aboutText"
       >
-        {{ `${hostUrl}:${port}` }}
+        <a
+          class="challenge-link"
+          :href="`//${hostUrl}:${port}`"
+          target="_blank"
+        >
+          {{ `${hostUrl}:${port}` }}
+        </a>
       </div>
     </div>
     <div class="adminChallStatistics">
