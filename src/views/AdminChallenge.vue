@@ -73,12 +73,15 @@
           </button>
         </div>
       </div>
-      <div class="aboutChallenge aboutText">
+      <div v-if="chalDetails.description" class="aboutChallenge aboutText">
         {{ chalDetails.description }}
       </div>
-      <div class="port aboutText">Port : {{ port }}</div>
-      <div class="host aboutText">
-        {{ `${this.$store.getters.hostUrl}:${chalDetails.ports}` }}
+      <div
+        v-for="port in this.chalDetails.ports"
+        :key="port"
+        class="host aboutText"
+      >
+        {{ `${hostUrl}:${port}` }}
       </div>
     </div>
     <div class="adminChallStatistics">
@@ -161,7 +164,9 @@ export default {
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
-      confirmDialogs: confimDialogMessages(this.$route.params.id).adminChallenge
+      confirmDialogs: confimDialogMessages(this.$route.params.id)
+        .adminChallenge,
+      hostUrl: this.$store.getters.hostUrl
     };
   },
   computed: {
@@ -217,9 +222,6 @@ export default {
                     response => {
                       let data = response.data;
                       this.chalDetails = data;
-                      if (data.ports !== null) {
-                        this.chalDetails.port = data.ports[0];
-                      }
                       challengeDeployed = data.status === "Deployed";
                     }
                   );
@@ -236,9 +238,6 @@ export default {
                     response => {
                       let data = response.data;
                       this.chalDetails = data;
-                      if (data.ports !== null) {
-                        this.chalDetails.port = data.ports[0];
-                      }
                       challengeDeployed = data.status === "Undeployed";
                     }
                   );
@@ -272,9 +271,6 @@ export default {
       .then(response => {
         let data = response.data;
         this.chalDetails = data;
-        if (data.ports !== null) {
-          this.chalDetails.port = data.ports[0];
-        }
       })
       .finally(() => {
         this.loading.challengeNotFetched = false;

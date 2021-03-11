@@ -20,12 +20,12 @@
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <div v-if="this.port" class="challCard-challPort">
-        Port: {{ this.port }}
-      </div>
-      <a :href="`${this.$store.getters.hostUrl}:${this.port || ''}`"
+      <a
+        v-for="port in this.challDetails.ports"
+        :key="port"
+        :href="`${hostUrl}:${port}`"
         ><div class="challCard-challLink">
-          {{ `${this.$store.getters.hostUrl}:${this.port || ""}` }}
+          {{ `${hostUrl}:${port}` }}
         </div>
       </a>
     </div>
@@ -69,20 +69,15 @@ export default {
   components: { Button },
   data() {
     return {
-      port: undefined,
       flag: "",
       showSuccess: false,
-      showFail: false
+      showFail: false,
+      hostUrl: this.$store.getters.hostUrl
     };
   },
   state: {
     disable: false,
     isModalVisible: false
-  },
-  mounted() {
-    if (this.challDetails.ports && this.challDetails.ports.length > 0) {
-      this.port = this.challDetails.ports[0];
-    }
   },
   methods: {
     enter: function() {
