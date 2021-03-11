@@ -86,13 +86,15 @@ export default {
   },
   methods: {
     enter: function() {
+      let self = this;
       setTimeout(function() {
-        if (this.showSuccess) {
-          this.$router.go();
+        if (self.showSuccess) {
+          self.$router.go();
+        } else {
+          self.showSuccess = false;
+          self.showFail = false;
         }
-        this.showSuccess = false;
-        this.showFail = false;
-      }, 3000); // hide the message after 3 seconds
+      }, 2500); // hide the message after 2.5 seconds
     },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
