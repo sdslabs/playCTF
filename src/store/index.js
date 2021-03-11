@@ -28,7 +28,7 @@ export default new Vuex.Store({
       timezone: "",
       logo: ""
     },
-    hostUrl: "beastchallengeurl.com"
+    hostUrl: "localhost"
   },
   mutations: {
     updateCurrentPage(state, page) {
