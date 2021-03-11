@@ -147,8 +147,7 @@
     .host {
         line-height: 1rem;
         color: $theme-color-violet;
-        margin: 0.625rem 0;
-        ;
+        margin: 0.625rem 0 0 0;
     }
 
     .testRun {
@@ -242,4 +241,10 @@
 .chartjs-size-monitor {
     position: relative;
     display: none;
+}
+
+.challenge-link {
+    font-style: $primary-font-family;
+    color: $theme-color-violet;
+    text-decoration: none;
 }

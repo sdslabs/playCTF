@@ -23,7 +23,9 @@
       <a
         v-for="port in this.challDetails.ports"
         :key="port"
-        :href="`${hostUrl}:${port}`"
+        :href="`//${hostUrl}:${port}`"
+        class="challenge-link"
+        target="_blank"
         ><div class="challCard-challLink">
           {{ `${hostUrl}:${port}` }}
         </div>
