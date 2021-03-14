@@ -4,9 +4,7 @@
     <div class="adHeadingContainerWithFeedback">
       <div class="adminHeadingName">CREATE NEW NOTIFICATION</div>
       <div class="addFeedback">
-        <div class="fade" v-if="err.msg">
-          <ErrorBox :error="err" />
-        </div>
+        <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
       </div>
     </div>
     <div class="adNotifForm">
@@ -39,7 +37,7 @@
         <button
           class="adminSubmitButton primary-cta"
           :class="{
-            adminProcSubmitButton: subProcessing
+            adminProcSubmitButton: subProcessing,
           }"
           :disabled="!canSubmit"
           v-on:click="onSubmit"
@@ -75,7 +73,7 @@ export default {
   components: {
     NotificationTab,
     SpinLoader,
-    ErrorBox
+    ErrorBox,
   },
   data() {
     return {
@@ -90,15 +88,13 @@ export default {
       checked: false,
       notifications: [],
       loading: true,
-      err: {
-        msg: null,
-        icon: null
-      }
+      msg: null,
+      icon: null,
     };
   },
   mounted() {
     NotifService.getAllNotifs()
-      .then(response => {
+      .then((response) => {
         this.notifications = response.data.sort((a, b) => {
           return new Date(a.updated_at).getTime() <
             new Date(b.updated_at).getTime()
@@ -111,21 +107,21 @@ export default {
       });
   },
   methods: {
-    isNew: function(notification) {
+    isNew: function (notification) {
       this.duration(notification);
       return this.hours < 1;
     },
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     async fadeFunc() {
       await this.sleep(3000);
-      this.err.msg = null;
-      this.err.icon = null;
+      this.msg = null;
+      this.icon = null;
       this.showSuccess = false;
       this.showFail = false;
     },
-    duration: function(notification) {
+    duration: function (notification) {
       if (notification.isNew) {
         return "Just a moment";
       }
@@ -138,7 +134,7 @@ export default {
       else if (this.minutes > 0) return this.minutes + " minutes";
       else if (this.seconds > 0) return this.seconds + " seconds";
     },
-    calcTime: function(passTime) {
+    calcTime: function (passTime) {
       this.seconds = Math.floor((passTime % (1000 * 60)) / 1000);
       this.minutes = Math.floor((passTime % (1000 * 60 * 60)) / (1000 * 60));
       this.hours = Math.floor(
@@ -159,9 +155,9 @@ export default {
               title: self.title,
               desc: self.description,
               updated_at: "Just Now",
-              isNew: true
+              isNew: true,
             },
-            ...self.notifications
+            ...self.notifications,
           ];
           self.title = "";
           self.description = "";
@@ -169,8 +165,8 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showSuccess = true;
-          self.err.msg = "Notification sent successfully";
-          self.err.icon = "tick-white";
+          self.msg = "Notification sent successfully";
+          self.icon = "tick-white";
           this.fadeFunc();
         })
         .catch(() => {
@@ -180,23 +176,23 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showFail = true;
-          self.err.msg = "Failed to send notification";
-          self.err.icon = "error-white";
+          self.msg = "Failed to send notification";
+          self.icon = "error-white";
           this.fadeFunc();
         });
     },
-    enter: function() {
+    enter: function () {
       let self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
-    }
+    },
   },
   watch: {
-    title: function() {
+    title: function () {
       this.canSubmit = this.title.length > 0 && this.checked;
-    }
-  }
+    },
+  },
 };
 </script>
