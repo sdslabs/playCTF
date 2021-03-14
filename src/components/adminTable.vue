@@ -40,9 +40,9 @@
                     (row.status === 'Banned' || row.status === 'Incorrect'),
                   bannedTableData:
                     row.status === 'Banned' &&
-                    (col === 'rank' || col === 'score')
+                    (col === 'rank' || col === 'score'),
                 },
-                `adminTable${col}`
+                `adminTable${col}`,
               ]"
             >
               <router-link
@@ -63,8 +63,9 @@
     <div class="paginateContainer">
       <div class="pagination">
         <paginate
+          v-if="pageCount-1"
           v-model="currentPage"
-          :page-count="rows.length / maxElementPerPage"
+          :page-count="pageCount"
           :click-handler="pageChangeHandler"
           :page-range="3"
           :margin-pages="2"
@@ -76,18 +77,17 @@
           :next-link-class="'nextItem'"
           :break-view-link-class="'breakItemlink-'"
           :no-li-surround="true"
-        >
-          >
-        </paginate>
+          :hide-prev-next="true"
+        />
       </div>
-      <div class="jumpPage">
+      <div v-if="pageCount-1" class="jumpPage">
         <span>Jump to</span>
         <form class="form" @submit="changePage">
           <input
             type="number"
             v-model="jumpPage"
             :min="1"
-            :max="rows.length / maxElementPerPage"
+            :max="pageCount"
             class="pageInput"
           />
         </form>
@@ -104,7 +104,7 @@ export default {
     return {
       jumpPage: 1,
       currentPage: 1,
-      redirectLink: ""
+      redirectLink: "",
     };
   },
   props: [
@@ -113,12 +113,12 @@ export default {
     "colStyle",
     "links",
     "maxElementPerPage",
-    "userData"
+    "userData",
   ],
   methods: {
     isColLink(val) {
       let isLink = false;
-      this.links.forEach(item => {
+      this.links.forEach((item) => {
         if (item.col === val) {
           isLink = true;
           this.redirectLink = item.redirect;
@@ -136,7 +136,7 @@ export default {
       let start = (this.currentPage - 1) * this.maxElementPerPage;
       let end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);
-    }
+    },
   },
   computed: {
     columns: function columns() {
@@ -144,7 +144,15 @@ export default {
         return [];
       }
       return Object.keys(this.rows[0]);
-    }
-  }
+    },
+    pageCount() {
+      if (
+        Math.round(this.rows.length / this.maxElementPerPage) ===
+        this.rows.length / this.maxElementPerPage
+      )
+        return Math.round(this.rows.length / this.maxElementPerPage);
+      else return Math.round(this.rows.length / this.maxElementPerPage) + 1;
+    },
+  },
 };
 </script>

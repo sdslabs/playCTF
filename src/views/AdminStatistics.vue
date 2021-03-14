@@ -93,7 +93,7 @@
         <div class="adminStatsRightCol">
           <PieChart
             v-bind:chartData="this.categoryChartData()"
-            v-bind:options="this.chartOptions"
+            v-bind:options="this.pieChartOptions"
             :height="130"
             :width="250"
           />
@@ -256,7 +256,7 @@ export default {
       },
       submissions: {},
       chalCategory: {},
-      chartOptions: pieChartOptions(),
+      pieChartOptions: pieChartOptions(),
       barChartOptions: barChartOptions().statistics
     };
   }
