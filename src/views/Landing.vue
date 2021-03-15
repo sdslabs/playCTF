@@ -12,18 +12,16 @@
           <div class="timing">{{ configData.starting_time }}</div>
           <div class="description">Ending Time</div>
           <div class="timing">{{ configData.ending_time }}</div>
-          <Button
+          <router-link
+            style="text-decoration: none"
             v-if="isLoggedIn()"
-            text="See Challenges"
-            class="primary-cta"
-            url="/challenges"
-          />
-          <Button
-            v-else
-            text="Register Now"
-            class="primary-cta"
-            url="/register"
-          />
+            to="/challenges"
+          >
+            <Button text="See Challenges" class="primary-cta"
+          /></router-link>
+          <router-link style="text-decoration: none" v-else to="/register">
+            <Button text="Register Now" class="primary-cta"
+          /></router-link>
         </div>
         <div class="event-info-img">
           <img class="landing-img" src="@/assets/landing1.svg" />
@@ -50,12 +48,12 @@ import Button from "../components/Button.vue";
 export default {
   name: "home",
   components: {
-    Button
+    Button,
   },
   props: ["fetchedData", "configs"],
   data() {
     return {
-      configData: {}
+      configData: {},
     };
   },
   beforeCreate() {
@@ -63,7 +61,7 @@ export default {
   },
   mounted() {
     if (!this.fetchedData) {
-      ConfigApiService.getConfigs().then(response => {
+      ConfigApiService.getConfigs().then((response) => {
         this.configData = response.data;
       });
     } else {
@@ -75,8 +73,8 @@ export default {
     isLoggedIn() {
       let userInfo = this.$store.state.userInfo;
       return userInfo.access && userInfo.role === "contestant";
-    }
-  }
+    },
+  },
 };
 </script>
 
