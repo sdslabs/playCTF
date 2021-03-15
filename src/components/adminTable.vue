@@ -19,7 +19,7 @@
           <td class="adminTableData adminTableUserData adminTableusername">
             {{ this.userData.username }}
           </td>
-          <td class="adminTableData adminTableUserData adminTablescore">
+          <td class="adminTableData adminTableUserData adminTablerank">
             {{ this.userData.score }}
           </td>
         </tr>
