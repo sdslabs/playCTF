@@ -21,8 +21,6 @@
       {{ logo.name }}
       <div @click="removeLogo()"><img src="@/assets/cross.svg" /></div>
     </div>
-    <!-- <img class="upload-feedback" src="@/assets/upload-fail.svg" />
-    <img class="upload-feedback" src="@/assets/upload-success.svg" /> -->
     <img v-if="showImg" class="upload-preview" id="preview" />
     <img
       v-if="showInitialImg"
