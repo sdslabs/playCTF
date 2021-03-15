@@ -23,7 +23,6 @@
             margin-right: 2rem;
         }
 
-
         .addConfigFeedback {
             margin-left: auto;
             display: flex;
@@ -103,7 +102,6 @@
         padding-left: 1rem;
         padding-top: 1rem;
     }
-
 
     textarea::placeholder {
         font-family: $primary-font-family;
@@ -200,31 +198,6 @@
     }
 }
 
-// .themes {
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-between;
-
-//     .sub-themes {
-//         border: 0cm;
-//         background: none;
-//         display: flex;
-//         flex-direction: column;
-
-//         .block {
-//             width: 7.5rem;
-//             height: 85.33px;
-//             background: #c4c4c4;
-//             border: none;
-//         }
-
-//         .block:focus {
-//             border: 0.125rem solid $theme-color-dark-orange;
-//             box-sizing: border-box;
-//         }
-//     }
-// }
-
 .v-select-disabled {
     pointer-events: none;
     color: #bfcbd9;
@@ -290,7 +263,7 @@
         flex-direction: row;
         justify-content: space-evenly;
         background: $theme-color-white;
-        align-items: center
+        align-items: center;
     }
 }
 

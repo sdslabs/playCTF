@@ -61,15 +61,7 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-
-        // .addChallenge:hover {
-        //     .addImg {
-        //         filter: invert(59%) sepia(76%) saturate(4653%) hue-rotate(358deg) brightness(99%) contrast(110%);
-        //     }
-        // }
     }
-
-
 }
 
 .adminChallengesList {
@@ -123,7 +115,6 @@
             margin: 0 auto;
             width: 3.5rem;
             border-bottom: 0.125rem solid $theme-color-dark-orange;
-            ;
         }
     }
 
@@ -143,9 +134,9 @@
             line-height: 1.125rem;
             color: $theme-color-black-high-transp;
         }
-        .vs__selected{
+        .vs__selected {
             position: absolute;
-            top:0.1rem;
+            top: 0.1rem;
         }
     }
 
@@ -158,7 +149,7 @@
     align-self: center;
     text-align: center;
     justify-self: center;
-    padding: 5%
+    padding: 5%;
 }
 
 .vue-simple-spinner-text {
@@ -172,7 +163,6 @@
     padding: 0.2rem 1rem;
     margin-right: auto;
 }
-
 
 .createChallBtnRow {
     display: flex;
