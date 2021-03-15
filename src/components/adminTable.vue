@@ -40,9 +40,9 @@
                     (row.status === 'Banned' || row.status === 'Incorrect'),
                   bannedTableData:
                     row.status === 'Banned' &&
-                    (col === 'rank' || col === 'score'),
+                    (col === 'rank' || col === 'score')
                 },
-                `adminTable${col}`,
+                `adminTable${col}`
               ]"
             >
               <router-link
@@ -63,7 +63,7 @@
     <div class="paginateContainer">
       <div class="pagination">
         <paginate
-          v-if="pageCount-1"
+          v-if="pageCount - 1"
           v-model="currentPage"
           :page-count="pageCount"
           :click-handler="pageChangeHandler"
@@ -80,7 +80,7 @@
           :hide-prev-next="true"
         />
       </div>
-      <div v-if="pageCount-1" class="jumpPage">
+      <div v-if="pageCount - 1" class="jumpPage">
         <span>Jump to</span>
         <form class="form" @submit="changePage">
           <input
@@ -104,7 +104,7 @@ export default {
     return {
       jumpPage: 1,
       currentPage: 1,
-      redirectLink: "",
+      redirectLink: ""
     };
   },
   props: [
@@ -113,12 +113,12 @@ export default {
     "colStyle",
     "links",
     "maxElementPerPage",
-    "userData",
+    "userData"
   ],
   methods: {
     isColLink(val) {
       let isLink = false;
-      this.links.forEach((item) => {
+      this.links.forEach(item => {
         if (item.col === val) {
           isLink = true;
           this.redirectLink = item.redirect;
@@ -136,7 +136,7 @@ export default {
       let start = (this.currentPage - 1) * this.maxElementPerPage;
       let end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);
-    },
+    }
   },
   computed: {
     columns: function columns() {
@@ -152,7 +152,7 @@ export default {
       )
         return Math.round(this.rows.length / this.maxElementPerPage);
       else return Math.round(this.rows.length / this.maxElementPerPage) + 1;
-    },
-  },
+    }
+  }
 };
 </script>

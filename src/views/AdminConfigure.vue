@@ -32,7 +32,7 @@
           startTime: compStartTime,
           startDate: compStartDate,
           endDate: compEndDate,
-          endTime: compEndTime,
+          endTime: compEndTime
         }"
         :disabled="true"
       ></ConfigTimeDate>
@@ -97,7 +97,7 @@ export default {
     ConfigTimeDate,
     ConfigLogo,
     PreviewModal,
-    ErrorBox,
+    ErrorBox
   },
   data() {
     return {
@@ -119,7 +119,7 @@ export default {
       showFail: false,
       showPreviewModal: false,
       msg: null,
-      icon: null,
+      icon: null
     };
   },
   methods: {
@@ -152,7 +152,7 @@ export default {
       return value;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async fadeFunc() {
       await this.sleep(3000);
@@ -163,7 +163,7 @@ export default {
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex((el) => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -186,7 +186,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo,
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -204,9 +204,9 @@ export default {
           this.fadeFunc();
         });
     },
-    enter: function () {
+    enter: function() {
       let self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
@@ -216,10 +216,10 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
-    },
+    }
   },
   mounted() {
-    configureService.getConfigs().then((response) => {
+    configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -245,12 +245,12 @@ export default {
       this.compTimezone =
         configs.timezone ||
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
-      configureService.getLogo(configs.logo_url).then((response) => {
+      configureService.getLogo(configs.logo_url).then(response => {
         if (response.status === 200) {
           this.compLogo = response.data;
         }
       });
     });
-  },
+  }
 };
 </script>

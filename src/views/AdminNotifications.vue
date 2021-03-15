@@ -37,7 +37,7 @@
         <button
           class="adminSubmitButton primary-cta"
           :class="{
-            adminProcSubmitButton: subProcessing,
+            adminProcSubmitButton: subProcessing
           }"
           :disabled="!canSubmit"
           v-on:click="onSubmit"
@@ -73,7 +73,7 @@ export default {
   components: {
     NotificationTab,
     SpinLoader,
-    ErrorBox,
+    ErrorBox
   },
   data() {
     return {
@@ -89,12 +89,12 @@ export default {
       notifications: [],
       loading: true,
       msg: null,
-      icon: null,
+      icon: null
     };
   },
   mounted() {
     NotifService.getAllNotifs()
-      .then((response) => {
+      .then(response => {
         this.notifications = response.data.sort((a, b) => {
           return new Date(a.updated_at).getTime() <
             new Date(b.updated_at).getTime()
@@ -107,12 +107,12 @@ export default {
       });
   },
   methods: {
-    isNew: function (notification) {
+    isNew: function(notification) {
       this.duration(notification);
       return this.hours < 1;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async fadeFunc() {
       await this.sleep(3000);
@@ -121,7 +121,7 @@ export default {
       this.showSuccess = false;
       this.showFail = false;
     },
-    duration: function (notification) {
+    duration: function(notification) {
       if (notification.isNew) {
         return "Just a moment";
       }
@@ -134,7 +134,7 @@ export default {
       else if (this.minutes > 0) return this.minutes + " minutes";
       else if (this.seconds > 0) return this.seconds + " seconds";
     },
-    calcTime: function (passTime) {
+    calcTime: function(passTime) {
       this.seconds = Math.floor((passTime % (1000 * 60)) / 1000);
       this.minutes = Math.floor((passTime % (1000 * 60 * 60)) / (1000 * 60));
       this.hours = Math.floor(
@@ -155,9 +155,9 @@ export default {
               title: self.title,
               desc: self.description,
               updated_at: "Just Now",
-              isNew: true,
+              isNew: true
             },
-            ...self.notifications,
+            ...self.notifications
           ];
           self.title = "";
           self.description = "";
@@ -181,18 +181,18 @@ export default {
           this.fadeFunc();
         });
     },
-    enter: function () {
+    enter: function() {
       let self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
-    },
+    }
   },
   watch: {
-    title: function () {
+    title: function() {
       this.canSubmit = this.title.length > 0 && this.checked;
-    },
-  },
+    }
+  }
 };
 </script>

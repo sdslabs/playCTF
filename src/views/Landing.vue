@@ -48,12 +48,12 @@ import Button from "../components/Button.vue";
 export default {
   name: "home",
   components: {
-    Button,
+    Button
   },
   props: ["fetchedData", "configs"],
   data() {
     return {
-      configData: {},
+      configData: {}
     };
   },
   beforeCreate() {
@@ -61,7 +61,7 @@ export default {
   },
   mounted() {
     if (!this.fetchedData) {
-      ConfigApiService.getConfigs().then((response) => {
+      ConfigApiService.getConfigs().then(response => {
         this.configData = response.data;
       });
     } else {
@@ -73,8 +73,8 @@ export default {
     isLoggedIn() {
       let userInfo = this.$store.state.userInfo;
       return userInfo.access && userInfo.role === "contestant";
-    },
-  },
+    }
+  }
 };
 </script>
 
