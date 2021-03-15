@@ -39,29 +39,6 @@
       <p class="subfields">Competition logo (in .jpg format)</p>
       <!-- eslint-disable-next-line -->
       <ConfigLogo @changed="setCompLogo" :compLogo="compLogo"></ConfigLogo>
-      <!-- <p class="subfields">Themes</p>
-      <div class="themes">
-        <div class="sub-themes">
-          <button class="block"></button>
-          <p class="theme-name">Default</p>
-        </div>
-        <div class="sub-themes">
-          <button class="block"></button>
-          <p class="theme-name">Red</p>
-        </div>
-        <div class="sub-themes">
-          <button class="block"></button>
-          <p class="theme-name">Blue</p>
-        </div>
-        <div class="sub-themes">
-          <button class="block"></button>
-          <p class="theme-name">Dark</p>
-        </div>
-        <div class="sub-themes">
-          <button class="block"></button>
-          <p class="theme-name">Green</p>
-        </div>
-      </div> -->
       <button
         class="adminSubmitButton primary-cta"
         :disabled="cannotUpdate()"

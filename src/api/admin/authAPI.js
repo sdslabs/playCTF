@@ -14,19 +14,6 @@ export default {
     }).catch(err => {
       console.log(err);
     });
-    // try {
-    //   let response = await axiosInstance({
-    //     method: 'post',
-    //     url: `/auth/login`,
-    //     data: bodyFormData,
-    //   })
-    //   console.log(response)
-    //   return Promise.resolve(response)
-    // } catch (err) {
-    //   console.log(err)
-    //   let response = err
-    //   return response
-    // }
   },
 
   async loggedInUser(username, password) {
