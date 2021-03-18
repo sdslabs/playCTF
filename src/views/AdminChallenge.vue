@@ -81,12 +81,8 @@
         :key="port"
         class="host aboutText"
       >
-        <a
-          class="challenge-link"
-          :href="`//${hostUrl}:${port}`"
-          target="_blank"
-        >
-          {{ `${hostUrl}:${port}` }}
+        <a class="challenge-link" :href="getUrl(port)" target="_blank">
+          {{ getUrl(port) }}
         </a>
       </div>
     </div>
@@ -153,6 +149,7 @@ import {
 } from "../constants/constants";
 import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
+import { CONFIG } from "@/config/config";
 export default {
   components: { BarGraphVertical, AdminTable, SpinLoader },
   name: "AdminChallenge",
@@ -186,6 +183,14 @@ export default {
     }
   },
   methods: {
+    getUrl(port) {
+      let url = CONFIG.beastRoot;
+      let portIndex = url.lastIndexOf(":");
+      if (portIndex !== -1) {
+        url = url.substring(0, portIndex);
+      }
+      return `${url}:${port}`;
+    },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },

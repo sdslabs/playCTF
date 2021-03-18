@@ -27,8 +27,7 @@ export default new Vuex.Store({
       endingTime: "",
       timezone: "",
       logo: ""
-    },
-    hostUrl: "localhost"
+    }
   },
   mutations: {
     updateCurrentPage(state, page) {

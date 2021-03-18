@@ -23,11 +23,11 @@
       <a
         v-for="port in this.challDetails.ports"
         :key="port"
-        :href="`//${hostUrl}:${port}`"
+        :href="getUrl(port)"
         class="challenge-link"
         target="_blank"
         ><div class="challCard-challLink">
-          {{ `${hostUrl}:${port}` }}
+          {{ getUrl(port) }}
         </div>
       </a>
     </div>
@@ -65,6 +65,7 @@
 <script>
 import FlagService from "../api/userAPI";
 import Button from "@/components/Button.vue";
+import { CONFIG } from "@/config/config";
 export default {
   name: "ChallCard",
   props: ["challDetails", "tag", "isPreview"],
@@ -73,8 +74,7 @@ export default {
     return {
       flag: "",
       showSuccess: false,
-      showFail: false,
-      hostUrl: this.$store.getters.hostUrl
+      showFail: false
     };
   },
   state: {
@@ -82,6 +82,15 @@ export default {
     isModalVisible: false
   },
   methods: {
+    getUrl(port) {
+      let url = CONFIG.beastRoot;
+      let portIndex = url.lastIndexOf(":");
+      console.log(portIndex);
+      if (portIndex !== -1) {
+        url = url.substring(0, portIndex);
+      }
+      return `${url}:${port}`;
+    },
     enter: function() {
       setTimeout(function() {
         if (this.showSuccess) {
