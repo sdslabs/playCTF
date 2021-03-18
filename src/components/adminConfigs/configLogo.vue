@@ -19,6 +19,7 @@
         <img class="close-cross" src="@/assets/cross.svg" />
       </div>
     </div>
+    <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     <img v-if="this.logo" class="upload-preview" id="preview" />
   </div>
 </template>
@@ -26,16 +27,22 @@
 <script>
 import { upload } from "../../constants/images";
 import { CONFIG } from "@/config/config";
+import ErrorBox from "../../components/ErrorBox";
 export default {
   name: "ConfigLogo",
   props: ["compLogo"],
   data() {
     return {
+      msg: null,
+      icon: null,
       baseUrl: CONFIG.beastRoot,
       logo: this.compLogo,
       upload,
       acceptedImageExtensions: ["jpg", "jpeg", "png", "svg"]
     };
+  },
+  components: {
+    ErrorBox
   },
   created() {
     if (this.logo) {
@@ -43,6 +50,14 @@ export default {
     }
   },
   methods: {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async fadeFunc() {
+      await this.sleep(3000);
+      this.msg = null;
+      this.icon = null;
+    },
     removeLogo() {
       document.getElementById("actual-button").value = "";
       document.getElementById("preview").src = null;
@@ -77,9 +92,10 @@ export default {
           this.previewImg();
           this.emitLogo(newCompInfoLogo);
         } else {
-          console.log(prevCompInfoLogo);
           this.logo = prevCompInfoLogo;
-          console.log("Not a valid image format");
+          this.msg = "Not a valid image file";
+          this.icon = "error-white";
+          this.fadeFunc();
         }
       }
     },

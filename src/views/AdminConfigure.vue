@@ -93,8 +93,6 @@ export default {
       compEndTime: "",
       compEndDate: "",
       compLogo: "",
-      showSuccess: false,
-      showFail: false,
       showPreviewModal: false,
       msg: null,
       icon: null
@@ -136,8 +134,6 @@ export default {
       await this.sleep(3000);
       this.msg = null;
       this.icon = null;
-      this.showSuccess = false;
-      this.showFail = false;
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
@@ -169,7 +165,6 @@ export default {
       configureService
         .updateConfigs(configs)
         .then(() => {
-          this.showSuccess = true;
           if (configs.logo) {
             configs.logo = configs.logo.name;
           } else {
@@ -181,18 +176,10 @@ export default {
           this.fadeFunc();
         })
         .catch(() => {
-          this.showFail = true;
           this.msg = "Failed to make changes";
           this.icon = "error-white";
           this.fadeFunc();
         });
-    },
-    enter: function() {
-      let self = this;
-      setTimeout(function() {
-        self.showSuccess = false;
-        self.showFail = false;
-      }, 3000); // hide the message after 3 seconds
     },
     openModal() {
       this.modalOpen = !this.modalOpen;
