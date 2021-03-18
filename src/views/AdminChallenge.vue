@@ -301,6 +301,9 @@ export default {
       .finally(() => {
         this.loading.submissionsNotFetched = false;
       });
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminChallenges");
   }
 };
 </script>

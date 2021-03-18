@@ -158,6 +158,9 @@ export default {
       }
       return b[field1] - a[field1];
     }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminChallenges");
   }
 };
 </script>

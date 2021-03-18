@@ -259,6 +259,9 @@ export default {
       pieChartOptions: pieChartOptions(),
       barChartOptions: barChartOptions().statistics
     };
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminStatistics");
   }
 };
 </script>

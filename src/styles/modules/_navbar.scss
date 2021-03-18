@@ -1,147 +1,149 @@
 .navbar {
-    background-color: white;
-    width: 100%;
-    height: 2rem;
+  background-color: white;
+  width: 100%;
+  height: 2rem;
+  display: flex;
+  padding: 2.25rem 0;
+  flex-direction: row;
+  align-items: center;
+  z-index: 100;
+  .link-container {
     display: flex;
-    padding: 2.25rem 0;
     flex-direction: row;
     align-items: center;
-    z-index: 100;
-    .link-container{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        width: 50%;
-    }
-    .user-navbar-container{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
+    width: 50%;
+  }
+  .user-navbar-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-    .navbar-container {
-        width: 50%;
-        margin: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        .navbar-link {
-            display: inline-block;
-            vertical-align: middle;
-        }
-    }
-
+  .navbar-container {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     .navbar-link {
-        color: black;
-        font-family: $primary-font-family;
-        
-        font-size: 0.875rem;
-        line-height: 1.5rem;
-        color: $theme-color-black19;
-        text-decoration: none;
-        margin-left: 1.5rem;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
 
-        &:first-child {
-            margin-left: 0rem;
-        }
+  .navbar-link {
+    color: black;
+    font-family: $primary-font-family;
 
-        .logo {
-            img{
-                height: 3rem;
-            }
-        }
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: $theme-color-black19;
+    text-decoration: none;
+    margin-left: 1.5rem;
+
+    &:first-child {
+      margin-left: 0rem;
     }
 
-    .active {
-        font-weight: bold;
-
-        &:after {
-            content: "";
-            display: block;
-            margin: 0 auto;
-            width: 75%;
-            border-bottom: 0.125rem solid $theme-color-black19;
-            ;
-        }
+    .logo {
+      img {
+        height: 3rem;
+      }
     }
+  }
 
-    .navbar-link-current-page {
-        color: $theme-color-black19;
-        font-weight: bold;
+  .active {
+    font-weight: bold;
 
+    &:after {
+      content: "";
+      display: block;
+      margin: 0 auto;
+      width: 75%;
+      border-bottom: 0.125rem solid $theme-color-black19;
     }
+  }
 
-    .nav-timer {
-        margin-left: 20%;
-        font-family: $primary-font-family;
-        margin-top: -0.75rem;
-        font-size: 0.75rem;
-        color: $theme-color-grey39;
-        line-height: 0.5rem;
-    }
+  .navbar-link-current-page {
+    color: $theme-color-black19;
+    font-weight: bold;
+  }
 
-    .dropdown {
-        margin-left: 2.75rem;
-    }
+  .nav-timer {
+    margin-left: 20%;
+    font-family: $primary-font-family;
+    margin-top: -0.75rem;
+    font-size: 0.75rem;
+    color: $theme-color-grey39;
+    line-height: 0.5rem;
+  }
 
-    .dropbtn {
-        font-size: 1rem;
-        border: none;
-        outline: none;
-        color: black;
-        background-color: inherit;
-        font-family: inherit;
-        margin: 0;
-    }
+  .dropdown {
+    margin-left: 2.75rem;
+  }
 
-    .teamName {
-        color: $theme-color-violet;
-        font-weight: 600;
-        margin-right: 0.4375rem;
-    }
+  .dropbtn {
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    color: black;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        min-width: 9.375rem;
-    }
+  .teamName {
+    color: $theme-color-violet;
+    font-weight: 600;
+    margin-right: 0.4375rem;
+  }
 
-    .dropdown-link {
-        color: black;
-        float: none;
-        padding: 0.75rem 1rem;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-    }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 9.375rem;
+  }
 
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
+  .dropdown-link {
+    color: black;
+    float: none;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
 
-    .navbar-registration {
-        width: 8.0625rem;
-    }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
 
-    .navbar-already-registered {
-        font-size: 0.875rem;
-        color: $theme-color-grey39;
-        font: $secondary-font-family;
-        margin: 0rem;
-        line-height: 1.5rem;
-        vertical-align: super;
-    }
+  .navbar-registration {
+    width: 8.0625rem;
+  }
 
-    .login-link {
-        font-size: 0.875rem;
-        font-weight: bold;
-        color: $theme-color-violet;
-        text-decoration: none;
-    }
+  .navbar-already-registered {
+    font-size: 0.875rem;
+    color: $theme-color-grey39;
+    font: $secondary-font-family;
+    margin: 0rem;
+    line-height: 1.5rem;
+    vertical-align: super;
+  }
+
+  .login-link {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: $theme-color-violet;
+    text-decoration: none;
+  }
 }
 
-.bold{
-    @extend %font-style-bold;
+.bold {
+  @extend %font-style-bold;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }

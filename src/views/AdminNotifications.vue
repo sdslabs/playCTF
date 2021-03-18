@@ -193,6 +193,9 @@ export default {
     title: function() {
       this.canSubmit = this.title.length > 0 && this.checked;
     }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminNotifications");
   }
 };
 </script>

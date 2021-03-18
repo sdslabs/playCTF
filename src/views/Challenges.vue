@@ -107,7 +107,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "Challenges");
+    this.$store.commit("updateCurrentPage", "userChallenges");
   }
 };
 </script>

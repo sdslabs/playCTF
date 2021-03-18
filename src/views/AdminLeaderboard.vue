@@ -184,6 +184,9 @@ export default {
       .finally(() => {
         this.loading = false;
       });
+  },
+    beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminLeaderboard");
   }
 };
 </script>

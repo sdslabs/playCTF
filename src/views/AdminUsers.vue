@@ -140,6 +140,9 @@ export default {
         return this.displayUsers;
       }
     }
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminUsers");
   }
 };
 </script>

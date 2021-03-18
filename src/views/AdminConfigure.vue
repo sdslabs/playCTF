@@ -226,6 +226,9 @@ export default {
         this.compLogo = null;
       }
     });
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminLeaderboard");
   }
 };
 </script>
