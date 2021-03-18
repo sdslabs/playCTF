@@ -118,6 +118,7 @@ import { getAllTimezones } from "../constants/constants";
 import configureService from "../api/admin/configureAPI";
 import { preview } from "../constants/images";
 import PreviewModal from "../components/PreviewModal.vue";
+import { CONFIG } from "@/config/config";
 export default {
   data() {
     return {
@@ -155,6 +156,16 @@ export default {
       this.compPrizes = configs.prizes;
       let startingTime = configs.starting_time;
       let endingTime = configs.ending_time;
+      let logoName = configs.logo_url;
+      if (logoName) {
+        configureService
+          .getLogo(`${CONFIG.beastRoot}/api/info/logo/${logoName}`, logoName)
+          .then(response => {
+            this.compLogo = response;
+          });
+      } else {
+        this.compLogo = null;
+      }
       let startDetails = startingTime.split(",");
       let endingDetails = endingTime.split(",");
       this.compStartTime = moment(
@@ -290,6 +301,11 @@ export default {
         .updateConfigs(configs)
         .then(() => {
           this.showSuccess = true;
+          if (configs.logo) {
+            configs.logo = configs.logo.name;
+          } else {
+            configs.logo = "";
+          }
           this.$store.commit("updateCompInfo", configs);
           this.$router.push("/admin/statistics");
         })

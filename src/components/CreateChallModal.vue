@@ -2,7 +2,7 @@
   <div class="create-chall-modal">
     <div class="create-chall-modal-header">
       <div class="heading">CREATE NEW CHALLENGE</div>
-      <button class="modal-close-button" @click="$emit('close')">
+      <button class="modal-close-button close-cross" @click="$emit('close')">
         <img :src="cross" />
       </button>
     </div>

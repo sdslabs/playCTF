@@ -31,7 +31,8 @@ export default {
         prizes: configs.prizes,
         timezone: configs.timezone,
         startingTime: configs.starting_time,
-        endingTime: configs.ending_time
+        endingTime: configs.ending_time,
+        logo: configs.logo_url
       };
       this.$store.commit("updateCompInfo", competitionInfo);
     });

@@ -36,7 +36,7 @@
         }"
         :disabled="true"
       ></ConfigTimeDate>
-      <p class="subfields">Competition logo (in .jpg format)</p>
+      <p class="subfields">Competition logo (in image format)</p>
       <!-- eslint-disable-next-line -->
       <ConfigLogo @changed="setCompLogo" :compLogo="compLogo"></ConfigLogo>
       <button
@@ -66,6 +66,7 @@ import ConfigLogo from "../components/adminConfigs/configLogo.vue";
 import { getAllTimezones } from "../constants/constants";
 import PreviewModal from "../components/PreviewModal.vue";
 import ErrorBox from "../components/ErrorBox";
+import { CONFIG } from "@/config/config";
 export default {
   name: "AdminConfigure",
   components: {
@@ -169,6 +170,11 @@ export default {
         .updateConfigs(configs)
         .then(() => {
           this.showSuccess = true;
+          if (configs.logo) {
+            configs.logo = configs.logo.name;
+          } else {
+            configs.logo = "";
+          }
           this.$store.commit("updateCompInfo", configs);
           this.msg = "Changes made successfully";
           this.icon = "tick-white";
@@ -205,6 +211,7 @@ export default {
       let endingTime = configs.ending_time;
       let startDetails = startingTime.split(",");
       let endingDetails = endingTime.split(",");
+      let logoName = configs.logo_url;
       this.compStartTime = moment(
         startDetails[0].split(" ")[0],
         "HH:mm:ss"
@@ -222,11 +229,15 @@ export default {
       this.compTimezone =
         configs.timezone ||
         `${moment.tz.guess()}: UTC ${moment.tz(moment.tz.guess()).format("Z")}`;
-      configureService.getLogo(configs.logo_url).then(response => {
-        if (response.status === 200) {
-          this.compLogo = response.data;
-        }
-      });
+      if (logoName) {
+        configureService
+          .getLogo(`${CONFIG.beastRoot}/api/info/logo/${logoName}`, logoName)
+          .then(response => {
+            this.compLogo = response;
+          });
+      } else {
+        this.compLogo = null;
+      }
     });
   }
 };

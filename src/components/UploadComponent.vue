@@ -1,20 +1,18 @@
 <template>
   <div class="uploadRow margin-vert-1">
-    <div class="logoUpload">
-      <input
-        type="file"
-        id="challFileInput"
-        ref="file"
-        v-on:change="onFileChange()"
-        hidden
-      />
-      <label for="challFileInput">
-        <img :src="upload" />
-        <div class="uploadText">
-          {{ this.logo ? "Replace file" : "Upload file" }}
-        </div></label
-      >
-    </div>
+    <input
+      type="file"
+      id="challFileInput"
+      ref="file"
+      v-on:change="onFileChange()"
+      hidden
+    />
+    <label for="challFileInput" class="upload-button">
+      <img :src="upload" />
+      <div class="uploadText">
+        {{ this.logo ? "Replace file" : "Upload file" }}
+      </div></label
+    >
     <div v-if="logo" class="filename">
       {{ name }}
       <div @click="removeLogo()"><img src="@/assets/cross.svg" /></div>

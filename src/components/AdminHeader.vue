@@ -1,7 +1,7 @@
 <template>
   <div class="adminHeader">
     <div class="ctfLogo">
-      <img :src="`${baseUrl}/api/info/logo`" />
+      <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" />
     </div>
     <AdminNav />
     <AdminDropdown />

@@ -14,6 +14,8 @@ import VueConfirmDialog from "vue-confirm-dialog";
 import Spinner from "vue-simple-spinner";
 import ChartJsPluginDataLabels from "chartjs-plugin-datalabels";
 import AdminLandingLayout from "./layouts/AdminLanding.vue";
+import { CONFIG } from "@/config/config";
+import Logo from "./assets/main-logo.svg";
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
@@ -33,6 +35,14 @@ Vue.mixin({
     },
     getImage(imagename) {
       return require(`../src/assets/${imagename}.svg`);
+    },
+    getLogoUrl() {
+      let logoName = store.state.competitionInfo.logo;
+      if (!logoName) {
+        console.log(Logo);
+        return Logo;
+      }
+      return `${CONFIG.beastRoot}/api/info/logo/${logoName}`;
     }
   }
 });

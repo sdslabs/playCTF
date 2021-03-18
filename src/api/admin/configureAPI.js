@@ -21,7 +21,10 @@ export default {
     return await axiosInstance.get(`/api/info/competition-info`);
   },
 
-  async getLogo(imgUrl) {
-    return await axiosInstance.get(imgUrl);
+  async getLogo(imgUrl, imgName) {
+    const response = await fetch(imgUrl);
+    const blob = await response.blob();
+    const file = new File([blob], imgName, { type: blob.type });
+    return file;
   }
 };
