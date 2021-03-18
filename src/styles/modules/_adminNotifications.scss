@@ -5,8 +5,12 @@
   width: 100%;
 }
 
+.checkbox {
+  outline: none;
+  cursor: pointer;
+}
 .fade-leave-active {
-  transition: opacity 1s
+  transition: opacity 1s;
 }
 
 .addFeedback {
@@ -77,7 +81,6 @@
     line-height: 1.75rem;
   }
 
-
   textarea:focus,
   .adFormTitle:focus {
     outline: 0;
@@ -113,8 +116,6 @@
 }
 
 .adminSubmitButton {
-  height: 3.5rem;
-  padding: 0.5rem 1.5rem;
   margin-left: auto;
 }
 
