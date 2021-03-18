@@ -18,6 +18,7 @@
     box-sizing: border-box;
 
     .navButton {
+        cursor: pointer;
         display: flex;
         flex-direction: row-reverse;
         @extend %font-style-basic;
@@ -90,6 +91,7 @@
     }
 
     .sortOption {
+        cursor: pointer;
         box-sizing: border-box;
         font-size: 1rem;
         line-height: 1.5rem;
