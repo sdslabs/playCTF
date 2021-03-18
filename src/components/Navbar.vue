@@ -3,7 +3,7 @@
     <div class="user-navbar-container" v-if="loggedIn()">
       <router-link to="/about" class="navbar-link ctfLogo"
         ><div class="logo">
-          <img :src="`${baseUrl}/api/info/logo`" /></div
+          <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" /></div
       ></router-link>
       <nav class="navbar-container">
         <div class="link-container">

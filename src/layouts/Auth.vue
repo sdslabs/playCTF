@@ -4,7 +4,7 @@
       <nav v-if="pathLogin()" class="navbar-container">
         <router-link to="/" class="navbar-link"
           ><div class="logo">
-            <img :src="`${baseUrl}/api/info/logo`" /></div
+            <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" /></div
         ></router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">New here?</p>
@@ -14,7 +14,7 @@
       <nav v-else class="navbar-container">
         <router-link to="/" class="navbar-link">
           <div class="logo">
-            <img :src="`${baseUrl}/api/info/logo`" /></div
+            <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" /></div
         ></router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">Already Registered?</p>

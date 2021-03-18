@@ -1,32 +1,25 @@
 <template>
   <div class="uploadRow">
-    <div class="logoUpload">
-      <input
-        type="file"
-        id="actual-button"
-        ref="file"
-        v-on:change="onFileChange()"
-        hidden
-      />
-      <label for="actual-button">
-        <img :src="upload" />
-        <div class="uploadText">
-          {{
-            this.logo || this.showInitialImg ? "Replace file" : "Upload file"
-          }}
-        </div></label
-      >
-    </div>
+    <input
+      type="file"
+      id="actual-button"
+      ref="file"
+      v-on:change="onFileChange()"
+      hidden
+    />
+    <label for="actual-button" class="upload-button">
+      <img :src="upload" />
+      <div class="uploadText">
+        {{ this.logo ? "Replace file" : "Upload file" }}
+      </div></label
+    >
     <div v-if="logo" class="filename">
       {{ logo.name }}
-      <div @click="removeLogo()"><img src="@/assets/cross.svg" /></div>
+      <div @click="removeLogo()">
+        <img class="close-cross" src="@/assets/cross.svg" />
+      </div>
     </div>
-    <img v-if="showImg" class="upload-preview" id="preview" />
-    <img
-      v-if="showInitialImg"
-      class="upload-preview"
-      :src="`${baseUrl}/api/info/logo`"
-    />
+    <img v-if="this.logo" class="upload-preview" id="preview" />
   </div>
 </template>
 
@@ -39,16 +32,19 @@ export default {
   data() {
     return {
       baseUrl: CONFIG.beastRoot,
-      logo: null,
+      logo: this.compLogo,
       upload,
-      showImg: false,
-      showInitialImg: true
+      acceptedImageExtensions: ["jpg", "jpeg", "png", "svg"]
     };
+  },
+  created() {
+    if (this.logo) {
+      this.previewImg();
+    }
   },
   methods: {
     removeLogo() {
       document.getElementById("actual-button").value = "";
-      this.showImg = false;
       document.getElementById("preview").src = null;
       this.logo = null;
     },
@@ -56,7 +52,6 @@ export default {
       if (!this.logo) {
         return;
       }
-      this.showImg = true;
       let reader = new FileReader();
       reader.readAsDataURL(this.logo);
       reader.onload = function(readerEvent) {
@@ -67,20 +62,30 @@ export default {
       this.$emit("changed", compInfoLogo);
     },
     onFileChange() {
-      this.showInitialImg = false;
       this.logo = this.$refs.file.files[0];
-      this.previewImg();
     }
   },
   watch: {
     logo: function(newCompInfoLogo, prevCompInfoLogo) {
       if (newCompInfoLogo != prevCompInfoLogo) {
-        this.emitLogo(newCompInfoLogo);
+        if (newCompInfoLogo === null) {
+          this.previewImg();
+          this.emitLogo(newCompInfoLogo);
+        }
+        let extension = newCompInfoLogo.name.split(".")[1];
+        if (this.acceptedImageExtensions.includes(extension)) {
+          this.previewImg();
+          this.emitLogo(newCompInfoLogo);
+        } else {
+          console.log(prevCompInfoLogo);
+          this.logo = prevCompInfoLogo;
+          console.log("Not a valid image format");
+        }
       }
+    },
+    compLogo: function(changedValue) {
+      this.logo = changedValue;
     }
-    // compLogo: function (changedValue) {
-    //   this.logo = changedValue;
-    // },
   }
 };
 </script>

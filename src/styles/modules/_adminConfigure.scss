@@ -1,280 +1,276 @@
 .adminConfigureContainer,
 .landingInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .preview-button {
+    padding: 0 1rem;
+    justify-content: space-between;
+    width: 7rem;
+  }
+
+  .heading {
+    @extend %font-style-bold;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .headingText {
+      margin-right: 2rem;
+    }
+
+    .addConfigFeedback {
+      margin-left: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+
+  .form {
+    margin-top: 1.875rem;
+    margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+  }
 
-    .preview-button {
-        padding: 0 1rem;
-        justify-content: space-between;
-        width: 7rem;
-    }
+  .fields {
+    text-align: left;
+    font-family: $primary-font-family;
 
-    .heading {
-        @extend %font-style-bold;
-        font-size: 1.5rem;
-        line-height: 1.75rem;
-        text-align: left;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.125rem;
+    margin: 0.2rem;
+    margin-left: 0;
+  }
 
-        .headingText {
-            margin-right: 2rem;
-        }
+  .subfields-row {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
+  }
 
-        .addConfigFeedback {
-            margin-left: auto;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-    }
+  .counter {
+    @extend %font-style-basic;
+    font-size: 0.75rem;
+    color: $theme-color-violet;
+    margin-left: auto;
+  }
 
-    .form {
-        margin-top: 1.875rem;
-        margin-bottom: 2.5rem;
+  .subfields {
+    font-size: 0.75rem;
+    text-align: left;
+    font-family: $primary-font-family;
+
+    font-weight: 600;
+    line-height: 1.125rem;
+    margin: 0.2rem;
+    margin-left: 0;
+  }
+
+  .confirmation {
+    @extend %font-style-basic;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
+
+  .configTitle:focus,
+  textarea:focus {
+    outline: 0;
+    border: 2px solid $theme-color-violet;
+  }
+
+  textarea {
+    box-sizing: border-box;
+    height: 6rem;
+    border-radius: 0.3125rem;
+    border: 0.0625rem solid $theme-color-grey-high-transp;
+    @extend %font-style-basic;
+    margin-bottom: 2%;
+    width: 100%;
+    padding-left: 1rem;
+    padding-top: 1rem;
+  }
+
+  textarea::placeholder {
+    font-family: $primary-font-family;
+
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.125rem;
+  }
+
+  .notifTabs {
+    margin-top: 2.5rem;
+    height: 43rem;
+    overflow-y: scroll;
+  }
+
+  .notifTabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .importantField {
+    color: red;
+  }
+
+  .time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.2rem 0;
+
+    .timeSub {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 48%;
+
+      input {
+        border: 1px solid rgba(87, 87, 87, 0.7);
+        border-radius: 2px;
+        background-color: $theme-color-white;
+        padding-left: 1rem;
+        height: 2rem;
+        outline: none;
+      }
+
+      .dateInput {
+        width: 50%;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
-    }
+        align-items: flex-start;
+      }
 
-    .fields {
-        text-align: left;
-        font-family: $primary-font-family;
-
-        font-weight: 600;
-        font-size: 0.875rem;
-        line-height: 1.125rem;
-        margin: 0.2rem;
-        margin-left: 0;
-    }
-
-    .subfields-row {
-        width: 100%;
+      .timeInput {
+        width: 45%;
         display: flex;
-        align-items: center;
-        height: 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
+  }
 
-    .counter {
-        @extend %font-style-basic;
-        font-size: 0.75rem;
-        color: $theme-color-violet;
-        margin-left: auto;
+  .timezoneSelect {
+    outline: none;
+    background-color: $theme-color-white;
+
+    .vs__selected {
+      @extend %font-style-basic;
     }
+  }
 
-    .subfields {
-        font-size: 0.75rem;
-        text-align: left;
-        font-family: $primary-font-family;
+  .v-select-disabled {
+    outline: none;
+    background-color: $theme-color-white;
 
-        font-weight: 600;
-        line-height: 1.125rem;
-        margin: 0.2rem;
-        margin-left: 0;
+    .vs__selected {
+      color: $theme-color-grey-high-transp;
+      @extend %font-style-basic;
     }
-
-    .confirmation {
-        @extend %font-style-basic;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        font-size: 1rem;
-        line-height: 1.75rem;
-    }
-
-    .configTitle:focus,
-    textarea:focus {
-        outline: 0;
-        border: 2px solid $theme-color-violet;
-    }
-
-    textarea {
-        box-sizing: border-box;
-        height: 6rem;
-        border-radius: 0.3125rem;
-        border: 0.0625rem solid $theme-color-grey-high-transp;
-        @extend %font-style-basic;
-        margin-bottom: 2%;
-        width: 100%;
-        padding-left: 1rem;
-        padding-top: 1rem;
-    }
-
-    textarea::placeholder {
-        font-family: $primary-font-family;
-
-        font-weight: 600;
-        font-size: 1rem;
-        line-height: 1.125rem;
-    }
-
-    .notifTabs {
-        margin-top: 2.5rem;
-        height: 43rem;
-        overflow-y: scroll;
-    }
-
-    .notifTabs::-webkit-scrollbar {
-        display: none;
-    }
-
-    .importantField {
-        color: red;
-    }
-
-    .time {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0.2rem 0;
-
-        .timeSub {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 48%;
-
-            input {
-                border: 1px solid rgba(87, 87, 87, 0.7);
-                border-radius: 2px;
-                background-color: $theme-color-white;
-                padding-left: 1rem;
-                height: 2rem;
-                outline: none;
-            }
-
-            .dateInput {
-                width: 50%;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .timeInput {
-                width: 45%;
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-    }
-
-    .timezoneSelect {
-        outline: none;
-        background-color: $theme-color-white;
-
-        .vs__selected {
-            @extend %font-style-basic;
-        }
-    }
-
-    .v-select-disabled {
-        outline: none;
-        background-color: $theme-color-white;
-
-        .vs__selected {
-            color: $theme-color-grey-high-transp;
-            @extend %font-style-basic;
-        }
-    }
+  }
 }
 
 .adminConfigureContainer {
-    .upload-preview {
-        height: 5rem;
-        position: absolute;
-        right: 25%;
-    }
+  .upload-preview {
+    height: 3rem;
+    position: absolute;
+    right: 25%;
+  }
 }
 
 .landingInput {
-    .upload-preview {
-        height: 5rem;
-        position: absolute;
-        right: 0;
-    }
+  .upload-preview {
+    height: 3rem;
+    position: absolute;
+    right: 0;
+  }
 }
 
 .v-select-disabled {
-    pointer-events: none;
-    color: #bfcbd9;
-    cursor: not-allowed;
-    background-image: none;
-    background-color: #eef1f6;
-    border-color: #d1dbe5;
+  pointer-events: none;
+  color: #bfcbd9;
+  cursor: not-allowed;
+  background-image: none;
+  background-color: #eef1f6;
+  border-color: #d1dbe5;
 }
 
 .configureContent {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 0 0.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0.1rem;
 }
 
 .uploadRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  .filename {
+    @extend %font-style-basic;
+    border: 0.1rem solid rgba(87, 87, 87, 0.57);
+    box-sizing: border-box;
+    box-shadow: 0px 0.125rem 0.625rem rgba(37, 85, 124, 0.1);
+    border-radius: 1.25rem;
     display: flex;
     align-items: center;
-    margin-bottom: 3rem;
-
-    .filename {
-        @extend %font-style-basic;
-        border: 0.1rem solid rgba(87, 87, 87, 0.57);
-        box-sizing: border-box;
-        box-shadow: 0px 0.125rem 0.625rem rgba(37, 85, 124, 0.1);
-        border-radius: 1.25rem;
-        display: flex;
-        align-items: center;
-        color: rgba(25, 25, 25, 0.57);
-        height: 2rem;
-        padding: 0 1rem;
-        position: absolute;
-        margin-left: 9rem;
-
-        img {
-            padding-left: 0.5rem;
-            height: 0.8rem;
-        }
-    }
-
-    .upload-feedback {
-        height: 1.5rem;
-        position: absolute;
-        margin-left: 20%;
-    }
-}
-
-.logoUpload {
-    width: 7rem;
+    color: rgba(25, 25, 25, 0.57);
     height: 2rem;
-    border: 1.5px solid #393939;
-    box-sizing: border-box;
-    box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
-    border-radius: 3px;
+    padding: 0 1rem;
+    position: absolute;
+    margin-left: 9rem;
 
-    label {
-        height: 100%;
-        @extend %font-style-basic;
-        font-size: 0.875rem;
-        line-height: 1.125rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        background: $theme-color-white;
-        align-items: center;
+    img {
+      padding-left: 0.5rem;
+      height: 0.8rem;
     }
+  }
+
+  .upload-feedback {
+    height: 1.5rem;
+    position: absolute;
+    margin-left: 20%;
+  }
 }
 
 .margin-vert-1 {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
 
 .margin-bottom-2 {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .margin-0 {
-    margin: 0;
+  margin: 0;
+}
+
+.close-cross {
+  cursor: pointer;
+}
+
+.upload-button {
+  @extend .action-cta;
+  &:hover:not(:active) {
+    background-color: $theme-color-violet;
+    border: 1.5px solid $theme-color-violet;
+    color: $theme-color-white;
+    img {
+      filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg)
+        brightness(99%) contrast(103%);
+    }
+  }
 }

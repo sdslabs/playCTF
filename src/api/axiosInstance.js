@@ -27,12 +27,10 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function(error) {
-    let ignoreErrorPagesPath = [
-      "/api/info/logo",
-      "/auth/login",
-      "/auth/register"
-    ];
+    let ignoreErrorPagesPath = ["/auth/login", "/auth/register"];
     if (ignoreErrorPagesPath.includes(error.response.config.url)) {
+      return error;
+    } else if (error.response.config.url.includes("/api/info/logo")) {
       return error;
     } else {
       if (!error.response) {
