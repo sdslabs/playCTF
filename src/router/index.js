@@ -112,7 +112,7 @@ const routes = [
     name: "adminStatistics",
     component: AdminStatistics,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -120,7 +120,7 @@ const routes = [
     name: "adminNotifications",
     component: AdminNotifications,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -128,7 +128,7 @@ const routes = [
     name: "adminUsers",
     component: AdminUsers,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -136,7 +136,7 @@ const routes = [
     name: "adminUsers",
     component: AdminUser,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -144,7 +144,7 @@ const routes = [
     name: "adminLeaderboard",
     component: AdminLeaderboard,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -152,7 +152,7 @@ const routes = [
     name: "adminChallenges",
     component: AdminChallenges,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -160,7 +160,7 @@ const routes = [
     name: "adminChallenge",
     component: AdminChallenge,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -168,7 +168,7 @@ const routes = [
     name: "adminSubmissions",
     component: AdminSubmissions,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {
@@ -176,7 +176,7 @@ const routes = [
     name: "adminConfigure",
     component: AdminConfigure,
     meta: {
-      layout: "admin-layout"
+      layout: "user-layout"
     }
   },
   {

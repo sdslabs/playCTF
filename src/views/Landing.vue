@@ -57,7 +57,7 @@ export default {
     };
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "AboutCTF");
+    this.$store.commit("updateCurrentPage", "userAboutCTF");
   },
   mounted() {
     if (!this.fetchedData) {

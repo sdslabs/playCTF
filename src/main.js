@@ -1,7 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import AdminLayout from "./layouts/Admin";
 import DefaultLayout from "./layouts/Default";
 import UserLayout from "./layouts/Users";
 import AuthLayout from "./layouts/Auth";
@@ -19,7 +18,6 @@ import Logo from "./assets/main-logo.svg";
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
-Vue.component("admin-layout", AdminLayout);
 Vue.component("user-layout", UserLayout);
 Vue.component("auth-layout", AuthLayout);
 Vue.component("error-layout", ErrorLayout);

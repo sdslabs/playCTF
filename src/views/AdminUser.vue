@@ -311,6 +311,9 @@ export default {
       .finally(() => {
         this.loading.userNotFetched = false;
       });
+  },
+  beforeCreate() {
+    this.$store.commit("updateCurrentPage", "adminUsers");
   }
 };
 </script>

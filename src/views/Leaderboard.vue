@@ -114,7 +114,7 @@ export default {
       });
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "Leaderboard");
+    this.$store.commit("updateCurrentPage", "userLeaderboard");
   }
 };
 </script>

@@ -76,7 +76,7 @@ export default {
     }
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "Notifications");
+    this.$store.commit("updateCurrentPage", "userNotifications");
   }
 };
 </script>

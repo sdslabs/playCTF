@@ -8,11 +8,11 @@
       <nav class="navbar-container">
         <div class="link-container">
           <router-link
-            v-for="routes in links"
+            v-for="routes in getLinks()"
             v-bind:key="routes.index"
             :class="{
               'navbar-link': true,
-              active: routes.text === $store.getters.currentPage
+              active: isActive(routes)
             }"
             :to="`${routes.page}`"
             >{{ routes.text }}
@@ -33,13 +33,21 @@
           <img :src="dropdown" />
         </button>
         <div v-if="displayDropdownContent" class="adminNavDropdownContent">
-          <router-link :to="userProfilePath" class="adminNavDropdownLink"
+          <router-link
+            v-if="this.userRole !== 'admin'"
+            :to="userProfilePath"
+            class="adminNavDropdownLink"
             >Profile</router-link
           >
-          <router-link to="/resetpassword" class="adminNavDropdownLink"
+          <router-link
+            v-if="this.userRole !== 'admin'"
+            to="/resetpassword"
+            class="adminNavDropdownLink"
             >Change Password</router-link
           >
-          <a class="adminNavDropdownLink" @click="logout()">Logout</a>
+          <a class="adminNavDropdownLink cursor-pointer" @click="logout()"
+            >Logout</a
+          >
         </div>
       </div>
     </div>
@@ -59,7 +67,8 @@ export default {
       username: "",
       displayDropdownContent: false,
       baseUrl: CONFIG.beastRoot,
-      links: [
+      userRole: this.$store.state.userInfo.role,
+      userLinks: [
         {
           index: 0,
           text: "Challenges",
@@ -81,6 +90,43 @@ export default {
           page: "/about"
         }
       ],
+      adminLinks: [
+        {
+          index: 0,
+          text: "Statistics",
+          page: "/admin/statistics"
+        },
+        {
+          index: 1,
+          text: "Notifications",
+          page: "/admin/notifications"
+        },
+        {
+          index: 2,
+          text: "Users",
+          page: "/admin/users"
+        },
+        {
+          index: 3,
+          text: "Leaderboard",
+          page: "/admin/leaderboard"
+        },
+        {
+          index: 4,
+          text: "Challenges",
+          page: "/admin/challenges"
+        },
+        {
+          index: 5,
+          text: "Submissions",
+          page: "/admin/submissions"
+        },
+        {
+          index: 6,
+          text: "Configure",
+          page: "/admin/configure"
+        }
+      ],
       userProfilePath: "/user/"
     };
   },
@@ -92,6 +138,20 @@ export default {
     this.userProfilePath += this.username;
   },
   methods: {
+    isActive(routes) {
+      if (this.userRole === "admin") {
+        return "admin" + routes.text === this.$store.getters.currentPage;
+      } else {
+        return "user" + routes.text === this.$store.getters.currentPage;
+      }
+    },
+    getLinks() {
+      if (this.userRole === "admin") {
+        return this.adminLinks;
+      } else {
+        return this.userLinks;
+      }
+    },
     loggedIn() {
       return store.getters.getState;
     },
