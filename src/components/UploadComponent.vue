@@ -15,7 +15,9 @@
     >
     <div v-if="logo" class="filename">
       {{ name }}
-      <div @click="removeLogo()"><img src="@/assets/cross.svg" /></div>
+      <div @click="removeLogo()" class="close-cross">
+        <img src="@/assets/cross.svg" />
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +34,8 @@ export default {
       logo: null,
       upload,
       showImg: false,
-      name: ""
+      name: "",
+      acceptedChallengeExtensions: ["tar.gz", "tar", "zip"]
     };
   },
   methods: {
@@ -46,13 +49,29 @@ export default {
     },
     onFileChange() {
       this.logo = this.$refs.file.files[0];
-      this.name = this.logo.name.trim().substr(0, 10) + "...";
+      if (this.logo.name.length > 18) {
+        this.name = this.logo.name.trim().substr(0, 15) + "...";
+      } else {
+        this.name = this.logo.name;
+      }
     }
   },
   watch: {
     logo: function(newCompInfoLogo, prevCompInfoLogo) {
       if (newCompInfoLogo != prevCompInfoLogo) {
-        this.emitLogo(newCompInfoLogo);
+        if (newCompInfoLogo === null) {
+          this.emitLogo(newCompInfoLogo);
+        }
+        if (
+          this.acceptedChallengeExtensions.includes(
+            newCompInfoLogo.name.split(".")[1]
+          )
+        ) {
+          this.emitLogo(newCompInfoLogo);
+        } else {
+          this.emitLogo("invalidFile");
+          this.logo = prevCompInfoLogo;
+        }
       }
     }
   }
