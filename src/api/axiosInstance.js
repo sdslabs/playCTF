@@ -28,8 +28,11 @@ axiosInstance.interceptors.response.use(
   },
   function(error) {
     let ignoreErrorPagesPath = ["/auth/login", "/auth/register"];
+    let catchInternalPagesPath = ["/api/manage/challenge/upload"];
     if (ignoreErrorPagesPath.includes(error.response.config.url)) {
       return error;
+    } else if (catchInternalPagesPath.includes(error.response.config.url)) {
+      return Promise.reject(error);
     } else if (error.response.config.url.includes("/api/info/logo")) {
       return error;
     } else {

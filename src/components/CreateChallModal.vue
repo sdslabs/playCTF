@@ -6,11 +6,20 @@
         <img :src="cross" />
       </button>
     </div>
-    <UploadComponent
-      :previewImage="false"
-      @changed="setChallengeTar"
-      :uploadFile="challengeTar"
-    ></UploadComponent>
+    <div class="flex-row-center">
+      <UploadComponent
+        :previewImage="false"
+        @changed="setChallengeTar"
+        :uploadFile="challengeTar"
+      ></UploadComponent>
+      <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
+    </div>
+    <ErrorBox
+      v-if="submitMsg"
+      :msg="submitMsg"
+      :icon="icon"
+      class="received-error"
+    />
     <div v-if="this.challengeInfo.name" class="margin-bottom-2">
       <ChallCard
         :challDetails="this.challengeInfo"
@@ -42,19 +51,45 @@ import challengesService from "../api/admin/challengesAPI";
 import UploadComponent from "@/components/UploadComponent.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import Button from "@/components/Button.vue";
+import ErrorBox from "@/components/ErrorBox.vue";
 export default {
   name: "PreviewModal",
   data() {
-    return { cross, challengeTar: "", challengeInfo: {}, challCreated: false };
+    return {
+      cross,
+      challengeTar: "",
+      challengeInfo: {},
+      challCreated: false,
+      submitted: null,
+      submitMsg: null,
+      msg: null,
+      icon: null
+    };
   },
   components: {
     UploadComponent,
     ChallCard,
-    Button
+    Button,
+    ErrorBox
   },
   methods: {
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async fadeFunc() {
+      await this.sleep(3000);
+      this.submitMsg = null;
+      this.msg = null;
+      this.icon = null;
+    },
     setChallengeTar(val) {
-      this.challengeTar = val;
+      if (val === "invalidFile") {
+        this.msg = "Not a valid challenge file";
+        this.icon = "error-white";
+        this.fadeFunc();
+      } else {
+        this.challengeTar = val;
+      }
     },
     async updateConfigs() {
       await challengesService
@@ -63,7 +98,10 @@ export default {
           this.challengeInfo = res;
           this.challCreated = true;
         })
-        .catch(() => {
+        .catch(e => {
+          this.submitMsg = e.response.data.error;
+          this.icon = "error-white";
+          this.fadeFunc();
           this.showFail = true;
           this.challCreated = false;
         });
