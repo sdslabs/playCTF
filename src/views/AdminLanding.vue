@@ -79,15 +79,11 @@
       </button>
     </div>
     <div v-else class="action">
-      <button
-        v-if="getCurrentStep() !== 1"
-        class="action-cta back-btn"
-        @click="goBack"
-      >
+      <button v-if="getCurrentStep() !== 1" class="action-cta" @click="goBack">
         Back
       </button>
       <button
-        class="primary-cta action-btn"
+        class="secondary-cta action-btn"
         @click="goNext"
         :disabled="isNextDisabled()"
       >

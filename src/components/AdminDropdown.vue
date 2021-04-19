@@ -9,7 +9,9 @@
       <img :src="dropdown" />
     </button>
     <div v-if="displayDropdownContent" class="adminNavDropdownContent">
-      <a class="adminNavDropdownLink cursor-pointer" @click="logout()">Logout</a>
+      <a class="adminNavDropdownLink cursor-pointer" @click="logout()"
+        >Logout</a
+      >
     </div>
   </div>
 </template>

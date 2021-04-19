@@ -185,7 +185,7 @@ export default {
         this.loading = false;
       });
   },
-    beforeCreate() {
+  beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminLeaderboard");
   }
 };
