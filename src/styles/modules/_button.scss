@@ -38,6 +38,7 @@
     background-color: $theme-color-light-grey-d7;
     box-shadow: none;
     color: $theme-color-grey39;
+    cursor: default;
   }
 }
 
@@ -80,6 +81,7 @@
   &:disabled {
     background-color: $theme-color-light-grey-d7;
     color: $theme-color-grey39;
+    cursor: default;
   }
 }
 
