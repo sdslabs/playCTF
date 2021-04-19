@@ -48,7 +48,7 @@
         />
         <Button
           text="Submit Flag"
-          variant="primary-cta"
+          variant="secondary-cta"
           :disabled="flag.length === 0 || this.showSuccess || this.showFail"
           :onclick="submitFlag"
         />
