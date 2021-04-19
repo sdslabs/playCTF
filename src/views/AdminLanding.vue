@@ -67,14 +67,10 @@
       </div>
     </transition-group>
     <div v-if="totalSteps === getCurrentStep()" class="action">
-      <button
-        v-if="getCurrentStep() !== 1"
-        class="action-cta back-btn"
-        @click="goBack"
-      >
+      <button v-if="getCurrentStep() !== 1" class="action-cta" @click="goBack">
         Back
       </button>
-      <button class="primary-cta action-btn" @click="submitConfigs">
+      <button class="secondary-cta" @click="submitConfigs">
         Proceed
       </button>
     </div>
@@ -83,7 +79,7 @@
         Back
       </button>
       <button
-        class="secondary-cta action-btn"
+        class="secondary-cta ml-1"
         @click="goNext"
         :disabled="isNextDisabled()"
       >

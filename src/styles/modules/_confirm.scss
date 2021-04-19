@@ -33,22 +33,16 @@
 
             .vc-btn:not(.left) {
                 @extend .action-cta;
-                @extend .back-btn;
-                padding: 0 0.5rem !important;
                 margin-right: 1rem;
-                min-width: 5rem;
             }
 
 
             .vc-btn.left {
-                @extend .primary-cta;
-                padding: 0 1rem !important;
+                @extend .secondary-cta;
             }
 
             .vc-btn{
-                height: 2rem;
-                display: flex;
-                justify-content: center;
+                min-height: none !important;
             }
 
         }
