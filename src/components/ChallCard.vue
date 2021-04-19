@@ -16,20 +16,21 @@
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points
-      <span v-if="challDetails">| {{ challDetails.solves.length }} Solves</span>
+      <span v-if="challDetails && challDetails.solves"
+        >| {{ challDetails.solves.length }} Solves</span
+      >
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <a
+      <div
         v-for="port in this.challDetails.ports"
         :key="port"
-        :href="getUrl(port)"
-        class="challenge-link"
-        target="_blank"
-        ><div class="challCard-challLink">
+        class="host aboutText"
+      >
+        <a class="challenge-link" :href="getUrl(port)" target="_blank">
           {{ getUrl(port) }}
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
     <div
       v-if="!challDetails.isSolved && !isPreview"
@@ -47,7 +48,7 @@
         />
         <Button
           text="Submit Flag"
-          variant="secondary-cta"
+          variant="primary-cta"
           :disabled="flag.length === 0 || this.showSuccess || this.showFail"
           :onclick="submitFlag"
         />
@@ -85,22 +86,19 @@ export default {
     getUrl(port) {
       let url = CONFIG.beastRoot;
       let portIndex = url.lastIndexOf(":");
-      console.log(portIndex);
       if (portIndex !== -1) {
         url = url.substring(0, portIndex);
       }
       return `${url}:${port}`;
     },
     enter: function() {
-      let self = this;
       setTimeout(function() {
-        if (self.showSuccess) {
-          self.$router.go();
-        } else {
-          self.showSuccess = false;
-          self.showFail = false;
+        if (this.showSuccess) {
+          this.$router.go();
         }
-      }, 2500); // hide the message after 2.5 seconds
+        this.showSuccess = false;
+        this.showFail = false;
+      }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {

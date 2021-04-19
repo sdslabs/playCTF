@@ -77,7 +77,7 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     async fadeFunc() {
-      await this.sleep(3000);
+      await this.sleep(5000);
       this.submitMsg = null;
       this.msg = null;
       this.icon = null;
