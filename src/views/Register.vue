@@ -12,7 +12,7 @@
           <input
             v-model="uname"
             type="text"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="name"
             name="name"
             placeholder="Name*"
@@ -23,7 +23,7 @@
           <input
             v-model="username"
             type="text"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="username"
             name="user_name"
             placeholder="Username*"
@@ -34,7 +34,7 @@
           <input
             v-model="email"
             type="text"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="email"
             name="user_email"
             placeholder="Email*"
@@ -48,7 +48,7 @@
           <input
             v-model="password"
             type="password"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="password"
             name="user_pass"
             placeholder="Password*"
@@ -59,7 +59,7 @@
           <input
             v-model="password2"
             type="password"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="confirmpassword"
             name="user_pass"
             placeholder="Confirm Password*"

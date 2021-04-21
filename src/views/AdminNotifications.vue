@@ -14,7 +14,7 @@
       <input
         v-model="title"
         placeholder="Enter the Notification Title to be displayed"
-        class="adFormTitle"
+        class="adminFormTitle"
       />
       <p class="adFormFields">Content</p>
       <textarea

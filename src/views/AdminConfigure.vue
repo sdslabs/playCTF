@@ -220,7 +220,6 @@ export default {
         configureService
           .getLogo(`${CONFIG.beastRoot}/api/info/logo/${logoName}`, logoName)
           .then(response => {
-            console.log("idhar chal raha hai");
             this.compLogo = response;
           });
       } else {

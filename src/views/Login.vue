@@ -9,7 +9,7 @@
         <div class="info">
           <input
             type="text"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="username"
             name="user_name"
             placeholder="Team Name*"
@@ -19,7 +19,7 @@
         <div class="info">
           <input
             type="password"
-            class="adFormTitle inputField"
+            class="adminFormTitle inputField"
             id="password"
             name="user_pass"
             placeholder="Password*"
