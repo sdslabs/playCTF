@@ -2,7 +2,7 @@
   <input
     v-model="name"
     placeholder="Enter the name of competition to be displayed"
-    class="adFormTitle"
+    class="adminFormTitle"
   />
 </template>
 
