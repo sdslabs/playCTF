@@ -92,12 +92,13 @@ export default {
       return `${url}:${port}`;
     },
     enter: function() {
+      var self = this;
       setTimeout(function() {
-        if (this.showSuccess) {
-          this.$router.go();
+        if (self.showSuccess) {
+          self.$router.go();
         }
-        this.showSuccess = false;
-        this.showFail = false;
+        self.showSuccess = false;
+        self.showFail = false;
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {

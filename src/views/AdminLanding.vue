@@ -70,7 +70,7 @@
       <button v-if="getCurrentStep() !== 1" class="action-cta" @click="goBack">
         Back
       </button>
-      <button class="secondary-cta" @click="submitConfigs">
+      <button class="secondary-cta ml-1" @click="submitConfigs">
         Proceed
       </button>
     </div>

@@ -11,7 +11,7 @@
           <input
             v-model="password"
             type="password"
-            class="inputField password"
+            class="adFormTitle inputField"
             id="password"
             name="user_pass"
             placeholder="New Password*"
@@ -22,7 +22,7 @@
           <input
             v-model="password2"
             type="password"
-            class="inputField password"
+            class="adFormTitle inputField"
             id="confirmpassword"
             name="user_pass"
             placeholder="Confirm Password*"

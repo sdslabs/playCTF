@@ -26,7 +26,7 @@
 
             .timing {
                 @extend %font-style-basic;
-                font-size: 1rem;
+                font-size: 1.25rem;
                 line-height: 2rem;
                 margin: 0.5rem 0;
             }
@@ -70,8 +70,9 @@
 }
 
 .description {
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     font-family: $secondary-font-family;
     color: $theme-color-grey57;
     margin-top: 0.5rem;
+    margin-bottom: 1rem;
 }
