@@ -220,6 +220,7 @@ export default {
         configureService
           .getLogo(`${CONFIG.beastRoot}/api/info/logo/${logoName}`, logoName)
           .then(response => {
+            console.log("idhar chal raha hai");
             this.compLogo = response;
           });
       } else {
@@ -228,7 +229,7 @@ export default {
     });
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "adminLeaderboard");
+    this.$store.commit("updateCurrentPage", "adminConfigure");
   }
 };
 </script>
