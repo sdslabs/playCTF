@@ -51,6 +51,7 @@
     padding-left: 1rem;
     @extend %font-style-basic;
     margin-bottom: 1rem;
+    width: 100%;
   }
 
   .adminFormTitle::placeholder,

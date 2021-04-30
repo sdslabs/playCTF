@@ -63,29 +63,37 @@
               <span> Preview</span>
             </button>
           </div>
+          <div v-if="totalSteps === getCurrentStep()" class="action">
+            <button
+              v-if="getCurrentStep() !== 1"
+              class="action-cta"
+              @click="goBack"
+            >
+              Back
+            </button>
+            <button class="secondary-cta ml-1" @click="submitConfigs">
+              Proceed
+            </button>
+          </div>
+          <div v-else class="action">
+            <button
+              v-if="getCurrentStep() !== 1"
+              class="action-cta"
+              @click="goBack"
+            >
+              Back
+            </button>
+            <button
+              class="secondary-cta ml-1"
+              @click="goNext"
+              :disabled="isNextDisabled()"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </transition-group>
-    <div v-if="totalSteps === getCurrentStep()" class="action">
-      <button v-if="getCurrentStep() !== 1" class="action-cta" @click="goBack">
-        Back
-      </button>
-      <button class="secondary-cta ml-1" @click="submitConfigs">
-        Proceed
-      </button>
-    </div>
-    <div v-else class="action">
-      <button v-if="getCurrentStep() !== 1" class="action-cta" @click="goBack">
-        Back
-      </button>
-      <button
-        class="secondary-cta ml-1"
-        @click="goNext"
-        :disabled="isNextDisabled()"
-      >
-        Next
-      </button>
-    </div>
     <transition name="fade" appear>
       <div class="modal-overlay" v-if="showPreviewModal">
         <preview-modal
