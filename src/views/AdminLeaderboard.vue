@@ -128,7 +128,7 @@ export default {
           });
           timeScores[index] = currentScore;
         }
-        scoreSeries[index + 1] = {
+        scoreSeries[data.length - index] = {
           x: moment(new Date(el.solvedAt)),
           y: timeScores[index]
         };
@@ -139,6 +139,10 @@ export default {
           "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
         ),
         y: 0
+      };
+      scoreSeries[data.length + 1] = {
+        x: moment(moment.now(), "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"),
+        y: score
       };
       return scoreSeries;
     }
