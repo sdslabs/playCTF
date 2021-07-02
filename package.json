@@ -1,12 +1,12 @@
 {
-  "name": "beast-frontend",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
-  },
+    "name": "beast-frontend",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "serve": "vue-cli-service serve",
+      "build": "vue-cli-service build",
+      "lint": "vue-cli-service lint"
+    },
   "dependencies": {
     "axios": "^0.21.0",
     "chart.js": "^2.9.4",
