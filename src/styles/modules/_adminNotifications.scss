@@ -54,6 +54,18 @@
     width: 100%;
   }
 
+  #formDropdown {
+    background-color: #ffffff;
+  }
+
+  .defaultOption {
+    color: $theme-color-light-grey;
+  }
+
+  .adminFormRadio {
+    font-size: 0.875rem;
+  }
+
   .adminFormTitle::placeholder,
   textarea::placeholder {
     @extend %font-style-basic;

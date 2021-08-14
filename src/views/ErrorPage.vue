@@ -61,7 +61,7 @@ export default {
         case "408":
           return "Internal Server Error";
         case "500":
-          return "Check your Internet Connection";
+          return "Internal Server Error";
         default:
           return "Page Not Found";
       }

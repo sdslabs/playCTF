@@ -19,10 +19,7 @@
             :challenges="this.displayChallenges"
             @clicked="selectChallenge"
           />
-          <ChallCard
-            :challDetails="this.displayChallenge"
-            :tag="this.selectedTag.name"
-          />
+          <ChallCard :challDetails="this.displayChallenge" :tag="this.selectedTag.name" />
         </div>
       </div>
     </div>
@@ -49,20 +46,20 @@ export default {
       usersNotFetched: true,
       userDetails: {},
       totalChals: 0,
-      selectedChall: {}
+      selectedChall: {},
     };
   },
   components: {
     StatsNavbar,
     ChallengesByTag,
-    ChallCard
+    ChallCard,
   },
   created() {
     this.username = store.getters.getUsername;
   },
   mounted() {
     ChalService.getChallenges(true, this.username)
-      .then(response => {
+      .then((response) => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.tags = [...this.tags, ...response.categoryFilterOptions];
@@ -74,7 +71,7 @@ export default {
       });
     // hardcoding user for now, need to fix after login integration
     UsersService.getUserByUsername(this.username)
-      .then(response => {
+      .then((response) => {
         this.userDetails = response.data;
       })
       .finally(() => {
@@ -87,7 +84,7 @@ export default {
       if (value.name === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter(el => {
+        this.displayChallenges = this.challenges.filter((el) => {
           return el.category == value.name;
         });
       }
@@ -96,18 +93,18 @@ export default {
       if (name === null) {
         this.selectedChall = null;
       }
-      this.selectedChall = this.challenges.filter(el => {
+      this.selectedChall = this.challenges.filter((el) => {
         return el.name == name;
       })[0];
-    }
+    },
   },
   computed: {
-    displayChallenge: function() {
+    displayChallenge: function () {
       return this.selectedChall;
-    }
+    },
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "userChallenges");
-  }
+  },
 };
 </script>

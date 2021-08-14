@@ -12,7 +12,7 @@ export default {
       url: `/auth/login`,
       data: bodyFormData
     }).catch(err => {
-      console.log(err);
+      // console.log(err);
     });
   },
 
@@ -37,30 +37,38 @@ export default {
     }
   },
 
-  async registerUser(name, username, email, password) {
+  async registerUser(name, username, college, email, password, futureUpdates) {
     let bodyFormData = new FormData();
     bodyFormData.append("name", name);
     bodyFormData.append("username", username);
+    bodyFormData.append("college", college);
     bodyFormData.append("password", password);
     bodyFormData.append("email", email);
-    try {
-      let response = await axiosInstance({
-        method: "post",
-        url: `/auth/register`,
-        data: bodyFormData
-      });
-      return Promise.resolve(response);
-    } catch (err) {
-      return err;
-    }
+    bodyFormData.append("subscribe", futureUpdates);
+    return await axiosInstance({
+      method: "post",
+      url: `/auth/register`,
+      data: bodyFormData
+    }).catch(err => {
+      // console.log(err);
+    });
   },
 
-  async registeredUser(name, username, email, password) {
-    const response = await this.registerUser(name, username, email, password);
+  async registeredUser(name, username, college, email, password, futureUpdates) {
+    const response = await this.registerUser(name, username, college, email, password, futureUpdates);
+    // console.log(response);
     if (response.status === 200) {
-      return true;
+      return 200;
     } else {
-      return false;
+      // console.log(response.message);
+      // console.log(response);
+      if (response.message.includes("400")) {
+        return 400;
+      } else if (response.message.includes("406")) {
+        return 401;
+      } else {
+        return 403;
+      }
     }
   },
 

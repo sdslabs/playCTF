@@ -29,7 +29,7 @@ Vue.component("loader", Spinner);
 Vue.mixin({
   methods: {
     apiErrHandler: function(error) {
-      console.log(error);
+      // console.log(error);
     },
     getImage(imagename) {
       return require(`../src/assets/${imagename}.svg`);
@@ -37,7 +37,7 @@ Vue.mixin({
     getLogoUrl() {
       let logoName = store.state.competitionInfo.logo;
       if (!logoName) {
-        console.log(Logo);
+        // console.log(Logo);
         return Logo;
       }
       return `${CONFIG.beastRoot}/api/info/logo/${logoName}`;

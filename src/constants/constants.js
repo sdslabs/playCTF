@@ -430,7 +430,7 @@ export const lineGraphOptions = showLegend => {
         label: function(data, tooltipItem) {
           let time = moment(data["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
           let value = time.format("MMMM DD, YYYY; HH:mm:ss, ") + data["value"];
-          console.log(value);
+          // console.log(value);
           return value;
         }
       },

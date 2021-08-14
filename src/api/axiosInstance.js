@@ -4,9 +4,11 @@ import store from "../store/index";
 import router from "../router/index";
 const axiosInstance = axios.create({
   headers: {
-    "Content-Type": "multipart/form-data"
+    "Content-Type": "multipart/form-data",
   },
-  baseURL: CONFIG.beastRoot
+  baseURL: CONFIG.beastRoot,
+  timeout: 2000,
+  timeoutErrorMessage: "Request timed out"
 });
 
 axiosInstance.interceptors.request.use(
@@ -24,6 +26,7 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   function(response) {
+    // console.log(response+"test");
     return response;
   },
   function(error) {
@@ -46,6 +49,8 @@ axiosInstance.interceptors.response.use(
           case 404:
             router.push("/error/404");
             break;
+          case 406:
+            return error
           default:
             router.push("/error/500");
             break;

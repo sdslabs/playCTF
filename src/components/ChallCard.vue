@@ -22,20 +22,13 @@
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <div
-        v-for="port in this.challDetails.ports"
-        :key="port"
-        class="host aboutText"
-      >
+      <div v-for="port in this.challDetails.ports" :key="port" class="host aboutText">
         <a class="challenge-link" :href="getUrl(port)" target="_blank">
           {{ getUrl(port) }}
         </a>
       </div>
     </div>
-    <div
-      v-if="!challDetails.isSolved && !isPreview"
-      class="challCard-bottom-row"
-    >
+    <div v-if="!challDetails.isSolved && !isPreview" class="challCard-bottom-row">
       <div class="challCard-form">
         <input
           type="text"
@@ -75,12 +68,12 @@ export default {
     return {
       flag: "",
       showSuccess: false,
-      showFail: false
+      showFail: false,
     };
   },
   state: {
     disable: false,
-    isModalVisible: false
+    isModalVisible: false,
   },
   methods: {
     getUrl(port) {
@@ -89,11 +82,17 @@ export default {
       if (portIndex !== -1) {
         url = url.substring(0, portIndex);
       }
+      if (
+        this.challDetails.category === "service" ||
+        this.challDetails.category === "xinetd"
+      ) {
+        return `nc scythe2021.sdslabs.co ${port}`;
+      }
       return `${url}:${port}`;
     },
-    enter: function() {
+    enter: function () {
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         if (self.showSuccess) {
           self.$router.go();
         }
@@ -102,7 +101,7 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then((Response) => {
         if (Response.data.success) {
           this.showSuccess = true;
         } else {
@@ -110,7 +109,7 @@ export default {
         }
       });
     },
-    isDisabled: function() {
+    isDisabled: function () {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {
         this.disable = true;
@@ -123,7 +122,7 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
-  }
+    },
+  },
 };
 </script>
