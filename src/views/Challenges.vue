@@ -1,5 +1,9 @@
 <template>
-  <div class="challenge-main-container">
+  <div v-if="displayPage">
+    <div style="font-size:50px">&#128338;</div>
+    <h1>scythe 2021 has not started yet.</h1>
+  </div>
+  <div v-else class="challenge-main-container">
     <div class="adminChallengesVerticalNav tags">
       <a
         v-for="tag in tags"
@@ -19,7 +23,10 @@
             :challenges="this.displayChallenges"
             @clicked="selectChallenge"
           />
-          <ChallCard :challDetails="this.displayChallenge" :tag="this.selectedTag.name" />
+          <ChallCard
+            :challDetails="this.displayChallenge"
+            :tag="this.selectedTag.name"
+          />
         </div>
       </div>
     </div>
@@ -33,6 +40,8 @@ import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import UsersService from "../api/admin/usersAPI";
+import moment from "moment-timezone";
+
 export default {
   name: "Challenges",
   data() {
@@ -47,19 +56,21 @@ export default {
       userDetails: {},
       totalChals: 0,
       selectedChall: {},
+      startTime: this.$store.state.competitionInfo.startingTime,
+      endTime: this.$store.state.competitionInfo.endingTime
     };
   },
   components: {
     StatsNavbar,
     ChallengesByTag,
-    ChallCard,
+    ChallCard
   },
   created() {
     this.username = store.getters.getUsername;
   },
   mounted() {
     ChalService.getChallenges(true, this.username)
-      .then((response) => {
+      .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
         this.tags = [...this.tags, ...response.categoryFilterOptions];
@@ -71,7 +82,7 @@ export default {
       });
     // hardcoding user for now, need to fix after login integration
     UsersService.getUserByUsername(this.username)
-      .then((response) => {
+      .then(response => {
         this.userDetails = response.data;
       })
       .finally(() => {
@@ -84,7 +95,7 @@ export default {
       if (value.name === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((el) => {
+        this.displayChallenges = this.challenges.filter(el => {
           return el.category == value.name;
         });
       }
@@ -93,18 +104,24 @@ export default {
       if (name === null) {
         this.selectedChall = null;
       }
-      this.selectedChall = this.challenges.filter((el) => {
+      this.selectedChall = this.challenges.filter(el => {
         return el.name == name;
       })[0];
-    },
+    }
   },
   computed: {
-    displayChallenge: function () {
+    displayChallenge: function() {
       return this.selectedChall;
     },
+    displayPage: function() {
+      return (
+        moment(this.startTime, "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd") >
+        new Date().getTime()
+      );
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "userChallenges");
-  },
+  }
 };
 </script>
