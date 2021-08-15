@@ -132,6 +132,14 @@
           <input type="checkbox" id="checkbox" v-model="futureUpdates" />
           <label for="checkbox">Do you want to receive future updates?</label>
         </div>
+        <vue-recaptcha
+          sitekey="6LdJU_8bAAAAAMme7avv_2va5lOccNXO9ZXd2hoS"
+          @verify="recaptchaValidate"
+        ></vue-recaptcha>
+        <div class="text-field-error" v-if="recaptchaErr">
+          <img src="@/assets/error.svg" class="errImg" />
+          {{ this.recaptchaErr }}
+        </div>
         <Button
           :onclick="register"
           variant="primary-cta"
@@ -150,11 +158,14 @@ import RegisterUser from "../api/admin/authAPI.js";
 import ConfigApiService from "../api/admin/configureAPI";
 import ErrorBox from "../components/ErrorBox";
 import Button from "@/components/Button.vue";
+import VueRecaptcha from "vue-recaptcha";
+
 export default {
   name: "register",
   components: {
     ErrorBox,
     Button,
+    VueRecaptcha
   },
   data() {
     return {
@@ -171,17 +182,19 @@ export default {
       status: false,
       emailErr: false,
       passErr: false,
+      recaptchaErr: false,
       collegeErr: false,
       otherCollegeErr: false,
       futureUpdates: false,
       registered: true,
       errorIcon: "error-white",
       tickIcon: "tick-white",
+      recaptcha: null
     };
   },
   mounted() {
     if (!this.fetchedData) {
-      ConfigApiService.getConfigs().then((response) => {
+      ConfigApiService.getConfigs().then(response => {
         this.configData = response.data;
       });
     } else {
@@ -190,12 +203,16 @@ export default {
     }
   },
   methods: {
+    recaptchaValidate(response) {
+      this.recaptcha = response ? false : "Captcha invalid or incomplete";
+      console.log(this.recaptcha);
+    },
     validateEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return re.test(email);
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     validateCollege() {
       if (this.college === "") {
@@ -210,15 +227,13 @@ export default {
       return false;
     },
     async register() {
-      if(this.validateCollege()) {
+      if (this.validateCollege()) {
         this.collegeErr = "Select a college";
-      }
-      else {
-        if(this.college === "Other") {
-          if(this.validateOtherCollege()) {
+      } else {
+        if (this.college === "Other") {
+          if (this.validateOtherCollege()) {
             this.otherCollegeErr = "Enter college name";
-          }
-          else {
+          } else {
             this.otherCollegeErr = false;
           }
         }
@@ -239,7 +254,8 @@ export default {
         !this.passErr &&
         !this.emailErr &&
         !this.collegeErr &&
-        !this.otherCollegeErr
+        !this.otherCollegeErr &&
+        !this.recaptcha
       ) {
         this.status = await RegisterUser.registeredUser(
           this.uname,
@@ -267,7 +283,7 @@ export default {
           }
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
