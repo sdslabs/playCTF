@@ -132,11 +132,13 @@
           <input type="checkbox" id="checkbox" v-model="futureUpdates" />
           <label for="checkbox">Do you want to receive future updates?</label>
         </div>
-        <vue-recaptcha
-          sitekey="6LdJU_8bAAAAAMme7avv_2va5lOccNXO9ZXd2hoS"
-          @verify="recaptchaValidate"
-        ></vue-recaptcha>
-        <div class="text-field-error" v-if="recaptchaErr">
+	<div style="margin-top: 20px">
+          <vue-recaptcha
+            sitekey="6LdJU_8bAAAAAMme7avv_2va5lOccNXO9ZXd2hoS"
+            @verify="recaptchaValidate"
+          ></vue-recaptcha>
+	</div>
+        <div class="text-field-error" v-if="recaptchaErr && recaptcha">
           <img src="@/assets/error.svg" class="errImg" />
           {{ this.recaptchaErr }}
         </div>
@@ -182,7 +184,7 @@ export default {
       status: false,
       emailErr: false,
       passErr: false,
-      recaptchaErr: false,
+      recaptchaErr: true,
       collegeErr: false,
       otherCollegeErr: false,
       futureUpdates: false,
@@ -204,8 +206,8 @@ export default {
   },
   methods: {
     recaptchaValidate(response) {
-      this.recaptcha = response ? false : "Captcha invalid or incomplete";
-      console.log(this.recaptcha);
+      this.recaptchaErr = response ? false : "Captcha invalid or incomplete";
+      this.recaptcha = response;
     },
     validateEmail(email) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -255,7 +257,7 @@ export default {
         !this.emailErr &&
         !this.collegeErr &&
         !this.otherCollegeErr &&
-        !this.recaptcha
+        !this.recaptchaErr
       ) {
         this.status = await RegisterUser.registeredUser(
           this.uname,
