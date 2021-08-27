@@ -105,6 +105,7 @@ export default {
       .then(response => {
         this.challenges = response.challenges;
         this.displayChallenges = response.displayChallenges;
+        console.log(response)
         this.categoryFilterOptions = [
           ...this.categoryFilterOptions,
           ...response.categoryFilterOptions
@@ -148,7 +149,7 @@ export default {
         this.displayChallenges = this.challenges;
       } else {
         this.displayChallenges = this.challenges.filter(el => {
-          return el.category == value;
+          return el.tag == value;
         });
       }
     },

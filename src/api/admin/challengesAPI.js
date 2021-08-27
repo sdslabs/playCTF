@@ -108,7 +108,7 @@ export default {
     let categoryFilterOptions = [];
     let displayChallenges = [];
     challenges.forEach(el => {
-      allTags.push(el.category);
+      allTags.push(el.tag);
     });
     allTags = allTags.filter((item, pos) => {
       return allTags.indexOf(item) == pos;
