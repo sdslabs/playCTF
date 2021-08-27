@@ -27,8 +27,8 @@
         :key="port"
         class="host aboutText"
       >
-        <div >
-          <div class="challenge-link" >
+        <div>
+          <div class="challenge-link">
             {{ getUrl(port) }}
           </div>
         </div>
@@ -102,20 +102,23 @@ export default {
     },
     assets(challDetails, port) {
       let url = this.challUrl();
+      let staticUrl = CONFIG.staticRoot;
       let assetsArr = [];
       if (_.isEmpty(challDetails.assets)) {
-        if (
-          this.challDetails.category !== "service" &&
-          this.challDetails.category !== "xinetd"
-        ) {
-          assetsArr += `${url}:${port}`;
-        }
         return assetsArr;
       }
       const myArr = challDetails.assets.split("::::");
-      console.log(myArr.length);
-      for (let i = 0; i < myArr.length; i++) {
-        assetsArr.push(`${url}:${port}/${myArr[i]}`);
+      if (
+        this.challDetails.category === "service" ||
+        this.challDetails.category === "xinetd"
+      ) {
+        for (let i = 0; i < myArr.length; i++) {
+          assetsArr.push(`${staticUrl}:${port}/${myArr[i]}`);
+        }
+      } else {
+        for (let i = 0; i < myArr.length; i++) {
+          assetsArr.push(`${url}:${port}/${myArr[i]}`);
+        }
       }
       return assetsArr;
     },
