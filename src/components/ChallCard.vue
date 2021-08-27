@@ -39,7 +39,7 @@
         </div>
       </div>
       <div v-if="!this.challDetails.ports" class="host aboutText">
-        <div v-for="asset in assets(challDetails)" :key="asset">
+        <div v-for="asset in assetsWithoutPort(challDetails)" :key="asset">
           <a class="challenge-link" target="_blank" :href="asset">
             {{ asset }}
           </a>
