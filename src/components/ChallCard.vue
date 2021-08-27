@@ -22,10 +22,12 @@
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <div v-for="port in this.challDetails.ports" :key="port" class="host aboutText">
-        <a class="challenge-link" :href="getUrl(port)" target="_blank">
-          {{ getUrl(port) }}
-        </a>
+      <div class="host aboutText">
+        <div v-for="asset in this.assets" :key="asset">
+          <a class="challenge-link" target="_blank" :href="asset">
+            {{ asset }}
+          </a>
+        </div>
       </div>
     </div>
     <div v-if="!challDetails.isSolved && !isPreview" class="challCard-bottom-row">
@@ -69,11 +71,19 @@ export default {
       flag: "",
       showSuccess: false,
       showFail: false,
+      assets: [],
+      ports: [],
     };
   },
   state: {
     disable: false,
     isModalVisible: false,
+  },
+  created() {
+    this.ports = this.challDetails.ports;
+    for(let i = 0; i < this.ports.length; i++) {
+      this.getUrl(this.ports[i]);
+    }
   },
   methods: {
     getUrl(port) {
@@ -88,11 +98,18 @@ export default {
       ) {
         return `nc scythe2021.sdslabs.co ${port}`;
       }
-      return `${url}:${port}`;
+      if(this.challDetails.assets.length === 0) {
+        this.assets += `${url}:${port}`;
+      }
+      const myArr = this.challDetails.assets.split("::::");
+      for (let i = 0; i < myArr.length; i++) {
+        this.assets.push(`${url}:${port}/${myArr[i]}`);
+      }
+      // return this.assets;
     },
-    enter: function () {
+    enter: function() {
       var self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         if (self.showSuccess) {
           self.$router.go();
         }
@@ -101,15 +118,17 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
-      FlagService.submitFlag(this.challDetails.id, this.flag).then((Response) => {
-        if (Response.data.success) {
-          this.showSuccess = true;
-        } else {
-          this.showFail = true;
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(
+        (Response) => {
+          if (Response.data.success) {
+            this.showSuccess = true;
+          } else {
+            this.showFail = true;
+          }
         }
-      });
+      );
     },
-    isDisabled: function () {
+    isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {
         this.disable = true;

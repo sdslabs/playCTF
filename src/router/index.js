@@ -1,4 +1,4 @@
-  import Vue from "vue";
+import Vue from "vue";
   import VueRouter from "vue-router";
   import Challenges from "@/views/Challenges.vue";
   import Leaderboard from "@/views/Leaderboard.vue";
