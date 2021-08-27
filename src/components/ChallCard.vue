@@ -22,15 +22,27 @@
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <div class="host aboutText">
-        <div v-for="asset in this.assets" :key="asset">
+      <div
+        v-for="port in this.challDetails.ports"
+        :key="port"
+        class="host aboutText"
+      >
+        <div >
+          <div class="challenge-link" >
+            {{ getUrl(port) }}
+          </div>
+        </div>
+        <div v-for="asset in assets(challDetails, port)" :key="asset">
           <a class="challenge-link" target="_blank" :href="asset">
             {{ asset }}
           </a>
         </div>
       </div>
     </div>
-    <div v-if="!challDetails.isSolved && !isPreview" class="challCard-bottom-row">
+    <div
+      v-if="!challDetails.isSolved && !isPreview"
+      class="challCard-bottom-row"
+    >
       <div class="challCard-form">
         <input
           type="text"
@@ -59,6 +71,7 @@
 </template>
 
 <script>
+import _ from "lodash";
 import FlagService from "../api/userAPI";
 import Button from "@/components/Button.vue";
 import { CONFIG } from "@/config/config";
@@ -71,7 +84,6 @@ export default {
       flag: "",
       showSuccess: false,
       showFail: false,
-      assets: [],
       ports: [],
     };
   },
@@ -79,33 +91,43 @@ export default {
     disable: false,
     isModalVisible: false,
   },
-  created() {
-    this.ports = this.challDetails.ports;
-    for(let i = 0; i < this.ports.length; i++) {
-      this.getUrl(this.ports[i]);
-    }
-  },
   methods: {
-    getUrl(port) {
+    challUrl() {
       let url = CONFIG.beastRoot;
       let portIndex = url.lastIndexOf(":");
       if (portIndex !== -1) {
         url = url.substring(0, portIndex);
       }
+      return url;
+    },
+    assets(challDetails, port) {
+      let url = this.challUrl();
+      let assetsArr = [];
+      if (_.isEmpty(challDetails.assets)) {
+        if (
+          this.challDetails.category !== "service" &&
+          this.challDetails.category !== "xinetd"
+        ) {
+          assetsArr += `${url}:${port}`;
+        }
+        return assetsArr;
+      }
+      const myArr = challDetails.assets.split("::::");
+      console.log(myArr.length);
+      for (let i = 0; i < myArr.length; i++) {
+        assetsArr.push(`${url}:${port}/${myArr[i]}`);
+      }
+      return assetsArr;
+    },
+    getUrl(port) {
+      let ip = CONFIG.ip;
+      let url = this.challUrl();
       if (
         this.challDetails.category === "service" ||
         this.challDetails.category === "xinetd"
       ) {
-        return `nc scythe2021.sdslabs.co ${port}`;
+        return `nc ${ip} ${port}`;
       }
-      if(this.challDetails.assets.length === 0) {
-        this.assets += `${url}:${port}`;
-      }
-      const myArr = this.challDetails.assets.split("::::");
-      for (let i = 0; i < myArr.length; i++) {
-        this.assets.push(`${url}:${port}/${myArr[i]}`);
-      }
-      // return this.assets;
     },
     enter: function() {
       var self = this;
