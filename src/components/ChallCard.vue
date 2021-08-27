@@ -38,6 +38,13 @@
           </a>
         </div>
       </div>
+      <div v-if="!this.challDetails.ports" class="host aboutText">
+        <div v-for="asset in assets(challDetails)" :key="asset">
+          <a class="challenge-link" target="_blank" :href="asset">
+            {{ asset }}
+          </a>
+        </div>
+      </div>
     </div>
     <div
       v-if="!challDetails.isSolved && !isPreview"
@@ -84,12 +91,12 @@ export default {
       flag: "",
       showSuccess: false,
       showFail: false,
-      ports: [],
+      ports: []
     };
   },
   state: {
     disable: false,
-    isModalVisible: false,
+    isModalVisible: false
   },
   methods: {
     challUrl() {
@@ -113,12 +120,26 @@ export default {
         this.challDetails.category === "xinetd"
       ) {
         for (let i = 0; i < myArr.length; i++) {
-          assetsArr.push(`${staticUrl}:${port}/${myArr[i]}`);
+          assetsArr.push(`${staticUrl}/${challDetails.name}/${myArr[i]}`);
         }
       } else {
         for (let i = 0; i < myArr.length; i++) {
           assetsArr.push(`${url}:${port}/${myArr[i]}`);
         }
+      }
+      return assetsArr;
+    },
+    assetsWithoutPort(challDetails) {
+      let url = this.challUrl();
+      let staticUrl = CONFIG.staticRoot;
+      let assetsArr = [];
+      if (_.isEmpty(challDetails.assets)) {
+        return assetsArr;
+      }
+      const myArr = challDetails.assets.split("::::");
+
+      for (let i = 0; i < myArr.length; i++) {
+        assetsArr.push(`${staticUrl}/${challDetails.name}/${myArr[i]}`);
       }
       return assetsArr;
     },
@@ -143,15 +164,13 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(
-        (Response) => {
-          if (Response.data.success) {
-            this.showSuccess = true;
-          } else {
-            this.showFail = true;
-          }
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        if (Response.data.success) {
+          this.showSuccess = true;
+        } else {
+          this.showFail = true;
         }
-      );
+      });
     },
     isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
@@ -166,7 +185,7 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    },
-  },
+    }
+  }
 };
 </script>
