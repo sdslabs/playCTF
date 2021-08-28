@@ -123,18 +123,18 @@ export default {
         return assetsArr;
       }
       const myArr = challDetails.assets.split("::::");
-      if (
-        this.challDetails.category === "service" ||
-        this.challDetails.category === "xinetd"
-      ) {
-        for (let i = 0; i < myArr.length; i++) {
-          assetsArr.push(`${staticUrl}/${challDetails.name}/${myArr[i]}`);
-        }
-      } else {
-        for (let i = 0; i < myArr.length; i++) {
-          assetsArr.push(`${staticUrl}:${port}/${myArr[i]}`);
-        }
+      // if (
+      //   this.challDetails.category === "service" ||
+      //   this.challDetails.category === "xinetd"
+      // ) {
+      for (let i = 0; i < myArr.length; i++) {
+        assetsArr.push(`${staticUrl}/${challDetails.name}/${myArr[i]}`);
       }
+      // } else {
+      //   for (let i = 0; i < myArr.length; i++) {
+      //     assetsArr.push(`${staticUrl}:${port}/${myArr[i]}`);
+      //   }
+      // }
       return assetsArr;
     },
     assetsWithoutPort(challDetails) {
