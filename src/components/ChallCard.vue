@@ -32,6 +32,14 @@
             {{ getUrl(port) }}
           </div>
         </div>
+        <div
+          v-for="asset in assetsForDockerWeb(challDetails, port)"
+          :key="asset"
+        >
+          <a class="challenge-link" target="_blank" :href="asset">
+            {{ asset }}
+          </a>
+        </div>
         <div v-for="asset in assets(challDetails, port)" :key="asset">
           <a class="challenge-link" target="_blank" :href="asset">
             {{ asset }}
@@ -141,6 +149,15 @@ export default {
       for (let i = 0; i < myArr.length; i++) {
         assetsArr.push(`${staticUrl}/${challDetails.name}/${myArr[i]}`);
       }
+      return assetsArr;
+    },
+    assetsForDockerWeb(challDetails, port) {
+      let url = this.challUrl();
+      let assetsArr = [];
+      if (_.isEmpty(challDetails.assets)) {
+        return assetsArr;
+      }
+      assetsArr.push(`${url}:${port}`);
       return assetsArr;
     },
     getUrl(port) {
