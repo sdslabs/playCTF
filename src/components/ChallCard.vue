@@ -154,10 +154,7 @@ export default {
     assetsForDockerWeb(challDetails, port) {
       let url = CONFIG.ip;
       let assetsArr = [];
-      if (
-        _.isEmpty(challDetails.assets) ||
-        challDetails.tag.toLowerCase() !== "web"
-      ) {
+      if (challDetails.tag.toLowerCase() !== "web") {
         return assetsArr;
       }
       assetsArr.push(`${url}:${port}`);
