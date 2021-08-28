@@ -132,7 +132,7 @@ export default {
         }
       } else {
         for (let i = 0; i < myArr.length; i++) {
-          assetsArr.push(`${url}:${port}/${myArr[i]}`);
+          assetsArr.push(`${staticUrl}:${port}/${myArr[i]}`);
         }
       }
       return assetsArr;
