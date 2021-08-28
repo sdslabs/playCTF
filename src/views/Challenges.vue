@@ -1,9 +1,9 @@
 <template>
-  <!-- <div v-if="displayPage">
+  <div v-if="displayPage">
     <div style="font-size:50px">&#128338;</div>
     <h1>scythe 2021 has not started yet.</h1>
-  </div> -->
-  <div class="challenge-main-container">
+  </div>
+  <div v-else class="challenge-main-container">
     <div class="adminChallengesVerticalNav tags">
       <a
         v-for="tag in tags"
