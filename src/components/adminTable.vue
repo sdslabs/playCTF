@@ -25,7 +25,7 @@
         </tr>
         <tr class="adminNullRow"></tr>
         <tbody class="adminTableBody">
-          <tr v-for="row in get_rows()" :key="row.rank" class="adminTableRow">
+          <tr v-for="row in tableRows" :key="row.rank" class="adminTableRow">
             <td
               v-for="col in columns"
               :key="col.id"
@@ -48,7 +48,7 @@
               <router-link
                 class="adminTableLink"
                 v-if="isColLink(col)"
-                :to="redirectLink + row[col]"
+                :to="getRedirectLink(col)+row[col]"
               >
                 {{ row[col] }}
               </router-link>
@@ -104,8 +104,11 @@ export default {
     return {
       jumpPage: 1,
       currentPage: 1,
-      redirectLink: ""
+      tableRows:[],
     };
+  },
+  mounted(){
+    this.tableRows = this.get_rows()
   },
   props: [
     "tableCols",
@@ -117,22 +120,31 @@ export default {
   ],
   methods: {
     isColLink(val) {
-      let isLink = false;
-      this.links.forEach(item => {
+      var isLink = false;
+      this.links.forEach((item) => {
         if (item.col === val) {
           isLink = true;
-          this.redirectLink = item.redirect;
         }
       });
       return isLink;
     },
+    getRedirectLink(val){
+      this.links.forEach((item) => {
+        if (item.col === val) {
+          return item.redirect;
+        }
+      });
+      return "";
+    },
     changePage() {
       this.currentPage = this.jumpPage;
+      this.tableRows = this.get_rows();
     },
     pageChangeHandler(selectedPage) {
       this.currentPage = selectedPage;
+      this.tableRows = this.get_rows();
     },
-    get_rows: function get_rows() {
+    get_rows(){
       let start = (this.currentPage - 1) * this.maxElementPerPage;
       let end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);

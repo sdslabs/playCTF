@@ -42,15 +42,17 @@ export default {
   methods: {},
   mounted() {
     SubmissionService.getSubmissions()
-      .then(response => {
-        response.forEach(element => {
-          this.rows.push({
-            username: element.username,
-            challenge: element.name,
-            category: element.category,
-            timeDate: element.solvedTime
-          });
+      .then((response) => {
+        var submissions = [];
+        response.forEach((element, index) => {
+            submissions.push({
+              username: element.username,
+              challenge: element.name,
+              category: element.category,
+              timeDate: element.solvedTime
+            });
         });
+        this.rows = submissions;
       })
       .finally(() => {
         this.loading = false;

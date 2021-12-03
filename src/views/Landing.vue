@@ -65,7 +65,6 @@ export default {
         this.configData = response.data;
       });
     } else {
-      console.log(this.configs);
       this.configData = this.configs;
     }
   },
