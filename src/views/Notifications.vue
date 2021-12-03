@@ -2,10 +2,7 @@
   <div class="notification">
     <div class="heading">NOTIFICATIONS</div>
     <spin-loader v-if="loading" />
-    <div
-      class="user-notif-tabs"
-      v-if="notifications.length > 0 && !this.loading"
-    >
+    <div class="user-notif-tabs" v-else-if="notifications.length > 0">
       <NotificationTab
         v-for="notif in notifications"
         :key="notif.ID"
@@ -25,33 +22,41 @@
 import NotificationService from "@/api/admin/notificationsAPI";
 import NotificationTab from "../components/NotificationTab";
 import SpinLoader from "../components/spinLoader.vue";
+const notifPollingInterval = 10000;
 export default {
   name: "notifications",
   data() {
     return {
       notifications: [],
-      loading: true
+      loading: true,
+      pollingId: null
     };
   },
   mounted() {
-    NotificationService.getAllNotifs()
-      .then(response => {
-        this.notifications = response.data.sort((a, b) => {
-          return new Date(a.updated_at).getTime() <
-            new Date(b.updated_at).getTime()
-            ? 1
-            : -1;
-        });
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    this.pollNotifications();
+  },
+  beforeDestroy() {
+    clearInterval(this.pollingId);
   },
   components: {
     NotificationTab,
     SpinLoader
   },
   methods: {
+    fetchNotifications() {
+      NotificationService.getAllNotifs()
+        .then(response => {
+          this.notifications = response.data.sort((a, b) => {
+            return new Date(a.updated_at).getTime() <
+              new Date(b.updated_at).getTime()
+              ? 1
+              : -1;
+          });
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
     isNew: function(notification) {
       this.duration(notification);
       if (this.hours < 1) return "NEW";
@@ -73,6 +78,12 @@ export default {
         (passTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       this.days = Math.floor(passTime / (1000 * 60 * 60 * 24));
+    },
+    pollNotifications() {
+      this.fetchNotifications();
+      this.pollingId = setInterval(() => {
+        this.fetchNotifications();
+      }, notifPollingInterval);
     }
   },
   beforeCreate() {

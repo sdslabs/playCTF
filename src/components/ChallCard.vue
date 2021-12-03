@@ -43,7 +43,6 @@
           class="challCard-form-input"
           id="flag-input"
           placeholder="Start typing flag here..."
-          v-validate="'required'"
           v-model="flag"
         />
         <Button
@@ -96,7 +95,10 @@ export default {
       setTimeout(function() {
         if (self.showSuccess) {
           self.$router.go();
+        } else {
+          self.$emit("updateChallenges");
         }
+        self.flag = "";
         self.showSuccess = false;
         self.showFail = false;
       }, 3000); // hide the message after 3 seconds
@@ -123,6 +125,11 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
+    }
+  },
+  watch: {
+    challDetails() {
+      this.flag = "";
     }
   }
 };
