@@ -109,7 +109,6 @@ export default {
       }
     },
     selectChallenge(name) {
-      console.log(name);
       if (name === null) {
         this.selectedChall = null;
       }
