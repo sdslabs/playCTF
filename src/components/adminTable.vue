@@ -48,7 +48,7 @@
               <router-link
                 class="adminTableLink"
                 v-if="isColLink(col)"
-                :to="getRedirectLink(col)+row[col]"
+                :to="getRedirectLink(col) + row[col]"
               >
                 {{ row[col] }}
               </router-link>
@@ -104,11 +104,11 @@ export default {
     return {
       jumpPage: 1,
       currentPage: 1,
-      tableRows:[],
+      tableRows: []
     };
   },
-  mounted(){
-    this.tableRows = this.get_rows()
+  mounted() {
+    this.tableRows = this.get_rows();
   },
   props: [
     "tableCols",
@@ -120,16 +120,16 @@ export default {
   ],
   methods: {
     isColLink(val) {
-      var isLink = false;
-      this.links.forEach((item) => {
+      let isLink = false;
+      this.links.forEach(item => {
         if (item.col === val) {
           isLink = true;
         }
       });
       return isLink;
     },
-    getRedirectLink(val){
-      this.links.forEach((item) => {
+    getRedirectLink(val) {
+      this.links.forEach(item => {
         if (item.col === val) {
           return item.redirect;
         }
@@ -144,7 +144,7 @@ export default {
       this.currentPage = selectedPage;
       this.tableRows = this.get_rows();
     },
-    get_rows(){
+    get_rows() {
       let start = (this.currentPage - 1) * this.maxElementPerPage;
       let end = start + this.maxElementPerPage;
       return this.rows.slice(start, end);

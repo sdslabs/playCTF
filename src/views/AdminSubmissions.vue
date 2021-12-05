@@ -40,23 +40,19 @@ export default {
     };
   },
   methods: {},
-  mounted() {
-    SubmissionService.getSubmissions()
-      .then((response) => {
-        var submissions = [];
-        response.forEach((element, index) => {
-            submissions.push({
-              username: element.username,
-              challenge: element.name,
-              category: element.category,
-              timeDate: element.solvedTime
-            });
-        });
-        this.rows = submissions;
-      })
-      .finally(() => {
-        this.loading = false;
+  async mounted() {
+    let response = await SubmissionService.getSubmissions();
+    var submissions = [];
+    response.forEach((element, index) => {
+      submissions.push({
+        username: element.username,
+        challenge: element.name,
+        category: element.category,
+        timeDate: element.solvedTime
       });
+    });
+    this.rows = submissions;
+    this.loading = false;
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminSubmissions");
