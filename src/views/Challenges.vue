@@ -41,8 +41,8 @@ import store from "@/store/index";
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
-import ChalService from "../api/admin/challengesAPI";
-import UsersService from "../api/admin/usersAPI";
+import ChalService from "@/api/admin/challengesAPI";
+import UsersService from "@/api/admin/usersAPI";
 export default {
   name: "Challenges",
   data() {
@@ -68,35 +68,27 @@ export default {
   created() {
     this.username = store.getters.getUsername;
   },
-  mounted() {
-    this.fetchChallenges(false);
-    this.updateUserStats();
+  async mounted() {
+    await this.fetchChallenges(false);
+    await this.updateUserStats();
   },
   methods: {
-    updateUserStats() {
-      UsersService.getUserByUsername(this.username)
-        .then(response => {
-          this.userDetails = response.data;
-        })
-        .finally(() => {
-          this.usersNotFetched = false;
-        });
+    async updateUserStats() {
+      const userData = await UsersService.getUserByUsername(this.username);
+      this.userDetails = userData.data;
+      this.usersNotFetched = false;
     },
-    fetchChallenges(isUpdation) {
-      ChalService.getChallenges(true, this.username)
-        .then(response => {
-          this.challenges = response.challenges;
-          this.tags = [...this.defaultTags, ...response.categoryFilterOptions];
-          this.totalChals = response.challenges.length;
-          this.displayChallenges = response.displayChallenges;
-          if (!isUpdation) {
-            this.selectedChall = this.displayChallenges[0];
-          }
-        })
-        .finally(() => {
-          this.challengesNotFetched = false;
-          this.selectDefaultChallenge = false;
-        });
+    async fetchChallenges(isUpdation) {
+      const challData = await ChalService.getChallenges(true, this.username);
+      this.challenges = challData.challenges;
+      this.tags = [...this.defaultTags, ...challData.categoryFilterOptions];
+      this.totalChals = challData.challenges.length;
+      this.displayChallenges = challData.displayChallenges;
+      if (!isUpdation) {
+        this.selectedChall = this.displayChallenges[0];
+      }
+      this.challengesNotFetched = false;
+      this.selectDefaultChallenge = false;
     },
     changeFilter(value) {
       this.selectedTag = value;

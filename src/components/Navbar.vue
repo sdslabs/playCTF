@@ -17,10 +17,10 @@
             :to="`${routes.page}`"
             >{{ routes.text }}
           </router-link>
-        </div>
-        <div class="adminNavTimer">
-          <p class="adminTimerMessage">Time Remaining</p>
-          <Timer class="adminTimerValue" />
+          <div class="adminNavTimer">
+            <p class="adminTimerMessage">Time Remaining</p>
+            <Timer class="adminTimerValue" />
+          </div>
         </div>
       </nav>
       <div

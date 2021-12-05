@@ -20,9 +20,9 @@
 
 <script>
 import NotificationService from "@/api/admin/notificationsAPI";
-import NotificationTab from "../components/NotificationTab";
-import SpinLoader from "../components/spinLoader.vue";
-const notifPollingInterval = 10000;
+import NotificationTab from "@/components/NotificationTab";
+import SpinLoader from "@/components/spinLoader.vue";
+import { notifPollingInterval } from "@/constants/constants";
 export default {
   name: "notifications",
   data() {
@@ -32,8 +32,8 @@ export default {
       pollingId: null
     };
   },
-  mounted() {
-    this.pollNotifications();
+  async mounted() {
+    await this.pollNotifications();
   },
   beforeDestroy() {
     clearInterval(this.pollingId);
@@ -43,19 +43,15 @@ export default {
     SpinLoader
   },
   methods: {
-    fetchNotifications() {
-      NotificationService.getAllNotifs()
-        .then(response => {
-          this.notifications = response.data.sort((a, b) => {
-            return new Date(a.updated_at).getTime() <
-              new Date(b.updated_at).getTime()
-              ? 1
-              : -1;
-          });
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+    async fetchNotifications() {
+      const fetchedNotifications = await NotificationService.getAllNotifs();
+      this.notifications = fetchedNotifications.data.sort((a, b) => {
+        return new Date(a.updated_at).getTime() <
+          new Date(b.updated_at).getTime()
+          ? 1
+          : -1;
+      });
+      this.loading = false;
     },
     isNew: function(notification) {
       this.duration(notification);
@@ -79,10 +75,10 @@ export default {
       );
       this.days = Math.floor(passTime / (1000 * 60 * 60 * 24));
     },
-    pollNotifications() {
-      this.fetchNotifications();
-      this.pollingId = setInterval(() => {
-        this.fetchNotifications();
+    async pollNotifications() {
+      await this.fetchNotifications();
+      this.pollingId = setInterval(async () => {
+        await this.fetchNotifications();
       }, notifPollingInterval);
     }
   },
