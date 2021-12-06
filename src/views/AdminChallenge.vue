@@ -73,9 +73,11 @@
           </button>
         </div>
       </div>
-      <div v-if="chalDetails.description" class="aboutChallenge aboutText">
-        {{ chalDetails.description }}
-      </div>
+      <div
+        v-if="chalDetails.description"
+        v-html="chalDetails.description"
+        class="aboutChallenge aboutText"
+      />
       <div
         v-for="port in this.chalDetails.ports"
         :key="port"
@@ -281,6 +283,29 @@ export default {
     ChalService.fetchChallengeByName(this.$route.params.id)
       .then(response => {
         let data = response.data;
+
+        let { description } = data;
+
+        if (description.length > 0) {
+          //URLs starting with http://, https://, or ftp://
+          const exp1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#/%?=~_|!:,.;]*[-A-Z0-9+&@#/%=~_|])/gim;
+          //URLs starting with www.
+          const exp2 = /(^|[^/])(www\.[\S]+(\b|$))/gim;
+          //Change email addresses to mailto:: links
+          const exp3 = /(\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6})/gim;
+
+          let replacedDesc = description.replace(exp1, "<a href='$1'>$1</a>");
+          replacedDesc = replacedDesc.replace(
+            exp2,
+            "$1<a href='http://$2'>$2</a>"
+          );
+          replacedDesc = replacedDesc.replace(
+            exp3,
+            "<a href='mailto:$1'>$1</a>"
+          );
+
+          data.description = replacedDesc;
+        }
         this.chalDetails = data;
       })
       .finally(() => {
