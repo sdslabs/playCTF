@@ -132,7 +132,16 @@ export default {
       }
     },
     exportUsersAsCSV() {
-      UsersService.exportAsCSV(this.sortFilter, this.statusFilter);
+      UsersService.exportAsCSV(this.sortFilter, this.statusFilter).then(res => {
+        let blob = new Blob([res.data], { type: "text/csv" });
+        let url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "users.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
     }
   },
   computed: {

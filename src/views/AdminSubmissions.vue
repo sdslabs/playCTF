@@ -1,6 +1,10 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adSubHeaderComponent">Submissions</div>
+    <button class="action-cta" @click="exportUsersAsCSV()">
+      <img :src="download" />
+      <span>Export as CSV</span>
+    </button>
     <spin-loader v-if="loading" />
     <admin-table
       :tableCols="tableCols"
@@ -25,6 +29,7 @@
 import SubmissionService from "../api/admin/submissionsAPI";
 import adminTable from "../components/adminTable.vue";
 import spinLoader from "../components/spinLoader.vue";
+import { download } from "../constants/images";
 import { tableCols } from "../constants/constants";
 export default {
   name: "AdminSubmissions",
@@ -34,12 +39,26 @@ export default {
   },
   data() {
     return {
+      download,
       rows: [],
       tableCols: tableCols.adminSumbissions,
       loading: true
     };
   },
-  methods: {},
+  methods: {
+    exportUsersAsCSV() {
+      SubmissionService.exportAsCSV().then(res => {
+        let blob = new Blob([res.data], { type: "text/csv" });
+        let url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", "submissions.csv");
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+  },
   async mounted() {
     let response = await SubmissionService.getSubmissions();
     var submissions = [];

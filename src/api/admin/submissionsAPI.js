@@ -19,5 +19,13 @@ export default {
       return el.username === username;
     });
     return data;
+  },
+
+  async exportAsCSV() {
+    return await axiosInstance({
+      method: "get",
+      responseType: "blob",
+      url: `/api/info/submissions?format=csv`
+    });
   }
 };

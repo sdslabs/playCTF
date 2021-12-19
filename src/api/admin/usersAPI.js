@@ -36,15 +36,11 @@ export default {
     } else if (statusFilter == "Banned") {
       statusFilter = "banned";
     }
+
     return await axiosInstance({
       method: "get",
       responseType: "blob",
       url: `/api/info/users?sort=${sortFilter}&filter=${statusFilter}&format=csv`
-    }).then(res => {
-      let blob = new Blob([res.data], { type: "text/csv" }),
-        url = window.URL.createObjectURL(blob);
-
-      window.open(url, "_blank");
     });
   }
 };
