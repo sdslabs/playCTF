@@ -1,6 +1,9 @@
-import variables from "../styles/main.scss";
 import moment from "moment-timezone";
-import store from "../store/index";
+import store from "@/store/index";
+import variables from "@/styles/main.scss";
+
+export const notifPollingInterval = 10000;
+
 export const colors = {
   barGraph: ["#55C39C", "#6269AB", "#59ABDA", "#81C1D6", "#6E8A8E"],
   pieChart: ["#B12BD2", "#FEC42C", "#5793F3", "#EA9311"],

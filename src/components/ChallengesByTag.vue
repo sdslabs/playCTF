@@ -37,7 +37,7 @@
 <script>
 export default {
   name: "ChallengesByTag",
-  props: ["tag", "challenges"],
+  props: ["tag", "challenges", "selectDefaultChallenge"],
   data() {
     return {
       selectedChallenge: {}
@@ -54,6 +54,9 @@ export default {
   },
   watch: {
     challenges: function(challenges) {
+      if (!this.selectDefaultChallenge) {
+        return;
+      }
       let emitted = false;
       challenges.forEach(el => {
         if (el.status === "Deployed") {

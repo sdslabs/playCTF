@@ -2,10 +2,7 @@
   <div class="notification">
     <div class="heading">NOTIFICATIONS</div>
     <spin-loader v-if="loading" />
-    <div
-      class="user-notif-tabs"
-      v-if="notifications.length > 0 && !this.loading"
-    >
+    <div class="user-notif-tabs" v-else-if="notifications.length > 0">
       <NotificationTab
         v-for="notif in notifications"
         :key="notif.ID"
@@ -23,35 +20,39 @@
 
 <script>
 import NotificationService from "@/api/admin/notificationsAPI";
-import NotificationTab from "../components/NotificationTab";
-import SpinLoader from "../components/spinLoader.vue";
+import NotificationTab from "@/components/NotificationTab";
+import SpinLoader from "@/components/spinLoader.vue";
+import { notifPollingInterval } from "@/constants/constants";
 export default {
   name: "notifications",
   data() {
     return {
       notifications: [],
-      loading: true
+      loading: true,
+      pollingId: null
     };
   },
-  mounted() {
-    NotificationService.getAllNotifs()
-      .then(response => {
-        this.notifications = response.data.sort((a, b) => {
-          return new Date(a.updated_at).getTime() <
-            new Date(b.updated_at).getTime()
-            ? 1
-            : -1;
-        });
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+  async mounted() {
+    await this.pollNotifications();
+  },
+  beforeDestroy() {
+    clearInterval(this.pollingId);
   },
   components: {
     NotificationTab,
     SpinLoader
   },
   methods: {
+    async fetchNotifications() {
+      const fetchedNotifications = await NotificationService.getAllNotifs();
+      this.notifications = fetchedNotifications.data.sort((a, b) => {
+        return new Date(a.updated_at).getTime() <
+          new Date(b.updated_at).getTime()
+          ? 1
+          : -1;
+      });
+      this.loading = false;
+    },
     isNew: function(notification) {
       this.duration(notification);
       if (this.hours < 1) return "NEW";
@@ -73,6 +74,12 @@ export default {
         (passTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
       this.days = Math.floor(passTime / (1000 * 60 * 60 * 24));
+    },
+    async pollNotifications() {
+      await this.fetchNotifications();
+      this.pollingId = setInterval(async () => {
+        await this.fetchNotifications();
+      }, notifPollingInterval);
     }
   },
   beforeCreate() {

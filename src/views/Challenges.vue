@@ -17,11 +17,18 @@
           <ChallengesByTag
             :tag="this.selectedTag.name"
             :challenges="this.displayChallenges"
+            :selectDefaultChallenge="selectDefaultChallenge"
             @clicked="selectChallenge"
           />
           <ChallCard
-            :challDetails="this.displayChallenge"
+            :challDetails="selectedChall"
             :tag="this.selectedTag.name"
+            @updateChallenges="
+              () => {
+                fetchChallenges(true);
+                updateUserStats();
+              }
+            "
           />
         </div>
       </div>
@@ -34,8 +41,8 @@ import store from "@/store/index";
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
-import ChalService from "../api/admin/challengesAPI";
-import UsersService from "../api/admin/usersAPI";
+import ChalService from "@/api/admin/challengesAPI";
+import UsersService from "@/api/admin/usersAPI";
 export default {
   name: "Challenges",
   data() {
@@ -43,13 +50,14 @@ export default {
       tag: "All",
       challenges: [],
       displayChallenges: [],
-      tags: [{ name: "All", id: 1 }],
+      defaultTags: [{ name: "All", id: 1 }],
       selectedTag: { name: "All", id: 1 },
       challengesNotFetched: true,
       usersNotFetched: true,
       userDetails: {},
       totalChals: 0,
-      selectedChall: {}
+      selectedChall: {},
+      selectDefaultChallenge: true
     };
   },
   components: {
@@ -60,28 +68,28 @@ export default {
   created() {
     this.username = store.getters.getUsername;
   },
-  mounted() {
-    ChalService.getChallenges(true, this.username)
-      .then(response => {
-        this.challenges = response.challenges;
-        this.displayChallenges = response.displayChallenges;
-        this.tags = [...this.tags, ...response.categoryFilterOptions];
-        this.totalChals = response.challenges.length;
-        this.selectedChall = this.displayChallenges[0];
-      })
-      .finally(() => {
-        this.challengesNotFetched = false;
-      });
-    // hardcoding user for now, need to fix after login integration
-    UsersService.getUserByUsername(this.username)
-      .then(response => {
-        this.userDetails = response.data;
-      })
-      .finally(() => {
-        this.usersNotFetched = false;
-      });
+  async mounted() {
+    await this.fetchChallenges(false);
+    await this.updateUserStats();
   },
   methods: {
+    async updateUserStats() {
+      const userData = await UsersService.getUserByUsername(this.username);
+      this.userDetails = userData.data;
+      this.usersNotFetched = false;
+    },
+    async fetchChallenges(isUpdation) {
+      const challData = await ChalService.getChallenges(true, this.username);
+      this.challenges = challData.challenges;
+      this.tags = [...this.defaultTags, ...challData.categoryFilterOptions];
+      this.totalChals = challData.challenges.length;
+      this.displayChallenges = challData.displayChallenges;
+      if (!isUpdation) {
+        this.selectedChall = this.displayChallenges[0];
+      }
+      this.challengesNotFetched = false;
+      this.selectDefaultChallenge = false;
+    },
     changeFilter(value) {
       this.selectedTag = value;
       if (value.name === "All") {
@@ -99,11 +107,6 @@ export default {
       this.selectedChall = this.challenges.filter(el => {
         return el.name == name;
       })[0];
-    }
-  },
-  computed: {
-    displayChallenge: function() {
-      return this.selectedChall;
     }
   },
   beforeCreate() {
