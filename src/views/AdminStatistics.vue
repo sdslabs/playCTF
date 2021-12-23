@@ -94,7 +94,7 @@
           <PieChart
             v-bind:chartData="this.categoryChartData()"
             v-bind:options="this.pieChartOptions"
-            :height="130"
+            :height="200"
             :width="250"
           />
         </div>
