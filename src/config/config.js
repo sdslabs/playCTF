@@ -1,3 +1,3 @@
 export const CONFIG = {
-  beastRoot: "http://localhost:5005"
+  beastRoot: "https://scythe2021.sdslabs.co/server"
 };

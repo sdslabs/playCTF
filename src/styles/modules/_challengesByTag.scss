@@ -1,6 +1,7 @@
 .challengesByTag {
-    width: 30%;
+    width: calc(30% - 1.5rem);
     min-width: 12.5rem;
+    padding: 0;
     color: $theme-color-black19;
     text-align: left;
 
@@ -18,7 +19,7 @@
         height: 26.5625rem;
         overflow-y: scroll;
         overflow-x: hidden;
-        padding: 0.125rem;
+        width: 100%;
 
         &::-webkit-scrollbar {
             width: 0;
@@ -33,7 +34,7 @@
         }
 
         .challengesByTag-challenge {
-            width: 95%;
+            width: 100%;
             height: 4.5rem;
             box-sizing: border-box;
             background: $theme-color-white;

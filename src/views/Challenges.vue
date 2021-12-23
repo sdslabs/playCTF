@@ -96,7 +96,7 @@ export default {
         this.displayChallenges = this.challenges;
       } else {
         this.displayChallenges = this.challenges.filter(el => {
-          return el.category == value.name;
+          return el.tag == value.name;
         });
       }
     },

@@ -6,13 +6,13 @@
   >
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
-      <div v-if="challDetails.category" class="challCard-tag">
-        {{ challDetails.category }}
-      </div>
       <div v-if="challDetails.isSolved" class="chall-submitted">
         <span>Submitted</span>
         <img src="@/assets/tick.svg" />
       </div>
+    </div>
+    <div v-if="challDetails.tag" class="challCard-tag">
+      {{ challDetails.tag }}
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points

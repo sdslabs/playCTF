@@ -279,7 +279,7 @@ export default {
   mounted() {
     ChalService.getChallenges()
       .then(response => {
-        this.chalTags = response.categoryFilterOptions;
+        this.chalTags = response.tagFilterOptions;
         SubmissionService.getSubStats(
           this.chalTags,
           this.$route.params.username

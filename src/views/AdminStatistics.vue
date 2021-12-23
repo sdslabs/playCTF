@@ -7,9 +7,9 @@
         <p class="adminSubheading">General</p>
         <p class="adminInfo">
           Total
-          <span class="adminBold">{{ users.total_registered_users }}</span> are
-          registered out of which
-          <span class="adminBold">{{ users.banned_users }}</span> are banned
+          <span class="adminBold">{{ userStats.total_registered_users }}</span>
+          are registered out of which
+          <span class="adminBold">{{ userStats.banned_users }}</span> are banned
           and,
         </p>
         <p class="adminInfo">
@@ -40,7 +40,7 @@
                 ? "-"
                 : (
                     (challenges.maxSolvedChal.solves /
-                      users.total_registered_users) *
+                      userStats.total_registered_users) *
                     100
                   ).toFixed(2)
             }}</span
@@ -62,7 +62,7 @@
                 ? "-"
                 : (
                     (challenges.leastSolvedChal.solves /
-                      users.total_registered_users) *
+                      userStats.total_registered_users) *
                     100
                   ).toFixed(2)
             }}</span
@@ -106,7 +106,7 @@
     <div class="adminStatsContainer">
       <div class="adminOneColContainer">
         <p class="adminSubheading">
-          Solve Percentages (Out of {{ users.active }} Active Users)
+          Solve Percentages (Out of {{ userStats.active }} Active Users)
         </p>
         <div class="adminSolveGraphContainer" v-if="this.chalTags.length > 0">
           <div v-for="tag in chalTags" :key="tag.id" class="graph">
@@ -130,8 +130,13 @@ import PieChart from "../components/PieChart.vue";
 import BarGraph from "../components/BarGraph.vue";
 import UsersService from "../api/admin/usersAPI";
 import ChalService from "../api/admin/challengesAPI";
-import SubmissionService from "../api/admin/submissionsAPI";
 import SpinLoader from "../components/spinLoader.vue";
+import {
+  getChalStats,
+  getChallenges,
+  getChalCategory
+} from "../utils/challenges";
+import { getSubStats } from "../utils/submissions";
 import {
   colors,
   barChartOptions,
@@ -197,48 +202,23 @@ export default {
       };
     }
   },
-  mounted() {
-    UsersService.getUserStats()
-      .then(response => {
-        this.users = response.data;
-      })
-      .finally(() => {
-        this.loading.userStatsNotFetched = false;
-      });
-
-    UsersService.getUsers()
-      .then(users => {
-        if (users.length > 0) {
-          this.leader = users.sort((a, b) => {
-            return a.rank - b.rank;
-          })[0];
-        }
-      })
-      .finally(() => {
-        this.loading.usersNotFetched = false;
-      });
-
-    ChalService.getChalStats()
-      .then(response => {
-        this.challenges = response;
-      })
-      .finally(() => {
-        this.loading.chalStatsNotFetched = false;
-      });
-
-    ChalService.getChallenges()
-      .then(response => {
-        this.chalTags = response.categoryFilterOptions;
-        SubmissionService.getSubStats(this.chalTags, null).then(response => {
-          this.submissions = response;
-        });
-        ChalService.getChalCategory(this.chalTags).then(response => {
-          this.chalCategory = response;
-        });
-      })
-      .finally(() => {
-        this.loading.challengesNotFetched = false;
-      });
+  async mounted() {
+    this.userStats = await (await UsersService.getUserStats()).data;
+    this.loading.userStatsNotFetched = false;
+    let allUsers = await UsersService.getUsers();
+    if (allUsers.length > 0) {
+      this.leader = allUsers.sort((a, b) => {
+        return a.rank - b.rank;
+      })[0];
+    }
+    this.loading.usersNotFetched = false;
+    this.challenges = await getChalStats();
+    this.loading.chalStatsNotFetched = false;
+    let chalData = await getChallenges();
+    this.chalTags = chalData.tagFilterOptions;
+    this.submissions = await getSubStats(this.chalTags, null);
+    this.chalCategory = await getChalCategory(this.chalTags);
+    this.loading.challengesNotFetched = false;
   },
   data() {
     return {
@@ -248,7 +228,7 @@ export default {
         chalStatsNotFetched: true,
         challengesNotFetched: true
       },
-      users: {},
+      userStats: {},
       challenges: {},
       leader: {
         username: "-",

@@ -13,9 +13,9 @@
     <div class="adminChallItem" @click="redirect(challenge.name)">
       <div class="adminChallDetails">
         <span class="adminChallName">{{ challenge.name }}</span>
-        <span class="adminChallCategory">{{ challenge.category }}</span>
         <span class="adminChallStatus">{{ challenge.status }}</span>
       </div>
+      <span class="adminChallCategory">{{ challenge.tag }}</span>
       <div class="adminChallStats">
         <span class="adminChallPoints">{{ challenge.points }} Points</span>
         <span class="adminChallSolves"
