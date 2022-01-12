@@ -123,7 +123,13 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     triggerRegister() {
-      if(this.uname && this.username && this.password && this.password2 && this.email) {
+      if (
+        this.uname &&
+        this.username &&
+        this.password &&
+        this.password2 &&
+        this.email
+      ) {
         this.register();
       }
     },

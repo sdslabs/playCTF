@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     triggerLogin() {
-      if(this.username && this.password) {
+      if (this.username && this.password) {
         this.login();
       }
     },

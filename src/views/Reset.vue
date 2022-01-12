@@ -74,7 +74,7 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     triggerReset() {
-      if(this.password && this.password2) {
+      if (this.password && this.password2) {
         this.reset();
       }
     },
