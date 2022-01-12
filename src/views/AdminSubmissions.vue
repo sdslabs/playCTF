@@ -47,9 +47,9 @@ export default {
     };
   },
   methods: {
-    exportUsersAsCSV() {
+    async exportUsersAsCSV() {
       SubmissionService.fetchAsCSV().then(res => {
-        utils.saveAsFile(res, "submissions.csv", "text/csv");
+        utils.saveAsFile(res.data, "submissions.csv", "text/csv");
       });
     }
   },

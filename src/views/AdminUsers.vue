@@ -132,9 +132,9 @@ export default {
         });
       }
     },
-    exportUsersAsCSV() {
+    async exportUsersAsCSV() {
       UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
-        utils.saveAsFile(res, "users.csv", "text/csv");
+        utils.saveAsFile(res.data, "users.csv", "text/csv");
       });
     }
   },

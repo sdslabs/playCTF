@@ -25,6 +25,11 @@
         </div>
       </div>
 
+      <button class="action-cta" @click="exportLeaderBoardAsCSV()">
+        <img :src="download" />
+        <span>Export as CSV</span>
+      </button>
+
       <admin-table
         v-if="resultQuery.length > 0"
         :tableCols="tableCols"
@@ -43,6 +48,7 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
+import utils from "@/api/utils";
 import SpinLoader from "../components/spinLoader.vue";
 import moment from "moment-timezone";
 import {
@@ -51,7 +57,7 @@ import {
   lineGraphOptions,
   lineGraphConfig
 } from "../constants/constants";
-import { leaderboard, search } from "../constants/images";
+import { leaderboard, search, download } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
@@ -59,6 +65,7 @@ export default {
     return {
       leaderboard,
       search,
+      download,
       loading: true,
       lineColors: colors.lineGraph,
       scoreSeries: [],
@@ -144,6 +151,11 @@ export default {
         y: score
       };
       return scoreSeries;
+    },
+    async exportLeaderBoardAsCSV() {
+      var jsonObject = JSON.stringify(this.resultQuery);
+      var csv = await utils.convertToCSV(jsonObject);
+      utils.saveAsFile(csv, "leaderboard.csv", "text/csv");
     }
   },
   computed: {
