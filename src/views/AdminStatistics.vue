@@ -184,11 +184,11 @@ export default {
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach(el => {
-        labels.push(el.name);
+      this.chalTags.forEach(tag => {
+        labels.push(tag.name);
       });
-      labels.forEach(el => {
-        let sub = this.submissions.category[el];
+      labels.forEach(label => {
+        let sub = this.submissions.category[label];
         data.push(sub);
       });
       return {
