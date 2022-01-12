@@ -21,7 +21,7 @@
         </div>
         <div class="info">
           <input
-            v-model="password2"
+            v-model="confirmPassword"
             type="password"
             class="adminFormTitle inputField"
             id="confirmpassword"
@@ -38,7 +38,7 @@
           :onclick="reset"
           class="auth-button"
           variant=" primary-cta"
-          :disabled="!(password && password2)"
+          :disabled="!(password && confirmPassword)"
           text="Change Password"
         />
       </div>
@@ -60,7 +60,7 @@ export default {
       icon: null,
       PassErr: false,
       password: "",
-      password2: "",
+      confirmPassword: "",
       errorIcon: "error-white",
       tickIcon: "tick-white"
     };
@@ -79,18 +79,18 @@ export default {
       }
     },
     async reset() {
-      if (this.password !== this.password2) {
+      if (this.password !== this.confirmPassword) {
         this.PassErr = "Passwords don't match";
       } else {
         this.PassErr = false;
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
-          this.msg = "Succesfully changed";
+          this.msg = "Successfully changed";
           this.icon = this.tickIcon;
           await this.sleep(3000);
           this.$router.push("/about");
         } else {
-          this.msg = "Unatuthorized Access";
+          this.msg = "Unauthorized access";
           this.icon = this.errorIcon;
         }
       }
