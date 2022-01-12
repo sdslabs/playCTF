@@ -8,7 +8,7 @@
         purgedLink: challenge.status === 'Purged',
         inProgressLink: challStatus.inProgressStatus.includes(challenge.status)
       },
-      'adminChalLink'
+      'adminChalLink',
     ]"
   >
     <div class="adminChallItem" @click="redirect(challenge.name)">
@@ -21,6 +21,10 @@
         <span class="adminChallSolves"
           >{{ challenge.solvesNumber }} Solves</span
         >
+        {{ challenge.checked }}
+        <span class="challengesCheckBox"
+          ><input @click="handleCheckboxClick" type="checkbox"
+        /></span>
       </div>
       <div class="adminTags">
         <div

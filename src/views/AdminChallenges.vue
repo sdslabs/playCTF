@@ -169,7 +169,7 @@ export default {
       sortTypeOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 }
+        { name: "Solves", id: 3 },
       ],
       statusFilterOptions: [
         "All",
@@ -243,6 +243,17 @@ export default {
         }
         return filteredChallenges;
       }
+    },
+    getUrl(port) {
+      let url = CONFIG.beastRoot;
+      let portIndex = url.lastIndexOf(":");
+      if (portIndex !== -1) {
+        url = url.substring(0, portIndex);
+      }
+      return `${url}:${port}`;
+    },
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     sortChallenges(challenges, sortType) {
       let sortedChallenges = [];
@@ -457,6 +468,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  }
+  },
 };
 </script>
