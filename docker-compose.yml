@@ -7,9 +7,11 @@ services:
     container_name: "playctf"
     volumes:
         - ".:/app"
+        - "/app/node_modules"
     extra_hosts:
         - "localhost:127.0.0.1"
     environment: 
         - "CHOKIDAR_USEPOLLING=true"
+        - "npm_config_unsafe_perm=true"
     ports:
         - "8080:8080"
