@@ -14,6 +14,7 @@
             name="user_name"
             placeholder="Team Name*"
             v-model="username"
+            @keyup.enter="triggerLogin"
           />
         </div>
         <div class="info">
@@ -24,6 +25,7 @@
             name="user_pass"
             placeholder="Password*"
             v-model="password"
+            @keyup.enter="triggerLogin"
           />
         </div>
         <Button
@@ -58,6 +60,11 @@ export default {
     Button
   },
   methods: {
+    triggerLogin() {
+      if (this.username && this.password) {
+        this.login();
+      }
+    },
     async login() {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
