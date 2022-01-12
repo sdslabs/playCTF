@@ -16,7 +16,6 @@
             name="user_pass"
             placeholder="New Password*"
             required="true"
-            @keyup.enter="triggerReset"
           />
         </div>
         <div class="info">
@@ -28,7 +27,6 @@
             name="user_pass"
             placeholder="Confirm Password*"
             required="true"
-            @keyup.enter="triggerReset"
           />
           <div class="error-box" v-if="PassErr">
             <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
@@ -72,11 +70,6 @@ export default {
   methods: {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
-    },
-    triggerReset() {
-      if (this.password && this.password2) {
-        this.reset();
-      }
     },
     async reset() {
       if (this.password !== this.password2) {
