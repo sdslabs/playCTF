@@ -18,8 +18,10 @@ export const getChallenges = async (getUserSolves, username) => {
   let allTags = [];
   let tagFilterOptions = [];
   let displayChallenges = [];
-  challenges.forEach(el => {
-    allTags.push(el.tag);
+  challenges.forEach(challenge => {
+    challenge.tags.forEach(tag => {
+      allTags.push(tag);
+    });
   });
 
   // removing all duplicate tags

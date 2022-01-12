@@ -22,7 +22,6 @@
           />
           <ChallCard
             :challDetails="selectedChall"
-            :tag="this.selectedTag.name"
             @updateChallenges="
               () => {
                 fetchChallenges(true);
@@ -43,6 +42,7 @@ import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import ChalService from "@/api/admin/challengesAPI";
 import UsersService from "@/api/admin/usersAPI";
+import { getChallenges } from "../utils/challenges";
 export default {
   name: "Challenges",
   data() {
@@ -79,9 +79,9 @@ export default {
       this.usersNotFetched = false;
     },
     async fetchChallenges(isUpdation) {
-      const challData = await ChalService.getChallenges(true, this.username);
+      const challData = await getChallenges(true, this.username);
       this.challenges = challData.challenges;
-      this.tags = [...this.defaultTags, ...challData.categoryFilterOptions];
+      this.tags = [...this.defaultTags, ...challData.tagFilterOptions];
       this.totalChals = challData.challenges.length;
       this.displayChallenges = challData.displayChallenges;
       if (!isUpdation) {
@@ -95,8 +95,14 @@ export default {
       if (value.name === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter(el => {
-          return el.tag == value.name;
+        this.displayChallenges = this.challenges.filter(challenge => {
+          let includeChallenge = false;
+          challenge.tags.forEach(tag => {
+            if (tag === value.name) {
+              includeChallenge = true;
+            }
+          });
+          return includeChallenge;
         });
       }
     },

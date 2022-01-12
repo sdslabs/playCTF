@@ -11,8 +11,10 @@
         <img src="@/assets/tick.svg" />
       </div>
     </div>
-    <div v-if="challDetails.tag" class="challCard-tag">
-      {{ challDetails.tag }}
+    <div>
+      <span v-for="tag in challDetails.tags" :key="tag" class="challCard-tag">
+        {{ tag }}
+      </span>
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points

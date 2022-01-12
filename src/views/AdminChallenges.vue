@@ -121,6 +121,18 @@ export default {
       if (filterValue === "All") {
         return challenges;
       }
+      if (filterType === "tags") {
+        let filteredChallenges = challenges.filter(chall => {
+          let includeChallenge = false;
+          chall.tags.forEach(tag => {
+            if (tag === filterValue) {
+              includeChallenge = true;
+            }
+          });
+          return includeChallenge;
+        });
+        return filteredChallenges;
+      }
       let filteredChallenges = challenges.filter(chall => {
         return chall[filterType] == filterValue;
       });
@@ -152,7 +164,7 @@ export default {
       filteredSortedChallenges = this.filterChallenges(
         filteredSortedChallenges,
         this.tagFilter,
-        "tag"
+        "tags"
       );
       filteredSortedChallenges = this.filterChallenges(
         filteredSortedChallenges,

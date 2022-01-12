@@ -15,7 +15,14 @@
         <span class="adminChallName">{{ challenge.name }}</span>
         <span class="adminChallStatus">{{ challenge.status }}</span>
       </div>
-      <span class="adminChallCategory">{{ challenge.tag }}</span>
+      <div class="adminTags">
+        <span
+          v-for="tag in challenge.tags"
+          :key="tag"
+          class="adminChallCategory"
+          >{{ tag }}</span
+        >
+      </div>
       <div class="adminChallStats">
         <span class="adminChallPoints">{{ challenge.points }} Points</span>
         <span class="adminChallSolves"
