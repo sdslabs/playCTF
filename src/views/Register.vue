@@ -41,10 +41,11 @@
             name="user_email"
             placeholder="Email*"
             required="true"
-            @keyup.enter="triggerRegister"
+            @blur="validateEmail"
           />
           <div class="text-field-error" v-if="EmailErr">
-            <img src="@/assets/error.svg" class="errImg" /> {{ this.EmailErr }}
+            <img src="@/assets/error.svg" class="errImg" />
+            <div>{{ this.EmailErr }}</div>
           </div>
         </div>
         <div class="info">
@@ -56,29 +57,36 @@
             name="user_pass"
             placeholder="Password*"
             required="true"
-            @keyup.enter="triggerRegister"
+            @blur="validatePassword"
           />
+          <div class="text-field-error" v-if="PassLen">
+            <img src="@/assets/error.svg" class="errImg" />
+            <div>{{ this.PassLen }}</div>
+          </div>
         </div>
         <div class="info">
           <input
-            v-model="password2"
+            v-model="confirmPassword"
             type="password"
             class="adminFormTitle inputField"
             id="confirmpassword"
             name="user_pass"
             placeholder="Confirm Password*"
             required="true"
-            @keyup.enter="triggerRegister"
+            @blur="comparePassword"
           />
           <div class="text-field-error" v-if="PassErr">
-            <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
+            <img src="@/assets/error.svg" class="errImg" />
+            <div>{{ this.PassErr }}</div>
           </div>
         </div>
         <Button
           :onclick="register"
           variant="primary-cta"
           class="auth-button"
-          :disabled="!(uname && username && password && password2 && email)"
+          :disabled="
+            !(uname && username && password && confirmPassword && email)
+          "
           text="Register Now"
         />
       </div>
@@ -105,9 +113,10 @@ export default {
       username: "",
       email: "",
       password: "",
-      password2: "",
+      confirmPassword: "",
       status: false,
       EmailErr: false,
+      PassLen: false,
       PassErr: false,
       registered: true,
       errorIcon: "error-white",
@@ -115,36 +124,33 @@ export default {
     };
   },
   methods: {
-    validateEmail(email) {
+    validateEmail(e) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      return re.test(email);
-    },
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
-    },
-    triggerRegister() {
-      if (
-        this.uname &&
-        this.username &&
-        this.password &&
-        this.password2 &&
-        this.email
-      ) {
-        this.register();
-      }
-    },
-    async register() {
-      if (!this.validateEmail(this.email)) {
-        this.EmailErr = "Invalid Email";
-      } else {
+      if (re.test(this.email)) {
         this.EmailErr = false;
+      } else {
+        this.EmailErr = "Invalid Email";
       }
-      if (this.password !== this.password2) {
+    },
+    validatePassword(e) {
+      if (this.password.length < 8) {
+        this.PassLen = "Password should be atleast of 8 characters";
+      } else {
+        this.PassLen = false;
+      }
+    },
+    comparePassword(e) {
+      if (this.password !== this.confirmPassword) {
         this.PassErr = "Passwords don't match";
       } else {
         this.PassErr = false;
       }
-      if (!this.PassErr && !this.EmailErr) {
+    },
+    sleep(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    async register() {
+      if (!this.PassErr && !this.EmailErr && !this.PassLen) {
         this.status = RegisterUser.registeredUser(
           this.uname,
           this.username,
