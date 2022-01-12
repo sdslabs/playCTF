@@ -8,6 +8,7 @@
 .checkbox {
   outline: none;
   cursor: pointer;
+  margin-right: 0.5rem;
 }
 .fade-leave-active {
   transition: opacity 1s;
@@ -80,6 +81,18 @@
     color: $theme-color-grey-high-transp;
     font-size: 1rem;
     line-height: 1.75rem;
+    label{
+      text-align: left;
+    }
+  }
+
+  @media(max-width:1450px){
+    .confirmation{
+      #checkbox{
+        align-self: flex-start;
+        margin-top: 8px;
+      }
+    }
   }
 
   textarea:focus,

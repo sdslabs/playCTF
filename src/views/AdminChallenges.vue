@@ -2,13 +2,13 @@
   <div class="adminChallengesContainer">
     <div class="adminChallengesVerticalNav" v-if="!loading">
       <button
-        v-for="category in this.categoryFilterOptions"
-        :key="category.id"
+        v-for="tag in this.tagFilterOptions"
+        :key="tag.id"
         class="navButton"
-        @click="changeCategory(category.name)"
-        :class="{ active: categoryFilter === category.name }"
+        @click="changeTagFilter(tag.name)"
+        :class="{ active: tagFilter === tag.name }"
       >
-        {{ category.name }}
+        {{ tag.name }}
       </button>
     </div>
     <div class="mainContaineradminChall">
@@ -25,11 +25,11 @@
       <div class="adminSort">
         <span class="sortText">Sort by:</span>
         <a
-          v-for="sort in this.sortFilterOptions"
+          v-for="sort in this.sortTypeOptions"
           :key="sort.id"
           class="sortOption"
-          :class="[{ active: sortFilter === sort.name }]"
-          @click="changeSort(sort.name)"
+          :class="[{ active: sortType === sort.name }]"
+          @click="changeSortType(sort.name)"
         >
           {{ sort.name }}
         </a>
@@ -37,7 +37,7 @@
           class="dropdown"
           :options="statusFilterOptions"
           :value="this.statusFilter"
-          @input="changeFilter"
+          @input="changeStatusFilter"
           :clearable="false"
           :searchable="false"
         >
@@ -78,6 +78,11 @@ import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
 import { add } from "../constants/images";
 import CreateChallModal from "../components/CreateChallModal.vue";
+import {
+  getChalStats,
+  getChallenges,
+  getChalCategory
+} from "../utils/challenges";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader, CreateChallModal },
@@ -87,12 +92,12 @@ export default {
       add,
       loading: true,
       statusFilter: "All",
-      sortFilter: "Name",
-      categoryFilter: "All",
+      sortType: "Name",
+      tagFilter: "All",
       challenges: [],
       displayChallenges: [],
-      categoryFilterOptions: [{ name: "All", id: 1 }],
-      sortFilterOptions: [
+      tagFilterOptions: [{ name: "All", id: 1 }],
+      sortTypeOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
         { name: "Solves", id: 3 }
@@ -100,57 +105,89 @@ export default {
       statusFilterOptions: ["All", "Deployed", "Undeployed"]
     };
   },
-  mounted() {
-    ChalService.getChallenges()
-      .then(response => {
-        this.challenges = response.challenges;
-        this.displayChallenges = response.displayChallenges;
-        this.categoryFilterOptions = [
-          ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions
-        ];
-        this.displayChallenges = response.displayChallenges;
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+  async mounted() {
+    let response = await getChallenges();
+    this.challenges = response.challenges;
+    this.displayChallenges = response.displayChallenges;
+    this.tagFilterOptions = [
+      ...this.tagFilterOptions,
+      ...response.tagFilterOptions
+    ];
+    this.displayChallenges = response.displayChallenges;
+    this.loading = false;
   },
   methods: {
-    changeFilter(value) {
+    filterChallenges(challenges, filterValue, filterType) {
+      if (filterValue === "All") {
+        return challenges;
+      }
+      if (filterType === "tags") {
+        let filteredChallenges = challenges.filter(chall => {
+          let includeChallenge = false;
+          chall.tags.forEach(tag => {
+            if (tag === filterValue) {
+              includeChallenge = true;
+            }
+          });
+          return includeChallenge;
+        });
+        return filteredChallenges;
+      }
+      let filteredChallenges = challenges.filter(chall => {
+        return chall[filterType] == filterValue;
+      });
+      return filteredChallenges;
+    },
+    sortChallenges(challenges, sortType) {
+      let sortedChallenges = [];
+      switch (sortType) {
+        case "Name":
+          sortedChallenges = challenges.sort((a, b) => {
+            return a.name > b.name ? 1 : -1;
+          });
+          break;
+        case "Score":
+          sortedChallenges = challenges.sort((a, b) => {
+            return this.findGreater(a, b, "Points", "Name");
+          });
+          break;
+        case "Solves":
+          sortedChallenges = challenges.sort((a, b) => {
+            return this.findGreater(a, b, "SolvesNumber", "Name");
+          });
+          break;
+      }
+      return sortedChallenges;
+    },
+    refreshChallengeList() {
+      let filteredSortedChallenges = this.challenges;
+      filteredSortedChallenges = this.filterChallenges(
+        filteredSortedChallenges,
+        this.tagFilter,
+        "tags"
+      );
+      filteredSortedChallenges = this.filterChallenges(
+        filteredSortedChallenges,
+        this.statusFilter,
+        "status"
+      );
+      filteredSortedChallenges = this.sortChallenges(
+        filteredSortedChallenges,
+        this.sortType
+      );
+      this.displayChallenges = filteredSortedChallenges;
+    },
+    changeStatusFilter(value) {
       this.statusFilter = value;
-      if (value === "All") {
-        this.displayChallenges = this.challenges;
-      } else {
-        this.displayChallenges = this.challenges.filter(el => {
-          return el.status == value;
-        });
-      }
+      this.refreshChallengeList();
     },
-    changeSort(value) {
-      this.sortFilter = value;
-      if (value === "Name") {
-        this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return a.name > b.name ? 1 : -1;
-        });
-      } else if (value === "Score") {
-        this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return this.findGreater(a, b, "Points", "Name");
-        });
-      } else if (value === "Solves") {
-        this.displayChallenges = this.displayChallenges.sort((a, b) => {
-          return this.findGreater(a, b, "SolvesNumber", "Name");
-        });
-      }
+    changeSortType(value) {
+      this.sortType = value;
+      this.refreshChallengeList();
     },
-    changeCategory(value) {
-      this.categoryFilter = value;
-      if (value === "All") {
-        this.displayChallenges = this.challenges;
-      } else {
-        this.displayChallenges = this.challenges.filter(el => {
-          return el.category == value;
-        });
-      }
+    changeTagFilter(value) {
+      this.tagFilter = value;
+      this.refreshChallengeList();
     },
     findGreater(a, b, field1, field2) {
       if (a[field1] === b[field1]) {

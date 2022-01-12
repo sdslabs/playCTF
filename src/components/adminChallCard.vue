@@ -13,8 +13,15 @@
     <div class="adminChallItem" @click="redirect(challenge.name)">
       <div class="adminChallDetails">
         <span class="adminChallName">{{ challenge.name }}</span>
-        <span class="adminChallCategory">{{ challenge.category }}</span>
         <span class="adminChallStatus">{{ challenge.status }}</span>
+      </div>
+      <div class="adminTags">
+        <span
+          v-for="tag in challenge.tags"
+          :key="tag"
+          class="adminChallCategory"
+          >{{ tag }}</span
+        >
       </div>
       <div class="adminChallStats">
         <span class="adminChallPoints">{{ challenge.points }} Points</span>

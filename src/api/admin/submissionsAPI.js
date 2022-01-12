@@ -13,28 +13,6 @@ export default {
     });
     return submissions;
   },
-  async getSubStats(tags, user) {
-    const response = await this.getSubmissions();
-    let submissions = {};
-    let totalChal = 0;
-    tags.forEach(el => {
-      submissions[el.name] = 0;
-    });
-    let subs;
-    if (user === null) {
-      subs = response;
-    } else {
-      subs = response.filter(el => {
-        return el.username === user;
-      });
-    }
-    subs.forEach(el => {
-      submissions[el.category]++;
-      totalChal++;
-    });
-    return { totalChal: totalChal, category: submissions };
-  },
-
   async getUserSubs(username) {
     const response = await this.getSubmissions();
     let data = response.filter(el => {

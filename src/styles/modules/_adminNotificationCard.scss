@@ -1,5 +1,4 @@
 .adminNotifCard {
-  height: 6rem;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -29,4 +28,7 @@
 
 .adminNotifDesc {
   margin-top: 0;
+  color: $theme-color-grey57;
+  font-weight: normal;
+  text-align: left;
 }

@@ -1,7 +1,6 @@
 .adminChalLink {
     width: 44%;
     text-decoration: none;
-    height: 3.75rem;
     border-radius: 0.1875rem;
     padding: 0.625rem 0.625rem;
     box-shadow: 0 0.125rem 0.625rem $theme-color-black-low-transp;
@@ -11,34 +10,23 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
+        
         .adminChallDetails {
             display: flex;
             flex-direction: row;
             align-items: center;
-            margin-bottom: 0.625rem;
-
+            margin-bottom: 0.25rem;
+            
             .adminChallName {
                 @extend %font-style-basic;
                 font-size: 1rem;
                 line-height: 1.125rem;
+                overflow-x: hidden;
+                overflow-y: hidden;
+                margin-right: 0.5rem;
             }
-
-            .adminChallCategory {
-                text-align: center;
-                vertical-align: middle;
-                background: $theme-color-violet;
-                border-radius: 0.125rem;
-                font-family: $secondary-font-family;
-                
-                font-weight: bold;
-                font-size: 0.75rem;
-                line-height: 1rem;
-                color: $theme-color-white;
-                padding: 0.25rem 0.625rem;
-                margin-left: 0.625rem;
-            }
-
+            
+            
             .adminChallStatus {
                 @extend %font-style-basic;
                 font-weight: 300;
@@ -48,7 +36,7 @@
                 margin-left: auto;
             }
         }
-
+        
         .adminChallStats {
             display: flex;
             flex-direction: row;
@@ -56,12 +44,12 @@
             font-size: 1rem;
             line-height: 1.125rem;
             color: $theme-color-black-med-transp;
-
+            
             .adminChallPoints {
                 border-right: 0.125rem solid $theme-color-black-med-transp;
                 padding-right: 0.3125rem;
             }
-
+            
             .adminChallSolves {
                 padding-left: 0.3125rem;
             }
@@ -79,4 +67,18 @@
 
 .undeployedLink {
     border-left: 0.3125rem solid $theme-color-yellow-high-transp;
+}
+
+.adminChallCategory {
+    width: max-content;
+    vertical-align: middle;
+    background: $theme-color-violet;
+    border-radius: 0.125rem;
+    font-family: $secondary-font-family;
+    font-weight: bold;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: $theme-color-white;
+    padding: 0.25rem 0.625rem;
+    margin-bottom: 0.25rem;
 }
