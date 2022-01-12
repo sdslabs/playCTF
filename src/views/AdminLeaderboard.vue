@@ -51,7 +51,7 @@ import {
   lineGraphOptions,
   lineGraphConfig
 } from "../constants/constants";
-import { leaderboard, search, download } from "../constants/images";
+import { leaderboard, search } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
@@ -90,7 +90,6 @@ export default {
           backgroundColor: "#ffffff",
           borderColor: this.lineColors[index],
           label: `${this.scoreSeries[index].username} ${labelPostText}`,
-
           data: this.scoreSeries[index].series
         });
       });

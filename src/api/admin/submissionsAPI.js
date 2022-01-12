@@ -21,7 +21,7 @@ export default {
     return data;
   },
 
-  async exportAsCSV() {
+  async fetchAsCSV() {
     return await axiosInstance({
       method: "get",
       responseType: "blob",

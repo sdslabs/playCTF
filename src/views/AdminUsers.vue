@@ -133,7 +133,7 @@ export default {
       }
     },
     exportUsersAsCSV() {
-      UsersService.exportAsCSV(this.sortFilter, this.statusFilter).then(res => {
+      UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
         utils.saveAsFile(res, "users.csv", "text/csv");
       });
     }

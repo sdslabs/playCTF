@@ -24,7 +24,7 @@ export default {
     });
   },
 
-  async exportAsCSV(sortFilter, statusFilter) {
+  async fetchAsCSV(sortFilter, statusFilter) {
     if (sortFilter == "User Name") {
       sortFilter = "username";
     } else if (sortFilter == "Score") {
