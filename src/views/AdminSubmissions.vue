@@ -29,6 +29,7 @@
 import SubmissionService from "../api/admin/submissionsAPI";
 import adminTable from "../components/adminTable.vue";
 import spinLoader from "../components/spinLoader.vue";
+import utils from "@/api/utils";
 import { download } from "../constants/images";
 import { tableCols } from "../constants/constants";
 export default {
@@ -48,14 +49,7 @@ export default {
   methods: {
     exportUsersAsCSV() {
       SubmissionService.exportAsCSV().then(res => {
-        let blob = new Blob([res.data], { type: "text/csv" });
-        let url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "submissions.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        utils.saveAsFile(res, "submissions.csv", "text/csv");
       });
     }
   },

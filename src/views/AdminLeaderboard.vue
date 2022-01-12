@@ -51,7 +51,7 @@ import {
   lineGraphOptions,
   lineGraphConfig
 } from "../constants/constants";
-import { leaderboard, search } from "../constants/images";
+import { leaderboard, search, download } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",

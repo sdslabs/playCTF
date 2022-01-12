@@ -68,6 +68,7 @@
 <script>
 import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
+import utils from "@/api/utils";
 import SpinLoader from "../components/spinLoader.vue";
 import { search, userPanel, download } from "../constants/images";
 import { tableCols } from "../constants/constants";
@@ -133,14 +134,7 @@ export default {
     },
     exportUsersAsCSV() {
       UsersService.exportAsCSV(this.sortFilter, this.statusFilter).then(res => {
-        let blob = new Blob([res.data], { type: "text/csv" });
-        let url = window.URL.createObjectURL(blob);
-        const link = document.createElement("a");
-        link.href = url;
-        link.setAttribute("download", "users.csv");
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        utils.saveAsFile(res, "users.csv", "text/csv");
       });
     }
   },
