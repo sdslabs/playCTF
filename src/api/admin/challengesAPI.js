@@ -21,6 +21,18 @@ export default {
       data: postData
     });
   },
+
+  async manageMultipleChalAction(name, action) {
+    let postData = new FormData();
+    postData.append("names", name);
+    postData.append("action", action);
+    return await axiosInstance({
+      method: "post",
+      url: `/api/manage/challenge/multiple/`,
+      data: postData
+    });
+  },
+
   async createChallenge(file) {
     let bodyFormData = new FormData();
     bodyFormData.append("file", file);
