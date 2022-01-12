@@ -17,6 +17,7 @@
             name="name"
             placeholder="Name*"
             required="true"
+            @keyup.enter="triggerRegister"
           />
         </div>
         <div class="info">
@@ -28,6 +29,7 @@
             name="user_name"
             placeholder="Username*"
             required="true"
+            @keyup.enter="triggerRegister"
           />
         </div>
         <div class="info">
@@ -39,6 +41,7 @@
             name="user_email"
             placeholder="Email*"
             required="true"
+            @keyup.enter="triggerRegister"
           />
           <div class="text-field-error" v-if="EmailErr">
             <img src="@/assets/error.svg" class="errImg" /> {{ this.EmailErr }}
@@ -53,6 +56,7 @@
             name="user_pass"
             placeholder="Password*"
             required="true"
+            @keyup.enter="triggerRegister"
           />
         </div>
         <div class="info">
@@ -64,6 +68,7 @@
             name="user_pass"
             placeholder="Confirm Password*"
             required="true"
+            @keyup.enter="triggerRegister"
           />
           <div class="text-field-error" v-if="PassErr">
             <img src="@/assets/error.svg" class="errImg" /> {{ this.PassErr }}
@@ -116,6 +121,11 @@ export default {
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    triggerRegister() {
+      if(this.uname && this.username && this.password && this.password2 && this.email) {
+        this.register();
+      }
     },
     async register() {
       if (!this.validateEmail(this.email)) {
