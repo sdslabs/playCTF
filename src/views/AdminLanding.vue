@@ -172,14 +172,14 @@ export default {
         startDetails[0].split(" ")[0],
         "HH:mm:ss"
       ).format("HH:mm:ss");
-      this.compStartDate = moment(startDetails[1], " Do MMMM YYYY").format(
+      this.compStartDate = moment(startDetails[1], " DD MMMM YYYY").format(
         "yyyy-MM-DD"
       );
       this.compEndTime = moment(
         endingDetails[0].split(" ")[0],
         "HH:mm:ss"
       ).format("HH:mm:ss");
-      this.compEndDate = moment(endingDetails[1], " Do MMMM YYYY").format(
+      this.compEndDate = moment(endingDetails[1], " DD MMMM YYYY").format(
         "yyyy-MM-DD"
       );
       this.compTimezone =
@@ -326,11 +326,11 @@ export default {
       let startingTime = `${startingTimeObj.format(
         "HH:mm:ss"
       )} UTC: ${moment.tz(timezone).format("Z")}, ${startingTimeObj.format(
-        "Do MMMM YYYY, dddd"
+        "DD MMMM YYYY, dddd"
       )}`;
       let endingTime = `${endingTimeObj.format("HH:mm:ss")} UTC: ${moment
         .tz(timezone)
-        .format("Z")}, ${endingTimeObj.format("Do MMMM YYYY, dddd")}`;
+        .format("Z")}, ${endingTimeObj.format("DD MMMM YYYY, dddd")}`;
       return {
         startingTime,
         endingTime

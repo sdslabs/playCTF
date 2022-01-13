@@ -19,7 +19,7 @@ export const getSubStats = async (tags, user) => {
     sub.tags.forEach(tag => {
       submissions[tag]++;
       totalChal++;
-    })
+    });
   });
   return { totalChal: totalChal, category: submissions };
 };

@@ -108,25 +108,25 @@ export const getChalCategory = async tags => {
     });
     let totalChallenges = challenges.length;
     let userSolves = [];
-    challenges.forEach(el => {
-        el.solves.forEach(solve => {
-          if (
-            userSolves.findIndex(el => {
-              el.username === solve.username;
-            }) === -1
-          ) {
-            userSolves.push({
-              username: solve.username,
-              solves: 1
-            });
-          } else {
-            userSolves[
-              userSolves.findIndex(el => {
-                el.username === solve.username;
-              })
-            ].solves++;
-          }
-        });
+    challenges.forEach(challenge => {
+      challenge.solves.forEach(solve => {
+        if (
+          userSolves.findIndex(userSolve => {
+            return userSolve.username === solve.username;
+          }) === -1
+        ) {
+          userSolves.push({
+            username: solve.username,
+            solves: 1
+          });
+        } else {
+          userSolves[
+            userSolves.findIndex(userSolve => {
+              return userSolve.username === solve.username;
+            })
+          ].solves++;
+        }
+      });
     });
     userSolves = userSolves.sort((a, b) => {
       return a.solves < b.solves ? 1 : -1;

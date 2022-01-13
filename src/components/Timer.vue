@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     getDateTimeString(time) {
-      return moment(time, "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd");
+      return moment(time, "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd");
     },
     formatValue(timeElement) {
       if (timeElement < 10) {

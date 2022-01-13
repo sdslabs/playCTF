@@ -128,14 +128,15 @@
   </div>
 </template>
 <script>
-import LineGraph from "../components/LineGraph.vue";
-import adminTable from "../components/adminTable";
-import ChalService from "../api/admin/challengesAPI";
-import SubmissionService from "../api/admin/submissionsAPI";
-import PieChart from "../components/PieChart.vue";
-import UsersService from "../api/admin/usersAPI";
-import SpinLoader from "../components/spinLoader";
-import store from "../store/index";
+import LineGraph from "@/components/LineGraph.vue";
+import adminTable from "@/components/adminTable";
+import PieChart from "@/components/PieChart.vue";
+import SpinLoader from "@/components/spinLoader";
+import { getChallenges } from "@/utils/challenges";
+import { getSubStats } from "@/utils/submissions";
+import SubmissionService from "@/api/admin/submissionsAPI";
+import UsersService from "@/api/admin/usersAPI";
+import store from "@/store/index";
 import moment from "moment";
 import {
   confimDialogMessages,
@@ -235,12 +236,12 @@ export default {
       scoreSeries[0] = {
         x: moment(
           this.$store.state.competitionInfo.startingTime,
-          "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+          "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"),
+        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
         y: this.userDetails.score
       };
       return scoreSeries;
@@ -276,45 +277,37 @@ export default {
       };
     }
   },
-  mounted() {
-    ChalService.getChallenges()
-      .then(response => {
-        this.chalTags = response.tagFilterOptions;
-        SubmissionService.getSubStats(
-          this.chalTags,
-          this.$route.params.username
-        ).then(response => {
-          this.submissions = response;
-        });
-      })
-      .finally(() => {
-        this.loading.challengesNotFetched = false;
+  async mounted() {
+    const challResponse = await getChallenges();
+    this.chalTags = challResponse.tagFilterOptions;
+    const subResponse = await getSubStats(
+      this.chalTags,
+      this.$route.params.username
+    );
+    this.submissions = subResponse;
+    this.loading.challengesNotFetched = false;
+    const userResponse = await UsersService.getUserByUsername(
+      this.$route.params.username
+    );
+    let data = userResponse.data;
+    this.userDetails.id = data.id;
+    this.userDetails.name = data.username;
+    this.userDetails.score = data.score;
+    this.userDetails.rank = data.rank;
+    this.userDetails.active = data.status === 0;
+    this.userDetails.email = data.email;
+    const subData = await SubmissionService.getUserSubs(
+      this.$route.params.username
+    );
+    subData.forEach(element => {
+      this.rows.push({
+        challenge: element.name,
+        category: element.category,
+        timeDateRight: element.solvedTime
       });
-    UsersService.getUserByUsername(this.$route.params.username)
-      .then(response => {
-        let data = response.data;
-        this.userDetails.id = data.id;
-        this.userDetails.name = data.username;
-        this.userDetails.score = data.score;
-        this.userDetails.rank = data.rank;
-        this.userDetails.active = data.status === 0;
-        this.userDetails.email = data.email;
-        SubmissionService.getUserSubs(this.$route.params.username).then(
-          subData => {
-            subData.forEach(element => {
-              this.rows.push({
-                challenge: element.name,
-                category: element.category,
-                timeDateRight: element.solvedTime
-              });
-            });
-            this.scoreSeries = this.findScoreSeries(subData);
-          }
-        );
-      })
-      .finally(() => {
-        this.loading.userNotFetched = false;
-      });
+    });
+    this.scoreSeries = this.findScoreSeries(subData);
+    this.loading.userNotFetched = false;
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminUsers");
