@@ -31,6 +31,7 @@
               v-if="getCurrentStep() === 1"
               @changed="setCompName"
               :compName="this.compName"
+              @triggerNext="triggerNextButton"
             />
             <ConfigContent
               v-if="getCurrentStep() === 3"
@@ -283,6 +284,9 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
+    },
+    triggerNextButton() {
+      this.goNext();
     },
     submitConfigs() {
       let startEndTime = this.getDateTimeString();
