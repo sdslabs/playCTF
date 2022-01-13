@@ -51,13 +51,17 @@ export default {
   },
   methods: {
     handleCheckboxClick(e) {
-      e.stopPropagation();
+      e.stopPropagation()
       //console.log(e)
       if (this.challenge.checked === undefined) {
-        this.challenge.checked = true;
+        this.challenge.checked = true
       } else {
-        this.challenge.checked = !this.challenge.checked;
+        this.challenge.checked = !this.challenge.checked
       }
+
+      this.$parent.canPurge()
+      this.$parent.canDeploy()
+      this.$parent.canUndeploy()
     },
   },
 };

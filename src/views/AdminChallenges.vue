@@ -33,8 +33,14 @@
         >
           {{ sort.name }}
         </a>
-        <span class="deployer" @click="manageMultipleChallenge('deploy')">
+        <span v-if="canDeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('deploy')">
           <img class="addImg" src="@/assets/deployChallenges.svg" />
+        </span>
+        <span v-if="canUndeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('undeploy')">
+          <img class="addImg" src="@/assets/undeployChallenges.svg" />
+        </span>
+        <span v-if="canPurge() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('purge')">
+          <img class="addImg" src="@/assets/purgeChallenges.svg" />
         </span>
         <v-select
           class="dropdown"
@@ -105,6 +111,7 @@ export default {
       v2: "",
       challStatus,
       loading: true,
+      reload: true,
       statusFilter: "All",
       sortType: "Name",
       tagFilter: "All",
@@ -153,6 +160,7 @@ export default {
     this.loading = false;
   },
   methods: {
+<<<<<<< HEAD
     filterChallenges(challenges, filterValue, filterType) {
       if (filterValue === "All") {
         return challenges;
@@ -188,6 +196,10 @@ export default {
         }
         return filteredChallenges;
       }
+=======
+    test(){
+      console.log("wtf")
+>>>>>>> add support for purge and undeploy
     },
     getUrl(port) {
       let url = CONFIG.beastRoot;
@@ -256,6 +268,44 @@ export default {
         return a[field2] > b[field2] ? 1 : -1;
       }
       return b[field1] - a[field1];
+    },
+    canPurge(){
+      this.reload = !this.reload
+      for(let x of this.displayChallenges){
+        if(x.checked === true){
+          return true;
+        }
+      }
+      return false;
+    },
+    canDeploy(){
+      this.reload = !this.reload
+      let flag = true
+      let i=0
+      for(let x of this.displayChallenges){
+        if(x.checked === true){
+          flag = flag && (x.status === 'Undeployed')
+          i++
+        }
+      }
+      if(i==0)
+        return false
+      return flag;
+    }
+    ,
+    canUndeploy(){
+      this.reload = !this.reload
+      let flag = true;
+      let i=0
+      for(let x of this.displayChallenges){
+        if(x.checked === true){
+          flag = flag && (x.status === 'Deployed')
+          i++
+        }
+      }
+      if(i==0)
+        return false
+      return flag;
     },
     manageMultipleChallenge(name) {
       let final = "";
