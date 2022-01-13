@@ -140,6 +140,13 @@ export default {
         return filteredChallenges;
       }
       if (filterType === "status") {
+        let inProgressStatus = [
+          "Queued",
+          "Commiting",
+          "Staging",
+          "Deploying",
+          "Building"
+        ];
         let filteredChallenges = [];
         switch (filterValue) {
           case "Deployed":
@@ -151,13 +158,7 @@ export default {
             break;
           case "InProgress":
             filteredChallenges = challenges.filter(chall => {
-              return (
-                chall[filterType] == "Queued" ||
-                chall[filterType] == "Commiting" ||
-                chall[filterType] == "Staging" ||
-                chall[filterType] == "Deploying" ||
-                chall[filterType] == "Building"
-              );
+              return inProgressStatus.includes(chall[filterType]);
             });
             break;
         }
