@@ -18,7 +18,7 @@ import ErrorPage from "@/views/ErrorPage.vue";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
 import Reset from "../views/Reset.vue";
-import store from "../store/index";
+import LoginUser from "../api/admin/authAPI.js";
 
 Vue.use(VueRouter);
 
@@ -79,8 +79,9 @@ const routes = [
       layout: "auth-layout"
     },
     beforeEnter: function(to, from, next) {
-      if (store.getters.getState) {
-        if (store.getters.getRole === "admin") {
+      let userInfo = LoginUser.getUserInfo();
+      if (userInfo) {
+        if (userInfo.role === "admin") {
           router.push("/admin/");
         } else {
           router.push("/about/");
@@ -241,23 +242,25 @@ router.beforeEach((to, from, next) => {
   let pagePath = to.path;
   let adminPages = "/admin";
   let userPages = ["/challenges", "/leaderboard", "/notifications", "/about"];
-  if (pagePath.includes(adminPages) && store.getters.getRole !== "admin") {
+  let userInfo = LoginUser.getUserInfo();
+  if (pagePath.includes(adminPages) && userInfo && userInfo.role !== "admin") {
     next({
       path: "/error/401"
     });
   } else if (
     userPages.includes(pagePath) &&
-    store.getters.getRole !== "contestant"
+    userInfo &&
+    userInfo.role !== "contestant"
   ) {
     next({
       path: "/error/401"
     });
   } else if (pagePath === "/") {
-    if (store.getters.getRole === "contestant") {
+    if (userInfo && userInfo.role === "contestant") {
       next({
         path: "/about"
       });
-    } else if (store.getters.getRole === "admin") {
+    } else if (userInfo && userInfo.role === "admin") {
       next({
         path: "/admin/statistics"
       });
