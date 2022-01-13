@@ -23,7 +23,6 @@
         </button>
       </div>
       <div class="adminSort">
-<<<<<<< HEAD
         <div class="left">
           <span class="sortText">Sort by:</span>
           <a
@@ -96,40 +95,6 @@
             </template>
           </v-select>
         </div>
-=======
-        <span class="sortText">Sort by:</span>
-        <a
-          v-for="sort in this.sortTypeOptions"
-          :key="sort.id"
-          class="sortOption"
-          :class="[{ active: sortType === sort.name }]"
-          @click="changeSortType(sort.name)"
-        >
-          {{ sort.name }}
-        </a>
-        <span v-if="canDeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('deploy')">
-          <img class="addImg" src="@/assets/deployChallenges.svg" />
-        </span>
-        <span v-if="canUndeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('undeploy')">
-          <img class="addImg" src="@/assets/undeployChallenges.svg" />
-        </span>
-        <span v-if="canPurge() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('purge')">
-          <img class="addImg" src="@/assets/purgeChallenges.svg" />
-        </span>
-        <v-select
-          class="dropdown"
-          :options="statusFilterOptions"
-          :value="this.statusFilter"
-          @input="changeStatusFilter"
-          :clearable="false"
-          :searchable="false"
-        >
-          <template #selected-option="item" class="selection">
-            <span class="filterText">Filter By:</span
-            ><span class="filterSelection">{{ item.label }}</span>
-          </template>
-        </v-select>
->>>>>>> add support for purge and undeploy
       </div>
       <spin-loader v-if="loading" />
       <div
@@ -243,7 +208,6 @@ export default {
     this.loading = false;
   },
   methods: {
-<<<<<<< HEAD
     filterChallenges(challenges, filterValue, filterType) {
       if (filterValue === "All") {
         return challenges;
@@ -279,10 +243,6 @@ export default {
         }
         return filteredChallenges;
       }
-=======
-    test(){
-      console.log("wtf")
->>>>>>> add support for purge and undeploy
     },
     getUrl(port) {
       let url = CONFIG.beastRoot;
@@ -352,7 +312,6 @@ export default {
       }
       return b[field1] - a[field1];
     },
-<<<<<<< HEAD
     getUrl(port) {
       let url = CONFIG.beastRoot;
       let portIndex = url.lastIndexOf(":");
@@ -406,45 +365,6 @@ export default {
       }
       this.canUndeploy = flag;
       return this.canUndeploy;
-=======
-    canPurge(){
-      this.reload = !this.reload
-      for(let x of this.displayChallenges){
-        if(x.checked === true){
-          return true;
-        }
-      }
-      return false;
-    },
-    canDeploy(){
-      this.reload = !this.reload
-      let flag = true
-      let i=0
-      for(let x of this.displayChallenges){
-        if(x.checked === true){
-          flag = flag && (x.status === 'Undeployed')
-          i++
-        }
-      }
-      if(i==0)
-        return false
-      return flag;
-    }
-    ,
-    canUndeploy(){
-      this.reload = !this.reload
-      let flag = true;
-      let i=0
-      for(let x of this.displayChallenges){
-        if(x.checked === true){
-          flag = flag && (x.status === 'Deployed')
-          i++
-        }
-      }
-      if(i==0)
-        return false
-      return flag;
->>>>>>> add support for purge and undeploy
     },
     manageMultipleChallenge(name) {
       this.reload = !this.reload;
