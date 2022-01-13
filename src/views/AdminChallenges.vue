@@ -70,48 +70,50 @@
           </a>
         </div>
         <div class="right">
-          <div class="emptySpace"></div>
-          <div class="deployerContainer">
-            <span
+          <div class="deployer-container">
+            <button
               v-if="canDeploy() === true"
-              class="deployer"
+              class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('deploy')"
             >
-              <img class="addImg" src="@/assets/deployChallenges.svg" />
-            </span>
-            <span
+              <img src="@/assets/deployChallenges.svg" />
+              <span class="tooltiptext">Deploy</span>
+            </button>
+            <button
               v-if="canUndeploy() === true"
-              class="deployer"
+              class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('undeploy')"
             >
               <img class="addImg" src="@/assets/undeployChallenges.svg" />
-            </span>
+              <span class="tooltiptext">Undeploy</span>
+            </button>
           </div>
-          <div class="deployerContainer">
-            <span
+          <div class="deployer-container">
+            <button
               v-if="canPurge() === true"
-              class="deployer"
+              class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('purge')"
             >
               <img class="addImg" src="@/assets/purgeChallenges.svg" />
-            </span>
+              <span class="tooltiptext">Purge</span>
+            </button>
           </div>
           <button
             v-if="canPurge() === false"
-            class="slectAll action-cta challenge-action-btn"
+            class="action-cta"
             @click="selectAll()"
           >
-            <span class="text"> Select All </span>
+            <span> Select All </span>
           </button>
           <button
             v-if="canPurge() === true"
-            class="slectAll action-cta challenge-action-btn"
+            class=" action-cta"
             @click="deselectAll()"
           >
-            <span class="text"> Deselect All </span>
+            <span> Deselect All </span>
           </button>
           <v-select
             class="dropdown"
@@ -418,7 +420,7 @@ export default {
       if (i == 0) return false;
       return flag;
     },
-    manageMultipleChallenge(name) {
+    manageMultipleChallenge(action) {
       let final = "";
       let i = 0;
       for (let x of this.displayChallenges) {
@@ -430,10 +432,12 @@ export default {
             final = x.name + "," + final;
           }
           i++;
+          x.checked = false;
         }
       }
-      console.log(final);
-      if (i > 0) this.manageMultipleChallengeHandler(final, name);
+      this.reload = !this.reload;
+      console.log(this.displayChallenges);
+      if (i > 0) this.manageMultipleChallengeHandler(final, action);
     },
     manageMultipleChallengeHandler(name, action) {
       //let confirmHandler = (confirm) => {

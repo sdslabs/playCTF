@@ -16,36 +16,36 @@
       </div>
     </div>
     <div class="adminSort">
-      <span class="sortText">Sort by:</span>
-      <a
-        class="sortOption"
-        :class="{ active: sortFilter === 'User Name' }"
-        @click="changeSort('User Name')"
-        >User Name</a
-      >
-      <a
-        class="sortOption"
-        :class="{ active: sortFilter === 'Score' }"
-        @click="changeSort('Score')"
-        >Score</a
-      >
-      <v-select
-        class="dropdown"
-        :options="['All', 'Active', 'Banned']"
-        :value="this.statusFilter"
-        @input="changeFilter"
-        :clearable="false"
-        :searchable="false"
-      >
-        <template #selected-option="item" class="selection">
-          <span class="filterText">Filter By:</span
-          ><span class="filterSelection">{{ item.label }}</span>
-        </template>
-      </v-select>
-      <button class="action-cta" @click="exportUsersAsCSV()">
-        <img :src="download" />
-        <span>Export as CSV</span>
-      </button>
+      <div class="left">
+        <span class="sortText">Sort by:</span>
+        <a
+          class="sortOption"
+          :class="{ active: sortFilter === 'User Name' }"
+          @click="changeSort('User Name')"
+          >User Name</a
+        >
+        <a
+          class="sortOption"
+          :class="{ active: sortFilter === 'Score' }"
+          @click="changeSort('Score')"
+          >Score</a
+        >
+      </div>
+      <div class="right">
+        <v-select
+          class="dropdown"
+          :options="['All', 'Active', 'Banned']"
+          :value="this.statusFilter"
+          @input="changeFilter"
+          :clearable="false"
+          :searchable="false"
+        >
+          <template #selected-option="item" class="selection">
+            <span class="filterText">Filter By:</span
+            ><span class="filterSelection">{{ item.label }}</span>
+          </template>
+        </v-select>
+      </div>
     </div>
     <spin-loader v-if="loading" />
     <admin-table

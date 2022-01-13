@@ -87,6 +87,7 @@
     .left {
         display: flex;
         justify-content: flex-start;
+        align-items: center;
         .sortText {
             line-height: 1.125rem;
             color: $theme-color-black-high-transp;
@@ -129,26 +130,50 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        .deployerContainer {
+        .deployer-container {
             margin-top: 3px;
             margin-left: 0;
             margin-right: 0;
-            padding: 5px;
-            .deployer {
+            border: 0px;
+            button {
+                width: 1.989rem;
+                img{
+                    padding-left: 0.3rem;
+                    width:fit-content;
+                    height:fit-content;
+                }
+                .tooltiptext {
+                    visibility: hidden;
+                    width: 120px;
+                    background-color: black;
+                    color: #fff;
+                    text-align: center;
+                    border-radius: 6px;
+                    padding: 5px 0;
+                  
+                    /* Position the tooltip */
+                    position: absolute;
+                    top: 2.5rem;
+                    z-index: 1;
+                }
+            }
+            button:hover .tooltiptext{
+                visibility: visible;
             }
         }
 
         button {
             margin-left: 0;
             margin-right: 10px;
-            width: 10rem;
+            width: 7rem;
             padding: 7px;
-            padding-left: 20px;
+            padding-left: 10px;
             padding-right: 10px;
             border: 1px solid;
             border-color: $theme-color-grey-high-transp;
             border-radius: 5px;
             background: none;
+            justify-content: center;
             .text {
                 @extend %font-style-basic;
                 color: $theme-color-grey57;
