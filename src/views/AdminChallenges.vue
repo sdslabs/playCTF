@@ -105,12 +105,8 @@ export default {
       statusFilterOptions: [
         "All",
         "Undeployed",
-        "Staging",
-        "Commiting",
-        "Deploying",
         "Deployed",
-        "Building",
-        "Queued",
+        "InProgress",
         "Purged"
       ]
     };
@@ -143,10 +139,30 @@ export default {
         });
         return filteredChallenges;
       }
-      let filteredChallenges = challenges.filter(chall => {
-        return chall[filterType] == filterValue;
-      });
-      return filteredChallenges;
+      if (filterType === "status") {
+        let filteredChallenges = [];
+        switch (filterValue) {
+          case "Deployed":
+          case "Undeployed":
+          case "Purged":
+            filteredChallenges = challenges.filter(chall => {
+              return chall[filterType] == filterValue;
+            });
+            break;
+          case "InProgress":
+            filteredChallenges = challenges.filter(chall => {
+              return (
+                chall[filterType] == "Queued" ||
+                chall[filterType] == "Commiting" ||
+                chall[filterType] == "Staging" ||
+                chall[filterType] == "Deploying" ||
+                chall[filterType] == "Building"
+              );
+            });
+            break;
+        }
+        return filteredChallenges;
+      }
     },
     sortChallenges(challenges, sortType) {
       let sortedChallenges = [];
