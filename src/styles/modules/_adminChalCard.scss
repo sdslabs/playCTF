@@ -69,6 +69,10 @@
     border-left: 0.3125rem solid $theme-color-yellow-high-transp;
 }
 
+.inProgressLink {
+    border-left: 0.3125rem solid $theme-color-light-orange;
+}
+
 .adminChallCategory {
     width: max-content;
     vertical-align: middle;

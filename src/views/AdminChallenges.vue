@@ -102,7 +102,17 @@ export default {
         { name: "Score", id: 2 },
         { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"]
+      statusFilterOptions: [
+        "All",
+        "Undeployed",
+        "Staging",
+        "Commiting",
+        "Deploying",
+        "Deployed",
+        "Building",
+        "Queued",
+        "Purged"
+      ]
     };
   },
   async mounted() {

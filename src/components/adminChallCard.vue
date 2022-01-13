@@ -5,7 +5,13 @@
       {
         deployedLink: challenge.status === 'Deployed',
         undeployedLink: challenge.status === 'Undeployed',
-        purgedLink: challenge.status === 'Purged'
+        purgedLink: challenge.status === 'Purged',
+        inProgressLink:
+          challenge.status === 'Queued' ||
+          challenge.status === 'Building' ||
+          challenge.status === 'Deploying' ||
+          challenge.status === 'Commiting' ||
+          challenge.status === 'Staging'
       },
       'adminChalLink'
     ]"
