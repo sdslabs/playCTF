@@ -491,11 +491,11 @@ export const lineGraphOptions = showLegend => {
                 .duration(
                   moment(
                     store.state.competitionInfo.endingTime,
-                    "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                    "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
                   ).diff(
                     moment(
                       store.state.competitionInfo.startingTime,
-                      "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                      "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
                     )
                   )
                 )
@@ -516,12 +516,12 @@ export const lineGraphOptions = showLegend => {
             min:
               moment(
                 store.state.competitionInfo.startingTime,
-                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000,
             max:
               moment(
                 store.state.competitionInfo.endingTime,
-                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000
           }
         },
@@ -550,12 +550,12 @@ export const lineGraphOptions = showLegend => {
             min:
               moment(
                 store.state.competitionInfo.startingTime,
-                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000,
             max:
               moment(
                 store.state.competitionInfo.endingTime,
-                "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000
           }
         }

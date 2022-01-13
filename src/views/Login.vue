@@ -12,7 +12,7 @@
             class="adminFormTitle inputField"
             id="username"
             name="user_name"
-            placeholder="Team Name*"
+            placeholder="Username*"
             v-model="username"
             @keyup.enter="triggerLogin"
           />

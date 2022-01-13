@@ -161,6 +161,7 @@ export default {
   },
   methods: {
     getBarData(tag) {
+      console.log(this.chalCategory);
       let dataSolves = this.chalCategory[tag].solves;
       if (dataSolves.length > 5) {
         dataSolves = dataSolves.slice(0, 5);
@@ -184,11 +185,11 @@ export default {
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach(el => {
-        labels.push(el.name);
+      this.chalTags.forEach(tag => {
+        labels.push(tag.name);
       });
-      labels.forEach(el => {
-        let sub = this.submissions.category[el];
+      labels.forEach(label => {
+        let sub = this.submissions.category[label];
         data.push(sub);
       });
       return {

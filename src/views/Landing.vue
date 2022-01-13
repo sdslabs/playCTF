@@ -9,9 +9,13 @@
             {{ configData.about }}
           </div>
           <div class="description">Starting Time</div>
-          <div class="timing">{{ configData.starting_time }}</div>
+          <div class="timing">
+            {{ convertTimeFormat(configData.starting_time) }}
+          </div>
           <div class="description">Ending Time</div>
-          <div class="timing">{{ configData.ending_time }}</div>
+          <div class="timing">
+            {{ convertTimeFormat(configData.ending_time) }}
+          </div>
           <router-link
             style="text-decoration: none"
             v-if="isLoggedIn()"
@@ -45,6 +49,7 @@
 <script>
 import ConfigApiService from "../api/admin/configureAPI";
 import Button from "../components/Button.vue";
+import moment from "moment-timezone";
 export default {
   name: "home",
   components: {
@@ -72,6 +77,12 @@ export default {
     isLoggedIn() {
       let userInfo = this.$store.state.userInfo;
       return userInfo.access && userInfo.role === "contestant";
+    },
+    convertTimeFormat(time) {
+      console.log(time);
+      return moment(time, "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd").format(
+        "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+      );
     }
   }
 };
