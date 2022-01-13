@@ -98,38 +98,43 @@ export const getChalCategory = async tags => {
   const response = await ChalService.fetchAllChallenges();
   tags.forEach(tag => {
     let challenges = response.data.filter(challenge => {
-      return challenge.tag === tag.name;
+      let includeChallenge = false;
+      challenge.tags.forEach(t => {
+        if (t === tag.name) {
+          includeChallenge = true;
+        }
+      });
+      return includeChallenge;
     });
     let totalChallenges = challenges.length;
     let userSolves = [];
-    challenges.forEach(el => {
-      if (el.solves !== null) {
-        el.solves.forEach(solve => {
-          if (
-            userSolves.findIndex(el => {
-              el.username === solve.username;
-            }) === -1
-          ) {
-            userSolves.push({
-              username: solve.username,
-              solves: 1
-            });
-          } else {
-            userSolves[
-              userSolves.findIndex(el => {
-                el.username === solve.username;
-              })
-            ].solves++;
-          }
-        });
-      }
+    challenges.forEach(challenge => {
+      challenge.solves.forEach(solve => {
+        if (
+          userSolves.findIndex(userSolve => {
+            return userSolve.username === solve.username;
+          }) === -1
+        ) {
+          userSolves.push({
+            username: solve.username,
+            solves: 1
+          });
+        } else {
+          userSolves[
+            userSolves.findIndex(userSolve => {
+              return userSolve.username === solve.username;
+            })
+          ].solves++;
+        }
+      });
     });
     userSolves = userSolves.sort((a, b) => {
       return a.solves < b.solves ? 1 : -1;
     });
-    submissionsCategory[tag.name] = {};
-    submissionsCategory[tag.name].solves = userSolves;
-    submissionsCategory[tag.name].total = totalChallenges;
+    submissionsCategory[tag.name] = {
+      solves: userSolves,
+      total: totalChallenges
+    };
   });
   return submissionsCategory;
 };

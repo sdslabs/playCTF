@@ -36,11 +36,10 @@
 </template>
 
 <script>
-import store from "@/store/index";
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
-import ChalService from "@/api/admin/challengesAPI";
+import LoginUser from "../api/admin/authAPI.js";
 import UsersService from "@/api/admin/usersAPI";
 import { getChallenges } from "../utils/challenges";
 export default {
@@ -66,7 +65,7 @@ export default {
     ChallCard
   },
   created() {
-    this.username = store.getters.getUsername;
+    this.username = LoginUser.getUserInfo().userName;
   },
   async mounted() {
     await this.fetchChallenges(false);

@@ -48,7 +48,7 @@
               <router-link
                 class="adminTableLink"
                 v-if="isColLink(col)"
-                :to="getRedirectLink(col) + row[col]"
+                :to="getRedirectLink(col, row[col])"
               >
                 {{ row[col] }}
               </router-link>
@@ -128,13 +128,14 @@ export default {
       });
       return isLink;
     },
-    getRedirectLink(val) {
+    getRedirectLink(val, username) {
+      var redirectLink = "";
       this.links.forEach(item => {
         if (item.col === val) {
-          return item.redirect;
+          redirectLink = item.redirect + username;
         }
       });
-      return "";
+      return redirectLink;
     },
     changePage() {
       this.currentPage = this.jumpPage;

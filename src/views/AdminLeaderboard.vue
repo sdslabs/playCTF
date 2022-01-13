@@ -136,12 +136,12 @@ export default {
       scoreSeries[0] = {
         x: moment(
           this.$store.state.competitionInfo.startingTime,
-          "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+          "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"),
+        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
         y: score
       };
       return scoreSeries;
