@@ -18,7 +18,7 @@
 
 <script>
 import { dropdown } from "../constants/images";
-import store from "../store/index";
+import LoginUser from "../api/admin/authAPI.js";
 export default {
   name: "AdminDropdown",
   data() {
@@ -29,11 +29,11 @@ export default {
     };
   },
   created() {
-    this.username = store.getters.getUsername;
+    this.username = LoginUser.getUserInfo().userName;
   },
   methods: {
     logout() {
-      store.commit("logout");
+      LoginUser.logout();
       this.$router.push("/login");
     },
     showDropdownContent(showContent) {

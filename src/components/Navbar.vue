@@ -57,8 +57,8 @@
 <script>
 import Timer from "@/components/Timer.vue";
 import { dropdown } from "../constants/images";
-import store from "../store/index";
 import { CONFIG } from "@/config/config";
+import LoginUser from "../api/admin/authAPI.js";
 export default {
   name: "Navbar",
   data() {
@@ -67,7 +67,7 @@ export default {
       username: "",
       displayDropdownContent: false,
       baseUrl: CONFIG.beastRoot,
-      userRole: this.$store.state.userInfo.role,
+      userRole: LoginUser.getUserInfo().role,
       userLinks: [
         {
           index: 0,
@@ -134,7 +134,7 @@ export default {
     Timer
   },
   created() {
-    this.username = store.getters.getUsername;
+    this.username = LoginUser.getUserInfo().userName;
     this.userProfilePath += this.username;
   },
   methods: {
@@ -153,10 +153,10 @@ export default {
       }
     },
     loggedIn() {
-      return store.getters.getState;
+      return LoginUser.getUserInfo().login;
     },
     logout() {
-      store.commit("logout");
+      LoginUser.logout();
       this.$router.push("/login");
     },
     showDropdownContent(showContent) {

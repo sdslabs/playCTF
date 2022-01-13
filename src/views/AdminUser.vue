@@ -134,7 +134,7 @@ import { getChallenges } from "@/utils/challenges";
 import { getSubStats } from "@/utils/submissions";
 import SubmissionService from "@/api/admin/submissionsAPI";
 import UsersService from "@/api/admin/usersAPI";
-import store from "@/store/index";
+import LoginUser from "../api/admin/authAPI.js";
 import moment from "moment";
 import {
   confimDialogMessages,
@@ -190,7 +190,7 @@ export default {
   },
   methods: {
     getAccess() {
-      if (store.getters.getRole === "admin") return true;
+      if (LoginUser.getUserInfo().role === "admin") return true;
       return false;
     },
     manageUser(userId, action) {
