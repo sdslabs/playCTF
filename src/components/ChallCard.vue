@@ -49,7 +49,7 @@
         />
         <Button
           text="Submit Flag"
-          variant="secondary-cta"
+          variant="secondary-cta challCard-submit-buttom"
           :disabled="flag.length === 0 || this.showSuccess || this.showFail"
           :onclick="submitFlag"
         />
