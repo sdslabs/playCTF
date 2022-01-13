@@ -36,6 +36,7 @@
         :rows="resultQuery"
         :links="[{ col: 'username', redirect: '/admin/users/' }]"
         :maxElementPerPage="10"
+        :key="searchQuery"
       />
       <div class="adminEmptyDataContainer" v-else>
         <span class="adminEmptyData">No Users</span>

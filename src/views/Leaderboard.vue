@@ -25,6 +25,7 @@
         :links="[]"
         :maxElementPerPage="10"
         :userData="userInfo"
+        :key="searchQuery"
       />
     </div>
   </div>

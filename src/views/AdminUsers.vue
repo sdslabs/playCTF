@@ -54,6 +54,7 @@
       :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
+      :key="reload + searchQuery"
     />
     <div
       class="adminEmptyDataContainer"
@@ -89,6 +90,7 @@ export default {
       sortFilter: "User Name",
       statusFilter: "All",
       searchQuery: null,
+      reload: true,
       ascending: false,
       sortColumn: "",
       tableCols: tableCols.users,
@@ -111,6 +113,7 @@ export default {
   },
   methods: {
     changeFilter(value) {
+      this.reload = !this.reload;
       this.statusFilter = value;
       if (value === "All") {
         this.displayUsers = this.users;
@@ -121,6 +124,7 @@ export default {
       }
     },
     changeSort(value) {
+      this.reload = !this.reload;
       this.sortFilter = value;
       if (value === "User Name") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
