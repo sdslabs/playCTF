@@ -26,5 +26,23 @@ export default {
     const blob = await response.blob();
     const file = new File([blob], imgName, { type: blob.type });
     return file;
+  },
+
+  async updateChallengeConfig(challengeInfo) {
+    let bodyFormData = new FormData();
+    bodyFormData.append("name", challengeInfo.name);
+    bodyFormData.append("flag", challengeInfo.flag);
+    bodyFormData.append("hints", challengeInfo.hints);
+    bodyFormData.append("desc", challengeInfo.description);
+    bodyFormData.append("tags", challengeInfo.tags);
+    bodyFormData.append("ports", challengeInfo.ports);
+    bodyFormData.append("points", challengeInfo.points);
+    bodyFormData.append("assets", challengeInfo.assetLinks.join("::::"));
+    bodyFormData.append("additionalLinks", challengeInfo.additionalLinks.join("::::"));
+    return await axiosInstance({
+      method: "post",
+      url: `/api/config/challenge-info`,
+      data: bodyFormData,
+    });
   }
 };

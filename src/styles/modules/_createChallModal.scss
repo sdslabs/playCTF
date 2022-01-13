@@ -1,5 +1,8 @@
 .create-chall-modal {
-    margin: 15rem 35%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
     background-color: white;
     display: flex;
     flex-direction: column;
