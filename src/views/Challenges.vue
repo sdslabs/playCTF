@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="challenge-main-container">
     <div class="adminChallengesVerticalNav tags">
       <a
@@ -33,90 +33,144 @@
       </div>
     </div>
   </div>
+</template> -->
+
+// <script>
+// import store from "@/store/index";
+// import StatsNavbar from "@/components/Stats.vue";
+// import ChallengesByTag from "@/components/ChallengesByTag.vue";
+// import ChallCard from "@/components/ChallCard.vue";
+// import ChalService from "@/api/admin/challengesAPI";
+// import UsersService from "@/api/admin/usersAPI";
+// import { getChallenges } from "../utils/challenges";
+// export default {
+//   name: "Challenges",
+//   data() {
+//     return {
+//       tag: "All",
+//       challenges: [],
+//       displayChallenges: [],
+//       defaultTags: [{ name: "All", id: 1 }],
+//       selectedTag: { name: "All", id: 1 },
+//       challengesNotFetched: true,
+//       usersNotFetched: true,
+//       userDetails: {},
+//       totalChals: 0,
+//       selectedChall: {},
+//       selectDefaultChallenge: true
+//     };
+//   },
+//   components: {
+//     StatsNavbar,
+//     ChallengesByTag,
+//     ChallCard
+//   },
+//   created() {
+//     this.username = store.getters.getUsername;
+//   },
+//   async mounted() {
+//     await this.fetchChallenges(false);
+//     await this.updateUserStats();
+//   },
+//   methods: {
+//     async updateUserStats() {
+//       const userData = await UsersService.getUserByUsername(this.username);
+//       this.userDetails = userData.data;
+//       this.usersNotFetched = false;
+//     },
+//     async fetchChallenges(isUpdation) {
+//       const challData = await getChallenges(true, this.username);
+//       this.challenges = challData.challenges;
+//       this.tags = [...this.defaultTags, ...challData.tagFilterOptions];
+//       this.totalChals = challData.challenges.length;
+//       this.displayChallenges = challData.displayChallenges;
+//       if (!isUpdation) {
+//         this.selectedChall = this.displayChallenges[0];
+//       }
+//       this.challengesNotFetched = false;
+//       this.selectDefaultChallenge = false;
+//     },
+//     changeFilter(value) {
+//       this.selectedTag = value;
+//       if (value.name === "All") {
+//         this.displayChallenges = this.challenges;
+//       } else {
+//         this.displayChallenges = this.challenges.filter(challenge => {
+//           let includeChallenge = false;
+//           challenge.tags.forEach(tag => {
+//             if (tag === value.name) {
+//               includeChallenge = true;
+//             }
+//           });
+//           return includeChallenge;
+//         });
+//       }
+//     },
+//     selectChallenge(name) {
+//       if (name === null) {
+//         this.selectedChall = null;
+//       }
+//       this.selectedChall = this.challenges.filter(el => {
+//         return el.name == name;
+//       })[0];
+//     }
+//   },
+//   beforeCreate() {
+//     this.$store.commit("updateCurrentPage", "userChallenges");
+//   }
+// };
+// </script>
+
+<template>
+    <div class="preChall-container">
+      <img class="hourglass-img" src="../assets/hourglass.png" alt="hourglass">
+      <div class="preMessage">
+        <p>Competition yet to start</p> 
+      </div>
+      <Timer />
+    </div>
 </template>
 
 <script>
-import store from "@/store/index";
-import StatsNavbar from "@/components/Stats.vue";
-import ChallengesByTag from "@/components/ChallengesByTag.vue";
-import ChallCard from "@/components/ChallCard.vue";
-import ChalService from "@/api/admin/challengesAPI";
-import UsersService from "@/api/admin/usersAPI";
-import { getChallenges } from "../utils/challenges";
-export default {
-  name: "Challenges",
-  data() {
-    return {
-      tag: "All",
-      challenges: [],
-      displayChallenges: [],
-      defaultTags: [{ name: "All", id: 1 }],
-      selectedTag: { name: "All", id: 1 },
-      challengesNotFetched: true,
-      usersNotFetched: true,
-      userDetails: {},
-      totalChals: 0,
-      selectedChall: {},
-      selectDefaultChallenge: true
-    };
-  },
-  components: {
-    StatsNavbar,
-    ChallengesByTag,
-    ChallCard
-  },
-  created() {
-    this.username = store.getters.getUsername;
-  },
-  async mounted() {
-    await this.fetchChallenges(false);
-    await this.updateUserStats();
-  },
-  methods: {
-    async updateUserStats() {
-      const userData = await UsersService.getUserByUsername(this.username);
-      this.userDetails = userData.data;
-      this.usersNotFetched = false;
+  import ConfigApiService from "../api/admin/configureAPI";
+  import Button from "../components/Button.vue";
+  import moment from "moment-timezone";
+  import Timer from "../components/Timer.vue"
+  export default {
+    name: "home",
+    components: {
+      Button,
+      Timer
     },
-    async fetchChallenges(isUpdation) {
-      const challData = await getChallenges(true, this.username);
-      this.challenges = challData.challenges;
-      this.tags = [...this.defaultTags, ...challData.tagFilterOptions];
-      this.totalChals = challData.challenges.length;
-      this.displayChallenges = challData.displayChallenges;
-      if (!isUpdation) {
-        this.selectedChall = this.displayChallenges[0];
-      }
-      this.challengesNotFetched = false;
-      this.selectDefaultChallenge = false;
+    props: ["fetchedData", "configs"],
+    data() {
+      return {
+        configData: {}
+      };
     },
-    changeFilter(value) {
-      this.selectedTag = value;
-      if (value.name === "All") {
-        this.displayChallenges = this.challenges;
-      } else {
-        this.displayChallenges = this.challenges.filter(challenge => {
-          let includeChallenge = false;
-          challenge.tags.forEach(tag => {
-            if (tag === value.name) {
-              includeChallenge = true;
-            }
-          });
-          return includeChallenge;
+    beforeCreate() {
+      this.$store.commit("updateCurrentPage", "userAboutCTF");
+    },
+    mounted() {
+      if (!this.fetchedData) {
+        ConfigApiService.getConfigs().then(response => {
+          this.configData = response.data;
         });
+      } else {
+        this.configData = this.configs;
       }
     },
-    selectChallenge(name) {
-      if (name === null) {
-        this.selectedChall = null;
+    methods: {
+      isLoggedIn() {
+        let userInfo = this.$store.state.userInfo;
+        return userInfo.access && userInfo.role === "contestant";
+      },
+      convertTimeFormat(time) {
+        console.log(time);
+        return moment(time, "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd").format(
+          "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
+        );
       }
-      this.selectedChall = this.challenges.filter(el => {
-        return el.name == name;
-      })[0];
     }
-  },
-  beforeCreate() {
-    this.$store.commit("updateCurrentPage", "userChallenges");
-  }
-};
+  };
 </script>
