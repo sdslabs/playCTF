@@ -5,7 +5,8 @@
       {
         deployedLink: challenge.status === 'Deployed',
         undeployedLink: challenge.status === 'Undeployed',
-        purgedLink: challenge.status === 'Purged'
+        purgedLink: challenge.status === 'Purged',
+        inProgressLink: challStatus.inProgressStatus.includes(challenge.status)
       },
       'adminChalLink'
     ]"
@@ -35,8 +36,14 @@
 </template>
 
 <script>
+import { challStatus } from "../constants/constants";
 export default {
   name: "adminChallCard",
-  props: ["challenge"]
+  props: ["challenge"],
+  data() {
+    return {
+      challStatus
+    };
+  }
 };
 </script>

@@ -42,6 +42,10 @@ export const AdminLandingDetails = [
   }
 ];
 
+export const challStatus = {
+  inProgressStatus: ["Staging", "Queued", "Building", "Commiting", "Deploying"]
+};
+
 export const getAllTimezones = () => {
   let timezones = moment.tz.names();
   let formattedTimezones = [];

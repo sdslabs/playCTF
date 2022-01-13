@@ -77,6 +77,7 @@ import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
 import { add } from "../constants/images";
+import { challStatus } from "../constants/constants";
 import CreateChallModal from "../components/CreateChallModal.vue";
 import {
   getChalStats,
@@ -90,6 +91,7 @@ export default {
     return {
       showCreateChallModal: false,
       add,
+      challStatus,
       loading: true,
       statusFilter: "All",
       sortType: "Name",
@@ -102,7 +104,13 @@ export default {
         { name: "Score", id: 2 },
         { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: ["All", "Deployed", "Undeployed"]
+      statusFilterOptions: [
+        "All",
+        "Undeployed",
+        "Deployed",
+        "InProgress",
+        "Purged"
+      ]
     };
   },
   async mounted() {
@@ -133,10 +141,24 @@ export default {
         });
         return filteredChallenges;
       }
-      let filteredChallenges = challenges.filter(chall => {
-        return chall[filterType] == filterValue;
-      });
-      return filteredChallenges;
+      if (filterType === "status") {
+        let filteredChallenges = [];
+        switch (filterValue) {
+          case "Deployed":
+          case "Undeployed":
+          case "Purged":
+            filteredChallenges = challenges.filter(chall => {
+              return chall[filterType] == filterValue;
+            });
+            break;
+          case "InProgress":
+            filteredChallenges = challenges.filter(chall => {
+              return challStatus.inProgressStatus.includes(chall[filterType]);
+            });
+            break;
+        }
+        return filteredChallenges;
+      }
     },
     sortChallenges(challenges, sortType) {
       let sortedChallenges = [];
