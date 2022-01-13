@@ -77,6 +77,7 @@ import adminChallCard from "../components/adminChallCard.vue";
 import ChalService from "../api/admin/challengesAPI";
 import SpinLoader from "../components/spinLoader";
 import { add } from "../constants/images";
+import { challStatus } from "../constants/constants";
 import CreateChallModal from "../components/CreateChallModal.vue";
 import {
   getChalStats,
@@ -90,6 +91,7 @@ export default {
     return {
       showCreateChallModal: false,
       add,
+      challStatus,
       loading: true,
       statusFilter: "All",
       sortType: "Name",
@@ -140,13 +142,6 @@ export default {
         return filteredChallenges;
       }
       if (filterType === "status") {
-        let inProgressStatus = [
-          "Queued",
-          "Commiting",
-          "Staging",
-          "Deploying",
-          "Building"
-        ];
         let filteredChallenges = [];
         switch (filterValue) {
           case "Deployed":
@@ -158,7 +153,7 @@ export default {
             break;
           case "InProgress":
             filteredChallenges = challenges.filter(chall => {
-              return inProgressStatus.includes(chall[filterType]);
+              return challStatus.inProgressStatus.includes(chall[filterType]);
             });
             break;
         }
