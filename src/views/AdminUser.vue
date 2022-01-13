@@ -4,13 +4,13 @@
     <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
     <div class="adminUserInfoContainer">
       <div class="user">
-        <div class="userDetails">
           <div class="userName">
             <div class="name">{{ userDetails.name }}</div>
             <a :href="`mailto:${userDetails.email}`" class="mailLink">
               <img :src="mail" class="mailImg" />
               <div class="contact">Contact</div></a
             >
+            <div class="status unbanned">Active</div>
           </div>
           <div class="rankScore">
             <div class="rank">
@@ -37,30 +37,28 @@
               >
               <span class="field">Score</span>
             </div>
+              <div class="userStatus" v-if="getAccess()">
+                <div v-if="userDetails.active">
+                  <button
+                    class="action-cta"
+                    @click="manageUser(userDetails.id, 'ban')"
+                  >
+                    <img :src="ban" />
+                    <div class="adminBanText">Ban Player</div>
+                  </button>
+                </div>
+                <div v-else>
+                  <div class="status banned">Banned</div>
+                  <button
+                    class="action-cta"
+                    @click="manageUser(userDetails.id, 'unban')"
+                  >
+                    <img :src="unban" />
+                    <div class="adminBanText">Remove Ban</div>
+                  </button>
+                </div>
+            </div>
           </div>
-        </div>
-        <div v-if="getAccess()">
-          <div class="userStatus" v-if="userDetails.active">
-            <div class="status unbanned">Active</div>
-            <button
-              class="action-cta"
-              @click="manageUser(userDetails.id, 'ban')"
-            >
-              <img :src="ban" />
-              <div class="adminBanText">Ban Player</div>
-            </button>
-          </div>
-          <div class="userStatus" v-else>
-            <div class="status banned">Banned</div>
-            <button
-              class="action-cta"
-              @click="manageUser(userDetails.id, 'unban')"
-            >
-              <img :src="unban" />
-              <div class="adminBanText">Remove Ban</div>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
     <div class="adminStatsContainer">

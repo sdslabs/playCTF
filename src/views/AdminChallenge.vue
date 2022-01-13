@@ -4,11 +4,6 @@
     <div class="adminChalInfo">
       <div class="infoDetails">
         <span class="name">{{ chalDetails.name }}</span>
-        <div class="chall-tags">
-          <span v-for="tag in chalDetails.tags" :key="tag" class="category">{{
-            tag
-          }}</span>
-        </div>
         <span
           class="status"
           :class="{
@@ -77,6 +72,11 @@
           </button>
         </div>
       </div>
+      <div class="chall-tags">
+          <div v-for="tag in chalDetails.tags" :key="tag" class="category">{{
+            tag
+          }}</div>
+        </div>
       <div v-if="chalDetails.description" class="aboutChallenge aboutText">
         {{ chalDetails.description }}
       </div>

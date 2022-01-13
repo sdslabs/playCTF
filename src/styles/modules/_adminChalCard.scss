@@ -69,6 +69,13 @@
     border-left: 0.3125rem solid $theme-color-yellow-high-transp;
 }
 
+.adminTags {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
 .adminChallCategory {
     width: max-content;
     vertical-align: middle;
