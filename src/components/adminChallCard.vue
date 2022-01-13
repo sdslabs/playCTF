@@ -8,7 +8,7 @@
         purgedLink: challenge.status === 'Purged',
         inProgressLink: challStatus.inProgressStatus.includes(challenge.status)
       },
-      'adminChalLink',
+      'adminChalLink'
     ]"
   >
     <div class="adminChallItem" @click="redirect(challenge.name)">
@@ -21,10 +21,13 @@
         <span class="adminChallSolves"
           >{{ challenge.solvesNumber }} Solves</span
         >
-        {{ challenge.checked }}
-        <span class="challengesCheckBox"
-          ><input @click="handleCheckboxClick" type="checkbox"
-        /></span>
+        <span class="challengesCheckBox">
+          <input
+            @click="handleCheckboxClick"
+            type="checkbox"
+            v-model="checkedChallenge"
+          />
+        </span>
       </div>
       <div class="adminTags">
         <div
@@ -43,7 +46,8 @@
 import { challStatus } from "../constants/constants";
 export default {
   name: "adminChallCard",
-  props: ["challenge"],
+  props: ["challenge", "checkedChallenge"],
+  reload: true,
   data() {
     return {
       challStatus
@@ -51,18 +55,19 @@ export default {
   },
   methods: {
     handleCheckboxClick(e) {
-      e.stopPropagation()
+      this.checkedChallenge = !this.checkedChallenge;
+      e.stopPropagation();
       //console.log(e)
       if (this.challenge.checked === undefined) {
-        this.challenge.checked = true
+        this.challenge.checked = true;
       } else {
-        this.challenge.checked = !this.challenge.checked
+        this.challenge.checked = !this.challenge.checked;
       }
 
-      this.$parent.canPurge()
-      this.$parent.canDeploy()
-      this.$parent.canUndeploy()
-    },
-  },
+      this.$parent.canPurge();
+      this.$parent.canDeploy();
+      this.$parent.canUndeploy();
+    }
+  }
 };
 </script>
