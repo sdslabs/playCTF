@@ -4,61 +4,61 @@
     <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
     <div class="adminUserInfoContainer">
       <div class="user">
-          <div class="userName">
-            <div class="name">{{ userDetails.name }}</div>
-            <a :href="`mailto:${userDetails.email}`" class="mailLink">
-              <img :src="mail" class="mailImg" />
-              <div class="contact">Contact</div></a
+        <div class="userName">
+          <div class="name">{{ userDetails.name }}</div>
+          <a :href="`mailto:${userDetails.email}`" class="mailLink">
+            <img :src="mail" class="mailImg" />
+            <div class="contact">Contact</div></a
+          >
+          <div class="status unbanned">Active</div>
+        </div>
+        <div class="rankScore">
+          <div class="rank">
+            <span
+              class="value"
+              :style="
+                this.userDetails.active
+                  ? { color: '$theme-color-black19' }
+                  : { color: 'rgba(25, 25, 25, 0.57)' }
+              "
+              >{{ userDetails.rank }}</span
             >
-            <div class="status unbanned">Active</div>
+            <span class="field">Rank</span>
           </div>
-          <div class="rankScore">
-            <div class="rank">
-              <span
-                class="value"
-                :style="
-                  this.userDetails.active
-                    ? { color: '$theme-color-black19' }
-                    : { color: 'rgba(25, 25, 25, 0.57)' }
-                "
-                >{{ userDetails.rank }}</span
+          <div class="score">
+            <span
+              class="value"
+              :style="
+                this.userDetails.active
+                  ? { color: '$theme-color-black19' }
+                  : { color: 'rgba(25, 25, 25, 0.57)' }
+              "
+              >{{ userDetails.score }}</span
+            >
+            <span class="field">Score</span>
+          </div>
+          <div class="userStatus" v-if="getAccess()">
+            <div v-if="userDetails.active">
+              <button
+                class="action-cta"
+                @click="manageUser(userDetails.id, 'ban')"
               >
-              <span class="field">Rank</span>
+                <img :src="ban" />
+                <div class="adminBanText">Ban Player</div>
+              </button>
             </div>
-            <div class="score">
-              <span
-                class="value"
-                :style="
-                  this.userDetails.active
-                    ? { color: '$theme-color-black19' }
-                    : { color: 'rgba(25, 25, 25, 0.57)' }
-                "
-                >{{ userDetails.score }}</span
+            <div v-else>
+              <div class="status banned">Banned</div>
+              <button
+                class="action-cta"
+                @click="manageUser(userDetails.id, 'unban')"
               >
-              <span class="field">Score</span>
-            </div>
-              <div class="userStatus" v-if="getAccess()">
-                <div v-if="userDetails.active">
-                  <button
-                    class="action-cta"
-                    @click="manageUser(userDetails.id, 'ban')"
-                  >
-                    <img :src="ban" />
-                    <div class="adminBanText">Ban Player</div>
-                  </button>
-                </div>
-                <div v-else>
-                  <div class="status banned">Banned</div>
-                  <button
-                    class="action-cta"
-                    @click="manageUser(userDetails.id, 'unban')"
-                  >
-                    <img :src="unban" />
-                    <div class="adminBanText">Remove Ban</div>
-                  </button>
-                </div>
+                <img :src="unban" />
+                <div class="adminBanText">Remove Ban</div>
+              </button>
             </div>
           </div>
+        </div>
       </div>
     </div>
     <div class="adminStatsContainer">

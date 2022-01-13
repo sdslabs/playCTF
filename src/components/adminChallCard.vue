@@ -26,8 +26,9 @@
           v-for="tag in challenge.tags"
           :key="tag"
           class="adminChallCategory"
-          >{{ tag }}</div
         >
+          {{ tag }}
+        </div>
       </div>
     </div>
   </router-link>
