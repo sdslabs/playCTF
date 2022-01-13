@@ -59,16 +59,29 @@ export default {
   },
   methods: {
     handleCheckboxClick(e) {
+<<<<<<< HEAD
       this.checkedChallenge = !this.checkedChallenge;
       e.stopPropagation();
+=======
+      e.stopPropagation()
+>>>>>>> add support for purge and undeploy
       //console.log(e)
       if (this.challenge.checked === undefined) {
-        this.challenge.checked = true;
+        this.challenge.checked = true
       } else {
-        this.challenge.checked = !this.challenge.checked;
+        this.challenge.checked = !this.challenge.checked
       }
+<<<<<<< HEAD
       this.$parent.reloadFunc();
     }
   }
+=======
+
+      this.$parent.canPurge()
+      this.$parent.canDeploy()
+      this.$parent.canUndeploy()
+    },
+  },
+>>>>>>> add support for purge and undeploy
 };
 </script>
