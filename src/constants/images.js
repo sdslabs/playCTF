@@ -8,6 +8,7 @@ export const twitterLogo = getImage("twitter-logo");
 export const githubLogo = getImage("github-logo");
 export const ctfLogo = getImage("ctf-logo");
 export const dropdown = getImage("dropdown");
+export const download = getImage("download");
 export const edit = getImage("edit");
 export const purge = getImage("purge");
 export const play = getImage("play");

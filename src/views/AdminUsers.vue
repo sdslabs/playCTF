@@ -42,6 +42,10 @@
           ><span class="filterSelection">{{ item.label }}</span>
         </template>
       </v-select>
+      <button class="action-cta" @click="exportUsersAsCSV()">
+        <img :src="download" />
+        <span>Export as CSV</span>
+      </button>
     </div>
     <spin-loader v-if="loading" />
     <admin-table
@@ -64,8 +68,9 @@
 <script>
 import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
+import utils from "@/api/utils";
 import SpinLoader from "../components/spinLoader.vue";
-import { search, userPanel } from "../constants/images";
+import { search, userPanel, download } from "../constants/images";
 import { tableCols } from "../constants/constants";
 export default {
   components: { adminTable, SpinLoader },
@@ -74,6 +79,7 @@ export default {
     return {
       search,
       userPanel,
+      download,
       loading: true,
       emptyDataMessage: {
         All: "No Users",
@@ -125,6 +131,11 @@ export default {
           return a.rank - b.rank;
         });
       }
+    },
+    async exportUsersAsCSV() {
+      UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
+        utils.saveAsFile(res.data, "users.csv", "text/csv");
+      });
     }
   },
   computed: {
