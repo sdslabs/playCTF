@@ -33,6 +33,28 @@
           {{ getUrl(port) }}
         </a>
       </div>
+      <div class="challenge-links">
+        <p class="link-heading">Asset Links</p>
+        <a
+          class="challenge-link aboutText"
+          v-for="asset in this.challDetails.assets"
+          :href="asset"
+          target="_blank"
+          :key="asset"
+        >
+          {{ asset }}
+        </a>
+        <p class="link-heading">Additional Links</p>
+        <a
+          class="challenge-link"
+          v-for="asset in this.challDetails.additionalLinks"
+          :href="asset"
+          target="_blank"
+          :key="asset"
+        >
+          {{ asset }}
+        </a>
+      </div>
     </div>
     <div
       v-if="!challDetails.isSolved && !isPreview"
@@ -76,12 +98,12 @@ export default {
     return {
       flag: "",
       showSuccess: false,
-      showFail: false
+      showFail: false,
     };
   },
   state: {
     disable: false,
-    isModalVisible: false
+    isModalVisible: false,
   },
   methods: {
     getUrl(port) {
@@ -92,9 +114,9 @@ export default {
       }
       return `${url}:${port}`;
     },
-    enter: function() {
+    enter: function () {
       var self = this;
-      setTimeout(function() {
+      setTimeout(function () {
         if (self.showSuccess) {
           self.$router.go();
         } else {
@@ -106,15 +128,18 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        if (Response.data.success) {
-          this.showSuccess = true;
-        } else {
-          this.showFail = true;
+      console.log(this.challDetails)
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(
+        (Response) => {
+          if (Response.data.success) {
+            this.showSuccess = true;
+          } else {
+            this.showFail = true;
+          }
         }
-      });
+      );
     },
-    isDisabled: function() {
+    isDisabled: function () {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {
         this.disable = true;
@@ -127,12 +152,12 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    }
+    },
   },
   watch: {
     challDetails() {
       this.flag = "";
-    }
-  }
+    },
+  },
 };
 </script>
