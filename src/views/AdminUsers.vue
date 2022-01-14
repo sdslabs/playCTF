@@ -128,7 +128,7 @@ export default {
       this.sortFilter = value;
       if (value === "User Name") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.username > b.username ? 1 : -1;
+          return a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1;
         });
       } else if (value === "Score") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
