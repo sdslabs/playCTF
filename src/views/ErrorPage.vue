@@ -10,6 +10,7 @@
 
 <script>
 import Button from "@/components/Button.vue";
+import LoginUser from "../api/admin/authAPI.js";
 
 export default {
   Name: "ErrorPage",
@@ -30,7 +31,7 @@ export default {
       this.$router.go(-1);
     },
     redirectToHome() {
-      if (this.$store.state.userInfo.role === "admin") {
+      if (LoginUser.getUserInfo().role === "admin") {
         this.$router.push("/admin/statistics");
       } else {
         this.$router.push("/about");

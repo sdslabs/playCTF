@@ -1,7 +1,7 @@
 import { CONFIG } from "@/config/config";
 import axios from "axios";
-import store from "../store/index";
 import router from "../router/index";
+import LoginUser from "../api/admin/authAPI.js";
 const axiosInstance = axios.create({
   headers: {
     "Content-Type": "multipart/form-data"
@@ -11,9 +11,9 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   function(config) {
-    const token = store.state.userInfo.token;
-    if (token) {
-      config.headers["Authorization"] = "Bearer " + token;
+    let userInfo = LoginUser.getUserInfo();
+    if (userInfo && userInfo.token) {
+      config.headers["Authorization"] = "Bearer " + userInfo.token;
     }
     return config;
   },

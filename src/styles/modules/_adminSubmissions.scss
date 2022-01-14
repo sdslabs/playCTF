@@ -2,7 +2,10 @@
   width: 80%;
   margin-left: 10%;
 }
-
+.adHeaderComponent {
+  display: flex;
+  justify-content: space-between;
+}
 .adSubHeaderComponent {
   text-align: left;
   @extend %font-style-bold;

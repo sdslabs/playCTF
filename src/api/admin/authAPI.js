@@ -1,5 +1,4 @@
 import axiosInstance from "../axiosInstance.js";
-import store from "../../store/index";
 import router from "../../router/index.js";
 
 export default {
@@ -20,7 +19,15 @@ export default {
     const response = await this.loginUser(username, password);
     if (response.status === 200) {
       const { token, role } = response.data;
-      store.commit("updateUserAuth", { username, token, role });
+      var userInfo = {
+        userName: username,
+        Score: "",
+        token: token,
+        login: true,
+        access: true,
+        role: role
+      };
+      localStorage.setItem("userInfo", JSON.stringify(userInfo));
       if (response.data.role === "admin") {
         router.push("/admin/");
       } else {
@@ -85,5 +92,14 @@ export default {
       return true;
     }
     return false;
+  },
+
+  getUserInfo() {
+    const userInfo = localStorage.getItem("userInfo");
+    return JSON.parse(userInfo);
+  },
+
+  logout() {
+    localStorage.removeItem("userInfo");
   }
 };

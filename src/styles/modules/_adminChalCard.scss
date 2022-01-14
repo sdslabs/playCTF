@@ -69,6 +69,17 @@
     border-left: 0.3125rem solid $theme-color-yellow-high-transp;
 }
 
+.inProgressLink {
+    border-left: 0.3125rem solid $theme-color-light-orange;
+}
+
+.adminTags {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
 .adminChallCategory {
     width: max-content;
     vertical-align: middle;
@@ -81,4 +92,5 @@
     color: $theme-color-white;
     padding: 0.25rem 0.625rem;
     margin-bottom: 0.25rem;
+    text-align: left;
 }

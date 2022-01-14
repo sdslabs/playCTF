@@ -42,6 +42,10 @@
           ><span class="filterSelection">{{ item.label }}</span>
         </template>
       </v-select>
+      <button class="action-cta" @click="exportUsersAsCSV()">
+        <img :src="download" />
+        <span>Export as CSV</span>
+      </button>
     </div>
     <spin-loader v-if="loading" />
     <admin-table
@@ -50,6 +54,7 @@
       :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
+      :key="reload + searchQuery"
     />
     <div
       class="adminEmptyDataContainer"
@@ -64,8 +69,9 @@
 <script>
 import adminTable from "../components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
+import utils from "@/api/utils";
 import SpinLoader from "../components/spinLoader.vue";
-import { search, userPanel } from "../constants/images";
+import { search, userPanel, download } from "../constants/images";
 import { tableCols } from "../constants/constants";
 export default {
   components: { adminTable, SpinLoader },
@@ -74,6 +80,7 @@ export default {
     return {
       search,
       userPanel,
+      download,
       loading: true,
       emptyDataMessage: {
         All: "No Users",
@@ -83,6 +90,7 @@ export default {
       sortFilter: "User Name",
       statusFilter: "All",
       searchQuery: null,
+      reload: true,
       ascending: false,
       sortColumn: "",
       tableCols: tableCols.users,
@@ -105,6 +113,7 @@ export default {
   },
   methods: {
     changeFilter(value) {
+      this.reload = !this.reload;
       this.statusFilter = value;
       if (value === "All") {
         this.displayUsers = this.users;
@@ -115,16 +124,25 @@ export default {
       }
     },
     changeSort(value) {
+      this.reload = !this.reload;
       this.sortFilter = value;
       if (value === "User Name") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.username > b.username ? 1 : -1;
+          return a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1;
         });
       } else if (value === "Score") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
           return a.rank - b.rank;
         });
       }
+    },
+    async exportUsersAsCSV() {
+      let jsonObject = JSON.stringify(this.resultQuery);
+      let csv = await utils.convertToCSV(jsonObject);
+      utils.saveAsFile(csv, "users.csv", "text/csv");
+      // UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
+      //   utils.saveAsFile(res.data, "users.csv", "text/csv");
+      // });
     }
   },
   computed: {

@@ -5,14 +5,22 @@
 
 }
 
+.adminLbSearchHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
 .adminHeadingColor {
   width: 12rem;
   height: 1.75rem;
 }
 
 .adminLbSearchDiv {
-  width: 60%;
-  margin: 2% 20%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 2% 0;
 }
 
 .lineGraph {

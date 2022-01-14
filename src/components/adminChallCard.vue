@@ -5,7 +5,8 @@
       {
         deployedLink: challenge.status === 'Deployed',
         undeployedLink: challenge.status === 'Undeployed',
-        purgedLink: challenge.status === 'Purged'
+        purgedLink: challenge.status === 'Purged',
+        inProgressLink: challStatus.inProgressStatus.includes(challenge.status)
       },
       'adminChalLink'
     ]"
@@ -15,27 +16,34 @@
         <span class="adminChallName">{{ challenge.name }}</span>
         <span class="adminChallStatus">{{ challenge.status }}</span>
       </div>
-      <div class="adminTags">
-        <span
-          v-for="tag in challenge.tags"
-          :key="tag"
-          class="adminChallCategory"
-          >{{ tag }}</span
-        >
-      </div>
       <div class="adminChallStats">
         <span class="adminChallPoints">{{ challenge.points }} Points</span>
         <span class="adminChallSolves"
           >{{ challenge.solvesNumber }} Solves</span
         >
       </div>
+      <div class="adminTags">
+        <div
+          v-for="tag in challenge.tags"
+          :key="tag"
+          class="adminChallCategory"
+        >
+          {{ tag }}
+        </div>
+      </div>
     </div>
   </router-link>
 </template>
 
 <script>
+import { challStatus } from "../constants/constants";
 export default {
   name: "adminChallCard",
-  props: ["challenge"]
+  props: ["challenge"],
+  data() {
+    return {
+      challStatus
+    };
+  }
 };
 </script>

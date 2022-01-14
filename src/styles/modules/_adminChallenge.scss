@@ -30,11 +30,10 @@
     .infoDetails {
         display: flex;
         flex-direction: row;
-        align-items: center;
 
         .name {
             font-family: $primary-font-family;
-
+            text-align: left;
             font-weight: bold;
             font-size: 1.5rem;
             line-height: 1.75rem;
@@ -54,7 +53,6 @@
             color: $theme-color-white;
             padding: 0.25rem 0.625rem;
             margin-left: 1.25rem;
-            margin-right: 1.875rem;
         }
 
         .status {
@@ -91,8 +89,7 @@
 
             .point {
                 border-right: 0.1875rem solid $theme-color-grey-high-transp;
-                padding: 0 0.625rem;
-                padding-top: 0;
+                padding-right: 0.8125rem;
                 display: flex;
                 flex-direction: column;
             }
@@ -100,7 +97,7 @@
             .solves {
                 display: flex;
                 flex-direction: column;
-                padding: 0.625rem;
+                padding-left: 0.625rem;
                 padding-top: 0;
             }
 
@@ -129,6 +126,28 @@
         }
     }
 
+    .chall-tags {
+        display: flex;
+        flex-flow: row wrap;
+        column-gap: 0.25rem;
+        row-gap: 0.25rem;
+        margin-top: 0.625rem;
+    }
+
+    .category {
+        text-align: center;
+        vertical-align: middle;
+        background: $theme-color-violet;
+        border-radius: 0.125rem;
+        font-family: $secondary-font-family;
+
+        font-weight: bold;
+        font-size: 0.875rem;
+        line-height: 1rem;
+        color: $theme-color-white;
+        padding: 0.25rem 0.625rem;
+    }
+
     .aboutText {
         text-align: left;
         font-family: $secondary-font-family;
@@ -153,6 +172,25 @@
     .testRun {
         width: 7.5rem;
         margin: 0;
+    }
+
+    .challenge-links{
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        a{
+            color:$theme-color-violet;
+        }
+    }
+
+    .link-heading{
+        font-size: 1rem;
+        font-family: $primary-font-family;
+        font-weight: bold;
+        line-height: 1rem;
+        color: $theme-color-black19;
+        margin-block-start: 1em;
+        margin-block-end: 0.3rem;
     }
 }
 

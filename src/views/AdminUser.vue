@@ -4,61 +4,59 @@
     <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
     <div class="adminUserInfoContainer">
       <div class="user">
-        <div class="userDetails">
-          <div class="userName">
-            <div class="name">{{ userDetails.name }}</div>
-            <a :href="`mailto:${userDetails.email}`" class="mailLink">
-              <img :src="mail" class="mailImg" />
-              <div class="contact">Contact</div></a
-            >
-          </div>
-          <div class="rankScore">
-            <div class="rank">
-              <span
-                class="value"
-                :style="
-                  this.userDetails.active
-                    ? { color: '$theme-color-black19' }
-                    : { color: 'rgba(25, 25, 25, 0.57)' }
-                "
-                >{{ userDetails.rank }}</span
-              >
-              <span class="field">Rank</span>
-            </div>
-            <div class="score">
-              <span
-                class="value"
-                :style="
-                  this.userDetails.active
-                    ? { color: '$theme-color-black19' }
-                    : { color: 'rgba(25, 25, 25, 0.57)' }
-                "
-                >{{ userDetails.score }}</span
-              >
-              <span class="field">Score</span>
-            </div>
-          </div>
+        <div class="userName">
+          <div class="name">{{ userDetails.name }}</div>
+          <a :href="`mailto:${userDetails.email}`" class="mailLink">
+            <img :src="mail" class="mailImg" />
+            <div class="contact">Contact</div></a
+          >
+          <div class="status unbanned">Active</div>
         </div>
-        <div v-if="getAccess()">
-          <div class="userStatus" v-if="userDetails.active">
-            <div class="status unbanned">Active</div>
-            <button
-              class="action-cta"
-              @click="manageUser(userDetails.id, 'ban')"
+        <div class="rankScore">
+          <div class="rank">
+            <span
+              class="value"
+              :style="
+                this.userDetails.active
+                  ? { color: '$theme-color-black19' }
+                  : { color: 'rgba(25, 25, 25, 0.57)' }
+              "
+              >{{ userDetails.rank }}</span
             >
-              <img :src="ban" />
-              <div class="adminBanText">Ban Player</div>
-            </button>
+            <span class="field">Rank</span>
           </div>
-          <div class="userStatus" v-else>
-            <div class="status banned">Banned</div>
-            <button
-              class="action-cta"
-              @click="manageUser(userDetails.id, 'unban')"
+          <div class="score">
+            <span
+              class="value"
+              :style="
+                this.userDetails.active
+                  ? { color: '$theme-color-black19' }
+                  : { color: 'rgba(25, 25, 25, 0.57)' }
+              "
+              >{{ userDetails.score }}</span
             >
-              <img :src="unban" />
-              <div class="adminBanText">Remove Ban</div>
-            </button>
+            <span class="field">Score</span>
+          </div>
+          <div class="userStatus" v-if="getAccess()">
+            <div v-if="userDetails.active">
+              <button
+                class="action-cta"
+                @click="manageUser(userDetails.id, 'ban')"
+              >
+                <img :src="ban" />
+                <div class="adminBanText">Ban Player</div>
+              </button>
+            </div>
+            <div v-else>
+              <div class="status banned">Banned</div>
+              <button
+                class="action-cta"
+                @click="manageUser(userDetails.id, 'unban')"
+              >
+                <img :src="unban" />
+                <div class="adminBanText">Remove Ban</div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -136,7 +134,7 @@ import { getChallenges } from "@/utils/challenges";
 import { getSubStats } from "@/utils/submissions";
 import SubmissionService from "@/api/admin/submissionsAPI";
 import UsersService from "@/api/admin/usersAPI";
-import store from "@/store/index";
+import LoginUser from "../api/admin/authAPI.js";
 import moment from "moment";
 import {
   confimDialogMessages,
@@ -177,7 +175,8 @@ export default {
         id: null
       },
       rows: [],
-      tableCols: tableCols.user
+      tableCols: tableCols.user,
+      state: {}
     };
   },
   computed: {
@@ -192,7 +191,7 @@ export default {
   },
   methods: {
     getAccess() {
-      if (store.getters.getRole === "admin") return true;
+      if (LoginUser.getUserInfo().role === "admin") return true;
       return false;
     },
     manageUser(userId, action) {
@@ -235,13 +234,24 @@ export default {
       });
       scoreSeries[0] = {
         x: moment(
-          this.$store.state.competitionInfo.startingTime,
+          this.state.competitionInfo.startingTime,
           "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
+      let currentMoment = moment.now();
+      let endingMoment = moment(
+        this.state.competitionInfo.endingTime,
+        "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
+      );
+      let maxX;
+      if (currentMoment > endingMoment) {
+        maxX = endingMoment;
+      } else {
+        maxX = currentMoment;
+      }
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
+        x: maxX,
         y: this.userDetails.score
       };
       return scoreSeries;
@@ -278,6 +288,7 @@ export default {
     }
   },
   async mounted() {
+    this.state = await this.$store.state;
     const challResponse = await getChallenges();
     this.chalTags = challResponse.tagFilterOptions;
     const subResponse = await getSubStats(

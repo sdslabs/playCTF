@@ -23,6 +23,11 @@
             class="query"
           />
         </div>
+
+        <button class="action-cta" @click="exportLeaderBoardAsCSV()">
+          <img :src="download" />
+          <span>Export as CSV</span>
+        </button>
       </div>
 
       <admin-table
@@ -31,6 +36,7 @@
         :rows="resultQuery"
         :links="[{ col: 'username', redirect: '/admin/users/' }]"
         :maxElementPerPage="10"
+        :key="searchQuery"
       />
       <div class="adminEmptyDataContainer" v-else>
         <span class="adminEmptyData">No Users</span>
@@ -43,6 +49,7 @@ import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SubmissionService from "../api/admin/submissionsAPI";
 import LineGraph from "../components/LineGraph.vue";
+import utils from "@/api/utils";
 import SpinLoader from "../components/spinLoader.vue";
 import moment from "moment-timezone";
 import {
@@ -51,7 +58,7 @@ import {
   lineGraphOptions,
   lineGraphConfig
 } from "../constants/constants";
-import { leaderboard, search } from "../constants/images";
+import { leaderboard, search, download } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },
   name: "AdminLeaderboard",
@@ -59,6 +66,7 @@ export default {
     return {
       leaderboard,
       search,
+      download,
       loading: true,
       lineColors: colors.lineGraph,
       scoreSeries: [],
@@ -66,7 +74,8 @@ export default {
       searchQuery: "",
       tableCols: tableCols.leaderboard,
       users: [],
-      displayUsers: []
+      displayUsers: [],
+      state: {}
     };
   },
   methods: {
@@ -90,7 +99,6 @@ export default {
           backgroundColor: "#ffffff",
           borderColor: this.lineColors[index],
           label: `${this.scoreSeries[index].username} ${labelPostText}`,
-
           data: this.scoreSeries[index].series
         });
       });
@@ -135,16 +143,32 @@ export default {
       });
       scoreSeries[0] = {
         x: moment(
-          this.$store.state.competitionInfo.startingTime,
+          this.state.competitionInfo.startingTime,
           "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
+      let currentMoment = moment.now();
+      let endingMoment = moment(
+        this.state.competitionInfo.endingTime,
+        "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
+      );
+      let maxX;
+      if (currentMoment > endingMoment) {
+        maxX = endingMoment;
+      } else {
+        maxX = currentMoment;
+      }
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
+        x: maxX,
         y: score
       };
       return scoreSeries;
+    },
+    async exportLeaderBoardAsCSV() {
+      var jsonObject = JSON.stringify(this.resultQuery);
+      var csv = await utils.convertToCSV(jsonObject);
+      utils.saveAsFile(csv, "leaderboard.csv", "text/csv");
     }
   },
   computed: {
@@ -162,6 +186,7 @@ export default {
     }
   },
   mounted() {
+    this.state = this.$store.state;
     UsersService.getUsers()
       .then(users => {
         if (users.length === 0) {

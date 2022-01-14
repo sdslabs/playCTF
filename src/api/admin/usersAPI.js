@@ -22,5 +22,25 @@ export default {
       method: "post",
       url: `/api/admin/users/${action}/${userId}`
     });
+  },
+
+  async fetchAsCSV(sortFilter, statusFilter) {
+    if (sortFilter == "User Name") {
+      sortFilter = "username";
+    } else if (sortFilter == "Score") {
+      sortFilter = "score";
+    }
+
+    if (statusFilter == "Active") {
+      statusFilter = "active";
+    } else if (statusFilter == "Banned") {
+      statusFilter = "banned";
+    }
+
+    return await axiosInstance({
+      method: "get",
+      responseType: "blob",
+      url: `/api/info/users?sort=${sortFilter}&filter=${statusFilter}&format=csv`
+    });
   }
 };

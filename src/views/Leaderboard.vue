@@ -25,17 +25,18 @@
         :links="[]"
         :maxElementPerPage="10"
         :userData="userInfo"
+        :key="searchQuery"
       />
     </div>
   </div>
 </template>
 <script>
-import store from "@/store/index";
 import adminTable from "../components/adminTable.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { tableCols, colors, lineGraphOptions } from "../constants/constants";
 import { leaderboard, search } from "../constants/images";
+import LoginUser from "../api/admin/authAPI.js";
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
@@ -58,7 +59,7 @@ export default {
     };
   },
   created() {
-    this.username = store.getters.getUsername;
+    this.username = LoginUser.getUserInfo().userName;
   },
   methods: {
     isLoading() {
