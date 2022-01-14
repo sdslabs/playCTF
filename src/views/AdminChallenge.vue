@@ -16,7 +16,7 @@
           :class="{
             deployed: chalDetails.status === 'Deployed',
             purged: chalDetails.status === 'Purged',
-            undeployed: chalDetails.status === 'Undeployed',
+            undeployed: chalDetails.status === 'Undeployed'
           }"
           >{{ chalDetails.status }}</span
         >
@@ -186,7 +186,7 @@ import {
   tableCols,
   confimDialogMessages,
   barChartOptions,
-  colors,
+  colors
 } from "../constants/constants";
 import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
@@ -205,25 +205,25 @@ export default {
       loading: {
         usersNotFetched: true,
         challengeNotFetched: true,
-        submissionsNotFetched: true,
+        submissionsNotFetched: true
       },
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
-      hostUrl: this.$store.getters.hostUrl,
+      hostUrl: this.$store.getters.hostUrl
     };
   },
   computed: {
-    isLoading: function () {
+    isLoading: function() {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   methods: {
     getUrl(port) {
@@ -235,16 +235,16 @@ export default {
       return `${url}:${port}`;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     barData() {
       return {
         datasets: [
           {
             backgroundColor: colors.singleBarGraph,
-            data: [this.solvePercentage()],
-          },
-        ],
+            data: [this.solvePercentage()]
+          }
+        ]
       };
     },
     barChartOptions() {
@@ -254,9 +254,9 @@ export default {
       return (this.chalDetails.solvesNumber / this.activeUsers) * 100;
     },
     manageChallenge(name, action) {
-      let confirmHandler = (confirm) => {
+      let confirmHandler = confirm => {
         if (confirm) {
-          ChalService.manageChalAction(name, action).then(async (response) => {
+          ChalService.manageChalAction(name, action).then(async response => {
             if (response.status !== 200) {
               console.log(response.data);
             } else {
@@ -273,7 +273,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    (response) => {
+                    response => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Deployed";
@@ -289,7 +289,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    (response) => {
+                    response => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Undeployed";
@@ -308,21 +308,21 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirmHandler,
+        callback: confirmHandler
       };
       this.$confirm(inputParams);
-    },
+    }
   },
   mounted() {
     UsersService.getUserStats()
-      .then((response) => {
+      .then(response => {
         this.activeUsers = response.data.unbanned_users;
       })
       .finally(() => {
         this.loading.usersNotFetched = false;
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
-      .then((response) => {
+      .then(response => {
         let data = response.data;
         this.chalDetails = data;
       })
@@ -331,12 +331,12 @@ export default {
       });
 
     SubmissionService.getSubmissions()
-      .then((response) => {
-        response.forEach((element) => {
+      .then(response => {
+        response.forEach(element => {
           if (element.name == this.$route.params.id) {
             this.rows.push({
               username: element.username,
-              timeDateRight: element.solvedAt,
+              timeDateRight: element.solvedAt
             });
           }
         });
@@ -347,6 +347,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  },
+  }
 };
 </script>

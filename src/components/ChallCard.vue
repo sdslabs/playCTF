@@ -38,11 +38,11 @@
         <a
           class="challenge-link aboutText"
           v-for="asset in this.challDetails.assets"
-          :href="asset"
+          :href="getStaticUrl(asset)"
           target="_blank"
           :key="asset"
         >
-          {{ asset }}
+          {{ getFileFromAsset(asset) }}
         </a>
         <p class="link-heading">Additional Links</p>
         <a
@@ -98,25 +98,39 @@ export default {
     return {
       flag: "",
       showSuccess: false,
-      showFail: false,
+      showFail: false
     };
   },
   state: {
     disable: false,
-    isModalVisible: false,
+    isModalVisible: false
   },
   methods: {
     getUrl(port) {
-      let url = CONFIG.beastRoot;
+      let url = CONFIG.webRoot;
       let portIndex = url.lastIndexOf(":");
       if (portIndex !== -1) {
         url = url.substring(0, portIndex);
       }
+      if (
+        this.challDetails.category === "service" ||
+        this.challDetails.category === "xinetd"
+      ) {
+        return `nc ${url} ${port}`;
+      }
       return `${url}:${port}`;
     },
-    enter: function () {
+    getStaticUrl(asset) {
+      let url = CONFIG.staticRoot;
+      return `${url}${asset}`;
+    },
+    getFileFromAsset(asset) {
+      let paths = asset.split("/");
+      return paths[paths.length - 1];
+    },
+    enter: function() {
       var self = this;
-      setTimeout(function () {
+      setTimeout(function() {
         if (self.showSuccess) {
           self.$router.go();
         } else {
@@ -128,18 +142,16 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
-      console.log(this.challDetails)
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(
-        (Response) => {
-          if (Response.data.success) {
-            this.showSuccess = true;
-          } else {
-            this.showFail = true;
-          }
+      console.log(this.challDetails);
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        if (Response.data.success) {
+          this.showSuccess = true;
+        } else {
+          this.showFail = true;
         }
-      );
+      });
     },
-    isDisabled: function () {
+    isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
       if (flag != "") {
         this.disable = true;
@@ -152,12 +164,12 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false;
-    },
+    }
   },
   watch: {
     challDetails() {
       this.flag = "";
-    },
-  },
+    }
+  }
 };
 </script>

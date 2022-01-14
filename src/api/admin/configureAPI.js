@@ -38,11 +38,14 @@ export default {
     bodyFormData.append("ports", challengeInfo.ports);
     bodyFormData.append("points", challengeInfo.points);
     bodyFormData.append("assets", challengeInfo.assetLinks.join("::::"));
-    bodyFormData.append("additionalLinks", challengeInfo.additionalLinks.join("::::"));
+    bodyFormData.append(
+      "additionalLinks",
+      challengeInfo.additionalLinks.join("::::")
+    );
     return await axiosInstance({
       method: "post",
       url: `/api/config/challenge-info`,
-      data: bodyFormData,
+      data: bodyFormData
     });
   }
 };
