@@ -93,8 +93,7 @@ export default {
           this.emitLogo(newCompInfoLogo);
         } else {
           this.logo = prevCompInfoLogo;
-          this.msg = "Not a valid image file";
-          this.icon = "error-white";
+          this.$vToastify.error("Not a valid image file", "Error");
           this.fadeFunc();
         }
       }

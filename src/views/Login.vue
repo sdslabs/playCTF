@@ -52,12 +52,12 @@ export default {
       msg: null,
       icon: "error-white",
       username: "",
-      password: ""
+      password: "",
     };
   },
   components: {
     ErrorBox,
-    Button
+    Button,
   },
   methods: {
     triggerLogin() {
@@ -68,13 +68,13 @@ export default {
     async login() {
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
-        this.msg = "User not registered";
+        this.$vToastify.error("User not registered", "Error");
       } else if (check === 401) {
-        this.msg = "Wrong credentials";
+        this.$vToastify.error("Wrong Credentials", "Error");
       } else if (check === 403) {
-        this.msg = "User banned";
+        this.$vToastify.error("User Banned", "Error");
       }
-    }
-  }
+    },
+  },
 };
 </script>

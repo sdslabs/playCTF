@@ -17,39 +17,33 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  function(error) {
+  function (error) {
     return Promise.reject(error);
   }
 );
 
 axiosInstance.interceptors.response.use(
-  function(response) {
+  function (response) {
     return response;
   },
-  function(error) {
+  function (error) {
     let ignoreErrorPagesPath = ["/auth/login", "/auth/register"];
-    let catchInternalPagesPath = ["/api/manage/challenge/upload"];
-    if (ignoreErrorPagesPath.includes(error.response.config.url)) {
+    if (!error.response) {
+      router.push("/error/networkerror");
+    } else if (ignoreErrorPagesPath.includes(error.response.config.url)) {
       return error;
-    } else if (catchInternalPagesPath.includes(error.response.config.url)) {
-      return Promise.reject(error);
     } else if (error.response.config.url.includes("/api/info/logo")) {
       return error;
     } else {
-      if (!error.response) {
-        router.push("/error/networkerror");
-      } else {
-        switch (error.response.status) {
-          case 401:
-            router.push("/error/401");
-            break;
-          case 404:
-            router.push("/error/404");
-            break;
-          default:
-            router.push("/error/500");
-            break;
-        }
+      switch (error.response.status) {
+        case 401:
+          router.push("/error/401");
+          break;
+        case 404:
+          router.push("/error/404");
+          break;
+        default:
+          return error;
       }
 
       Promise.reject(error);

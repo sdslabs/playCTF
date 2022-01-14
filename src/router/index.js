@@ -204,7 +204,7 @@ const routes = [
     name: "NetworkError",
     component: ErrorPage,
     props: {
-      errorCode: "408"
+      errorCode: "500"
     },
     meta: {
       layout: "error-layout"

@@ -84,8 +84,7 @@ export default {
     },
     setChallengeTar(val) {
       if (val === "invalidFile") {
-        this.msg = "Not a valid challenge file";
-        this.icon = "error-white";
+        this.$vToastify.error("Not a valid challenge file", "Error");
         this.fadeFunc();
       } else {
         this.challengeTar = val;

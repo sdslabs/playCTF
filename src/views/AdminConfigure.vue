@@ -171,13 +171,11 @@ export default {
             configs.logo = "";
           }
           this.$store.commit("updateCompInfo", configs);
-          this.msg = "Changes made successfully";
-          this.icon = "tick-white";
+          this.$vToastify.success("Changes made successfully", "Success");
           this.fadeFunc();
         })
         .catch(() => {
-          this.msg = "Failed to make changes";
-          this.icon = "error-white";
+          this.$vToastify.error("Failed to make changes", "Error");
           this.fadeFunc();
         });
     },

@@ -165,8 +165,7 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showSuccess = true;
-          self.msg = "Notification sent successfully";
-          self.icon = "tick-white";
+          this.$vToastify.success("Notification sent successfully", "Success");
           this.fadeFunc();
         })
         .catch(() => {
@@ -176,8 +175,7 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showFail = true;
-          self.msg = "Failed to send notification";
-          self.icon = "error-white";
+          this.$vToastify.error("Failed to send notification", "Error");
           this.fadeFunc();
         });
     },
