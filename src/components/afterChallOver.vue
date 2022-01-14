@@ -1,12 +1,10 @@
 <template>
-  <div class="postChall-container">
-    <img
-      class="team-goals-img"
-      src="../assets/team-goals.png"
-      alt="teamgoals"
-    />
-    <div class="postMessage">
-      Competition ended
+  <div class="pre-chall-container">
+    <img class="hourglass-img" src="@/assets/team-goals.png" alt="teamgoals" />
+    <div class="pre-message">
+      <p class="pre-message-text">
+        Competition ended
+      </p>
     </div>
     <router-link
       style="text-decoration: none"
@@ -33,7 +31,7 @@ export default {
     };
   },
   beforeCreate() {
-    this.$store.commit("updateCurrentPage", "userAboutCTF");
+    this.$store.commit("updateCurrentPage", "userChallenges");
   },
   mounted() {
     if (!this.fetchedData) {

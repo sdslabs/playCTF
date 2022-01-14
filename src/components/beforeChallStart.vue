@@ -1,15 +1,20 @@
 <template>
-  <div class="preChall-container">
-    <img class="hourglass-img" src="../assets/hourglass.png" alt="hourglass" />
-    <div class="preMessage">
-      <p>Competition yet to start</p>
+  <div class="pre-chall-container">
+    <img class="hourglass-img" src="@/assets/hourglass.png" alt="hourglass" />
+    <div class="pre-message">
+      <p class="pre-message-text">Competition yet to start</p>
     </div>
-      <div>
+    <div>
       <div class="timer2" v-if="days" v-show="statusType === 'Upcoming'">
-        <div>{{ days }}Day(s)</div> <div>{{ this.formatValue(hours) }}:</div><div>{{ this.formatValue(minutes) }}:</div><div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
+        <div>{{ days }}Day(s)</div>
+        <div>{{ this.formatValue(hours) }}:</div>
+        <div>{{ this.formatValue(minutes) }}:</div>
+        <div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
       </div>
       <div class="timer2" v-else v-show="statusType === 'Upcoming'">
-        <div>{{ this.formatValue(hours) }}:</div><div>{{ this.formatValue(minutes) }}:</div><div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
+        <div>{{ this.formatValue(hours) }}:</div>
+        <div>{{ this.formatValue(minutes) }}:</div>
+        <div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
       </div>
     </div>
   </div>
@@ -86,16 +91,16 @@ export default {
 </script>
 
 <style scoped>
-  .timer2{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .timer2.div{
-    font-size: 15rem;
-  }
-  .timer2.secondsTimer{
-    color: #FF6700;
-  }
+.timer2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.timer2.div {
+  font-size: 15rem;
+}
+.timer2.secondsTimer {
+  color: #ff6700;
+}
 </style>
