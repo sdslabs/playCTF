@@ -175,7 +175,8 @@ export default {
         id: null
       },
       rows: [],
-      tableCols: tableCols.user
+      tableCols: tableCols.user,
+      state: {}
     };
   },
   computed: {
@@ -233,13 +234,24 @@ export default {
       });
       scoreSeries[0] = {
         x: moment(
-          this.$store.state.competitionInfo.startingTime,
+          this.state.competitionInfo.startingTime,
           "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
+      let currentMoment = moment.now();
+      let endingMoment = moment(
+        this.state.competitionInfo.endingTime,
+        "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
+      );
+      let maxX;
+      if (currentMoment > endingMoment) {
+        maxX = endingMoment;
+      } else {
+        maxX = currentMoment;
+      }
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
+        x: maxX,
         y: this.userDetails.score
       };
       return scoreSeries;
@@ -276,6 +288,7 @@ export default {
     }
   },
   async mounted() {
+    this.state = await this.$store.state;
     const challResponse = await getChallenges();
     this.chalTags = challResponse.tagFilterOptions;
     const subResponse = await getSubStats(
