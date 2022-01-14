@@ -164,7 +164,7 @@ export default {
         this.rows.length / this.maxElementPerPage
       )
         return Math.round(this.rows.length / this.maxElementPerPage);
-      else return Math.round(this.rows.length / this.maxElementPerPage) + 1;
+      else return Math.floor(this.rows.length / this.maxElementPerPage) + 1;
     }
   }
 };

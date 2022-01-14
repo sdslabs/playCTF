@@ -54,6 +54,7 @@
       :rows="resultQuery"
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
+      :key="reload + searchQuery"
     />
     <div
       class="adminEmptyDataContainer"
@@ -89,6 +90,7 @@ export default {
       sortFilter: "User Name",
       statusFilter: "All",
       searchQuery: null,
+      reload: true,
       ascending: false,
       sortColumn: "",
       tableCols: tableCols.users,
@@ -111,6 +113,7 @@ export default {
   },
   methods: {
     changeFilter(value) {
+      this.reload = !this.reload;
       this.statusFilter = value;
       if (value === "All") {
         this.displayUsers = this.users;
@@ -121,10 +124,11 @@ export default {
       }
     },
     changeSort(value) {
+      this.reload = !this.reload;
       this.sortFilter = value;
       if (value === "User Name") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.username > b.username ? 1 : -1;
+          return a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1;
         });
       } else if (value === "Score") {
         this.displayUsers = this.displayUsers.sort((a, b) => {
@@ -133,9 +137,12 @@ export default {
       }
     },
     async exportUsersAsCSV() {
-      UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
-        utils.saveAsFile(res.data, "users.csv", "text/csv");
-      });
+      let jsonObject = JSON.stringify(this.resultQuery);
+      let csv = await utils.convertToCSV(jsonObject);
+      utils.saveAsFile(csv, "users.csv", "text/csv");
+      // UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
+      //   utils.saveAsFile(res.data, "users.csv", "text/csv");
+      // });
     }
   },
   computed: {
