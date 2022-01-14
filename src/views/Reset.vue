@@ -85,13 +85,11 @@ export default {
         this.PassErr = false;
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
-          this.msg = "Successfully changed";
-          this.icon = this.tickIcon;
+          this.$vToastify.error("Successfully changed", "Success");
           await this.sleep(3000);
           this.$router.push("/about");
         } else {
-          this.msg = "Unauthorized access";
-          this.icon = this.errorIcon;
+          this.$vToastify.error("Unauthorized access", "Error");
         }
       }
     }

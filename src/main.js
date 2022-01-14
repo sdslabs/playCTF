@@ -15,6 +15,16 @@ import ChartJsPluginDataLabels from "chartjs-plugin-datalabels";
 import AdminLandingLayout from "./layouts/AdminLanding.vue";
 import { CONFIG } from "@/config/config";
 import Logo from "./assets/main-logo.svg";
+import VueToastify from "vue-toastify";
+Vue.use(VueToastify, {
+  position: "top-center",
+  canTimeout: true,
+  errorDuration: 3000,
+  successDuration: 3000,
+  warningInfoDuration: 3000,
+  canPause: true,
+  theme: "light"
+});
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);
 Vue.component("default-layout", DefaultLayout);
@@ -28,7 +38,7 @@ Vue.component("vue-confirm-dialog", VueConfirmDialog.default);
 Vue.component("loader", Spinner);
 Vue.mixin({
   methods: {
-    apiErrHandler: function(error) {
+    apiErrHandler: function (error) {
       console.log(error);
     },
     getImage(imagename) {
