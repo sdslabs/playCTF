@@ -74,7 +74,8 @@ export default {
       searchQuery: "",
       tableCols: tableCols.leaderboard,
       users: [],
-      displayUsers: []
+      displayUsers: [],
+      state: {}
     };
   },
   methods: {
@@ -142,13 +143,24 @@ export default {
       });
       scoreSeries[0] = {
         x: moment(
-          this.$store.state.competitionInfo.startingTime,
+          this.state.competitionInfo.startingTime,
           "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
         y: 0
       };
+      let currentMoment = moment.now();
+      let endingMoment = moment(
+        this.state.competitionInfo.endingTime,
+        "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
+      );
+      let maxX;
+      if (currentMoment > endingMoment) {
+        maxX = endingMoment;
+      } else {
+        maxX = currentMoment;
+      }
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"),
+        x: maxX,
         y: score
       };
       return scoreSeries;
@@ -174,6 +186,7 @@ export default {
     }
   },
   mounted() {
+    this.state = this.$store.state;
     UsersService.getUsers()
       .then(users => {
         if (users.length === 0) {

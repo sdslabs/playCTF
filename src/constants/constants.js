@@ -426,7 +426,13 @@ export const lineGraphOptions = showLegend => {
           let title = "";
           data.forEach((el, index) => {
             let playerInfo = tooltipItem.datasets[el.datasetIndex].label;
-            let playerData = playerInfo.split(" ");
+            let playerData = [
+              playerInfo.substring(0, playerInfo.lastIndexOf(" ")),
+              playerInfo.substring(
+                playerInfo.lastIndexOf(" ") + 1,
+                playerInfo.length
+              )
+            ];
             title += `${playerData[0]}; ${playerData[1].substring(1, 4)} Rank`;
             if (index !== data.length - 1) {
               title += " & ";
@@ -437,7 +443,6 @@ export const lineGraphOptions = showLegend => {
         label: function(data, tooltipItem) {
           let time = moment(data["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
           let value = time.format("MMMM DD, YYYY; HH:mm:ss, ") + data["value"];
-          console.log(value);
           return value;
         }
       },
