@@ -21,7 +21,6 @@
 <script>
 import ConfigApiService from "../api/admin/configureAPI";
 import Button from "./Button.vue";
-import moment from "moment-timezone";
 export default {
   name: "home",
   components: {
@@ -49,12 +48,6 @@ export default {
     isLoggedIn() {
       let userInfo = this.$store.state.userInfo;
       return userInfo.access && userInfo.role === "contestant";
-    },
-    convertTimeFormat(time) {
-      console.log(time);
-      return moment(time, "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd").format(
-        "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"
-      );
     }
   }
 };

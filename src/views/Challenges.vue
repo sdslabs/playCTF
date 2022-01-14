@@ -62,7 +62,7 @@ export default {
       totalChals: 0,
       selectedChall: {},
       selectDefaultChallenge: true,
-      renderParam: "1"    
+      renderParam: "1"
     };
   },
   components: {
@@ -78,7 +78,7 @@ export default {
   async mounted() {
     await this.fetchChallenges(false);
     await this.updateUserStats();
-    console.log('hello');
+    console.log("hello");
   },
   methods: {
     async updateUserStats() {
@@ -88,7 +88,7 @@ export default {
     },
     async fetchChallenges(isUpdation) {
       const challData = await getChallenges(true, this.username);
-      if(challData.error) {
+      if (challData.error) {
         this.renderParam = challData.message;
         return;
       }

@@ -1,11 +1,10 @@
 import ChalService from "@/api/admin/challengesAPI";
-import UserService from "@/api/admin/usersAPI"
+import UserService from "@/api/admin/usersAPI";
 export const getChallenges = async (getUserSolves, username) => {
   let challenges = await (await ChalService.fetchAllChallenges()).data;
   console.log(challenges);
-  if(challenges.message == "0" || challenges.message == "2")
-  {
-    return {message : challenges.message, error: true};
+  if (challenges.message == "0" || challenges.message == "2") {
+    return { message: challenges.message, error: true };
   }
   if (getUserSolves) {
     let userData = await UserService.getUserByUsername(username);
