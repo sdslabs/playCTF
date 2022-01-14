@@ -3,6 +3,7 @@
     v-model="name"
     placeholder="Enter the name of competition to be displayed"
     class="adminFormTitle"
+    @keyup.enter="triggerNext"
   />
 </template>
 
@@ -18,6 +19,11 @@ export default {
   methods: {
     emitName(compInfoName) {
       this.$emit("changed", compInfoName);
+    },
+    triggerNext() {
+      if (this.name) {
+        this.$emit("triggerNext");
+      }
     }
   },
   watch: {
