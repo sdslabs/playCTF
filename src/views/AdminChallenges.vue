@@ -23,7 +23,6 @@
         </button>
       </div>
       <div class="adminSort">
-<<<<<<< HEAD
         <span class="sortText">Sort by:</span>
         <a
           v-for="sort in this.sortTypeOptions"
@@ -34,13 +33,28 @@
         >
           {{ sort.name }}
         </a>
-        <span v-if="canDeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('deploy')">
+        <span
+          v-if="canDeploy() === true"
+          class="deployer"
+          :key="reload"
+          @click="manageMultipleChallenge('deploy')"
+        >
           <img class="addImg" src="@/assets/deployChallenges.svg" />
         </span>
-        <span v-if="canUndeploy() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('undeploy')">
+        <span
+          v-if="canUndeploy() === true"
+          class="deployer"
+          :key="reload"
+          @click="manageMultipleChallenge('undeploy')"
+        >
           <img class="addImg" src="@/assets/undeployChallenges.svg" />
         </span>
-        <span v-if="canPurge() === true" class="deployer" :key="reload" @click="manageMultipleChallenge('purge')">
+        <span
+          v-if="canPurge() === true"
+          class="deployer"
+          :key="reload"
+          @click="manageMultipleChallenge('purge')"
+        >
           <img class="addImg" src="@/assets/purgeChallenges.svg" />
         </span>
         <v-select
@@ -56,92 +70,16 @@
             ><span class="filterSelection">{{ item.label }}</span>
           </template>
         </v-select>
-=======
-        <div class="left">
-          <span class="sortText">Sort by:</span>
-          <a
-            v-for="sort in this.sortFilterOptions"
-            :key="sort.id"
-            class="sortOption"
-            :class="[{ active: sortFilter === sort.name }]"
-            @click="changeSort(sort.name)"
-          >
-            {{ sort.name }}
-          </a>
-        </div>
-        <div class="right">
-          <div class="deployer-container">
-            <button
-              v-if="canDeploy() === true"
-              class="action-cta multiple-deployer-cta"
-              :key="reload"
-              @click="manageMultipleChallenge('deploy')"
-            >
-              <img src="@/assets/deployChallenges.svg" />
-              <span class="tooltiptext">Deploy</span>
-            </button>
-            <button
-              v-if="canUndeploy() === true"
-              class="action-cta multiple-deployer-cta"
-              :key="reload"
-              @click="manageMultipleChallenge('undeploy')"
-            >
-              <img class="addImg" src="@/assets/undeployChallenges.svg" />
-              <span class="tooltiptext">Undeploy</span>
-            </button>
-          </div>
-          <div class="deployer-container">
-            <button
-              v-if="canPurge() === true"
-              class="action-cta multiple-deployer-cta"
-              :key="reload"
-              @click="manageMultipleChallenge('purge')"
-            >
-              <img class="addImg" src="@/assets/purgeChallenges.svg" />
-              <span class="tooltiptext">Purge</span>
-            </button>
-          </div>
-          <button
-            v-if="canPurge() === false"
-            class="action-cta"
-            @click="selectAll()"
-          >
-            <span> Select All </span>
-          </button>
-          <button
-            v-if="canPurge() === true"
-            class=" action-cta"
-            @click="deselectAll()"
-          >
-            <span> Deselect All </span>
-          </button>
-          <v-select
-            class="dropdown"
-            :options="statusFilterOptions"
-            :value="this.statusFilter"
-            @input="changeFilter"
-            :clearable="false"
-            :searchable="false"
-          >
-            <template #selected-option="item" class="selection">
-              <span class="filterText">Filter By:</span
-              ><span class="filterSelection">{{ item.label }}</span>
-            </template>
-          </v-select>
-        </div>
->>>>>>> add css and clean up code
       </div>
       <spin-loader v-if="loading" />
       <div
         class="adminChallengesList"
         v-if="displayChallenges.length > 0 && !loading"
-        :key="reload"
       >
         <admin-chall-card
           v-for="challenge in displayChallenges"
           :key="challenge.id"
           :challenge="challenge"
-          :checkedChallenge="challenge.checked"
         />
       </div>
       <div
@@ -191,7 +129,7 @@ export default {
       tagFilter: "All",
       challenges: [],
       displayChallenges: [],
-      checkedChallenges: {},
+      checkedChallenges: [],
       typeOptions: [
         { name: "deploy", id: 1 },
         { name: "undeploy", id: 2 },
@@ -222,7 +160,6 @@ export default {
       return false;
     }
   },
-<<<<<<< HEAD
   async mounted() {
     let response = await getChallenges();
     this.challenges = response.challenges;
@@ -235,7 +172,6 @@ export default {
     this.loading = false;
   },
   methods: {
-<<<<<<< HEAD
     filterChallenges(challenges, filterValue, filterType) {
       if (filterValue === "All") {
         return challenges;
@@ -271,29 +207,7 @@ export default {
         }
         return filteredChallenges;
       }
-=======
-    test(){
-      console.log("wtf")
->>>>>>> add support for purge and undeploy
     },
-=======
-  mounted() {
-    ChalService.getChallenges()
-      .then(response => {
-        this.challenges = response.challenges;
-        this.displayChallenges = response.displayChallenges;
-        this.categoryFilterOptions = [
-          ...this.categoryFilterOptions,
-          ...response.categoryFilterOptions
-        ];
-        this.displayChallenges = response.displayChallenges;
-      })
-      .finally(() => {
-        this.loading = false;
-      });
-  },
-  methods: {
->>>>>>> add css and clean up code
     getUrl(port) {
       let url = CONFIG.beastRoot;
       let portIndex = url.lastIndexOf(":");
@@ -305,7 +219,6 @@ export default {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
-<<<<<<< HEAD
     sortChallenges(challenges, sortType) {
       let sortedChallenges = [];
       switch (sortType) {
@@ -324,16 +237,6 @@ export default {
             return this.findGreater(a, b, "SolvesNumber", "Name");
           });
           break;
-=======
-    changeFilter(value) {
-      this.statusFilter = value;
-      if (value === "All") {
-        this.displayChallenges = this.challenges;
-      } else {
-        this.displayChallenges = this.challenges.filter(el => {
-          return el.status == value;
-        });
->>>>>>> add css and clean up code
       }
       return sortedChallenges;
     },
@@ -355,7 +258,6 @@ export default {
       );
       this.displayChallenges = filteredSortedChallenges;
     },
-<<<<<<< HEAD
     changeStatusFilter(value) {
       this.statusFilter = value;
       this.refreshChallengeList();
@@ -367,17 +269,6 @@ export default {
     changeTagFilter(value) {
       this.tagFilter = value;
       this.refreshChallengeList();
-=======
-    changeCategory(value) {
-      this.categoryFilter = value;
-      if (value === "All") {
-        this.displayChallenges = this.challenges;
-      } else {
-        this.displayChallenges = this.challenges.filter(el => {
-          return el.category == value;
-        });
-      }
->>>>>>> add css and clean up code
     },
     findGreater(a, b, field1, field2) {
       if (a[field1] === b[field1]) {
@@ -420,7 +311,7 @@ export default {
       if (i == 0) return false;
       return flag;
     },
-    manageMultipleChallenge(action) {
+    manageMultipleChallenge(name) {
       let final = "";
       let i = 0;
       for (let x of this.displayChallenges) {
@@ -432,12 +323,10 @@ export default {
             final = x.name + "," + final;
           }
           i++;
-          x.checked = false;
         }
       }
-      this.reload = !this.reload;
-      console.log(this.displayChallenges);
-      if (i > 0) this.manageMultipleChallengeHandler(final, action);
+      console.log(final);
+      if (i > 0) this.manageMultipleChallengeHandler(final, name);
     },
     manageMultipleChallengeHandler(name, action) {
       //let confirmHandler = (confirm) => {
@@ -500,19 +389,6 @@ export default {
       //  callback: confirmHandler,
       //};
       //this.$confirm(inputParams);
-    },
-    selectAll() {
-      console.log("working");
-      for (let x of this.displayChallenges) {
-        x.checked = true;
-      }
-      this.reload = !this.reload;
-    },
-    deselectAll() {
-      for (let x of this.displayChallenges) {
-        x.checked = false;
-      }
-      this.reload = !this.reload;
     }
   },
   beforeCreate() {
