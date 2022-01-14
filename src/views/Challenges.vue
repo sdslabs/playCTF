@@ -1,5 +1,5 @@
 <template>
-  <div class="challenge-main-container">
+  <div class="challenge-main-container" v-if="renderParam === '1'">
     <div class="adminChallengesVerticalNav tags">
       <a
         v-for="tag in tags"
@@ -33,11 +33,15 @@
       </div>
     </div>
   </div>
+  <beforeChallStart v-else-if="renderParam === '0'" />
+  <afterChallOver v-else />
 </template>
 
 <script>
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
+import beforeChallStart from "@/components/beforeChallStart.vue";
+import afterChallOver from "@/components/afterChallOver.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import LoginUser from "../api/admin/authAPI.js";
 import UsersService from "@/api/admin/usersAPI";
@@ -56,13 +60,16 @@ export default {
       userDetails: {},
       totalChals: 0,
       selectedChall: {},
-      selectDefaultChallenge: true
+      selectDefaultChallenge: true,
+      renderParam: "1"
     };
   },
   components: {
     StatsNavbar,
     ChallengesByTag,
-    ChallCard
+    ChallCard,
+    afterChallOver,
+    beforeChallStart
   },
   created() {
     this.username = LoginUser.getUserInfo().userName;
@@ -70,6 +77,7 @@ export default {
   async mounted() {
     await this.fetchChallenges(false);
     await this.updateUserStats();
+    console.log("hello");
   },
   methods: {
     async updateUserStats() {
@@ -79,6 +87,13 @@ export default {
     },
     async fetchChallenges(isUpdation) {
       const challData = await getChallenges(true, this.username);
+      if (challData.error) {
+        this.renderParam = challData.message;
+        return;
+      }
+      console.log(challData);
+      console.log(challData.error);
+      console.log(challData.message);
       this.challenges = challData.challenges;
       this.tags = [...this.defaultTags, ...challData.tagFilterOptions];
       this.totalChals = challData.challenges.length;
