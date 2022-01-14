@@ -18,7 +18,7 @@
       </div>
     </div>
     <spin-loader v-if="isLoading()" />
-    <div v-else>
+    <div v-else-if="users.length > 0">
       <admin-table
         :tableCols="tableCols"
         :rows="resultQuery"
@@ -26,6 +26,10 @@
         :maxElementPerPage="10"
         :userData="userInfo"
       />
+    </div>
+
+    <div class="adminEmptyData" v-else>
+      <span> No Notifications posted </span>
     </div>
   </div>
 </template>
