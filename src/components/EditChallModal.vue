@@ -102,15 +102,15 @@ export default {
       cross,
       assetLinks: [],
       additionalLinks: [],
-      challengeInfo: {},
+      challengeInfo: {}
     };
   },
   components: {
     Button,
-    ClickToAddList,
+    ClickToAddList
   },
   mounted() {
-    console.log(this.challenge)
+    console.log(this.challenge);
     this.challengeInfo = Object.assign({}, this.challenge);
     this.updateChallengeInfo();
   },
@@ -125,14 +125,14 @@ export default {
           tags: this.tags,
           ports: this.ports,
           points: this.points,
-          assetLinks: this.assetLinks.filter((e) => e),
-          additionalLinks: this.additionalLinks.filter((e) => e),
+          assetLinks: this.assetLinks.filter(e => e),
+          additionalLinks: this.additionalLinks.filter(e => e)
         })
-        .then((res) => {
+        .then(res => {
           this.$emit("close");
           this.$router.go();
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(err);
         });
     },
@@ -168,7 +168,7 @@ export default {
         this.challengeInfo.additionalLinks[0] === ""
           ? []
           : this.challengeInfo.additionalLinks;
-    },
-  },
+    }
+  }
 };
 </script>

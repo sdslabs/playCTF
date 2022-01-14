@@ -22,17 +22,17 @@ export default {
   data() {
     return {
       cross,
-      isCreated: false,
+      isCreated: false
     };
   },
   methods: {
     addNewItem() {
       this.list.push("");
-    },
+    }
   },
   updated() {
     if (this.isCreated) this.$refs.link[this.list.length - 1].focus();
     this.isCreated = true;
-  },
+  }
 };
 </script>

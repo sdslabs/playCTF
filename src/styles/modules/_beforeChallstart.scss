@@ -1,4 +1,4 @@
-.preChall-container{
+.pre-chall-container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,8 +9,25 @@
   width: 20rem; 
 }
  
-.preMessage.p{
-  font: Nunito Sans;
-  font-size: 10rem;
-  font-weight: 600;
+.pre-message{
+  .pre-message-text {
+    font-family: $primary-font-family;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    color: $theme-color-grey39;
+    font-weight: 600;
+  }
+}
+
+.timer2{
+  div{
+    font-family: $secondary-font-family;
+    font-size: 2rem;
+    line-height: 3.75rem;
+    color: $theme-color-grey39;
+    font-weight: 600;
+  }
+  .secondsTimer{
+    color: $theme-color-dark-orange;
+  }
 }
