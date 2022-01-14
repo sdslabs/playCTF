@@ -29,42 +29,63 @@
             v-for="sort in this.sortTypeOptions"
             :key="sort.id"
             class="sortOption"
-            :class="[{ active: sortType === sort.name }]"
-            @click="changeSortType(sort.name)"
+            :class="[{ active: sortFilter === sort.name }]"
+            @click="changeSort(sort.name)"
           >
             {{ sort.name }}
           </a>
         </div>
         <div class="right">
-          <span
-            v-if="canDeploy() === true"
-            class="deployer"
-            :key="reload"
-            @click="manageMultipleChallenge('deploy')"
+          <div class="deployer-container">
+            <button
+              v-if="canDeploy() === true"
+              class="action-cta multiple-deployer-cta"
+              :key="reload"
+              @click="manageMultipleChallenge('deploy')"
+            >
+              <img src="@/assets/deployChallenges.svg" />
+              <span class="tooltiptext">Deploy</span>
+            </button>
+            <button
+              v-if="canUndeploy() === true"
+              class="action-cta multiple-deployer-cta"
+              :key="reload"
+              @click="manageMultipleChallenge('undeploy')"
+            >
+              <img class="addImg" src="@/assets/undeployChallenges.svg" />
+              <span class="tooltiptext">Undeploy</span>
+            </button>
+          </div>
+          <div class="deployer-container">
+            <button
+              v-if="canPurge() === true"
+              class="action-cta multiple-deployer-cta"
+              :key="reload"
+              @click="manageMultipleChallenge('purge')"
+            >
+              <img class="addImg" src="@/assets/purgeChallenges.svg" />
+              <span class="tooltiptext">Purge</span>
+            </button>
+          </div>
+          <button
+            v-if="canPurge() === false"
+            class="action-cta"
+            @click="selectAll()"
           >
-            <img class="addImg" src="@/assets/deployChallenges.svg" />
-          </span>
-          <span
-            v-if="canUndeploy() === true"
-            class="deployer"
-            :key="reload"
-            @click="manageMultipleChallenge('undeploy')"
-          >
-            <img class="addImg" src="@/assets/undeployChallenges.svg" />
-          </span>
-          <span
+            <span> Select All </span>
+          </button>
+          <button
             v-if="canPurge() === true"
-            class="deployer"
-            :key="reload"
-            @click="manageMultipleChallenge('purge')"
+            class=" action-cta"
+            @click="deselectAll()"
           >
-            <img class="addImg" src="@/assets/purgeChallenges.svg" />
-          </span>
+            <span> Deselect All </span>
+          </button>
           <v-select
             class="dropdown"
             :options="statusFilterOptions"
             :value="this.statusFilter"
-            @input="changeStatusFilter"
+            @input="changeFilter"
             :clearable="false"
             :searchable="false"
           >
@@ -79,11 +100,13 @@
       <div
         class="adminChallengesList"
         v-if="displayChallenges.length > 0 && !loading"
+        :key="reload"
       >
         <admin-chall-card
           v-for="challenge in displayChallenges"
           :key="challenge.id"
           :challenge="challenge"
+          :checkedChallenge="challenge.checked"
         />
       </div>
       <div
@@ -112,7 +135,7 @@ import CreateChallModal from "../components/CreateChallModal.vue";
 import {
   getChalStats,
   getChallenges,
-  getChalCategory,
+  getChalCategory
 } from "../utils/challenges";
 import { CONFIG } from "@/config/config";
 import { tableCols, confimDialogMessages } from "../constants/constants";
@@ -137,47 +160,47 @@ export default {
       typeOptions: [
         { name: "deploy", id: 1 },
         { name: "undeploy", id: 2 },
-        { name: "purge", id: 3 },
+        { name: "purge", id: 3 }
       ],
       tagFilterOptions: [{ name: "All", id: 1 }],
       sortTypeOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 },
+        { name: "Solves", id: 3 }
       ],
       statusFilterOptions: [
         "All",
         "Undeployed",
         "Deployed",
         "InProgress",
-        "Purged",
+        "Purged"
       ],
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
-      hostUrl: this.$store.getters.hostUrl,
+      hostUrl: this.$store.getters.hostUrl
     };
   },
   computed: {
-    isLoading: function () {
+    isLoading: function() {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   async mounted() {
-    console.log("working")
+    console.log("working");
     let response = await getChallenges();
     this.challenges = response.challenges;
     this.displayChallenges = response.displayChallenges;
     this.tagFilterOptions = [
       ...this.tagFilterOptions,
-      ...response.tagFilterOptions,
+      ...response.tagFilterOptions
     ];
     this.displayChallenges = response.displayChallenges;
     this.loading = false;
@@ -285,7 +308,7 @@ export default {
       return `${url}:${port}`;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     canPurge() {
       this.reload = !this.reload;
@@ -323,6 +346,7 @@ export default {
       return flag;
     },
     manageMultipleChallenge(name) {
+      this.reload = !this.reload;
       let final = "";
       let i = 0;
       for (let x of this.displayChallenges) {
@@ -336,14 +360,13 @@ export default {
           i++;
         }
       }
-      console.log(final);
       if (i > 0) this.manageMultipleChallengeHandler(final, name);
     },
     manageMultipleChallengeHandler(name, action) {
       //let confirmHandler = (confirm) => {
       //if (confirm) {
       ChalService.manageMultipleChalAction(name, action).then(
-        async (response) => {
+        async response => {
           if (response.status !== 200) {
             console.log(response.data);
           } else {
@@ -361,7 +384,7 @@ export default {
                 }
                 let names = this.$route.params.id.split(",");
                 for (name of names) {
-                  ChalService.fetchChallengeByName(name).then((response) => {
+                  ChalService.fetchChallengeByName(name).then(response => {
                     let data = response.data;
                     this.chalDetails = data;
                     challengesDeployed &= data.status === "Deployed";
@@ -377,7 +400,7 @@ export default {
                   break;
                 }
                 ChalService.fetchChallengeByName(this.$route.params.id).then(
-                  (response) => {
+                  response => {
                     let data = response.data;
                     this.chalDetails = data;
                     challengeDeployed = data.status === "Undeployed";
@@ -401,9 +424,22 @@ export default {
       //};
       //this.$confirm(inputParams);
     },
+    selectAll() {
+      console.log("working");
+      for (let x of this.displayChallenges) {
+        x.checked = true;
+      }
+      this.reload = !this.reload;
+    },
+    deselectAll() {
+      for (let x of this.displayChallenges) {
+        x.checked = false;
+      }
+      this.reload = !this.reload;
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  },
+  }
 };
 </script>
