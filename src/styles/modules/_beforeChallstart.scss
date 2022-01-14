@@ -19,15 +19,18 @@
   }
 }
 
-.timer2{
-  div{
+.timer-sec {
+  .timer2-text{
     font-family: $secondary-font-family;
     font-size: 2rem;
     line-height: 3.75rem;
     color: $theme-color-grey39;
     font-weight: 600;
   }
-  .secondsTimer{
+  display: flex;
+  flex-direction: row;
+  gap:2px;
+  .seconds-timer{
     color: $theme-color-dark-orange;
   }
 }

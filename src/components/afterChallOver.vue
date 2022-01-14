@@ -8,7 +8,6 @@
     </div>
     <router-link
       style="text-decoration: none"
-      v-if="isLoggedIn()"
       to="/leaderboard"
     >
       <Button text="View Results" class="primary-cta"
@@ -42,11 +41,5 @@ export default {
       this.configData = this.configs;
     }
   },
-  methods: {
-    isLoggedIn() {
-      let userInfo = this.$store.state.userInfo;
-      return userInfo.access && userInfo.role === "contestant";
-    }
-  }
 };
 </script>

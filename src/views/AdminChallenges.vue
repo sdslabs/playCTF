@@ -113,7 +113,6 @@ export default {
         "Undeployed",
         "Deployed",
         "InProgress",
-        "Purged"
       ]
     };
   },
@@ -152,7 +151,6 @@ export default {
         switch (filterValue) {
           case "Deployed":
           case "Undeployed":
-          case "Purged":
             filteredChallenges = challenges.filter(chall => {
               return chall[filterType] == filterValue;
             });

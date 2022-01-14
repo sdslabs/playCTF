@@ -61,16 +61,16 @@ export default {
       let distance = start - now;
       let passTime = end - now;
 
-      if (distance < 0 && passTime < 0) {
-        this.statusType = "Expired";
+      if (distance > 0) {
+        this.statusType = "Upcoming";
         clearInterval(this.interval);
         return;
       } else if (distance < 0 && passTime > 0) {
         this.statusType = "running";
         this.calcTime(passTime);
-      } else if (distance > 0 && passTime > 0) {
+      } else {
         this.calcTime(distance);
-        this.statusType = "Upcoming";
+        this.statusType = "Expired";
       }
     },
     calcTime: function(dist) {
