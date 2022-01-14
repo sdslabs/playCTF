@@ -103,7 +103,7 @@ export default {
   name: "register",
   components: {
     ErrorBox,
-    Button,
+    Button
   },
   data() {
     return {
@@ -120,13 +120,12 @@ export default {
       PassErr: false,
       registered: true,
       errorIcon: "error-white",
-      tickIcon: "tick-white",
+      tickIcon: "tick-white"
     };
   },
   methods: {
     validateEmail(e) {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (re.test(this.email)) {
         this.EmailErr = false;
       } else {
@@ -148,7 +147,7 @@ export default {
       }
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async register() {
       if (!this.PassErr && !this.EmailErr && !this.PassLen) {
@@ -167,7 +166,7 @@ export default {
           this.$router.push("/login");
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>

@@ -17,16 +17,16 @@ axiosInstance.interceptors.request.use(
     }
     return config;
   },
-  function (error) {
+  function(error) {
     return Promise.reject(error);
   }
 );
 
 axiosInstance.interceptors.response.use(
-  function (response) {
+  function(response) {
     return response;
   },
-  function (error) {
+  function(error) {
     let ignoreErrorPagesPath = ["/auth/login", "/auth/register"];
     if (!error.response) {
       router.push("/error/networkerror");

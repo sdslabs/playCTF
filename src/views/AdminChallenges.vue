@@ -194,7 +194,6 @@ export default {
     }
   },
   async mounted() {
-    console.log("working");
     let response = await getChallenges();
     this.challenges = response.challenges;
     this.displayChallenges = response.displayChallenges;
@@ -425,7 +424,6 @@ export default {
       //this.$confirm(inputParams);
     },
     selectAll() {
-      console.log("working");
       for (let x of this.displayChallenges) {
         x.checked = true;
       }
