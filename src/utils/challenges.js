@@ -21,6 +21,7 @@ export const getChallenges = async (getUserSolves, username) => {
   let allTags = [];
   let tagFilterOptions = [];
   let displayChallenges = [];
+  console.log(challenges);
   challenges.forEach(challenge => {
     challenge.tags.forEach(tag => {
       allTags.push(tag);
