@@ -169,7 +169,7 @@ export default {
       sortTypeOptions: [
         { name: "Name", id: 1 },
         { name: "Score", id: 2 },
-        { name: "Solves", id: 3 },
+        { name: "Solves", id: 3 }
       ],
       statusFilterOptions: [
         "All",
@@ -468,6 +468,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  },
+  }
 };
 </script>
