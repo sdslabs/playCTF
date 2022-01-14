@@ -52,12 +52,12 @@ export default {
       msg: null,
       icon: "error-white",
       username: "",
-      password: "",
+      password: ""
     };
   },
   components: {
     ErrorBox,
-    Button,
+    Button
   },
   methods: {
     triggerLogin() {
@@ -74,7 +74,7 @@ export default {
       } else if (check === 403) {
         this.$vToastify.error("User Banned", "Error");
       }
-    },
-  },
+    }
+  }
 };
 </script>

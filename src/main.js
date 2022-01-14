@@ -38,7 +38,7 @@ Vue.component("vue-confirm-dialog", VueConfirmDialog.default);
 Vue.component("loader", Spinner);
 Vue.mixin({
   methods: {
-    apiErrHandler: function (error) {
+    apiErrHandler: function(error) {
       console.log(error);
     },
     getImage(imagename) {
