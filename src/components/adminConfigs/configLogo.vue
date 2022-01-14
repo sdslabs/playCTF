@@ -25,9 +25,9 @@
 </template>
 
 <script>
-import { upload } from "../../constants/images";
+import { upload } from "@/constants/images";
 import { CONFIG } from "@/config/config";
-import ErrorBox from "../../components/ErrorBox";
+import ErrorBox from "@/components/ErrorBox";
 export default {
   name: "ConfigLogo",
   props: ["compLogo"],

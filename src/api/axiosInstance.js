@@ -1,7 +1,7 @@
 import { CONFIG } from "@/config/config";
 import axios from "axios";
-import router from "../router/index";
-import LoginUser from "../api/admin/authAPI.js";
+import router from "@/router/index";
+import LoginUser from "@/api/admin/authAPI.js";
 const axiosInstance = axios.create({
   headers: {
     "Content-Type": "multipart/form-data"

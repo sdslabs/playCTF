@@ -88,8 +88,8 @@
 </template>
 
 <script>
-import RegisterUser from "../api/admin/authAPI.js";
-import ErrorBox from "../components/ErrorBox";
+import RegisterUser from "@/api/admin/authAPI.js";
+import ErrorBox from "@/components/ErrorBox";
 import Button from "@/components/Button.vue";
 export default {
   name: "register",

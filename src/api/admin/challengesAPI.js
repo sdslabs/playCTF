@@ -1,5 +1,4 @@
-import UserService from "./usersAPI";
-import axiosInstance from "../axiosInstance.js";
+import axiosInstance from "@/api/axiosInstance.js";
 export default {
   async fetchAllChallenges() {
     return await axiosInstance.get(`/api/info/challenges`);

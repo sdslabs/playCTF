@@ -1,5 +1,5 @@
-import axiosInstance from "../axiosInstance.js";
-import router from "../../router/index.js";
+import axiosInstance from "@/api/axiosInstance.js";
+import router from "@/router/index.js";
 
 export default {
   async loginUser(username, password) {

@@ -66,12 +66,12 @@
   </div>
 </template>
 <script>
-import adminTable from "../components/adminTable.vue";
+import adminTable from "@/components/adminTable.vue";
 import UsersService from "@/api/admin/usersAPI";
 import utils from "@/api/utils";
-import SpinLoader from "../components/spinLoader.vue";
-import { search, userPanel, download } from "../constants/images";
-import { tableCols } from "../constants/constants";
+import SpinLoader from "@/components/spinLoader.vue";
+import { search, userPanel, download } from "@/constants/images";
+import { tableCols } from "@/constants/constants";
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",

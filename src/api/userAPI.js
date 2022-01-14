@@ -1,4 +1,4 @@
-import axiosInstance from "./axiosInstance.js";
+import axiosInstance from "@/api/axiosInstance.js";
 
 export default {
   async submitFlag(chall_id, flag) {

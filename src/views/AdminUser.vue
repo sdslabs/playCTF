@@ -134,7 +134,7 @@ import { getChallenges } from "@/utils/challenges";
 import { getSubStats } from "@/utils/submissions";
 import SubmissionService from "@/api/admin/submissionsAPI";
 import UsersService from "@/api/admin/usersAPI";
-import LoginUser from "../api/admin/authAPI.js";
+import LoginUser from "@/api/admin/authAPI.js";
 import moment from "moment";
 import {
   confimDialogMessages,

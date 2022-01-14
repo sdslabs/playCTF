@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import LoginUser from "../api/admin/authAPI";
-import ErrorBox from "../components/ErrorBox";
+import LoginUser from "@/api/admin/authAPI";
+import ErrorBox from "@/components/ErrorBox";
 import Button from "@/components/Button.vue";
 
 export default {

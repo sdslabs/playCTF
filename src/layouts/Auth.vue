@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import Footer from "../components/Footer.vue";
+import Footer from "@/components/Footer.vue";
 import { CONFIG } from "@/config/config";
 export default {
   name: "AuthLayout",

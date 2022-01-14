@@ -73,17 +73,14 @@
   </div>
 </template>
 <script>
-import adminChallCard from "../components/adminChallCard.vue";
-import ChalService from "../api/admin/challengesAPI";
-import SpinLoader from "../components/spinLoader";
-import { add } from "../constants/images";
-import { challStatus } from "../constants/constants";
-import CreateChallModal from "../components/CreateChallModal.vue";
+import adminChallCard from "@/components/adminChallCard.vue";
+import SpinLoader from "@/components/spinLoader";
+import { add } from "@/constants/images";
+import { challStatus } from "@/constants/constants";
+import CreateChallModal from "@/components/CreateChallModal.vue";
 import {
-  getChalStats,
-  getChallenges,
-  getChalCategory
-} from "../utils/challenges";
+  getChallenges
+} from "@/utils/challenges";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader, CreateChallModal },

@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import LoginUser from "../api/admin/authAPI.js";
-import ErrorBox from "../components/ErrorBox";
+import LoginUser from "@/api/admin/authAPI.js";
+import ErrorBox from "@/components/ErrorBox";
 import Button from "@/components/Button.vue";
 export default {
   name: "login",

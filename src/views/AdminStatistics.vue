@@ -126,22 +126,21 @@
 </template>
 
 <script>
-import PieChart from "../components/PieChart.vue";
-import BarGraph from "../components/BarGraph.vue";
-import UsersService from "../api/admin/usersAPI";
-import ChalService from "../api/admin/challengesAPI";
-import SpinLoader from "../components/spinLoader.vue";
+import PieChart from "@/components/PieChart.vue";
+import BarGraph from "@/components/BarGraph.vue";
+import UsersService from "@/api/admin/usersAPI";
+import SpinLoader from "@/components/spinLoader.vue";
 import {
   getChalStats,
   getChallenges,
   getChalCategory
-} from "../utils/challenges";
-import { getSubStats } from "../utils/submissions";
+} from "@/utils/challenges";
+import { getSubStats } from "@/utils/submissions";
 import {
   colors,
   barChartOptions,
   pieChartOptions
-} from "../constants/constants";
+} from "@/constants/constants";
 export default {
   name: "AdminStatistics",
   components: {

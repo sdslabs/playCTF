@@ -107,17 +107,17 @@
 </template>
 
 <script>
-import AdminLandingProgress from "../components/AdminLandingProgress";
-import { AdminLandingDetails } from "../constants/constants";
-import ConfigTitle from "../components/adminConfigs/configTitle.vue";
-import ConfigContent from "../components/adminConfigs/configContent.vue";
-import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
-import ConfigLogo from "../components/adminConfigs/configLogo.vue";
+import AdminLandingProgress from "@/components/AdminLandingProgress";
+import { AdminLandingDetails } from "@/constants/constants";
+import ConfigTitle from "@/components/adminConfigs/configTitle.vue";
+import ConfigContent from "@/components/adminConfigs/configContent.vue";
+import ConfigTimeDate from "@/components/adminConfigs/configTimeDate.vue";
+import ConfigLogo from "@/components/adminConfigs/configLogo.vue";
 import moment from "moment-timezone";
-import { getAllTimezones } from "../constants/constants";
-import configureService from "../api/admin/configureAPI";
-import { preview } from "../constants/images";
-import PreviewModal from "../components/PreviewModal.vue";
+import { getAllTimezones } from "@/constants/constants";
+import configureService from "@/api/admin/configureAPI";
+import { preview } from "@/constants/images";
+import PreviewModal from "@/components/PreviewModal.vue";
 import { CONFIG } from "@/config/config";
 export default {
   data() {

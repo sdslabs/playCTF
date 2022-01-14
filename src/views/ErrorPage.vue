@@ -10,7 +10,7 @@
 
 <script>
 import Button from "@/components/Button.vue";
-import LoginUser from "../api/admin/authAPI.js";
+import LoginUser from "@/api/admin/authAPI.js";
 
 export default {
   Name: "ErrorPage",

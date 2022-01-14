@@ -9,7 +9,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
-import configureService from "./api/admin/configureAPI";
+import configureService from "@/api/admin/configureAPI";
 const default_layout = "default-layout";
 export default {
   name: "app",

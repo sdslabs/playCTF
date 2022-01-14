@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import ConfigApiService from "../api/admin/configureAPI";
-import Button from "../components/Button.vue";
+import ConfigApiService from "@/api/admin/configureAPI";
+import Button from "@/components/Button.vue";
 import moment from "moment-timezone";
-import LoginUser from "../api/admin/authAPI.js";
+import LoginUser from "@/api/admin/authAPI.js";
 export default {
   name: "home",
   components: {

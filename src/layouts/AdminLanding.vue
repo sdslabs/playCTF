@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import AdminLandingHeader from "../components/AdminLandingHeader.vue";
-import Footer from "../components/Footer.vue";
+import AdminLandingHeader from "@/components/AdminLandingHeader.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "AdminLandingLayout",
   components: {

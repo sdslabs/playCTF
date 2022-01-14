@@ -140,11 +140,11 @@
   </div>
 </template>
 <script>
-import BarGraphVertical from "../components/BarGraphVertical.vue";
-import AdminTable from "../components/adminTable.vue";
-import UsersService from "../api/admin/usersAPI";
-import SubmissionService from "../api/admin/submissionsAPI";
-import ChalService from "../api/admin/challengesAPI";
+import BarGraphVertical from "@/components/BarGraphVertical.vue";
+import AdminTable from "@/components/adminTable.vue";
+import UsersService from "@/api/admin/usersAPI";
+import SubmissionService from "@/api/admin/submissionsAPI";
+import ChalService from "@/api/admin/challengesAPI";
 import {
   tableCols,
   confimDialogMessages,

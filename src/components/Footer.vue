@@ -26,7 +26,7 @@ import {
   twitterLogo,
   githubLogo,
   fbLogo
-} from "../constants/images";
+} from "@/constants/images";
 export default {
   name: "Footer",
   data() {

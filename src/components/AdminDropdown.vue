@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import { dropdown } from "../constants/images";
-import LoginUser from "../api/admin/authAPI.js";
+import { dropdown } from "@/constants/images";
+import LoginUser from "@/api/admin/authAPI.js";
 export default {
   name: "AdminDropdown",
   data() {

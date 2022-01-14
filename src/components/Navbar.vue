@@ -56,9 +56,9 @@
 
 <script>
 import Timer from "@/components/Timer.vue";
-import { dropdown } from "../constants/images";
+import { dropdown } from "@/constants/images";
 import { CONFIG } from "@/config/config";
-import LoginUser from "../api/admin/authAPI.js";
+import LoginUser from "@/api/admin/authAPI.js";
 export default {
   name: "Navbar",
   data() {

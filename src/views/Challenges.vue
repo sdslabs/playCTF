@@ -39,9 +39,9 @@
 import StatsNavbar from "@/components/Stats.vue";
 import ChallengesByTag from "@/components/ChallengesByTag.vue";
 import ChallCard from "@/components/ChallCard.vue";
-import LoginUser from "../api/admin/authAPI.js";
+import LoginUser from "@/api/admin/authAPI.js";
 import UsersService from "@/api/admin/usersAPI";
-import { getChallenges } from "../utils/challenges";
+import { getChallenges } from "@/utils/challenges";
 export default {
   name: "Challenges",
   data() {

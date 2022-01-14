@@ -1,4 +1,4 @@
-import axiosInstance from "../axiosInstance.js";
+import axiosInstance from "@/api/axiosInstance.js";
 import { parseUserData } from "@/utils/users.js";
 export default {
   async getUsers() {

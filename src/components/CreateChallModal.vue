@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { cross } from "../constants/images";
-import challengesService from "../api/admin/challengesAPI";
+import { cross } from "@/constants/images";
+import challengesService from "@/api/admin/challengesAPI";
 import UploadComponent from "@/components/UploadComponent.vue";
 import ChallCard from "@/components/ChallCard.vue";
 import Button from "@/components/Button.vue";

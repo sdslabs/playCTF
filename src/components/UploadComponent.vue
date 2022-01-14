@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { upload } from "../constants/images";
+import { upload } from "@/constants/images";
 import { CONFIG } from "@/config/config";
 export default {
   name: "UploadComponent",

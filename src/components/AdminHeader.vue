@@ -8,7 +8,7 @@
   </div>
 </template>
 <script>
-import AdminNav from "./AdminNav";
+import AdminNav from "@/components/AdminNav";
 import { CONFIG } from "@/config/config";
 import AdminDropdown from "@/components/AdminDropdown.vue";
 export default {

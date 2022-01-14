@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import FlagService from "../api/userAPI";
+import FlagService from "@/api/userAPI";
 import Button from "@/components/Button.vue";
 import { CONFIG } from "@/config/config";
 export default {

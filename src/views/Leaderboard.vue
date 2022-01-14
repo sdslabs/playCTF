@@ -30,12 +30,12 @@
   </div>
 </template>
 <script>
-import adminTable from "../components/adminTable.vue";
-import UsersService from "../api/admin/usersAPI";
-import SpinLoader from "../components/spinLoader.vue";
-import { tableCols, colors, lineGraphOptions } from "../constants/constants";
-import { leaderboard, search } from "../constants/images";
-import LoginUser from "../api/admin/authAPI.js";
+import adminTable from "@/components/adminTable.vue";
+import UsersService from "@/api/admin/usersAPI";
+import SpinLoader from "@/components/spinLoader.vue";
+import { tableCols, colors, lineGraphOptions } from "@/constants/constants";
+import { leaderboard, search } from "@/constants/images";
+import LoginUser from "@/api/admin/authAPI.js";
 export default {
   components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",

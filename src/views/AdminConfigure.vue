@@ -55,17 +55,17 @@
   </div>
 </template>
 <script>
-import { preview, upload } from "../constants/images";
-import configureService from "../api/admin/configureAPI";
+import { preview, upload } from "@/constants/images";
+import configureService from "@/api/admin/configureAPI";
 import moment from "moment-timezone";
-import { configFail, configSuccess } from "../constants/images";
-import ConfigTitle from "../components/adminConfigs/configTitle.vue";
-import ConfigContent from "../components/adminConfigs/configContent.vue";
-import ConfigTimeDate from "../components/adminConfigs/configTimeDate.vue";
-import ConfigLogo from "../components/adminConfigs/configLogo.vue";
-import { getAllTimezones } from "../constants/constants";
-import PreviewModal from "../components/PreviewModal.vue";
-import ErrorBox from "../components/ErrorBox";
+import { configFail, configSuccess } from "@/constants/images";
+import ConfigTitle from "@/components/adminConfigs/configTitle.vue";
+import ConfigContent from "@/components/adminConfigs/configContent.vue";
+import ConfigTimeDate from "@/components/adminConfigs/configTimeDate.vue";
+import ConfigLogo from "@/components/adminConfigs/configLogo.vue";
+import { getAllTimezones } from "@/constants/constants";
+import PreviewModal from "@/components/PreviewModal.vue";
+import ErrorBox from "@/components/ErrorBox";
 import { CONFIG } from "@/config/config";
 export default {
   name: "AdminConfigure",

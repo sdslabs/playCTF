@@ -1,4 +1,4 @@
-import axiosInstance from "../axiosInstance.js";
+import axiosInstance from "@/api/axiosInstance.js";
 import moment from "moment";
 export default {
   async getSubmissions() {

@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import SubmissionService from "../api/admin/submissionsAPI";
-import adminTable from "../components/adminTable.vue";
-import spinLoader from "../components/spinLoader.vue";
+import SubmissionService from "@/api/admin/submissionsAPI";
+import adminTable from "@/components/adminTable.vue";
+import spinLoader from "@/components/spinLoader.vue";
 import utils from "@/api/utils";
-import { download } from "../constants/images";
-import { tableCols } from "../constants/constants";
+import { download } from "@/constants/images";
+import { tableCols } from "@/constants/constants";
 export default {
   name: "AdminSubmissions",
   components: {

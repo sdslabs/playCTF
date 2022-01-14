@@ -44,19 +44,19 @@
   </div>
 </template>
 <script>
-import adminTable from "../components/adminTable.vue";
-import UsersService from "../api/admin/usersAPI";
-import SubmissionService from "../api/admin/submissionsAPI";
-import LineGraph from "../components/LineGraph.vue";
+import adminTable from "@/components/adminTable.vue";
+import UsersService from "@/api/admin/usersAPI";
+import SubmissionService from "@/api/admin/submissionsAPI";
+import LineGraph from "@/components/LineGraph.vue";
 import utils from "@/api/utils";
-import SpinLoader from "../components/spinLoader.vue";
+import SpinLoader from "@/components/spinLoader.vue";
 import moment from "moment-timezone";
 import {
   tableCols,
   colors,
   lineGraphOptions,
   lineGraphConfig
-} from "../constants/constants";
+} from "@/constants/constants";
 import { leaderboard, search, download } from "../constants/images";
 export default {
   components: { adminTable, LineGraph, SpinLoader },

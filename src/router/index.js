@@ -4,8 +4,8 @@ import Challenges from "@/views/Challenges.vue";
 import Leaderboard from "@/views/Leaderboard.vue";
 import Notification from "@/views/Notifications.vue";
 import Login from "@/views/Login.vue";
-import AdminLanding from "../views/AdminLanding.vue";
-import AdminStatistics from "../views/AdminStatistics.vue";
+import AdminLanding from "@/views/AdminLanding.vue";
+import AdminStatistics from "@/views/AdminStatistics.vue";
 import AdminNotifications from "@/views/AdminNotifications.vue";
 import AdminUser from "@/views/AdminUser.vue";
 import AdminUsers from "@/views/AdminUsers.vue";
@@ -17,8 +17,8 @@ import AdminChallenge from "@/views/AdminChallenge.vue";
 import ErrorPage from "@/views/ErrorPage.vue";
 import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
-import Reset from "../views/Reset.vue";
-import LoginUser from "../api/admin/authAPI.js";
+import Reset from "@/views/Reset.vue";
+import LoginUser from "@/api/admin/authAPI.js";
 
 Vue.use(VueRouter);
 

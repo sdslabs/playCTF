@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getAllTimezones } from "../../constants/constants";
+import { getAllTimezones } from "@/constants/constants";
 export default {
   name: "ConfigTimeDate",
   props: ["compTimeDate", "disabled"],

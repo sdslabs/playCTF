@@ -1,5 +1,5 @@
 function getImage(imagename) {
-  return require(`../assets/${imagename}.svg`);
+  return require(`@/assets/${imagename}.svg`);
 }
 
 export const sdslabsLogo = getImage("sdslabs-logo");

@@ -63,11 +63,11 @@
   </div>
 </template>
 <script>
-import NotificationTab from "../components/NotificationTab";
-import NotifService from "../api/admin/notificationsAPI";
-import SpinLoader from "../components/spinLoader.vue";
-import { notifAdded, notifFailed } from "../constants/images";
-import ErrorBox from "../components/ErrorBox";
+import NotificationTab from "@/components/NotificationTab";
+import NotifService from "@/api/admin/notificationsAPI";
+import SpinLoader from "@/components/spinLoader.vue";
+import { notifAdded, notifFailed } from "@/constants/images";
+import ErrorBox from "@/components/ErrorBox";
 export default {
   name: "AdminNotfications",
   components: {

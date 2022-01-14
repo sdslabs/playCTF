@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Landing from "../views/Landing.vue";
-import { cross } from "../constants/images";
+import Landing from "@/views/Landing.vue";
+import { cross } from "@/constants/images";
 
 export default {
   name: "PreviewModal",

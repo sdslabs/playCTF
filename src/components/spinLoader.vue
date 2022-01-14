@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import variables from "../styles/main.scss";
+import variables from "@/styles/main.scss";
 export default {
   name: "spinLoader",
   data() {
