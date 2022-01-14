@@ -80,17 +80,18 @@
     @extend %font-style-basic;
     color: $theme-color-grey-high-transp;
     font-size: 1rem;
-    line-height: 1.75rem;
+    margin-top: 0.5rem;
+    // line-height: 1.75rem;
     label{
       text-align: left;
     }
   }
 
-  @media(max-width:1450px){
+  @media(max-width:1340px){
     .confirmation{
       #checkbox{
         align-self: flex-start;
-        margin-top: 8px;
+        margin-top: 4px;
       }
     }
   }

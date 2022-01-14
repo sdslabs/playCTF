@@ -20,7 +20,7 @@
           />
         </div>
         <div class="timeInput">
-          <p class="subfields">Start time (24HR)</p>
+          <p class="subfields">Start time</p>
           <input
             v-model="timedate.startTime"
             class="dateComponent"
@@ -41,7 +41,7 @@
           />
         </div>
         <div class="timeInput">
-          <p class="subfields">End time (24HR)</p>
+          <p class="subfields">End time</p>
           <input
             v-model="timedate.endTime"
             class="dateComponent"

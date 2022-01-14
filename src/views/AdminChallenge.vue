@@ -212,7 +212,7 @@ export default {
       return barChartOptions().challenges;
     },
     solvePercentage() {
-      return (this.chalDetails.solvesNumber / this.activeUsers) * 100;
+      return ((this.chalDetails.solvesNumber / this.activeUsers) * 100).toFixed(0);
     },
     manageChallenge(name, action) {
       let confirmHandler = confirm => {
@@ -297,7 +297,7 @@ export default {
           if (element.name == this.$route.params.id) {
             this.rows.push({
               username: element.username,
-              timeDateRight: element.solvedAt
+              timeDateRight: element.solvedTime
             });
           }
         });

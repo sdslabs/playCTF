@@ -87,21 +87,17 @@ export default {
       sortColumn: "",
       tableCols: tableCols.users,
       displayUsers: [],
+      resultQuery: [],
       users: []
     };
   },
-  mounted() {
-    UsersService.getUsers()
-      //TODO: need to handle api errors
-      .then(users => {
-        this.users = users;
-        this.displayUsers = this.users.sort((a, b) => {
-          return a.username > b.username ? 1 : -1;
-        });
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+  async mounted() {
+    const users = await UsersService.getUsers();
+    this.users = users;
+    this.displayUsers = this.users.sort((a, b) => {
+      return a.username > b.username ? 1 : -1;
+    });
+    this.loading = false;
   },
   methods: {
     changeFilter(value) {
@@ -113,6 +109,7 @@ export default {
           return el.status == value;
         });
       }
+      this.resultQuery = this.displayUsers;
     },
     changeSort(value) {
       this.sortFilter = value;
@@ -125,19 +122,20 @@ export default {
           return a.rank - b.rank;
         });
       }
+    this.resultQuery = this.displayUsers;
     }
   },
-  computed: {
-    resultQuery() {
+  watch: {
+    displayUsers: function(){
+      this.resultQuery = this.displayUsers;
+    },
+    searchQuery: function() {
       if (this.searchQuery) {
-        return this.displayUsers.filter(item => {
-          return this.searchQuery
-            .toLowerCase()
-            .split(" ")
-            .every(v => item.username.toLowerCase().includes(v));
+        this.resultQuery = this.displayUsers.filter(user => {
+          return user.username.toLowerCase().startsWith(this.searchQuery);
         });
       } else {
-        return this.displayUsers;
+        this.resultQuery = this.displayUsers;
       }
     }
   },

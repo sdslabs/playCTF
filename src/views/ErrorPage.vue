@@ -58,7 +58,7 @@ export default {
     msg() {
       switch (this.errorCode) {
         case "401":
-          return "Unathorized Access";
+          return "Unauthorized Access";
         case "408":
           return "Internal Server Error";
         case "500":
