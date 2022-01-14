@@ -62,7 +62,9 @@
         class="adminEmptyDataContainer"
         v-if="displayChallenges.length === 0 && !loading"
       >
-        <span class="adminEmptyData">No Challenges available</span>
+        <span class="adminEmptyData"
+          >No {{ v2 + " " + v1 }} Challenges available</span
+        >
       </div>
     </div>
     <transition name="fade" appear>
@@ -91,6 +93,8 @@ export default {
     return {
       showCreateChallModal: false,
       add,
+      v1: "",
+      v2: "",
       challStatus,
       loading: true,
       statusFilter: "All",
@@ -130,6 +134,7 @@ export default {
         return challenges;
       }
       if (filterType === "tags") {
+        this.v1 = filterValue;
         let filteredChallenges = challenges.filter(chall => {
           let includeChallenge = false;
           chall.tags.forEach(tag => {
@@ -143,6 +148,7 @@ export default {
       }
       if (filterType === "status") {
         let filteredChallenges = [];
+        this.v2 = filterValue;
         switch (filterValue) {
           case "Deployed":
           case "Undeployed":

@@ -1,8 +1,8 @@
 <template>
   <div class="notification">
     <div class="heading">NOTIFICATIONS</div>
-    <spin-loader v-if="loading" />
-    <div class="user-notif-tabs" v-else-if="notifications.length > 0">
+    <!-- <spin-loader v-if="loading" /> -->
+    <div class="user-notif-tabs" v-if="notifications.length > 0">
       <NotificationTab
         v-for="notif in notifications"
         :key="notif.ID"
@@ -39,8 +39,8 @@ export default {
     clearInterval(this.pollingId);
   },
   components: {
-    NotificationTab,
-    SpinLoader
+    NotificationTab
+    //SpinLoader
   },
   methods: {
     async fetchNotifications() {

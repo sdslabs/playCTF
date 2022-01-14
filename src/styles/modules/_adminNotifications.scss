@@ -108,11 +108,12 @@
 }
 
 .adminEmptyDataContainer {
-  text-align: left;
+  text-align: center;
 }
 
 .adminEmptyData {
-  text-align: left;
+  text-align: center;
+  padding: 2.5rem 2.5rem;
   @extend %font-style-bold;
   font-size: 2rem;
   line-height: 3rem;
