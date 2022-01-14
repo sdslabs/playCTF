@@ -1,10 +1,12 @@
 <template>
   <div class="mainAdminContainer">
-    <div class="adSubHeaderComponent">Submissions</div>
-    <button class="action-cta" @click="exportUsersAsCSV()">
-      <img :src="download" />
-      <span>Export as CSV</span>
-    </button>
+    <div class="adHeaderComponent">
+      <div class="adSubHeaderComponent">Submissions</div>
+      <button class="action-cta" @click="exportUsersAsCSV()">
+        <img :src="download" />
+        <span>Export as CSV</span>
+      </button>
+    </div>
     <spin-loader v-if="loading" />
     <admin-table
       :tableCols="tableCols"

@@ -23,12 +23,12 @@
             class="query"
           />
         </div>
-      </div>
 
-      <button class="action-cta" @click="exportLeaderBoardAsCSV()">
-        <img :src="download" />
-        <span>Export as CSV</span>
-      </button>
+        <button class="action-cta" @click="exportLeaderBoardAsCSV()">
+          <img :src="download" />
+          <span>Export as CSV</span>
+        </button>
+      </div>
 
       <admin-table
         v-if="resultQuery.length > 0"
