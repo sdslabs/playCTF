@@ -30,7 +30,7 @@
             :key="sort.id"
             class="sortOption"
             :class="[{ active: sortFilter === sort.name }]"
-            @click="changeSort(sort.name)"
+            @click="changeSortType(sort.name)"
           >
             {{ sort.name }}
           </a>
