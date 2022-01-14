@@ -137,9 +137,12 @@ export default {
       }
     },
     async exportUsersAsCSV() {
-      UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
-        utils.saveAsFile(res.data, "users.csv", "text/csv");
-      });
+      let jsonObject = JSON.stringify(this.resultQuery);
+      let csv = await utils.convertToCSV(jsonObject);
+      utils.saveAsFile(csv, "users.csv", "text/csv");
+      // UsersService.fetchAsCSV(this.sortFilter, this.statusFilter).then(res => {
+      //   utils.saveAsFile(res.data, "users.csv", "text/csv");
+      // });
     }
   },
   computed: {
