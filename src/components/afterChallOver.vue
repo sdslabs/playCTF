@@ -6,11 +6,7 @@
         Competition ended
       </p>
     </div>
-    <router-link
-      style="text-decoration: none"
-      v-if="isLoggedIn()"
-      to="/leaderboard"
-    >
+    <router-link style="text-decoration: none" to="/leaderboard">
       <Button text="View Results" class="primary-cta"
     /></router-link>
   </div>
@@ -40,12 +36,6 @@ export default {
       });
     } else {
       this.configData = this.configs;
-    }
-  },
-  methods: {
-    isLoggedIn() {
-      let userInfo = this.$store.state.userInfo;
-      return userInfo.access && userInfo.role === "contestant";
     }
   }
 };

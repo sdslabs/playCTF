@@ -41,8 +41,10 @@
         }
 
         .category {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             text-align: center;
-            vertical-align: middle;
             background: $theme-color-violet;
             border-radius: 0.125rem;
             font-family: $secondary-font-family;

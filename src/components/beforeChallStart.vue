@@ -4,17 +4,19 @@
     <div class="pre-message">
       <p class="pre-message-text">Competition yet to start</p>
     </div>
-    <div>
-      <div class="timer2" v-if="days" v-show="statusType === 'Upcoming'">
-        <div>{{ days }}Day(s)</div>
-        <div>{{ this.formatValue(hours) }}:</div>
-        <div>{{ this.formatValue(minutes) }}:</div>
-        <div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
+    <div class="timer-sec" v-if="days">
+      <div class="timer2-text">{{ days }}Day(s)</div>
+      <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
+      <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
+      <div class="timer2-text seconds-timezoneimer">
+        {{ this.formatValue(seconds) }}
       </div>
-      <div class="timer2" v-else v-show="statusType === 'Upcoming'">
-        <div>{{ this.formatValue(hours) }}:</div>
-        <div>{{ this.formatValue(minutes) }}:</div>
-        <div class="secondsTimer">{{ this.formatValue(seconds) }}</div>
+    </div>
+    <div class="timer-sec" v-else>
+      <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
+      <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
+      <div class="timer2-text seconds-timer">
+        {{ this.formatValue(seconds) }}
       </div>
     </div>
   </div>
@@ -89,18 +91,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.timer2 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-.timer2.div {
-  font-size: 15rem;
-}
-.timer2.secondsTimer {
-  color: #ff6700;
-}
-</style>

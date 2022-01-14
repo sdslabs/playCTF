@@ -108,13 +108,7 @@ export default {
         { name: "Score", id: 2 },
         { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: [
-        "All",
-        "Undeployed",
-        "Deployed",
-        "InProgress",
-        "Purged"
-      ]
+      statusFilterOptions: ["All", "Undeployed", "Deployed", "InProgress"]
     };
   },
   async mounted() {
@@ -152,7 +146,6 @@ export default {
         switch (filterValue) {
           case "Deployed":
           case "Undeployed":
-          case "Purged":
             filteredChallenges = challenges.filter(chall => {
               return chall[filterType] == filterValue;
             });
