@@ -147,6 +147,23 @@
         vertical-align: middle;
       }
     }
+    .challenge-links{
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      a{
+          color:$theme-color-violet;
+      }
+      .link-heading{
+        font-size: 1rem;
+        font-family: $primary-font-family;
+        font-weight: bold;
+        line-height: 1rem;
+        color: $theme-color-black19;
+        margin-block-start: 1em;
+        margin-block-end: 0.3rem;
+    }
+  }
   }
 
   .challCard-bottom-row {
@@ -240,4 +257,15 @@
   overflow-wrap: break-word;
   margin: 0;
   width: 100%;
+}
+.challenge-link {
+  font-style: $primary-font-family;
+  color: $theme-color-violet;
+  text-decoration: none;
+}
+.challenge-link-code {
+  font-family: monospace;
+  color: $theme-color-violet;
+  text-decoration: none;
+  letter-spacing: 0.1rem;
 }

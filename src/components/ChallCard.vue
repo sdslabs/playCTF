@@ -29,8 +29,38 @@
         :key="port"
         class="host aboutText"
       >
-        <a class="challenge-link" :href="getUrl(port)" target="_blank">
+        <a
+          class="challenge-link"
+          :href="getUrl(port)"
+          target="_blank"
+          v-if="link"
+        >
           {{ getUrl(port) }}
+        </a>
+        <p class="challenge-link-code" :href="getUrl(port)" v-else>
+          {{ getUrl(port) }}
+        </p>
+      </div>
+      <div class="challenge-links">
+        <p class="link-heading">Asset Links</p>
+        <a
+          class="challenge-link aboutText"
+          v-for="asset in this.challDetails.assets"
+          :href="getStaticUrl(asset)"
+          target="_blank"
+          :key="asset"
+        >
+          {{ getFileFromAsset(asset) }}
+        </a>
+        <p class="link-heading">Additional Links</p>
+        <a
+          class="challenge-link"
+          v-for="asset in this.challDetails.additionalLinks"
+          :href="asset"
+          target="_blank"
+          :key="asset"
+        >
+          {{ asset }}
         </a>
       </div>
     </div>
@@ -76,7 +106,8 @@ export default {
     return {
       flag: "",
       showSuccess: false,
-      showFail: false
+      showFail: false,
+      link: false
     };
   },
   state: {
@@ -85,12 +116,23 @@ export default {
   },
   methods: {
     getUrl(port) {
-      let url = CONFIG.beastRoot;
-      let portIndex = url.lastIndexOf(":");
-      if (portIndex !== -1) {
-        url = url.substring(0, portIndex);
+      let url = CONFIG.webRoot;
+      let ncurl = CONFIG.ncRoot;
+      if (
+        this.challDetails.category === "service" ||
+        this.challDetails.category === "xinetd"
+      ) {
+        return `nc ${ncurl} ${port}`;
       }
-      return `${url}:${port}`;
+      return `${CONFIG.webRoot}:${port}`;
+    },
+    getStaticUrl(asset) {
+      let url = CONFIG.staticRoot;
+      return `${url}${asset}`;
+    },
+    getFileFromAsset(asset) {
+      let paths = asset.split("/");
+      return paths[paths.length - 1];
     },
     enter: function() {
       var self = this;
@@ -106,6 +148,7 @@ export default {
       }, 3000); // hide the message after 3 seconds
     },
     submitFlag() {
+      console.log(this.challDetails);
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
         if (Response.data.success) {
           this.showSuccess = true;
@@ -133,6 +176,14 @@ export default {
     challDetails() {
       this.flag = "";
     }
+  },
+  mounted() {
+    if (
+      this.challDetails.category === "service" ||
+      this.challDetails.category === "xinetd"
+    )
+      this.link = false;
+    else this.link = true;
   }
 };
 </script>

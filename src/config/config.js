@@ -1,3 +1,6 @@
 export const CONFIG = {
-  beastRoot: "https://localhost:5005/"
+  beastRoot: "http://localhost:5005/",
+  staticRoot: "http://static.beast.com/",
+  webRoot: "http://web.beast.com/",
+  ncRoot: "beast.sdslabs.co"
 };
