@@ -23,7 +23,7 @@ Vue.use(VueToastify, {
   successDuration: 3000,
   warningInfoDuration: 3000,
   canPause: true,
-  theme: "light"
+  theme: "dark"
 });
 Vue.config.productionTip = false;
 Vue.use(VueConfirmDialog);

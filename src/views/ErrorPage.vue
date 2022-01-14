@@ -42,9 +42,6 @@ export default {
         case "401":
           this.redirectToLogin();
           break;
-        case "408":
-          this.refresh();
-          break;
         case "500":
           this.refresh();
           break;
@@ -59,10 +56,8 @@ export default {
       switch (this.errorCode) {
         case "401":
           return "Unathorized Access";
-        case "408":
-          return "Internal Server Error";
         case "500":
-          return "Check your Internet Connection";
+          return "Internal Server Error";
         default:
           return "Page Not Found";
       }
@@ -71,10 +66,8 @@ export default {
       switch (this.errorCode) {
         case "401":
           return "Login";
-        case "408":
-          return "Refresh";
         case "500":
-          return "Try Again";
+          return "Refresh";
         default:
           return "Go To Home";
       }

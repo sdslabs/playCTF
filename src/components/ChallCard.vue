@@ -85,12 +85,6 @@
         />
       </div>
     </div>
-    <div class="submit-feedback">
-      <transition name="fade" v-on:enter="enter">
-        <img v-if="showSuccess" src="@/assets/submit-success.svg" />
-        <img v-if="showFail" src="@/assets/submit-fail.svg" />
-      </transition>
-    </div>
   </div>
 </template>
 
@@ -134,7 +128,17 @@ export default {
       let paths = asset.split("/");
       return paths[paths.length - 1];
     },
-    enter: function() {
+    submitFlag() {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        this.$vToastify.setSettings({ position: "center-right"});
+        if (Response.data.success) {
+          this.showSuccess = true;
+          this.$vToastify.success("Flag submitted successfully", "Success");
+        } else {
+          this.showFail = true;
+          this.$vToastify.error("Incorrect flag submitted", "Error");
+        }
+      });
       var self = this;
       setTimeout(function() {
         if (self.showSuccess) {
@@ -145,17 +149,7 @@ export default {
         self.flag = "";
         self.showSuccess = false;
         self.showFail = false;
-      }, 3000); // hide the message after 3 seconds
-    },
-    submitFlag() {
-      console.log(this.challDetails);
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        if (Response.data.success) {
-          this.showSuccess = true;
-        } else {
-          this.showFail = true;
-        }
-      });
+      }, 3000);
     },
     isDisabled: function() {
       let flag = document.getElementById("flag-input").value;

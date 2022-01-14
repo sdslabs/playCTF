@@ -80,12 +80,12 @@ export default {
     },
     async reset() {
       if (this.password !== this.confirmPassword) {
-        this.PassErr = "Passwords don't match";
+        this.$vToastify.error("Passwords don't match", "Error");
       } else {
         this.PassErr = false;
         const state = await LoginUser.resetPassword(this.password);
         if (state) {
-          this.$vToastify.error("Successfully changed", "Success");
+          this.$vToastify.success("Successfully changed", "Success");
           await this.sleep(3000);
           this.$router.push("/about");
         } else {
