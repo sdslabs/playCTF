@@ -6,10 +6,7 @@
         Competition ended
       </p>
     </div>
-    <router-link
-      style="text-decoration: none"
-      to="/leaderboard"
-    >
+    <router-link style="text-decoration: none" to="/leaderboard">
       <Button text="View Results" class="primary-cta"
     /></router-link>
   </div>
@@ -40,6 +37,6 @@ export default {
     } else {
       this.configData = this.configs;
     }
-  },
+  }
 };
 </script>

@@ -4,17 +4,21 @@
     <div class="pre-message">
       <p class="pre-message-text">Competition yet to start</p>
     </div>
-      <div class="timer-sec" v-if="days">
-        <div class="timer2-text">{{ days }}Day(s)</div>
-        <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
-        <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
-        <div class="timer2-text seconds-timezoneimer">{{ this.formatValue(seconds) }}</div>
+    <div class="timer-sec" v-if="days">
+      <div class="timer2-text">{{ days }}Day(s)</div>
+      <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
+      <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
+      <div class="timer2-text seconds-timezoneimer">
+        {{ this.formatValue(seconds) }}
       </div>
-      <div class="timer-sec" v-else>
-        <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
-        <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
-        <div class="timer2-text seconds-timer">{{ this.formatValue(seconds) }}</div>
+    </div>
+    <div class="timer-sec" v-else>
+      <div class="timer2-text">{{ this.formatValue(hours) }}:</div>
+      <div class="timer2-text">{{ this.formatValue(minutes) }}:</div>
+      <div class="timer2-text seconds-timer">
+        {{ this.formatValue(seconds) }}
       </div>
+    </div>
   </div>
 </template>
 
