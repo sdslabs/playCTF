@@ -31,7 +31,7 @@ export default {
       if (response.data.role === "admin") {
         router.push("/admin/");
       } else {
-        router.push("/about");
+        router.push("/challenges");
       }
     } else {
       if (response.message.includes("400")) {

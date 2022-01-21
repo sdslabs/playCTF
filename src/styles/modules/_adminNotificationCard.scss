@@ -1,7 +1,8 @@
 .adminNotifCard {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: space-between;
   background: $theme-color-white;
   box-shadow: 0rem 0.375rem 0.625rem $theme-color-light-black-low-transp;
   border-radius: 0.1875rem;
@@ -11,19 +12,33 @@
   line-height: 1.75rem;
   padding: 0.625rem 1rem;
 }
-
+.adminNotifCardTitle{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 .adminNotifTitle {
   font-weight: bold;
   text-align: left;
-  width: 60%;
+  width: 100%;
   margin-bottom: 0;
+  display: flex;
+  flex-grow: row wrap;
+  align-items: center;
+  .text {
+    margin-right: 0.625rem;
+  }
+  .image{
+    display: flex;
+    align-items: center;
+  }
 }
 
 .adminNotifTime {
   text-align: right;
   color: $theme-color-violet;
   width: 40%;
-  margin-bottom: 0;
+  //margin-bottom: 0;
 }
 
 .adminNotifDesc {

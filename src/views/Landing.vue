@@ -3,8 +3,10 @@
     <div class="event">
       <div class="event-info">
         <div class="event-info-text">
-          <div class="tagline">Be a part of</div>
-          <div class="tagline">{{ configData.name }}</div>
+          <div class="tagline">
+            Be a part of <br />
+            {{ configData.name }}
+          </div>
           <div class="description">
             {{ configData.about }}
           </div>

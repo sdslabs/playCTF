@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { challStatus } from "../constants/constants";
+import { challStatus } from "@/constants/constants";
 export default {
   name: "adminChallCard",
   props: ["challenge", "checkedChallenge"],

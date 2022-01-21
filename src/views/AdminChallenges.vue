@@ -127,19 +127,22 @@
   </div>
 </template>
 <script>
-import adminChallCard from "../components/adminChallCard.vue";
-import ChalService from "../api/admin/challengesAPI";
-import SpinLoader from "../components/spinLoader";
-import { add } from "../constants/images";
-import { challStatus } from "../constants/constants";
-import CreateChallModal from "../components/CreateChallModal.vue";
+import adminChallCard from "@/components/adminChallCard.vue";
+import ChalService from "@/api/admin/challengesAPI";
+import SpinLoader from "@/components/spinLoader";
+import { add } from "@/constants/images";
+import {
+  tableCols,
+  confimDialogMessages,
+  challStatus
+} from "@/constants/constants";
+import CreateChallModal from "@/components/CreateChallModal.vue";
+import { CONFIG } from "@/config/config";
 import {
   getChalStats,
   getChallenges,
   getChalCategory
-} from "../utils/challenges";
-import { CONFIG } from "@/config/config";
-import { tableCols, confimDialogMessages } from "../constants/constants";
+} from "@/utils/challenges";
 export default {
   name: "AdminChallenges",
   components: { adminChallCard, SpinLoader, CreateChallModal },

@@ -139,7 +139,7 @@ export const tableCols = {
     },
     {
       id: 3,
-      label: "Category",
+      label: "Tags",
       style: { textAlign: "center", width: "10%" }
     },
     {
@@ -168,7 +168,7 @@ export const tableCols = {
     },
     {
       id: 2,
-      label: "Category",
+      label: "Tags",
       style: { textAlign: "center", width: "20%" }
     },
     {
@@ -274,7 +274,7 @@ export const pieChartOptions = () => {
         }
       }
     },
-    cutoutPercentage: 35,
+    //cutoutPercentage: 35,
     tooltips: {
       callbacks: {
         title: function(tooltipItem, data) {
