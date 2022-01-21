@@ -357,6 +357,7 @@ export default {
             final = x.name + "," + final;
           }
           i++;
+          x.checked = false;
         }
       }
       if (i > 0) this.manageMultipleChallengeHandler(final, name);
