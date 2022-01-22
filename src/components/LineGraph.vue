@@ -7,8 +7,10 @@ export default {
   props: ["chartData", "options"],
   watch: {
     chartData: function() {
-      this.$data._chart.destroy();
-      this.renderChart(this.chartData, this.options);
+      if (this.chartData.update) {
+        this.$data._chart.destroy();
+        this.renderChart(this.chartData, this.options);
+      }
     }
   },
   mounted() {
