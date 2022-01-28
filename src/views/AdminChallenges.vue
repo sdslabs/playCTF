@@ -38,7 +38,7 @@
         <div class="right">
           <div class="deployer-container">
             <button
-              v-if="canDeploy() === true"
+              v-if="canDeploy === true"
               class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('deploy')"
@@ -47,7 +47,7 @@
               <span class="tooltiptext">Deploy</span>
             </button>
             <button
-              v-if="canUndeploy() === true"
+              v-if="canUndeploy === true"
               class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('undeploy')"
@@ -58,7 +58,7 @@
           </div>
           <div class="deployer-container">
             <button
-              v-if="canPurge() === true"
+              v-if="canPurge === true"
               class="action-cta multiple-deployer-cta"
               :key="reload"
               @click="manageMultipleChallenge('purge')"
@@ -68,14 +68,14 @@
             </button>
           </div>
           <button
-            v-if="canPurge() === false"
+            v-if="canPurge === false"
             class="action-cta"
             @click="selectAll()"
           >
             <span> Select All </span>
           </button>
           <button
-            v-if="canPurge() === true"
+            v-if="canPurge === true"
             class=" action-cta"
             @click="deselectAll()"
           >
@@ -155,6 +155,9 @@ export default {
       sortType: "Name",
       tagFilter: "All",
       challenges: [],
+      canDeploy: false,
+      canPurge: false,
+      canUndeploy: false,
       displayChallenges: [],
       checkedChallenges: [],
       typeOptions: [
@@ -309,17 +312,18 @@ export default {
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
-    canPurge() {
-      this.reload = !this.reload;
+    canPurgeFunc() {
+      console.log("wtf");
       for (let x of this.displayChallenges) {
         if (x.checked === true) {
+          this.canPurge = true;
           return true;
         }
       }
+      this.canPurge = false;
       return false;
     },
-    canDeploy() {
-      this.reload = !this.reload;
+    canDeployFunc() {
       let flag = true;
       let i = 0;
       for (let x of this.displayChallenges) {
@@ -328,11 +332,14 @@ export default {
           i++;
         }
       }
-      if (i == 0) return false;
-      return flag;
+      if (i == 0) {
+        this.canDeploy = false;
+        return false;
+      }
+      this.canDeploy = flag;
+      return this.canDeploy;
     },
-    canUndeploy() {
-      this.reload = !this.reload;
+    canUndeployFunc() {
       let flag = true;
       let i = 0;
       for (let x of this.displayChallenges) {
@@ -341,8 +348,12 @@ export default {
           i++;
         }
       }
-      if (i == 0) return false;
-      return flag;
+      if (i == 0) {
+        this.canUndeploy = false;
+        return false;
+      }
+      this.canUndeploy = flag;
+      return this.canUndeploy;
     },
     manageMultipleChallenge(name) {
       this.reload = !this.reload;
@@ -428,13 +439,20 @@ export default {
       for (let x of this.displayChallenges) {
         x.checked = true;
       }
-      this.reload = !this.reload;
+      this.reloadFunc();
     },
     deselectAll() {
       for (let x of this.displayChallenges) {
         x.checked = false;
       }
+      this.reloadFunc();
+    },
+    reloadFunc() {
+      console.log("hello");
       this.reload = !this.reload;
+      this.canPurgeFunc();
+      this.canDeployFunc();
+      this.canUndeployFunc();
     }
   },
   beforeCreate() {

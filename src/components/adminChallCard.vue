@@ -21,13 +21,6 @@
         <span class="adminChallSolves"
           >{{ challenge.solvesNumber }} Solves</span
         >
-        <span class="challengesCheckBox">
-          <input
-            @click="handleCheckboxClick"
-            type="checkbox"
-            v-model="checkedChallenge"
-          />
-        </span>
       </div>
       <div class="adminTags">
         <div
@@ -37,6 +30,13 @@
         >
           {{ tag }}
         </div>
+        <span class="challengesCheckBox">
+          <input
+            @click="handleCheckboxClick"
+            type="checkbox"
+            v-model="checkedChallenge"
+          />
+        </span>
       </div>
     </div>
   </router-link>
@@ -63,10 +63,7 @@ export default {
       } else {
         this.challenge.checked = !this.challenge.checked;
       }
-
-      this.$parent.canPurge();
-      this.$parent.canDeploy();
-      this.$parent.canUndeploy();
+      this.$parent.reloadFunc();
     }
   }
 };
