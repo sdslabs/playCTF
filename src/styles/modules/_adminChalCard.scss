@@ -53,12 +53,6 @@
             .adminChallSolves {
                 padding-left: 0.3125rem;
             }
-
-            .challengesCheckBox{
-                position: relative;
-                margin-left: auto;
-                margin-right: 0px;
-            }
         }
     }
 }
@@ -84,6 +78,20 @@
     flex-flow: row wrap;
     column-gap: 0.25rem;
     margin-top: 0.25rem;
+
+    .challengesCheckBox{
+        position: relative;
+        top: 0.4rem;
+        bottom: 0px;
+        margin-left: auto;
+        margin-right: 0px;
+        margin-bottom: 0px;
+
+        input{
+            bottom: 0;
+            position: relative;
+        }
+    }
 }
 
 .adminChallCategory {
