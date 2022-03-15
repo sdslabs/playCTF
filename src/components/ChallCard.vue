@@ -130,7 +130,7 @@ export default {
     },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        this.$vToastify.setSettings({ position: "center-right"});
+        this.$vToastify.setSettings({ position: "center-right" });
         if (Response.data.success) {
           this.showSuccess = true;
           this.$vToastify.success("Flag submitted successfully", "Success");
