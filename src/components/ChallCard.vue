@@ -42,7 +42,9 @@
         </p>
       </div>
       <div class="challenge-links">
-        <p class="link-heading">Asset Links</p>
+        <p class="link-heading" v-if="this.challDetails.assets.length > 0">
+          Asset Links
+        </p>
         <a
           class="challenge-link aboutText"
           v-for="asset in this.challDetails.assets"
@@ -52,7 +54,12 @@
         >
           {{ getFileFromAsset(asset) }}
         </a>
-        <p class="link-heading">Additional Links</p>
+        <p
+          class="link-heading"
+          v-if="this.challDetails.additionalLinks.length > 1"
+        >
+          Additional Links
+        </p>
         <a
           class="challenge-link"
           v-for="asset in this.challDetails.additionalLinks"
@@ -106,7 +113,9 @@ export default {
   },
   state: {
     disable: false,
-    isModalVisible: false
+    isModalVisible: false,
+    assetLinks: false,
+    additionalLinks: false
   },
   methods: {
     getUrl(port) {
@@ -130,12 +139,18 @@ export default {
     },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        this.$vToastify.setSettings({ position: "center-right"});
+        this.$vToastify.setSettings({
+          position: "center-right",
+          theme: "beast-success"
+        });
         if (Response.data.success) {
           this.showSuccess = true;
           this.$vToastify.success("Flag submitted successfully", "Success");
         } else {
           this.showFail = true;
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error("Incorrect flag submitted", "Error");
         }
       });

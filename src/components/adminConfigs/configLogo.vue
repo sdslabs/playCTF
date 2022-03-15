@@ -93,6 +93,9 @@ export default {
           this.emitLogo(newCompInfoLogo);
         } else {
           this.logo = prevCompInfoLogo;
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error("Not a valid image file", "Error");
           this.fadeFunc();
         }

@@ -1,0 +1,140 @@
+// This is all the styles the toast component uses.
+// You may change any of the default values
+// by appending the value with !important.
+//
+// To get the plain CSS rules just plug
+// it into an online converter
+.vt-success {
+  transform: scale(0.5) !important;
+  & > .vt-icon > svg {
+    fill: #199919;
+  }
+  border-color: #199919;
+}
+.vt-info {
+  transform: scale(0.5) !important;
+  & > .vt-icon > svg {
+    fill: #003bc8;
+  }
+  border-color: #003bc8;
+}
+.vt-warning {
+  transform: scale(0.5) !important;
+  & > .vt-icon > svg {
+    fill: #ffb300;
+  }
+  border-color: #ffb300;
+}
+.vt-error {
+  transform: scale(0.5) !important;
+  & > .vt-icon > svg {
+    fill: #D72C27 !important;
+  }
+  border-color: #D72C27 !important;
+}
+$themes: (
+  "beast-error": #D72C27,
+  "beast-success": #199919
+);
+@each $name, $color in $themes {
+  .vt-theme-#{$name} {
+    height: 99px;
+    width: 361px;
+    background-color: #ffffff;
+    border-radius: 2px !important;
+    box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+    & > .vt-progress-bar {
+      background-color: color-change($color, 10%);
+      & > .vt-progress {
+        background-color: color-change($color, 30%);
+      }
+    }
+    & > .vt-content { 
+      padding-top: 30px !important;
+      & > .vt-title {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 22px;
+        color: $color !important;
+      }
+      & > .vt-paragraph {
+        font-family: 'Open Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+        color: #6B6B6B !important;
+      }
+    }
+    & > .vt-buttons {
+      & > button {
+        border: solid 1px color-change($color, 10%);
+        background-color: color-change($color, 10%);
+        color: color-change($color, 75%);
+        transition: all 0.2s ease-out;
+        &:hover {
+          background-color: color-change($color, 65%);
+          color: color-change($color, 5%);
+          transition: all 0.2s ease-out;
+        }
+      }
+    }
+    & > .vt-prompt {
+      & > .vt-icon > svg {
+        fill: color-change($color, 70%);
+      }
+      border-color: color-change($color, 70%);
+    }
+    & > .vt-icon-container > .vt-spinner {
+      border: 2px solid color-change($color, 30%);
+      border-top: 2px solid color-change($color, 90%);
+    }
+  }
+}
+
+.vt-right-enter-active,
+.vt-left-enter-active,
+.vt-bottom-enter-active,
+.vt-top-enter-active,
+.vt-center-enter-active {
+  transition: all 0.2s ease-out;
+}
+
+.vt-right-leave-active,
+.vt-left-leave-active,
+.vt-bottom-leave-active,
+.vt-top-leave-active,
+.vt-center-leave-active {
+  transition: all 0.2s ease-in;
+}
+
+.vt-right-enter,
+.vt-right-leave-to {
+  transform: translateX(50px);
+  opacity: 0;
+}
+
+.vt-left-enter,
+.vt-left-leave-to {
+  transform: translateX(-50px);
+  opacity: 0;
+}
+
+.vt-bottom-enter,
+.vt-bottom-leave-to {
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.vt-top-enter,
+.vt-top-leave-to {
+  transform: translateY(-50px);
+  opacity: 0;
+}
+
+.vt-center-enter,
+.vt-center-leave-to {
+  opacity: 0;
+}

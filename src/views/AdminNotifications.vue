@@ -165,6 +165,9 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showSuccess = true;
+          this.$vToastify.setSettings({
+            theme: "beast-success"
+          });
           this.$vToastify.success("Notification sent successfully", "Success");
           this.fadeFunc();
         })
@@ -175,6 +178,9 @@ export default {
           self.canSubmit = false;
           self.subProcessing = false;
           self.showFail = true;
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error("Failed to send notification", "Error");
           this.fadeFunc();
         });
