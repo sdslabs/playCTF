@@ -8,7 +8,7 @@
         purgedLink: challenge.status === 'Purged',
         inProgressLink: challStatus.inProgressStatus.includes(challenge.status)
       },
-      'adminChalLink',
+      'adminChalLink'
     ]"
   >
     <div class="adminChallItem" @click="redirect(challenge.name)">
@@ -63,9 +63,9 @@ export default {
       e.stopPropagation();
       //console.log(e)
       if (this.challenge.checked === undefined) {
-        this.challenge.checked = true
+        this.challenge.checked = true;
       } else {
-        this.challenge.checked = !this.challenge.checked
+        this.challenge.checked = !this.challenge.checked;
       }
       this.$parent.reloadFunc();
     }

@@ -253,7 +253,7 @@ export default {
       return `${url}:${port}`;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     sortChallenges(challenges, sortType) {
       let sortedChallenges = [];
@@ -311,17 +311,6 @@ export default {
         return a[field2] > b[field2] ? 1 : -1;
       }
       return b[field1] - a[field1];
-    },
-    getUrl(port) {
-      let url = CONFIG.beastRoot;
-      let portIndex = url.lastIndexOf(":");
-      if (portIndex !== -1) {
-        url = url.substring(0, portIndex);
-      }
-      return `${url}:${port}`;
-    },
-    sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
     },
     canPurgeFunc() {
       console.log("wtf");
