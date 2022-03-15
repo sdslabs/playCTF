@@ -207,6 +207,32 @@ export const confimDialogMessages = chalName => {
         }
       }
     },
+    adminChallenges: {
+      purge: {
+        title: "Purge the selected challenges?",
+        message: `Action will pause the participation of players on these challenges.`,
+        button: {
+          yes: "Purge Selected",
+          no: "Cancel"
+        }
+      },
+      deploy: {
+        title: "Deploy the selected challenges?",
+        message: `The challenges would go live after this action. The players would be able to attempt these challenges.`,
+        button: {
+          yes: "Deploy Selected",
+          no: "Cancel"
+        }
+      },
+      undeploy: {
+        title: "Undeploy the selected challenges?",
+        message: `The challenges will be marked as "Down for maintenance" after this action.`,
+        button: {
+          yes: "Undeploy Selected",
+          no: "Cancel"
+        }
+      }
+    },
     user: {
       ban: {
         title: "Want to ban this player?",

@@ -29,7 +29,7 @@
             v-for="sort in this.sortTypeOptions"
             :key="sort.id"
             class="sortOption"
-            :class="[{ active: sortFilter === sort.name }]"
+            :class="[{ active: sortType === sort.name }]"
             @click="changeSortType(sort.name)"
           >
             {{ sort.name }}
@@ -85,7 +85,7 @@
             class="dropdown"
             :options="statusFilterOptions"
             :value="this.statusFilter"
-            @input="changeFilter"
+            @input="changeStatusFilter"
             :clearable="false"
             :searchable="false"
           >
@@ -123,6 +123,7 @@
         <create-chall-modal @close="showCreateChallModal = false" />
       </div>
     </transition>
+    <vue-confirm-dialog class="manageChalConfirmBox"></vue-confirm-dialog>
   </div>
 </template>
 <script>
@@ -165,10 +166,10 @@ export default {
         { name: "undeploy", id: 2 },
         { name: "purge", id: 3 }
       ],
-      tagFilterOptions: [{ name: "All", id: 1 }],
+      tagFilterOptions: [{ name: "All", id: 0 }],
       sortTypeOptions: [
         { name: "Name", id: 1 },
-        { name: "Score", id: 2 },
+        { name: "Points", id: 2 },
         { name: "Solves", id: 3 }
       ],
       statusFilterOptions: [
@@ -181,9 +182,10 @@ export default {
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
+      hostUrl: this.$store.getters.hostUrl,
+      sortAscending: 1,
       confirmDialogs: confimDialogMessages(this.$route.params.id)
-        .adminChallenge,
-      hostUrl: this.$store.getters.hostUrl
+        .adminChallenges
     };
   },
   computed: {
@@ -260,17 +262,18 @@ export default {
       switch (sortType) {
         case "Name":
           sortedChallenges = challenges.sort((a, b) => {
-            return a.name > b.name ? 1 : -1;
+            let res = a.name > b.name ? 1 : -1;
+            return res * this.sortAscending;
           });
           break;
-        case "Score":
+        case "Points":
           sortedChallenges = challenges.sort((a, b) => {
-            return this.findGreater(a, b, "Points", "Name");
+            return this.findGreater(a, b, "points", "name");
           });
           break;
         case "Solves":
           sortedChallenges = challenges.sort((a, b) => {
-            return this.findGreater(a, b, "SolvesNumber", "Name");
+            return this.findGreater(a, b, "solvesNumber", "name");
           });
           break;
       }
@@ -299,6 +302,9 @@ export default {
       this.refreshChallengeList();
     },
     changeSortType(value) {
+      if (this.sortType === value) {
+        this.sortAscending *= -1;
+      }
       this.sortType = value;
       this.refreshChallengeList();
     },
@@ -308,12 +314,12 @@ export default {
     },
     findGreater(a, b, field1, field2) {
       if (a[field1] === b[field1]) {
-        return a[field2] > b[field2] ? 1 : -1;
+        let res = a[field2] > b[field2] ? 1 : -1;
+        return res * this.sortAscending;
       }
-      return b[field1] - a[field1];
+      return (b[field1] - a[field1]) * this.sortAscending;
     },
     canPurgeFunc() {
-      console.log("wtf");
       for (let x of this.displayChallenges) {
         if (x.checked === true) {
           this.canPurge = true;
@@ -355,85 +361,37 @@ export default {
       this.canUndeploy = flag;
       return this.canUndeploy;
     },
-    manageMultipleChallenge(name) {
-      this.reload = !this.reload;
-      let final = "";
-      let i = 0;
-      for (let x of this.displayChallenges) {
-        if (x.checked === true) {
-          if (i == 0) {
-            final = x.name;
-          }
-          if (i > 0) {
-            final = x.name + "," + final;
-          }
-          i++;
-          x.checked = false;
-        }
-      }
-      if (i > 0) this.manageMultipleChallengeHandler(final, name);
-    },
-    manageMultipleChallengeHandler(name, action) {
-      //let confirmHandler = (confirm) => {
-      //if (confirm) {
-      ChalService.manageMultipleChalAction(name, action).then(
-        async response => {
-          if (response.status !== 200) {
-            console.log(response.data);
-          } else {
-            if (action === "purge") {
-              this.loading.challengeNotFetched = true;
-              await this.sleep(1000);
-              this.loading.challengeNotFetched = false;
-              this.$router.push("/admin/challenges/");
-            }
-            if (action === "deploy") {
-              let challengesDeployed = false;
-              while (!challengesDeployed) {
-                if (this.$route.name !== "adminChallenge") {
-                  break;
-                }
-                let names = this.$route.params.id.split(",");
-                for (name of names) {
-                  ChalService.fetchChallengeByName(name).then(response => {
-                    let data = response.data;
-                    this.chalDetails = data;
-                    challengesDeployed &= data.status === "Deployed";
-                  });
-                  await this.sleep(5000);
-                }
-              }
-            }
-            if (action === "undeploy") {
-              let challengeDeployed = false;
-              while (!challengeDeployed) {
-                if (this.$route.name !== "adminChallenge") {
-                  break;
-                }
-                ChalService.fetchChallengeByName(this.$route.params.id).then(
-                  response => {
-                    let data = response.data;
-                    this.chalDetails = data;
-                    challengeDeployed = data.status === "Undeployed";
-                  }
-                );
-                await this.sleep(5000);
-              }
+    manageMultipleChallenge(action) {
+      let confirmHandler = confirm => {
+        if (confirm) {
+          let allChallenges = [];
+          this.displayChallenges.forEach(challenge => {
+            allChallenges.push(challenge.name);
+          });
+          ChalService.manageMultipleChalAction(
+            allChallenges.join(","),
+            action
+          ).then(async response => {
+            if (response.status === 200) {
+              this.$vToastify.success(
+                "Action triggered successfully",
+                "Success"
+              );
             } else {
-              this.$router.go();
+              this.$vToastify.error("Server Error", "Error");
             }
-          }
+            await this.sleep(5000);
+            this.$router.go();
+          });
         }
-      );
-      //}
-      //};
-      //let inputParams = {
-      //  title: this.confirmDialogs[action].title,
-      //  message: this.confirmDialogs[action].message,
-      //  button: this.confirmDialogs[action].button,
-      //  callback: confirmHandler,
-      //};
-      //this.$confirm(inputParams);
+      };
+      let inputParams = {
+        title: this.confirmDialogs[action].title,
+        message: this.confirmDialogs[action].message,
+        button: this.confirmDialogs[action].button,
+        callback: confirmHandler
+      };
+      this.$confirm(inputParams);
     },
     selectAll() {
       for (let x of this.displayChallenges) {
@@ -448,7 +406,6 @@ export default {
       this.reloadFunc();
     },
     reloadFunc() {
-      console.log("hello");
       this.reload = !this.reload;
       this.canPurgeFunc();
       this.canDeployFunc();

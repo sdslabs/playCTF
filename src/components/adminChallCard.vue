@@ -17,21 +17,14 @@
         <span class="adminChallStatus">{{ challenge.status }}</span>
       </div>
       <div class="adminChallStats">
+        <span class="adminChallCategory">{{ challenge.category }}</span>
         <span class="adminChallPoints">{{ challenge.points }} Points</span>
         <span class="adminChallSolves"
           >{{ challenge.solvesNumber }} Solves</span
         >
-        {{ challenge.checked }}
-        <span class="challengesCheckBox"
-          ><input @click="handleCheckboxClick" type="checkbox"
-        /></span>
       </div>
       <div class="adminTags">
-        <div
-          v-for="tag in challenge.tags"
-          :key="tag"
-          class="adminChallCategory"
-        >
+        <div v-for="tag in challenge.tags" :key="tag" class="adminChallTags">
           {{ tag }}
         </div>
         <span class="challengesCheckBox">
