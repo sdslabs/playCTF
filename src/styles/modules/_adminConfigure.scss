@@ -21,6 +21,14 @@
 
     .headingText {
       margin-right: 2rem;
+      @extend %font-style-bold;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+      line-height: 1.75rem;
+      text-align: left;
+      padding: 0.625rem 0;
+      color: $theme-color-dark-orange;
     }
 
     .addConfigFeedback {
@@ -32,7 +40,7 @@
   }
 
   .form {
-    margin-top: 1.875rem;
+    margin-top: 1.425rem;
     margin-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
@@ -48,6 +56,7 @@
     line-height: 1.125rem;
     margin: 0.2rem;
     margin-left: 0;
+    color: $theme-color-grey57;
   }
 
   .subfields-row {
@@ -55,6 +64,7 @@
     display: flex;
     align-items: center;
     height: 1.5rem;
+    color: $theme-color-grey57;
   }
 
   .counter {
@@ -68,6 +78,7 @@
     font-size: 0.75rem;
     text-align: left;
     font-family: $primary-font-family;
+    color: $theme-color-grey57;
 
     font-weight: 600;
     line-height: 1.125rem;
@@ -101,10 +112,12 @@
     width: 100%;
     padding-left: 1rem;
     padding-top: 1rem;
+    color: $theme-color-black19;
   }
 
   textarea::placeholder {
     font-family: $primary-font-family;
+    color: $theme-color-grey-high-transp;
 
     font-weight: 600;
     font-size: 1rem;
@@ -151,6 +164,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        color: $theme-color-grey57;
       }
 
       .timeInput {
@@ -158,6 +172,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        color: $theme-color-grey57;
       }
     }
   }

@@ -62,6 +62,7 @@
       </div>
     </div>
     <div class="adminStatsContainer">
+      <div class="adminUserSubheading">Statistics</div>
       <p class="adminSubheading">Submissions</p>
       <div class="adminTwoColContainer" v-if="this.submissions.totalChal > 0">
         <div class="adminStatsLeftCol">
@@ -114,7 +115,7 @@
       </div>
     </div>
     <hr class="hrSeparator" />
-    <div class="adminHeadingName">Submissions</div>
+    <div class="adminUserSubheading">Submissions</div>
     <admin-table
       :tableCols="tableCols"
       :rows="rows"

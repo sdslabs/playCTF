@@ -196,15 +196,6 @@
     }
 }
 
-.adminHeadingName {
-    @extend %font-style-bold;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    line-height: 1.75rem;
-    text-align: left;
-    padding: 0.625rem 0;
-}
-
 .adminChallStatistics {
     display: flex;
     flex-direction: column;
