@@ -18,13 +18,16 @@
   width: 100%;
 }
 .adminNotifTitle {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
   text-align: left;
   width: 100%;
   margin-bottom: 0;
   display: flex;
   flex-grow: row wrap;
   align-items: center;
+  color: $theme-color-grey39;
+  
   .text {
     margin-right: 0.625rem;
   }
@@ -35,6 +38,8 @@
 }
 
 .adminNotifTime {
+  font-weight: 400;
+  font-size: 0.75rem;
   text-align: right;
   color: $theme-color-violet;
   width: 40%;
@@ -42,6 +47,8 @@
 }
 
 .adminNotifDesc {
+  font-weight: 400;
+  font-size: 0.875rem;
   margin-top: 0;
   color: $theme-color-grey57;
   font-weight: normal;

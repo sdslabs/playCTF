@@ -1,244 +1,253 @@
 .adminChallengesContainer {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin-bottom: 30%;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 30%;
 }
 
 .adminChallengesVerticalNav {
-    width: 15rem;
-    justify-content: flex-start;
-    align-items: flex-end;
+  width: 15rem;
+  justify-content: flex-start;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin-right: auto;
+  padding-top: 10.875rem;
+  padding-right: 1.5rem;
+  margin-left: -15rem;
+  box-sizing: border-box;
+
+  .navButton {
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
-    margin-right: auto;
-    padding-top: 10.875rem;
-        padding-right: 1.5rem;
-    margin-left: -15rem;
-    box-sizing: border-box;
+    flex-direction: row-reverse;
+    @extend %font-style-basic;
+    font-size: 1rem;
+    line-height: 1rem;
+    border: none;
+    background-color: transparent;
+    color: $theme-color-light-grey;
+    text-align: right;
+    outline: none;
+    margin: 1rem 0;
+    width: 100%;
+    height: 1.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.25rem;
+  }
 
-    .navButton {
-        cursor: pointer;
-        display: flex;
-        flex-direction: row-reverse;
-        @extend %font-style-basic;
-        font-size: 1rem;
-        line-height: 1rem;
-        background-color: white;
-        border: none;
-        color: $theme-color-light-grey;
-        text-align: right;
-        outline: none;
-        margin: 1rem 0;
-        width: 100%;
-        height: 1.5rem;
-        padding-right: 0.5rem;
-        padding-top: 0.25rem;
-    }
-
-    .navButton:hover,
-    .active {
-        @extend %font-style-bold;
-        font-size: 1rem;
-        line-height: 1rem;
-        color: $theme-color-black19;
-        border-right: 0.125rem solid $theme-color-dark-orange;
-        padding-right: calc(0.5rem - 0.125rem);
-    }
+  .navButton:hover,
+  .active {
+    @extend %font-style-bold;
+    font-size: 1rem;
+    line-height: 1rem;
+    color: $theme-color-black19;
+    border-right: 0.125rem solid $theme-color-dark-orange;
+    padding-right: calc(0.5rem - 0.125rem);
+  }
 }
 
 .mainContaineradminChall {
-    position: relative;
-    width: 100%;
-    align-self: flex-start;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  width: 100%;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-    .adminHeadingChal {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
+  .adminHeadingChal {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 .adminChallengesList {
-    margin-top: 1.25rem;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-between;
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .adminSort {
-    width: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  @extend %font-style-basic;
+  margin-top: 1.875rem;
+  height: 2.5rem;
+
+  .left {
     display: flex;
-    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     @extend %font-style-basic;
-    margin-top: 1.875rem;
+    margin-top: 0.875rem;
     height: 2.5rem;
 
     .left {
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        .sortText {
-            line-height: 1.125rem;
-            color: $theme-color-black-high-transp;
-            margin-right: 1rem;
-        }
-
-        .sortOption {
-            cursor: pointer;
-            box-sizing: border-box;
-            font-size: 1rem;
-            line-height: 1.5rem;
-            color: $theme-color-grey-high-transp;
-            margin: 0rem;
-            width: 5.5rem;
-            height: 3rem;
-            padding-top: 0.75rem;
-        }
-
-        .sortOption:hover,
-        .active {
-            @extend %font-style-bold;
-            font-size: 1rem;
-            line-height: 1.5rem;
-            color: $theme-color-black19;
-            margin: 0rem;
-            height: 3rem;
-
-            &:after {
-                content: "";
-                display: block;
-                margin: 0 auto;
-                width: 3.5rem;
-                border-bottom: 0.125rem solid $theme-color-dark-orange;
-            }
-        }
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .sortText {
+        line-height: 1.125rem;
+        color: $theme-color-black-high-transp;
+        margin-right: 1rem;
+      }
     }
 
-    .right {
-        flex-grow: 2;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        .deployer-container {
-            margin-top: 3px;
-            margin-left: 0;
-            margin-right: 0;
-            border: 0px;
-            button {
-                width: 1.989rem;
-                img{
-                    padding-left: 0.3rem;
-                    width:fit-content;
-                    height:fit-content;
-                }
-                .tooltiptext {
-                    visibility: hidden;
-                    width: 120px;
-                    background-color: black;
-                    color: #fff;
-                    text-align: center;
-                    border-radius: 6px;
-                    padding: 5px 0;
-                  
-                    /* Position the tooltip */
-                    position: absolute;
-                    top: 2.5rem;
-                    z-index: 1;
-                }
-            }
-            button:hover .tooltiptext{
-                visibility: visible;
-            }
-        }
-
-        button {
-            margin-left: 0;
-            margin-right: 10px;
-            width: 7rem;
-            padding: 7px;
-            padding-left: 10px;
-            padding-right: 10px;
-            border: 1px solid;
-            border-color: $theme-color-grey-high-transp;
-            border-radius: 5px;
-            background: none;
-            justify-content: center;
-            .text {
-                @extend %font-style-basic;
-                color: $theme-color-grey57;
-                font-size: 0.875rem;
-                justify-self: center;
-            }
-        }
-
-        .dropdown {
-            margin-left: 0;
-            width: 12.5rem;
-            .filterText {
-                @extend %font-style-basic;
-                font-size: 0.875rem;
-                line-height: 1.125rem;
-                color: $theme-color-grey57;
-            }
-
-            .filterSelection {
-                @extend %font-style-basic;
-                font-size: 0.875rem;
-                line-height: 1.125rem;
-                color: $theme-color-black-high-transp;
-            }
-            .vs__selected {
-                position: absolute;
-                top: 0.1rem;
-            }
-        }
-
-        .selection {
-            width: 12.5rem;
-        }
+    .sortOption {
+      cursor: pointer;
+      box-sizing: border-box;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: $theme-color-grey-high-transp;
+      margin: 0rem;
+      width: 5.5rem;
+      height: 3rem;
+      padding-top: 0.75rem;
     }
+
+    .sortOption:hover,
+    .active {
+      @extend %font-style-bold;
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: $theme-color-black19;
+      margin: 0rem;
+      height: 3rem;
+
+      &:after {
+        content: "";
+        display: block;
+        margin: 0 auto;
+        width: 3.5rem;
+        border-bottom: 0.125rem solid $theme-color-dark-orange;
+      }
+    }
+  }
+
+  .right {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .deployer-container {
+      margin-top: 3px;
+      margin-left: 0;
+      margin-right: 0;
+      border: 0px;
+      button {
+        width: 1.989rem;
+        img {
+          padding-left: 0.3rem;
+          width: fit-content;
+          height: fit-content;
+        }
+        .tooltiptext {
+          visibility: hidden;
+          width: 120px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+
+          /* Position the tooltip */
+          position: absolute;
+          top: 2.5rem;
+          z-index: 1;
+        }
+      }
+      button:hover .tooltiptext {
+        visibility: visible;
+      }
+    }
+
+    button {
+      margin-left: 0;
+      margin-right: 10px;
+      width: 7rem;
+      padding: 7px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: 1px solid;
+      border-color: $theme-color-grey-high-transp;
+      border-radius: 5px;
+      background: none;
+      justify-content: center;
+      .text {
+        @extend %font-style-basic;
+        color: $theme-color-grey57;
+        font-size: 0.875rem;
+        justify-self: center;
+      }
+    }
+
+    .dropdown {
+      margin-left: 0;
+      width: 12.5rem;
+      .filterText {
+        @extend %font-style-basic;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+        color: $theme-color-grey57;
+      }
+
+      .filterSelection {
+        @extend %font-style-basic;
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+        color: $theme-color-black-high-transp;
+      }
+      .vs__selected {
+        position: absolute;
+        top: 0.1rem;
+      }
+    }
+
+    .selection {
+      width: 12.5rem;
+    }
+  }
 }
 
 .loader {
-    align-self: center;
-    text-align: center;
-    justify-self: center;
-    padding: 5%;
+  align-self: center;
+  text-align: center;
+  justify-self: center;
+  padding: 5%;
 }
 
 .vue-simple-spinner-text {
-    @extend %font-style-bold;
-    line-height: 1.5rem;
-    color: $theme-color-grey-high-transp;
+  @extend %font-style-bold;
+  line-height: 1.5rem;
+  color: $theme-color-grey-high-transp;
 }
 
 .uploadChallengeButton {
-    width: 50%;
-    padding: 0.2rem 1rem;
-    margin-right: auto;
+  width: 50%;
+  padding: 0.2rem 1rem;
+  margin-right: auto;
 }
 
 .createChallBtnRow {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 
-    .createChallButton {
-        padding: 0.2rem 1rem;
-        margin-right: 2rem;
-    }
+  .createChallButton {
+    padding: 0.2rem 1rem;
+    margin-right: 2rem;
+  }
 }
 
 .uploadChallButton {
-    margin-right: auto;
+  margin-right: auto;
 }

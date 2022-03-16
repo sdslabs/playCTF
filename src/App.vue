@@ -23,7 +23,7 @@ export default {
     }
   },
   mounted() {
-    configureService.getConfigs().then((response) => {
+    configureService.getConfigs().then(response => {
       let configs = response.data;
       let competitionInfo = {
         name: configs.name,

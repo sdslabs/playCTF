@@ -10,11 +10,9 @@ export const parseUserData = userData => {
       return b.score - a.score;
     }
   });
-  let rank = 0;
   userData.forEach(el => {
-    rank++;
     allUsers.push({
-      rank: rank,
+      rank: el.rank,
       username: el.username,
       email: el.email,
       score: el.score,

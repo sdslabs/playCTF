@@ -105,7 +105,9 @@
     <div class="adminStatsContainer">
       <div class="adminOneColContainer">
         <p class="adminSubheading">
-          Solve Percentages (Out of {{ userStats.active }} Active Users)
+          Solve Percentages (<span class="adminSubheadingLight">Out of </span
+          >{{ userStats.unbanned_users }}
+          <span class="adminSubheadingLight">Active Users</span>)
         </p>
         <div class="adminSolveGraphContainer" v-if="this.chalTags.length > 0">
           <div v-for="tag in chalTags" :key="tag.id" class="graph">
@@ -167,9 +169,11 @@ export default {
       }
       let labels = [];
       let data = [];
-      dataSolves.forEach((el) => {
+      dataSolves.forEach(el => {
         labels.push(el.username);
-        data.push((el.solves / this.chalCategory[tag].total) * 100);
+        data.push(
+          ((el.solves / this.chalCategory[tag].total) * 100).toFixed(0)
+        );
       });
       return {
         labels,
