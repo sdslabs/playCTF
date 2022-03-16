@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="adminFooterLogos">
-      <img :src="sdslabsLogo" />
+      <a href="https://sdslabs.co"><img :src="sdslabsLogo"/></a>
       <div class="adminFooterContactInfo">
         <a href="https://www.facebook.com/SDSLabs"><img :src="fbLogo"/></a>
         <a href="https://twitter.com/sdslabs"><img :src="twitterLogo"/></a>

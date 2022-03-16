@@ -16,11 +16,10 @@
           <span class="adminBold">{{ challenges.deployedChal }}</span> are
           deployed,
           <span class="adminBold">{{ challenges.undeployedChal }}</span> are
-          undeployed and
-          <span class="adminBold">{{ challenges.purgedChal }}</span> are purged
+          undeployed.
         </p>
         <p class="adminInfo">
-          <span class="adminVioletBold">{{ leader.username }}</span> leads the
+          <span class="adminOrangeBold">{{ leader.username }}</span> leads the
           leaderboard with
           <span class="adminBold">{{ leader.score }}</span> points.
         </p>

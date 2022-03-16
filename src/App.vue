@@ -54,6 +54,7 @@ export default {
   z-index: 1;
   min-height: 100%;
   display: flex;
+  background-color: #fcfcfc;
 }
 
 @media only screen and (max-width: 1280) {

@@ -16,6 +16,11 @@
   font-weight: bold;
 }
 
+.adminOrangeBold {
+  color: $theme-color-dark-orange;
+  font-weight: bold;
+}
+
 .adminInfo {
   @extend %font-style-basic;
   

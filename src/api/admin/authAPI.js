@@ -50,25 +50,12 @@ export default {
     bodyFormData.append("username", username);
     bodyFormData.append("password", password);
     bodyFormData.append("email", email);
-    try {
-      let response = await axiosInstance({
-        method: "post",
-        url: `/auth/register`,
-        data: bodyFormData
-      });
-      return Promise.resolve(response);
-    } catch (err) {
-      return err;
-    }
-  },
-
-  async registeredUser(name, username, email, password) {
-    const response = await this.registerUser(name, username, email, password);
-    if (response.status === 200) {
-      return true;
-    } else {
-      return false;
-    }
+    const response = await axiosInstance({
+      method: "post",
+      url: `/auth/register`,
+      data: bodyFormData
+    });
+    return response.response;
   },
 
   async resetPass(newPassword) {
