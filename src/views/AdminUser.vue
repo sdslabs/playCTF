@@ -143,7 +143,7 @@ import {
   pieChartOptions,
   lineGraphOptions,
   lineGraphConfig,
-  colors,
+  colors
 } from "../constants/constants";
 import { mail, ban, unban } from "../constants/images";
 export default {
@@ -152,7 +152,7 @@ export default {
     LineGraph,
     adminTable,
     PieChart,
-    SpinLoader,
+    SpinLoader
   },
   data() {
     return {
@@ -161,7 +161,7 @@ export default {
       unban,
       loading: {
         challengesNotFetched: true,
-        userNotFetched: true,
+        userNotFetched: true
       },
       confirmDialogs: confimDialogMessages().user,
       scoreSeries: {},
@@ -173,22 +173,22 @@ export default {
         rank: "",
         score: "",
         active: true,
-        id: null,
+        id: null
       },
       rows: [],
       tableCols: tableCols.user,
-      state: {},
+      state: {}
     };
   },
   computed: {
-    isLoading: function () {
+    isLoading: function() {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   methods: {
     getAccess() {
@@ -196,7 +196,7 @@ export default {
       return false;
     },
     manageUser(userId, action) {
-      let confirmHandler = (confirm) => {
+      let confirmHandler = confirm => {
         if (confirm) {
           UsersService.manageUser(userId, action).then(() => {
             if (action == "ban")
@@ -213,7 +213,7 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirmHandler,
+        callback: confirmHandler
       };
 
       this.$confirm(inputParams);
@@ -229,14 +229,14 @@ export default {
           timeScores[0] = this.userDetails.score;
         } else {
           let currentScore = this.userDetails.score;
-          data.slice(0, index).forEach((sub) => {
+          data.slice(0, index).forEach(sub => {
             currentScore -= sub.points;
           });
           timeScores[index] = currentScore;
         }
         scoreSeries[data.length - index] = {
           x: moment(new Date(el.solvedAt)),
-          y: timeScores[index],
+          y: timeScores[index]
         };
       });
       scoreSeries[0] = {
@@ -244,7 +244,7 @@ export default {
           this.state.competitionInfo.startingTime,
           "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
         ),
-        y: 0,
+        y: 0
       };
       let currentMoment = moment.now();
       let endingMoment = moment(
@@ -259,7 +259,7 @@ export default {
       }
       scoreSeries[data.length + 1] = {
         x: moment(moment.now(), "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"),
-        y: this.userDetails.score,
+        y: this.userDetails.score
       };
       return scoreSeries;
     },
@@ -269,18 +269,18 @@ export default {
           {
             ...lineGraphConfig.singleLineConfig,
             ...lineGraphConfig,
-            data: this.scoreSeries,
-          },
-        ],
+            data: this.scoreSeries
+          }
+        ]
       };
     },
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach((el) => {
+      this.chalTags.forEach(el => {
         labels.push(el.name);
       });
-      labels.forEach((el) => {
+      labels.forEach(el => {
         data.push(this.submissions.category[el]);
       });
       return {
@@ -288,11 +288,11 @@ export default {
         datasets: [
           {
             backgroundColor: colors.pieChart,
-            data,
-          },
-        ],
+            data
+          }
+        ]
       };
-    },
+    }
   },
   async mounted() {
     this.state = await this.$store.state;
@@ -317,11 +317,11 @@ export default {
     const subData = await SubmissionService.getUserSubs(
       this.$route.params.username
     );
-    subData.forEach((element) => {
+    subData.forEach(element => {
       this.rows.push({
         challenge: element.name,
         category: element.category,
-        timeDateRight: element.solvedTime,
+        timeDateRight: element.solvedTime
       });
     });
     this.scoreSeries = this.findScoreSeries(subData);
@@ -329,6 +329,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminUsers");
-  },
+  }
 };
 </script>
