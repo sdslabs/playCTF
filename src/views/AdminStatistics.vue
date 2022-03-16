@@ -106,7 +106,7 @@
     <div class="adminStatsContainer">
       <div class="adminOneColContainer">
         <p class="adminSubheading">
-          Solve Percentages (Out of {{ userStats.active }} Active Users)
+          Solve Percentages (<span class="adminSubheadingLight">Out of </span>{{ userStats.unbanned_users }} <span class="adminSubheadingLight">Active Users</span>)
         </p>
         <div class="adminSolveGraphContainer" v-if="this.chalTags.length > 0">
           <div v-for="tag in chalTags" :key="tag.id" class="graph">

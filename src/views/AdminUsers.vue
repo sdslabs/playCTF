@@ -1,7 +1,7 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adminHeadingColorSearch">
-      <img :src="userPanel" class="adminHeadingColor" />
+      <div class="adminHeadingName">USERS PANEL</div>
       <div class="adminUserSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn" :disabled="true">

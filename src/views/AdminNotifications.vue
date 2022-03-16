@@ -1,8 +1,9 @@
 <template>
   <spin-loader v-if="loading" />
   <div class="mainAdminContainer" v-else>
+    <div class="adminHeadingName">NOTIFICATIONS</div>
     <div class="adHeadingContainerWithFeedback">
-      <div class="adminHeadingName">CREATE NEW NOTIFICATION</div>
+      <div class="adminSubheading">Create New Notification</div>
       <div class="addFeedback">
         <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
       </div>
@@ -46,7 +47,7 @@
         </button>
       </div>
     </div>
-    <div class="adminHeadingName">PAST NOTIFICATIONS</div>
+    <div class="adminSubheading">Past Notifications</div>
     <div class="adminNotifTabs" v-if="notifications.length > 0">
       <NotificationTab
         v-for="notif in notifications"

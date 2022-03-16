@@ -13,13 +13,17 @@
 }
 
 .adminNotifTitle {
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1rem;
   text-align: left;
   width: 60%;
   margin-bottom: 0;
+  color: $theme-color-grey39;
 }
 
 .adminNotifTime {
+  font-weight: 400;
+  font-size: 0.75rem;
   text-align: right;
   color: $theme-color-violet;
   width: 40%;
@@ -27,6 +31,8 @@
 }
 
 .adminNotifDesc {
+  font-weight: 400;
+  font-size: 0.875rem;
   margin-top: 0;
   color: $theme-color-grey57;
   font-weight: normal;
