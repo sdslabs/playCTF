@@ -287,11 +287,10 @@ export default {
       let labels = [];
       let data = [];
       this.chalTags.forEach(el => {
-        let sub = this.submissions.category[el.name];
-        if (sub > 0) {
-          labels.push(el.name);
-          data.push(sub);
-        }
+        labels.push(el.name);
+      });
+      labels.forEach(el => {
+        data.push(this.submissions.category[el]);
       });
       return {
         labels,
@@ -330,7 +329,11 @@ export default {
     subData.forEach(element => {
       this.rows.push({
         challenge: element.name,
+<<<<<<< HEAD
         tag: getChalTags(element.tags),
+=======
+        category: element.category,
+>>>>>>> d87866c (Fix Lint)
         timeDateRight: element.solvedTime
       });
     });
