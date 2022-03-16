@@ -92,22 +92,48 @@
         :key="port"
         class="host aboutText"
       >
-        <a class="challenge-link" :href="getUrl(port)" target="_blank">
+        <a
+          class="challenge-link"
+          :href="getUrl(port)"
+          target="_blank"
+          v-if="link"
+        >
           {{ getUrl(port) }}
         </a>
+        <p class="challenge-link-code" :href="getUrl(port)" v-else>
+          {{ getUrl(port) }}
+        </p>
       </div>
       <div class="challenge-links">
-        <p class="link-heading">Asset Links</p>
+        <p
+          class="link-heading"
+          v-if="
+            this.chalDetails.assets.length > 1 ||
+              (this.chalDetails.assets.length == 1 &&
+                this.chalDetails.assets[0] != '')
+          "
+        >
+          Asset Links
+        </p>
         <a
           class="challenge-link aboutText"
           v-for="asset in this.chalDetails.assets"
-          :href="asset"
+          :href="getStaticUrl(asset)"
           target="_blank"
           :key="asset"
         >
-          {{ asset }}
+          {{ getFileFromAsset(asset) }}
         </a>
-        <p class="link-heading">Additional Links</p>
+        <p
+          class="link-heading"
+          v-if="
+            this.chalDetails.additionalLinks.length > 1 ||
+              (this.chalDetails.additionalLinks.length == 1 &&
+                this.chalDetails.additionalLinks[0] != '')
+          "
+        >
+          Additional Links
+        </p>
         <a
           class="challenge-link"
           v-for="asset in this.chalDetails.additionalLinks"
@@ -198,6 +224,7 @@ export default {
   data() {
     return {
       showEditChallModal: false,
+      link: false,
       play,
       purge,
       undeploy,
@@ -227,12 +254,23 @@ export default {
   },
   methods: {
     getUrl(port) {
-      let url = CONFIG.beastRoot;
-      let portIndex = url.lastIndexOf(":");
-      if (portIndex !== -1) {
-        url = url.substring(0, portIndex);
+      let url = CONFIG.webRoot;
+      let ncurl = CONFIG.ncRoot;
+      if (
+        this.chalDetails.category === "service" ||
+        this.chalDetails.category === "xinetd"
+      ) {
+        return `nc ${ncurl} ${port}`;
       }
-      return `${url}:${port}`;
+      return `${CONFIG.webRoot}:${port}`;
+    },
+    getStaticUrl(asset) {
+      let url = CONFIG.staticRoot;
+      return `${url}${asset}`;
+    },
+    getFileFromAsset(asset) {
+      let paths = asset.split("/");
+      return paths[paths.length - 1];
     },
     sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -314,6 +352,12 @@ export default {
     }
   },
   mounted() {
+    if (
+      this.chalDetails.category === "service" ||
+      this.chalDetails.category === "xinetd"
+    )
+      this.link = false;
+    else this.link = true;
     UsersService.getUserStats()
       .then(response => {
         this.activeUsers = response.data.unbanned_users;

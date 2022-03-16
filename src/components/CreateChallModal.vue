@@ -84,6 +84,9 @@ export default {
     },
     setChallengeTar(val) {
       if (val === "invalidFile") {
+        this.$vToastify.setSettings({
+          theme: "beast-error"
+        });
         this.$vToastify.error("Not a valid challenge file", "Error");
         this.fadeFunc();
       } else {

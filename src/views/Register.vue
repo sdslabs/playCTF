@@ -158,8 +158,14 @@ export default {
           this.password
         );
         if (!this.status) {
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error("Registration Failed", "Error");
         } else {
+          this.$vToastify.setSettings({
+            theme: "beast-success"
+          });
           this.$vToastify.success("Registered Successfully", "Success");
           this.registered;
           await this.sleep(3000);

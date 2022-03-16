@@ -198,10 +198,17 @@ export default {
       let confirmHandler = confirm => {
         if (confirm) {
           UsersService.manageUser(userId, action).then(() => {
-            if (action == "ban")
+            if (action == "ban") {
+              this.$vToastify.setSettings({
+                theme: "beast-success"
+              });
               this.$vToastify.success("User has been banned", "Success");
-            else if (action == "unban")
+            } else if (action == "unban") {
+              this.$vToastify.setSettings({
+                theme: "beast-success"
+              });
               this.$vToastify.success("User has been unbanned", "Success");
+            }
             setTimeout(() => {
               this.$router.go();
             }, 3000);

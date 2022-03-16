@@ -171,10 +171,16 @@ export default {
             configs.logo = "";
           }
           this.$store.commit("updateCompInfo", configs);
+          this.$vToastify.setSettings({
+            theme: "beast-success"
+          });
           this.$vToastify.success("Changes made successfully", "Success");
           this.fadeFunc();
         })
         .catch(() => {
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error("Failed to make changes", "Error");
           this.fadeFunc();
         });

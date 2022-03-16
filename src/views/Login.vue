@@ -66,13 +66,17 @@ export default {
       }
     },
     async login() {
+      this.$vToastify.setSettings({ theme: "beast-error" });
       const check = await LoginUser.loggedInUser(this.username, this.password);
       if (check === 400) {
-        this.$vToastify.error("User not registered", "Error");
+        this.$vToastify.error("User not registered", "Incorrect Credentials");
       } else if (check === 401) {
-        this.$vToastify.error("Wrong Credentials", "Error");
+        this.$vToastify.error(
+          "Invalid username or password",
+          "Incorrect Credentials"
+        );
       } else if (check === 403) {
-        this.$vToastify.error("User Banned", "Error");
+        this.$vToastify.error("User Banned", "Incorrect Credentials");
       }
     }
   }
