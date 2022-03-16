@@ -105,7 +105,14 @@
         </p>
       </div>
       <div class="challenge-links">
-        <p class="link-heading" v-if="this.chalDetails.assets.length > 0">
+        <p
+          class="link-heading"
+          v-if="
+            this.chalDetails.assets.length > 1 ||
+              (this.chalDetails.assets.length == 1 &&
+                this.chalDetails.assets[0] != '')
+          "
+        >
           Asset Links
         </p>
         <a
@@ -119,7 +126,11 @@
         </a>
         <p
           class="link-heading"
-          v-if="this.chalDetails.additionalLinks.length > 1"
+          v-if="
+            this.chalDetails.additionalLinks.length > 1 ||
+              (this.chalDetails.additionalLinks.length == 1 &&
+                this.chalDetails.additionalLinks[0] != '')
+          "
         >
           Additional Links
         </p>

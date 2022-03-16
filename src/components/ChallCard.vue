@@ -42,7 +42,14 @@
         </p>
       </div>
       <div class="challenge-links">
-        <p class="link-heading" v-if="this.challDetails.assets.length > 0">
+        <p
+          class="link-heading"
+          v-if="
+            this.challDetails.assets.length > 1 ||
+              (this.challDetails.assets.length == 1 &&
+                this.challDetails.assets[0] != '')
+          "
+        >
           Asset Links
         </p>
         <a
@@ -56,7 +63,11 @@
         </a>
         <p
           class="link-heading"
-          v-if="this.challDetails.additionalLinks.length > 1"
+          v-if="
+            this.challDetails.additionalLinks.length > 1 ||
+              (this.challDetails.additionalLinks.length == 1 &&
+                this.challDetails.additionalLinks[0] != '')
+          "
         >
           Additional Links
         </p>

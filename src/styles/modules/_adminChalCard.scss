@@ -44,10 +44,13 @@
             font-size: 1rem;
             line-height: 1.125rem;
             color: $theme-color-black-med-transp;
-            
-            .adminChallPoints {
+            .adminChallCategory{
                 border-right: 0.125rem solid $theme-color-black-med-transp;
                 padding-right: 0.3125rem;
+            }
+            .adminChallPoints{
+                border-right: 0.125rem solid $theme-color-black-med-transp;
+                padding: 0 0.3125rem;
             }
             
             .adminChallSolves {
@@ -78,9 +81,21 @@
     flex-flow: row wrap;
     column-gap: 0.25rem;
     margin-top: 0.25rem;
+    align-items: center;
+
+    .challengesCheckBox{
+        margin-left: auto;
+        margin-right: 0px;
+        margin-bottom: 0px;
+
+        input{
+            height: 1.5rem;
+            width: 1.5rem;
+        }
+    }
 }
 
-.adminChallCategory {
+.adminChallTags {
     width: max-content;
     vertical-align: middle;
     background: $theme-color-violet;
