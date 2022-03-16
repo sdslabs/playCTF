@@ -17,7 +17,7 @@
             name="name"
             placeholder="Name*"
             required="true"
-            @keyup.enter="triggerRegister"
+            @keyup.enter="register"
           />
         </div>
         <div class="info">
@@ -29,7 +29,7 @@
             name="user_name"
             placeholder="Username*"
             required="true"
-            @keyup.enter="triggerRegister"
+            @keyup.enter="register"
           />
         </div>
         <div class="info">
@@ -42,6 +42,7 @@
             placeholder="Email*"
             required="true"
             @blur="validateEmail"
+            @keyup.enter="register"
           />
           <div class="text-field-error" v-if="EmailErr">
             <img src="@/assets/error.svg" class="errImg" />
@@ -58,6 +59,7 @@
             placeholder="Password*"
             required="true"
             @blur="validatePassword"
+            @keyup.enter="register"
           />
           <div class="text-field-error" v-if="PassLen">
             <img src="@/assets/error.svg" class="errImg" />
@@ -74,6 +76,7 @@
             placeholder="Confirm Password*"
             required="true"
             @blur="comparePassword"
+            @keyup.enter="register"
           />
           <div class="text-field-error" v-if="PassErr">
             <img src="@/assets/error.svg" class="errImg" />
@@ -93,7 +96,8 @@
               email &&
               !PassErr &&
               !EmailErr &&
-              password === confirmPassword
+              password === confirmPassword &&
+              !registered
             )
           "
           text="Register Now"
@@ -127,7 +131,7 @@ export default {
       EmailErr: false,
       PassLen: false,
       PassErr: false,
-      registered: true,
+      registered: false,
       errorIcon: "error-white",
       tickIcon: "tick-white"
     };
@@ -159,24 +163,29 @@ export default {
       return new Promise(resolve => setTimeout(resolve, ms));
     },
     async register() {
-      if (!this.PassErr && !this.EmailErr && !this.PassLen) {
+      if (
+        !this.PassErr &&
+        !this.EmailErr &&
+        !this.PassLen &&
+        !this.registered
+      ) {
         const registerResponse = await RegisterUser.registerUser(
           this.uname,
           this.username,
           this.email,
           this.password
         );
-        this.$vToastify.setSettings({
-          theme: "beast-error"
-        });
-        if (registerResponse.status != 200) {
+        if (registerResponse.status !== 200) {
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
           this.$vToastify.error(registerResponse.data.message, "Error");
         } else {
           this.$vToastify.setSettings({
             theme: "beast-success"
           });
           this.$vToastify.success("Registered Successfully", "Success");
-          this.registered;
+          this.registered = true;
           await this.sleep(3000);
           this.$router.push("/login");
         }
