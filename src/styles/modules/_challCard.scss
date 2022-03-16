@@ -117,7 +117,27 @@
     font-size: 0.875rem;
     display: inline-block;
     line-height: 1rem;
-
+    .aboutText{
+      .tooltiptext{
+        font-family: $primary-font-family !important;
+        font-size: 11px !important;
+        letter-spacing: 0;
+        visibility: hidden;
+        width: 120px;
+        background-color: $theme-color-grey-high-transp;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 3px 10px;
+      
+        /* Position the tooltip */
+        position: relative;
+        z-index: 1;
+      }
+      .challenge-link-code:hover .tooltiptext{
+        visibility: visible;
+      }
+    }
     .challCard-challPort {
       margin-top: 0.625rem;
       color: $theme-color-grey39;
@@ -268,4 +288,5 @@
   color: $theme-color-violet;
   text-decoration: none;
   letter-spacing: 0.1rem;
+  cursor: pointer;
 }

@@ -29,17 +29,10 @@
         :key="port"
         class="host aboutText"
       >
-        <a
-          class="challenge-link"
-          :href="getUrl(port)"
-          target="_blank"
-          v-if="link"
-        >
+        <div class="challenge-link-code" v-on:click="copyUrl(port)">
           {{ getUrl(port) }}
-        </a>
-        <p class="challenge-link-code" :href="getUrl(port)" v-else>
-          {{ getUrl(port) }}
-        </p>
+          <span class="tooltiptext">{{ copyText }}</span>
+        </div>
       </div>
       <div class="challenge-links">
         <p
@@ -120,7 +113,8 @@ export default {
       flag: "",
       showSuccess: false,
       showFail: false,
-      link: false
+      link: false,
+      copyText: "Click to Copy"
     };
   },
   state: {
@@ -182,6 +176,13 @@ export default {
         self.showSuccess = false;
         self.showFail = false;
       }, 3000);
+    },
+    copyUrl(text) {
+      navigator.clipboard.writeText(this.getUrl(text));
+      (this.copyText = "Copied"),
+        setTimeout(() => {
+          this.copyText = "Click to Copy";
+        }, 1000);
     },
     isDisabled: function() {
       let flag = document.getElementById("flag-input").value;
