@@ -167,7 +167,7 @@ export default {
       }
       let labels = [];
       let data = [];
-      dataSolves.forEach(el => {
+      dataSolves.forEach((el) => {
         labels.push(el.username);
         data.push((el.solves / this.chalCategory[tag].total) * 100);
       });
@@ -184,12 +184,21 @@ export default {
     categoryChartData() {
       let labels = [];
       let data = [];
+<<<<<<< HEAD
       this.chalTags.forEach(tag => {
         let sub = this.submissions.category[tag.name];
         if (sub > 0) {
           labels.push(tag.name);
           data.push(sub);
         }
+=======
+      this.chalTags.forEach((tag) => {
+        labels.push(tag.name);
+      });
+      labels.forEach((label) => {
+        let sub = this.submissions.category[label];
+        data.push(sub);
+>>>>>>> 4d9a53ef9fcda03d3f33ba3d4e1e20d454405430
       });
       return {
         labels,
