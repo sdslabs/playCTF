@@ -33,28 +33,16 @@
             <span class="field">Solves</span>
           </div>
         </div>
-        <div
-          v-if="chalDetails.status === 'Deployed'"
-          class="changeChallengeStatus"
-        >
+        <div class="changeChallengeStatus">
           <button
+            v-if="chalDetails.status === 'Deployed'"
             class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'undeploy')"
           >
             <img :src="undeploy" /><span class="adminBanText">Undeploy</span>
           </button>
           <button
-            class="action-cta challenge-action-btn"
-            @click="manageChallenge(chalDetails.name, 'purge')"
-          >
-            <img :src="purge" /><span class="adminBanText">Purge</span>
-          </button>
-        </div>
-        <div
-          v-if="chalDetails.status === 'Undeployed'"
-          class="changeChallengeStatus"
-        >
-          <button
+            v-if="chalDetails.status === 'Undeployed'"
             class="action-cta challenge-action-btn"
             @click="manageChallenge(chalDetails.name, 'deploy')"
           >
@@ -109,8 +97,8 @@
           class="link-heading"
           v-if="
             this.chalDetails.assets.length > 1 ||
-              (this.chalDetails.assets.length == 1 &&
-                this.chalDetails.assets[0] != '')
+            (this.chalDetails.assets.length == 1 &&
+              this.chalDetails.assets[0] != '')
           "
         >
           Asset Links
@@ -128,8 +116,8 @@
           class="link-heading"
           v-if="
             this.chalDetails.additionalLinks.length > 1 ||
-              (this.chalDetails.additionalLinks.length == 1 &&
-                this.chalDetails.additionalLinks[0] != '')
+            (this.chalDetails.additionalLinks.length == 1 &&
+              this.chalDetails.additionalLinks[0] != '')
           "
         >
           Additional Links
@@ -212,7 +200,7 @@ import {
   tableCols,
   confimDialogMessages,
   barChartOptions,
-  colors
+  colors,
 } from "../constants/constants";
 import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
@@ -232,25 +220,25 @@ export default {
       loading: {
         usersNotFetched: true,
         challengeNotFetched: true,
-        submissionsNotFetched: true
+        submissionsNotFetched: true,
       },
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
-      hostUrl: this.$store.getters.hostUrl
+      hostUrl: this.$store.getters.hostUrl,
     };
   },
   computed: {
-    isLoading: function() {
+    isLoading: function () {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    }
+    },
   },
   methods: {
     getUrl(port) {
@@ -273,16 +261,16 @@ export default {
       return paths[paths.length - 1];
     },
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     barData() {
       return {
         datasets: [
           {
             backgroundColor: colors.singleBarGraph,
-            data: [this.solvePercentage()]
-          }
-        ]
+            data: [this.solvePercentage()],
+          },
+        ],
       };
     },
     barChartOptions() {
@@ -294,9 +282,9 @@ export default {
       );
     },
     manageChallenge(name, action) {
-      let confirmHandler = confirm => {
+      let confirmHandler = (confirm) => {
         if (confirm) {
-          ChalService.manageChalAction(name, action).then(async response => {
+          ChalService.manageChalAction(name, action).then(async (response) => {
             if (response.status !== 200) {
               console.log(response.data);
             } else {
@@ -313,7 +301,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    response => {
+                    (response) => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Deployed";
@@ -329,7 +317,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    response => {
+                    (response) => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Undeployed";
@@ -348,10 +336,10 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirmHandler
+        callback: confirmHandler,
       };
       this.$confirm(inputParams);
-    }
+    },
   },
   mounted() {
     if (
@@ -361,14 +349,14 @@ export default {
       this.link = false;
     else this.link = true;
     UsersService.getUserStats()
-      .then(response => {
+      .then((response) => {
         this.activeUsers = response.data.unbanned_users;
       })
       .finally(() => {
         this.loading.usersNotFetched = false;
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
-      .then(response => {
+      .then((response) => {
         let data = response.data;
         this.chalDetails = data;
       })
@@ -377,8 +365,8 @@ export default {
       });
 
     SubmissionService.getSubmissions()
-      .then(response => {
-        response.forEach(element => {
+      .then((response) => {
+        response.forEach((element) => {
           if (element.name == this.$route.params.id) {
             this.rows.push({
               username: element.username,
@@ -393,6 +381,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  }
+  },
 };
 </script>
