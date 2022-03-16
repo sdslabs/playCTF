@@ -1,5 +1,6 @@
 <template>
-  <div class="pre-chall-container">
+  <spin-loader v-if="isLoading" />
+  <div class="pre-chall-container" v-else>
     <img class="hourglass-img" src="@/assets/hourglass.png" alt="hourglass" />
     <div class="pre-message">
       <p class="pre-message-text">Competition yet to start</p>
@@ -24,7 +25,9 @@
 
 <script>
 import moment from "moment-timezone";
+import SpinLoader from "../components/spinLoader.vue";
 export default {
+  components: { SpinLoader },
   name: "timer",
   data: function() {
     return {
@@ -37,7 +40,8 @@ export default {
       seconds: "",
       statusType: "",
       startTime: this.$store.state.competitionInfo.startingTime,
-      endTime: this.$store.state.competitionInfo.endingTime
+      endTime: this.$store.state.competitionInfo.endingTime,
+      isLoading: false
     };
   },
   mounted() {
@@ -68,10 +72,14 @@ export default {
       let passTime = end - now;
 
       if (distance < 0 && passTime < 0) {
+        this.isLoading = true;
+        this.$router.go();
         this.statusType = "Expired";
         clearInterval(this.interval);
         return;
       } else if (distance < 0 && passTime > 0) {
+        this.isLoading = true;
+        this.$router.go();
         this.statusType = "running";
         this.calcTime(passTime);
       } else if (distance > 0 && passTime > 0) {
