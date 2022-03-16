@@ -70,6 +70,7 @@ export default {
       loading: true,
       lineColors: colors.lineGraph,
       scoreSeries: [],
+      oldScoreSeries: [],
       lineGraphOptions: lineGraphOptions(true),
       searchQuery: "",
       tableCols: tableCols.leaderboard,
@@ -81,6 +82,11 @@ export default {
   methods: {
     lineGraphData() {
       let datasets = [];
+      let update = false;
+      if (this.scoreSeries !== this.oldScoreSeries) {
+        this.oldScoreSeries = this.scoreSeries;
+        update = true;
+      }
       this.scoreSeries.forEach((el, index) => {
         let labelPostText;
         switch (index) {
@@ -104,19 +110,24 @@ export default {
       });
       return {
         label: "Leaderboard",
-        datasets
+        datasets,
+        update
       };
     },
     findScoreSeries(users) {
+      let scoreSeriesLocal = [];
       users.forEach(user => {
         SubmissionService.getUserSubs(user.username).then(data => {
           if (data === null || data === undefined) {
             return;
           }
-          this.scoreSeries.push({
+          scoreSeriesLocal.push({
             username: user.username,
             series: this.findUserScoreSeries(data, user.score)
           });
+          if (scoreSeriesLocal.length == users.length) {
+            this.scoreSeries = scoreSeriesLocal;
+          }
         });
       });
     },
