@@ -96,12 +96,8 @@
               email &&
               !PassErr &&
               !EmailErr &&
-<<<<<<< HEAD
               password === confirmPassword &&
               !registered
-=======
-              password === confirmPassword
->>>>>>> 4d9a53ef9fcda03d3f33ba3d4e1e20d454405430
             )
           "
           text="Register Now"
@@ -167,31 +163,22 @@ export default {
       return new Promise((resolve) => setTimeout(resolve, ms));
     },
     async register() {
-<<<<<<< HEAD
       if (
         !this.PassErr &&
         !this.EmailErr &&
         !this.PassLen &&
         !this.registered
       ) {
-=======
-      if (!this.PassErr && !this.EmailErr && !this.PassLen) {
->>>>>>> 4d9a53ef9fcda03d3f33ba3d4e1e20d454405430
         const registerResponse = await RegisterUser.registerUser(
           this.uname,
           this.username,
           this.email,
           this.password
         );
-<<<<<<< HEAD
         if (registerResponse.status !== 200) {
           this.$vToastify.setSettings({
             theme: "beast-error"
           });
-=======
-        console.log(registerResponse);
-        if (registerResponse.status != 200) {
->>>>>>> 4d9a53ef9fcda03d3f33ba3d4e1e20d454405430
           this.$vToastify.error(registerResponse.data.message, "Error");
         } else {
           this.$vToastify.setSettings({

@@ -48,11 +48,7 @@ export default {
       url: `/auth/register`,
       data: bodyFormData
     });
-<<<<<<< HEAD
     return response;
-=======
-    return response.response;
->>>>>>> 4d9a53ef9fcda03d3f33ba3d4e1e20d454405430
   },
 
   async resetPass(newPassword) {
