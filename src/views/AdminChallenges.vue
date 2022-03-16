@@ -368,7 +368,7 @@ export default {
       let confirmHandler = confirm => {
         if (confirm) {
           let allChallenges = [];
-          this.displayChallenges.forEach(challenge => {
+          this.checkedChallenges.forEach(challenge => {
             allChallenges.push(challenge.name);
           });
           ChalService.manageMultipleChalAction(

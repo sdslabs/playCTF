@@ -169,9 +169,11 @@ export default {
       }
       let labels = [];
       let data = [];
-      dataSolves.forEach((el) => {
+      dataSolves.forEach(el => {
         labels.push(el.username);
-        data.push((el.solves / this.chalCategory[tag].total) * 100);
+        data.push(
+          ((el.solves / this.chalCategory[tag].total) * 100).toFixed(0)
+        );
       });
       return {
         labels,

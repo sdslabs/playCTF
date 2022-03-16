@@ -59,9 +59,9 @@ export default {
       usersNotFetched: true,
       userDetails: {},
       totalChals: 0,
-      selectedChall: {},
+      selectedChall: null,
       selectDefaultChallenge: true,
-      renderParam: "1"
+      renderParam: "1",
     };
   },
   components: {
@@ -69,7 +69,7 @@ export default {
     ChallengesByTag,
     ChallCard,
     afterChallOver,
-    beforeChallStart
+    beforeChallStart,
   },
   created() {
     this.username = LoginUser.getUserInfo().userName;
@@ -77,7 +77,6 @@ export default {
   async mounted() {
     await this.fetchChallenges(false);
     await this.updateUserStats();
-    console.log("hello");
   },
   methods: {
     async updateUserStats() {
@@ -91,15 +90,19 @@ export default {
         this.renderParam = challData.message;
         return;
       }
-      console.log(challData);
-      console.log(challData.error);
-      console.log(challData.message);
       this.challenges = challData.challenges;
       this.tags = [...this.defaultTags, ...challData.tagFilterOptions];
       this.totalChals = challData.challenges.length;
       this.displayChallenges = challData.displayChallenges;
       if (!isUpdation) {
-        this.selectedChall = this.displayChallenges[0];
+        var i = 0;
+        while (i < (this.displayChallenges.length)) {
+          if (this.displayChallenges[i].status == "Deployed") {
+            this.selectedChall = this.displayChallenges[i];
+            break;
+          }
+          i++;
+        }
       }
       this.challengesNotFetched = false;
       this.selectDefaultChallenge = false;
@@ -109,9 +112,9 @@ export default {
       if (value.name === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter(challenge => {
+        this.displayChallenges = this.challenges.filter((challenge) => {
           let includeChallenge = false;
-          challenge.tags.forEach(tag => {
+          challenge.tags.forEach((tag) => {
             if (tag === value.name) {
               includeChallenge = true;
             }
@@ -124,13 +127,13 @@ export default {
       if (name === null) {
         this.selectedChall = null;
       }
-      this.selectedChall = this.challenges.filter(el => {
+      this.selectedChall = this.challenges.filter((el) => {
         return el.name == name;
       })[0];
-    }
+    },
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "userChallenges");
-  }
+  },
 };
 </script>
