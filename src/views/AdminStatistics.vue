@@ -16,11 +16,10 @@
           <span class="adminBold">{{ challenges.deployedChal }}</span> are
           deployed,
           <span class="adminBold">{{ challenges.undeployedChal }}</span> are
-          undeployed and
-          <span class="adminBold">{{ challenges.purgedChal }}</span> are purged
+          undeployed.
         </p>
         <p class="adminInfo">
-          <span class="adminVioletBold">{{ leader.username }}</span> leads the
+          <span class="adminOrangeBold">{{ leader.username }}</span> leads the
           leaderboard with
           <span class="adminBold">{{ leader.score }}</span> points.
         </p>
@@ -168,7 +167,7 @@ export default {
       }
       let labels = [];
       let data = [];
-      dataSolves.forEach(el => {
+      dataSolves.forEach((el) => {
         labels.push(el.username);
         data.push((el.solves / this.chalCategory[tag].total) * 100);
       });
@@ -185,10 +184,10 @@ export default {
     categoryChartData() {
       let labels = [];
       let data = [];
-      this.chalTags.forEach(tag => {
+      this.chalTags.forEach((tag) => {
         labels.push(tag.name);
       });
-      labels.forEach(label => {
+      labels.forEach((label) => {
         let sub = this.submissions.category[label];
         data.push(sub);
       });

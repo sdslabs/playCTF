@@ -85,7 +85,16 @@
           variant="primary-cta"
           class="auth-button"
           :disabled="
-            !(uname && username && password && confirmPassword && email)
+            !(
+              uname &&
+              username &&
+              password &&
+              confirmPassword &&
+              email &&
+              !PassErr &&
+              !EmailErr &&
+              password === confirmPassword
+            )
           "
           text="Register Now"
         />
@@ -147,18 +156,19 @@ export default {
       }
     },
     sleep(ms) {
-      return new Promise(resolve => setTimeout(resolve, ms));
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     async register() {
       if (!this.PassErr && !this.EmailErr && !this.PassLen) {
-        this.status = RegisterUser.registeredUser(
+        const registerResponse = await RegisterUser.registerUser(
           this.uname,
           this.username,
           this.email,
           this.password
         );
-        if (!this.status) {
-          this.$vToastify.error("Registration Failed", "Error");
+        console.log(registerResponse);
+        if (registerResponse.status != 200) {
+          this.$vToastify.error(registerResponse.data.message, "Error");
         } else {
           this.$vToastify.success("Registered Successfully", "Success");
           this.registered;
