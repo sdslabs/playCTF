@@ -1,7 +1,7 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adminHeadingColor">
-      <img :src="leaderboard" class="adminHeadingColor" />
+      <div class="adminHeadingName">LEADERBOARD</div>
     </div>
     <spin-loader v-if="loading" />
     <div v-else>
