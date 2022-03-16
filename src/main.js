@@ -14,7 +14,7 @@ import Spinner from "vue-simple-spinner";
 import ChartJsPluginDataLabels from "chartjs-plugin-datalabels";
 import AdminLandingLayout from "./layouts/AdminLanding.vue";
 import { CONFIG } from "@/config/config";
-import Logo from "./assets/main-logo.svg";
+import Logo from "./assets/noobctflogo.png";
 import VueToastify from "vue-toastify";
 Vue.use(VueToastify, {
   position: "top-center",
