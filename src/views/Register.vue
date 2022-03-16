@@ -29,8 +29,13 @@
             name="user_name"
             placeholder="Username*"
             required="true"
+            @blur="validateUsername"
             @keyup.enter="register"
           />
+          <div class="text-field-error" v-if="UsernameErr">
+            <img src="@/assets/error.svg" class="errImg" />
+            <div>{{ this.UsernameErr }}</div>
+          </div>
         </div>
         <div class="info">
           <input
@@ -95,6 +100,7 @@
               confirmPassword &&
               email &&
               !PassErr &&
+              !UsernameErr &&
               !EmailErr &&
               password === confirmPassword &&
               !registered
@@ -128,6 +134,7 @@ export default {
       password: "",
       confirmPassword: "",
       status: false,
+      UsernameErr: false,
       EmailErr: false,
       PassLen: false,
       PassErr: false,
@@ -137,6 +144,13 @@ export default {
     };
   },
   methods: {
+    validateUsername(e) {
+      if (this.username.length > 12) {
+        this.UsernameErr = "Username should be 12 characters max";
+      } else {
+        this.UsernameErr = false;
+      }
+    },
     validateEmail(e) {
       const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       if (re.test(this.email)) {
@@ -165,6 +179,7 @@ export default {
     async register() {
       if (
         !this.PassErr &&
+        !this.UsernameErr &&
         !this.EmailErr &&
         !this.PassLen &&
         !this.registered
