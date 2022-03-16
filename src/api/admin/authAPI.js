@@ -6,13 +6,12 @@ export default {
     let bodyFormData = new FormData();
     bodyFormData.append("username", username);
     bodyFormData.append("password", password);
-    return await axiosInstance({
+    const response = await axiosInstance({
       method: "post",
       url: `/auth/login`,
       data: bodyFormData
-    }).catch(err => {
-      console.log(err);
     });
+    return response;
   },
 
   async loggedInUser(username, password) {
@@ -34,13 +33,7 @@ export default {
         router.push("/challenges");
       }
     } else {
-      if (response.message.includes("400")) {
-        return 400;
-      } else if (response.message.includes("401")) {
-        return 401;
-      } else if (response.message.includes("403")) {
-        return 403;
-      }
+      return response.data.message;
     }
   },
 
@@ -50,25 +43,12 @@ export default {
     bodyFormData.append("username", username);
     bodyFormData.append("password", password);
     bodyFormData.append("email", email);
-    try {
-      let response = await axiosInstance({
-        method: "post",
-        url: `/auth/register`,
-        data: bodyFormData
-      });
-      return Promise.resolve(response);
-    } catch (err) {
-      return err;
-    }
-  },
-
-  async registeredUser(name, username, email, password) {
-    const response = await this.registerUser(name, username, email, password);
-    if (response.status === 200) {
-      return true;
-    } else {
-      return false;
-    }
+    const response = await axiosInstance({
+      method: "post",
+      url: `/auth/register`,
+      data: bodyFormData
+    });
+    return response;
   },
 
   async resetPass(newPassword) {

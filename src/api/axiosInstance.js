@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
     if (!error.response) {
       router.push("/error/networkerror");
     } else if (ignoreErrorPagesPath.includes(error.response.config.url)) {
-      return error;
+      return error.response;
     } else if (error.response.config.url.includes("/api/info/logo")) {
       return error;
     } else {
