@@ -109,7 +109,7 @@
           text="Register Now"
         />
       </div>
-      <img src="@/assets/registration.svg" class="auth-image" />
+      <img src="@/assets/login.svg" class="auth-image" />
     </div>
   </div>
 </template>
