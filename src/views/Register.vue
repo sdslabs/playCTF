@@ -103,7 +103,7 @@
           text="Register Now"
         />
       </div>
-      <img src="@/assets/registration.svg" class="auth-image" />
+      <img src="@/assets/login.svg" class="auth-image" />
     </div>
   </div>
 </template>
@@ -160,7 +160,7 @@ export default {
       }
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async register() {
       if (
