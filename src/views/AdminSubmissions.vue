@@ -1,7 +1,7 @@
 <template>
   <div class="mainAdminContainer">
     <div class="adHeaderComponent">
-      <div class="adSubHeaderComponent">Submissions</div>
+      <div class="adminHeadingName">Submissions</div>
       <button class="action-cta" @click="exportUsersAsCSV()">
         <img :src="download" />
         <span>Export as CSV</span>
