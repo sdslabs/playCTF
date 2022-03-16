@@ -83,7 +83,7 @@ export default {
     lineGraphData() {
       let datasets = [];
       let update = false;
-      if (this.scoreSeries != this.oldScoreSeries) {
+      if (this.scoreSeries !== this.oldScoreSeries) {
         this.oldScoreSeries = this.scoreSeries;
         update = true;
       }
@@ -115,18 +115,18 @@ export default {
       };
     },
     findScoreSeries(users) {
-      let scoreSeries = [];
+      let scoreSeriesLocal = [];
       users.forEach(user => {
         SubmissionService.getUserSubs(user.username).then(data => {
           if (data === null || data === undefined) {
             return;
           }
-          scoreSeries.push({
+          scoreSeriesLocal.push({
             username: user.username,
             series: this.findUserScoreSeries(data, user.score)
           });
-          if (scoreSeries.length == users.length) {
-            this.scoreSeries = scoreSeries;
+          if (scoreSeriesLocal.length == users.length) {
+            this.scoreSeries = scoreSeriesLocal;
           }
         });
       });
