@@ -4,6 +4,7 @@
     padding: 0;
     color: $theme-color-black19;
     text-align: left;
+    //box-shadow: 0rem 0.375rem 0.625rem $theme-color-grey-low-transp;
 
     .challengesByTag-tag {
         font-family: $primary-font-family, sans-serif;
@@ -34,13 +35,14 @@
         }
 
         .challengesByTag-challenge {
-            width: 100%;
+            width: auto;
             height: 4.5rem;
             box-sizing: border-box;
             background: $theme-color-white;
-            box-shadow: 0rem 0.125rem 0.625rem $theme-color-black-low-transp;
+            //box-shadow: 0rem 0.125rem 0.625rem $theme-color-black-low-transp;
+            box-shadow: 0rem 0.375rem 0.625rem $theme-color-grey-low-transp;
             border-radius: 0.1875rem;
-            margin-top: 0.75rem;
+            margin: 0.75rem;
 
             &:first-child {
                 margin-top: 0rem;

@@ -186,11 +186,11 @@ export default {
       let labels = [];
       let data = [];
       this.chalTags.forEach(tag => {
-        labels.push(tag.name);
-      });
-      labels.forEach(label => {
-        let sub = this.submissions.category[label];
-        data.push(sub);
+        let sub = this.submissions.category[tag.name];
+        if (sub > 0) {
+          labels.push(tag.name);
+          data.push(sub);
+        }
       });
       return {
         labels,

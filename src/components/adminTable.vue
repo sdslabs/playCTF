@@ -12,7 +12,7 @@
             {{ tableCol.label }}
           </th>
         </thead>
-        <tr class="adminTableUserRow" v-if="this.userData">
+        <tr class="adminTableUserRow" v-if="this.userData && !this.keys">
           <td class="adminTableData adminTableUserData adminTablerank">
             {{ this.userData.rank }}
           </td>
@@ -116,7 +116,8 @@ export default {
     "colStyle",
     "links",
     "maxElementPerPage",
-    "userData"
+    "userData",
+    "keys"
   ],
   methods: {
     isColLink(val) {

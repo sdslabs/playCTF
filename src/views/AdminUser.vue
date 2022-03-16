@@ -89,8 +89,10 @@
           />
         </div>
       </div>
-      <div class="adminEmptyDataContainer" v-else>
-        <span class="adminEmptyData">No Correct Submissions</span>
+      <div class="adminOneColContainer" v-else>
+        <div class="adminEmptyDataContainer">
+          <span class="adminEmptyData">No Correct Submissions</span>
+        </div>
       </div>
     </div>
     <div class="adminStatsContainer">
@@ -130,7 +132,7 @@ import LineGraph from "@/components/LineGraph.vue";
 import adminTable from "@/components/adminTable";
 import PieChart from "@/components/PieChart.vue";
 import SpinLoader from "@/components/spinLoader";
-import { getChallenges } from "@/utils/challenges";
+import { getChallenges, getChalTags } from "@/utils/challenges";
 import { getSubStats } from "@/utils/submissions";
 import SubmissionService from "@/api/admin/submissionsAPI";
 import UsersService from "@/api/admin/usersAPI";
@@ -284,10 +286,11 @@ export default {
       let labels = [];
       let data = [];
       this.chalTags.forEach(el => {
-        labels.push(el.name);
-      });
-      labels.forEach(el => {
-        data.push(this.submissions.category[el]);
+        let sub = this.submissions.category[el.name];
+        if (sub > 0) {
+          labels.push(el.name);
+          data.push(sub);
+        }
       });
       return {
         labels,
@@ -326,7 +329,7 @@ export default {
     subData.forEach(element => {
       this.rows.push({
         challenge: element.name,
-        category: element.category,
+        tag: getChalTags(element.tags),
         timeDateRight: element.solvedTime
       });
     });

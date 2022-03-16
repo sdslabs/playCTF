@@ -94,6 +94,7 @@
           id="flag-input"
           placeholder="Start typing flag here..."
           v-model="flag"
+          @keyup.enter="triggerSubmit"
         />
         <Button
           text="Submit Flag"
@@ -147,6 +148,11 @@ export default {
     getFileFromAsset(asset) {
       let paths = asset.split("/");
       return paths[paths.length - 1];
+    },
+    triggerSubmit() {
+      if (!(this.flag.length === 0 || this.showSuccess || this.showFail)) {
+        this.submitFlag();
+      }
     },
     submitFlag() {
       FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {

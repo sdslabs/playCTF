@@ -17,16 +17,20 @@
         border-radius: 0.3125rem 0rem 0rem 0.3125rem;
         color: $theme-color-white !important;
         text-align: center;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
         .text {
             
             font-size: 1.5rem;
-            margin-bottom: auto;
+            margin: 0 auto;
         }
 
         .number {
             font-weight: bold;
             font-size: 2rem;
-            margin: auto;
+            margin: 0 auto;
         }
     }
 

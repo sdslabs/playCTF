@@ -34,6 +34,7 @@ import spinLoader from "../components/spinLoader.vue";
 import utils from "@/api/utils";
 import { download } from "../constants/images";
 import { tableCols } from "../constants/constants";
+import { getChalTags } from "../utils/challenges";
 export default {
   name: "AdminSubmissions",
   components: {
@@ -62,7 +63,7 @@ export default {
       submissions.push({
         username: element.username,
         challenge: element.name,
-        category: element.category,
+        tags: getChalTags(element.tags),
         timeDate: element.solvedTime
       });
     });

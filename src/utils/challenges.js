@@ -142,3 +142,15 @@ export const getChalCategory = async tags => {
   });
   return submissionsCategory;
 };
+
+export const getChalTags = tags => {
+  let challTags = "";
+  for (let index = 0; index < tags.length; index++) {
+    if (index === tags.length - 1) {
+      challTags += tags[index];
+    } else {
+      challTags += tags[index] + " , ";
+    }
+  }
+  return challTags;
+};

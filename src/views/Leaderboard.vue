@@ -4,7 +4,7 @@
       <div class="adminHeadingColor">
         <img :src="leaderboard" class="adminHeadingColor" />
       </div>
-      <div class="user-searchbar-div">
+      <div class="adminUserSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn">
             <img :src="search" class="searchImg" />
@@ -20,13 +20,17 @@
     <spin-loader v-if="isLoading()" />
     <div v-else-if="users.length > 0">
       <admin-table
+        v-if="resultQuery.length > 0"
         :tableCols="tableCols"
         :rows="resultQuery"
         :links="[]"
         :maxElementPerPage="10"
         :userData="userInfo"
-        :key="searchQuery"
+        :keys="searchQuery"
       />
+      <div class="adminEmptyDataContainer" v-else>
+        <span class="adminEmptyData">No Users</span>
+      </div>
     </div>
 
     <div class="adminEmptyData" v-else>
