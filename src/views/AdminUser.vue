@@ -119,7 +119,7 @@
     <admin-table
       :tableCols="tableCols"
       :rows="rows"
-      :links="[{ col: 'challenge', redirect: '/admin/challenges/' }]"
+      :links="getChallengeRedirectLink()"
       :maxElementPerPage="10"
       v-if="rows.length > 0"
     />
@@ -193,7 +193,18 @@ export default {
       return false;
     }
   },
+  watch: {
+    $route() {
+      this.$router.go();
+    }
+  },
   methods: {
+    getChallengeRedirectLink() {
+      if (this.$router.currentRoute.path.includes("admin")) {
+        return [{ col: "challenge", redirect: "/admin/challenges/" }];
+      }
+      return [];
+    },
     getAccess() {
       if (LoginUser.getUserInfo().role === "admin") return true;
       return false;
@@ -268,9 +279,10 @@ export default {
         maxX = currentMoment;
       }
       scoreSeries[data.length + 1] = {
-        x: moment(moment.now(), "HH:mm:ss UTC: Z, Do MMMM YYYY, dddd"),
+        x: moment.now(),
         y: this.userDetails.score
       };
+      console.log(scoreSeries);
       return scoreSeries;
     },
     lineGraphData() {

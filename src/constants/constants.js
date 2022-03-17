@@ -467,7 +467,7 @@ export const lineGraphOptions = showLegend => {
           return title;
         },
         label: function(data, tooltipItem) {
-          let time = moment(data["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
+          let time = moment(data["xLabel"], "MMM DD, YYYY, HH:mm:ss a");
           let value = time.format("MMMM DD, YYYY; HH:mm:ss, ") + data["value"];
           return value;
         }
@@ -486,7 +486,7 @@ export const lineGraphOptions = showLegend => {
       intersect: false,
       callbacks: {
         title: function(data, tooltipItem) {
-          let time = moment(data[0]["xLabel"], "MMM DD, YYYY, hh:mm:ss a");
+          let time = moment(data[0]["xLabel"], "MMM DD, YYYY, HH:mm:ss a");
           return time.format("MMMM DD, YYYY; HH:mm:ss");
         }
       },
