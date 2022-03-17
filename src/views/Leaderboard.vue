@@ -23,7 +23,7 @@
         v-if="resultQuery.length > 0"
         :tableCols="tableCols"
         :rows="resultQuery"
-        :links="[]"
+        :links="[{ col: 'username', redirect: '/user/' }]"
         :maxElementPerPage="10"
         :userData="userInfo"
         :keys="searchQuery"
