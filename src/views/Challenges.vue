@@ -61,7 +61,7 @@ export default {
       totalChals: 0,
       selectedChall: null,
       selectDefaultChallenge: true,
-      renderParam: "1",
+      renderParam: "1"
     };
   },
   components: {
@@ -69,7 +69,7 @@ export default {
     ChallengesByTag,
     ChallCard,
     afterChallOver,
-    beforeChallStart,
+    beforeChallStart
   },
   created() {
     this.username = LoginUser.getUserInfo().userName;
@@ -96,7 +96,7 @@ export default {
       this.displayChallenges = challData.displayChallenges;
       if (!isUpdation) {
         var i = 0;
-        while (i < (this.displayChallenges.length)) {
+        while (i < this.displayChallenges.length) {
           if (this.displayChallenges[i].status == "Deployed") {
             this.selectedChall = this.displayChallenges[i];
             break;
@@ -112,9 +112,9 @@ export default {
       if (value.name === "All") {
         this.displayChallenges = this.challenges;
       } else {
-        this.displayChallenges = this.challenges.filter((challenge) => {
+        this.displayChallenges = this.challenges.filter(challenge => {
           let includeChallenge = false;
-          challenge.tags.forEach((tag) => {
+          challenge.tags.forEach(tag => {
             if (tag === value.name) {
               includeChallenge = true;
             }
@@ -127,13 +127,13 @@ export default {
       if (name === null) {
         this.selectedChall = null;
       }
-      this.selectedChall = this.challenges.filter((el) => {
+      this.selectedChall = this.challenges.filter(el => {
         return el.name == name;
       })[0];
-    },
+    }
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "userChallenges");
-  },
+  }
 };
 </script>
