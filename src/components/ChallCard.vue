@@ -162,7 +162,10 @@ export default {
           this.$vToastify.setSettings({
             theme: "beast-error"
           });
-          this.$vToastify.error(Response.data.error, "Error");
+          this.$vToastify.error(
+            Response.data.error ? Response.data.error : Response.data.message,
+            "Error"
+          );
         }
       });
       var self = this;
