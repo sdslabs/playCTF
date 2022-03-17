@@ -175,13 +175,7 @@ export default {
         { name: "Points", id: 2 },
         { name: "Solves", id: 3 }
       ],
-      statusFilterOptions: [
-        "All",
-        "Undeployed",
-        "Deployed",
-        "InProgress",
-        "Purged"
-      ],
+      statusFilterOptions: ["All", "Undeployed", "Deployed", "InProgress"],
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
@@ -368,8 +362,10 @@ export default {
       let confirmHandler = confirm => {
         if (confirm) {
           let allChallenges = [];
-          this.checkedChallenges.forEach(challenge => {
-            allChallenges.push(challenge.name);
+          this.displayChallenges.forEach(challenge => {
+            if (challenge.checked) {
+              allChallenges.push(challenge.name);
+            }
           });
           ChalService.manageMultipleChalAction(
             allChallenges.join(","),
