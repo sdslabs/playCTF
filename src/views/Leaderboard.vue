@@ -4,7 +4,7 @@
       <div class="adminHeadingColor">
         <img :src="leaderboard" class="adminHeadingColor" />
       </div>
-      <div class="adminUserSearchDiv">
+      <!-- <div class="adminUserSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn">
             <img :src="search" class="searchImg" />
@@ -15,7 +15,7 @@
             class="query"
           />
         </div>
-      </div>
+      </div> -->
     </div>
     <spin-loader v-if="isLoading()" />
     <div v-else-if="users.length > 0">

@@ -12,7 +12,7 @@
         :height="150"
         v-if="this.users.length > 0 && this.scoreSeries.length > 0"
       />
-      <div class="adminLbSearchDiv">
+      <!-- <div class="adminLbSearchDiv">
         <div class="adminSearchBar">
           <button class="searchBtn">
             <img :src="search" class="searchImg" />
@@ -28,10 +28,10 @@
           <img :src="download" />
           <span>Export as CSV</span>
         </button>
-      </div>
+      </div> -->
 
       <admin-table
-        v-if="resultQuery.length > 0"
+        v-if="resultQuery.length > 0 && !loading"
         :tableCols="tableCols"
         :rows="resultQuery"
         :links="[{ col: 'username', redirect: '/admin/users/' }]"
@@ -72,7 +72,7 @@ export default {
       scoreSeries: [],
       oldScoreSeries: [],
       lineGraphOptions: lineGraphOptions(true),
-      searchQuery: "",
+      searchQuery: null,
       tableCols: tableCols.leaderboard,
       users: [],
       displayUsers: [],
