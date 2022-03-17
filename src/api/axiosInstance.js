@@ -27,7 +27,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   function(error) {
-    let ignoreErrorPagesPath = ["/auth/login", "/auth/register"];
+    let ignoreErrorPagesPath = [
+      "/auth/login",
+      "/auth/register",
+      "/api/submit/challenge"
+    ];
     if (!error.response) {
       router.push("/error/networkerror");
     } else if (ignoreErrorPagesPath.includes(error.response.config.url)) {

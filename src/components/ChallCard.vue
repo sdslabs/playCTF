@@ -162,7 +162,7 @@ export default {
           this.$vToastify.setSettings({
             theme: "beast-error"
           });
-          this.$vToastify.error("Incorrect flag submitted", "Error");
+          this.$vToastify.error(Response.data.error, "Error");
         }
       });
       var self = this;
