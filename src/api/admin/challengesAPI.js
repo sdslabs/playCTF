@@ -11,6 +11,9 @@ export default {
       // data: postData
     });
   },
+  async fetchAllTags() {
+    return await axiosInstance.get(`/api/info/tags`);
+  },
   async manageChalAction(name, action) {
     let postData = new FormData();
     postData.append("name", name);

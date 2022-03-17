@@ -154,3 +154,15 @@ export const getChalTags = tags => {
   }
   return challTags;
 };
+
+export const getTags = async () => {
+  const resp = await ChalService.fetchAllTags();
+  let tags = resp.data.tags;
+  let tagArray = [];
+  let id = 0;
+  tags.forEach(tag => {
+    tagArray.push({ id, name: tag });
+    id++;
+  });
+  return tagArray;
+};
