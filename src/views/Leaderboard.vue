@@ -19,6 +19,7 @@
     </div>
     <spin-loader v-if="isLoading()" />
     <div v-else-if="users.length > 0">
+      <LeaderboardGraph />
       <admin-table
         v-if="resultQuery.length > 0"
         :tableCols="tableCols"
@@ -40,13 +41,14 @@
 </template>
 <script>
 import adminTable from "../components/adminTable.vue";
+import LeaderboardGraph from "@/components/LeaderboardGraph.vue";
 import UsersService from "../api/admin/usersAPI";
 import SpinLoader from "../components/spinLoader.vue";
 import { tableCols, colors, lineGraphOptions } from "../constants/constants";
 import { leaderboard, search } from "../constants/images";
 import LoginUser from "../api/admin/authAPI.js";
 export default {
-  components: { adminTable, SpinLoader },
+  components: { adminTable, SpinLoader, LeaderboardGraph },
   name: "AdminLeaderboard",
   data() {
     return {
