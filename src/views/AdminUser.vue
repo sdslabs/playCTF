@@ -147,6 +147,7 @@ import {
   colors
 } from "../constants/constants";
 import { mail, ban, unban } from "../constants/images";
+import { getTags } from "../utils/challenges.js";
 export default {
   name: "AdminUser",
   components: {
@@ -305,8 +306,7 @@ export default {
   },
   async mounted() {
     this.state = await this.$store.state;
-    const challResponse = await getChallenges();
-    this.chalTags = challResponse.tagFilterOptions;
+    this.chalTags = await getTags();
     const subResponse = await getSubStats(
       this.chalTags,
       this.$route.params.username
