@@ -80,25 +80,18 @@
         :key="port"
         class="host aboutText"
       >
-        <a
-          class="challenge-link"
-          :href="getUrl(port)"
-          target="_blank"
-          v-if="link"
-        >
+        <div class="challenge-link-code" v-on:click="copyUrl(port)">
           {{ getUrl(port) }}
-        </a>
-        <p class="challenge-link-code" :href="getUrl(port)" v-else>
-          {{ getUrl(port) }}
-        </p>
+          <span class="tooltiptext">{{ copyText }}</span>
+        </div>
       </div>
       <div class="challenge-links">
         <p
           class="link-heading"
           v-if="
             this.chalDetails.assets.length > 1 ||
-            (this.chalDetails.assets.length == 1 &&
-              this.chalDetails.assets[0] != '')
+              (this.chalDetails.assets.length == 1 &&
+                this.chalDetails.assets[0] != '')
           "
         >
           Asset Links
@@ -116,8 +109,8 @@
           class="link-heading"
           v-if="
             this.chalDetails.additionalLinks.length > 1 ||
-            (this.chalDetails.additionalLinks.length == 1 &&
-              this.chalDetails.additionalLinks[0] != '')
+              (this.chalDetails.additionalLinks.length == 1 &&
+                this.chalDetails.additionalLinks[0] != '')
           "
         >
           Additional Links
@@ -200,7 +193,7 @@ import {
   tableCols,
   confimDialogMessages,
   barChartOptions,
-  colors,
+  colors
 } from "../constants/constants";
 import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
@@ -220,7 +213,7 @@ export default {
       loading: {
         usersNotFetched: true,
         challengeNotFetched: true,
-        submissionsNotFetched: true,
+        submissionsNotFetched: true
       },
       tableCols: tableCols.adminChallenge,
       rows: [],
@@ -228,17 +221,18 @@ export default {
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
       hostUrl: this.$store.getters.hostUrl,
+      copyText: "Click to Copy"
     };
   },
   computed: {
-    isLoading: function () {
+    isLoading: function() {
       for (let apiState in this.loading) {
         if (this.loading[apiState]) {
           return true;
         }
       }
       return false;
-    },
+    }
   },
   methods: {
     getUrl(port) {
@@ -261,16 +255,16 @@ export default {
       return paths[paths.length - 1];
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     barData() {
       return {
         datasets: [
           {
             backgroundColor: colors.singleBarGraph,
-            data: [this.solvePercentage()],
-          },
-        ],
+            data: [this.solvePercentage()]
+          }
+        ]
       };
     },
     barChartOptions() {
@@ -282,9 +276,9 @@ export default {
       );
     },
     manageChallenge(name, action) {
-      let confirmHandler = (confirm) => {
+      let confirmHandler = confirm => {
         if (confirm) {
-          ChalService.manageChalAction(name, action).then(async (response) => {
+          ChalService.manageChalAction(name, action).then(async response => {
             if (response.status !== 200) {
               console.log(response.data);
             } else {
@@ -301,7 +295,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    (response) => {
+                    response => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Deployed";
@@ -317,7 +311,7 @@ export default {
                     break;
                   }
                   ChalService.fetchChallengeByName(this.$route.params.id).then(
-                    (response) => {
+                    response => {
                       let data = response.data;
                       this.chalDetails = data;
                       challengeDeployed = data.status === "Undeployed";
@@ -336,10 +330,21 @@ export default {
         title: this.confirmDialogs[action].title,
         message: this.confirmDialogs[action].message,
         button: this.confirmDialogs[action].button,
-        callback: confirmHandler,
+        callback: confirmHandler
       };
       this.$confirm(inputParams);
     },
+    copyUrl(text) {
+      navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+        if (result.state == "granted" || result.state == "prompt") {
+          navigator.clipboard.writeText(this.getUrl(text));
+        }
+      });
+      (this.copyText = "Copied"),
+        setTimeout(() => {
+          this.copyText = "Click to Copy";
+        }, 1000);
+    }
   },
   mounted() {
     if (
@@ -349,14 +354,14 @@ export default {
       this.link = false;
     else this.link = true;
     UsersService.getUserStats()
-      .then((response) => {
+      .then(response => {
         this.activeUsers = response.data.unbanned_users;
       })
       .finally(() => {
         this.loading.usersNotFetched = false;
       });
     ChalService.fetchChallengeByName(this.$route.params.id)
-      .then((response) => {
+      .then(response => {
         let data = response.data;
         this.chalDetails = data;
       })
@@ -365,8 +370,8 @@ export default {
       });
 
     SubmissionService.getSubmissions()
-      .then((response) => {
-        response.forEach((element) => {
+      .then(response => {
+        response.forEach(element => {
           if (element.name == this.$route.params.id) {
             this.rows.push({
               username: element.username,
@@ -381,6 +386,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
-  },
+  }
 };
 </script>
