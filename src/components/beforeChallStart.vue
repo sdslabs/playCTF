@@ -78,6 +78,8 @@ export default {
         clearInterval(this.interval);
         return;
       } else if (distance < 0 && passTime > 0) {
+        this.isLoading = true;
+        this.$router.go();
         this.statusType = "running";
         this.calcTime(passTime);
       } else if (distance > 0 && passTime > 0) {
