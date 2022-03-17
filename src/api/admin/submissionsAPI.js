@@ -7,7 +7,7 @@ export default {
     response.data.forEach(element => {
       // solvedTime is solved time is given format
       element.solvedTime = moment(element.solvedAt).format(
-        "h:mm:ss; MMMM Do, YYYY"
+        "HH:mm:ss; MMMM Do, YYYY"
       );
       submissions.push(element);
     });
