@@ -158,6 +158,25 @@
         font-size: 0.875rem;
         line-height: 1.5rem;
         color: $theme-color-grey39;
+        .tooltiptext{
+            font-family: $primary-font-family !important;
+            font-size: 11px !important;
+            letter-spacing: 0;
+            visibility: hidden;
+            width: 120px;
+            background-color: $theme-color-grey-high-transp;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 3px 10px;
+          
+            /* Position the tooltip */
+            position: relative;
+            z-index: 1;
+          }
+          .challenge-link-code:hover .tooltiptext{
+            visibility: visible;
+          }
     }
 
     .aboutChallenge {

@@ -80,17 +80,10 @@
         :key="port"
         class="host aboutText"
       >
-        <a
-          class="challenge-link"
-          :href="getUrl(port)"
-          target="_blank"
-          v-if="link"
-        >
+        <div class="challenge-link-code" v-on:click="copyUrl(port)">
           {{ getUrl(port) }}
-        </a>
-        <p class="challenge-link-code" :href="getUrl(port)" v-else>
-          {{ getUrl(port) }}
-        </p>
+          <span class="tooltiptext">{{ copyText }}</span>
+        </div>
       </div>
       <div class="challenge-links">
         <p
@@ -227,7 +220,8 @@ export default {
       chalDetails: {},
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
-      hostUrl: this.$store.getters.hostUrl
+      hostUrl: this.$store.getters.hostUrl,
+      copyText: "Click to Copy"
     };
   },
   computed: {
@@ -339,6 +333,17 @@ export default {
         callback: confirmHandler
       };
       this.$confirm(inputParams);
+    },
+    copyUrl(text) {
+      navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+        if (result.state == "granted" || result.state == "prompt") {
+          navigator.clipboard.writeText(this.getUrl(text));
+        }
+      });
+      (this.copyText = "Copied"),
+        setTimeout(() => {
+          this.copyText = "Click to Copy";
+        }, 1000);
     }
   },
   mounted() {

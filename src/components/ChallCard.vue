@@ -178,7 +178,11 @@ export default {
       }, 3000);
     },
     copyUrl(text) {
-      navigator.clipboard.writeText(this.getUrl(text));
+      navigator.permissions.query({ name: "clipboard-write" }).then(result => {
+        if (result.state == "granted" || result.state == "prompt") {
+          navigator.clipboard.writeText(this.getUrl(text));
+        }
+      });
       (this.copyText = "Copied"),
         setTimeout(() => {
           this.copyText = "Click to Copy";
