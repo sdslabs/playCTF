@@ -38,8 +38,8 @@ $themes: (
 );
 @each $name, $color in $themes {
   .vt-theme-#{$name} {
-    height: 99px;
-    width: 361px;
+    // height: 99px;
+    // width: 361px;
     background-color: #ffffff;
     border-radius: 2px !important;
     box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
@@ -50,12 +50,12 @@ $themes: (
       }
     }
     & > .vt-content { 
-      padding-top: 30px !important;
+      // padding-top: 30px !important;
       & > .vt-title {
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 24px;
         line-height: 22px;
         color: $color !important;
       }
@@ -63,8 +63,8 @@ $themes: (
         font-family: 'Open Sans';
         font-style: normal;
         font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
+        font-size: 16px;
+        line-height: 20px;
         color: #6B6B6B !important;
       }
     }
