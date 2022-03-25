@@ -1,6 +1,6 @@
 export const CONFIG = {
-  beastRoot: "http://testctf.sdslabs.co/server/",
-  staticRoot: "http://static.testctf.sdslabs.co/static/",
-  webRoot: "http://hack.testctf.sdslabs.co",
-  ncRoot: "hack.testctf.sdslabs.co"
+  beastRoot: "http://localhost:5005",
+  staticRoot: "http://static.beast.sdslabs.local/static/",
+  webRoot: "http://hack.beast.sdslabs.local",
+  ncRoot: "hack.beast.sdslabs.local"
 };

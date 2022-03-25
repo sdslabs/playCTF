@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     redirectToLogin() {
+      localStorage.removeItem("userInfo");
       this.$router.push("/login");
     },
     refresh() {
