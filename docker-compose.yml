@@ -14,4 +14,4 @@ services:
         - "CHOKIDAR_USEPOLLING=true"
         - "npm_config_unsafe_perm=true"
     ports:
-        - "8080:8080"
+        - "8080:80"
