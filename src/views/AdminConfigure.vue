@@ -8,6 +8,10 @@
         <span>Preview</span>
       </button>
 
+      <button class="action-cta" @click="sendRestartRequest">
+        <span>Restart</span>
+      </button>
+
       <div class="addConfigFeedback">
         <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
       </div>
@@ -67,6 +71,7 @@ import { getAllTimezones } from "../constants/constants";
 import PreviewModal from "../components/PreviewModal.vue";
 import ErrorBox from "../components/ErrorBox";
 import { CONFIG } from "@/config/config";
+import axiosInstance from "../api/axiosInstance.js";
 export default {
   name: "AdminConfigure",
   components: {
@@ -190,6 +195,14 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
+    },
+    sendRestartRequest() {
+      fetch('/restart/');
+      this.$vToastify.setSettings({
+        theme: "beast-success"
+      });
+      this.$vToastify.success("Restart requested!", "Success");
+      this.fadeFunc();
     }
   },
   mounted() {
