@@ -110,7 +110,6 @@ export default {
     ClickToAddList
   },
   mounted() {
-    console.log(this.challenge);
     this.challengeInfo = Object.assign({}, this.challenge);
     this.updateChallengeInfo();
   },

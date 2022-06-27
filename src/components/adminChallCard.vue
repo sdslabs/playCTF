@@ -54,7 +54,6 @@ export default {
     handleCheckboxClick(e) {
       this.checkedChallenge = !this.checkedChallenge;
       e.stopPropagation();
-      //console.log(e)
       if (this.challenge.checked === undefined) {
         this.challenge.checked = true;
       } else {
