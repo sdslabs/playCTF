@@ -37,6 +37,11 @@
       flex-direction: row;
       align-items: center;
     }
+    
+    .configureButtons {
+      display: flex;
+      gap: 0.4rem;
+    }
   }
 
   .form {
