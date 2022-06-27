@@ -1,4 +1,4 @@
-# beast-frontend
+# playCTF
 
 ## Project setup and run
 - Install `docker` and `docker-compose`
