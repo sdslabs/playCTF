@@ -162,7 +162,6 @@ export default {
   },
   methods: {
     getBarData(tag) {
-      console.log(this.chalCategory);
       let dataSolves = this.chalCategory[tag].solves;
       if (dataSolves.length > 5) {
         dataSolves = dataSolves.slice(0, 5);
