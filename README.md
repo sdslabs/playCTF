@@ -1,6 +1,6 @@
 # playCTF
 <p align="center">
-  <img src="./src/assets/playctf-logo.svg" alt="playCTF Logo">
+  <img src="./src/assets/playctf-logo.png" alt="playCTF Logo">
 </p>
 
 ## Overview
