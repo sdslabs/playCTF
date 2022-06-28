@@ -62,7 +62,7 @@ export default {
       // Find the distance between now an the count down date
       let distance = start - now;
       let passTime = end - now;
-      console.log(start, end, distance, passTime);
+      // console.log(start, end, distance, passTime);
       if (distance > 0) {
         this.statusType = "Upcoming";
         clearInterval(this.interval);

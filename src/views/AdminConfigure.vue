@@ -190,18 +190,7 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
-<<<<<<< HEAD
-=======
     },
-    sendRestartRequest() {
-      fetch("/restart/");
-      this.$vToastify.setSettings({
-        theme: "beast-success"
-      });
-      this.$vToastify.success("Restart requested!", "Success");
-      this.fadeFunc();
->>>>>>> 096a6d7... fix timer and remove log statements
-    }
   },
   mounted() {
     configureService.getConfigs().then(response => {
