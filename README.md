@@ -8,7 +8,7 @@
 - It is written in VueJS and integrates all the endpoints provided by Beast which makes deploying challenges a breeze.
 - There are different panels for admins and users which enable easy moderation of CTF competitions.
 
-Visit [playctf.sdslabs.co/docs](https://playctf.sdslabs.co/docs) for more details and documentation about the APIs.
+Visit [beast.sdslabs.co](https://beast.sdslabs.co/) for more details and documentation about the APIs.
 
 Also check out the Beast source code at https://github.com/sdslabs/beast.
 
