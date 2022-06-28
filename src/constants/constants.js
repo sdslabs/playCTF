@@ -553,11 +553,7 @@ export const lineGraphOptions = showLegend => {
                 store.state.competitionInfo.startingTime,
                 "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000,
-            max:
-              moment(
-                store.state.competitionInfo.endingTime,
-                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
-              ).unix() * 1000
+            max: moment.now()
           }
         },
         {
@@ -587,11 +583,7 @@ export const lineGraphOptions = showLegend => {
                 store.state.competitionInfo.startingTime,
                 "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
               ).unix() * 1000,
-            max:
-              moment(
-                store.state.competitionInfo.endingTime,
-                "HH:mm:ss UTC: Z, DD MMMM YYYY, dddd"
-              ).unix() * 1000
+            max: moment.now()
           }
         }
       ],
