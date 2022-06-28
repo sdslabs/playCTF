@@ -13,7 +13,7 @@
 - [Contact](#contact)
 
 ## Overview
-
+playCTF is an all-in-one open source platform for hosting jeopardy style CTFs. It can be setup in under a minute and lets you pull challenge files straight from github, allowing you to shift your focus away from the infrastructure onto the actual challenges.
 - playCTF is the frontend service powered by Beast. 
 - It is written in VueJS and integrates all the endpoints provided by Beast which makes deploying challenges a breeze.
 - There are different panels for admins and users which enable easy moderation of CTF competitions.
@@ -27,13 +27,15 @@ Also check out the Beast source code at https://github.com/sdslabs/beast.
 - Create your own challenges, categories, hints, and flags from the Admin Interface
   - Dynamic Scoring Challenges
   - Challenge plugin architecture to create your own custom challenges
+  - Container based isolation of challenges
   - File uploads to the server
-  - Hide challenges
+  - Hide challenges under maintenance / for any other reason
   - Automatic bruteforce protection
+- Quick and User-Friendly onboarding
 - Scoregraphs comparing the top 3 players and player progress graphs
-- Player banning
+- CTF management on the go for activities like player banning, hint broadcasting, announcements and more
 - Exporting of CTF data for archival
-- Announcements
+- Sandbox playground environment for realtime experience
 And a lot more...
 
 ## Development
