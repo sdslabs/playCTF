@@ -43,7 +43,7 @@
                 this.challDetails.assets[0] != '')
           "
         >
-          Asset Links
+          Asset Links (Right click and select Save as to download the asset)
         </p>
         <a
           class="challenge-link aboutText"

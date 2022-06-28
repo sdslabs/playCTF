@@ -9,11 +9,11 @@
         </button>
 
         <button class="action-cta" @click="sendRestartRequest">
-          <span>Restart</span>
+          <span>Restart Beast Service</span>
         </button>
 
         <button class="action-cta" onclick="window.open('/logs')">
-          <span>Logs</span>
+          <span>View Server Logs</span>
         </button>
       </div>
 
