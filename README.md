@@ -44,8 +44,8 @@ And a lot more...
 - Site can be accessed on `localhost:8080`
 
 ### To run the application in development mode
-```
-npm run serve
+```shell
+npm i && npm run serve
 ```
 
 ### Compiles and minifies for production
