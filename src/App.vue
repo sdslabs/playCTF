@@ -9,7 +9,6 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
-import configureService from "./api/admin/configureAPI";
 const default_layout = "default-layout";
 export default {
   name: "app",
@@ -21,21 +20,6 @@ export default {
     layout() {
       return this.$route.meta.layout || default_layout;
     }
-  },
-  mounted() {
-    configureService.getConfigs().then(response => {
-      let configs = response.data;
-      let competitionInfo = {
-        name: configs.name,
-        about: configs.about,
-        prizes: configs.prizes,
-        timezone: configs.timezone,
-        startingTime: configs.starting_time,
-        endingTime: configs.ending_time,
-        logo: configs.logo_url
-      };
-      this.$store.commit("updateCompInfo", competitionInfo);
-    });
   }
 };
 </script>

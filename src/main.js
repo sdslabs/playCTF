@@ -16,6 +16,8 @@ import AdminLandingLayout from "./layouts/AdminLanding.vue";
 import { CONFIG } from "@/config/config";
 import Logo from "./assets/main-logo.svg";
 import VueToastify from "vue-toastify";
+import configureService from "./api/admin/configureAPI";
+
 Vue.use(VueToastify, {
   position: "top-center",
   canTimeout: true,
@@ -46,18 +48,35 @@ Vue.mixin({
     getLogoUrl() {
       let logoName = store.state.competitionInfo.logo;
       if (!logoName) {
-        console.log(Logo);
         return Logo;
       }
       return `${CONFIG.beastRoot}/api/info/logo/${logoName}`;
     }
   }
 });
-new Vue({
-  router,
-  store,
-  components: {
-    ChartJsPluginDataLabels
-  },
-  render: h => h(App)
-}).$mount("#app");
+
+async function init() {
+  const response = await configureService.getConfigs();
+  let configs = response.data;
+  let competitionInfo = {
+    name: configs.name,
+    about: configs.about,
+    prizes: configs.prizes,
+    timezone: configs.timezone,
+    startingTime: configs.starting_time,
+    endingTime: configs.ending_time,
+    logo: configs.logo_url
+  };
+  store.commit("updateCompInfo", competitionInfo);
+}
+
+init().then(() => {
+  new Vue({
+    router,
+    store,
+    components: {
+      ChartJsPluginDataLabels
+    },
+    render: h => h(App)
+  }).$mount("#app");
+});

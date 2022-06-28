@@ -41,7 +41,7 @@
           startTime: compStartTime,
           startDate: compStartDate,
           endDate: compEndDate,
-          endTime: compEndTime,
+          endTime: compEndTime
         }"
         :disabled="true"
       ></ConfigTimeDate>
@@ -85,7 +85,7 @@ export default {
     ConfigTimeDate,
     ConfigLogo,
     PreviewModal,
-    ErrorBox,
+    ErrorBox
   },
   data() {
     return {
@@ -105,7 +105,7 @@ export default {
       compLogo: "",
       showPreviewModal: false,
       msg: null,
-      icon: null,
+      icon: null
     };
   },
   methods: {
@@ -138,7 +138,7 @@ export default {
       return value;
     },
     sleep(ms) {
-      return new Promise((resolve) => setTimeout(resolve, ms));
+      return new Promise(resolve => setTimeout(resolve, ms));
     },
     async fadeFunc() {
       await this.sleep(3000);
@@ -147,7 +147,7 @@ export default {
     },
     updateConfigs() {
       let timezone = moment.tz.names()[
-        getAllTimezones().findIndex((el) => {
+        getAllTimezones().findIndex(el => {
           return el === this.compTimezone;
         })
       ];
@@ -170,7 +170,7 @@ export default {
         startingTime,
         endingTime,
         timezone: this.compTimezone,
-        logo: this.compLogo,
+        logo: this.compLogo
       };
       configureService
         .updateConfigs(configs)
@@ -182,14 +182,14 @@ export default {
           }
           this.$store.commit("updateCompInfo", configs);
           this.$vToastify.setSettings({
-            theme: "beast-success",
+            theme: "beast-success"
           });
           this.$vToastify.success("Changes made successfully", "Success");
           this.fadeFunc();
         })
         .catch(() => {
           this.$vToastify.setSettings({
-            theme: "beast-error",
+            theme: "beast-error"
           });
           this.$vToastify.error("Failed to make changes", "Error");
           this.fadeFunc();
@@ -204,14 +204,14 @@ export default {
     sendRestartRequest() {
       fetch("/restart/");
       this.$vToastify.setSettings({
-        theme: "beast-success",
+        theme: "beast-success"
       });
       this.$vToastify.success("Restart requested!", "Success");
       this.fadeFunc();
-    },
+    }
   },
   mounted() {
-    configureService.getConfigs().then((response) => {
+    configureService.getConfigs().then(response => {
       let configs = response.data;
       this.compName = configs.name;
       this.compAbout = configs.about;
@@ -241,7 +241,7 @@ export default {
       if (logoName) {
         configureService
           .getLogo(`${CONFIG.beastRoot}/api/info/logo/${logoName}`, logoName)
-          .then((response) => {
+          .then(response => {
             this.compLogo = response;
           });
       } else {
@@ -251,6 +251,6 @@ export default {
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminConfigure");
-  },
+  }
 };
 </script>
