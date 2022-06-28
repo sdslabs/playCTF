@@ -14,3 +14,5 @@ npm run build
 ```
 npm run lint
 ```
+
+Also check out the Beast source code at https://github.com/sdslabs/beast.
