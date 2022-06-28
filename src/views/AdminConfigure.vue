@@ -190,7 +190,7 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
-    }
+    },
   },
   mounted() {
     configureService.getConfigs().then(response => {
