@@ -12,7 +12,7 @@
           <span>Restart</span>
         </button>
 
-        <button class="action-cta" onclick="location.href = '/logs';">
+        <button class="action-cta" onclick="window.open('/logs')">
           <span>Logs</span>
         </button>
       </div>
