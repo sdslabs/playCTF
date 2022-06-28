@@ -18,7 +18,7 @@ playCTF is an all-in-one open source platform for hosting jeopardy style CTFs. I
 - It is written in VueJS and integrates all the endpoints provided by Beast which makes deploying challenges a breeze.
 - There are different panels for admins and users which enable easy moderation of CTF competitions.
 
-Visit [playctf.sdslabs.co/docs](https://playctf.sdslabs.co/docs) for more details and documentation about the APIs.
+Visit [https://beast.sdslabs.co/apiDocs/](https://beast.sdslabs.co/apiDocs/) for more details and documentation about the APIs.
 
 Also check out the Beast source code at https://github.com/sdslabs/beast.
 
