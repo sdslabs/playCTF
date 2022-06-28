@@ -12,6 +12,7 @@
         @changed="setChallengeTar"
         :uploadFile="challengeTar"
       ></UploadComponent>
+      <p class="upload-format">Challenge file (in .zip format)</p>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
     <ErrorBox
