@@ -1,4 +1,3 @@
-# playCTF
 <p align="center">
   <img src="./src/assets/playctf-logo.png" alt="playCTF Logo">
 </p>
