@@ -1,3 +1,4 @@
+# playCTF
 <p align="center">
   <img src="./src/assets/playctf-logo.svg" alt="playCTF Logo">
 </p>
@@ -8,7 +9,7 @@
 - It is written in VueJS and integrates all the endpoints provided by Beast which makes deploying challenges a breeze.
 - There are different panels for admins and users which enable easy moderation of CTF competitions.
 
-Visit [beast-docs-sdslabs.netlify.app](https://beast-docs-sdslabs.netlify.app/) for the more details and documentation about the APIs.
+Visit [playctf.sdslabs.co/docs](https://playctf.sdslabs.co/docs) for the more details and documentation about the APIs.
 
 Also check out the Beast source code at https://github.com/sdslabs/beast.
 
