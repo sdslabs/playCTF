@@ -190,6 +190,14 @@ export default {
     },
     closeModal() {
       this.showPreviewModal = false;
+    },
+    sendRestartRequest() {
+      fetch("/restart/");
+      this.$vToastify.setSettings({
+        theme: "beast-success"
+      });
+      this.$vToastify.success("Restart requested!", "Success");
+      this.fadeFunc();
     }
   },
   mounted() {

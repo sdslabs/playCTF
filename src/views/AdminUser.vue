@@ -282,7 +282,6 @@ export default {
         x: moment.now(),
         y: this.userDetails.score
       };
-      console.log(scoreSeries);
       return scoreSeries;
     },
     lineGraphData() {

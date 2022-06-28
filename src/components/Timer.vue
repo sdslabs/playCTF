@@ -29,14 +29,16 @@ export default {
       minutes: "",
       hours: "",
       seconds: "",
-      statusType: "",
-      startTime: this.$store.state.competitionInfo.startingTime,
-      endTime: this.$store.state.competitionInfo.endingTime
+      statusType: ""
     };
   },
   mounted() {
-    this.start = this.getDateTimeString(this.startTime);
-    this.end = this.getDateTimeString(this.endTime);
+    this.start = this.getDateTimeString(
+      this.$store.state.competitionInfo.startingTime
+    );
+    this.end = this.getDateTimeString(
+      this.$store.state.competitionInfo.endingTime
+    );
     // Update the count down every 1 second
     this.timerCount(this.start, this.end);
     this.interval = setInterval(() => {
@@ -60,7 +62,7 @@ export default {
       // Find the distance between now an the count down date
       let distance = start - now;
       let passTime = end - now;
-
+      console.log(start, end, distance, passTime);
       if (distance > 0) {
         this.statusType = "Upcoming";
         clearInterval(this.interval);
@@ -69,8 +71,9 @@ export default {
         this.statusType = "running";
         this.calcTime(passTime);
       } else {
-        this.calcTime(distance);
         this.statusType = "Expired";
+        clearInterval(this.interval);
+        return;
       }
     },
     calcTime: function(dist) {
