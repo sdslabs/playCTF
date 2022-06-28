@@ -9,7 +9,8 @@
 
 ## Coding Style Guide
 
-Beast uses `logrus` for logging purposes and follows standard effective go guidelines.
+You can refer to [this guide](https://github.com/airbnb/javascript)
+for more information on the coding style guidelines.
 
 ## Pre-Commit
 
