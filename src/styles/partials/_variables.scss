@@ -52,6 +52,45 @@ $primary-theme-color: $theme-color-blue;
 $secondary-theme-color: $theme-color-orange;
 $secondary-admin-theme-color: $theme-color-dark-orange;
 
+// dark-theme variables
+$dark-theme-color-black: #000000;
+$dark-theme-color-black12: #120f0f;
+$dark-theme-color-light-black: #0c0b0e;
+$dark-theme-color-white: #fcfcfe;
+$dark-theme-color-dark-white: #dddddd;
+$dark-theme-color-white-d7: #d7d7d7;
+$dark-theme-color-offwhite: #d7d6d7;
+$dark-theme-color-offwhite-b3: #b3b3b3;
+$dark-theme-color-med-blue: #355dc5;
+$dark-theme-color-dark-blue: #411396;
+$dark-theme-color-light-blue: #2e9cca;
+$dark-theme-color-grey-blue: #808cad;
+$dark-theme-color-light-orange: #ff9458;
+$dark-theme-color-dark-orange: #e44f26;
+$dark-theme-color-med-orange: #cc652b;
+$dark-theme-color-light-grey: #575757;
+$dark-theme-color-light-grey99: #999999;
+$dark-theme-color-dark-grey: #393939;
+$dark-theme-color-grey55: #555555;
+$dark-theme-color-med-grey: #444444;
+$dark-theme-color-dark-red: #aa3126;
+$dark-theme-color-dark-green: #073c17;
+$dark-theme-color-dark-yellow: #584b06;
+$dark-theme-color-brown: #571211;
+
+$dark-theme-color-white-transp: rgba(255, 255, 255, 0.15);
+$dark-theme-color-grey-transp: rgba(41, 40, 40, 0.5);
+$dark-theme-color-light-grey-transp: rgba(44, 43, 42, 0.8);
+$dark-theme-color-dark-grey-transp: rgba(87, 87, 87, 0.07);
+$dark-theme-color-dark-grey-low-transp: rgba(87, 87, 87, 0.2);
+$dark-theme-color-dark-grey-med-transp: rgba(87, 87, 87, 0.35);
+$dark-theme-color-light-grey-transp: rgba(138, 138, 138, 0.57);
+$dark-theme-color-med-blue-transp: rgba(37, 85, 124, 0.2);
+$dark-theme-color-dark-blue-transp: rbga(89, 60, 143, 0.57);
+$dark-theme-color-light-blue-transp: rgba(76, 128, 165, 0.35);
+$dark-theme-color-brown-transp: rgba(255, 103, 0, 0.3);
+
+
 // sidebar themes variables
 $sidebar-bg: $theme-color-black;
 $sidebar-fg: $theme-color-white;
