@@ -38,7 +38,7 @@ export default {
   z-index: 1;
   min-height: 100%;
   display: flex;
-  background-color: #fcfcfc;
+  background-color: $theme-color-white;
 }
 
 @media only screen and (max-width: 1280) {
