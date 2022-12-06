@@ -1,5 +1,10 @@
 <template>
-  <div class="adminFooter">
+  <div
+    class="adminFooter"
+    :class="{
+      adminFooterDark: theme == 'dark'
+    }"
+  >
     <div class="platformName">
       <p class="adminFooterTitle">playCTF</p>
       <div class="adminFooterContact">
@@ -34,7 +39,8 @@ export default {
       sdslabsLogo,
       twitterLogo,
       githubLogo,
-      fbLogo
+      fbLogo,
+      theme: this.$store.getters.theme
     };
   }
 };

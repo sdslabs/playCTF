@@ -8,6 +8,11 @@
         <span>Preview</span>
       </button>
 
+      <button class="toggle-theme action-cta" @click="toggleTheme">
+        <img :src="preview" />
+        <span>Toggle Theme</span>
+      </button>
+
       <div class="addConfigFeedback">
         <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
       </div>
@@ -93,6 +98,7 @@ export default {
       compEndTime: "",
       compEndDate: "",
       compLogo: "",
+      darktheme: false,
       showPreviewModal: false,
       msg: null,
       icon: null
@@ -191,6 +197,10 @@ export default {
     closeModal() {
       this.showPreviewModal = false;
     },
+    toggleTheme() {
+      this.darktheme = !this.darktheme;
+      this.$store.commit("updateTheme", this.darktheme);
+    }
   },
   mounted() {
     configureService.getConfigs().then(response => {

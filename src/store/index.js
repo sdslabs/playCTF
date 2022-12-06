@@ -19,7 +19,8 @@ export default new Vuex.Store({
       endingTime: "",
       timezone: "",
       logo: ""
-    }
+    },
+    theme: "light"
   },
   mutations: {
     updateCurrentPage(state, page) {
@@ -27,10 +28,14 @@ export default new Vuex.Store({
     },
     updateCompInfo(state, configs) {
       state.competitionInfo = configs;
+    },
+    updateTheme(state, darkmode) {
+      state.theme = darkmode ? "dark" : "light";
     }
   },
   getters: {
     currentPage: state => state.currentPage,
-    hostUrl: state => state.hostUrl
+    hostUrl: state => state.hostUrl,
+    theme: state => state.theme
   }
 });
