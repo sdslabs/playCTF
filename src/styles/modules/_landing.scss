@@ -68,6 +68,27 @@
             color: $theme-color-grey39;
         }
     }
+    .sponsor-info {
+        margin-top: 8rem;
+        margin-bottom: 8rem;
+
+        .heading {
+            font-weight: 800;
+            font-family: $primary-font-family;
+            font-size: 3rem;
+            line-height: 4.5rem;
+            color: $theme-color-grey39;
+        }
+
+        .sponsor-img {
+            display: flex;
+            justify-content: space-between;
+
+            .spons-img {
+                width: 35%;
+            }
+        }
+    }
 }
 
 .description {

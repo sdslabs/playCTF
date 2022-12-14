@@ -44,6 +44,13 @@
           <img class="landing-img" src="@/assets/landing2.svg" />
         </div>
       </div>
+      <div class="sponsor-info">
+        <div class="heading">Sponsors</div>
+        <div class="sponsor-img">
+          <img class="spons-img" src="@/assets/google-cloud.svg" />
+          <img class="spons-img" src="@/assets/saptang.png" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
