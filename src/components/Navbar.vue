@@ -2,7 +2,7 @@
   <div class="navbar">
     <div class="user-navbar-container" v-if="loggedIn()">
       <router-link to="/about" class="navbar-link ctfLogo"
-        ><div class="logo adminFooterTitle">playCTF</div>
+        ><div class="logo adminFooterTitle">BackdoorCTF</div>
       </router-link>
       <nav class="navbar-container">
         <div class="link-container">
