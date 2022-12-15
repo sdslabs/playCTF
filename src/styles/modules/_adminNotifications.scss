@@ -54,7 +54,7 @@
     @extend %font-style-basic;
     margin-bottom: 1rem;
     width: 100%;
-    color: $theme-color-black19;
+    color: $theme-color-black57;
   }
 
   .adminFormTitle::placeholder,
@@ -68,6 +68,7 @@
     height: 6rem;
     border-radius: 0.3125rem;
     border: 1px solid $theme-color-grey-high-transp;
+    color: $theme-color-black57;
     @extend %font-style-basic;
     padding-left: 1rem;
     padding-top: 1rem;

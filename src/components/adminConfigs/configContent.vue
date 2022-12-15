@@ -53,8 +53,8 @@ export default {
   data() {
     return {
       content: this.compContent,
-      maxAbout: 200,
-      maxPrizes: 200,
+      maxAbout: 500,
+      maxPrizes: 500,
       showPrizeCounter: false,
       showAboutCounter: false
     };
@@ -74,6 +74,7 @@ export default {
           );
           newCompInfoContent.about = this.content.about;
         }
+        this.content.prizes = this.content.prizes.replace("\\n", "\n");
         if (this.content.prizes.length > this.maxPrizes) {
           this.content.prizes = this.content.prizes.substring(
             0,
