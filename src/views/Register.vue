@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth-container">
       <div class="heading">
-        Register for n00b<label class="switch">CTF</label>
+        Register for {{ configData.name }}<label class="switch">CTF</label>
       </div>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
@@ -118,12 +118,14 @@
 import RegisterUser from "../api/admin/authAPI.js";
 import ErrorBox from "../components/ErrorBox";
 import Button from "@/components/Button.vue";
+import ConfigApiService from "../api/admin/configureAPI";
 export default {
   name: "register",
   components: {
     ErrorBox,
     Button
   },
+  props: ["fetchedData", "configs"],
   data() {
     return {
       msg: null,
@@ -140,8 +142,18 @@ export default {
       PassErr: false,
       registered: false,
       errorIcon: "error-white",
-      tickIcon: "tick-white"
+      tickIcon: "tick-white",
+      configData: {}
     };
+  },
+  mounted() {
+    if (!this.fetchedData) {
+      ConfigApiService.getConfigs().then(response => {
+        this.configData = response.data;
+      });
+    } else {
+      this.configData = this.configs;
+    }
   },
   methods: {
     validateUsername(e) {
