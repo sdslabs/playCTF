@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: row;
   height: 12.75rem;
-  background-color: $theme-color-dark-white;
+  background-color: #0c0b0e;
   justify-content: space-between;
   position: absolute;
   bottom: 0;
@@ -17,7 +17,7 @@
 }
 
 .adminFooterTitle {
-  color: $theme-color-black19 !important;
+  color: #d7d6d7 !important;
   text-align: left;
   vertical-align: middle;
   font-family: $primary-font-family;
@@ -47,7 +47,7 @@
   font-size: 1rem;
   line-height: 2rem;
   margin-left: 0.625rem;
-  color: $theme-color-violet;
+  color: #9744be;
   text-decoration: none;
 }
 

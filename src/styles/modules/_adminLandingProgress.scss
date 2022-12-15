@@ -9,15 +9,15 @@
         width: 10%;
         height: 0.25rem;
         border-radius: 0.1875rem;
-        background-color: $theme-color-grey-high-transp;
+        background-color: rgba(118, 118, 118, 0.799);
     }
 
     .completed{
-        background-color: $theme-color-black;
+        background-color: #fcfcfe;
     }
 
     .current{
-        background-color: $theme-color-dark-orange;
+        background-color: #e44f26;
         width: 40%;
     }
 }

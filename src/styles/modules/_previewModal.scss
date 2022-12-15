@@ -45,17 +45,17 @@
     font-family: $primary-font-family;
     font-size: 1.5rem;
     border-bottom: 0.0625rem solid rgba(87, 87, 87, 0.7);
-    background-color: $theme-color-white;
+    background-color: #121212;
 
 }
 
 .modal-close-button {
     outline: none;
     border: none;
-    background-color: $theme-color-white;
+    background-color: #121212;
 }
 
 .modal-body {
     padding: 4rem calc(10rem * 1440 / 1980);
-    background-color: $theme-color-white;
+    background-color: #121212;
 }

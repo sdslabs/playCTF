@@ -32,13 +32,13 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: $theme-color-grey-blue;
+  color: #5d8397;
   font-size: 1vw;
   overflow: hidden;
   z-index: 1;
   min-height: 100%;
   display: flex;
-  background-color: $theme-color-white;
+  background-color: #121212;
 }
 
 @media only screen and (max-width: 1280) {

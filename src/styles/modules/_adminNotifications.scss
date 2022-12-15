@@ -42,33 +42,33 @@
     @extend %font-style-basic;
     font-size: 0.875rem;
     margin: 0.75rem 0 0 0;
-    color: $theme-color-black-high-transp;
+    color: rgba(255, 255, 255, 0.38);
   }
 
   .adminFormTitle {
     box-sizing: border-box;
     height: 2.5rem;
     border-radius: 0.3125rem;
-    border: 1px solid $theme-color-grey-high-transp;
+    border: 1px solid rgba(118, 118, 118, 0.799);
     padding-left: 1rem;
     @extend %font-style-basic;
     margin-bottom: 1rem;
     width: 100%;
-    color: $theme-color-black57;
+    color: #747474;
   }
 
   .adminFormTitle::placeholder,
   textarea::placeholder {
     @extend %font-style-basic;
-    color: $theme-color-grey-high-transp;
+    color: rgba(118, 118, 118, 0.799);
   }
 
   textarea {
     box-sizing: border-box;
     height: 6rem;
     border-radius: 0.3125rem;
-    border: 1px solid $theme-color-grey-high-transp;
-    color: $theme-color-black57;
+    border: 1px solid rgba(118, 118, 118, 0.799);
+    color: #747474;
     @extend %font-style-basic;
     padding-left: 1rem;
     padding-top: 1rem;
@@ -81,7 +81,7 @@
     justify-content: flex-start;
     align-items: center;
     @extend %font-style-basic;
-    color: $theme-color-grey-high-transp;
+    color: rgba(118, 118, 118, 0.799);
     font-size: 1rem;
     line-height: 1.75rem;
     label{
@@ -101,7 +101,7 @@
   textarea:focus,
   .adminFormTitle:focus {
     outline: 0;
-    border: 2px solid $theme-color-violet;
+    border: 2px solid #9744be;
     padding-left: calc(1rem - 1px);
   }
 
@@ -121,7 +121,7 @@
   @extend %font-style-bold;
   font-size: 2rem;
   line-height: 3rem;
-  color: $theme-color-grey-high-transp;
+  color: rgba(118, 118, 118, 0.799);
 }
 
 .adminNotifTabs {

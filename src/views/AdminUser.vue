@@ -18,7 +18,7 @@
               class="value"
               :style="
                 this.userDetails.active
-                  ? { color: '$theme-color-black19' }
+                  ? { color: '#d7d6d7' }
                   : { color: 'rgba(25, 25, 25, 0.57)' }
               "
               >{{ userDetails.rank }}</span
@@ -30,7 +30,7 @@
               class="value"
               :style="
                 this.userDetails.active
-                  ? { color: '$theme-color-black19' }
+                  ? { color: '#d7d6d7' }
                   : { color: 'rgba(25, 25, 25, 0.57)' }
               "
               >{{ userDetails.score }}</span

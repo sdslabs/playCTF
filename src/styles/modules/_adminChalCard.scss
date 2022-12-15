@@ -3,7 +3,7 @@
     text-decoration: none;
     border-radius: 0.1875rem;
     padding: 0.625rem 0.625rem;
-    box-shadow: 0 0.125rem 0.625rem $theme-color-black-low-transp;
+    box-shadow: 0 0.125rem 0.625rem rgba(41, 40, 40, 0.5);
     margin-bottom: 0.75rem;
 
     .adminChallItem {
@@ -32,7 +32,7 @@
                 font-weight: 300;
                 line-height: 0.875rem;
                 text-align: right;
-                color: $theme-color-grey57;
+                color: #747474;
                 margin-left: auto;
             }
         }
@@ -43,13 +43,13 @@
             @extend %font-style-basic;
             font-size: 1rem;
             line-height: 1.125rem;
-            color: $theme-color-black-med-transp;
+            color: rgba(153, 153, 153, 1);
             .adminChallCategory{
-                border-right: 0.125rem solid $theme-color-black-med-transp;
+                border-right: 0.125rem solid rgba(153, 153, 153, 1);
                 padding-right: 0.3125rem;
             }
             .adminChallPoints{
-                border-right: 0.125rem solid $theme-color-black-med-transp;
+                border-right: 0.125rem solid rgba(153, 153, 153, 1);
                 padding: 0 0.3125rem;
             }
             
@@ -61,19 +61,19 @@
 }
 
 .deployedLink {
-    border-left: 0.3125rem solid $theme-color-green-high-transp;
+    border-left: 0.3125rem solid rgba(7, 60, 23, 1);
 }
 
 .purgedLink {
-    border-left: 0.3125rem solid $theme-color-red;
+    border-left: 0.3125rem solid #aa3126;
 }
 
 .undeployedLink {
-    border-left: 0.3125rem solid $theme-color-yellow-high-transp;
+    border-left: 0.3125rem solid rgba(88, 75, 6, 1);
 }
 
 .inProgressLink {
-    border-left: 0.3125rem solid $theme-color-light-blue;
+    border-left: 0.3125rem solid #808cad;
 }
 
 .adminTags {
@@ -98,13 +98,13 @@
 .adminChallTags {
     width: max-content;
     vertical-align: middle;
-    background: $theme-color-violet;
+    background: #9744be;
     border-radius: 0.125rem;
     font-family: $secondary-font-family;
     font-weight: bold;
     font-size: 0.75rem;
     line-height: 1rem;
-    color: $theme-color-white;
+    color: #121212;
     padding: 0.25rem 0.625rem;
     margin-bottom: 0.25rem;
     text-align: left;

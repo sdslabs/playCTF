@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth-container">
       <div class="heading">
-        Register for {{ configData.name }}<label class="switch">CTF</label>
+        Register for Backdoor<label class="switch">CTF</label>
       </div>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
@@ -142,18 +142,8 @@ export default {
       PassErr: false,
       registered: false,
       errorIcon: "error-white",
-      tickIcon: "tick-white",
-      configData: {}
+      tickIcon: "tick-white"
     };
-  },
-  mounted() {
-    if (!this.fetchedData) {
-      ConfigApiService.getConfigs().then(response => {
-        this.configData = response.data;
-      });
-    } else {
-      this.configData = this.configs;
-    }
   },
   methods: {
     validateUsername(e) {

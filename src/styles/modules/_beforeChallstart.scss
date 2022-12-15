@@ -14,7 +14,7 @@
     font-family: $primary-font-family;
     font-size: 1.5rem;
     line-height: 2rem;
-    color: $theme-color-grey39;
+    color: #a5a5a5;
     font-weight: 600;
   }
 }
@@ -24,13 +24,13 @@
     font-family: $secondary-font-family;
     font-size: 2rem;
     line-height: 3.75rem;
-    color: $theme-color-grey39;
+    color: #a5a5a5;
     font-weight: 600;
   }
   display: flex;
   flex-direction: row;
   gap:2px;
   .seconds-timer{
-    color: $theme-color-dark-orange;
+    color: #e44f26;
   }
 }

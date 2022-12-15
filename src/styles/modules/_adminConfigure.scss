@@ -28,7 +28,7 @@
       line-height: 1.75rem;
       text-align: left;
       padding: 0.625rem 0;
-      color: $theme-color-dark-orange;
+      color: #e44f26;
     }
 
     .addConfigFeedback {
@@ -56,7 +56,7 @@
     line-height: 1.125rem;
     margin: 0.2rem;
     margin-left: 0;
-    color: $theme-color-grey57;
+    color: #747474;
   }
 
   .subfields-row {
@@ -64,13 +64,13 @@
     display: flex;
     align-items: center;
     height: 1.5rem;
-    color: $theme-color-grey57;
+    color: #747474;
   }
 
   .counter {
     @extend %font-style-basic;
     font-size: 0.75rem;
-    color: $theme-color-violet;
+    color: #9744be;
     margin-left: auto;
   }
 
@@ -78,7 +78,7 @@
     font-size: 0.75rem;
     text-align: left;
     font-family: $primary-font-family;
-    color: $theme-color-grey57;
+    color: #747474;
 
     font-weight: 600;
     line-height: 1.125rem;
@@ -99,25 +99,25 @@
   .configTitle:focus,
   textarea:focus {
     outline: 0;
-    border: 2px solid $theme-color-violet;
+    border: 2px solid #9744be;
   }
 
   textarea {
     box-sizing: border-box;
     height: 6rem;
     border-radius: 0.3125rem;
-    border: 0.0625rem solid $theme-color-grey-high-transp;
+    border: 0.0625rem solid rgba(118, 118, 118, 0.799);
     @extend %font-style-basic;
     margin-bottom: 2%;
     width: 100%;
     padding-left: 1rem;
     padding-top: 1rem;
-    color: $theme-color-black19;
+    color: #d7d6d7;
   }
 
   textarea::placeholder {
     font-family: $primary-font-family;
-    color: $theme-color-grey-high-transp;
+    color: rgba(118, 118, 118, 0.799);
 
     font-weight: 600;
     font-size: 1rem;
@@ -153,8 +153,8 @@
       input {
         border: 1px solid rgba(87, 87, 87, 0.7);
         border-radius: 2px;
-        background-color: $theme-color-white;
-        color: $theme-color-black19;
+        background-color: #121212;
+        color: #d7d6d7;
         padding-left: 1rem;
         height: 2rem;
         outline: none;
@@ -165,7 +165,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        color: $theme-color-grey57;
+        color: #747474;
       }
 
       .timeInput {
@@ -173,14 +173,14 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        color: $theme-color-grey57;
+        color: #747474;
       }
     }
   }
 
   .timezoneSelect {
     outline: none;
-    background-color: $theme-color-white;
+    background-color: #121212;
 
     .vs__selected {
       @extend %font-style-basic;
@@ -189,10 +189,10 @@
 
   .v-select-disabled {
     outline: none;
-    background-color: $theme-color-white;
+    background-color: #121212;
 
     .vs__selected {
-      color: $theme-color-grey-high-transp;
+      color: rgba(118, 118, 118, 0.799);
       @extend %font-style-basic;
     }
   }
@@ -280,9 +280,9 @@
 .upload-button {
   @extend .action-cta;
   &:hover:not(:active) {
-    background-color: $theme-color-violet;
-    border: 1.5px solid $theme-color-violet;
-    color: $theme-color-white;
+    background-color: #9744be;
+    border: 1.5px solid #9744be;
+    color: #121212;
     img {
       filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg)
         brightness(99%) contrast(103%);
