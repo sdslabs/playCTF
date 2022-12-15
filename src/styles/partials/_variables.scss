@@ -11,49 +11,49 @@ $secondary-font-family: "Open Sans", sans-serif;
 
 
 // colors variables
-$theme-color-white: #fcfcfc;
-$theme-color-offwhite: #f2f2f2;
-$theme-color-dark-white: #e7e7e7;
-$theme-color-black: #000000;
-$theme-color-black19: #191919;
-$theme-color-black57: #575757;
-$theme-color-blue: #2f53b1;
-$theme-color-orange: #ffc568;
-$theme-color-dark-orange: #ff6700;
-$theme-color-light-orange: #ff8900;
-$theme-color-grey57: #575757;
-$theme-color-grey39: #393939;
-$theme-color-grey: #555555;
-$theme-color-dark-grey: #444444;
-$theme-color-light-grey: #999999;
-$theme-color-off-white: #dddddd;
-$theme-color-light-grey-d7: #d7d7d7;
-$theme-color-white-grey: #b3b3b3;
-$theme-color-grey-blue: #2c3e50;
-$theme-color-dark-blue: #355dc5;
-$theme-color-light-blue: #d6def3;
-$theme-color-red: #b83428;
-$theme-color-violet: #593c8f;
-$theme-color-white-low-transp: rgba(0,0,0,0.05);
-$theme-color-black-low-transp: rgba(57, 57, 57, 0.1);
-$theme-color-black-med-transp: rgba(57, 57, 57, 0.57);
-$theme-color-black-high-transp: rgba(57, 57, 57, 0.9);
-$theme-color-green-high-transp: rgba(0, 144, 43, 0.7);
-$theme-color-yellow-high-transp: rgba(255, 174, 0, 0.7);
-$theme-color-red-high-transp: rgba(215, 44, 39, 0.7);
-$theme-color-dark-red-med-transp: rgba(255, 103, 0, 0.57);
-$theme-color-grey-low-transp: rgba(87, 87, 87, 0.15);
-$theme-color-grey-med-transp: rgba(87, 87, 87, 0.4);
-$theme-color-grey-high-transp: rgba(87, 87, 87, 0.7);
-$theme-color-blue-low-transp: rgba(37, 85, 124, 0.1);
-$theme-color-light-black-low-transp: rgba(25, 25, 25, 0.1);
-$theme-color-light-black-med-transp: rgba(25, 25, 25, 0.57);
-$theme-color-violet-med-transp: rgba(89, 60, 143, 0.57);
-$theme-color-dark-black-low-transp: rgba(0, 0, 0, 0.15);
-$theme-color-dark-blue-high-transp: rgba(76, 128, 165, 0.75);
+// $theme-color-white: #fcfcfc;
+// $theme-color-offwhite: #f2f2f2;
+// $theme-color-dark-white: #e7e7e7;
+// $theme-color-black: #000000;
+// $theme-color-black19: #191919;
+// $theme-color-black57: #575757;
+// $theme-color-blue: #2f53b1;
+// $theme-color-orange: #ffc568;
+// $theme-color-dark-orange: #ff6700;
+// $theme-color-light-orange: #ff8900;
+// $theme-color-grey57: #575757;
+// $theme-color-grey39: #393939;
+// $theme-color-grey: #555555;
+// $theme-color-dark-grey: #444444;
+// $theme-color-light-grey: #999999;
+// $theme-color-off-white: #dddddd;
+// $theme-color-light-grey-d7: #d7d7d7;
+// $theme-color-white-grey: #b3b3b3;
+// $theme-color-grey-blue: #2c3e50;
+// $theme-color-dark-blue: #355dc5;
+// $theme-color-light-blue: #d6def3;
+// $theme-color-red: #b83428;
+// $theme-color-violet: #593c8f;
+// $theme-color-white-low-transp: rgba(0,0,0,0.05);
+// $theme-color-black-low-transp: rgba(57, 57, 57, 0.1);
+// $theme-color-black-med-transp: rgba(57, 57, 57, 0.57);
+// $theme-color-black-high-transp: rgba(57, 57, 57, 0.9);
+// $theme-color-green-high-transp: rgba(0, 144, 43, 0.7);
+// $theme-color-yellow-high-transp: rgba(255, 174, 0, 0.7);
+// $theme-color-red-high-transp: rgba(215, 44, 39, 0.7);
+// $theme-color-dark-red-med-transp: rgba(255, 103, 0, 0.57);
+// $theme-color-grey-low-transp: rgba(87, 87, 87, 0.15);
+// $theme-color-grey-med-transp: rgba(87, 87, 87, 0.4);
+// $theme-color-grey-high-transp: rgba(87, 87, 87, 0.7);
+// $theme-color-blue-low-transp: rgba(37, 85, 124, 0.1);
+// $theme-color-light-black-low-transp: rgba(25, 25, 25, 0.1);
+// $theme-color-light-black-med-transp: rgba(25, 25, 25, 0.57);
+// $theme-color-violet-med-transp: rgba(89, 60, 143, 0.57);
+// $theme-color-dark-black-low-transp: rgba(0, 0, 0, 0.15);
+// $theme-color-dark-blue-high-transp: rgba(76, 128, 165, 0.75);
 
     
-@if $dark-theme {
+//@if $dark-theme {
     $theme-color-white: #121212;
     $theme-color-offwhite: #120f0f;
     $theme-color-dark-white: #0c0b0e;
@@ -94,7 +94,7 @@ $theme-color-dark-blue-high-transp: rgba(76, 128, 165, 0.75);
     $theme-color-violet-med-transp: rgba(89, 60, 143, 0.57);
     $theme-color-dark-black-low-transp: rgba(255, 255, 255, 0.15);
     $theme-color-dark-blue-high-transp: rgba(76, 128, 165, 0.35);
-}
+//}
 
 
 $primary-font-color: $theme-color-black;
@@ -144,5 +144,5 @@ $assets-sdslabs-logo: "main-logo";
     themeColorViolet: $theme-color-violet;
     themeColorGreyLowTransp: $theme-color-grey-low-transp;
     themeColorGreyHighTransp: $theme-color-grey-high-transp;
-    isDarkTheme: $dark-theme;
+    //isDarkTheme: $dark-theme;
 }

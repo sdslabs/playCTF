@@ -11,8 +11,9 @@
     </div>
     <div class="adminFooterLogos">
       <a href="https://sdslabs.co">
-        <img v-if="this.isDarkTheme == 'true'" :src="sdslabsLogoDark" />
-        <img v-else :src="sdslabsLogo" />
+        <!-- <img v-if="this.isDarkTheme == 'true'" :src="sdslabsLogoDark" />
+        <img v-else :src="sdslabsLogo" /> -->
+        <img :src="sdslabsLogoDark" />
       </a>
       <div class="adminFooterContactInfo">
         <a href="https://www.facebook.com/SDSLabs"><img :src="fbLogo"/></a>
