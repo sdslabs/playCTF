@@ -1,13 +1,8 @@
 <template>
   <div class="adminFooter">
     <div class="platformName">
-      <p class="adminFooterTitle">playCTF</p>
-      <div class="adminFooterContact">
-        <p class="adminFooterMessage">
-          Wondering how to host a CTF using playCTF?
-        </p>
-        <a class="adminFooterLink" href="https://chat.sdslabs.co/">Reach us</a>
-      </div>
+      <p class="adminFooterTitle">backdoorCTF</p>
+
     </div>
     <div class="adminFooterLogos">
       <a href="https://sdslabs.co">
