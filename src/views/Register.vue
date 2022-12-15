@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth-container">
       <div class="heading">
-        Register for n00b<label class="switch">CTF</label>
+        Register for Backdoor<label class="switch">CTF</label>
       </div>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>

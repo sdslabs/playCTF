@@ -30,3 +30,6 @@ export const userPanel = getImage("userPanel");
 export const configFail = getImage("config-fail");
 export const configSuccess = getImage("config-success");
 export const cross = getImage("cross");
+export const instaLogo = getImage("insta-logo");
+export const discordLogo = getImage("discord-logo");
+export const infosecLogo = getImage("infosec-logo");

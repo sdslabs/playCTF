@@ -1,18 +1,20 @@
 <template>
   <div class="adminFooter">
     <div class="platformName">
-      <p class="adminFooterTitle">backdoorCTF</p>
+      <p class="adminFooterTitle">BackdoorCTF</p>
 
     </div>
     <div class="adminFooterLogos">
-      <a href="https://sdslabs.co">
-        <img v-if="this.isDarkTheme == 'true'" :src="sdslabsLogoDark" />
-        <img v-else :src="sdslabsLogo" />
+      <a href="https://infoseciitr.in/">
+        <img v-if="this.isDarkTheme == 'true'" :src="infosecLogo" />
+        <img v-else :src="infosecLogo" />
       </a>
       <div class="adminFooterContactInfo">
-        <a href="https://www.facebook.com/SDSLabs"><img :src="fbLogo"/></a>
-        <a href="https://twitter.com/sdslabs"><img :src="twitterLogo"/></a>
-        <a href="https://github.com/sdslabs/"><img :src="githubLogo"/></a>
+        <a href="https://facebook.com/InfoSecIITR"><img :src="fbLogo"/></a>
+        <a href="https://instagram.com/infoseciitr"><img :src="instaLogo"/></a>
+        <a href="https://twitter.com/InfoSecIITR"><img :src="twitterLogo"/></a>
+        <a href="https://github.com/InfoSecIITR"><img :src="githubLogo"/></a>
+        <a href="https://discord.gg/BaZD6sKK"><img :src="discordLogo"/></a>
       </div>
     </div>
   </div>
@@ -24,7 +26,10 @@ import {
   sdslabsLogoDark,
   twitterLogo,
   githubLogo,
-  fbLogo
+  fbLogo,
+  instaLogo,
+  discordLogo,
+  infosecLogo
 } from "../constants/images";
 import variables from "../styles/main.scss";
 console.log(variables.isDarkTheme);
@@ -37,7 +42,10 @@ export default {
       sdslabsLogoDark,
       twitterLogo,
       githubLogo,
-      fbLogo
+      fbLogo,
+      instaLogo,
+      discordLogo,
+      infosecLogo
     };
   }
 };

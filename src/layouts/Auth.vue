@@ -3,7 +3,7 @@
     <div class="navbar">
       <nav v-if="pathLogin()" class="navbar-container">
         <router-link to="/" class="navbar-link">
-          <div class="logo adminFooterTitle">backdoorCTF</div>
+          <div class="logo adminFooterTitle">BackdoorCTF</div>
         </router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">New here?</p>
@@ -12,7 +12,7 @@
       </nav>
       <nav v-else class="navbar-container">
         <router-link to="/" class="navbar-link">
-          <div class="logo adminFooterTitle">backdoorCTF</div>
+          <div class="logo adminFooterTitle">BackdoorCTF</div>
         </router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">Already Registered?</p>
