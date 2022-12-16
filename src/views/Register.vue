@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth-container">
       <div class="heading">
-        Register for Backdoor<label class="switch">CTF</label>
+        Register for Backdoor<label class="switch">CTF</label><div style="font-size: .5em; color:#ae001d">Note: Teams can create single account and share login credentials with team members.</div>
       </div>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
