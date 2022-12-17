@@ -29,7 +29,6 @@
           />
         </div>
         <Button
-          :disabled="!(username && password)"
           :onclick="login"
           class="auth-button"
           variant="primary-cta"

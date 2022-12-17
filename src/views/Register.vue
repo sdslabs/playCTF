@@ -92,20 +92,6 @@
           :onclick="register"
           variant="primary-cta"
           class="auth-button"
-          :disabled="
-            !(
-              uname &&
-              username &&
-              password &&
-              confirmPassword &&
-              email &&
-              !PassErr &&
-              !UsernameErr &&
-              !EmailErr &&
-              password === confirmPassword &&
-              !registered
-            )
-          "
           text="Register Now"
         />
       </div>
