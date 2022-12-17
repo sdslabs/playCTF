@@ -6,7 +6,7 @@
   line-height: 1.75rem;
   text-align: left;
   padding: 0.625rem 0;
-  color: $theme-color-dark-orange;
+  color: #e44f26;
 }
 
 .adminSubheading {
@@ -16,7 +16,7 @@
   margin-top: 0.375rem;
   margin-bottom: 0.375rem;
   text-align: left;
-  color: $theme-color-black19;
+  color: #d7d6d7;
 
   .adminSubheadingLight {
     font-weight: 400;
@@ -25,16 +25,16 @@
 
 .adminBold {
   font-weight: 600;
-  color: $theme-color-grey39;
+  color: #a5a5a5;
 }
 
 .adminVioletBold {
-  color: $theme-color-violet;
+  color: #9744be;
   font-weight: 600;
 }
 
 .adminOrangeBold {
-  color: $theme-color-dark-orange;
+  color: #e44f26;
   font-weight: bold;
 }
 
@@ -42,7 +42,7 @@
   @extend %font-style-basic;
   
   font-weight: 400;
-  color: $theme-color-grey57;
+  color: #747474;
   font-size: 1rem;
   line-height: 1.125rem;
   text-align: left;

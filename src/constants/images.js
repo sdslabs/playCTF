@@ -1,8 +1,11 @@
+import variables from "../styles/main.scss";
+
 function getImage(imagename) {
   return require(`../assets/${imagename}.svg`);
 }
 
 export const sdslabsLogo = getImage("sdslabs-logo");
+export const sdslabsLogoDark = getImage("sdslabs-logo-dark");
 export const fbLogo = getImage("fb-logo");
 export const twitterLogo = getImage("twitter-logo");
 export const githubLogo = getImage("github-logo");

@@ -3,14 +3,14 @@
   padding: 0.375rem 2rem;
   width: max-content;
   height: 2.5rem;
-  background: $theme-color-dark-orange;
+  background: #e44f26;
   box-shadow: 0px 6px 10px rgba(255, 103, 0, 0.3);
   border-radius: 3px;
   @extend %font-style-bold;
   outline: 0;
   font-size: 1rem;
   line-height: 1.75rem;
-  color: $theme-color-white;
+  color: #121212;
   display: flex;
   align-items: center;
   border: none;
@@ -26,7 +26,7 @@
         rgba(57, 57, 57, 0.25),
         rgba(57, 57, 57, 0.25)
       ),
-      $theme-color-dark-orange;
+      #e44f26;
   }
 
   &:active {
@@ -35,9 +35,9 @@
   }
 
   &:disabled {
-    background-color: $theme-color-light-grey-d7;
+    background-color: #3d3d3d;
     box-shadow: none;
-    color: $theme-color-grey39;
+    color: #a5a5a5;
     cursor: default;
   }
 }
@@ -48,14 +48,14 @@
   border: none;
   width: max-content;
   height: 2rem;
-  background: $theme-color-dark-orange;
+  background: #e44f26;
   border-radius: 3px;
   @extend %font-style-basic;
   outline: 0;
   font-weight: 600;
   font-size: 0.875rem;
   line-height: 1.5rem;
-  color: $theme-color-white;
+  color: #121212;
   display: flex;
   align-items: center;
 
@@ -71,7 +71,7 @@
         rgba(57, 57, 57, 0.25),
         rgba(57, 57, 57, 0.25)
       ),
-      $theme-color-dark-orange;
+      #e44f26;
   }
 
   &:active {
@@ -79,8 +79,8 @@
   }
 
   &:disabled {
-    background-color: $theme-color-light-grey-d7;
-    color: $theme-color-grey39;
+    background-color: #3d3d3d;
+    color: #a5a5a5;
     cursor: default;
   }
 }
@@ -90,17 +90,17 @@
   white-space: nowrap;
   text-align: center;
   padding: 0.25rem 0.75rem;
-  border: 1.5px solid $theme-color-grey39;
+  border: 1.5px solid #a5a5a5;
   height: 2rem;
   width: max-content;
-  background-color: $theme-color-white;
+  background-color: #121212;
   box-sizing: border-box;
   box-shadow: 0px 2px 10px rgba(37, 85, 124, 0.1);
   border-radius: 3px;
   outline: 0;
   @extend %font-style-basic;
   font-weight: 600;
-  color: $theme-color-grey39;
+  color: #a5a5a5;
   font-size: 0.875rem;
   line-height: 1.5rem;
   display: flex;
@@ -113,9 +113,9 @@
   }
 
   &:hover:enabled:not(:active) {
-    background-color: $theme-color-violet;
-    border: 1.5px solid $theme-color-violet;
-    color: $theme-color-white;
+    background-color: #9744be;
+    border: 1.5px solid #9744be;
+    color: #121212;
 
     img {
       filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(115deg)

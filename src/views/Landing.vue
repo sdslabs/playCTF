@@ -25,9 +25,9 @@
           >
             <Button text="See Challenges" class="primary-cta"
           /></router-link>
-          <router-link style="text-decoration: none" v-else to="/register">
+          <a style="text-decoration: none" v-else href="/#/register">
             <Button text="Register Now" class="primary-cta"
-          /></router-link>
+          /></a>
         </div>
         <div class="event-info-img">
           <img class="landing-img" src="@/assets/landing1.svg" />
@@ -42,6 +42,13 @@
         </div>
         <div class="prize-info-img">
           <img class="landing-img" src="@/assets/landing2.svg" />
+        </div>
+      </div>
+      <div class="sponsor-info">
+        <div class="heading">Sponsors</div>
+        <div class="sponsor-img">
+          <img class="spons-img" src="@/assets/google-cloud.svg" />
+          <img class="spons-img" src="@/assets/saptang.png" />
         </div>
       </div>
     </div>

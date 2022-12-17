@@ -3,8 +3,8 @@
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  background: $theme-color-white;
-  box-shadow: 0rem 0.375rem 0.625rem $theme-color-light-black-low-transp;
+  background: #121212;
+  box-shadow: 0rem 0.375rem 0.625rem rgba(221, 221, 221, 0.1);
   border-radius: 0.1875rem;
   margin: 0.5rem 0.5rem 1.5rem;
   @extend %font-style-basic;
@@ -26,7 +26,7 @@
   display: flex;
   flex-grow: row wrap;
   align-items: center;
-  color: $theme-color-grey39;
+  color: #a5a5a5;
   
   .text {
     margin-right: 0.625rem;
@@ -41,7 +41,7 @@
   font-weight: 400;
   font-size: 0.75rem;
   text-align: right;
-  color: $theme-color-violet;
+  color: #9744be;
   width: 40%;
   //margin-bottom: 0;
 }
@@ -50,7 +50,7 @@
   font-weight: 400;
   font-size: 0.875rem;
   margin-top: 0;
-  color: $theme-color-grey57;
+  color: #747474;
   font-weight: normal;
   text-align: left;
 }

@@ -20,7 +20,7 @@
                 font-weight: 800;
                 font-size: 3rem;
                 line-height: 3.8rem;
-                color: $theme-color-grey39;
+                color: #a5a5a5;
                 margin-bottom: 1rem;
             }
 
@@ -49,6 +49,7 @@
         display: flex;
         flex-direction: row-reverse;
         justify-content: space-between;
+        white-space: pre-wrap;
 
         .prize-info-text {
             width: 60%;
@@ -64,7 +65,28 @@
             font-family: $primary-font-family;
             font-size: 3rem;
             line-height: 4.5rem;
-            color: $theme-color-grey39;
+            color: #a5a5a5;
+        }
+    }
+    .sponsor-info {
+        margin-top: 8rem;
+        margin-bottom: 8rem;
+
+        .heading {
+            font-weight: 800;
+            font-family: $primary-font-family;
+            font-size: 3rem;
+            line-height: 4.5rem;
+            color: #a5a5a5;
+        }
+
+        .sponsor-img {
+            display: flex;
+            justify-content: space-between;
+
+            .spons-img {
+                width: 35%;
+            }
         }
     }
 }
@@ -72,7 +94,7 @@
 .description {
     font-size: 1.125rem;
     font-family: $secondary-font-family;
-    color: $theme-color-grey57;
+    color: #747474;
     margin-top: 1rem;
     margin-bottom: 1.2rem;
 }

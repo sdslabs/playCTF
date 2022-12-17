@@ -2,7 +2,7 @@
   <div class="auth">
     <div class="auth-container">
       <div class="heading">
-        Register for n00b<label class="switch">CTF</label>
+        Register for Backdoor<label class="switch">CTF</label>
       </div>
       <ErrorBox v-if="msg" :msg="msg" :icon="icon" />
     </div>
@@ -109,7 +109,7 @@
           text="Register Now"
         />
       </div>
-      <img src="@/assets/login.svg" class="auth-image" />
+      <img src="@/assets/playctf.png" class="auth-image" />
     </div>
   </div>
 </template>
@@ -118,12 +118,14 @@
 import RegisterUser from "../api/admin/authAPI.js";
 import ErrorBox from "../components/ErrorBox";
 import Button from "@/components/Button.vue";
+import ConfigApiService from "../api/admin/configureAPI";
 export default {
   name: "register",
   components: {
     ErrorBox,
     Button
   },
+  props: ["fetchedData", "configs"],
   data() {
     return {
       msg: null,

@@ -8,7 +8,7 @@
         box-sizing: border-box;
         height: 2rem;
         border-radius: 0.3125rem;
-        border: 1px solid $theme-color-grey-high-transp;
+        border: 1px solid rgba(118, 118, 118, 0.799);
         @extend %font-style-basic;
         width: 100%;
         display: flex;
@@ -32,7 +32,7 @@
     .addListItem{
         font-size: 0.875rem;
         cursor: pointer;
-        color: $theme-color-dark-orange;
+        color: #e44f26;
         text-align: left;
     }
     .addListItem:hover{text-decoration: underline;

@@ -72,7 +72,7 @@ $screenRatio: 1;
         }
 
         .block:focus {
-            border: 0.125rem solid $theme-color-dark-orange;
+            border: 0.125rem solid #e44f26;
             box-sizing: border-box;
         }
     }
@@ -90,10 +90,10 @@ label {
     width: 115px;
     padding: 0.4375rem;
     height: 2rem;
-    background: $theme-color-white;
-    border: 1.0.3125rem solid $theme-color-grey39;
+    background: #121212;
+    border: 1.0.3125rem solid #a5a5a5;
     box-sizing: border-box;
-    box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    box-shadow: 0 0.125rem 0.625rem rgba(37, 85, 124, 0.2);
     border-radius: 0.125rem;
 }
 
@@ -110,9 +110,9 @@ label {
 }
 
 .submitButton {
-    background-color: $theme-color-dark-orange;
+    background-color: #e44f26;
     border-radius: 0.125rem;
-    color: $theme-color-white;
+    color: #121212;
     font-family: $primary-font-family;
     
     font-weight: bold;
@@ -134,7 +134,7 @@ label {
 .title {
     height: 48px;
     border-radius: 0.125rem;
-    border: 0.0625rem solid $theme-color-grey-high-transp;
+    border: 0.0625rem solid rgba(118, 118, 118, 0.799);
     padding-left: 1rem;
     margin-bottom: 0.625rem;
 }
@@ -148,15 +148,15 @@ label {
 }
 
 .title:focus {
-    border: 2px solid $theme-color-violet;
-    box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    border: 2px solid #9744be;
+    box-shadow: 0 0.125rem 0.625rem rgba(37, 85, 124, 0.2);
 }
 
 textarea {
     height: 96px;
     box-sizing: border-box;
     border-radius: 0.125rem;
-    border: 0.0625rem solid $theme-color-grey-high-transp;
+    border: 0.0625rem solid rgba(118, 118, 118, 0.799);
     padding-left: 1rem;
     padding-top: 0.9375rem;
     margin-bottom: 0.625rem;
@@ -171,8 +171,8 @@ textarea::placeholder {
 }
 
 textarea:focus {
-    border: 1.0.3125rem solid $theme-color-violet;
-    box-shadow: 0 0.125rem 0.625rem $theme-color-blue-low-transp;
+    border: 1.0.3125rem solid #9744be;
+    box-shadow: 0 0.125rem 0.625rem rgba(37, 85, 124, 0.2);
 }
 
 .notifTabs {
