@@ -3,7 +3,7 @@
     :chartData="this.lineGraphData()"
     :options="this.lineGraphOptions"
     class="lineGraph"
-    :height="150"
+    :height="250"
     v-if="this.users.length > 0 && this.scoreSeries.length > 0"
   />
 </template>
