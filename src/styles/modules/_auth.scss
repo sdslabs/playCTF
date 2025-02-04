@@ -1,5 +1,7 @@
 .auth {
   width: 100%;
+  display: flex;
+  flex-direction: column;
 
   .auth-subheading {
     @extend %font-style-basic;
@@ -12,7 +14,7 @@
   }
 
   .auth-image {
-    width: 60%;
+    width: 100%;
   }
 
   .auth-container {
@@ -20,6 +22,7 @@
     flex-direction: row;
     align-items: center;
     text-align: center;
+    
     .heading {
       font-family: $primary-font-family;
       font-weight: bold;
@@ -27,6 +30,10 @@
       line-height: 2.75rem;
       color: $theme-color-grey39;
       text-align: left;
+
+      .switch {
+        color: $theme-color-light-orange;
+      }
     }
   }
 
@@ -43,18 +50,190 @@
     .form {
       width: 35%;
 
-      .inputField {
-        width: 100%;
+      .info {
+        position: relative;
+        margin-bottom: 1rem;
+
+        .inputField {
+          width: 100%;
+          margin-top: 1rem;
+          padding: 0.75rem;
+          border: 1px solid $theme-color-light-grey-d7;
+          border-radius: 4px;
+          font-size: 1rem;
+
+          &:focus {
+            outline: none;
+            border-color: $theme-color-light-orange;
+          }
+        }
+
+        .verify-button {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: $theme-color-light-orange;
+          color: $theme-color-white;
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:disabled {
+            background: $theme-color-light-grey-d7;
+            cursor: not-allowed;
+          }
+        }
+
+        .verification-message {
+          margin-bottom: 1rem;
+          color: $theme-color-grey39;
+        }
+      }
+
+      .text-field-error {
+        font-size: 0.9rem;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 5px;
+        color: $theme-color-red;
+        margin-top: 0.5rem;
+
+        .errImg {
+          width: 16px;
+          height: 16px;
+        }
+      }
+
+      .form-actions {
+        margin-top: 2rem;
+        
+        .next-arrow {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          cursor: pointer;
+          color: $theme-color-light-orange;
+
+          &.disabled {
+            color: $theme-color-light-grey-d7;
+            cursor: not-allowed;
+          }
+
+          .next-text {
+            font-weight: 500;
+          }
+        }
+      }
+
+      .timer-container {
         margin-top: 1rem;
+        text-align: center;
+        color: $theme-color-grey57;
+
+        .resend-button {
+          background: none;
+          border: none;
+          color: $theme-color-light-orange;
+          cursor: pointer;
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .auth-image-container {
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .progress-container {
+    margin-top: 2rem;
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+
+      .step-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+
+        &.active {
+          .step-circle {
+            background: $theme-color-white;
+            border-color: $theme-color-light-orange;
+            color: $theme-color-light-orange;
+          }
+
+          .step-title {
+            color: $theme-color-light-orange;
+          }
+        }
+
+        &.completed {
+          .step-circle {
+            background: $theme-color-light-orange;
+            border-color: $theme-color-light-orange;
+            color: $theme-color-white;
+          }
+        }
+
+        .step-circle {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background: $theme-color-white;
+          border: 2px solid $theme-color-light-grey-d7;
+          color: $theme-color-light-grey-d7;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        }
+
+        .step-title {
+          margin-top: 0.5rem;
+          color: $theme-color-grey57;
+          font-size: 0.875rem;
+        }
+      }
+
+      .step-line {
+        flex: 1;
+        height: 2px;
+        background: $theme-color-light-grey-d7;
+        margin: 0 1rem;
+        position: relative;
+        top: -15px;
+        z-index: 0;
+
+        &.active {
+          background: $theme-color-light-orange;
+        }
       }
     }
   }
 
-  .text-field-error {
-    font-size: 0.9rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 5px;
+  .register-button-container {
+    margin-top: 2rem;
+    
+    .register-button {
+      width: 100%;
+      
+      &:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
   }
 }
