@@ -294,3 +294,148 @@
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
+
+.challCard-hints {
+  margin: 20px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+
+  .hint-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .hint-button {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #2c3e50;
+    color: white;
+
+    &.hint-taken {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      opacity: 0.9;
+    }
+
+    &.hint-loading {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .hint-button-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hint-number {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .hint-points {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+}
+
+// Modal styles
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10000;
+
+  h3 {
+    color: #2c3e50;
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #4a5568;
+    margin: 0 0 24px 0;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &.hint-text {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid #e9ecef;
+      font-family: $primary-font-family;
+      white-space: pre-wrap;
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    button {
+      min-width: 100px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.modal-cancel {
+        background: #e2e8f0;
+        color: #4a5568;
+        border: none;
+
+        &:hover {
+          background: #cbd5e0;
+        }
+      }
+
+      &.modal-confirm {
+        background: $theme-color-dark-orange;
+        color: white;
+        border: none;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+  }
+}

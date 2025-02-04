@@ -76,6 +76,56 @@
       </div>
     </div>
     <div
+      class="challCard-hints"
+      v-if="challDetails.hints && challDetails.hints.length > 0"
+    >
+      <p class="link-heading">Hints Available</p>
+      <div class="hint-buttons">
+        <button
+          v-for="hint in challDetails.hints"
+          :key="`hint_${hint.id}`"
+          class="hint-button"
+          :class="{
+            'hint-taken': hintStates[hint.id] && hintStates[hint.id].taken,
+            'hint-loading': !hintStates[hint.id]
+          }"
+          @click="handleHint(hint)"
+          :disabled="!hintStates[hint.id]"
+        >
+          <div class="hint-button-content">
+            <span class="hint-number">Hint {{ hint.id }}</span>
+            <span class="hint-points">{{ hint.points }} points</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Hint Confirmation Modal -->
+    <div v-if="showConfirmModal" class="modal-overlay" @click="closeConfirmModal">
+      <div class="modal-content" @click.stop>
+        <h3>{{ isHintTaken ? 'Hint' : 'Take Hint?' }}</h3>
+        <p v-if="selectedHint && !isHintTaken">
+          Are you sure you want to spend {{ selectedHint.points }} points to view this hint?
+        </p>
+        <p v-else-if="selectedHint && isHintTaken" class="hint-text">
+          {{ hintStates[selectedHint.id] && hintStates[selectedHint.id].description }}
+        </p>
+        <div class="modal-actions">
+          <button class="modal-cancel" @click="closeConfirmModal">
+            {{ isHintTaken ? 'Close' : 'Cancel' }}
+          </button>
+          <button 
+            v-if="selectedHint && !isHintTaken" 
+            class="modal-confirm" 
+            @click="confirmHint"
+          >
+            Take Hint
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
       v-if="!challDetails.isSolved && !isPreview"
       class="challCard-bottom-row"
     >
@@ -103,7 +153,9 @@
 <script>
 import FlagService from "../api/userAPI";
 import Button from "@/components/Button.vue";
+import HintsService from "../api/admin/hintsAPI";
 import { CONFIG } from "@/config/config";
+
 export default {
   name: "ChallCard",
   props: ["challDetails", "tag", "isPreview"],
@@ -114,16 +166,143 @@ export default {
       showSuccess: false,
       showFail: false,
       link: false,
-      copyText: "Click to Copy"
+      copyText: "Click to Copy",
+      hintStates: {},
+      loadingHints: true,
+      showConfirmModal: false,
+      selectedHint: null
     };
   },
-  state: {
-    disable: false,
-    isModalVisible: false,
-    assetLinks: false,
-    additionalLinks: false
+  computed: {
+    loadedHints() {
+      if (!this.challDetails || !this.challDetails.hints) return [];
+      return this.challDetails.hints.filter(hint => this.hintStates[hint.id]);
+    },
+    takenHints() {
+      if (!this.challDetails || !this.challDetails.hints) return [];
+      return this.challDetails.hints.filter(
+        hint => this.hintStates[hint.id] && this.hintStates[hint.id].taken
+      );
+    },
+    isHintTaken() {
+      return this.selectedHint && 
+             this.hintStates[this.selectedHint.id] && 
+             this.hintStates[this.selectedHint.id].taken;
+    }
+  },
+  watch: {
+    challDetails: {
+      immediate: true,
+      handler(newVal) {
+        console.log("Challenge details changed:", JSON.stringify(newVal, null, 2));
+        if (newVal && newVal.hints) {
+          console.log("Found hints in watcher:", JSON.stringify(newVal.hints, null, 2));
+          this.loadHints();
+        }
+      }
+    },
+    'challDetails.hints': {
+      async handler(newHints) {
+        if (newHints) {
+          await this.loadHints();
+        }
+      },
+      immediate: true
+    }
   },
   methods: {
+    async loadHints() {
+      if (!this.challDetails.hints) return;
+      
+      try {
+        for (const hint of this.challDetails.hints) {
+          try {
+            const response = await HintsService.getHintStatus(hint.id);
+            const description = response.data.Description || response.data.description;
+            const points = response.data.Points || response.data.points;
+            
+            this.$set(this.hintStates, hint.id, {
+              description: description,
+              points: points,
+              taken: description !== "Hint is not taken yet"
+            });
+          } catch (error) {
+            console.error("Error loading hint:", error);
+            
+            this.$set(this.hintStates, hint.id, {
+              description: "Not enough hint points!",
+              points: hint.points,
+              taken: false
+            });
+          }
+        }
+      } catch (error) {
+        console.error("Error loading hints:", error);
+      }
+    },
+    async handleHint(hint) {
+      if (!hint) return;
+
+      // Show modal for both taken and untaken hints
+      this.selectedHint = hint;
+      this.showConfirmModal = true;
+    },
+
+    closeConfirmModal() {
+      this.showConfirmModal = false;
+      this.selectedHint = null;
+    },
+
+    async confirmHint() {
+      if (!this.selectedHint) return;
+      
+      const hintId = this.selectedHint.id;
+      this.showConfirmModal = false;
+      
+      try {
+        const response = await HintsService.takeHint(hintId);
+        
+        if (!response || !response.data) {
+          this.$vToastify.setSettings({ theme: "beast-error" });
+          this.$vToastify.error("Error fetching hint", "Error");
+          return;
+        }
+        
+        const description = response.data.message;
+        
+        if (description) {
+          this.$set(this.hintStates, hintId, {
+            description: description,
+            taken: true
+          });
+
+          // Show the hint in modal
+          this.showConfirmModal = true;
+        } else {
+          this.$vToastify.setSettings({ theme: "beast-error" });
+          this.$vToastify.error("Error fetching hint", "Error");
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 403) {
+          const message = error.response.data && error.response.data.error 
+            ? error.response.data.error 
+            : "You don't have enough points to take this hint";
+            
+          this.$vToastify.setSettings({ theme: "beast-error" });
+          this.$vToastify.error(message, "Error");
+          return;
+        }
+        
+        if (error.response && error.response.data && error.response.data.error) {
+          this.$vToastify.setSettings({ theme: "beast-error" });
+          this.$vToastify.error(error.response.data.error, "Error");
+          return;
+        }
+        
+        this.$vToastify.setSettings({ theme: "beast-error" });
+        this.$vToastify.error("Error fetching hint", "Error");
+      }
+    },
     getUrl(port) {
       let url = CONFIG.webRoot;
       let ncurl = CONFIG.ncRoot;
@@ -148,37 +327,27 @@ export default {
         this.submitFlag();
       }
     },
-    submitFlag() {
-      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
-        this.$vToastify.setSettings({
-          position: "center-right",
-          theme: "beast-success"
-        });
-        if (Response.data.success) {
+    async submitFlag() {
+      try {
+        const response = await FlagService.submitFlag(
+          this.challDetails.id,
+          this.flag
+        );
+        if (response.data.success) {
           this.showSuccess = true;
-          this.$vToastify.success("Flag submitted successfully", "Success");
+          setTimeout(() => {
+            this.showSuccess = false;
+          }, 2000);
+          this.$emit("flag-submitted");
         } else {
           this.showFail = true;
-          this.$vToastify.setSettings({
-            theme: "beast-error"
-          });
-          this.$vToastify.error(
-            Response.data.error ? Response.data.error : Response.data.message,
-            "Error"
-          );
+          setTimeout(() => {
+            this.showFail = false;
+          }, 2000);
         }
-      });
-      var self = this;
-      setTimeout(function() {
-        if (self.showSuccess) {
-          self.$router.go();
-        } else {
-          self.$emit("updateChallenges");
-        }
-        self.flag = "";
-        self.showSuccess = false;
-        self.showFail = false;
-      }, 3000);
+      } catch (error) {
+        console.error(error);
+      }
     },
     copyUrl(text) {
       navigator.permissions.query({ name: "clipboard-write" }).then(result => {
@@ -206,18 +375,16 @@ export default {
       this.isModalVisible = false;
     }
   },
-  watch: {
-    challDetails() {
-      this.flag = "";
-    }
-  },
-  mounted() {
+  async mounted() {
+    console.log("Component mounted, challDetails:", JSON.stringify(this.challDetails, null, 2));
     if (
       this.challDetails.category === "service" ||
       this.challDetails.category === "xinetd"
     )
       this.link = false;
     else this.link = true;
+
+    await this.loadHints();
   }
 };
 </script>

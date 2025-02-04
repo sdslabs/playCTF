@@ -32,6 +32,12 @@ axiosInstance.interceptors.response.use(
       "/auth/register",
       "/api/submit/challenge"
     ];
+    
+    // For hint errors, pass through the error response
+    if (error.response && error.response.config.url.includes("/api/info/hint")) {
+      return Promise.reject(error);
+    }
+    
     if (!error.response) {
       router.push("/error/networkerror");
     } else if (ignoreErrorPagesPath.includes(error.response.config.url)) {
@@ -49,7 +55,6 @@ axiosInstance.interceptors.response.use(
         default:
           return error;
       }
-
       Promise.reject(error);
     }
   }
