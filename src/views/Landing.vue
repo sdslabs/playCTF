@@ -23,8 +23,8 @@
             v-if="isLoggedIn()"
             to="/challenges"
           >
-            <Button text="See Challenges" class="primary-cta"
-          /></router-link>
+            <div class="primary-cta">See Challenges</div>
+          </router-link>
           <router-link style="text-decoration: none" v-else to="/register">
             <div class="primary-cta">Register Now</div>
           </router-link>
@@ -55,9 +55,7 @@ import moment from "moment-timezone";
 import LoginUser from "../api/admin/authAPI.js";
 export default {
   name: "home",
-  components: {
-    Button,
-  },
+  
   props: ["fetchedData", "configs"],
   data() {
     return {
