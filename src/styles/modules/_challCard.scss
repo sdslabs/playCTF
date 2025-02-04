@@ -294,3 +294,71 @@
   letter-spacing: 0.1rem;
   cursor: pointer;
 }
+
+.challCard-hints {
+  margin: 20px 0;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+
+  .hint-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .hint-button {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: #2c3e50;
+    color: white;
+
+    &.hint-taken {
+      background: linear-gradient(135deg, #27ae60, #2ecc71);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      opacity: 0.9;
+    }
+
+    &.hint-loading {
+      background-color: #95a5a6;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .hint-button-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .hint-number {
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .hint-points {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  }
+
+  .link-heading {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+}
