@@ -16,6 +16,9 @@
       <span v-if="challDetails && challDetails.solves"
         >| {{ challDetails.solves.length }} Solves</span
       >
+      <span class="attempts-counter" v-if="!isPreview">
+        | {{ challDetails.previous_tries }}/{{ challDetails.failSolveLimit }} attempts
+      </span>
     </div>
     <div class="challCard-tag-container">
       <span v-for="tag in challDetails.tags" :key="tag" class="challCard-tag">
@@ -126,7 +129,7 @@
     </div>
 
     <div
-      v-if="!challDetails.isSolved && !isPreview"
+      v-if="!challDetails.isSolved && !isPreview && challDetails.previous_tries < challDetails.failSolveLimit"
       class="challCard-bottom-row"
     >
       <div class="challCard-form">
@@ -146,6 +149,9 @@
           :onclick="submitFlag"
         />
       </div>
+    </div>
+    <div v-else-if="!isPreview && challDetails.previous_tries >= challDetails.failSolveLimit" class="challCard-maxed">
+      Maximum attempts reached
     </div>
   </div>
 </template>
@@ -359,20 +365,6 @@ export default {
         setTimeout(() => {
           this.copyText = "Click to Copy";
         }, 1000);
-    },
-    isDisabled: function() {
-      let flag = document.getElementById("flag-input").value;
-      if (flag != "") {
-        this.disable = true;
-      } else {
-        this.disable = false;
-      }
-    },
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeModal() {
-      this.isModalVisible = false;
     }
   },
   async mounted() {
