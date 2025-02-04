@@ -89,7 +89,7 @@
             'hint-taken': hintStates[hint.id] && hintStates[hint.id].taken,
             'hint-loading': !hintStates[hint.id]
           }"
-          @click="handleHint(hint.id)"
+          @click="handleHint(hint)"
           :disabled="!hintStates[hint.id]"
         >
           <div class="hint-button-content">
@@ -99,6 +99,32 @@
         </button>
       </div>
     </div>
+
+    <!-- Hint Confirmation Modal -->
+    <div v-if="showConfirmModal" class="modal-overlay" @click="closeConfirmModal">
+      <div class="modal-content" @click.stop>
+        <h3>{{ isHintTaken ? 'Hint' : 'Take Hint?' }}</h3>
+        <p v-if="selectedHint && !isHintTaken">
+          Are you sure you want to spend {{ selectedHint.points }} points to view this hint?
+        </p>
+        <p v-else-if="selectedHint && isHintTaken" class="hint-text">
+          {{ hintStates[selectedHint.id] && hintStates[selectedHint.id].description }}
+        </p>
+        <div class="modal-actions">
+          <button class="modal-cancel" @click="closeConfirmModal">
+            {{ isHintTaken ? 'Close' : 'Cancel' }}
+          </button>
+          <button 
+            v-if="selectedHint && !isHintTaken" 
+            class="modal-confirm" 
+            @click="confirmHint"
+          >
+            Take Hint
+          </button>
+        </div>
+      </div>
+    </div>
+
     <div
       v-if="!challDetails.isSolved && !isPreview"
       class="challCard-bottom-row"
@@ -142,7 +168,9 @@ export default {
       link: false,
       copyText: "Click to Copy",
       hintStates: {},
-      loadingHints: true
+      loadingHints: true,
+      showConfirmModal: false,
+      selectedHint: null
     };
   },
   computed: {
@@ -155,6 +183,11 @@ export default {
       return this.challDetails.hints.filter(
         hint => this.hintStates[hint.id] && this.hintStates[hint.id].taken
       );
+    },
+    isHintTaken() {
+      return this.selectedHint && 
+             this.hintStates[this.selectedHint.id] && 
+             this.hintStates[this.selectedHint.id].taken;
     }
   },
   watch: {
@@ -207,16 +240,26 @@ export default {
         console.error("Error loading hints:", error);
       }
     },
-    async handleHint(hintId) {
-      // If hint is already taken, just show it
-      if (this.hintStates[hintId] && this.hintStates[hintId].taken) {
-        this.$vToastify.setSettings({ theme: "beast-success" });
-        this.$vToastify.success(this.hintStates[hintId].description, "Hint");
-        return;
-      }
+    async handleHint(hint) {
+      if (!hint) return;
 
+      // Show modal for both taken and untaken hints
+      this.selectedHint = hint;
+      this.showConfirmModal = true;
+    },
+
+    closeConfirmModal() {
+      this.showConfirmModal = false;
+      this.selectedHint = null;
+    },
+
+    async confirmHint() {
+      if (!this.selectedHint) return;
+      
+      const hintId = this.selectedHint.id;
+      this.showConfirmModal = false;
+      
       try {
-        // Try to take the hint
         const response = await HintsService.takeHint(hintId);
         
         if (!response || !response.data) {
@@ -227,21 +270,19 @@ export default {
         
         const description = response.data.message;
         
-        // Store and show the hint
         if (description) {
           this.$set(this.hintStates, hintId, {
             description: description,
             taken: true
           });
-          
-          this.$vToastify.setSettings({ theme: "beast-success" });
-          this.$vToastify.success(description, "Hint");
+
+          // Show the hint in modal
+          this.showConfirmModal = true;
         } else {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error("Error fetching hint", "Error");
         }
       } catch (error) {
-        // For 403 errors (not enough points)
         if (error.response && error.response.status === 403) {
           const message = error.response.data && error.response.data.error 
             ? error.response.data.error 
@@ -252,14 +293,12 @@ export default {
           return;
         }
         
-        // For other errors with response data
         if (error.response && error.response.data && error.response.data.error) {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error(error.response.data.error, "Error");
           return;
         }
         
-        // Fallback error message
         this.$vToastify.setSettings({ theme: "beast-error" });
         this.$vToastify.error("Error fetching hint", "Error");
       }
