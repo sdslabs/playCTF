@@ -100,6 +100,7 @@
               confirmPassword &&
               email &&
               !PassErr &&
+              !PassLen && 
               !UsernameErr &&
               !EmailErr &&
               password === confirmPassword &&
