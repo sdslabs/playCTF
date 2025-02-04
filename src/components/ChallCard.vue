@@ -271,9 +271,18 @@ export default {
         this.challDetails.category === "service" ||
         this.challDetails.category === "xinetd"
       ) {
-        return `nc ${ncurl} ${port}`;
+        if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
+          return `nc ${ncurl} ${port}`;
+        } else {
+          return `nc ${this.challDetails.deployedLink} ${port}`;
+        }
       }
-      return `${CONFIG.webRoot}:${port}`;
+
+      if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
+        return `${CONFIG.webRoot}:${port}`;
+      } else {
+        return `http://${this.challDetails.deployedLink}:${port}`;
+      }
     },
     getStaticUrl(asset) {
       let url = CONFIG.staticRoot;
