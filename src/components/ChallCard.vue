@@ -51,7 +51,7 @@
         <a
           class="challenge-link aboutText"
           v-for="asset in this.challDetails.assets"
-          :href="getStaticUrl(asset)"
+          :href="getStaticUrl(challDetails.name, asset)"
           target="_blank"
           :key="asset"
         >
@@ -329,9 +329,9 @@ export default {
         return `http://${this.challDetails.deployedLink}:${port}`;
       }
     },
-    getStaticUrl(asset) {
+    getStaticUrl(name, asset) {
       let url = CONFIG.staticRoot;
-      return `${url}${asset}`;
+      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");
