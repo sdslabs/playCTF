@@ -8,11 +8,8 @@ export const getChallenges = async (getUserSolves, username) => {
   if (getUserSolves) {
     let userData = await UserService.getUserByUsername(username);
     challenges.forEach(challenge => {
-      if (
-        userData.data.challenges.find(el => {
-          return el.id === challenge.id;
-        })
-      ) {
+      // Check if the current user has solved this challenge
+      if (challenge.solves && challenge.solves.some(solve => solve.username === username)) {
         challenge.isSolved = true;
       }
     });
