@@ -36,8 +36,10 @@
           text="Login"
         />
       </div>
-      <img src="@/assets/login.svg" class="auth-image" />
-    </div>
+ <div class="auth-image-container">
+        <img src="@/assets/login.svg" class="auth-image" />
+      </div>
+          </div>
   </div>
 </template>
 
