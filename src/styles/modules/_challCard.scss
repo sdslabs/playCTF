@@ -79,6 +79,11 @@
     line-height: 1.125rem;
     align-items: center;
     color: $theme-color-grey39;
+
+    .attempts-counter {
+      color: $theme-color-grey57;
+      font-size: 0.875rem;
+    }
   }
 
   .challCard-challDesc {
@@ -275,6 +280,61 @@
       }
     }
   }
+
+  .challCard-submit {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+
+    &-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    &-input {
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-family: $primary-font-family;
+      font-size: 0.875rem;
+      
+      &:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+    }
+
+    &-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      font-family: $primary-font-family;
+      font-size: 0.875rem;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &:not(:disabled):hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+
+  .challCard-maxed {
+    text-align: center;
+    color: #dc3545;
+    font-family: $primary-font-family;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+  }
 }
 
 .preview-challcard {
@@ -354,11 +414,88 @@
       opacity: 0.8;
     }
   }
+}
 
-  .link-heading {
-    font-size: 18px;
-    font-weight: 600;
+// Modal styles
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: white;
+  padding: 24px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 10000;
+
+  h3 {
     color: #2c3e50;
-    margin-bottom: 8px;
+    margin: 0 0 16px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  p {
+    color: #4a5568;
+    margin: 0 0 24px 0;
+    font-size: 16px;
+    line-height: 1.5;
+
+    &.hint-text {
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px solid #e9ecef;
+      font-family: $primary-font-family;
+      white-space: pre-wrap;
+    }
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+
+    button {
+      min-width: 100px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &.modal-cancel {
+        background: #e2e8f0;
+        color: #4a5568;
+        border: none;
+
+        &:hover {
+          background: #cbd5e0;
+        }
+      }
+
+      &.modal-confirm {
+        background: $theme-color-dark-orange;
+        color: white;
+        border: none;
+
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
   }
 }
