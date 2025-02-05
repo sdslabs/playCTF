@@ -52,43 +52,144 @@
 
       .info {
         position: relative;
-        margin-bottom: 1rem;
+        margin-bottom: 1.25rem;
+
+        .step-title {
+          font-size: 1.1rem;
+          font-weight: 500;
+          color: $theme-color-grey39;
+          margin-bottom: 0.5rem;
+        }
 
         .inputField {
           width: 100%;
-          margin-top: 1rem;
-          padding: 0.75rem;
+          max-width: 320px;
+          height: 12px;
+          margin-top: 0.5rem;
+          padding: 0.75rem 1rem;
           border: 1px solid $theme-color-light-grey-d7;
           border-radius: 4px;
-          font-size: 1rem;
+          font-size: 0.95rem;
+          transition: all 0.2s ease;
+          background-color: #fff;
 
           &:focus {
             outline: none;
             border-color: $theme-color-light-orange;
+            box-shadow: 0 0 0 2px rgba($theme-color-light-orange, 0.1);
+          }
+
+          &::placeholder {
+            color: $theme-color-grey57;
+            font-size: 0.95rem;
           }
         }
 
-        .verify-button {
-          position: absolute;
-          right: 8px;
-          top: 50%;
-          transform: translateY(-50%);
+        .verification-message {
+          font-size: 0.85rem;
+          color: $theme-color-grey57;
+          margin-top: 0.5rem;
+          margin-bottom: 0.5rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          &::before {
+            content: "ⓘ";
+            color: $theme-color-light-orange;
+          }
+        }
+
+        .timer-container {
+          margin-top: 1rem;
+          text-align: center;
+          font-size: 0.9rem;
+          color: $theme-color-grey39;
+
+          .resend-button {
+            background: none;
+            border: none;
+            color: $theme-color-light-orange;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+            text-decoration: underline;
+
+            &:hover {
+              color: darken($theme-color-light-orange, 10%);
+            }
+          }
+        }
+      }
+
+      .email-input-container,
+      .otp-input-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 0.5rem;
+        max-width: 330px;
+
+        .inputField {
+          flex: 1;
+          height: 12px;
+          margin-top: 0;
+          padding: 0.75rem 1rem;
+          border: 1px solid $theme-color-light-grey-d7;
+          border-radius: 4px;
+          font-size: 0.95rem;
+          transition: all 0.2s ease;
+
+          &:focus {
+            outline: none;
+            border-color: $theme-color-light-orange;
+            box-shadow: 0 0 0 2px rgba($theme-color-light-orange, 0.1);
+          }
+
+          &:read-only {
+            background-color: $theme-color-light-grey-d7;
+            cursor: not-allowed;
+          }
+        }
+
+        .otp-button {
+          min-width: 110px;
+          height: 42px;
           background: $theme-color-light-orange;
           color: $theme-color-white;
           border: none;
-          padding: 0.5rem 1rem;
           border-radius: 4px;
+          font-size: 0.95rem;
+          font-weight: 500;
           cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover:not(:disabled) {
+            background: darken($theme-color-light-orange, 5%);
+            transform: translateY(-1px);
+          }
 
           &:disabled {
             background: $theme-color-light-grey-d7;
             cursor: not-allowed;
           }
-        }
 
-        .verification-message {
-          margin-bottom: 1rem;
-          color: $theme-color-grey39;
+          &.verify {
+            background: $theme-color-white;
+            border: 1px solid $theme-color-light-orange;
+            color: $theme-color-light-orange;
+
+            &:hover:not(:disabled) {
+              background: rgba($theme-color-light-orange, 0.1);
+            }
+
+            &:disabled {
+              border-color: $theme-color-light-grey-d7;
+              color: $theme-color-light-grey-d7;
+              background: $theme-color-white;
+            }
+          }
         }
       }
 
@@ -109,21 +210,78 @@
 
       .form-actions {
         margin-top: 2rem;
+        max-width: 320px;
         
-        .next-arrow {
-          display: flex;
+        .next-button {
+          display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
+          padding: 0.3rem 1rem;
+          background: $theme-color-white;
+          border: 1px solid $theme-color-light-orange;
+          border-radius: 4px;
           cursor: pointer;
-          color: $theme-color-light-orange;
-
-          &.disabled {
-            color: $theme-color-light-grey-d7;
-            cursor: not-allowed;
-          }
+          transition: all 0.3s ease;
 
           .next-text {
+            margin-right: 0.75rem;
+            color: $theme-color-light-orange;
             font-weight: 500;
+            font-size: 0.95rem;
+          }
+
+          svg {
+            color: $theme-color-light-orange;
+            transition: transform 0.3s ease;
+          }
+
+          &:hover {
+            box-shadow: 0 4px 12px rgba($theme-color-light-orange, 0.2);
+            transform: translateY(-2px);
+
+            svg {
+              transform: translateX(4px);
+            }
+          }
+
+          &.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            &:hover {
+              box-shadow: none;
+              transform: none;
+              svg {
+                transform: none;
+              }
+            }
+          }
+        }
+      }
+
+      .register-button-container {
+        margin-top: 2rem;
+        width: 100%;
+        max-width: 320px;
+
+        .register-button {
+          width: 100%;
+          height: 42px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          background: #f2f2f2;
+          color: $theme-color-grey39;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover:not(:disabled) {
+            background: darken(#f2f2f2, 5%);
+          }
+
+          &:disabled {
+            background: #f2f2f2;
+            color: $theme-color-grey57;
+            cursor: not-allowed;
           }
         }
       }
