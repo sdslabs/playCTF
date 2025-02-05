@@ -212,6 +212,7 @@
 
 <script>
 import RegisterUser from '../api/admin/authAPI.js';
+import VerifyOTP from "../api/admin/otpAPI.js";
 import ErrorBox from '../components/ErrorBox';
 import Button from '@/components/Button.vue';
 
@@ -306,22 +307,31 @@ export default {
     async sendOTP() {
       if (this.canProceedToOTP) {
         this.otpSent = true;
+        const otpResponse = await VerifyOTP.sendOTP(this.email);
         this.startTimer();
-        this.$vToastify.success('OTP sent to your email', 'Success');
+        if (otpResponse.status !== 200) {
+          this.$vToastify.error(otpResponse.data.message, "Error");
+        } else {
+        this.$vToastify.success("OTP sent to your email", "Success");
+      }
       }
     },
-    verifyOTP() {
-      if (this.otp === '123456') {
+
+    async verifyOTP() {
         this.otpVerified = true;
-        this.OtpErr = '';
-        this.$vToastify.success('Email verified successfully', 'Success');
-        this.currentStep = 2;
+        this.OtpErr = "";
+        const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
+        if (otpResponse.status !== 200) {
+          this.$vToastify.error(otpResponse.data.message, "Error");
+        } else {
+      
+        this.$vToastify.success("Email verified successfully", "Success");
+        }
+        this.currentStep = 3;
         if (this.timerInterval) {
           clearInterval(this.timerInterval);
         }
-      } else {
-        this.OtpErr = 'Invalid OTP';
-      }
+    
     },
     proceedToBasicInfo() {
       if (this.otpVerified) {
