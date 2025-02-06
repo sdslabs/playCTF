@@ -91,8 +91,13 @@
         </div>
 
         <div v-if="currentStep === 2">
-          <div class="step-title">Basic Info</div>
           <div class="info">
+            <div class="back-button" @click="currentStep = 1">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+              </svg>
+              <span class="back-text">Back</span>
+            </div>
             <input
               v-model="uname"
               type="text"
@@ -140,6 +145,12 @@
 
         <div v-if="currentStep === 3">
           <div class="info">
+            <div class="back-button" @click="currentStep = 2">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+              </svg>
+              <span class="back-text">Back</span>
+            </div>
             <input
               v-model="password"
               type="password"
@@ -312,24 +323,23 @@ export default {
         if (otpResponse.status !== 200) {
           this.$vToastify.error(otpResponse.data.message, "Error");
         } else {
-        this.$vToastify.success("OTP sent to your email", "Success");
-      }
+          this.$vToastify.success("OTP sent to your email", "Success");
+        }
       }
     },
 
     async verifyOTP() {
-        this.otpVerified = true;
         this.OtpErr = "";
         const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
         if (otpResponse.status !== 200) {
           this.$vToastify.error(otpResponse.data.message, "Error");
         } else {
-      
+        this.otpVerified = true;
         this.$vToastify.success("Email verified successfully", "Success");
-        }
-        this.currentStep = 3;
+        this.currentStep = 2;
         if (this.timerInterval) {
           clearInterval(this.timerInterval);
+        }
         }
     
     },
@@ -355,6 +365,7 @@ export default {
     },
     async register() {
       if (this.canRegister && !this.registered) {
+      console.log(this.uname, this.username, this.email, this.password);
         const registerResponse = await RegisterUser.registerUser(
           this.uname,
           this.username,
@@ -378,3 +389,25 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: #FF6B35;
+  margin-bottom: 16px;
+  width: fit-content;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.8;
+}
+
+.back-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+</style>
