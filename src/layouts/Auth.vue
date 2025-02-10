@@ -2,10 +2,9 @@
   <div id="auth-layout">
     <div class="navbar">
       <nav v-if="pathLogin()" class="navbar-container">
-        <router-link to="/" class="navbar-link"
-          ><div class="logo">
-            <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" /></div
-        ></router-link>
+        <router-link to="/" class="navbar-link">
+          <div class="logo adminFooterTitle">playCTF</div>
+        </router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">New here?</p>
           <router-link to="/register" class="login-link">REGISTER</router-link>
@@ -13,9 +12,8 @@
       </nav>
       <nav v-else class="navbar-container">
         <router-link to="/" class="navbar-link">
-          <div class="logo">
-            <img v-if="this.getLogoUrl()" :src="this.getLogoUrl()" /></div
-        ></router-link>
+          <div class="logo adminFooterTitle">playCTF</div>
+        </router-link>
         <div class="navbar-registration">
           <p class="navbar-already-registered">Already Registered?</p>
           <router-link to="/login" class="login-link">LOG IN</router-link>
