@@ -12,7 +12,11 @@
     </div>
     <div class="challenge">
       <div class="chall-details">
-        <StatsNavbar :details="userDetails" :total="totalChals" />
+        <StatsNavbar 
+          :details="userDetails" 
+          :total="totalChals"
+          :challenges="displayChallenges"
+        />
         <div class="chall">
           <ChallengesByTag
             :tag="this.selectedTag.name"
