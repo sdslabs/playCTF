@@ -1,5 +1,5 @@
 import axiosInstance from "../axiosInstance.js";
-
+import { cacheRequest } from "@/utils/cacheUtils";
 export default {
   async updateConfigs(configs) {
     let bodyFormData = new FormData();
@@ -18,7 +18,15 @@ export default {
     });
   },
   async getConfigs() {
-    return await axiosInstance.get(`/api/info/competition-info`);
+    try {
+      const request = new Request(`${axiosInstance.defaults.baseURL}/api/info/competition-info`);
+      const response = await cacheRequest(request);
+      const data = await response.json();
+      return { data };
+    } catch (error) {
+      console.error('Cache fetch failed, falling back to direct API call:', error);
+      return await axiosInstance.get(`/api/info/competition-info`);
+    }
   },
 
   async getLogo(imgUrl, imgName) {
