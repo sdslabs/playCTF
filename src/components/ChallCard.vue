@@ -16,8 +16,8 @@
       <span v-if="challDetails && challDetails.solves"
         >| {{ challDetails.solves.length }} Solves</span
       >
-      <span class="attempts-counter" v-if="!isPreview">
-        | {{ challDetails.previous_tries }}/{{ challDetails.failSolveLimit }} attempts
+      <span class="attempts-counter" v-if="!isPreview && challDetails.maxAttemptLimit !== -1">
+        | {{ challDetails.previous_tries }}/{{ challDetails.maxAttemptLimit }} attempts
       </span>
     </div>
     <div class="challCard-tag-container">
@@ -129,12 +129,11 @@
     </div>
 
     <div
-      v-if="!challDetails.isSolved && !isPreview && challDetails.previous_tries < challDetails.failSolveLimit"
+      v-if="!challDetails.isSolved && !isPreview && (challDetails.maxAttemptLimit === -1 || challDetails.previous_tries < challDetails.maxAttemptLimit)"
       class="challCard-bottom-row"
     >
       <div class="challCard-form">
         <input
-          type="text"
           name="flag"
           class="challCard-form-input"
           id="flag-input"
@@ -150,7 +149,7 @@
         />
       </div>
     </div>
-    <div v-else-if="!isPreview && challDetails.previous_tries >= challDetails.failSolveLimit" class="challCard-maxed">
+    <div v-else-if="!isPreview && challDetails.maxAttemptLimit !== -1 && challDetails.previous_tries >= challDetails.maxAttemptLimit" class="challCard-maxed">
       Maximum attempts reached
     </div>
   </div>
