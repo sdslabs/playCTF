@@ -302,8 +302,7 @@ export default {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error(error.response.data.error, "Error");
           return;
-        }
-        
+        }        
         this.$vToastify.setSettings({ theme: "beast-error" });
         this.$vToastify.error("Error fetching hint", "Error");
       }
@@ -341,27 +340,37 @@ export default {
         this.submitFlag();
       }
     },
-    async submitFlag() {
-      try {
-        const response = await FlagService.submitFlag(
-          this.challDetails.id,
-          this.flag
-        );
-        if (response.data.success) {
+    submitFlag() {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        this.$vToastify.setSettings({
+          position: "center-right",
+          theme: "beast-success"
+        });
+        if (Response.data.success) {
           this.showSuccess = true;
-          setTimeout(() => {
-            this.showSuccess = false;
-          }, 2000);
-          this.$emit("flag-submitted");
+          this.$vToastify.success("Flag submitted successfully", "Success");
         } else {
           this.showFail = true;
-          setTimeout(() => {
-            this.showFail = false;
-          }, 2000);
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
+          this.$vToastify.error(
+            Response.data.error ? Response.data.error : Response.data.message,
+            "Error"
+          );
         }
-      } catch (error) {
-        console.error(error);
-      }
+      });
+      var self = this;
+      setTimeout(function() {
+        if (self.showSuccess) {
+          self.$router.go();
+        } else {
+          self.$emit("updateChallenges");
+        }
+        self.flag = "";
+        self.showSuccess = false;
+        self.showFail = false;
+      }, 3000);
     },
     copyUrl(text) {
       navigator.permissions.query({ name: "clipboard-write" }).then(result => {
@@ -373,18 +382,34 @@ export default {
         setTimeout(() => {
           this.copyText = "Click to Copy";
         }, 1000);
+    },
+    isDisabled: function() {
+      let flag = document.getElementById("flag-input").value;
+      if (flag != "") {
+        this.disable = true;
+      } else {
+        this.disable = false;
+      }
+    },
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   },
-  async mounted() {
-    console.log("Component mounted, challDetails:", JSON.stringify(this.challDetails, null, 2));
+  // watch: {
+  //   challDetails() {
+  //     this.flag = "";
+  //   }
+  // },
+  mounted() {
     if (
       this.challDetails.category === "service" ||
       this.challDetails.category === "xinetd"
     )
       this.link = false;
     else this.link = true;
-
-    await this.loadHints();
   }
 };
 </script>
