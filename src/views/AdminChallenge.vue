@@ -280,7 +280,7 @@ export default {
         if (confirm) {
           ChalService.manageChalAction(name, action).then(async response => {
             if (response.status !== 200) {
-              console.log(response.data);
+              console.error(response.data);
             } else {
               if (action === "purge") {
                 this.loading.challengeNotFetched = true;
