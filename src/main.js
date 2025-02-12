@@ -40,7 +40,7 @@ Vue.component("loader", Spinner);
 Vue.mixin({
   methods: {
     apiErrHandler: function(error) {
-      console.log(error);
+      console.error(error);
     },
     getImage(imagename) {
       return require(`../src/assets/${imagename}.svg`);

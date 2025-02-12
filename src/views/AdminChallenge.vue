@@ -99,7 +99,7 @@
         <a
           class="challenge-link aboutText"
           v-for="asset in this.chalDetails.assets"
-          :href="getStaticUrl(asset)"
+          :href="getStaticUrl(chalDetails.name, asset)"
           target="_blank"
           :key="asset"
         >
@@ -246,9 +246,9 @@ export default {
       }
       return `${CONFIG.webRoot}:${port}`;
     },
-    getStaticUrl(asset) {
+    getStaticUrl(name, asset) {
       let url = CONFIG.staticRoot;
-      return `${url}${asset}`;
+      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");
@@ -280,7 +280,7 @@ export default {
         if (confirm) {
           ChalService.manageChalAction(name, action).then(async response => {
             if (response.status !== 200) {
-              console.log(response.data);
+              console.error(response.data);
             } else {
               if (action === "purge") {
                 this.loading.challengeNotFetched = true;
