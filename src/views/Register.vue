@@ -330,16 +330,16 @@ export default {
 
     async verifyOTP() {
         this.OtpErr = "";
-        const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
-        if (otpResponse.status !== 200) {
-          this.$vToastify.error(otpResponse.data.message, "Error");
-        } else {
-        this.otpVerified = true;
+        try {
+          const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
+          this.otpVerified = true;
         this.$vToastify.success("Email verified successfully", "Success");
         this.currentStep = 2;
         if (this.timerInterval) {
           clearInterval(this.timerInterval);
         }
+        } catch (error) {
+          this.$vToastify.error(otpResponse.data.error, "Error");
         }
     
     },

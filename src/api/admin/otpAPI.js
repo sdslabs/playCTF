@@ -19,13 +19,19 @@ async verifyOTP(email,otp) {
     bodyFormData.append("email", email);
     bodyFormData.append("otp", otp);
     
+    try {
+     
     const response = await axiosInstance({
       method: "post",
       url: `/auth/verify-otp`,
       data: bodyFormData
     });
+    console.log(response);
+    return response; 
+    } catch (error) {
+      throw error;
+    }
 
-    return response;
 }
 
 };
