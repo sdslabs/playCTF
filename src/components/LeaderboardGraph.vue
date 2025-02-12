@@ -1,11 +1,16 @@
 <template>
-  <LineGraph
-    :chartData="this.lineGraphData()"
-    :options="this.lineGraphOptions"
-    class="lineGraph"
-    :height="250"
-    v-if="this.users.length > 0 && this.scoreSeries.length > 0"
-  />
+  <div class="lineGraph-container">
+    <LineGraph
+      :chartData="chartData"
+      :options="lineGraphOptions"
+      class="lineGraph"
+      :height="250"
+      v-if="isDataReady"
+    />
+    <div v-else class="loading-message">
+      Loading chart data...
+    </div>
+  </div>
 </template>
 <script>
 import UsersService from "@/api/admin/usersAPI";
@@ -32,6 +37,7 @@ export default {
       lineColors: colors.lineGraph,
       scoreSeries: [],
       oldScoreSeries: [],
+      chartData: null,
       lineGraphOptions: lineGraphOptions(true),
       searchQuery: null,
       tableCols: tableCols.leaderboard,
@@ -40,14 +46,40 @@ export default {
       state: {}
     };
   },
+  computed: {
+    isDataReady() {
+      console.log(
+        this.users.length > 0,
+        this.scoreSeries.length > 0,
+        this.chartData !== null
+      );
+      return (
+        this.users.length > 0 &&
+        this.scoreSeries.length > 0 &&
+        this.chartData !== null
+      );
+    }
+  },
+  watch: {
+    scoreSeries: {
+      handler(newSeries) {
+        if (newSeries.length > 0) {
+          this.updateChartData();
+        }
+      },
+      deep: true
+    }
+  },
   methods: {
-    lineGraphData() {
+    updateChartData() {
       let datasets = [];
       let update = false;
+      
       if (this.scoreSeries !== this.oldScoreSeries) {
         this.oldScoreSeries = this.scoreSeries;
         update = true;
       }
+      
       this.scoreSeries.forEach((el, index) => {
         let labelPostText;
         switch (index) {
@@ -69,27 +101,33 @@ export default {
           data: this.scoreSeries[index].series
         });
       });
-      return {
+      
+      console.log("Datasets", datasets);
+      this.chartData = {
         label: "Leaderboard",
         datasets,
         update
       };
     },
     findScoreSeries(users) {
-      let scoreSeriesLocal = [];
-      users.forEach(user => {
-        SubmissionService.getUserSubs(user.username).then(data => {
-          if (data === null || data === undefined) {
-            return;
-          }
-          scoreSeriesLocal.push({
-            username: user.username,
-            series: this.findUserScoreSeries(data, user.score)
-          });
-          if (scoreSeriesLocal.length == users.length) {
-            this.scoreSeries = scoreSeriesLocal;
-          }
-        });
+      // Get all usernames first
+      const usernames = users.map(user => user.username);
+      
+      // Fetch submissions only once
+      SubmissionService.getSubmissions().then(submissions => {
+        if (!submissions) return;
+        console.log("Submissions", submissions);
+        // Group submissions by username
+        const userSubmissions = SubmissionService.groupSubmissionsByUsers(submissions, usernames);
+        
+        // Process submissions for each user
+        const scoreSeriesLocal = users.map(user => ({
+          username: user.username,
+          series: this.findUserScoreSeries(userSubmissions[user.username] || [], user.score)
+        }));
+        
+        this.scoreSeries = scoreSeriesLocal;
+        console.log("Score series", scoreSeriesLocal);
       });
     },
     findUserScoreSeries(data, score) {
@@ -145,8 +183,9 @@ export default {
   },
   mounted() {
     this.state = this.$store.state;
-    UsersService.getUsers()
+    UsersService.getLeaderboard(1)
       .then(users => {
+        console.log("Users", users);
         if (users.length === 0) {
           return;
         }

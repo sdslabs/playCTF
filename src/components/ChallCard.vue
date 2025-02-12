@@ -358,6 +358,10 @@ export default {
             Response.data.error ? Response.data.error : Response.data.message,
             "Error"
           );
+          // Increment the counter immediately after submission
+          if (this.challDetails.maxAttemptLimit !== -1) {
+            this.challDetails.previous_tries++;
+          }
         }
       });
       var self = this;

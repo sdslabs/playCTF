@@ -114,7 +114,7 @@ export const tableCols = {
       style: {
         width: "75%",
         paddingLeft: "2.5rem",
-        textAlign: "left"
+        textAlign: "center"
       }
     },
     {
