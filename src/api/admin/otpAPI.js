@@ -5,13 +5,18 @@ export default {
     let bodyFormData = new FormData();
     bodyFormData.append("email", email);
     
-    const response = await axiosInstance({
-      method: "post",
-      url: `/auth/send-otp`,
-      data: bodyFormData
-    });
-
-    return response;
+    try {
+      
+      const response = await axiosInstance({
+        method: "post",
+        url: `/auth/send-otp`,
+        data: bodyFormData
+      });
+  
+      return response;
+    } catch (error) {
+      throw error;
+    }
 },
 
 async verifyOTP(email,otp) {
@@ -20,14 +25,12 @@ async verifyOTP(email,otp) {
     bodyFormData.append("otp", otp);
     
     try {
-     
-    const response = await axiosInstance({
-      method: "post",
-      url: `/auth/verify-otp`,
-      data: bodyFormData
-    });
-    console.log(response);
-    return response; 
+      const response = await axiosInstance({
+        method: "post",
+        url: `/auth/verify-otp`,
+        data: bodyFormData
+      });
+      return response; 
     } catch (error) {
       throw error;
     }

@@ -317,13 +317,15 @@ export default {
     },
     async sendOTP() {
       if (this.canProceedToOTP) {
+        try {
+          const otpResponse = await VerifyOTP.sendOTP(this.email);
+          
         this.otpSent = true;
-        const otpResponse = await VerifyOTP.sendOTP(this.email);
         this.startTimer();
-        if (otpResponse.status !== 200) {
-          this.$vToastify.error(otpResponse.data.message, "Error");
-        } else {
-          this.$vToastify.success("OTP sent to your email", "Success");
+        this.$vToastify.success("OTP sent to your email", "Success");
+        } catch (error) {
+          
+          this.$vToastify.error(error.response.data.error, "Error");
         }
       }
     },
@@ -333,13 +335,13 @@ export default {
         try {
           const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
           this.otpVerified = true;
-        this.$vToastify.success("Email verified successfully", "Success");
-        this.currentStep = 2;
-        if (this.timerInterval) {
-          clearInterval(this.timerInterval);
-        }
+          this.$vToastify.success("Email verified successfully", "Success");
+          this.currentStep = 2;
+          if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+          }
         } catch (error) {
-          this.$vToastify.error(error.data.error, "Error");
+          this.$vToastify.error(error.response.data.error, "Error");
         }
     
     },
