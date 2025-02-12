@@ -339,7 +339,7 @@ export default {
           clearInterval(this.timerInterval);
         }
         } catch (error) {
-          this.$vToastify.error(otpResponse.data.error, "Error");
+          this.$vToastify.error(error.data.error, "Error");
         }
     
     },
