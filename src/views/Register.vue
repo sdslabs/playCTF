@@ -12,21 +12,9 @@
           <div class="info">
             <div class="step-title">Setup Email</div>
             <div class="email-input-container">
-              <input
-                v-model="email"
-                type="text"
-                class="inputField"
-                :readonly="otpVerified"
-                placeholder="IITR Email*"
-                required
-                @blur="validateEmail"
-              />
-              <button
-                v-if="!otpSent"
-                @click="sendOTP"
-                class="otp-button"
-                :disabled="!canProceedToOTP"
-              >
+              <input v-model="email" type="text" class="inputField" :readonly="otpVerified" placeholder="IITR Email*"
+                required @blur="validateEmail" />
+              <button v-if="!otpSent" @click="sendOTP" class="otp-button" :disabled="!canProceedToOTP">
                 Send OTP
               </button>
             </div>
@@ -41,17 +29,8 @@
               Please enter the OTP sent to {{ email }}
             </div>
             <div class="otp-input-container">
-              <input
-                v-model="otp"
-                type="text"
-                class="inputField"
-                placeholder="Enter OTP"
-              />
-              <button
-                @click="verifyOTP"
-                class="otp-button verify"
-                :disabled="!otp"
-              >
+              <input v-model="otp" type="text" class="inputField" placeholder="Enter OTP" />
+              <button @click="verifyOTP" class="otp-button verify" :disabled="!otp">
                 Verify OTP
               </button>
             </div>
@@ -68,23 +47,10 @@
           </div>
 
           <div class="form-actions">
-            <div
-              class="next-button"
-              :class="{ disabled: !otpVerified }"
-              @click="proceedToBasicInfo"
-            >
+            <div class="next-button" :class="{ disabled: !otpVerified }" @click="proceedToBasicInfo">
               <span class="next-text">Next</span>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
-                  fill="currentColor"
-                />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="currentColor" />
               </svg>
             </div>
           </div>
@@ -94,50 +60,25 @@
           <div class="info">
             <div class="back-button" @click="currentStep = 1">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor" />
               </svg>
               <span class="back-text">Back</span>
             </div>
-            <input
-              v-model="uname"
-              type="text"
-              class="inputField"
-              placeholder="Name*"
-              required
-            />
+            <input v-model="uname" type="text" class="inputField" placeholder="Name*" required />
           </div>
           <div class="info">
-            <input
-              v-model="username"
-              type="text"
-              class="inputField"
-              placeholder="Username*"
-              required
-              @blur="validateUsername"
-            />
+            <input v-model="username" type="text" class="inputField" placeholder="Username*" required
+              @blur="validateUsername" />
             <div class="text-field-error" v-if="UsernameErr">
               <img src="@/assets/error.svg" class="errImg" />
               <div>{{ UsernameErr }}</div>
             </div>
           </div>
           <div class="form-actions">
-            <div
-              class="next-button"
-              :class="{ disabled: !canProceedToPassword }"
-              @click="proceedToPassword"
-            >
+            <div class="next-button" :class="{ disabled: !canProceedToPassword }" @click="proceedToPassword">
               <span class="next-text">Next</span>
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z"
-                  fill="currentColor"
-                />
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4L10.59 5.41L16.17 11H4V13H16.17L10.59 18.59L12 20L20 12L12 4Z" fill="currentColor" />
               </svg>
             </div>
           </div>
@@ -147,62 +88,39 @@
           <div class="info">
             <div class="back-button" @click="currentStep = 2">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor"/>
+                <path d="M20 11H7.83L13.42 5.41L12 4L4 12L12 20L13.41 18.59L7.83 13H20V11Z" fill="currentColor" />
               </svg>
               <span class="back-text">Back</span>
             </div>
-            <input
-              v-model="password"
-              type="password"
-              class="inputField"
-              placeholder="Password*"
-              required
-              @blur="validatePassword"
-            />
+            <input v-model="password" type="password" class="inputField" placeholder="Password*" required
+              @blur="validatePassword" />
             <div class="text-field-error" v-if="PassLen">
               <img src="@/assets/error.svg" class="errImg" />
               <div>{{ PassLen }}</div>
             </div>
           </div>
           <div class="info">
-            <input
-              v-model="confirmPassword"
-              type="password"
-              class="inputField"
-              placeholder="Confirm Password*"
-              required
-              @blur="comparePassword"
-            />
+            <input v-model="confirmPassword" type="password" class="inputField" placeholder="Confirm Password*" required
+              @blur="comparePassword" />
             <div class="text-field-error" v-if="PassErr">
               <img src="@/assets/error.svg" class="errImg" />
               <div>{{ PassErr }}</div>
             </div>
           </div>
           <div class="register-button-container">
-            <Button
-              :onclick="register"
-              variant="primary-cta"
-              class="register-button"
-              :disabled="!canRegister"
-              text="Register Now"
-            />
+            <Button :onclick="register" variant="primary-cta" class="register-button" :disabled="!canRegister"
+              text="Register Now" />
           </div>
         </div>
 
         <div class="progress-container">
           <div class="progress-steps">
-            <div
-              class="step-item"
-              :class="{ active: currentStep >= 1, completed: currentStep > 1 }"
-            >
+            <div class="step-item" :class="{ active: currentStep >= 1, completed: currentStep > 1 }">
               <div class="step-circle">1</div>
               <div class="step-title">Setup Email</div>
             </div>
             <div class="step-line" :class="{ active: currentStep > 1 }"></div>
-            <div
-              class="step-item"
-              :class="{ active: currentStep >= 2, completed: currentStep > 2 }"
-            >
+            <div class="step-item" :class="{ active: currentStep >= 2, completed: currentStep > 2 }">
               <div class="step-circle">2</div>
               <div class="step-title">Basic Info</div>
             </div>
@@ -317,31 +235,31 @@ export default {
     },
     async sendOTP() {
       if (this.canProceedToOTP) {
-        this.otpSent = true;
         const otpResponse = await VerifyOTP.sendOTP(this.email);
-        this.startTimer();
         if (otpResponse.status !== 200) {
-          this.$vToastify.error(otpResponse.data.message, "Error");
+          this.$vToastify.error(otpResponse.data.error, "Error");
         } else {
+          this.otpSent = true;
+          this.startTimer();
           this.$vToastify.success("OTP sent to your email", "Success");
         }
       }
     },
 
     async verifyOTP() {
-        this.OtpErr = "";
-        const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
-        if (otpResponse.status !== 200) {
-          this.$vToastify.error(otpResponse.data.message, "Error");
-        } else {
+      this.OtpErr = "";
+      const otpResponse = await VerifyOTP.verifyOTP(this.email, this.otp);
+      if (otpResponse.status !== 200) {
+        this.$vToastify.error(otpResponse.data.error, "Error");
+      } else {
         this.otpVerified = true;
         this.$vToastify.success("Email verified successfully", "Success");
         this.currentStep = 2;
         if (this.timerInterval) {
           clearInterval(this.timerInterval);
         }
-        }
-    
+      }
+
     },
     proceedToBasicInfo() {
       if (this.otpVerified) {
@@ -365,7 +283,6 @@ export default {
     },
     async register() {
       if (this.canRegister && !this.registered) {
-      console.log(this.uname, this.username, this.email, this.password);
         const registerResponse = await RegisterUser.registerUser(
           this.uname,
           this.username,

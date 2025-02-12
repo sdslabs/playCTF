@@ -40,11 +40,12 @@ export default {
   components: {
     Footer
   },
-  methods: {
-    pathLogin() {
-      var route = this.$route.name;
-      return route.includes("login");
-    }
+  methods: { 
+  pathLogin() {
+  const route = this.$route.name;
+  return route.includes("login") || route.includes("forgetpassword");
+}
+
   }
 };
 </script>
