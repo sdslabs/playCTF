@@ -135,6 +135,9 @@ export default {
       .then(response => {
         if (response.data) {
           this.userInfo = response.data;
+        if (this.userInfo && this.userInfo.role === 'contestant') {
+          this.users = this.users.filter(user => user.status !== 1);
+        }
           this.loading.userNotFetched = false;
         }
       })
