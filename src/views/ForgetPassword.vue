@@ -90,7 +90,7 @@ export default {
     components: { ErrorBox, Button },
     data() {
         return {
-            currentStep: 2,
+            currentStep: 1,
             msg: null,
             icon: null,
             email: "",
@@ -98,7 +98,7 @@ export default {
             confirmPassword: "",
             otp: "",
             otpSent: false,
-            otpVerified: true,
+            otpVerified: false,
             EmailErr: "",
             PassLen: "",
             PassErr: "",
