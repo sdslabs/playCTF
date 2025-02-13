@@ -199,6 +199,7 @@ import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
 import { CONFIG } from "@/config/config";
 import EditChallModal from "../components/EditChallModal.vue";
+import Utils from "../api/utils"
 export default {
   components: { BarGraphVertical, AdminTable, SpinLoader, EditChallModal },
   name: "AdminChallenge",
