@@ -31,7 +31,9 @@ axiosInstance.interceptors.response.use(
       "/auth/login",
       "/auth/register",
       "/auth/send-otp",
+      "/auth/reset-password",
       "/auth/verify-otp",
+      "/auth/verify-otp-forget",
       "/api/submit/challenge"
     ];
     

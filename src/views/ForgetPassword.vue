@@ -116,6 +116,19 @@ export default {
         },
     },
     methods: {
+        startTimer() {
+            this.timer = 60;
+            if (this.timerInterval) {
+                clearInterval(this.timerInterval);
+            }
+            this.timerInterval = setInterval(() => {
+                if (this.timer > 0) {
+                    this.timer--;
+                } else {
+                    clearInterval(this.timerInterval);
+                }
+            }, 1000);
+        },
         validateEmail() {
             const iitrEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.iitr\.ac\.in$/;
             if (!this.email) {
@@ -153,6 +166,16 @@ export default {
                 this.otpVerified = true;
                 this.$vToastify.success("OTP verified successfully", "Success");
                 this.currentStep = 2;
+
+                const { token, role } = otpResponse.data;
+                var userInfo = {
+                    token: token,
+                    login: true,
+                    access: true,
+                    role: role
+                };
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
+
             }
         },
         proceedToResetPassword() {

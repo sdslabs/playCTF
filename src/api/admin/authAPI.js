@@ -67,11 +67,12 @@ export default {
   },
 
   async resetPassword(newPassword) {
-    const response = await this.resetPass(newPassword);
-    if (response.status === 200) {
-      return true;
+    try {
+      const response = await this.resetPass(newPassword);
+      return response;
+    } catch (error) {
+      throw error;
     }
-    return false;
   },
 
   getUserInfo() {
