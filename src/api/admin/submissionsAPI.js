@@ -29,5 +29,12 @@ export default {
       responseType: "blob",
       url: `/api/info/submissions?format=csv`
     });
+  },
+
+  async getUserSubs(username) {
+    const submissions = await this.getSubmissions();
+    const submission = submissions.filter(sub => sub.username === username);
+    console.log(submission);
+    return submission;
   }
 };
