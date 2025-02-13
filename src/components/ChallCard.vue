@@ -248,7 +248,8 @@ export default {
       let ncurl = CONFIG.ncRoot;
       if (
         this.challDetails.category === "service" ||
-        this.challDetails.category === "xinetd"
+        this.challDetails.category === "xinetd" || 
+        this.challDetails.category === "service_docker"
       ) {
         if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
           return `nc ${ncurl} ${port}`;

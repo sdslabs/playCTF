@@ -239,8 +239,9 @@ export default {
       let url = CONFIG.webRoot;
       let ncurl = CONFIG.ncRoot;
       if (
-        this.chalDetails.category === "service" ||
-        this.chalDetails.category === "xinetd"
+        this.challDetails.category === "service" ||
+        this.challDetails.category === "xinetd" || 
+        this.challDetails.category === "service_docker"
       ) {
         return `nc ${ncurl} ${port}`;
       }
