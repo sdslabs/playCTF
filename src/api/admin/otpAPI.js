@@ -5,13 +5,13 @@ export default {
     let bodyFormData = new FormData();
     bodyFormData.append("email", email);
 
-    try {
+    try {      
       const response = await axiosInstance({
         method: "post",
         url: `/auth/send-otp`,
-        data: bodyFormData,
+        data: bodyFormData
       });
-
+  
       return response;
     } catch (error) {
       throw error;
@@ -40,7 +40,7 @@ export default {
     let bodyFormData = new FormData();
     bodyFormData.append("email", email);
     bodyFormData.append("otp", otp);
-
+    
     try {
       const response = await axiosInstance({
         method: "post",
@@ -51,5 +51,5 @@ export default {
     } catch (error) {
       throw error;
     }
-  },
+  }
 };

@@ -1,9 +1,5 @@
 <template>
-  <div
-    v-if="this.challDetails"
-    class="challCard"
-    :class="{ 'preview-challcard': isPreview }"
-  >
+  <div v-if="this.challDetails" class="challCard" :class="{ 'preview-challcard': isPreview }">
     <div class="challCard-firstLine">
       <div class="challCard-challName">{{ challDetails.name }}</div>
       <div v-if="challDetails.isSolved" class="chall-submitted">
@@ -13,11 +9,9 @@
     </div>
     <div class="challCard-solves">
       {{ challDetails.points }} Points
-      <span v-if="challDetails && challDetails.solves"
-        >| {{ challDetails.solves.length }} Solves</span
-      >
-      <span class="attempts-counter" v-if="!isPreview">
-        | {{ challDetails.previous_tries }}/{{ challDetails.failSolveLimit }} attempts
+      <span v-if="challDetails && challDetails.solves">| {{ challDetails.solves.length }} Solves</span>
+      <span class="attempts-counter" v-if="!isPreview && challDetails.maxAttemptLimit !== -1">
+        | {{ challDetails.previous_tries }}/{{ challDetails.maxAttemptLimit }} attempts
       </span>
     </div>
     <div class="challCard-tag-container">
@@ -27,74 +21,44 @@
     </div>
     <div class="challCard-challDesc">{{ challDetails.description }}</div>
     <div class="challCard-resources">
-      <div
-        v-for="port in this.challDetails.ports"
-        :key="port"
-        class="host aboutText"
-      >
+      <div v-for="port in this.challDetails.ports" :key="port" class="host aboutText">
         <div class="challenge-link-code" v-on:click="copyUrl(port)">
           {{ getUrl(port) }}
           <span class="tooltiptext">{{ copyText }}</span>
         </div>
       </div>
       <div class="challenge-links">
-        <p
-          class="link-heading"
-          v-if="
-            this.challDetails.assets.length > 1 ||
-              (this.challDetails.assets.length == 1 &&
-                this.challDetails.assets[0] != '')
-          "
-        >
+        <p class="link-heading" v-if="
+          this.challDetails.assets.length > 1 ||
+          (this.challDetails.assets.length == 1 &&
+            this.challDetails.assets[0] != '')
+        ">
           Asset Links
         </p>
-        <a
-          class="challenge-link aboutText"
-          v-for="asset in this.challDetails.assets"
-          :href="getStaticUrl(asset)"
-          target="_blank"
-          :key="asset"
-        >
+        <a class="challenge-link aboutText" v-for="asset in this.challDetails.assets"
+          :href="getStaticUrl(challDetails.name, asset)" target="_blank" :key="asset">
           {{ getFileFromAsset(asset) }}
         </a>
-        <p
-          class="link-heading"
-          v-if="
-            this.challDetails.additionalLinks.length > 1 ||
-              (this.challDetails.additionalLinks.length == 1 &&
-                this.challDetails.additionalLinks[0] != '')
-          "
-        >
+        <p class="link-heading" v-if="
+          this.challDetails.additionalLinks.length > 1 ||
+          (this.challDetails.additionalLinks.length == 1 &&
+            this.challDetails.additionalLinks[0] != '')
+        ">
           Additional Links
         </p>
-        <a
-          class="challenge-link"
-          v-for="asset in this.challDetails.additionalLinks"
-          :href="asset"
-          target="_blank"
-          :key="asset"
-        >
+        <a class="challenge-link" v-for="asset in this.challDetails.additionalLinks" :href="asset" target="_blank"
+          :key="asset">
           {{ asset }}
         </a>
       </div>
     </div>
-    <div
-      class="challCard-hints"
-      v-if="challDetails.hints && challDetails.hints.length > 0"
-    >
+    <div class="challCard-hints" v-if="challDetails.hints && challDetails.hints.length > 0">
       <p class="link-heading">Hints Available</p>
       <div class="hint-buttons">
-        <button
-          v-for="hint in challDetails.hints"
-          :key="`hint_${hint.id}`"
-          class="hint-button"
-          :class="{
-            'hint-taken': hintStates[hint.id] && hintStates[hint.id].taken,
-            'hint-loading': !hintStates[hint.id]
-          }"
-          @click="handleHint(hint)"
-          :disabled="!hintStates[hint.id]"
-        >
+        <button v-for="hint in challDetails.hints" :key="`hint_${hint.id}`" class="hint-button" :class="{
+          'hint-taken': hintStates[hint.id] && hintStates[hint.id].taken,
+          'hint-loading': !hintStates[hint.id]
+        }" @click="handleHint(hint)" :disabled="!hintStates[hint.id]">
           <div class="hint-button-content">
             <span class="hint-number">Hint {{ hint.id }}</span>
             <span class="hint-points">{{ hint.points }} points</span>
@@ -117,11 +81,7 @@
           <button class="modal-cancel" @click="closeConfirmModal">
             {{ isHintTaken ? 'Close' : 'Cancel' }}
           </button>
-          <button 
-            v-if="selectedHint && !isHintTaken" 
-            class="modal-confirm" 
-            @click="confirmHint"
-          >
+          <button v-if="selectedHint && !isHintTaken" class="modal-confirm" @click="confirmHint">
             Take Hint
           </button>
         </div>
@@ -129,28 +89,18 @@
     </div>
 
     <div
-      v-if="!challDetails.isSolved && !isPreview && challDetails.previous_tries < challDetails.failSolveLimit"
-      class="challCard-bottom-row"
-    >
+      v-if="!challDetails.isSolved && !isPreview && (challDetails.maxAttemptLimit === -1 || challDetails.previous_tries < challDetails.maxAttemptLimit)"
+      class="challCard-bottom-row">
       <div class="challCard-form">
-        <input
-          type="text"
-          name="flag"
-          class="challCard-form-input"
-          id="flag-input"
-          placeholder="Start typing flag here..."
-          v-model="flag"
-          @keyup.enter="triggerSubmit"
-        />
-        <Button
-          text="Submit Flag"
-          variant="secondary-cta challCard-submit-buttom"
-          :disabled="flag.length === 0 || this.showSuccess || this.showFail"
-          :onclick="submitFlag"
-        />
+        <input name="flag" class="challCard-form-input" id="flag-input" placeholder="Start typing flag here..."
+          v-model="flag" @keyup.enter="triggerSubmit" />
+        <Button text="Submit Flag" variant="secondary-cta challCard-submit-buttom"
+          :disabled="flag.length === 0 || this.showSuccess || this.showFail" :onclick="submitFlag" />
       </div>
     </div>
-    <div v-else-if="!isPreview && challDetails.previous_tries >= challDetails.failSolveLimit" class="challCard-maxed">
+    <div
+      v-else-if="!isPreview && challDetails.maxAttemptLimit !== -1 && challDetails.previous_tries >= challDetails.maxAttemptLimit"
+      class="challCard-maxed">
       Maximum attempts reached
     </div>
   </div>
@@ -191,18 +141,16 @@ export default {
       );
     },
     isHintTaken() {
-      return this.selectedHint && 
-             this.hintStates[this.selectedHint.id] && 
-             this.hintStates[this.selectedHint.id].taken;
+      return this.selectedHint &&
+        this.hintStates[this.selectedHint.id] &&
+        this.hintStates[this.selectedHint.id].taken;
     }
   },
   watch: {
     challDetails: {
       immediate: true,
       handler(newVal) {
-        console.log("Challenge details changed:", JSON.stringify(newVal, null, 2));
         if (newVal && newVal.hints) {
-          console.log("Found hints in watcher:", JSON.stringify(newVal.hints, null, 2));
           this.loadHints();
         }
       }
@@ -219,14 +167,14 @@ export default {
   methods: {
     async loadHints() {
       if (!this.challDetails.hints) return;
-      
+
       try {
         for (const hint of this.challDetails.hints) {
           try {
             const response = await HintsService.getHintStatus(hint.id);
             const description = response.data.Description || response.data.description;
             const points = response.data.Points || response.data.points;
-            
+
             this.$set(this.hintStates, hint.id, {
               description: description,
               points: points,
@@ -234,7 +182,7 @@ export default {
             });
           } catch (error) {
             console.error("Error loading hint:", error);
-            
+
             this.$set(this.hintStates, hint.id, {
               description: "Not enough hint points!",
               points: hint.points,
@@ -248,8 +196,6 @@ export default {
     },
     async handleHint(hint) {
       if (!hint) return;
-
-      // Show modal for both taken and untaken hints
       this.selectedHint = hint;
       this.showConfirmModal = true;
     },
@@ -261,50 +207,38 @@ export default {
 
     async confirmHint() {
       if (!this.selectedHint) return;
-      
+
       const hintId = this.selectedHint.id;
       this.showConfirmModal = false;
-      
+
       try {
         const response = await HintsService.takeHint(hintId);
-        
+
         if (!response || !response.data) {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error("Error fetching hint", "Error");
           return;
         }
-        
+
         const description = response.data.message;
-        
+
         if (description) {
           this.$set(this.hintStates, hintId, {
             description: description,
             taken: true
           });
 
-          // Show the hint in modal
           this.showConfirmModal = true;
         } else {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error("Error fetching hint", "Error");
         }
       } catch (error) {
-        if (error.response && error.response.status === 403) {
-          const message = error.response.data && error.response.data.error 
-            ? error.response.data.error 
-            : "You don't have enough points to take this hint";
-            
-          this.$vToastify.setSettings({ theme: "beast-error" });
-          this.$vToastify.error(message, "Error");
-          return;
-        }
-        
         if (error.response && error.response.data && error.response.data.error) {
           this.$vToastify.setSettings({ theme: "beast-error" });
           this.$vToastify.error(error.response.data.error, "Error");
           return;
         }
-        
         this.$vToastify.setSettings({ theme: "beast-error" });
         this.$vToastify.error("Error fetching hint", "Error");
       }
@@ -316,13 +250,22 @@ export default {
         this.challDetails.category === "service" ||
         this.challDetails.category === "xinetd"
       ) {
-        return `nc ${ncurl} ${port}`;
+        if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
+          return `nc ${ncurl} ${port}`;
+        } else {
+          return `nc ${this.challDetails.deployedLink} ${port}`;
+        }
       }
-      return `${CONFIG.webRoot}:${port}`;
+
+      if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
+        return `${CONFIG.webRoot}:${port}`;
+      } else {
+        return `http://${this.challDetails.deployedLink}:${port}`;
+      }
     },
-    getStaticUrl(asset) {
+    getStaticUrl(name, asset) {
       let url = CONFIG.staticRoot;
-      return `${url}${asset}`;
+      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");
@@ -333,50 +276,105 @@ export default {
         this.submitFlag();
       }
     },
-    async submitFlag() {
-      try {
-        const response = await FlagService.submitFlag(
-          this.challDetails.id,
-          this.flag
-        );
-        if (response.data.success) {
+    submitFlag() {
+      FlagService.submitFlag(this.challDetails.id, this.flag).then(Response => {
+        this.$vToastify.setSettings({
+          position: "center-right",
+          theme: "beast-success"
+        });
+        if (Response.data.success) {
           this.showSuccess = true;
-          setTimeout(() => {
-            this.showSuccess = false;
-          }, 2000);
-          this.$emit("flag-submitted");
+          this.$vToastify.success("Flag submitted successfully", "Success");
         } else {
           this.showFail = true;
-          setTimeout(() => {
-            this.showFail = false;
-          }, 2000);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    copyUrl(text) {
-      navigator.permissions.query({ name: "clipboard-write" }).then(result => {
-        if (result.state == "granted" || result.state == "prompt") {
-          navigator.clipboard.writeText(this.getUrl(text));
+          this.$vToastify.setSettings({
+            theme: "beast-error"
+          });
+          this.$vToastify.error(
+            Response.data.error ? Response.data.error : Response.data.message,
+            "Error"
+          );
         }
       });
-      (this.copyText = "Copied"),
+      var self = this;
+      setTimeout(function () {
+        if (self.showSuccess) {
+          self.$router.go();
+        } else {
+          self.$emit("updateChallenges");
+        }
+        self.flag = "";
+        self.showSuccess = false;
+        self.showFail = false;
+      }, 3000);
+    },
+
+    async copyUrl(text) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(this.getUrl(text));
+        } else {
+          const textArea = document.createElement("textarea");
+          textArea.value = this.getUrl(text);
+
+          textArea.style.top = "0";
+          textArea.style.left = "0";
+          textArea.style.position = "fixed";
+          textArea.style.opacity = "0";
+
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+
+          try {
+            const successful = document.execCommand('copy');
+            if (!successful) {
+              throw new Error('Copy command failed');
+            }
+          } catch (err) {
+            console.error('Failed to copy text: ', err);
+            throw err;
+          } finally {
+            document.body.removeChild(textArea);
+          }
+        }
+
+        this.copyText = "Copied";
         setTimeout(() => {
           this.copyText = "Click to Copy";
         }, 1000);
+
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+        this.copyText = "Copy failed";
+        setTimeout(() => {
+          this.copyText = "Click to Copy";
+        }, 1000);
+      }
+    },
+    isDisabled: function () {
+      let flag = document.getElementById("flag-input").value;
+      if (flag != "") {
+        this.disable = true;
+      } else {
+        this.disable = false;
+      }
+    },
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   },
-  async mounted() {
-    console.log("Component mounted, challDetails:", JSON.stringify(this.challDetails, null, 2));
+
+  mounted() {
     if (
       this.challDetails.category === "service" ||
       this.challDetails.category === "xinetd"
     )
       this.link = false;
     else this.link = true;
-
-    await this.loadHints();
   }
 };
 </script>

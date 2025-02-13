@@ -242,6 +242,7 @@ export default {
           this.otpSent = true;
           this.startTimer();
           this.$vToastify.success("OTP sent to your email", "Success");
+       
         }
       }
     },
@@ -259,7 +260,6 @@ export default {
           clearInterval(this.timerInterval);
         }
       }
-
     },
     proceedToBasicInfo() {
       if (this.otpVerified) {

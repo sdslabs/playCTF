@@ -27,16 +27,12 @@ export default {
   computed: {
     getSolvedCount() {
       if (!this.challenges) {
-        console.log('No challenges');
         return 0;
       }
-      console.log('Challenges:', JSON.stringify(this.challenges, null, 2));
       // Get unique solved challenge IDs
       const solvedChallenges = this.challenges.filter(chall => {
-        console.log('Challenge:', chall.id, 'isSolved:', chall.isSolved);
         return chall.isSolved === true;
       });
-      console.log('Solved challenges:', solvedChallenges);
       return solvedChallenges.length;
     }
   }
