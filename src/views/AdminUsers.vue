@@ -52,7 +52,7 @@
       v-if="this.resultQuery.length > 0 && !loading"
       :tableCols="tableCols"
       :rows="resultQuery"
-      :links="[{ col: 'username', redirect: '/admin/users/' }]"
+      :links="[{ col: 'user name', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
       :key="reload + searchQuery"
       :total-users="totalUsers"
