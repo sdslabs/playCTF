@@ -239,10 +239,15 @@ export default {
         if (otpResponse.status !== 200) {
           this.$vToastify.error(otpResponse.data.error, "Error");
         } else {
-          this.otpSent = true;
-          this.startTimer();
-          this.$vToastify.success("OTP sent to your email", "Success");
-       
+          if (otpResponse.data.message === "Email already verified") {
+            this.otpVerified = true;
+            this.$vToastify.success("Email already verified", "Success");
+            this.currentStep = 2;
+          } else {
+            this.otpSent = true;
+            this.startTimer();
+            this.$vToastify.success("OTP sent to your email", "Success");
+          }
         }
       }
     },
@@ -253,11 +258,17 @@ export default {
       if (otpResponse.status !== 200) {
         this.$vToastify.error(otpResponse.data.error, "Error");
       } else {
-        this.otpVerified = true;
-        this.$vToastify.success("Email verified successfully", "Success");
-        this.currentStep = 2;
-        if (this.timerInterval) {
-          clearInterval(this.timerInterval);
+        if (otpResponse.data.message === "Email already verified") {
+          this.otpVerified = true;
+          this.$vToastify.success("Email already verified", "Success");
+          this.currentStep = 2;
+        } else {
+          this.otpVerified = true;
+          this.$vToastify.success("Email verified successfully", "Success");
+          this.currentStep = 2;
+          if (this.timerInterval) {
+            clearInterval(this.timerInterval);
+          }
         }
       }
     },
