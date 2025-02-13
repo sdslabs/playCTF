@@ -248,8 +248,9 @@ export default {
       return `${CONFIG.webRoot}:${port}`;
     },
     getStaticUrl(name, asset) {
-      let url = CONFIG.staticRoot;
-      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
+      const url = CONFIG.staticRoot;
+      const downloadUrl = Utils.downloadFileUrl(name, asset,url);
+      return downloadUrl;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");

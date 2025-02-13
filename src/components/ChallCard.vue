@@ -110,6 +110,7 @@
 import FlagService from "../api/userAPI";
 import Button from "@/components/Button.vue";
 import HintsService from "../api/admin/hintsAPI";
+import Utils from "../api/utils";
 import { CONFIG } from "@/config/config";
 
 export default {
@@ -265,8 +266,9 @@ export default {
       }
     },
     getStaticUrl(name, asset) {
-      let url = CONFIG.staticRoot;
-      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
+      const url = CONFIG.staticRoot;
+      const downloadUrl = Utils.downloadFileURL(name, asset, url);
+      return downloadUrl;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");
