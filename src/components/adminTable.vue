@@ -12,7 +12,8 @@
             {{ tableCol.label }}
           </th>
         </thead>
-        <tr class="adminTableUserRow" v-if="this.userData && !this.keys">
+        <tbody class="adminTableBody">
+          <tr class="adminTableUserRow" v-if="this.userData && !this.keys">
           <td class="adminTableData adminTableUserData adminTablerank">
             {{ this.userData.rank }}
           </td>
@@ -24,14 +25,13 @@
           </td>
         </tr>
         <tr class="adminNullRow"></tr>
-        <tbody class="adminTableBody">
-          <tr v-for="row in tableRows" :key="row.rank" class="adminTableRow">
-            <td
-              v-for="col in columns"
-              :key="col.id"
-              class="adminTableData"
-              :class="[
-                {
+        <tr v-for="row in tableRows" :key="row.rank" class="adminTableRow">
+          <td
+            v-for="col in columns"
+            :key="col.id"
+            class="adminTableData"
+            :class="[
+              {
                   green:
                     col === 'status' &&
                     (row.status === 'Active' || row.status === 'Correct'),
@@ -75,9 +75,12 @@
           :page-link-class="'pageItem'"
           :prev-link-class="'prevItem'"
           :next-link-class="'nextItem'"
+          :active-class="'activePageItem'"
           :break-view-link-class="'breakItemlink-'"
           :no-li-surround="true"
-          :hide-prev-next="true"
+          :hide-prev-next="false"
+          :prev-handler="handlePrevClick"
+          :next-handler="handleNextClick"
         />
       </div>
       <div v-if="pageCount - 1" class="jumpPage">
@@ -100,72 +103,109 @@
 export default {
   name: "adminTable",
   components: {},
+  props: {
+    tableCols: {
+      type: Array,
+      required: true
+    },
+    rows: {
+      type: Array,
+      required: true
+    },
+    colStyle: {
+      type: Object,
+      default: () => ({})
+    },
+    links: {
+      type: Array,
+      default: () => []
+    },
+    maxElementPerPage: {
+      type: Number,
+      default: 25
+    },
+    userData: {
+      type: Object,
+      default: () => ({})
+    },
+    keys: {
+      type: String,
+      default: ''
+    },
+    totalUsers: {
+      type: Number,
+      default: 0,
+      validator: value => value >= 0
+    }
+  },
   data() {
     return {
-      jumpPage: 1,
       currentPage: 1,
-      tableRows: []
+      jumpPage: ""
     };
   },
-  mounted() {
-    this.tableRows = this.get_rows();
+  watch: {
+    totalUsers() {
+      this.currentPage = 1;
+      this.$emit('page-changed', 1);
+    },
+    currentPage(newPage, oldPage) {
+      if (newPage !== oldPage) {
+        this.$emit('page-changed', newPage);
+      }
+    }
   },
-  props: [
-    "tableCols",
-    "rows",
-    "colStyle",
-    "links",
-    "maxElementPerPage",
-    "userData",
-    "keys"
-  ],
   methods: {
     isColLink(val) {
-      let isLink = false;
-      this.links.forEach(item => {
-        if (item.col === val) {
-          isLink = true;
-        }
+      if (!this.links) return false;
+      return this.links.some(link => {
+        const colObj = this.tableCols.find(col => col.id === parseInt(val));
+        return colObj && link.col.toLowerCase() === colObj.label.toLowerCase();
       });
-      return isLink;
     },
     getRedirectLink(val, username) {
-      var redirectLink = "";
-      this.links.forEach(item => {
-        if (item.col === val) {
-          redirectLink = item.redirect + username;
-        }
-      });
-      return redirectLink;
+      if (!this.links) return "";
+      const colObj = this.tableCols.find(col => col.id === parseInt(val));
+      if (!colObj) return "";
+      
+      const link = this.links.find(link => link.col.toLowerCase() === colObj.label.toLowerCase());
+      if (!link) return "";
+      return `${link.redirect}${username}`;
     },
-    changePage() {
-      this.currentPage = this.jumpPage;
-      this.tableRows = this.get_rows();
+    changePage(e) {
+      e.preventDefault();
+      const page = parseInt(this.jumpPage);
+      if (page >= 1 && page <= this.pageCount) {
+        this.currentPage = page;
+      }
+      this.jumpPage = "";
     },
     pageChangeHandler(selectedPage) {
-      this.currentPage = selectedPage;
-      this.tableRows = this.get_rows();
+      if (selectedPage >= 1 && selectedPage <= this.pageCount) {
+        this.currentPage = selectedPage;
+      }
     },
-    get_rows() {
-      let start = (this.currentPage - 1) * this.maxElementPerPage;
-      let end = start + this.maxElementPerPage;
-      return this.rows.slice(start, end);
+    handlePrevClick() {
+      if (this.currentPage > 1) {
+        this.pageChangeHandler(this.currentPage - 1);
+      }
+    },
+    handleNextClick() {
+      if (this.currentPage < this.pageCount) {
+        this.pageChangeHandler(this.currentPage + 1);
+      }
     }
   },
   computed: {
-    columns: function columns() {
-      if (this.rows.length == 0) {
-        return [];
-      }
-      return Object.keys(this.rows[0]);
+    tableRows() {
+      return this.rows;
+    },
+    columns() {
+      if (!this.tableCols || this.tableCols.length === 0) return [];
+      return this.tableCols.map(col => col.id);
     },
     pageCount() {
-      if (
-        Math.round(this.rows.length / this.maxElementPerPage) ===
-        this.rows.length / this.maxElementPerPage
-      )
-        return Math.round(this.rows.length / this.maxElementPerPage);
-      else return Math.floor(this.rows.length / this.maxElementPerPage) + 1;
+      return Math.max(1, Math.ceil(this.totalUsers / this.maxElementPerPage));
     }
   }
 };
