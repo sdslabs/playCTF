@@ -250,7 +250,7 @@ export default {
     },
     getStaticUrl(name, asset) {
       const url = CONFIG.staticRoot;
-      const downloadUrl = Utils.downloadFileUrl(name, asset,url);
+      const downloadUrl = Utils.downloadFileURL(name, asset,url);
       return downloadUrl;
     },
     getFileFromAsset(asset) {

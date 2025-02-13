@@ -27,21 +27,32 @@ export default {
 
     return str;
   },
-  async downloadFileURL(name,asset,url) {
+async downloadFileURL(name, asset, url) {
     const fullUrl = `${url}api/info/download?challenge=${name}&asset=${asset}`;
     
     try {
-      const response = await axiosInstance({
-        method: 'get',
-        url: fullUrl,
-        responseType: 'blob'
-      });
+        const response = await axiosInstance({
+            method: 'get',
+            url: fullUrl,
+            responseType: 'blob',  // Ensure binary data is handled properly
+        });
 
-      const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
-      return downloadUrl;
+        const blob = new Blob([response.data]);
+        const downloadUrl = window.URL.createObjectURL(blob);
+
+        // Create a link element and trigger the download
+        const link = document.createElement('a');
+        link.href = downloadUrl;
+        link.setAttribute('download', asset); // Set the filename
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        return downloadUrl;
     } catch (error) {
-      console.error('There has been a problem with your axios operation:', error);
+        console.error('There has been a problem with your axios operation:', error);
     }
-  }
+}
+
 };
 
