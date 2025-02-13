@@ -147,7 +147,7 @@ export default {
         },
         async sendOTP() {
             if (this.canProceedToOTP) {
-                const otpResponse = await VerifyOTP.sendOTP(this.email);
+                const otpResponse = await VerifyOTP.sendOTPForForget(this.email);
                 if (otpResponse.status !== 200) {
                     this.$vToastify.error(otpResponse.data.error, "Error");
                 } else {
