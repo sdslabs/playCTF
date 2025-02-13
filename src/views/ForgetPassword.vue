@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div class="register-button-container">
-                            <Button :onclick="resetPassword" variant="primary-cta" class="register-button"
+                            <Button :onclick="resetPassword" class="otp-button" variant="primary-cta"
                                 :disabled="!canResetPassword" text="Reset Password" />
                         </div>
                     </div>
