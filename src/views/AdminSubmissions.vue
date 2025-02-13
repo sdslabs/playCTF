@@ -75,7 +75,6 @@ export default {
   async mounted() {
     let response = await SubmissionService.getSubmissions();
     var submissions = [];
-    console.log(response);
     response.forEach((element, index) => {
       submissions.push({
         "1": element.username,

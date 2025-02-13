@@ -16,7 +16,6 @@ export default {
 
   // Group submissions by username for efficient processing
   groupSubmissionsByUsers(submissions, usernames) {
-    console.log("Called",submissions);
     const userSubmissions = {};
     usernames.forEach(username => {
       userSubmissions[username] = submissions.filter(sub => sub.username === username);
