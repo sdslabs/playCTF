@@ -78,7 +78,6 @@ export default {
     async fetchTotalUsers() {
       try {
         const response = await UsersService.getUserCount();
-        console.log("Fetching user count", response);
         this.totalUsers = response.user_count || 0;
       } catch (err) {
         console.error('Error fetching user count:', err);
@@ -89,7 +88,6 @@ export default {
       this.loading = true;
       try {
         const users = await UsersService.getLeaderboard(page);
-        console.log("Fetching users", users);
         if (!users || users.length === 0) {
           this.users = [];
           this.displayUsers = [];
@@ -106,7 +104,6 @@ export default {
         this.users = [];
         this.displayUsers = [];
       } finally {
-        console.log("Finished fetching users");
         this.loading = false;
       }
     },

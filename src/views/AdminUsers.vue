@@ -55,6 +55,8 @@
       :links="[{ col: 'username', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
       :key="reload + searchQuery"
+      :total-users="totalUsers"
+      @page-changed="onPageChange"
     />
     <div
       class="adminEmptyDataContainer"
@@ -95,46 +97,63 @@ export default {
       sortColumn: "",
       tableCols: tableCols.users,
       displayUsers: [],
-      users: []
+      users: [],
+      totalUsers: 0
     };
   },
   mounted() {
     UsersService.getUsers()
-      //TODO: need to handle api errors
       .then(users => {
-        this.users = users;
-        this.displayUsers = this.users.sort((a, b) => {
-          return a.username > b.username ? 1 : -1;
-        });
+        this.users = users.map(element => ({
+          "1": element.rank,
+          "2": element.username,
+          "3": element.email,
+          "4": element.score,
+          "5": element.status
+        }));
+        this.applySort();
+        this.totalUsers = this.users.length;
+        this.fetchUsers(1);
       })
       .finally(() => {
         this.loading = false;
       });
   },
   methods: {
+    onPageChange(page) {
+      this.fetchUsers(page);
+    },
+    async fetchUsers(page = 1) {
+      const filteredAndSortedUsers = this.applySort([...this.users]);
+      this.displayUsers = filteredAndSortedUsers.slice((page - 1) * 10, page * 10);
+      this.totalUsers = filteredAndSortedUsers.length;
+    },
     changeFilter(value) {
-      this.reload = !this.reload;
       this.statusFilter = value;
-      if (value === "All") {
-        this.displayUsers = this.users;
-      } else {
-        this.displayUsers = this.users.filter(el => {
-          return el.status == value;
-        });
-      }
+      this.reload = !this.reload;
+      this.fetchUsers(1);
     },
     changeSort(value) {
-      this.reload = !this.reload;
       this.sortFilter = value;
-      if (value === "User Name") {
-        this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1;
-        });
-      } else if (value === "Score") {
-        this.displayUsers = this.displayUsers.sort((a, b) => {
-          return a.rank - b.rank;
-        });
+      this.reload = !this.reload;
+      this.fetchUsers(1);
+    },
+    applySort(users = this.users) {
+      let filtered = [...users];
+      
+      // Apply status filter
+      if (this.statusFilter !== "All") {
+        filtered = filtered.filter(user => user["5"] === this.statusFilter);
       }
+
+      // Apply sorting
+      if (this.sortFilter === "User Name") {
+        filtered.sort((a, b) => a["2"].localeCompare(b["2"]));
+      } else if (this.sortFilter === "Score") {
+        filtered.sort((a, b) => b["4"] - a["4"]);
+      }
+
+      return filtered;
     },
     async exportUsersAsCSV() {
       let jsonObject = JSON.stringify(this.resultQuery);
@@ -152,7 +171,7 @@ export default {
           return this.searchQuery
             .toLowerCase()
             .split(" ")
-            .every(v => item.username.toLowerCase().includes(v));
+            .every(v => item["2"].toLowerCase().includes(v));
         });
       } else {
         return this.displayUsers;
