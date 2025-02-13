@@ -12,11 +12,13 @@
       :tableCols="tableCols"
       :rows="rows"
       :links="[
-        { col: 'challenge', redirect: '/admin/challenges/' },
-        { col: 'username', redirect: '/admin/users/' }
+        { col: '2', redirect: '/admin/challenges/' },
+        { col: '1', redirect: '/admin/users/' }
       ]"
       :maxElementPerPage="20"
+      :total-users="totalSubmissions"
       v-if="this.rows.length > 0 && !loading"
+      @page-changed="onPageChange"
     />
     <div
       class="adminEmptyDataContainer"
@@ -46,29 +48,46 @@ export default {
       download,
       rows: [],
       tableCols: tableCols.adminSumbissions,
-      loading: true
+      loading: true,
+      currentPage: 1,
+      totalSubmissions: 0,
+      submissions: [],
+      displaySubmissions: []
     };
   },
   methods: {
+    onPageChange(page) {
+      this.currentPage = page;
+      this.fetchUsers(page);
+    },
     async exportUsersAsCSV() {
       SubmissionService.fetchAsCSV().then(res => {
         utils.saveAsFile(res.data, "submissions.csv", "text/csv");
       });
+    },
+    async fetchUsers(page = 1) {
+      this.loading = true;
+      this.displaySubmissions = this.submissions.slice((page - 1) * 10, page * 10);
+      this.loading = false;
+      this.rows = this.displaySubmissions;
     }
   },
   async mounted() {
     let response = await SubmissionService.getSubmissions();
     var submissions = [];
+    console.log(response);
     response.forEach((element, index) => {
       submissions.push({
-        username: element.username,
-        challenge: element.name,
-        tags: getChalTags(element.tags),
-        timeDate: element.solvedTime
+        "1": element.username,
+        "2": element.name,
+        "3": getChalTags(element.tags),
+        "4": element.solvedTime
       });
     });
-    this.rows = submissions;
+    this.submissions = submissions;
+    this.totalSubmissions = submissions.length;
     this.loading = false;
+    this.fetchUsers(1);
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminSubmissions");
