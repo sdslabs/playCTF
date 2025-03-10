@@ -248,7 +248,8 @@ export default {
       let ncurl = CONFIG.ncRoot;
       if (
         this.challDetails.category === "service" ||
-        this.challDetails.category === "xinetd"
+        this.challDetails.category === "xinetd" || 
+        this.challDetails.category === "service_docker"
       ) {
         if (this.challDetails.deployedLink == "localhost" || this.challDetails.deployedLink == "") {
           return `nc ${ncurl} ${port}`;
@@ -294,6 +295,10 @@ export default {
             Response.data.error ? Response.data.error : Response.data.message,
             "Error"
           );
+          // Increment the counter immediately after submission
+          if (this.challDetails.maxAttemptLimit !== -1) {
+            this.challDetails.previous_tries++;
+          }
         }
       });
       var self = this;

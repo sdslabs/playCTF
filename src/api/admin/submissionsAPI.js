@@ -13,12 +13,14 @@ export default {
     });
     return submissions;
   },
-  async getUserSubs(username) {
-    const response = await this.getSubmissions();
-    let data = response.filter(el => {
-      return el.username === username;
+
+  // Group submissions by username for efficient processing
+  groupSubmissionsByUsers(submissions, usernames) {
+    const userSubmissions = {};
+    usernames.forEach(username => {
+      userSubmissions[username] = submissions.filter(sub => sub.username === username);
     });
-    return data;
+    return userSubmissions;
   },
 
   async fetchAsCSV() {
@@ -27,5 +29,12 @@ export default {
       responseType: "blob",
       url: `/api/info/submissions?format=csv`
     });
+  },
+
+  async getUserSubs(username) {
+    const submissions = await this.getSubmissions();
+    const submission = submissions.filter(sub => sub.username === username);
+    console.log(submission);
+    return submission;
   }
 };

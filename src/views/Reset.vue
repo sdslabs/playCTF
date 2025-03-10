@@ -86,19 +86,17 @@ export default {
         this.$vToastify.error("Passwords don't match", "Error");
       } else {
         this.PassErr = false;
-        const state = await LoginUser.resetPassword(this.password);
-        if (state) {
+
+        const resetResponse = await LoginUser.resetPassword(this.password);
+        if (resetResponse.status !== 200) {
+          this.$vToastify.error(resetResponse.data.message, "Error");
+        } else {
           this.$vToastify.setSettings({
             theme: "beast-success"
           });
           this.$vToastify.success("Successfully changed", "Success");
           await this.sleep(3000);
           this.$router.push("/about");
-        } else {
-          this.$vToastify.setSettings({
-            theme: "beast-error"
-          });
-          this.$vToastify.error("Unauthorized access", "Error");
         }
       }
     }

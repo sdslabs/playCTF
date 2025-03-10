@@ -30,6 +30,10 @@ axiosInstance.interceptors.response.use(
     let ignoreErrorPagesPath = [
       "/auth/login",
       "/auth/register",
+      "/auth/send-otp",
+      "/auth/reset-password",
+      "/auth/verify-otp",
+      "/auth/verify-otp-forget",
       "/api/submit/challenge"
     ];
     

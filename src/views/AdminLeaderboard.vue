@@ -5,7 +5,7 @@
     </div>
     <spin-loader v-if="loading" />
     <div v-else>
-      <LeaderboardGraph />
+      <!-- <LeaderboardGraph /> -->
       <div class="adminLbSearchDiv">
         <!-- <div class="adminSearchBar">
           <button class="searchBtn">
@@ -28,9 +28,11 @@
         v-if="resultQuery.length > 0 && !loading"
         :tableCols="tableCols"
         :rows="resultQuery"
-        :links="[{ col: 'username', redirect: '/admin/users/' }]"
-        :maxElementPerPage="10"
+        :links="[{ col: '2', redirect: '/admin/users/' }]"
+        :maxElementPerPage="25"
         :keys="searchQuery"
+        :total-users="totalUsers"
+        @page-changed="onPageChange"
       />
       <div class="adminEmptyDataContainer" v-else>
         <span class="adminEmptyData">No Users</span>
@@ -40,14 +42,14 @@
 </template>
 <script>
 import adminTable from "@/components/adminTable.vue";
-import LeaderboardGraph from "@/components/LeaderboardGraph.vue";
+// import LeaderboardGraph from "@/components/LeaderboardGraph.vue";
 import UsersService from "@/api/admin/usersAPI";
 import utils from "@/api/utils";
 import SpinLoader from "@/components/spinLoader.vue";
 import { tableCols, colors, lineGraphOptions } from "../constants/constants";
 import { leaderboard, search, download } from "../constants/images";
 export default {
-  components: { adminTable, SpinLoader, LeaderboardGraph },
+  components: { adminTable, SpinLoader },
   name: "AdminLeaderboard",
   data() {
     return {
@@ -63,7 +65,8 @@ export default {
       tableCols: tableCols.leaderboard,
       users: [],
       displayUsers: [],
-      state: {}
+      state: {},
+      totalUsers: 0
     };
   },
   methods: {
@@ -71,6 +74,42 @@ export default {
       var jsonObject = JSON.stringify(this.resultQuery);
       var csv = await utils.convertToCSV(jsonObject);
       utils.saveAsFile(csv, "leaderboard.csv", "text/csv");
+    },
+    async fetchTotalUsers() {
+      try {
+        const response = await UsersService.getUserCount();
+        this.totalUsers = response.user_count || 0;
+      } catch (err) {
+        console.error('Error fetching user count:', err);
+        this.totalUsers = 0;
+      }
+    },
+    async fetchUsers(page = 1) {
+      this.loading = true;
+      try {
+        const users = await UsersService.getLeaderboard(page);
+        if (!users || users.length === 0) {
+          this.users = [];
+          this.displayUsers = [];
+          return;
+        }
+        this.users = users.map(element => ({
+          "1": element.rank,
+          "2": element.username,
+          "3": element.score
+        }));
+        this.displayUsers = [...this.users];
+      } catch (err) {
+        console.error('Error fetching users:', err);
+        this.users = [];
+        this.displayUsers = [];
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    async onPageChange(page) {
+      await this.fetchUsers(page);
     }
   },
   computed: {
@@ -89,25 +128,8 @@ export default {
   },
   mounted() {
     this.state = this.$store.state;
-    UsersService.getUsers()
-      .then(users => {
-        if (users.length === 0) {
-          return;
-        }
-        users.forEach(element => {
-          this.users.push({
-            rank: element.rank,
-            username: element.username,
-            score: element.score
-          });
-        });
-        this.displayUsers = this.users.sort((a, b) => {
-          return a.rank > b.rank ? 1 : -1;
-        });
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    this.fetchUsers();
+    this.fetchTotalUsers();
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminLeaderboard");

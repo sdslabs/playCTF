@@ -43,8 +43,8 @@
 
         .adminTableteamName,
         .adminTableusername {
-            text-align: left;
-            padding-left: 2.5rem;
+            text-align: center;
+            // padding-left: 2.5rem;
         }
 
         .adminTablechallenge {
@@ -176,4 +176,10 @@
     text-align: center;
     border: none;
     width: 2.5rem;
+}
+
+.activePageItem {
+    font-weight: bold !important;
+    background-color: var(--theme-color-dark-blue-high-transp) !important;
+    color: var(--theme-color-light-blue) !important;
 }

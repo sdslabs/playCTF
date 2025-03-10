@@ -19,6 +19,7 @@ import Home from "@/views/Landing.vue";
 import Register from "@/views/Register.vue";
 import Reset from "../views/Reset.vue";
 import LoginUser from "../api/admin/authAPI.js";
+import ForgetPassword from "../views/ForgetPassword.vue";
 
 Vue.use(VueRouter);
 
@@ -184,6 +185,14 @@ const routes = [
     path: "/register",
     name: "register",
     component: Register,
+    meta: {
+      layout: "auth-layout"
+    }
+  },
+  {
+    path: "/forgetpassword",
+    name: "forgetpassword",
+    component: ForgetPassword,
     meta: {
       layout: "auth-layout"
     }

@@ -7,36 +7,22 @@
     <div class="form-div">
       <div class="form">
         <div class="info">
-          <input
-            type="text"
-            class="adminFormTitle inputField"
-            id="username"
-            name="user_name"
-            placeholder="Username*"
-            v-model="username"
-            @keyup.enter="triggerLogin"
-          />
+          <input type="text" class=" adminFormTitle" id="username" name="user_name" placeholder="Username*"
+            v-model="username" @keyup.enter="triggerLogin" />
         </div>
         <div class="info">
-          <input
-            type="password"
-            class="adminFormTitle inputField"
-            id="password"
-            name="user_pass"
-            placeholder="Password*"
-            v-model="password"
-            @keyup.enter="triggerLogin"
-          />
+          <input type="password" class=" adminFormTitle" id="password" name="user_pass" placeholder="Password*"
+            v-model="password" @keyup.enter="triggerLogin" />
         </div>
-        <Button
-          :disabled="!(username && password)"
-          :onclick="login"
-          class="auth-button"
-          variant="primary-cta"
-          text="Login"
-        />
+        <Button :disabled="!(username && password)" :onclick="login" class="auth-button" variant="primary-cta"
+          text="Login" />
+        <router-link to="/forgetpassword" class="forgot-password-link">
+          Forgot Password
+        </router-link>
       </div>
-      <img src="@/assets/login.svg" class="auth-image" />
+      <div class="auth-image-container">
+        <img src="@/assets/login.svg" class="auth-image" />
+      </div>
     </div>
   </div>
 </template>
@@ -78,3 +64,11 @@ export default {
   }
 };
 </script>
+
+
+<style scoped>
+.forgot-password-link {
+  margin-top: 1rem;
+  color: #FF6B35;
+}
+</style>

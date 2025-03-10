@@ -42,5 +42,15 @@ export default {
       responseType: "blob",
       url: `/api/info/users?sort=${sortFilter}&filter=${statusFilter}&format=csv`
     });
+  },
+
+  async getLeaderboard(page = 1) {
+    const response = await axiosInstance.get(`/api/info/leaderboard?page=${page}`);
+    return response.data;
+  },
+
+  async getUserCount() {
+    const response = await axiosInstance.get('/api/info/usercount');
+    return response.data;
   }
 };

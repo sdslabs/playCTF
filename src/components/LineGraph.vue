@@ -6,15 +6,25 @@ export default {
   mixins: [mixins.reactiveProp],
   props: ["chartData", "options"],
   watch: {
-    chartData: function() {
-      if (this.chartData.update) {
-        this.$data._chart.destroy();
-        this.renderChart(this.chartData, this.options);
-      }
+    chartData: {
+      handler(newData) {
+        if (!newData) return;
+        
+        if (newData.update && this.$data._chart) {
+          this.$data._chart.destroy();
+          console.log("Updating chart");
+          this.renderChart(newData, this.options);
+        }
+      },
+      deep: true
     }
   },
   mounted() {
-    this.renderChart(this.chartData, this.options);
+    console.log("Chart data", this.chartData);
+    console.log("Options", this.options);
+    if (this.chartData) {
+      this.renderChart(this.chartData, this.options);
+    }
   }
 };
 </script>

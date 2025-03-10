@@ -164,11 +164,13 @@
     <hr class="hrSeparator" />
     <div class="adminHeadingName">Submissions</div>
     <admin-table
+      v-if="rows.length > 0"
       :tableCols="tableCols"
       :rows="rows"
-      :links="[{ col: 'username', redirect: '/admin/users/' }]"
+      :links="[{ col: '1', redirect: '/admin/users/' }]"
       :maxElementPerPage="10"
-      v-if="rows.length > 0"
+      :total-users="submissions.length"
+      @page-changed="onPageChange"
     />
     <div class="adminEmptyDataContainer" v-else>
       <span class="adminEmptyData">No Submissions</span>
@@ -218,29 +220,34 @@ export default {
       tableCols: tableCols.adminChallenge,
       rows: [],
       chalDetails: {},
+      currentPage: 1,
       confirmDialogs: confimDialogMessages(this.$route.params.id)
         .adminChallenge,
       hostUrl: this.$store.getters.hostUrl,
-      copyText: "Click to Copy"
+      copyText: "Click to Copy",
+      submissions: []
     };
   },
   computed: {
-    isLoading: function() {
-      for (let apiState in this.loading) {
-        if (this.loading[apiState]) {
-          return true;
-        }
-      }
-      return false;
+    isLoading() {
+      return (
+        this.loading.usersNotFetched ||
+        this.loading.challengeNotFetched ||
+        this.loading.submissionsNotFetched
+      );
     }
   },
   methods: {
+    setLoadingState(key, value) {
+      this.$set(this.loading, key, value);
+    },
     getUrl(port) {
       let url = CONFIG.webRoot;
       let ncurl = CONFIG.ncRoot;
       if (
         this.chalDetails.category === "service" ||
-        this.chalDetails.category === "xinetd"
+        this.chalDetails.category === "xinetd" ||
+        this.chalDetails.category === "service_docker"
       ) {
         return `nc ${ncurl} ${port}`;
       }
@@ -344,6 +351,15 @@ export default {
         setTimeout(() => {
           this.copyText = "Click to Copy";
         }, 1000);
+    },
+    onPageChange(page) {
+      this.currentPage = page;
+      this.fetchUsers(page);
+    },
+    fetchUsers(page) {
+      this.loading.usersNotFetched = true;
+      this.rows=this.submissions.slice((page - 1) * 10, page * 10);
+      this.loading.usersNotFetched = false;
     }
   },
   mounted() {
@@ -353,36 +369,42 @@ export default {
     )
       this.link = false;
     else this.link = true;
-    UsersService.getUserStats()
-      .then(response => {
-        this.activeUsers = response.data.unbanned_users;
-      })
-      .finally(() => {
-        this.loading.usersNotFetched = false;
-      });
-    ChalService.fetchChallengeByName(this.$route.params.id)
-      .then(response => {
-        let data = response.data;
-        this.chalDetails = data;
-      })
-      .finally(() => {
-        this.loading.challengeNotFetched = false;
-      });
 
-    SubmissionService.getSubmissions()
-      .then(response => {
-        response.forEach(element => {
-          if (element.name == this.$route.params.id) {
-            this.rows.push({
-              username: element.username,
-              timeDateRight: element.solvedTime
-            });
-          }
-        });
-      })
-      .finally(() => {
-        this.loading.submissionsNotFetched = false;
-      });
+    Promise.all([
+      // Fetch user stats
+      UsersService.getUserStats()
+        .then(response => {
+          this.activeUsers = response.data.unbanned_users;
+        })
+        .finally(() => {
+          this.setLoadingState("usersNotFetched", false);
+        }),
+
+      // Fetch challenge details
+      ChalService.fetchChallengeByName(this.$route.params.id)
+        .then(response => {
+          this.chalDetails = response.data;
+        })
+        .finally(() => {
+          this.setLoadingState("challengeNotFetched", false);
+        }),
+
+      // Fetch submissions
+      SubmissionService.getSubmissions()
+        .then(response => {
+          this.rows = response
+            .filter(element => element.name === this.$route.params.id)
+            .map(element => ({
+              "1": element.username,
+              "2": element.solvedTime
+            }));
+          this.submissions = this.rows;
+        })
+        .finally(() => {
+          this.setLoadingState("submissionsNotFetched", false);
+          this.fetchUsers(1);
+        })
+    ]);
   },
   beforeCreate() {
     this.$store.commit("updateCurrentPage", "adminChallenges");
