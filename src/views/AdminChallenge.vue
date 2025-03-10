@@ -201,6 +201,7 @@ import { play, purge, undeploy, edit } from "../constants/images";
 import SpinLoader from "../components/spinLoader.vue";
 import { CONFIG } from "@/config/config";
 import EditChallModal from "../components/EditChallModal.vue";
+import Utils from "../api/utils"
 export default {
   components: { BarGraphVertical, AdminTable, SpinLoader, EditChallModal },
   name: "AdminChallenge",
@@ -254,8 +255,9 @@ export default {
       return `${CONFIG.webRoot}:${port}`;
     },
     getStaticUrl(name, asset) {
-      let url = CONFIG.staticRoot;
-      return `${url}api/info/download?challenge=${name}&asset=${asset}`;
+      const url = CONFIG.staticRoot;
+      const downloadUrl = Utils.downloadFileURL(name, asset,url);
+      return downloadUrl;
     },
     getFileFromAsset(asset) {
       let paths = asset.split("/");
